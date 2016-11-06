@@ -8,7 +8,7 @@ inherit eutils
 
 DESCRIPTION="Universal Netboot Installer creates Live USB systems for various OS distributions"
 HOMEPAGE="http://unetbootin.sourceforge.net"
-SRC_URI="http://pkg.rogentos.ro/distfiles/${CATEGORY}/${PN}/${P}.tar.bz2"
+SRC_URI="http://redcorelinux.org/distfiles/${CATEGORY}/${PN}/${P}.tar.bz2"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -29,5 +29,5 @@ src_install() {
 	doins ${FILESDIR}/${PN}.desktop
 	dodir /usr/share/polkit-1/actions
 	insinto /usr/share/polkit-1/actions
-	doins ${FILESDIR}/ro.kogaion.${PN}.policy
+	doins ${FILESDIR}/ro.redcore.${PN}.policy
 }
