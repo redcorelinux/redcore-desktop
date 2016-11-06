@@ -7,8 +7,8 @@ EAPI=5
 inherit eutils git-2 cmake-utils
 
 DESCRIPTION="A simple frontend for the lightdm displaymanager, written in c++ and qt5"
-HOMEPAGE="http://rogentos.ro"
-EGIT_REPO_URI="https://gitlab.com/kogaion/lightdm-qt5-greeter.git"
+HOMEPAGE="http://redcorelinux.org"
+EGIT_REPO_URI="https://gitlab.com/redcore/lightdm-qt5-greeter.git"
 
 LICENSE="GPL-2"
 SLOT="0"
