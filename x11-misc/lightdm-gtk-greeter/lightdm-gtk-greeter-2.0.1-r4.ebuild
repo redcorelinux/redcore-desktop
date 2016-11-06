@@ -18,7 +18,7 @@ KEYWORDS="amd64 x86"
 IUSE="ayatana +branding"
 
 COMMON_DEPEND="ayatana? ( dev-libs/libindicator:3 )
-	branding? ( >=x11-themes/kogaion-artwork-core-3 )
+	branding? ( >=x11-themes/redcore-artwork-core-1 )
 	x11-libs/gtk+:3
 	>=x11-misc/lightdm-1.2.2"
 
