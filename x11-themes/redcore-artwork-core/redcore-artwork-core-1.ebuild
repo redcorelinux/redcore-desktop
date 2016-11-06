@@ -1,17 +1,16 @@
-# Copyright 2011-2015 Kogaion Linux
+# Copyright 2016 Redcore Linux
 # Distributed under the terms of the GNU General Public License v2
-# Maintainer BlackNoxis <stefan.cristian at rogentos.ro>
 
 EAPI=4
-inherit eutils mount-boot kogaion-artwork
+inherit eutils mount-boot
 
-DESCRIPTION="Offical Kogaion-Linux Core Artwork"
-HOMEPAGE="http://www.rogentos.ro"
-SRC_URI="http://pkg.rogentos.ro/distfiles/${CATEGORY}/${PN}/"${PN}"-${PV}.tar.gz"
+DESCRIPTION="Offical Redcore Linux Core Artwork"
+HOMEPAGE="http://redcorelinux.org"
+SRC_URI="http://redcorelinux.org/distfiles/${CATEGORY}/${PN}/"${PN}"-${PV}.tar.xz"
 
 LICENSE="CCPL-Attribution-ShareAlike-3.0"
 SLOT="0"
-KEYWORDS="~arm x86 amd64"
+KEYWORDS="x86 amd64"
 IUSE=""
 RDEPEND="sys-apps/findutils"
 
@@ -35,9 +34,7 @@ src_install() {
 	insinto /usr/share/plymouth
 	doins "${S}"/plymouth/bizcom.png # back to our bizcom
 	insinto /usr/share/plymouth/themes
-	doins -r "${S}"/plymouth/themes/kogaion
-	#insinto /usr/share/plymouth/
-	#newins "${S}"/plymouth/themes/kogaion/kogaion-logo.png bizcom.png
+	doins -r "${S}"/plymouth/themes/redcore
 
 	# Apply our tricks
 
@@ -50,5 +47,5 @@ pkg_postinst() {
 	mount-boot_mount_boot_partition
 
 	einfo "Please report bugs or glitches to"
-	einfo "BlackNoxis"
+	einfo "V3n3RiX"
 }
