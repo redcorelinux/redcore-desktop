@@ -1,9 +1,13 @@
---- os-prober-1.53/os-probes/mounted/common/90linux-distro	2011-07-23 04:01:00.000000000 +0300
-+++ os-prober-1.53.new/os-probes/mounted/common/90linux-distro	2015-04-21 23:22:57.835424199 +0300
-@@ -85,6 +85,12 @@
+diff -Nur a/os-probes/mounted/common/90linux-distro b/os-probes/mounted/common/90linux-distro
+--- a/os-probes/mounted/common/90linux-distro	2014-09-28 22:04:17.000000000 +0100
++++ b/os-probes/mounted/common/90linux-distro	2016-11-06 12:16:59.285765508 +0000
+@@ -89,6 +89,15 @@
  	elif [ -e "$dir/etc/gentoo-release" ]; then
  		short="Gentoo"
  		long="$(cat "$dir/etc/gentoo-release")"
++	elif [ -e "$dir/etc/redcore-release" ]; then
++		short="Redcore"
++		long="$(cat "$dir/etc/redcore-release")"
 +	elif [ -e "$dir/etc/kogaion-release" ]; then
 +		short="Kogaion"
 +		long="$(cat "$dir/etc/kogaion-release")"

@@ -19,7 +19,7 @@ IUSE=""
 S=${WORKDIR}/${PN}
 
 src_prepare() {
-	epatch "${FILESDIR}"/os-prober-kogaion.patch
+	epatch "${FILESDIR}"/os-prober-redcore.patch
 	# use default GNU rules
 	rm Makefile || die 'rm Makefile failed'
 	# Fix references to grub-mount
