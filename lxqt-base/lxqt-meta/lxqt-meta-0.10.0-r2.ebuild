@@ -28,7 +28,7 @@ RDEPEND="
 	virtual/ttf-fonts
 	about? ( ~lxqt-base/lxqt-about-${PV} )
 	admin? ( ~lxqt-base/lxqt-admin-${PV} )
-	branding? ( x11-themes/kogaion-theme-lxqt )
+	branding? ( x11-themes/redcore-theme-lxqt )
 	filemanager? ( ~x11-misc/pcmanfm-qt-${PV} )
 	icons? ( oxygen? ( kde-frameworks/oxygen-icons )
 		!oxygen? ( virtual/freedesktop-icon-theme ) )
