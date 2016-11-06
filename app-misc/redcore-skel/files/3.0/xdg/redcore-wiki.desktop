@@ -1,0 +1,10 @@
+[Desktop Entry]
+Encoding=UTF-8
+Type=Application
+
+Exec=xdg-open http://wiki.redcorelinux.org
+Icon=/usr/share/pixmaps/redcore-weblink.png
+
+Name=Redcore Documentation
+Name[ro]=Documentație Redcore
+

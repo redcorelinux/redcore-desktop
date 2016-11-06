@@ -1,0 +1,9 @@
+[Desktop Entry]
+Encoding=UTF-8
+Type=Application
+
+Exec=xdg-open https://gitlab.com/groups/redcore
+Icon=/usr/share/pixmaps/redcore-weblink.png
+
+Name=Redcore Git Repos
+Name[ro]=Depozite Redcore
