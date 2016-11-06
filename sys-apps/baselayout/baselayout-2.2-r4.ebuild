@@ -156,8 +156,7 @@ src_unpack() {
 	unpack ${A}
 
 	cd "${S}"
-	# Set Kogaion output here
-	epatch "${FILESDIR}/${PN}-kogaion-os-release.patch"
+	epatch "${FILESDIR}/${PN}-redcore.patch"
 }
 
 src_install() {
