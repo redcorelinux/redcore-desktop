@@ -3,12 +3,12 @@
 EAPI=5
 
 EGIT_BRANCH="master"
-EGIT_REPO_URI="https://gitlab.com/kogaion/kogaion-live.git"
+EGIT_REPO_URI="https://gitlab.com/redcore/redcore-live.git"
 
 inherit eutils systemd git-2
 
-DESCRIPTION="Kogaion live scripts"
-HOMEPAGE="http://www.rogentos.ro"
+DESCRIPTION="Redcore Linux live scripts"
+HOMEPAGE="http://redcorelinux.org"
 
 SLOT="0"
 LICENSE="GPL-2"
@@ -24,7 +24,7 @@ src_install() {
 }
 
 pkg_postrm() {
-	for service in "kogaionlive.service" ; do
+	for service in "redcorelive.service" ; do
 		find "${ROOT}etc/systemd/system" -name "$service" -delete
 	done
 }
