@@ -6,20 +6,20 @@ EAPI=5
 
 inherit versionator
 
-K_ROGKERNEL_NAME="kogaion"
+K_ROGKERNEL_NAME="redcore"
 K_ROGKERNEL_URI_CONFIG="yes"
-K_ROGKERNEL_SELF_TARBALL_NAME="kogaion"
+K_ROGKERNEL_SELF_TARBALL_NAME="redcore"
 K_ONLY_SOURCES="1"
 K_ROGKERNEL_FORCE_SUBLEVEL="5"
 K_KERNEL_NEW_VERSIONING="1"
 
-inherit kogaion-kernel
+inherit redcore-kernel
 
-KEYWORDS="amd64 ~arm x86"
-DESCRIPTION="Official Kogaion Linux Standard kernel sources"
+KEYWORDS="amd64 x86"
+DESCRIPTION="Official Redcore Linux Standard kernel sources"
 RESTRICT="mirror"
 IUSE="sources_standalone"
 
 DEPEND="${DEPEND}
-	sources_standalone? ( !=sys-kernel/linux-kogaion-${PVR} )
-	!sources_standalone? ( =sys-kernel/linux-kogaion-${PVR} )"
+	sources_standalone? ( !=sys-kernel/linux-redcore-${PVR} )
+	!sources_standalone? ( =sys-kernel/linux-redcore-${PVR} )"

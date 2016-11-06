@@ -6,9 +6,9 @@ EAPI=5
 
 inherit versionator
 
-K_ROGKERNEL_SELF_TARBALL_NAME="kogaion"
-K_REQUIRED_LINUX_FIRMWARE_VER="20150206"
-K_ROGKERNEL_FORCE_SUBLEVEL="4"
+K_ROGKERNEL_SELF_TARBALL_NAME="redcore"
+K_REQUIRED_LINUX_FIRMWARE_VER="20160331"
+K_ROGKERNEL_FORCE_SUBLEVEL="5"
 K_ROGKERNEL_PATCH_UPSTREAM_TARBALL="0"
 
 _ver="$(get_version_component_range 1-2)"
@@ -23,8 +23,8 @@ K_MKIMAGE_RAMDISK_ADDRESS="0x81000000"
 K_MKIMAGE_RAMDISK_ENTRYPOINT="0x00000000"
 K_MKIMAGE_KERNEL_ADDRESS="0x80008000"
 
-inherit kogaion-kernel
+inherit redcore-kernel
 
 KEYWORDS="amd64 x86"
-DESCRIPTION="Official Kogaion Linux Standard kernel image"
+DESCRIPTION="Official Redcore Linux Standard kernel image"
 RESTRICT="mirror"

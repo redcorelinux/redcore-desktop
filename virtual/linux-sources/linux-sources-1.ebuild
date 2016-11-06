@@ -14,4 +14,4 @@ KEYWORDS="amd64 x86"
 IUSE="firmware"
 
 DEPEND="firmware? ( sys-kernel/linux-firmware )"
-RDEPEND="sys-kernel/kogaion-sources"
+RDEPEND="sys-kernel/redcore-sources"
