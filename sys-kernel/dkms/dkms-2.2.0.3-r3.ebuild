@@ -16,7 +16,7 @@ SLOT="0"
 src_prepare() {
 	epatch ${FILESDIR}/${P}-dont-touch-configs.patch
 	epatch ${FILESDIR}/${P}-gentoo-functions.patch
-	epatch ${FILESDIR}/${P}-kogaion-systemd.patch
+	epatch ${FILESDIR}/${P}-systemd.patch
 }
 
 src_install() {
