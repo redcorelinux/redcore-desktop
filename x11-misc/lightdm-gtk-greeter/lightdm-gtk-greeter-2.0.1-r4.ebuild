@@ -32,7 +32,7 @@ RDEPEND="${COMMON_DEPEND}
 
 src_prepare() {
 	if use branding; then
-		epatch "${FILESDIR}/${PN}-kogaion.patch"
+		epatch "${FILESDIR}/${PN}-redcore.patch"
 	fi
 }
 

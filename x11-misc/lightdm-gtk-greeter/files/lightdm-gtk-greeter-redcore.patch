@@ -9,7 +9,7 @@ diff -Nur a/data/lightdm-gtk-greeter.conf b/data/lightdm-gtk-greeter.conf
 +background=#005fce
  #user-background=
 -#theme-name=
-+theme-name=Kogaion-daylight
++theme-name=Redcore-daylight
  #icon-theme-name=
  #font-name=
 -#xft-antialias=
@@ -25,4 +25,4 @@ diff -Nur a/data/lightdm-gtk-greeter.conf b/data/lightdm-gtk-greeter.conf
  #reader=
  #position=
  #screensaver-timeout=
-+default-user-image=/usr/share/pixmaps/kogaion-symbolic.png
++default-user-image=/usr/share/pixmaps/redcore-symbolic.png
