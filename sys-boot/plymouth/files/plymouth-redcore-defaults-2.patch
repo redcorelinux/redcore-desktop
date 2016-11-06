@@ -5,5 +5,5 @@
  # upgrades.
  [Daemon]
 -Theme=spinner
-+Theme=kogaion
++Theme=redcore
  ShowDelay=5
