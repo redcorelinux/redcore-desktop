@@ -177,7 +177,7 @@ if [ "${K_KERNEL_NEW_VERSIONING}" = "1" ]; then
 	CKV="$(get_version_component_range 1-2)"
 fi
 
-inherit eutils multilib kernel-2 mount-boot linux-info
+inherit eutils multilib kernel-2 redcore-artwork mount-boot linux-info
 
 # from kernel-2 eclass
 detect_version
@@ -493,7 +493,7 @@ _kernel_src_compile() {
 	local GKARGS=()
 	GKARGS+=( "--no-menuconfig" "--all-ramdisk-modules" "--no-save-config" "--e2fsprogs" "--udev" )
 	use btrfs && GKARGS+=( "--btrfs" )
-	use plymouth && GKARGS+=( "--plymouth" "--plymouth-theme=redcore" )
+	use plymouth && GKARGS+=( "--plymouth" "--plymouth-theme=${PLYMOUTH_THEME}" )
 	use dmraid && GKARGS+=( "--dmraid" )
 	use iscsi && GKARGS+=( "--iscsi" )
 	use mdadm && GKARGS+=( "--mdadm" )
@@ -739,6 +739,8 @@ _remove_dkms_modules() {
 
 redcore-kernel_pkg_postinst() {
 	if _is_kernel_binary; then
+		# Update kernel initramfs to match user customizations
+		use splash && update_redcore_kernel_initramfs_splash
 		# generate initramfs with dracut
 		if use dracut ; then
 			_dracut_initramfs_create
