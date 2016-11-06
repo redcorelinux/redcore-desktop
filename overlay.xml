@@ -2,13 +2,13 @@
 <!DOCTYPE repositories SYSTEM "repositories.dtd">
 <repositories xmlns="" version="1.0">
   <repo quality="experimental" status="unofficial">
-    <name>kogaion-desktop</name>
-    <description>Kogaion Desktop oriented overlay of ebuilds</description>
-    <homepage>https://gitlab.com/kogaion/kogaion-desktop</homepage>
+    <name>redcore-desktop</name>
+    <description>Redcore Linux desktop oriented overlay of ebuilds</description>
+    <homepage>https://gitlab.com/redcore/redcore-desktop</homepage>
     <owner type="project">
-      <email>stefan.cristian at rogentos.ro</email>
-      <name>Steven Cristian</name>
+      <email>venerix at gmail.com</email>
+      <name>Ghiunhan Mamut</name>
     </owner>
-    <source type="git">https://gitlab.com/kogaion/kogaion-desktop.git</source>
+    <source type="git">https://gitlab.com/redcore/redcore-desktop.git</source>
   </repo>
 </repositories>
