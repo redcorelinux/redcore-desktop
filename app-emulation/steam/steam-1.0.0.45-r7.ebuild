@@ -37,13 +37,13 @@ RDEPEND="
 S=${WORKDIR}/${PN}
 
 src_prepare() {
-	epatch "${FILESDIR}"/kogaion-${PN}.patch
+	epatch "${FILESDIR}"/redcore-${PN}.patch
 }
 
 src_install() {
 	emake DESTDIR="${D}" install || die "make install failed"
 	exeinto /usr/bin || die
-	doexe ${FILESDIR}/kogaion-steam || die
+	doexe ${FILESDIR}/redcore-steam || die
 	rm -rf "${D}"/usr/bin/steamdeps || die
 	dosym /bin/true /usr/bin/steamdeps || die
 }
