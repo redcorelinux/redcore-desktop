@@ -20,8 +20,7 @@ DEPEND="
 src_prepare() {
 	unpacker_src_unpack
 	cd "${S}" || die
-	epatch "${FILESDIR}/${PN}-kogaion-base-gcc-support.patch"
-	# systemd-only systems (Kogaion/Sabayon) support
+	# systemd-only systems (Kogaion/Sabayon/Redcore) support
 	if use systemd; then
 		epatch "${FILESDIR}/${PN}-systemd.patch"
 	fi
