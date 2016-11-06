@@ -32,7 +32,7 @@ DEPEND="${CDEPEND}
 # Block due bug #383067
 RDEPEND="${CDEPEND}
 	virtual/udev
-	>=x11-themes/kogaion-artwork-core-1
+	x11-themes/redcore-artwork-core
 "
 
 DOC_CONTENTS="
@@ -41,7 +41,7 @@ DOC_CONTENTS="
 "
 
 src_prepare() {
-	epatch "${FILESDIR}/${PN}-kogaion-defaults.patch"
+	epatch "${FILESDIR}/${PN}-redcore-defaults.patch"
 
 	sed -i 's:/bin/systemd-tty-ask-password-agent:/usr/bin/systemd-tty-ask-password-agent:g' \
 		systemd-units/systemd-ask-password-plymouth.service.in || die \
@@ -71,7 +71,7 @@ src_configure() {
 src_install() {
 	autotools-utils_src_install
 
-	# Provided by kogaion-artwork-core
+	# Provided by redcore-artwork-core
 	rm "${D}/usr/share/plymouth/bizcom.png"
 
 	# Install compatibility symlinks as some rdeps hardcode the paths
