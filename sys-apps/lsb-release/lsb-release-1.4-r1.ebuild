@@ -21,7 +21,7 @@ src_unpack() {
 	unpack ${A}
 
 	cd "${S}"
-	epatch "${FILESDIR}/${PN}-kogaion-version.patch"
+	epatch "${FILESDIR}/${PN}-redcore-version.patch"
 }
 
 src_install() {
@@ -33,6 +33,6 @@ src_install() {
 
 	mkdir -p "${D}/etc"
 	cat > "${D}/etc/lsb-release" <<- EOF
-		DISTRIB_ID="Kogaion"
+		DISTRIB_ID="Redcore"
 	EOF
 }
