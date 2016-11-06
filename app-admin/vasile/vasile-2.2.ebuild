@@ -7,10 +7,10 @@ EAPI=5
 inherit eutils git-2
 
 DESCRIPTION="Versatile Advanced Script for ISO and Latest Enchantments"
-HOMEPAGE="http://rogentos.ro"
+HOMEPAGE="http://redcorelinux.org"
 
-EGIT_BRANCH="kogaion"
-EGIT_REPO_URI="https://gitlab.com/rogentos/vasile.git"
+EGIT_BRANCH="master"
+EGIT_REPO_URI="https://gitlab.com/redcore/vasile.git"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -31,7 +31,7 @@ src_install() {
 	doexe ${S}/${PN}
 	dodir /usr/$(get_libdir)/${PN}
 	insinto /usr/$(get_libdir)/${PN}
-	doins ${S}/libkvasile
+	doins ${S}/libvasile
 	dodir /usr/share/${PN}
 	insinto /usr/share/${PN}
 	insopts -m 755
