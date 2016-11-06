@@ -7,10 +7,10 @@ EAPI=5
 inherit eutils git-2
 
 DESCRIPTION="A simple portage wrapper which works like other package managers"
-HOMEPAGE="http://rogentos.ro"
+HOMEPAGE="http://redcorelinux.org"
 
 EGIT_BRANCH=master
-EGIT_REPO_URI="https://gitlab.com/kogaion/epkg.git"
+EGIT_REPO_URI="https://gitlab.com/redcore/epkg.git"
 
 LICENSE="BSD-2"
 SLOT="0"
@@ -27,6 +27,6 @@ src_install() {
 	dodir /usr/share/${PN}
 	insinto /usr/share/${PN}
 	insopts -m 755
-	doins kogaionsync
+	doins redcoresync
 	doins checksync
 }
