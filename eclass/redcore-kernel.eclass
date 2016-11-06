@@ -5,20 +5,20 @@
 # @ECLASS-VARIABLE: K_ROGKERNEL_NAME
 # @DESCRIPTION:
 # The kernel name used by the ebuild, it should be the ending ${PN} part
-# for example, of linux-kogaion it is "${PN/${PN/-*}-}" (kogaion)
+# for example, of linux-redcore it is "${PN/${PN/-*}-}" (redcore)
 K_ROGKERNEL_NAME="${K_ROGKERNEL_NAME:-${PN/${PN/-*}-}}"
 
 # @ECLASS-VARIABLE: K_ROGKERNEL_SELF_TARBALL_NAME
 # @DESCRIPTION:
 # If the main kernel sources tarball is generated in-house and available
-# on the "kogaion" mirror, set this variable to the extension name (see example
+# on the "redcore" mirror, set this variable to the extension name (see example
 # below). This will disable ALL the extra/local patches (since they have to
 # be applied inside the tarball). Moreover, K_ROGKERNEL_NAME,
 # K_KERNEL_PATCH_VER will be ignored.
 # Example:
-#   K_ROGKERNEL_SELF_TARBALL_NAME="kogaion"
+#   K_ROGKERNEL_SELF_TARBALL_NAME="redcore"
 #   This would generate:
-#   SRC_URI="mirror://kogaion/sys-kernel/linux-${PV}+kogaion.tar.${K_TARBALL_EXT}"
+#   SRC_URI="mirror://redcore/sys-kernel/linux-${PV}+redcore.tar.${K_TARBALL_EXT}"
 K_ROGKERNEL_SELF_TARBALL_NAME="${K_ROGKERNEL_SELF_TARBALL_NAME:-}"
 
 # @ECLASS-VARIABLE: K_ROGKERNEL_PATCH_UPSTREAM_TARBALL
@@ -177,13 +177,13 @@ if [ "${K_KERNEL_NEW_VERSIONING}" = "1" ]; then
 	CKV="$(get_version_component_range 1-2)"
 fi
 
-inherit eutils multilib kernel-2 kogaion-artwork mount-boot linux-info
+inherit eutils multilib kernel-2 mount-boot linux-info
 
 # from kernel-2 eclass
 detect_version
 detect_arch
 
-DESCRIPTION="Kogaion, Argent and ArgOS linux kernel functions and phases"
+DESCRIPTION="Redcore Linux kernel functions and phases"
 
 
 K_LONGTERM_URL_STR=""
@@ -198,7 +198,7 @@ if [ "${K_ROGKERNEL_PATCH_UPSTREAM_TARBALL}" = "1" ]; then
 	UNIPATCH_LIST="${UNIPATCH_LIST} ${DISTDIR}/${_patch_name}"
 	unset _patch_name
 elif [ -n "${K_ROGKERNEL_SELF_TARBALL_NAME}" ]; then
-	SRC_URI="http://bpr.bluepink.ro/kogaion/distfiles/${CATEGORY}/linux-${PVR}+${K_ROGKERNEL_SELF_TARBALL_NAME}.tar.${K_TARBALL_EXT}"
+	SRC_URI="http://bpr.bluepink.ro/redcore/distfiles/${CATEGORY}/linux-${PVR}+${K_ROGKERNEL_SELF_TARBALL_NAME}.tar.${K_TARBALL_EXT}"
 else
 	SRC_URI="${KERNEL_URI}"
 fi
@@ -227,7 +227,7 @@ _get_real_kv_full() {
 }
 
 # replace "linux" with K_ROGKERNEL_NAME, usually replaces
-# "linux" with "kogaion" or "server" or "openvz"
+# "linux" with "redcore" or "server" or "openvz"
 EXTRAVERSION="${EXTRAVERSION/${PN/-*}/${K_ROGKERNEL_NAME}}"
 
 if [ "${PR}" == "r0" ] ; then
@@ -238,7 +238,7 @@ fi
 ORIGINAL_KV_FULL="${KV_FULL}"
 
 # Starting from linux-3.0, we still have to install
-# sources stuff into /usr/src/linux-3.0.0-kogaion (example)
+# sources stuff into /usr/src/linux-3.0.0-redcore (example)
 # where the last part must always match uname -r
 # otherwise kernel-switcher (and RELEASE_LEVEL file)
 # will complain badly
@@ -343,7 +343,7 @@ else
 		|| ( >=sys-kernel/genkernel-next-5[dmraid(+)?,mdadm(+)?] >=sys-kernel/genkernel-3.4.45-r2 )
 		amd64? ( sys-apps/v86d )
 		x86? ( sys-apps/v86d )
-		splash? ( x11-themes/kogaion-artwork-core )
+		splash? ( x11-themes/redcore-artwork-core )
 		lvm? ( sys-fs/lvm2 sys-block/thin-provisioning-tools )
 		btrfs? ( sys-fs/btrfs-progs )
 		plymouth? (
@@ -384,7 +384,7 @@ _update_depmod() {
 	fi
 }
 
-kogaion-kernel_pkg_setup() {
+redcore-kernel_pkg_setup() {
 	if [ -n "${K_FIRMWARE_PACKAGE}" ]; then
 		einfo "Preparing kernel firmwares"
 	else
@@ -392,7 +392,7 @@ kogaion-kernel_pkg_setup() {
 	fi
 }
 
-kogaion-kernel_src_unpack() {
+redcore-kernel_src_unpack() {
 	local okv="${OKV}"
 	if [ -n "${K_ROGKERNEL_SELF_TARBALL_NAME}" ] && [ "${K_ROGKERNEL_PATCH_UPSTREAM_TARBALL}" != "1" ]; then
 		OKV="${PVR}+${K_ROGKERNEL_SELF_TARBALL_NAME}"
@@ -416,11 +416,11 @@ kogaion-kernel_src_unpack() {
 	OKV="${okv}"
 }
 
-kogaion-kernel_src_prepare() {
+redcore-kernel_src_prepare() {
 	_set_config_file_vars
 }
 
-kogaion-kernel_src_compile() {
+redcore-kernel_src_compile() {
 	if [ -n "${K_FIRMWARE_PACKAGE}" ]; then
 		_firmwares_src_compile
 	elif [ -n "${K_ONLY_SOURCES}" ]; then
@@ -444,11 +444,11 @@ _firmwares_src_compile() {
 
 _kernel_copy_config() {
 	_is_config_file_set \
-		|| die "Kernel configuration file not set. Was kogaion-kernel_src_prepare() called?"
+		|| die "Kernel configuration file not set. Was redcore-kernel_src_prepare() called?"
 
 	local base_path="${DISTDIR}"
 	if [ -n "${K_ROGKERNEL_SELF_TARBALL_NAME}" ]; then
-		base_path="${S}/kogaion/config"
+		base_path="${S}/redcore/config"
 	fi
 
 	local found= cfg=
@@ -493,7 +493,7 @@ _kernel_src_compile() {
 	local GKARGS=()
 	GKARGS+=( "--no-menuconfig" "--all-ramdisk-modules" "--no-save-config" "--e2fsprogs" "--udev" )
 	use btrfs && GKARGS+=( "--btrfs" )
-	use plymouth && GKARGS+=( "--plymouth" "--plymouth-theme=${PLYMOUTH_THEME}" ) #reverted to use variable (check the eclass)
+	use plymouth && GKARGS+=( "--plymouth" "--plymouth-theme=redcore" )
 	use dmraid && GKARGS+=( "--dmraid" )
 	use iscsi && GKARGS+=( "--iscsi" )
 	use mdadm && GKARGS+=( "--mdadm" )
@@ -558,7 +558,7 @@ _kernel_src_compile() {
 	ARCH=${OLDARCH}
 }
 
-kogaion-kernel_src_install() {
+redcore-kernel_src_install() {
 	if [ -n "${K_FIRMWARE_PACKAGE}" ]; then
 		_firmwares_src_install
 	elif [ -n "${K_ONLY_SOURCES}" ]; then
@@ -655,7 +655,7 @@ _kernel_src_install() {
 	fi
 }
 
-kogaion-kernel_pkg_preinst() {
+redcore-kernel_pkg_preinst() {
 	if _is_kernel_binary; then
 		mount-boot_pkg_preinst
 	fi
@@ -737,11 +737,8 @@ _remove_dkms_modules() {
 	fi
 }
 
-kogaion-kernel_pkg_postinst() {
+redcore-kernel_pkg_postinst() {
 	if _is_kernel_binary; then
-		# Update kernel initramfs to match user customizations
-		use splash && update_kogaion_kernel_initramfs_splash
-
 		# generate initramfs with dracut
 		if use dracut ; then
 			_dracut_initramfs_create
@@ -764,13 +761,13 @@ kogaion-kernel_pkg_postinst() {
 	fi
 }
 
-kogaion-kernel_pkg_prerm() {
+redcore-kernel_pkg_prerm() {
 	if _is_kernel_binary; then
 		mount-boot_pkg_prerm
 	fi
 }
 
-kogaion-kernel_pkg_postrm() {
+redcore-kernel_pkg_postrm() {
 	if _is_kernel_binary; then
 		_dracut_initramfs_delete
 	fi
