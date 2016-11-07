@@ -19,8 +19,8 @@ RDEPEND="
 	python? (
 		>=dev-libs/boost-1.55.0-r2[python_targets_python3_4]
 	)
-	branding? ( >=x11-themes/redcore-artwork-calamares-1 )
-	>=app-misc/calamares-config-redcore-1
+	branding? ( >=x11-themes/redcore-artwork-calamares-1.0 )
+	>=app-misc/calamares-config-redcore-1.0
 	>=dev-qt/designer-5.6.0:5
 	>=dev-qt/linguist-tools-5.6.0:5
 	>=dev-qt/qtconcurrent-5.6.0:5

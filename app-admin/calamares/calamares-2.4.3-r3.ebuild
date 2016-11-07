@@ -46,7 +46,7 @@ DEPEND="
 	>=kde-frameworks/extra-cmake-modules-5.18.0
 	>=sys-libs/kpmcore-2.2.0"
 
-RDEPEND=">=app-misc/calamares-runtime-1[branding]"
+RDEPEND=">=app-misc/calamares-runtime-1.0[branding]"
 
 src_prepare() {
 	# patch dracut module to be called the way we want it, until the module becomes configurable
