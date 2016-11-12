@@ -36,8 +36,6 @@ src_install() {
 	insinto /usr/share/${PN}
 	insopts -m 755
 	doins ${S}/make*
-	doins ${S}/devmodeset
-	doins ${S}/usermodeset
-	doins ${S}/modereset
+	doins ${S}/*mode
 }
 
