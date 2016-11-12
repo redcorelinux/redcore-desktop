@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=4
-inherit eutils mount-boot
+inherit eutils
 
 DESCRIPTION="Offical Redcore Linux Core Artwork"
 HOMEPAGE="http://redcorelinux.org"
@@ -40,12 +40,4 @@ src_install() {
 
 	insinto /usr/share/cursors/xorg-x11
 	dosym RezoBlue /usr/share/cursors/xorg-x11/default || "RezoBlue not found" #set default xcursor
-}
-
-pkg_postinst() {
-	# mount boot first
-	mount-boot_mount_boot_partition
-
-	einfo "Please report bugs or glitches to"
-	einfo "V3n3RiX"
 }
