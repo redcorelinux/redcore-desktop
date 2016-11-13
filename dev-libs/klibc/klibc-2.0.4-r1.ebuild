@@ -23,12 +23,7 @@ inherit eutils multilib toolchain-funcs flag-o-matic
 
 DESCRIPTION="A minimal libc subset for use with initramfs"
 HOMEPAGE="http://www.zytor.com/mailman/listinfo/klibc/ https://www.kernel.org/pub/linux/libs/klibc/"
-KV_MAJOR="3" KV_MINOR="x"
-if [[ $(gcc-major-version) -gt 4 ]]; then
-	KV_SUB="18"
-else
-	KV_SUB="12"
-fi
+KV_MAJOR="3" KV_MINOR="x" KV_SUB="18"
 PKV_EXTRA=""
 if [[ ${PKV_EXTRA} ]]; then
 	if [[ ${KV_MAJOR} == 2 ]]; then
@@ -120,11 +115,6 @@ src_prepare() {
 
 	# Newer kernels have some headers in the uapi dir
 	epatch "${FILESDIR}"/klibc-2.0.3-kernel-uapi.patch
-
-	# Borrow the debian fixes too
-	for p in $(<"${S}"/debian/patches/series) ; do
-		epatch "${S}/debian/patches/${p}"
-	done
 }
 
 # klibc has it's own ideas of arches
