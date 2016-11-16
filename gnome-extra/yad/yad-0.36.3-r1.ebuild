@@ -14,7 +14,8 @@ KEYWORDS="amd64 x86"
 IUSE=""
 
 RDEPEND="x11-libs/gtk+:2
-		 dev-libs/glib:2"
+	dev-libs/glib:2
+	net-libs/webkit-gtk:2"
 DEPEND="${RDEPEND}
 		|| ( dev-util/pkgconfig dev-util/pkgconf )
 		sys-devel/gettext
