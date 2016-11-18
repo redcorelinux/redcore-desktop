@@ -19,14 +19,13 @@ IUSE=""
 
 DEPEND=""
 RDEPEND="app-portage/gentoolkit
-		app-portage/portage-utils
-		sys-apps/portage"
+	app-portage/portage-utils
+	sys-apps/gentoo-functions
+	sys-apps/portage"
 
 src_install() {
 	dobin epkg
-	dodir /usr/share/${PN}
-	insinto /usr/share/${PN}
-	insopts -m 755
-	doins redcoresync
-	doins checksync
+	dodir /usr/$(get_libdir)/${PN}
+	insinto /usr/$(get_libdir)/${PN}
+	doins ${S}/libepkg
 }
