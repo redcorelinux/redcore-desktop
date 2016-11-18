@@ -32,10 +32,5 @@ src_install() {
 	dodir /usr/$(get_libdir)/${PN}
 	insinto /usr/$(get_libdir)/${PN}
 	doins ${S}/libvasile
-	dodir /usr/share/${PN}
-	insinto /usr/share/${PN}
-	insopts -m 755
-	doins ${S}/make*
-	doins ${S}/*mode
 }
 
