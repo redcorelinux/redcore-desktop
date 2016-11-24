@@ -49,8 +49,6 @@ DEPEND="
 RDEPEND=">=app-misc/calamares-runtime-1.0[branding]"
 
 src_prepare() {
-	# patch dracut module to be called the way we want it, until the module becomes configurable
-	epatch ${FILESDIR}/${P}-dracut-redcore.patch
 	# replace calamares installer desktop icon
 	sed -i "s/Icon=calamares/Icon=start-here/g" "${S}/calamares.desktop"
 	# fix installer doesn't start from desktop launcher (IMPROVE THIS UGLY THINGY)
