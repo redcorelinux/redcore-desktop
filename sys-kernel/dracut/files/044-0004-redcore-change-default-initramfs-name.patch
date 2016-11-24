@@ -14,7 +14,7 @@ diff -Nur a/dracut.sh b/dracut.sh
          outfile="/boot/${MACHINE_ID}/$kernel/initrd"
      else
 -        outfile="/boot/initramfs-$kernel.img"
-+        outfile="/boot/initramfs-genkernel-$kernelarch-$kernel.img"
++        outfile="/boot/initramfs-genkernel-$kernelarch-$kernel"
      fi
  fi
  
