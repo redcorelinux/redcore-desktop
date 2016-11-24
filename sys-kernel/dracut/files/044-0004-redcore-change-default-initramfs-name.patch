@@ -1,0 +1,20 @@
+diff -Nur a/dracut.sh b/dracut.sh
+--- a/dracut.sh	2015-11-25 13:22:28.000000000 +0000
++++ b/dracut.sh	2016-11-24 00:24:59.601507598 +0000
+@@ -613,6 +613,7 @@
+ 
+ if ! [[ $kernel ]]; then
+     kernel=$(uname -r)
++    kernelarch=$(uname -r)
+ fi
+ 
+ if [[ $kernel ]]; then
+@@ -627,7 +628,7 @@
+     if [[ $MACHINE_ID ]] && ( [[ -d /boot/${MACHINE_ID} ]] || [[ -L /boot/${MACHINE_ID} ]] ); then
+         outfile="/boot/${MACHINE_ID}/$kernel/initrd"
+     else
+-        outfile="/boot/initramfs-$kernel.img"
++        outfile="/boot/initramfs-genkernel-$kernelarch-$kernel.img"
+     fi
+ fi
+ 
