@@ -4,3 +4,4 @@ To install it as an overlay in a Gentoo planet distro, use the following command
 
 layman -f -a redcore-desktop -o https://gitlab.com/redcore/redcore-desktop/raw/master/overlay.xml
 
+Enjoy!
