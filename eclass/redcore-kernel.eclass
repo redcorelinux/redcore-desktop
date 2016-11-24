@@ -731,7 +731,7 @@ _remove_dkms_modules() {
 		local kver="${PV}-${K_ROGKERNEL_SELF_TARBALL_NAME}-${PR}"
 	fi
 	if [[ -x $(which dkms) ]] ; then
-		for i in $(dkms status | cut -d , -f1,2 | sed -e 's/, /\//' | uniq) ; do
+		for i in $(dkms status | cut -d " " -f1,2 | sed -e 's/,//g' | sed -e 's/ /\//g' | sed -e 's/://g') ; do
 			dkms remove $i -k "${kver}"
 		done
 	fi
@@ -752,12 +752,6 @@ redcore-kernel_pkg_postinst() {
 		local depmod_r=$(_get_release_level)
 		_update_depmod "${depmod_r}"
 
-		elog "Please report kernel bugs at:"
-		elog "http://forum.rogentos.ro"
-		elog "The kernel source code is located at =${K_KERNEL_SOURCES_PKG}."
-		elog "RogentOS Team recommends portage users to install it"
-		elog "if you want to build any 3rd party kernel modules"
-		elog "(e.g. nvidia-drivers, virtualbox, etc...)."
 	else
 		kernel-2_pkg_postinst
 	fi
