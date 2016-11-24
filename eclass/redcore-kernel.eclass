@@ -695,7 +695,7 @@ _dracut_initramfs_create() {
 	fi
 	elog "Generating initramfs for ${kver}, please wait"
 	addpredict /etc/ld.so.cache~
-	dracut -H -f -o systemd -o systemd-initrd -o systemd-networkd -o dracut-systemd --kver="${kver}" "${ROOT}boot/initramfs-genkernel-${kern_arch}-${kver}"
+	dracut -f --kver="${kver}" "${ROOT}boot/initramfs-genkernel-${kern_arch}-${kver}"
 }
 
 _dracut_initramfs_delete() {
