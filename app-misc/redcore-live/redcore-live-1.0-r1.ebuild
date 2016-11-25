@@ -19,7 +19,7 @@ DEPEND=""
 RDEPEND=""
 
 src_install() {
-	emake DESTDIR="${D}" SYSTEMD_UNITDIR="$(systemd_get_unitdir)" \
+	emake DESTDIR="${D}" SYSTEMD_UNITDIR="$(systemd_get_systemunitdir)" \
 		install || die
 }
 
