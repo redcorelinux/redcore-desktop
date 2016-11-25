@@ -2,9 +2,9 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=5
+EAPI=6
 
-inherit eutils git-2 cmake-utils
+inherit eutils git-r3 cmake-utils
 
 DESCRIPTION="A simple frontend for the lightdm displaymanager, written in c++ and qt5"
 HOMEPAGE="http://redcorelinux.org"
