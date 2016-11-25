@@ -1,10 +1,10 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=4
+EAPI=6
 EGIT_REPO_URI="https://gitlab.com/redcore/redcore-skel.git"
 
-inherit eutils git-2 fdo-mime
+inherit eutils git-r3 fdo-mime
 
 DESCRIPTION="Redcore Linux skel tree"
 HOMEPAGE="http://redcorelinux.org"
