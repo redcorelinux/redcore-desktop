@@ -17,7 +17,7 @@ KEYWORDS="amd64 x86"
 IUSE=""
 RDEPEND=""
 
-S="${WORKDIR}"
+S="${WORKDIR}/${PN}-${PV}"
 
 src_install () {
 	dodir /usr/share/grub/themes || die
