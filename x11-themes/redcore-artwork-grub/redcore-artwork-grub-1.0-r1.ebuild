@@ -2,7 +2,7 @@
 
 EAPI=6
 
-inherit base mount-boot git-r3 eutils
+inherit mount-boot git-r3 eutils
 
 DESCRIPTION="Redcore Linux GRUB2 Images"
 HOMEPAGE="http://redcorelinux.org"
