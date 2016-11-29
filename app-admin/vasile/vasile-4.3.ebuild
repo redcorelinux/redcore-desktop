@@ -7,7 +7,7 @@ EAPI=6
 inherit eutils git-r3
 
 DESCRIPTION="Versatile Advanced Script for ISO and Latest Enchantments"
-HOMEPAGE="4ba6ec694d0d9b54849c91f81623b37738d76187"
+HOMEPAGE="http://redcorelinux.org"
 
 EGIT_BRANCH="master"
 EGIT_REPO_URI="https://gitlab.com/redcore/vasile.git"
