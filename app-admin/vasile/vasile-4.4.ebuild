@@ -11,20 +11,20 @@ HOMEPAGE="http://redcorelinux.org"
 
 EGIT_BRANCH="master"
 EGIT_REPO_URI="https://gitlab.com/redcore/vasile.git"
-EGIT_COMMIT="0634516f33d501f3095846a47e31ae11880f776b"
+EGIT_COMMIT="c1061623c68ef96f882b3f45ae34ecf0be3d0fd0"
 
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="amd64"
 IUSE=""
 
-DEPEND="
-	sys-apps/gentoo-functions
-	sys-fs/squashfs-tools
-	sys-boot/grub:2
+DEPEND="sys-apps/gentoo-functions"
+RDEPEND="${DEPEND}
 	dev-libs/libisoburn
-	sys-fs/mtools"
-RDEPEND="${DEPEND}"
+	sys-boot/grub:2
+	sys-kernel/dkms
+	sys-fs/mtools
+	sys-fs/squashfs-tools"
 
 src_install() {
 	dodir /usr/bin
