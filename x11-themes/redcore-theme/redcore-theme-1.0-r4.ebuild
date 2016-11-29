@@ -15,7 +15,8 @@ LICENSE="GPLv3"
 SLOT="0"
 KEYWORDS="x86 amd64"
 IUSE=""
-RDEPEND=""
+RDEPEND="x11-themes/gtk-engines-murrine
+	x11-themes/gtk-engines-unico"
 
 src_install() {
 	rm README.md
