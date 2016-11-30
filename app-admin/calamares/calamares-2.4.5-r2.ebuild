@@ -50,7 +50,7 @@ RDEPEND=">=app-misc/calamares-runtime-1.0[branding]"
 
 src_prepare() {
 	# replace calamares installer desktop icon
-	sed -i "s/Icon=calamares/Icon=redcore-weblink/g" "${S}/calamares.desktop"
+	sed -i "s/Icon=calamares/Icon=redcore-logo/g" "${S}/calamares.desktop"
 	# fix installer doesn't start from desktop launcher (IMPROVE THIS UGLY THINGY)
 	sed -i "s/pkexec //g" "${S}/calamares.desktop"
 	sed -i "s/calamares/calamares-pkexec/g" "${S}/calamares.desktop"
