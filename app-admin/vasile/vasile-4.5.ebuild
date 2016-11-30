@@ -11,7 +11,7 @@ HOMEPAGE="http://redcorelinux.org"
 
 EGIT_BRANCH="master"
 EGIT_REPO_URI="https://gitlab.com/redcore/vasile.git"
-EGIT_COMMIT="c1061623c68ef96f882b3f45ae34ecf0be3d0fd0"
+EGIT_COMMIT="811f49541c839cffada80dab0162bd98f7259e47"
 
 LICENSE="GPL-2"
 SLOT="0"
