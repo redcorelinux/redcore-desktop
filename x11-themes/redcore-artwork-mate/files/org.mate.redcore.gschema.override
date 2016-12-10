@@ -12,11 +12,11 @@ picture-options='zoom'
 [org.mate.interface]
 document-font-name='Bitstream Vera Sans 10'
 font-name='Bitstream Vera Sans 10'
-gtk-theme='Kogaion-daylight'
+gtk-theme='Redcore-daylight'
 icon-theme='Numix-Circle'
 
 [org.mate.Marco.general]
-theme='Kogaion-daylight'
+theme='Redcore-daylight'
 titlebar-font='Bitstream Vera Sans Bold 10'
 
 [org.mate.panel.menubar]
