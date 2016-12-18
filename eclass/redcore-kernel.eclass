@@ -251,7 +251,7 @@ if [ -n "${K_FIRMWARE_PACKAGE}" ]; then
 elif [ "${K_KERNEL_SLOT_USEPVR}" = "1" ]; then
 	SLOT="${PVR}"
 elif [ "${K_KERNEL_NEW_VERSIONING}" = "1" ]; then
-	SLOT="$(get_version_component_range 1-2)"
+	SLOT="$(get_version_component_range 1-3)"
 else
 	SLOT="${PV}"
 fi
