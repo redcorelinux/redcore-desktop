@@ -45,7 +45,7 @@ DEPEND="${COMMON_DEPEND}
 	sys-devel/gettext
 	virtual/pkgconfig"
 PDEPEND="gtk? ( x11-misc/lightdm-gtk-greeter )
-	qt5 ( x11-misc/lightdm-qt5-greeter )
+	qt5? ( x11-misc/lightdm-qt5-greeter )
 	kde? ( x11-misc/lightdm-kde )"
 
 DOCS=( NEWS )
