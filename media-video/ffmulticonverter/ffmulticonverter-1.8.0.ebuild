@@ -12,7 +12,7 @@ SRC_URI="mirror://sourceforge/project/ffmulticonv/${P}.tar.gz"
 LICENSE="GPLv3"
 SLOT="0"
 KEYWORDS="amd64"
-IUSE="+ffmpeg libav +imagemagick unoconv"
+IUSE="+ffmpeg libav +imagemagick +unoconv"
 
 DEPEND="dev-lang/python:3.4
 	dev-python/PyQt5
