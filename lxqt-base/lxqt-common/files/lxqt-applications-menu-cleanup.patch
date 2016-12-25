@@ -1,6 +1,6 @@
 diff -Nur a/menu/lxqt-applications.menu b/menu/lxqt-applications.menu
 --- a/menu/lxqt-applications.menu	2016-09-23 23:44:22.000000000 +0100
-+++ b/menu/lxqt-applications.menu	2016-11-29 19:12:49.779191588 +0000
++++ b/menu/lxqt-applications.menu	2016-12-25 17:29:14.853094295 +0000
 @@ -20,12 +20,13 @@
  		<Include>
  			<And>
@@ -41,15 +41,16 @@ diff -Nur a/menu/lxqt-applications.menu b/menu/lxqt-applications.menu
  			</And>
  		</Include>
  	</Menu>	 <!-- End Internet -->
-@@ -125,6 +128,7 @@
+@@ -125,6 +128,8 @@
  		<Include>
  			<And>
  				<Category>Office</Category>
 +				<Not><Category>Network</Category></Not>
++				<Not><Category>AudioVideo</Category></Not>
  			</And>
  		</Include>
  	</Menu> <!-- End Office -->
-@@ -140,26 +144,10 @@
+@@ -140,26 +145,10 @@
  				<Not><Category>PackageManager</Category></Not>
  				<Not><Category>X-Leave</Category></Not>
  				<Not><Category>Screensaver</Category></Not>
@@ -76,7 +77,7 @@ diff -Nur a/menu/lxqt-applications.menu b/menu/lxqt-applications.menu
  	<Menu>
  		<Name>DesktopSettings</Name>
  		<Directory>lxde-settings.directory</Directory>
-@@ -204,7 +192,7 @@
+@@ -204,7 +193,7 @@
  		</Layout>
  	</Menu> <!-- End Settings -->
  
