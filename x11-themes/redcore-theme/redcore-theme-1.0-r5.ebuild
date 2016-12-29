@@ -20,7 +20,6 @@ RDEPEND="x11-themes/gtk-engines-murrine
 
 src_install() {
 	rm README.md
-	rm to_review
 	insinto /usr/share/themes
 	doins -r *
 }
