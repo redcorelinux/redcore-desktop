@@ -4,7 +4,7 @@
 
 EAPI=5
 
-DESCRIPTION="Kogaion Linux Calamares modules config"
+DESCRIPTION="Redcore Linux 1701 Calamares modules config"
 HOMEPAGE=""
 SRC_URI=""
 
