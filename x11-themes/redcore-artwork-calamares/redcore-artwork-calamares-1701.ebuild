@@ -6,7 +6,7 @@ EAPI=5
 
 inherit eutils
 
-DESCRIPTION="Redcore Linux 1701 branding component for Calamares"
+DESCRIPTION="Redcore Linux branding component for Calamares"
 HOMEPAGE="http://redcorelinux.org"
 SRC_URI="http://redcorelinux.org/distfiles/${CATEGORY}/${PN}/${PN}-${PV}.tar.xz"
 
