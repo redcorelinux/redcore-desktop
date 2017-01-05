@@ -74,7 +74,7 @@ src_configure() {
 
 src_compile() {
 	cd src || die
-	lrelease MEGASync/MEGASync.pro || die
+	${ROOT}usr/$(get_libdir)/qt5/bin/lrelease MEGASync/MEGASync.pro || die
 	emake
 }
 
