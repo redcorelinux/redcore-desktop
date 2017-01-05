@@ -724,11 +724,15 @@ _grub2_update_grubcfg() {
 	fi
 }
 
-_reload_dkms_modules() {
+_remove_dkms_modules() {
+	if [ "${PR}" == "r0" ] ; then
+		local kver="${PV}-${K_ROGKERNEL_SELF_TARBALL_NAME}"
+	else
+		local kver="${PV}-${K_ROGKERNEL_SELF_TARBALL_NAME}-${PR}"
+	fi
 	if [[ -x $(which dkms) ]] ; then
 		for i in $(dkms status | cut -d " " -f1,2 | sed -e 's/,//g' | sed -e 's/ /\//g' | sed -e 's/://g') ; do
-			dkms remove $i -k --all
-			dkms add $i
+			dkms remove $i -k "${kver}"
 		done
 	fi
 }
@@ -763,7 +767,7 @@ redcore-kernel_pkg_postrm() {
 	if _is_kernel_binary; then
 		_dracut_initramfs_delete
 	fi
-	_reload_dkms_modules
+	_remove_dkms_modules
 	_grub2_update_grubcfg
 }
 
