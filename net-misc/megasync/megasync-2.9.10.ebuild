@@ -75,7 +75,12 @@ src_configure() {
 
 src_compile() {
 	cd src || die
-	${ROOT}usr/$(get_libdir)/qt5/bin/lrelease MEGASync/MEGASync.pro || die
+	# bypass qtchooser, some may only have qt4, some qt5
+	if use qt5 ; then
+		${ROOT}usr/$(get_libdir)/qt5/bin/lrelease MEGASync/MEGASync.pro || die
+	elif ! use qt5 ; then
+		${ROOT}usr/$(get_libdir)/qt4/bin/lrelease MEGASync/MEGASync.pro || die
+	fi
 	emake
 }
 
