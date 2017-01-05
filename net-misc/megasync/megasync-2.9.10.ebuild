@@ -21,6 +21,7 @@ RESTRICT="bindist"
 RDEPEND="dev-libs/crypto++
 	sys-libs/zlib
 	dev-db/sqlite:3
+	dev-libs/libsodium
 	net-dns/c-ares
 	!libressl? (
 		net-misc/curl[ssl,curl_ssl_openssl]
