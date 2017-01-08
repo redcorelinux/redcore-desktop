@@ -19,7 +19,7 @@ S="${WORKDIR}"/"${PN}"
 src_install() {
 	# Cursors
 	insinto /usr/share/cursors/xorg-x11/
-	doins -r "${S}"/mouse/RezoBlue
+	doins -r "${S}"/mouse/Hacked-Red
 
 	# Wallpapers
 	insinto /usr/share/backgrounds/
@@ -39,5 +39,5 @@ src_install() {
 	# Apply our tricks
 
 	insinto /usr/share/cursors/xorg-x11
-	dosym RezoBlue /usr/share/cursors/xorg-x11/default || "RezoBlue not found" #set default xcursor
+	dosym Hacked-Red /usr/share/cursors/xorg-x11/default || "Hacked-Red not found" #set default xcursor
 }
