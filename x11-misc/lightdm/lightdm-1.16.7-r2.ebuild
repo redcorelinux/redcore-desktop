@@ -7,13 +7,13 @@ inherit autotools eutils pam readme.gentoo systemd versionator
 
 TRUNK_VERSION="$(get_version_component_range 1-2)"
 DESCRIPTION="A lightweight display manager"
-HOMEPAGE="http://www.freedesktop.org/wiki/Software/LightDM"
+HOMEPAGE="https://www.freedesktop.org/wiki/Software/LightDM"
 SRC_URI="https://launchpad.net/${PN}/${TRUNK_VERSION}/${PV}/+download/${P}.tar.xz
 	mirror://gentoo/introspection-20110205.m4.tar.bz2"
 
 LICENSE="GPL-3 LGPL-3"
 SLOT="0"
-KEYWORDS="amd64 ~arm ~arm64 ~ppc ~x86"
+KEYWORDS="amd64 arm ~arm64 ~ppc ~ppc64 x86"
 IUSE="audit +gtk +introspection kde qt4 qt5 +gnome"
 REQUIRED_USE="|| ( gtk kde )"
 
@@ -45,7 +45,6 @@ DEPEND="${COMMON_DEPEND}
 	sys-devel/gettext
 	virtual/pkgconfig"
 PDEPEND="gtk? ( x11-misc/lightdm-gtk-greeter )
-	qt5? ( x11-misc/lightdm-qt5-greeter )
 	kde? ( x11-misc/lightdm-kde )"
 
 DOCS=( NEWS )
@@ -74,7 +73,7 @@ src_prepare() {
 src_configure() {
 	# Set default values if global vars unset
 	local _greeter _session _user
-	_greeter=${LIGHTDM_GREETER:=qt-lightdm-greeter}
+	_greeter=${LIGHTDM_GREETER:=lightdm-gtk-greeter}
 	_session=${LIGHTDM_SESSION:=gnome}
 	_user=${LIGHTDM_USER:=root}
 	# Let user know how lightdm is configured
