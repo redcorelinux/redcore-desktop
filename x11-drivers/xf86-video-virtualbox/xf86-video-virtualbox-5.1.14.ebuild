@@ -46,10 +46,7 @@ PDEPEND="dri? ( ~app-emulation/virtualbox-guest-additions-${PV} )"
 
 REQUIRED_USE=( "${PYTHON_REQUIRED_USE}" )
 
-BUILD_TARGETS="all"
-BUILD_TARGET_ARCH="${ARCH}"
 S="${WORKDIR}/${MY_P}"
-MODULES_SRC_DIR="${S}/src/VBox/Additions/linux/drm"
 
 PATCHES=(
 	# Ugly hack to build the opengl part of the video driver

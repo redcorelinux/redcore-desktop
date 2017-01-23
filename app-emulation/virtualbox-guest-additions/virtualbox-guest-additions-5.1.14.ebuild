@@ -157,7 +157,6 @@ src_install() {
 }
 
 pkg_postinst() {
-	linux-mod_pkg_postinst
 	if ! use X ; then
 		elog "use flag X is off, enable it to install the"
 		elog "X Window System video driver."
