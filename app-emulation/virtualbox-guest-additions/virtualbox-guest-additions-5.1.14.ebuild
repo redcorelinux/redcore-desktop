@@ -1,4 +1,4 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -9,7 +9,7 @@ inherit eutils systemd user toolchain-funcs
 MY_PV="${PV/beta/BETA}"
 MY_PV="${MY_PV/rc/RC}"
 MY_P=VirtualBox-${MY_PV}
-DESCRIPTION="VirtualBox user-space tools for Gentoo guests"
+DESCRIPTION="VirtualBox kernel modules and user-space tools for Gentoo guests"
 HOMEPAGE="http://www.virtualbox.org/"
 SRC_URI="http://download.virtualbox.org/virtualbox/${MY_PV}/${MY_P}.tar.bz2"
 
@@ -18,8 +18,7 @@ SLOT="0"
 KEYWORDS="amd64 x86"
 IUSE="X"
 
-RDEPEND="X? ( ~x11-drivers/xf86-video-virtualbox-${PV}
-		x11-apps/xrandr
+RDEPEND="X? ( x11-apps/xrandr
 		x11-apps/xrefresh
 		x11-libs/libXmu
 		x11-libs/libX11
@@ -31,7 +30,6 @@ RDEPEND="X? ( ~x11-drivers/xf86-video-virtualbox-${PV}
 		x11-libs/libICE
 		x11-proto/glproto )
 	sys-apps/dbus
-	=sys-kernel/virtualbox-guest-dkms-${PV}
 	!!x11-drivers/xf86-input-virtualbox"
 DEPEND="${RDEPEND}
 	>=dev-util/kbuild-0.1.9998_pre20131130
@@ -41,6 +39,10 @@ DEPEND="${RDEPEND}
 	sys-power/iasl
 	X? ( x11-proto/renderproto )
 	!X? ( x11-proto/xproto )"
+PDEPEND="X? ( ~x11-drivers/xf86-video-virtualbox-${PV} )"
+
+BUILD_TARGETS="all"
+BUILD_TARGET_ARCH="${ARCH}"
 
 S="${WORKDIR}/${MY_P}"
 
@@ -154,6 +156,7 @@ src_install() {
 }
 
 pkg_postinst() {
+	linux-mod_pkg_postinst
 	if ! use X ; then
 		elog "use flag X is off, enable it to install the"
 		elog "X Window System video driver."

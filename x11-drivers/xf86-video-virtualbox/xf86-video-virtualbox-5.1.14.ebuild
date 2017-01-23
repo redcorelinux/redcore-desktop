@@ -1,4 +1,4 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -10,23 +10,22 @@ inherit eutils multilib python-single-r1 versionator toolchain-funcs
 MY_PV="${PV/beta/BETA}"
 MY_PV="${MY_PV/rc/RC}"
 MY_P=VirtualBox-${MY_PV}
-DESCRIPTION="VirtualBox video driver"
+DESCRIPTION="VirtualBox X11 video driver for Gentoo guest"
 HOMEPAGE="http://www.virtualbox.org/"
 SRC_URI="http://download.virtualbox.org/virtualbox/${MY_PV}/${MY_P}.tar.bz2"
 
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="amd64 x86"
-IUSE="dri"
+IUSE="+dri"
 
 RDEPEND="=sys-kernel/virtualbox-guest-dkms-${PV}
 	>=x11-base/xorg-server-1.7:=[-minimal]
 	x11-libs/libXcomposite"
 DEPEND="${RDEPEND}
-	>=dev-util/kbuild-0.1.9998_pre20131130
 	${PYTHON_DEPS}
 	>=dev-lang/yasm-0.6.2
-	>=sys-devel/gcc-4.9.0
+	>=dev-util/kbuild-0.1.9998_pre20131130
 	sys-power/iasl
 	x11-proto/fontsproto
 	x11-proto/randrproto
@@ -43,10 +42,14 @@ DEPEND="${RDEPEND}
 	x11-libs/libXext
 	dri? (  x11-proto/xf86driproto
 		>=x11-libs/libdrm-2.4.5 )"
+PDEPEND="dri? ( ~app-emulation/virtualbox-guest-additions-${PV} )"
 
 REQUIRED_USE=( "${PYTHON_REQUIRED_USE}" )
 
+BUILD_TARGETS="all"
+BUILD_TARGET_ARCH="${ARCH}"
 S="${WORKDIR}/${MY_P}"
+MODULES_SRC_DIR="${S}/src/VBox/Additions/linux/drm"
 
 PATCHES=(
 	# Ugly hack to build the opengl part of the video driver
@@ -115,7 +118,7 @@ src_compile() {
 	use dri && targets+=( Additions/linux/drm )
 
 	for each in ${targets[@]} ; do
-		pushd "${S}"/src/VBox/${each} $>/dev/null || die
+		pushd "${S}"/src/VBox/${each} &>/dev/null || die
 		MAKE="kmk" \
 		emake TOOL_YASM_AS=yasm \
 		VBOX_USE_SYSTEM_XORG_HEADERS=1 \
@@ -126,6 +129,7 @@ src_compile() {
 
 	if use dri; then
 		local objdir="out/linux.${ARCH}/release/obj/vboxvideo_drm"
+		ln -s Makefile.module.kms "${MODULES_SRC_DIR}"/Makefile || die
 		targets=(
 			include
 			src/VBox/Runtime/r0drv
@@ -135,6 +139,8 @@ src_compile() {
 		for each in ${targets[@]} ; do
 			:
 		done
+		# see the vboxvideo_drm_SOURCES list in Makefile.kmk for the below,
+		# and replace '..' with 'dt'
 		targets=(
 			dt/dt/common/VBoxVideo/HGSMIBase.o
 			dt/dt/common/VBoxVideo/Modesetting.o
@@ -146,12 +152,11 @@ src_compile() {
 		for each in ${targets[@]} ; do
 			:
 		done
-
 	fi
 }
 
 src_install() {
-	if use dri; then
+	if use dri ; then
 		:
 	fi
 
@@ -174,15 +179,4 @@ pkg_postinst() {
 	elog "  Driver  \"vboxvideo\""
 	elog ""
 	elog "in the Graphics device section (Section \"Device\")"
-	elog ""
-	if use dri; then
-		elog "To use the kernel drm video driver, please add:"
-		elog "\"${MODULE_NAMES%(*}\" to:"
-		if has_version sys-apps/openrc ; then
-			elog "/etc/conf.d/modules"
-		else
-			elog "/etc/modules.autoload.d/kernel-${KV_MAJOR}.${KV_MINOR}"
-		fi
-		elog ""
-	fi
 }

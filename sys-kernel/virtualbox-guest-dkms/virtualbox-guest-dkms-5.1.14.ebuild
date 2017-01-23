@@ -8,7 +8,7 @@ inherit eutils
 
 DESCRIPTION="Kernel Modules (guest) source for Virtualbox"
 HOMEPAGE="http://www.virtualbox.org/"
-SRC_URI="http://mirror.archlinux.ro/archlinux/community/os/x86_64/${P}-1-x86_64.pkg.tar.xz"
+SRC_URI="http://mirror.archlinux.ro/archlinux/community-testing/os/x86_64/${P}-1-x86_64.pkg.tar.xz"
 
 LICENSE="GPL-2"
 SLOT="0"

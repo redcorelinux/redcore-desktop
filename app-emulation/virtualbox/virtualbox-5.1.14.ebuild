@@ -1,4 +1,4 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -20,7 +20,7 @@ HOMEPAGE="http://www.virtualbox.org/"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="amd64 x86"
-IUSE="alsa debug doc headless java libressl +lvm pam pulseaudio +opengl python +qt5 +sdk +udev vboxwebsrv vnc"
+IUSE="alsa debug doc headless java libressl lvm pam pulseaudio +opengl python +qt5 +sdk +udev vboxwebsrv vnc"
 
 RDEPEND="!app-emulation/virtualbox-bin
 	~app-emulation/virtualbox-modules-${PV}
@@ -188,7 +188,7 @@ src_prepare() {
 }
 
 src_configure() {
-	local myconf
+	local myconf=()
 	use alsa       || myconf+=( --disable-alsa )
 	use debug      && myconf+=( --build-debug )
 	use doc        || myconf+=( --disable-docs )
