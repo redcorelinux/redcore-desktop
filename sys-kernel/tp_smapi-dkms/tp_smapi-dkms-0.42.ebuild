@@ -9,8 +9,8 @@ inherit eutils
 MY_PN="tp_smapi"
 MY_P="${MY_PN}-${PVR}"
 DESCRIPTION="IBM ThinkPad SMAPI BIOS driver"
-HOMEPAGE="https://github.com/evgeni/tp_smapi/ http://tpctl.sourceforge.net/"
-SRC_URI="mirror://github/evgeni/${MY_PN}/${MY_P}.tar.gz"
+HOMEPAGE="https://github.com/evgeni/${MY_PN}/"
+SRC_URI="${HOMEPAGE}/releases/download/${MY_PN}/${PV}/${MY_PN}-${PV}.tgz"
 
 LICENSE="GPL-2"
 SLOT="0"
