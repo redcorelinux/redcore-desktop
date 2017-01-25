@@ -223,6 +223,10 @@ multilib_src_configure() {
 		--enable-ima
 		# disable ldconfig service (gentoo based distros don't need it)
 		--disable-ldconfig
+		# disable the shit called networkd
+		--disable-networkd
+		# and resolved
+		--disable-resolved
 		# disable kill-user-process (DON'T REMOVE THE LINE BELOW NO MATTER WHAT)
 		--without-kill-user-processes
 
