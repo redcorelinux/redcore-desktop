@@ -1,8 +1,7 @@
-Index: config/Makefile.inc.in
-===================================================================
---- config/Makefile.inc.in	(revision 36912)
-+++ config/Makefile.inc.in	(working copy)
-@@ -125,12 +125,6 @@
+diff -ruN a/config/Makefile.inc.in b/config/Makefile.inc.in
+--- a/config/Makefile.inc.in	2016-09-09 23:28:18.000000000 +0200
++++ b/config/Makefile.inc.in	2016-11-05 19:43:07.688466668 +0100
+@@ -124,12 +124,6 @@
  # with usually. Many applications will want to add $(ICULIBS_I18N) as well. 
  ICULIBS = $(ICULIBS_BASE) $(ICULIBS_I18N) $(ICULIBS_COMMON) $(ICULIBS_DATA) 
  
@@ -15,11 +14,10 @@ Index: config/Makefile.inc.in
  ##################################################################
  ##################################################################
  #
-Index: config/icu-config-bottom
-===================================================================
---- config/icu-config-bottom	(revision 36912)
-+++ config/icu-config-bottom	(working copy)
-@@ -217,73 +217,73 @@
+diff -ruN a/config/icu-config-bottom b/config/icu-config-bottom
+--- a/config/icu-config-bottom	2016-09-09 23:28:18.000000000 +0200
++++ b/config/icu-config-bottom	2016-11-05 19:49:00.854481361 +0100
+@@ -218,65 +218,65 @@
  	    ;;
  
  	--cflags)
@@ -100,8 +98,7 @@ Index: config/icu-config-bottom
  	    ;;
  
  	--ldflags-layout)
--	    echo $ECHO_N "${ICULIBS_LAYOUT} ${ICULIBS_LAYOUTEX} ${ECHO_C}"
-+	    printf "%s" "${ICULIBS_LAYOUT} ${ICULIBS_LAYOUTEX} "
+@@ -285,7 +285,7 @@
  	    ;;
  
  	--ldflags-searchpath)
@@ -110,7 +107,7 @@ Index: config/icu-config-bottom
  	    ;;
  
  	--detect-prefix)
-@@ -319,47 +319,47 @@
+@@ -321,47 +321,47 @@
  	    ;;
  
  	--shared-datadir)
@@ -169,11 +166,10 @@ Index: config/icu-config-bottom
  	    ;;
  
  	--host)
-Index: configure.ac
-===================================================================
---- configure.ac	(revision 36912)
-+++ configure.ac	(working copy)
-@@ -19,24 +19,6 @@
+diff -ruN a/configure.ac b/configure.ac
+--- a/configure.ac	2016-10-04 21:30:20.000000000 +0200
++++ b/configure.ac	2016-11-05 19:43:07.688466668 +0100
+@@ -22,24 +22,6 @@
  PACKAGE="icu"
  AC_SUBST(PACKAGE)
  
@@ -198,11 +194,10 @@ Index: configure.ac
  AC_MSG_CHECKING(for ICU version numbers)
  
  # Get the ICU version from uversion.h or other headers
-Index: icudefs.mk.in
-===================================================================
---- icudefs.mk.in	(revision 36912)
-+++ icudefs.mk.in	(working copy)
-@@ -155,11 +155,6 @@
+diff -ruN a/icudefs.mk.in b/icudefs.mk.in
+--- a/icudefs.mk.in	2016-09-09 23:28:18.000000000 +0200
++++ b/icudefs.mk.in	2016-11-05 19:43:07.688466668 +0100
+@@ -157,11 +157,6 @@
  ENABLE_STATIC = @ENABLE_STATIC@
  ENABLE_SHARED = @ENABLE_SHARED@
  
@@ -214,11 +209,10 @@ Index: icudefs.mk.in
  # Commands to compile
  COMPILE.c=    $(CC) $(CPPFLAGS) $(DEFS) $(CFLAGS) -c
  COMPILE.cc=   $(CXX) $(CPPFLAGS) $(DEFS) $(CXXFLAGS) -c
-Index: test/hdrtst/Makefile.in
-===================================================================
---- test/hdrtst/Makefile.in	(revision 36912)
-+++ test/hdrtst/Makefile.in	(working copy)
-@@ -33,9 +33,6 @@
+diff -ruN a/test/hdrtst/Makefile.in b/test/hdrtst/Makefile.in
+--- a/test/hdrtst/Makefile.in	2016-09-28 06:17:24.000000000 +0200
++++ b/test/hdrtst/Makefile.in	2016-11-05 19:43:07.688466668 +0100
+@@ -35,9 +35,6 @@
  include $(shell icu-config --incfile)
  DIRS=$(prefix)/include/unicode
  LDIRS=$(prefix)/include/layout
