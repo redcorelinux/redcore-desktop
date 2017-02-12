@@ -41,3 +41,8 @@ src_install() {
 	insinto /usr/share/cursors/xorg-x11
 	dosym Hacked-Red /usr/share/cursors/xorg-x11/default || "Hacked-Red not found" #set default xcursor
 }
+
+pkg_postinst() {
+	# regenerate initramfs to include plymouth theme changes
+	dracut -f
+}
