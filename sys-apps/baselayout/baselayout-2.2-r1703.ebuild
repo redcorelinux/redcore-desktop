@@ -186,7 +186,7 @@ src_install() {
 	echo "LDPATH='${ldpaths#:}'" >> "${D}"/etc/env.d/00basic
 
 	# rc-scripts version for testing of features that *should* be present
-	echo "Redcore Linux 1702 Canis Major" > "${D}"/etc/gentoo-release
+	echo "Redcore Linux 1703 Delta Draconis" > "${D}"/etc/gentoo-release
 
 	# Sabayon customization, install /etc/hosts separately (to .example)
 	mv "${D}"/etc/hosts "${D}"/etc/hosts.example || die "cannot move /etc/hosts"
