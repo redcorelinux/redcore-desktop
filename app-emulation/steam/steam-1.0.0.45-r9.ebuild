@@ -21,6 +21,7 @@ RDEPEND="
 		net-misc/curl
 		sys-apps/dbus
 		media-libs/freetype
+		media-libs/libtxc_dxtn
 		x11-libs/gdk-pixbuf
 		gnome-extra/zenity
 		amd64?	(
