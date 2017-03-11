@@ -1,6 +1,5 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=6
 
@@ -19,8 +18,8 @@ SLOT="0"
 KEYWORDS="amd64 x86"
 IUSE="+dri"
 
-RDEPEND="=sys-kernel/virtualbox-guest-dkms-${PV}
-	>=x11-base/xorg-server-1.7:=[-minimal]
+RDEPEND=">=x11-base/xorg-server-1.7:=[-minimal]
+	=sys-kernel/virtualbox-guest-dkms-${PV}
 	x11-libs/libXcomposite"
 DEPEND="${RDEPEND}
 	${PYTHON_DEPS}
@@ -46,7 +45,10 @@ PDEPEND="dri? ( ~app-emulation/virtualbox-guest-additions-${PV} )"
 
 REQUIRED_USE=( "${PYTHON_REQUIRED_USE}" )
 
+BUILD_TARGETS="all"
+BUILD_TARGET_ARCH="${ARCH}"
 S="${WORKDIR}/${MY_P}"
+MODULES_SRC_DIR="${S}/src/VBox/Additions/linux/drm"
 
 PATCHES=(
 	# Ugly hack to build the opengl part of the video driver
@@ -70,22 +72,28 @@ pkg_setup() {
 }
 
 src_prepare() {
+	# Prepare the vboxvideo_drm Makefiles and build dir
 	eapply "${FILESDIR}"/${PN}-5.1.4-Makefile.module.kms.patch
 
+	# Remove shipped binaries (kBuild,yasm), see bug #232775
 	rm -r kBuild/bin tools || die
 
+	# Disable things unused or splitted into separate ebuilds
 	cp "${FILESDIR}/${PN}-5-localconfig" LocalConfig.kmk || die
 
+	# Remove pointless GCC version limitations in check_gcc()
 	sed -e "/\s*-o\s*\\\(\s*\$cc_maj\s*-eq\s*[5-9]\s*-a\s*\$cc_min\s*-gt\s*[0-5]\s*\\\)\s*\\\/d" \
 		-i configure || die
 
 	default
 
+	# link with lazy on hardened #394757
 	sed '/^TEMPLATE_VBOXR3EXE_LDFLAGS.linux/s/$/ -Wl,-z,lazy/' \
 		-i Config.kmk || die
 }
 
 src_configure() {
+	# build the user-space tools, warnings are harmless
 	local cmd=(
 		./configure
 		--nofatal
@@ -115,6 +123,7 @@ src_compile() {
 		Additions/x11/vboxvideo
 	)
 
+	# need to use the upstream build system to create necessary objects properly
 	use dri && targets+=( Additions/linux/drm )
 
 	for each in ${targets[@]} ; do
@@ -129,14 +138,18 @@ src_compile() {
 
 	if use dri; then
 		local objdir="out/linux.${ARCH}/release/obj/vboxvideo_drm"
-		targets=(
+		# We need a Makefile, so use Makefile.module.kms
+		ln -s Makefile.module.kms "${MODULES_SRC_DIR}"/Makefile || die
+		# All of these are expected to be in $(KBUILD_EXTMOD)/ so symlink them into place
+	targets=(
 			include
 			src/VBox/Runtime/r0drv
 			src/VBox/Installer/linux/Makefile.include.{head,foot}er
 			out/linux.${ARCH}/release/{product,version,revision}-generated.h
 		)
 		for each in ${targets[@]} ; do
-			:
+			ln -s "${S}"/${each} \
+				"${MODULES_SRC_DIR}"/${each##*/} || die
 		done
 		# see the vboxvideo_drm_SOURCES list in Makefile.kmk for the below,
 		# and replace '..' with 'dt'
@@ -149,20 +162,20 @@ src_compile() {
 			dt/dt/dt/Runtime/common/alloc/heapoffset.o
 		)
 		for each in ${targets[@]} ; do
-			:
+			ln -s "${S}"/${objdir}/${each} \
+				"${MODULES_SRC_DIR}" || die
+			ln -s "${S}"/${objdir}/${each}.dep \
+				"${MODULES_SRC_DIR}" || die
 		done
 	fi
 }
 
 src_install() {
-	if use dri ; then
-		:
-	fi
-
 	cd "${S}/out/linux.${ARCH}/release/bin/additions" || die
 	insinto /usr/$(get_libdir)/xorg/modules/drivers
 	newins vboxvideo_drv_system.so vboxvideo_drv.so
 
+	# Guest OpenGL driver
 	insinto /usr/$(get_libdir)
 	doins -r VBoxOGL*
 
