@@ -45,10 +45,7 @@ PDEPEND="dri? ( ~app-emulation/virtualbox-guest-additions-${PV} )"
 
 REQUIRED_USE=( "${PYTHON_REQUIRED_USE}" )
 
-BUILD_TARGETS="all"
-BUILD_TARGET_ARCH="${ARCH}"
 S="${WORKDIR}/${MY_P}"
-MODULES_SRC_DIR="${S}/src/VBox/Additions/linux/drm"
 
 PATCHES=(
 	# Ugly hack to build the opengl part of the video driver
@@ -138,8 +135,6 @@ src_compile() {
 
 	if use dri; then
 		local objdir="out/linux.${ARCH}/release/obj/vboxvideo_drm"
-		# We need a Makefile, so use Makefile.module.kms
-		ln -s Makefile.module.kms "${MODULES_SRC_DIR}"/Makefile || die
 		# All of these are expected to be in $(KBUILD_EXTMOD)/ so symlink them into place
 	targets=(
 			include
@@ -148,8 +143,7 @@ src_compile() {
 			out/linux.${ARCH}/release/{product,version,revision}-generated.h
 		)
 		for each in ${targets[@]} ; do
-			ln -s "${S}"/${each} \
-				"${MODULES_SRC_DIR}"/${each##*/} || die
+			:
 		done
 		# see the vboxvideo_drm_SOURCES list in Makefile.kmk for the below,
 		# and replace '..' with 'dt'
@@ -162,10 +156,7 @@ src_compile() {
 			dt/dt/dt/Runtime/common/alloc/heapoffset.o
 		)
 		for each in ${targets[@]} ; do
-			ln -s "${S}"/${objdir}/${each} \
-				"${MODULES_SRC_DIR}" || die
-			ln -s "${S}"/${objdir}/${each}.dep \
-				"${MODULES_SRC_DIR}" || die
+			:
 		done
 	fi
 }
