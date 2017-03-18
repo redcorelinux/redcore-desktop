@@ -23,7 +23,8 @@ DEPEND="
 "
 RDEPEND="${DEPEND}
 	virtual/ffmpeg[X,encode]
-	media-video/mediainfo"
+	media-video/mediainfo
+	media-video/mpv[libmpv]"
 
 src_prepare(){
 	sed -i '/pypi/redcore' ${PN}/__init__.py
