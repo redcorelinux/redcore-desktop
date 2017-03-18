@@ -27,6 +27,6 @@ RDEPEND="${DEPEND}
 	media-video/mpv[libmpv]"
 
 src_prepare(){
-	sed -i '/pypi/redcore' ${PN}/__init__.py
+	sed -i '/pypi/d' ${PN}/__init__.py
 	eapply_user
 }
