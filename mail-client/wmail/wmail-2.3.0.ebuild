@@ -8,7 +8,7 @@ inherit eutils unpacker
 
 DESCRIPTION="The missing desktop client for Gmail & Google Inbox"
 HOMEPAGE="https://github.com/Thomas101/wmail"
-SRC_URI="https://github.com/Thomas101/wmail/releases/download/v${PV}/WMail_2_2_0_linux_x86_64.deb"
+SRC_URI="https://github.com/Thomas101/wmail/releases/download/v${PV}/WMail_2_3_0_linux_x86_64.deb"
 
 LICENSE="GPL2"
 SLOT="0"
@@ -34,4 +34,5 @@ src_unpack() {
 
 src_install() {
 	mv * "${D}" || die
+	fperms 0755 /opt/${PN}-desktop/Wmail || die
 }
