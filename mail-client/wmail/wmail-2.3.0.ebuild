@@ -34,5 +34,5 @@ src_unpack() {
 
 src_install() {
 	mv * "${D}" || die
-	fperms 0755 /opt/${PN}-desktop/Wmail || die
+	fperms 0755 /opt/${PN}-desktop/WMail || die
 }
