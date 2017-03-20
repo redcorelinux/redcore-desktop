@@ -33,7 +33,7 @@ DEPEND="${CDEPEND}"
 S="${WORKDIR}/${PN}"
 
 src_prepare() {
-	# fix icon installation location
+	epatch ${FILESDIR}/redcorelinux.patch
 	sed -i \
 		-e "/icon.path/s:app-install/icons:${PN}:" "${PN}.pro" \
 		|| die "sed on ${PN}.pro failed"
@@ -49,8 +49,6 @@ src_install() {
 	# remove gksu && kdesu enabled desktop entries
 	rm -rf ${ED}/usr/share/applications/kde-${PN}.desktop
 	rm -rf ${ED}/usr/share/applications/mate-${PN}.desktop
-	# make polkit enabled desktop entry universal
-	sed -i "s/\OnlyShowIn=GNOME//g" ${ED}/usr/share/applications/gnome-${PN}.desktop
 }
 
 pkg_postinst() {
