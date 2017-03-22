@@ -5,17 +5,19 @@ EAPI=6
 
 KDE_HANDBOOK="forceoptional"
 KDE_TEST="optional"
-inherit kde5 git-r3
+inherit kde5
 
 DESCRIPTION="Full-featured burning and ripping application based on KDE Frameworks"
 HOMEPAGE="http://www.k3b.org/"
 
-EGIT_REPO_URI="https://github.com/KDE/k3b"
-EGIT_COMMIT="8102d390e763abc1e4db2954798930e5f04d6370"
+_COMMIT="8102d390e763abc1e4db2954798930e5f04d6370"
+SRC_URI="https://github.com/KDE/k3b/archive/${_COMMIT}.zip"
 
 LICENSE="GPL-2 FDL-1.2"
 KEYWORDS="~amd64 ~x86"
 IUSE="dvd emovix encode ffmpeg flac libav mad mp3 musepack sndfile sox taglib vcd vorbis"
+
+S=${WORKDIR}/${PN}-${_COMMIT}
 
 DEPEND="
 	$(add_frameworks_dep karchive)
