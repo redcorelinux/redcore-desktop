@@ -15,9 +15,9 @@ SLOT="0"
 KEYWORDS="amd64 ~hppa x86"
 IUSE=""
 
-RDEPEND="virtual/udev
-	sys-kernel/${PN}-dmks-${PV}"
-DEPEND="${RDEPEND}
+DEPEND="=sys-kernel/${PN}-dkms-${PV}"
+RDEPEND="${DEPEND}
+	virtual/udev
 	virtual/pkgconfig"
 
 S=${WORKDIR}/${MY_P}
