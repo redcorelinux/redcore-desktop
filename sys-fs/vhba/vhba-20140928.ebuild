@@ -16,7 +16,7 @@ KEYWORDS="amd64 ~hppa x86"
 IUSE=""
 
 RDEPEND="virtual/udev
-	=sys-kernel/${PN}-dmks-${PV}"
+	sys-kernel/${PN}-dmks-${PV}"
 DEPEND="${RDEPEND}
 	virtual/pkgconfig"
 
