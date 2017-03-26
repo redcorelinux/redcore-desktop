@@ -11,6 +11,7 @@ HOMEPAGE="http://redcorelinux.org"
 
 EGIT_BRANCH=master
 EGIT_REPO_URI="https://gitlab.com/redcore/epkg.git"
+EGIT_COMMIT="fbc031c788b31cddeaa722b265b792934293e677"
 
 LICENSE="BSD-2"
 SLOT="0"
@@ -25,6 +26,7 @@ RDEPEND="app-portage/gentoolkit
 
 src_install() {
 	dobin epkg
+	dodir /var/lib/epkg/{csv,db}
 	dodir /usr/$(get_libdir)/${PN}
 	insinto /usr/$(get_libdir)/${PN}
 	doins ${S}/libepkg
