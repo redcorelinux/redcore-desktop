@@ -11,7 +11,7 @@ HOMEPAGE="http://redcorelinux.org"
 
 EGIT_BRANCH=master
 EGIT_REPO_URI="https://gitlab.com/redcore/epkg.git"
-EGIT_COMMIT="32cbd03bed60e17c14c8b7012e8051fc27edda21"
+EGIT_COMMIT="0bf551ac95ffdbb6dda2e74ad8a3c1803f56a2ff"
 
 LICENSE="BSD-2"
 SLOT="0"
