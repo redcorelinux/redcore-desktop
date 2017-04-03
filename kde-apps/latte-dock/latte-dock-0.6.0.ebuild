@@ -12,7 +12,7 @@ HOMEPAGE="https://psifidotos.blogspot.co.uk/2017/04/latte-dock-v06-fresh-air.htm
 SRC_URI="https://github.com/psifidotos/${MY_PN}/archive/v${PV}.tar.gz"
 
 LICENSE="GPL"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 x86"
 IUSE="+X"
 
 S=${WORKDIR}/${MY_PN}-${PV}
@@ -42,6 +42,7 @@ RDEPEND="${DEPEND}
 "
 
 src_configure() {
+	export BUILD_DIR=${S}/build
 	local mycmakeargs=(
 		-DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Gentoo
 	)
