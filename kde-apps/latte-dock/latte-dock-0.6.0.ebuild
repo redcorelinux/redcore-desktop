@@ -33,9 +33,9 @@ DEPEND="
 	$(add_qt_dep qtdbus)
 	$(add_qt_dep qtgui)
 	X? (
-			$(add_frameworks_dep kwindowsystem)
-			$(add_qt_dep qtx11extras)
-			x11-libs/libxcb
+		$(add_frameworks_dep kwindowsystem)
+		$(add_qt_dep qtx11extras)
+		x11-libs/libxcb
 	)
 "
 RDEPEND="${DEPEND}
