@@ -6,7 +6,7 @@ EAPI=5
 
 DESCRIPTION="Redcore Linux Community Wallpapers"
 HOMEPAGE="http://redcorelinux.org"
-SRC_URI="http://redcorelinux.org/distfiles/${CATEGORY}/${PN}/${PN}-${PV}.tar.xz"
+SRC_URI="http://mirror.math.princeton.edu/pub/redcorelinux/distfiles/${CATEGORY}/${PN}/${PN}-${PV}.tar.xz"
 
 LICENSE=""
 SLOT="0"
