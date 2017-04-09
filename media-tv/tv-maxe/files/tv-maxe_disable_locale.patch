@@ -1,0 +1,11 @@
+diff -Nur a/tv-maxe/tvmaxe.py b/tv-maxe/tvmaxe.py
+--- a/tv-maxe/tvmaxe.py	2015-01-07 14:53:41.000000000 +0000
++++ b/tv-maxe/tvmaxe.py	2017-04-09 17:24:40.536587825 +0100
+@@ -11,7 +11,6 @@
+         os.path.abspath(__file__)), 'lng')
+ except:
+     LOCALE_PATH = 'lng'
+-locale.setlocale(locale.LC_ALL, '')
+ for module in gtk.glade, gettext:
+     module.bindtextdomain(GETTEXT_DOMAIN, LOCALE_PATH)
+     module.textdomain(GETTEXT_DOMAIN)

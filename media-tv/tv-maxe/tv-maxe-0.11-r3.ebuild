@@ -33,6 +33,7 @@ S="${WORKDIR}/${PN}-${PV}"
 
 src_prepare() {
 	sed -i "s|python|python2|g" ${S}/${PN}/${PN} || die "Cannot sed file"
+	epatch ${FILESDIR}/${PN}_disable_locale.patch
 }
 
 src_install() {
