@@ -9,7 +9,7 @@ DESCRIPTION="the Paper theme official icons."
 HOMEPAGE="https://github.com/${MY_AUTHOR}/${PN}"
 
 SRC_URI="https://github.com/${MY_AUTHOR}/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 x86"
 
 LICENSE="CC-BY-SA-4.0"
 SLOT="0"
