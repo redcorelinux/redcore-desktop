@@ -9,7 +9,7 @@ start() {
 	ebegin "Setting up bbswitch"
 	# make sure that the nvidia and nouveau modules are
 	# removed, then reload bbswitch.
-	for mod in nvidia nouveau; do
+	for mod in nvidia nvidia_drm nvidia_modeset nouveau; do
 		modprobe -r ${mod} 2> /dev/null  # best effort
 	done
 	# reload bbswitch now
