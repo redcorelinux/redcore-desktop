@@ -9,7 +9,6 @@ inherit cmake-utils git-r3
 DESCRIPTION="Qt password manager compatible with its Win32 and Pocket PC versions"
 HOMEPAGE="http://keepassx.sourceforge.net/"
 EGIT_REPO_URI=(
-	"git://keepassx.org/${PN}.git"
 	"https://github.com/${PN}/${PN}"
 )
 
