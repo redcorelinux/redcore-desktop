@@ -18,6 +18,9 @@ GRUB_DISTRIBUTOR="Redcore"
 GRUB_TIMEOUT="5"
 #GRUB_TIMEOUT_STYLE=menu
 
+# Append parameters to the Linux kernel command line for ALL entries
+GRUB_CMDLINE_LINUX="init=/usr/lib/systemd/systemd"
+
 # Append parameters to the linux kernel command line for non-recovery entries
 GRUB_CMDLINE_LINUX_DEFAULT="splash modprobe.blacklist=vboxvideo quiet"
 
