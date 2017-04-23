@@ -74,8 +74,6 @@ src_install() {
 	if use bbswitch; then
 		# This is much better than the udev rule below
 		doinitd "${FILESDIR}/bbswitch-setup"
-		sed -i "s:need xdm:need bbswitch-setup xdm:" \
-			"${ED}/etc/init.d/bumblebee" || die
 	fi
 	# Downstream says: this is just plain wrong, how about
 	# the situation in where the user has bumblebee installed

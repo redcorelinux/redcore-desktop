@@ -3,7 +3,8 @@
 # Distributed under the terms of the GNU General Public License v2
 
 depend() {
-	need xdm vgl
+	need bbswitch-setup
+	before xdm
 }
 
 PIDFILE="${PIDFILE:-/var/run/bumblebee.pid}"
