@@ -34,3 +34,6 @@ src_install() {
 	doins ${S}/libvasile
 }
 
+pkg_postinst {
+	/usr/bin/vasile --binmode
+}
