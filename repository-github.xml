@@ -9,6 +9,6 @@ https://redcorelinux.org
 <email>venerix@redcorelinux.org</email>
 <name>Ghiunhan Mamut</name>
 </owner>
-<source type="git">https://gitlab.com/redcore/redcore-desktop.git</source>
+<source type="git">https://github.com/redcorelinux/redcore-desktop.git</source>
 </repo>
 </repositories>
