@@ -55,5 +55,5 @@ RDEPEND="
 	>=sys-libs/kpmcore-2.2.0
 	sys-boot/os-prober
 	sys-auth/polkit-qt5
-	sys-fs/udisks:2[systemd]
-	virtual/udev[systemd]"
+	sys-fs/udisks:2
+	virtual/udev"
