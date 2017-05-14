@@ -33,7 +33,3 @@ src_install() {
 	insinto /usr/$(get_libdir)/${PN}
 	doins ${S}/libvasile
 }
-
-pkg_postinst() {
-	/usr/bin/vasile --binmode
-}
