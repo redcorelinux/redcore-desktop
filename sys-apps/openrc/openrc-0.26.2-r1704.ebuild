@@ -290,7 +290,9 @@ pkg_postinst() {
 	fi
 
 	if use dkms; then
+		elog
 		elog "Auto-adding DKMS to boot runlevel"
+		elog
 		ln -sf /etc/init.d/dkms /etc/runlevels/boot
 	fi
 
