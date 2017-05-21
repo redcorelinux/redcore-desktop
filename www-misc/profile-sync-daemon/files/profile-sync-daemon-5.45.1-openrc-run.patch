@@ -1,0 +1,9 @@
+diff -Nur a/init/psd.openrc b/init/psd.openrc
+--- a/init/psd.openrc	2014-01-18 11:23:13.000000000 +0000
++++ b/init/psd.openrc	2017-05-21 09:59:06.222031221 +0100
+@@ -1,4 +1,4 @@
+-#!/sbin/runscript
++#!/sbin/openrc-run
+ # Copyright 1999-2013 Gentoo Foundation
+ # Distributed under the terms of the GNU General Public License v2
+ 
