@@ -1,0 +1,82 @@
+diff -Nur a/dkms_autoinstaller b/dkms_autoinstaller
+--- a/dkms_autoinstaller	2016-08-31 18:23:47.000000000 +0100
++++ b/dkms_autoinstaller	2017-05-21 11:49:24.833475555 +0100
+@@ -1,60 +1,29 @@
+ #!/bin/sh
+-#
+-# dkms_autoinstaller - A service to automatically install DKMS modules for new kernels.
+-#
+-# chkconfig: 345 04 04
+-# description: Compiles and install kernel modules automatically for new \
+-#              kernels at boot.
+-
+-### BEGIN INIT INFO
+-# Provides: dkms_autoinstaller dkms
+-# Default-Start: 3 4 5
+-# Default-Stop: 0 1 2 6
+-# Required-Start: $local_fs
+-# Short-Description: DKMS kernel modules installer service
++# Short-Description: Automatically install DKMS modules for new kernels
+ # Description: A service to automatically install DKMS modules for new kernels.
+-### END INIT INFO
+ 
++test -f /usr/sbin/dkms || exit 0
+ 
+-if [ -f /lib/lsb/init-functions ]; then
+-    . /lib/lsb/init-functions
+-elif [ -f /etc/rc.d/init.d/functions ]; then 
+-    . /etc/rc.d/init.d/functions
++if [ -f /lib/gentoo/functions.sh ]; then
++	. /lib/gentoo/functions.sh
+ fi
+ 
+-#We only have these functions on debian/ubuntu
+-# so on other distros just stub them out
+-if [ ! -f /etc/debian_version ]; then
+-    alias log_daemon_msg=/bin/echo
+-    log_end_msg() { if [ "$1" = "0" ]; then echo " Done. "; else echo " Failed. "; fi }
+-    alias log_action_begin_msg=log_daemon_msg
+-    alias log_action_end_msg=log_end_msg
++if [ -n "$2" ]; then
++	kernel="$2"
++else
++	kernel=`uname -r`
+ fi
+ 
+-exec="/usr/sbin/dkms"
+-prog=${exec##*/}
+-
+-test -f $exec || exit 0
+-
+-[ -e /etc/sysconfig/$prog ] && . /etc/sysconfig/$prog
+-
++# See how we were called.
+ case "$1" in
+-    start)
+-		if [ -n "$2" ]; then
+-			kernel="$2"
+-		else
+-			kernel=`uname -r`
+-		fi
+-		log_daemon_msg "$prog: running auto installation service for kernel $kernel"
+-		dkms autoinstall --kernelver $kernel
+-		log_end_msg $?
++	start)
++		dkms autoinstall --force --kernelver $kernel
++		;;
++	status)
++		dkms status
+ 		;;
+-	stop|restart|force-reload|status|reload)
+-		# There is no stop action, this and the 04 priority during stop is
+-		# added to make RHEL chkconfig happy.
+-		# Ignore others on debian/ubuntu too
+-        ;;
+-    *)
+-        echo $"Usage: $0 {start}"
+-        exit 2
++	*)
++		echo "Usage: $0 {start}"
+ esac
++
++exit 0

@@ -1,0 +1,18 @@
+#!/sbin/openrc-run
+# Copyright 1999-2012 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+
+depend() {
+	need localmount
+	before net
+}
+
+start() {
+	ebegin "Starting Dynamic Kernel Module Support "
+		/usr/lib/dkms/dkms_autoinstaller start
+	eend 0
+}
+
+status() {
+	/usr/lib/dkms/dkms_autoinstaller status
+}

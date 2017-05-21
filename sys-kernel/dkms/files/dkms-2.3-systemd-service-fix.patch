@@ -1,0 +1,23 @@
+diff -Nur a/dkms.service b/dkms.service
+--- a/dkms.service	2016-08-31 18:23:47.000000000 +0100
++++ b/dkms.service	2017-05-21 11:52:28.087487858 +0100
+@@ -1,11 +1,15 @@
+ [Unit]
+-Description=Builds and install new kernel modules through DKMS
+-Documentation=man:dkms(8)
++Description=DKMS Autoinstall service
++DefaultDependencies=no
++After=local-fs.target
++Conflicts=shutdown.target
++Before=basic.target shutdown.target
+ 
+ [Service]
++ExecStart=/usr/lib/dkms/dkms_autoinstaller start
+ Type=oneshot
+-RemainAfterExit=true
+-ExecStart=/bin/sh -c 'dkms autoinstall --verbose --kernelver $(uname -r)'
++TimeoutSec=0
++StandardInput=tty
+ 
+ [Install]
+ WantedBy=multi-user.target
