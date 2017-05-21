@@ -1,16 +1,20 @@
 #!/sbin/openrc-run
-# Copyright 1999-2012 Gentoo Foundation
+# Copyright 2017 Redcore Linux Project
 # Distributed under the terms of the GNU General Public License v2
 
 depend() {
-	need localmount
-	before net
+	after localmount
 }
 
 start() {
-	ebegin "Starting Dynamic Kernel Module Support "
+	ebegin "Starting DKMS (dynamic kernel module support) "
 		/usr/lib/dkms/dkms_autoinstaller start
-	eend 0
+	eend $?
+}
+
+stop() {
+	ebegin "Stopping DKMS (dynamic kernel module support)"
+	eend $?
 }
 
 status() {
