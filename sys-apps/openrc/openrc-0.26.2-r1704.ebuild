@@ -18,7 +18,7 @@ fi
 
 LICENSE="BSD-2"
 SLOT="0"
-IUSE="audit debug ncurses pam newnet prefix +netifrc selinux static-libs
+IUSE="audit debug +dkms ncurses pam newnet prefix +netifrc selinux static-libs
 	unicode kernel_linux kernel_FreeBSD"
 
 COMMON_DEPEND="kernel_FreeBSD? ( || ( >=sys-freebsd/freebsd-ubin-9.0_rc sys-process/fuser-bsd ) )
@@ -40,6 +40,7 @@ COMMON_DEPEND="kernel_FreeBSD? ( || ( >=sys-freebsd/freebsd-ubin-9.0_rc sys-proc
 	!<sys-fs/udev-init-scripts-27"
 DEPEND="${COMMON_DEPEND}
 	virtual/os-headers
+	dkms? ( sys-kernel/dkms )
 	ncurses? ( virtual/pkgconfig )"
 RDEPEND="${COMMON_DEPEND}
 	!prefix? (
@@ -65,6 +66,10 @@ src_prepare() {
 	if [[ ${PV} == "9999" ]] ; then
 		local ver="git-${EGIT_VERSION:0:6}"
 		sed -i "/^GITVER[[:space:]]*=/s:=.*:=${ver}:" mk/gitver.mk || die
+	fi
+	
+	if use dkms ; then
+		epatch ${FILESDIR}/${PN}-dkms.patch
 	fi
 }
 
@@ -282,6 +287,11 @@ pkg_postinst() {
 			cp -RPp "${EROOT}"usr/share/${PN}/runlevels/nonetwork \
 				"${EROOT}"etc/runlevels
 		fi
+	fi
+
+	if use dkms; then
+		elog "Auto-adding DKMS to boot runlevel"
+		ln -sf /etc/init.d/dkms /etc/runlevels/boot
 	fi
 
 	if use hppa; then
