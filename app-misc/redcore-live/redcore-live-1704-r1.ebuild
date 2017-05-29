@@ -5,7 +5,7 @@ EAPI=6
 EGIT_BRANCH="master"
 EGIT_REPO_URI="https://gitlab.com/redcore/redcore-live.git"
 
-inherit eutils systemd git-r3
+inherit eutils git-r3
 
 DESCRIPTION="Redcore Linux live scripts"
 HOMEPAGE="http://redcorelinux.org"
@@ -19,8 +19,7 @@ DEPEND=""
 RDEPEND=""
 
 src_install() {
-	emake DESTDIR="${D}" SYSTEMD_UNITDIR="$(systemd_get_systemunitdir)" \
-		install || die
+	default
 }
 
 pkg_postrm() {
