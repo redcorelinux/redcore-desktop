@@ -48,6 +48,8 @@ DEPEND="
 RDEPEND=">=app-misc/calamares-runtime-1.0[branding]"
 
 src_prepare() {
+	# luksfix (master) by frugalware, backported to stable
+	epatch "${FILESDIR}"/${P}-luksfix.patch
 	# replace calamares installer desktop icon
 	sed -i "s/Icon=calamares/Icon=redcore-logo/g" "${S}/calamares.desktop"
 	# fix installer doesn't start from desktop launcher (IMPROVE THIS UGLY THINGY)

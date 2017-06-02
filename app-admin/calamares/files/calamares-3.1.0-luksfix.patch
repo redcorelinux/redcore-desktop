@@ -1,0 +1,87 @@
+diff -Nur a/src/modules/bootloader/main.py b/src/modules/bootloader/main.py
+--- a/src/modules/bootloader/main.py	2017-02-17 15:21:02.000000000 +0000
++++ b/src/modules/bootloader/main.py	2017-06-02 13:38:49.275348324 +0100
+@@ -98,14 +98,15 @@
+     cryptdevice_params = []
+ 
+     for partition in partitions:
+-        if partition["fs"] == "linuxswap":
++        if partition["fs"] == "linuxswap" and not "luksMapperName" in partition:
+             swap_uuid = partition["uuid"]
+ 
+         if partition["mountPoint"] == "/" and "luksMapperName" in partition:
+             cryptdevice_params = [
+                 "cryptdevice=UUID={!s}:{!s}".format(partition["luksUuid"],
+                                                     partition["luksMapperName"]),
+-                "root=/dev/mapper/{!s}".format(partition["luksMapperName"])
++                "root=/dev/mapper/{!s}".format(partition["luksMapperName"]),
++                "resume=/dev/mapper/{!s}".format(partition["luksMapperName"])
+             ]
+ 
+     if cryptdevice_params:
+diff -Nur a/src/modules/fstab/main.py b/src/modules/fstab/main.py
+--- a/src/modules/fstab/main.py	2016-11-25 17:38:49.000000000 +0000
++++ b/src/modules/fstab/main.py	2017-06-02 13:28:53.792308347 +0100
+@@ -257,8 +257,23 @@
+                         check=check,
+                         )
+ 
++        if filesystem == "swap" and "luksMapperName" in partition:
++            return dict(device="/dev/mapper/" + partition["luksMapperName"],
++                        mount_point=mount_point or "swap",
++                        fs=filesystem,
++                        options=options,
++                        check=check,
++                        )
++        else:
++            return dict(device="UUID=" + partition["uuid"],
++                        mount_point=mount_point or "swap",
++                        fs=filesystem,
++                        options=options,
++                        check=check,
++                        )
++
+         return dict(device="UUID=" + partition["uuid"],
+-                    mount_point=mount_point or "swap",
++                    mount_point=mount_point,
+                     fs=filesystem,
+                     options=options,
+                     check=check,
+diff -Nur a/src/modules/grubcfg/main.py b/src/modules/grubcfg/main.py
+--- a/src/modules/grubcfg/main.py	2017-02-17 15:21:02.000000000 +0000
++++ b/src/modules/grubcfg/main.py	2017-06-02 13:36:55.032340654 +0100
+@@ -48,7 +48,7 @@
+ 
+     if dracut_bin == 0:
+         for partition in partitions:
+-            if partition["fs"] == "linuxswap":
++            if partition["fs"] == "linuxswap" and not "luksMapperName" in partition:
+                 swap_uuid = partition["uuid"]
+ 
+             if partition["fs"] == "linuxswap" and "luksMapperName" in partition:
+@@ -58,14 +58,15 @@
+                 cryptdevice_params = ["rd.luks.uuid={!s}".format(partition["luksUuid"])]
+     else:
+         for partition in partitions:
+-            if partition["fs"] == "linuxswap":
++            if partition["fs"] == "linuxswap" and not "luksMapperName" in partition:
+                 swap_uuid = partition["uuid"]
+ 
+             if partition["mountPoint"] == "/" and "luksMapperName" in partition:
+                 cryptdevice_params = [
+                     "cryptdevice=UUID={!s}:{!s}".format(partition["luksUuid"],
+                                                         partition["luksMapperName"]),
+-                    "root=/dev/mapper/{!s}".format(partition["luksMapperName"])
++                    "root=/dev/mapper/{!s}".format(partition["luksMapperName"]),
++                    "resume=/dev/mapper/{!s}".format(partition["luksMapperName"])
+                 ]
+ 
+     kernel_params = ["quiet"]
+@@ -80,6 +81,7 @@
+         kernel_params.append("resume=UUID={!s}".format(swap_uuid))
+ 
+     if dracut_bin == 0 and swap_outer_uuid:
++        kernel_params.append("resume=/dev/mapper/{!s}".format(partition["luksMapperName"]))
+         kernel_params.append("rd.luks.uuid={!s}".format(swap_outer_uuid))
+ 
+     distributor_line = "GRUB_DISTRIBUTOR='{!s}'".format(distributor_replace)
