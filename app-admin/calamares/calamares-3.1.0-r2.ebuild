@@ -48,8 +48,10 @@ DEPEND="
 RDEPEND=">=app-misc/calamares-runtime-1.0[branding]"
 
 src_prepare() {
-	# luksfix (master) by frugalware, backported to stable
-	# epatch "${FILESDIR}"/${P}-luksfix.patch
+	# by default, calamares writes UUID=partition-uuid in fstab, regardless
+	# is luks or not. This is utterly broken for many reasons. The patch
+	# below will make calamares to write proper /dev/mapper entries.
+	epatch "${FILESDIR}"/${P}-luks-fstab-write-devmapper.patch
 	# replace calamares installer desktop icon
 	sed -i "s/Icon=calamares/Icon=redcore-logo/g" "${S}/calamares.desktop"
 	# fix installer doesn't start from desktop launcher (IMPROVE THIS UGLY THINGY)
