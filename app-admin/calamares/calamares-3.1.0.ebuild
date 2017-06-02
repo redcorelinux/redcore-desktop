@@ -20,7 +20,6 @@ IUSE="+python"
 S="${WORKDIR}/${P}"
 
 DEPEND="
-	dev-vcs/git
 	python? (
 		>=dev-libs/boost-1.55.0-r2[python_targets_python3_4]
 	)
@@ -44,7 +43,7 @@ DEPEND="
 	>=dev-qt/qtxmlpatterns-5.6.0:5
 	>=dev-cpp/yaml-cpp-0.5.1
 	>=kde-frameworks/extra-cmake-modules-5.18.0
-	>=sys-libs/kpmcore-2.2.0"
+	>=sys-libs/kpmcore-3.0.2"
 
 RDEPEND=">=app-misc/calamares-runtime-1.0[branding]"
 
