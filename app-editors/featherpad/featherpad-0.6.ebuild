@@ -6,7 +6,7 @@ inherit eutils qmake-utils git-r3
 
 DESCRIPTION="Lightweight Qt5 Plain-Text Editor for Linux"
 EGIT_REPO_URI="https://github.com/tsujan/FeatherPad.git"
-EGIT_COMMIT="c7f62469af0222a3cedefbb39278e4f80077dcfb"
+EGIT_COMMIT="00d2202758e5d830c90926fe800343e0946a521d"
 
 LICENSE="GPL-3"
 SLOT="0"
