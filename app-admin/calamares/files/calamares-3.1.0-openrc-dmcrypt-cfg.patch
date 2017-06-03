@@ -1,0 +1,78 @@
+diff -Nur a/src/modules/openrcdmcryptcfg/main.py b/src/modules/openrcdmcryptcfg/main.py
+--- a/src/modules/openrcdmcryptcfg/main.py	1970-01-01 01:00:00.000000000 +0100
++++ b/src/modules/openrcdmcryptcfg/main.py	2017-06-03 17:34:02.791096200 +0100
+@@ -0,0 +1,59 @@
++#!/usr/bin/env python3
++# -*- coding: utf-8 -*-
++#
++# === This file is part of Calamares - <http://github.com/calamares> ===
++#
++#   Copyright 2017, Ghiunhan Mamut <venerix@redcorelinux.org>
++#
++#   Calamares is free software: you can redistribute it and/or modify
++#   it under the terms of the GNU General Public License as published by
++#   the Free Software Foundation, either version 3 of the License, or
++#   (at your option) any later version.
++#
++#   Calamares is distributed in the hope that it will be useful,
++#   but WITHOUT ANY WARRANTY; without even the implied warranty of
++#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++#   GNU General Public License for more details.
++#
++#   You should have received a copy of the GNU General Public License
++#   along with Calamares. If not, see <http://www.gnu.org/licenses/>.
++
++import libcalamares
++import os.path
++
++
++def write_dmcrypt_conf(partitions, root_mount_point, dmcrypt_conf_path):
++    crypto_target = ""
++    crypto_source = ""
++
++    for partition in partitions:
++        if partition["mountPoint"] == "/home" and "luksMapperName" in partition:
++            crypto_target = partition["luksMapperName"]
++            crypto_source = "/dev/disk/by-uuid/{!s}".format(partition["uuid"])
++        
++    if not "luksMapperName" in partition:
++            return None
++
++    with open(os.path.join(root_mount_point, dmcrypt_conf_path), 'a+') as dmcrypt_file:
++        dmcrypt_file.write("\ntarget=" + crypto_target)
++        dmcrypt_file.write("\nsource=" + crypto_source)
++        dmcrypt_file.write("\nkey=/crypto_keyfile.bin")
++        dmcrypt_file.write("\n")
++        dmcrypt_file.close()
++
++    return None
++
++
++def run():
++    """
++    This module configures the OpenRC dmcrypt service for an encrypted /home partition.
++    :return:
++    """
++
++    root_mount_point = libcalamares.globalstorage.value("rootMountPoint")
++    dmcrypt_conf_path = libcalamares.job.configuration["configFilePath"]
++    partitions = libcalamares.globalstorage.value("partitions")
++
++    dmcrypt_conf_path = dmcrypt_conf_path.lstrip('/')
++
++    return write_dmcrypt_conf(partitions, root_mount_point, dmcrypt_conf_path)
+diff -Nur a/src/modules/openrcdmcryptcfg/module.desc b/src/modules/openrcdmcryptcfg/module.desc
+--- a/src/modules/openrcdmcryptcfg/module.desc	1970-01-01 01:00:00.000000000 +0100
++++ b/src/modules/openrcdmcryptcfg/module.desc	2017-06-03 14:39:12.592391951 +0100
+@@ -0,0 +1,5 @@
++---
++type:       "job"
++name:       "openrcdmcryptcfg"
++interface:  "python"
++script:     "main.py"
+diff -Nur a/src/modules/openrcdmcryptcfg/openrcdmcryptcfg.conf b/src/modules/openrcdmcryptcfg/openrcdmcryptcfg.conf
+--- a/src/modules/openrcdmcryptcfg/openrcdmcryptcfg.conf	1970-01-01 01:00:00.000000000 +0100
++++ b/src/modules/openrcdmcryptcfg/openrcdmcryptcfg.conf	2017-06-03 14:44:03.981411513 +0100
+@@ -0,0 +1,2 @@
++---
++configFilePath: /etc/conf.d/dmcrypt
