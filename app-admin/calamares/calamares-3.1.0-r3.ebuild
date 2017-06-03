@@ -53,7 +53,7 @@ src_prepare() {
 	# below will make calamares to write proper /dev/mapper entries.
 	epatch "${FILESDIR}"/${P}-luks-fstab-write-devmapper.patch
 	# support auto-unlocking encrypted /home partition via OpenRC's dmcrypt service
-	epatch "${FILESDIR}"/${P}-openrc-dmcrypt-cfg.patch
+	epatch -p1 "${FILESDIR}"/${P}-openrc-dmcrypt-cfg.patch
 	# replace calamares installer desktop icon
 	sed -i "s/Icon=calamares/Icon=redcore-logo/g" "${S}/calamares.desktop"
 	# fix installer doesn't start from desktop launcher (IMPROVE THIS UGLY THINGY)
