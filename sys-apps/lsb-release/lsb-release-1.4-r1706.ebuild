@@ -34,5 +34,8 @@ src_install() {
 	mkdir -p "${D}/etc"
 	cat > "${D}/etc/lsb-release" <<- EOF
 		DISTRIB_ID="Redcore"
+		DISTRIB_RELEASE=1706
+		DISTRIB_CODENAME=Fomalhaut
+		DISTRIB_DESCRIPTION="Redcore 1706 Fomalhaut"
 	EOF
 }
