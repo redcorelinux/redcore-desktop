@@ -7,7 +7,7 @@ inherit eutils qmake-utils git-r3
 
 DESCRIPTION="Notepad++-like editor for Linux"
 EGIT_REPO_URI="https://github.com/${PN}/${PN}.git"
-EGIT_COMMIT="3b0751277fb268ec72b466b37d0f0977c536bc1b"
+EGIT_COMMIT="695b38b975e4c88e4f132feb466c03f3f8e7fa7c"
 
 LICENSE="GPL-3"
 SLOT="0"
