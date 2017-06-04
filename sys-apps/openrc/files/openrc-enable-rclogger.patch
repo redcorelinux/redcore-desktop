@@ -1,0 +1,12 @@
+diff -Nur a/etc/rc.conf b/etc/rc.conf
+--- a/etc/rc.conf	2017-05-30 18:46:49.000000000 +0100
++++ b/etc/rc.conf	2017-06-04 12:45:58.300189719 +0100
+@@ -48,7 +48,7 @@
+ # /var/log/rc.log
+ # NOTE: Linux systems require the devfs service to be started before
+ # logging can take place and as such cannot log the sysinit runlevel.
+-#rc_logger="NO"
++rc_logger="YES"
+ 
+ # Through rc_log_path you can specify a custom log file.
+ # The default value is: /var/log/rc.log

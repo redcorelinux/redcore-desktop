@@ -69,8 +69,10 @@ src_prepare() {
 	fi
 	
 	if use dkms ; then
-		epatch ${FILESDIR}/${PN}-dkms.patch
+		epatch "${FILESDIR}"/${PN}-dkms.patch
 	fi
+	
+	epatch "${FILESDIR}"/${PN}-enable-rclogger.patch
 }
 
 src_compile() {
