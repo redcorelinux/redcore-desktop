@@ -1,6 +1,5 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=6
 
@@ -11,7 +10,7 @@ MY_PV="${PV/beta/BETA}"
 MY_PV="${MY_PV/rc/RC}"
 MY_P=VirtualBox-${MY_PV}
 SRC_URI="http://download.virtualbox.org/virtualbox/${MY_PV}/${MY_P}.tar.bz2
-	https://dev.gentoo.org/~polynomial-c/${PN}/patchsets/${PN}-5.1.6-patches-01.tar.xz"
+	https://dev.gentoo.org/~polynomial-c/${PN}/patchsets/${PN}-5.1.18-patches-01.tar.xz"
 S="${WORKDIR}/${MY_P}"
 
 DESCRIPTION="Family of powerful x86 virtualization products for enterprise and home use"
@@ -20,7 +19,7 @@ HOMEPAGE="http://www.virtualbox.org/"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="amd64 x86"
-IUSE="alsa debug doc headless java libressl lvm pam pulseaudio +opengl python +qt5 +sdk +udev vboxwebsrv vnc"
+IUSE="alsa debug doc headless java libressl lvm pam pax_kernel pulseaudio +opengl python +qt5 +sdk +udev vboxwebsrv vnc"
 
 RDEPEND="!app-emulation/virtualbox-bin
 	~app-emulation/virtualbox-modules-${PV}
@@ -64,6 +63,7 @@ DEPEND="${RDEPEND}
 	virtual/pkgconfig
 	alsa? ( >=media-libs/alsa-lib-1.0.13 )
 	doc? (
+		app-text/docbook-sgml-dtd:4.4
 		dev-texlive/texlive-basic
 		dev-texlive/texlive-latex
 		dev-texlive/texlive-latexrecommended
@@ -74,6 +74,7 @@ DEPEND="${RDEPEND}
 	!headless? ( x11-libs/libXinerama )
 	java? ( >=virtual/jre-1.6:= )
 	pam? ( sys-libs/pam )
+	pax_kernel? ( sys-apps/elfix )
 	pulseaudio? ( media-sound/pulseaudio )
 	qt5? ( dev-qt/linguist-tools:5 )
 	vboxwebsrv? ( net-libs/gsoap[-gnutls(-)] )
@@ -146,9 +147,8 @@ src_prepare() {
 	# Remove shipped binaries (kBuild,yasm), see bug #232775
 	rm -r kBuild/bin tools || die
 
-	# Remove pointless GCC version limitations in check_gcc()
-	sed -e "/\s*-o\s*\\\(\s*\$cc_maj\s*-eq\s*[5-9]\s*-a\s*\$cc_min\s*-gt\s*[0-5]\s*\\\)\s*\\\/d" \
-		-i configure || die
+	# Remove pointless GCC version check
+	sed -e '/^check_gcc$/d' -i configure || die
 
 	# Disable things unused or split into separate ebuilds
 	sed -e "s@MY_LIBDIR@$(get_libdir)@" \
@@ -182,7 +182,13 @@ src_prepare() {
 		rm "${WORKDIR}"/patches/050_${PN}-*-nopie.patch || die
 	fi
 
+	# Only add paxmark patch when we're on pax_kernel
+	if use pax_kernel ; then
+		epatch "${FILESDIR}"/virtualbox-5.1.4-paxmark-bldprogs.patch || die
+	fi
+
 	eapply "${WORKDIR}/patches"
+	eapply "${FILESDIR}/${P}-opengl_dlopen_fix.patch" #616238
 
 	eapply_user
 }
@@ -394,6 +400,10 @@ src_install() {
 		dosym ${vbox_inst_path}/VBox /usr/bin/vboxwebsrv
 		newinitd "${FILESDIR}"/vboxwebsrv-initd vboxwebsrv
 		newconfd "${FILESDIR}"/vboxwebsrv-confd vboxwebsrv
+	fi
+
+	if use doc ; then
+		dodoc UserManual.pdf
 	fi
 }
 
