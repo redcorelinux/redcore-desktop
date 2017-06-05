@@ -15,4 +15,4 @@ IUSE=""
 DEPEND="~sys-fs/spl-${PV}
 	~sys-fs/zfs-utils-${PV}
 	~sys-kernel/zfs-dkms-${PV}"
-RDEPEND=""
+RDEPEND="${DEPEND}"

@@ -14,4 +14,4 @@ IUSE=""
 
 DEPEND="~sys-fs/spl-utils-${PV}
 	~sys-kernel/spl-dkms-${PV}"
-RDEPEND=""
+RDEPEND="${DEPEND}"
