@@ -11,7 +11,7 @@ HOMEPAGE="http://zfsonlinux.org/"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS=" ~amd64"
+KEYWORDS="amd64"
 IUSE="custom-cflags debug"
 
 RESTRICT="debug? ( strip ) test"
