@@ -41,7 +41,8 @@ RDEPEND="${COMMON_DEPEND}
 		app-misc/pax-utils
 		!<sys-boot/grub-2.00-r2:2
 		)
-	sys-fs/udev-init-scripts"
+	sys-fs/udev-init-scripts
+	~sys-kernel/spl-${PV}"
 
 AT_M4DIR="config"
 AUTOTOOLS_IN_SOURCE_BUILD="1"
