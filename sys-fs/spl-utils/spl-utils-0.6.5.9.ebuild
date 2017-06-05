@@ -4,7 +4,10 @@
 EAPI="5"
 inherit flag-o-matic autotools-utils
 
-SRC_URI="https://github.com/zfsonlinux/zfs/releases/download/zfs-${PV}/${P}.tar.gz"
+MY_PN="spl"
+MY_P="${MY_PN}-${PV}"
+
+SRC_URI="https://github.com/zfsonlinux/zfs/releases/download/zfs-${PV}/${MY_P}.tar.gz"
 
 DESCRIPTION="The Solaris Porting Layer is a Linux kernel module which provides many of the Solaris kernel APIs"
 HOMEPAGE="http://zfsonlinux.org/"
@@ -15,6 +18,8 @@ KEYWORDS="amd64"
 IUSE="custom-cflags debug"
 
 RESTRICT="debug? ( strip ) test"
+
+S="${WORKDIR}/${MY_P}"
 
 COMMON_DEPEND="dev-lang/perl
 	virtual/awk"

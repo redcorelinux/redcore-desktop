@@ -6,7 +6,10 @@ PYTHON_COMPAT=( python{2_7,3_4,3_5} )
 
 inherit autotools-utils bash-completion-r1 flag-o-matic linux-info python-r1 systemd toolchain-funcs udev
 
-SRC_URI="https://github.com/zfsonlinux/${PN}/releases/download/${P}/${P}.tar.gz"
+MY_PN="zfs"
+MY_P="${MY_PN}-${PV}"
+
+SRC_URI="https://github.com/zfsonlinux/${MY_PN}/releases/download/${MY_P}/${MY_P}.tar.gz"
 
 DESCRIPTION="Userland utilities for ZFS Linux kernel module"
 HOMEPAGE="http://zfsonlinux.org/"
@@ -14,12 +17,14 @@ HOMEPAGE="http://zfsonlinux.org/"
 LICENSE="BSD-2 CDDL MIT"
 SLOT="0"
 KEYWORDS="amd64"
-IUSE="custom-cflags debug +rootfs test-suite static-libs"
+IUSE="debug +rootfs test-suite"
 
 RESTRICT="test"
 
-COMMON_DEPEND="sys-apps/util-linux[static-libs?]
-	sys-libs/zlib[static-libs(+)?]
+S="${WORKDIR}/${MY_P}"
+
+COMMON_DEPEND="sys-apps/util-linux
+	sys-libs/zlib
 	virtual/awk"
 DEPEND="${COMMON_DEPEND}
 	virtual/pkgconfig"
@@ -42,7 +47,7 @@ RDEPEND="${COMMON_DEPEND}
 		!<sys-boot/grub-2.00-r2:2
 		)
 	sys-fs/udev-init-scripts
-	~sys-kernel/spl-${PV}"
+	~sys-fs/spl-utils-${PV}"
 
 AT_M4DIR="config"
 AUTOTOOLS_IN_SOURCE_BUILD="1"
@@ -81,7 +86,6 @@ src_prepare() {
 }
 
 src_configure() {
-	use custom-cflags || strip-flags
 	local myeconfargs=(
 		--bindir="${EPREFIX}/bin"
 		--sbindir="${EPREFIX}/sbin"
