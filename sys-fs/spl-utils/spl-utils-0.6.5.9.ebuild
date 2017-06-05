@@ -15,7 +15,7 @@ HOMEPAGE="http://zfsonlinux.org/"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="amd64"
-IUSE="custom-cflags debug"
+IUSE="debug"
 
 RESTRICT="debug? ( strip ) test"
 
@@ -48,7 +48,6 @@ src_prepare() {
 }
 
 src_configure() {
-	use custom-cflags || strip-flags
 	filter-ldflags -Wl,*
 
 	local myeconfargs=(
