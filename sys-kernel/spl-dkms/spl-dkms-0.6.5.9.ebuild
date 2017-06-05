@@ -39,6 +39,9 @@ src_install() {
 	dodir /usr/src/${P}
 	insinto /usr/src/${P}
 	doins -r ${S}/*
+	fperms 0755 /usr/src/${P}/configure
+	fperms 0755 /usr/src/${P}/scripts/dkms.mkconf
+	fperms 0755 /usr/src/${P}/scripts/dkms.postbuild
 }
 
 pkg_postinst() {
