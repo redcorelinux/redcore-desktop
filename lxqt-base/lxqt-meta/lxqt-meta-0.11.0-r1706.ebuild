@@ -10,7 +10,7 @@ HOMEPAGE="http://lxqt.org/"
 LICENSE="metapackage"
 SLOT="0"
 KEYWORDS="amd64 ~arm64 ~x86"
-IUSE="+about +admin +branding +filemanager +icons +lightdm +lximage minimal +oxygen +policykit
+IUSE="+about +admin +branding +filemanager +icons +sddm +lximage minimal +oxygen +policykit
 	+powermanagement +ssh-askpass sudo"
 REQUIRED_USE="oxygen? ( icons )"
 
@@ -32,7 +32,7 @@ RDEPEND="
 	filemanager? ( >=x11-misc/pcmanfm-qt-${PV} )
 	icons? ( oxygen? ( kde-frameworks/oxygen-icons )
 		!oxygen? ( virtual/freedesktop-icon-theme ) )
-	lightdm? ( x11-misc/lightdm )
+	sddm? ( x11-misc/sddm )
 	lximage? ( media-gfx/lximage-qt )
 	!minimal? ( x11-wm/openbox
 		x11-misc/obconf-qt )
