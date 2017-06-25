@@ -6,12 +6,12 @@ inherit cmake-utils user
 
 DESCRIPTION="Simple Desktop Display Manager"
 HOMEPAGE="https://github.com/sddm/sddm"
-SRC_URI="http://mirror.math.princeton.edu/pub/redcorelinux/distfiles/${CATEGORY}/${PN}/${P}.tar.xz"
+SRC_URI="https://github.com/${PN}/${PN}/releases/download/v${PV}/${P}.tar.xz"
 KEYWORDS="amd64 ~arm x86"
 
 LICENSE="GPL-2+ MIT CC-BY-3.0 CC-BY-SA-3.0 public-domain"
 SLOT="0"
-IUSE="consolekit +pam systemd"
+IUSE="+branding consolekit +pam systemd"
 
 RDEPEND=">=dev-qt/qtcore-5.6:5
 	>=dev-qt/qtdbus-5.6:5
@@ -20,6 +20,7 @@ RDEPEND=">=dev-qt/qtcore-5.6:5
 	>=dev-qt/qtnetwork-5.6:5
 	>=x11-base/xorg-server-1.15.1
 	x11-libs/libxcb[xkb(-)]
+	branding? ( x11-themes/redcore-theme-sddm )
 	consolekit? ( >=sys-auth/consolekit-0.9.4 )
 	pam? ( sys-libs/pam )
 	systemd? ( sys-apps/systemd:= )

@@ -1,0 +1,15 @@
+[SddmGreeterTheme]
+Name=Redcore
+Description=Redcore Theme
+Author=Ghiunhan Mamut
+Copyright=(c) 2017, Ghiunhan Mamut
+License=CC-BY-SA
+Type=sddm-theme
+Version=0.1
+Website=https://redcorelinux.org
+MainScript=Main.qml
+ConfigFile=theme.conf
+TranslationsDirectory=translations
+Email=venerix@redcorelinux.org
+Theme-Id=redcore
+Theme-API=${COMPONENTS_VERSION}
