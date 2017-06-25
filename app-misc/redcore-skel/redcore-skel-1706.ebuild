@@ -30,6 +30,14 @@ src_install () {
 	dodir /usr/share/redcore
 	cp -a "${FILESDIR}"/3.0/* "${D}"/usr/share/redcore/
 	doicon "${FILESDIR}"/3.0/img/redcore-weblink.png
+
+	dodir /etc/xdg/autostart
+	insinto /etc/xdg/autostart
+	doins "${FILESDIR}"/loginsound.desktop
+
+	dodir /usr/share/sounds
+	insinto /usr/share/sounds
+	doins "${FILESDIR}"/redcore.ogg
 }
 
 pkg_postinst() {
