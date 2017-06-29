@@ -30,4 +30,5 @@ src_compile() {
 
 src_install() {
 	doins -r ${S}/*
+	rm -rf ${ED}usr/lib/debug
 }
