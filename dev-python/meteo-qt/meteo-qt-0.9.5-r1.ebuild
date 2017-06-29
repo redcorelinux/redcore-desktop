@@ -27,8 +27,6 @@ DEPEND="
 
 S="${WORKDIR}/${PN}-${PV}"
 
-PATCHES="${FILESDIR}/lrelease.patch"
-
 python_install_all() {
 	distutils-r1_python_install_all
 }
