@@ -18,7 +18,7 @@ fi
 
 LICENSE="BSD-2"
 SLOT="0"
-IUSE="audit debug +dkms ncurses pam newnet prefix +netifrc selinux static-libs
+IUSE="audit debug +dkms ncurses pam newnet prefix +netifrc selinux +settingsd static-libs
 	unicode kernel_linux kernel_FreeBSD"
 
 COMMON_DEPEND="kernel_FreeBSD? ( || ( >=sys-freebsd/freebsd-ubin-9.0_rc sys-process/fuser-bsd ) )
@@ -41,7 +41,8 @@ COMMON_DEPEND="kernel_FreeBSD? ( || ( >=sys-freebsd/freebsd-ubin-9.0_rc sys-proc
 DEPEND="${COMMON_DEPEND}
 	virtual/os-headers
 	dkms? ( sys-kernel/dkms )
-	ncurses? ( virtual/pkgconfig )"
+	ncurses? ( virtual/pkgconfig )
+	settingsd? ( app-admin/openrc-settingsd )"
 RDEPEND="${COMMON_DEPEND}
 	!prefix? (
 		kernel_linux? (
@@ -292,9 +293,7 @@ pkg_postinst() {
 	fi
 
 	if use dkms; then
-		elog
-		elog "Auto-adding DKMS to boot runlevel"
-		elog
+		elog "Adding DKMS to boot runlevel (Redcore Linux tweak)"
 		ln -sf /etc/init.d/dkms /etc/runlevels/boot
 	fi
 
