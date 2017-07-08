@@ -8,7 +8,7 @@ inherit gnome2-utils
 
 DESCRIPTION="Icon theme from the numix project."
 HOMEPAGE="http://numixproject.org/"
-SRC_URI="http://mirror.math.princeton.edu/pub/redcorelinux/distfiles/${CATEGORY}/${PN}/"${PN}"-${PV}.tar.gz"
+SRC_URI="http://mirror.math.princeton.edu/pub/redcorelinux/distfiles/${P}.tar.gz"
 
 LICENSE="GPL-3.0+"
 SLOT="0"

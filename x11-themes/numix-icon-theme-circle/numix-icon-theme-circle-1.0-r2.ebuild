@@ -8,7 +8,7 @@ inherit gnome2-utils
 
 DESCRIPTION="Numix Circle icon theme"
 HOMEPAGE="https://numixproject.org"
-SRC_URI="http://mirror.math.princeton.edu/pub/redcorelinux/distfiles/${CATEGORY}/${PN}/"${PN}"-${PV}.tar.gz"
+SRC_URI="http://mirror.math.princeton.edu/pub/redcorelinux/distfiles/${P}.tar.gz"
 
 LICENSE="GPL-3.0+"
 SLOT="0"

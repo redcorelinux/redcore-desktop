@@ -8,7 +8,7 @@ inherit eutils
 
 DESCRIPTION="Redcore Linux branding component for Calamares"
 HOMEPAGE="http://redcorelinux.org"
-SRC_URI="http://mirror.math.princeton.edu/pub/redcorelinux/distfiles/${CATEGORY}/${PN}/${PN}-${PV}.tar.xz"
+SRC_URI="http://mirror.math.princeton.edu/pub/redcorelinux/distfiles/${P}.tar.xz"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -17,7 +17,7 @@ IUSE=""
 
 RDEPEND="app-admin/calamares"
 
-S="${WORKDIR}/${PN}-${PV}"
+S="${WORKDIR}/${P}"
 
 src_install() {
 	dodir /etc/calamares/branding/redcore_branding || die
