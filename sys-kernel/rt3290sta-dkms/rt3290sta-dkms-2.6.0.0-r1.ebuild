@@ -7,7 +7,7 @@ inherit eutils
 
 DESCRIPTION="Mediatek/Ralink rt3290 wifi driver sources for Linux 4.x"
 HOMEPAGE="https://www.mediatek.com/products/connectivity-and-networking/broadband-wifi"
-SRC_URI="http://mirror.math.princeton.edu/pub/redcorelinux/distfiles/${CATEGORY}/${P}.tar.xz"
+SRC_URI="http://mirror.math.princeton.edu/pub/redcorelinux/distfiles/${P}.tar.xz"
 
 LICENSE="GPL-2"
 SLOT="0"

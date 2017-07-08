@@ -8,7 +8,7 @@ inherit eutils
 
 DESCRIPTION="Universal Netboot Installer creates Live USB systems for various OS distributions"
 HOMEPAGE="http://unetbootin.sourceforge.net"
-SRC_URI="http://redcorelinux.org/distfiles/${CATEGORY}/${PN}/${P}.tar.bz2"
+SRC_URI="http://redcorelinux.org/distfiles/${P}.tar.bz2"
 
 LICENSE="GPL-2"
 SLOT="0"
