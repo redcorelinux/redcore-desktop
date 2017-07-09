@@ -13,12 +13,12 @@ HOMEPAGE="http://redcorelinux.org"
 
 EGIT_BRANCH=master
 EGIT_REPO_URI="https://gitlab.com/redcore/sisyphus.git"
-EGIT_COMMIT="97ac8f5f4b6f36db3a52cc6a5f72b616127b3ba2"
+EGIT_COMMIT="6408b2eb9ee783a79d2d3adb7c217e8978647b73"
 
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="amd64 x86"
-IUSE="gui"
+IUSE="+gui"
 
 DEPEND="dev-lang/python:3.4[sqlite]"
 RDEPEND="${DEPEND}
