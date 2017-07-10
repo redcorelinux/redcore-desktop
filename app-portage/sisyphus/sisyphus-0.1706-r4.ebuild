@@ -13,7 +13,7 @@ HOMEPAGE="http://redcorelinux.org"
 
 EGIT_BRANCH=master
 EGIT_REPO_URI="https://gitlab.com/redcore/sisyphus.git"
-EGIT_COMMIT="352c2237e030c14a7adf07df57a0fd338b790efe"
+EGIT_COMMIT="1ec6d57d6b7c6e861f04d95f5599964f1b8b46ea"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -23,6 +23,7 @@ IUSE="+gui"
 DEPEND="dev-lang/python:3.4[sqlite]"
 RDEPEND="${DEPEND}
 	app-portage/gentoolkit[${PYTHON_USEDEP}]
+	dev-python/animation[${PYTHON_USEDEP}]
 	dev-python/urllib3[${PYTHON_USEDEP}]
 	sys-apps/portage[${PYTHON_USEDEP}]
 	gui? ( dev-python/PyQt5[designer,gui,widgets,${PYTHON_USEDEP}] )"
