@@ -38,7 +38,7 @@ src_configure() {
 src_compile() {
 	# Disable stack protector, as it does not work with klibc (bug #346397).
 	filter-flags -fstack-protector -fstack-protector-all
-	emake KDIR="${KV_DIR}" || die
+	emake KDIR="/usr" || die
 }
 
 src_install() {
