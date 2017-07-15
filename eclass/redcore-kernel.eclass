@@ -289,9 +289,9 @@ if _is_kernel_binary; then
 fi
 
 if [ -n "${K_ROGKERNEL_SELF_TARBALL_NAME}" ]; then
-	HOMEPAGE="https://gitlab.com/rogentos/kernel"
+	HOMEPAGE="https://gitlab.com/redcore/kernel"
 else
-	HOMEPAGE="http://www.rogentos.ro"
+	HOMEPAGE="https:/redcorelinux.org"
 fi
 
 # Returns success if _set_config_file_vars was called.
@@ -341,8 +341,6 @@ else
 		sys-devel/autoconf
 		sys-devel/make
 		|| ( >=sys-kernel/genkernel-next-5[dmraid(+)?,mdadm(+)?] >=sys-kernel/genkernel-3.4.45-r2 )
-		amd64? ( sys-apps/v86d )
-		x86? ( sys-apps/v86d )
 		splash? ( x11-themes/redcore-artwork-core )
 		lvm? ( sys-fs/lvm2 sys-block/thin-provisioning-tools )
 		btrfs? ( sys-fs/btrfs-progs )
