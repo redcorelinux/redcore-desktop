@@ -29,7 +29,12 @@ src_configure() {
 
 src_install() {
 	emake INSTALL_ROOT="${D}" install
-	for style in libbb10styleplugin.so libqcleanlooksstyle.so libqmotifstyle.so libqplastiquestyle.so ; do
-		rm -rf ${ED}usr/$(get_libdir)/qt5/plugins/styles/"${style}"
+	# remove unwanted styles
+	for pluginfile in libbb10styleplugin.so libqcleanlooksstyle.so libqmotifstyle.so libqplastiquestyle.so ; do
+		rm -rf ${ED}usr/$(get_libdir)/qt5/plugins/styles/"${pluginfile}"
+	done
+	# remove unwanted cmake files
+	for plugincmake in Qt5Widgets_QBB10StylePlugin.cmake QCleanlooksStylePlugin.cmake Qt5Widgets_QMotifStylePlugin.cmake Qt5Widgets_QPlastiqueStylePlugin.cmake ; do
+		rm -rf ${ED}usr/$(get_libdir)/cmake/Qt5Widgets/"${plugincmake}"
 	done
 }
