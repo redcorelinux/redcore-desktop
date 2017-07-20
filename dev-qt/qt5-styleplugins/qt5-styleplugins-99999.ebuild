@@ -4,7 +4,7 @@
 
 EAPI=6
 
-inherit git-r3 qmake-utils
+inherit git-r3 qmake-utils eutils
 
 DESCRIPTION="Additional style plugins for Qt"
 HOMEPAGE="http://code.qt.io/cgit/qt/qtstyleplugins.git/"
@@ -29,4 +29,7 @@ src_configure() {
 
 src_install() {
 	emake INSTALL_ROOT="${D}" install
+	for style in libbb10styleplugin.so libqcleanlooksstyle.so libqmotifstyle.so libqplastiquestyle.so ; do
+		rm -rf ${ED}usr/$(get_libdir)/qt5/plugins/styles/"${style}"
+	done
 }
