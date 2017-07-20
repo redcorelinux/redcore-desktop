@@ -34,7 +34,7 @@ src_install() {
 		rm -rf ${ED}usr/$(get_libdir)/qt5/plugins/styles/"${pluginfile}"
 	done
 	# remove unwanted cmake files
-	for plugincmake in Qt5Widgets_QBB10StylePlugin.cmake QCleanlooksStylePlugin.cmake Qt5Widgets_QMotifStylePlugin.cmake Qt5Widgets_QPlastiqueStylePlugin.cmake ; do
+	for plugincmake in Qt5Widgets_QBB10StylePlugin.cmake Qt5Widgets_QCleanlooksStylePlugin.cmake Qt5Widgets_QMotifStylePlugin.cmake Qt5Widgets_QPlastiqueStylePlugin.cmake ; do
 		rm -rf ${ED}usr/$(get_libdir)/cmake/Qt5Widgets/"${plugincmake}"
 	done
 }
