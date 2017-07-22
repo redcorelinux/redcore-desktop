@@ -29,7 +29,7 @@ RDEPEND="X? ( x11-apps/xrandr
 		x11-libs/libICE
 		x11-proto/glproto )
 	sys-apps/dbus
-	=sys-kernel/virtualbox-guest-dkms-${PV}
+	~sys-kernel/virtualbox-guest-dkms-${PV}
 	!!x11-drivers/xf86-input-virtualbox"
 DEPEND="${RDEPEND}
 	>=dev-util/kbuild-0.1.9998_pre20131130

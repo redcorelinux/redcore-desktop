@@ -16,7 +16,7 @@ SLOT="0"
 KEYWORDS="amd64 x86"
 IUSE=""
 
-DEPEND="=sys-kernel/${PN}-dkms-${PV}"
+DEPEND="~sys-kernel/${PN}-dkms-${PV}"
 RDEPEND="${DEPEND}
 	!=app-emulation/virtualbox-9999"
 
