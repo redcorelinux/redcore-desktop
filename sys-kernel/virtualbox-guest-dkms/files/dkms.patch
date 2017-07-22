@@ -6,9 +6,9 @@ diff -Nur a/dkms.conf b/dkms.conf
  #
  
 -PACKAGE_NAME="vboxguest"
--PACKAGE_VERSION=5.1.22_OSE
+-PACKAGE_VERSION=5.1.24_OSE
 +PACKAGE_NAME="virtualbox-guest-dkms"
-+PACKAGE_VERSION=5.1.22
++PACKAGE_VERSION=5.1.24
  AUTOINSTALL=yes
  
  BUILT_MODULE_NAME[0]="vboxguest"
