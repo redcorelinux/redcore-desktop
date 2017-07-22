@@ -70,7 +70,7 @@ DEPEND="
 RDEPEND="
 	${COMMON}
 	acpi? ( sys-power/acpid )
-	dkms? ( =sys-kernel/${PN}-dkms-${PV} )
+	dkms? ( ~sys-kernel/${PN}-dkms-${PV} )
 	tools? ( !media-video/nvidia-settings )
 	wayland? ( dev-libs/wayland[${MULTILIB_USEDEP}] )
 	X? (
