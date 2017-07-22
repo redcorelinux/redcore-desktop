@@ -13,8 +13,8 @@ LICENSE="GPL-3+"
 KEYWORDS="amd64 x86"
 IUSE=""
 
-DEPEND="=sys-kernel/${PN}-dkms-${PV}"
-RDEPEND=""
+DEPEND="~sys-kernel/${PN}-dkms-${PV}"
+RDEPEND="${DEPEND}"
 
 S=${WORKDIR}
 
