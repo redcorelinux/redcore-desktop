@@ -58,6 +58,9 @@ PATCHES=(
 
 	# xorg-1.19 patch from opensuse (bug #602784)
 	"${FILESDIR}/${PN}-5.1.10-xorg119.patch"
+
+	# fix bug #579946
+	"${FILESDIR}/${PN}-5.1.22-sysmacros.patch"
 )
 
 QA_TEXTRELS_x86="usr/lib/VBoxOGL.so"
@@ -72,7 +75,7 @@ pkg_setup() {
 
 src_prepare() {
 	# Prepare the vboxvideo_drm Makefiles and build dir
-	eapply "${FILESDIR}"/${PN}-5.1.4-Makefile.module.kms.patch
+	eapply "${FILESDIR}"/${PN}-kms.patch
 
 	# Remove shipped binaries (kBuild,yasm), see bug #232775
 	rm -r kBuild/bin tools || die
