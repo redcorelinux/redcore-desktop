@@ -289,6 +289,7 @@ ecnij_src_install()
 	if use cups && use_if_iuse net; then
 		pushd com/libs_bin${abi_lib} || die
 		for lib in lib*.so; do
+			[[ -L ${lib} ]] && continue ||
 			rm ${lib} && ln -s ${lib}.[0-9]* ${lib}
 		done
 		popd
