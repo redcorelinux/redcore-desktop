@@ -7,7 +7,7 @@ EAPI=5
 inherit eutils
 
 MY_PN="tp_smapi"
-MY_P="${MY_PN}-${PVR}"
+MY_P="${MY_PN}-${PV}"
 DESCRIPTION="IBM ThinkPad SMAPI BIOS driver"
 HOMEPAGE="https://github.com/evgeni/${MY_PN}/"
 SRC_URI="${HOMEPAGE}/releases/download/${MY_PN}/${PV}/${MY_PN}-${PV}.tgz"
