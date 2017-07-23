@@ -1,7 +1,7 @@
 diff -Nur a/dkms.conf b/dkms.conf
---- a/dkms.conf	2016-10-25 17:45:45.245376701 +0100
-+++ b/dkms.conf	2016-10-25 17:46:28.523379606 +0100
-@@ -14,8 +14,8 @@
+--- a/dkms.conf	2017-07-18 12:50:58.000000000 +0100
++++ b/dkms.conf	2017-07-23 14:40:45.746169005 +0100
+@@ -14,18 +14,18 @@
  # hope that it will be useful, but WITHOUT ANY WARRANTY of any kind.
  #
  
@@ -12,3 +12,16 @@ diff -Nur a/dkms.conf b/dkms.conf
  AUTOINSTALL=yes
  
  BUILT_MODULE_NAME[0]="vboxguest"
+ BUILT_MODULE_LOCATION[0]="vboxguest"
+-DEST_MODULE_LOCATION[0]="/kernel/misc"
++DEST_MODULE_LOCATION[0]="/extra/dkms"
+ 
+ BUILT_MODULE_NAME[1]="vboxsf"
+ BUILT_MODULE_LOCATION[1]="vboxsf"
+-DEST_MODULE_LOCATION[1]="/kernel/misc"
++DEST_MODULE_LOCATION[1]="/extra/dkms"
+ 
+ BUILT_MODULE_NAME[2]="vboxvideo"
+ BUILT_MODULE_LOCATION[2]="vboxvideo"
+-DEST_MODULE_LOCATION[2]="/kernel/misc"
++DEST_MODULE_LOCATION[2]="/extra/dkms"
