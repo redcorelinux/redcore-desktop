@@ -35,8 +35,7 @@ PATCHES=(
 	"${FILESDIR}"/${PN}-4.00-6-headers.patch
 )
 
-src_prepare()
-{
+src_prepare() {
 	local arc=64
 	[[ x${ABI} == xx86 ]] && arc=32
 	sed -e "s,cnijlgmon2_LDADD =,cnijlgmon2_LDADD = -L../../com/libs_bin${arc}," \
@@ -45,3 +44,40 @@ src_prepare()
 	ecnij_src_prepare
 }
 
+src_install() {
+	ecnij_src_install
+
+	# dirty hack to stop cnijfilter spamming ldconfig
+	for i in libcnbpcmcm43{1..8}.so; do
+		rm -rf ${ED}usr/lib32/${i}
+		ln -sf ${ED}usr/lib32/${i}.8.20.1 ${ED}usr/lib32/${i}
+	done
+	for i in libcnbpcnclapi43{1..8}.so; do
+		rm -rf ${ED}usr/lib32/${i}
+		ln -sf ${ED}usr/lib32/${i}.4.1.0 ${ED}usr/lib32/${i}
+	done
+	for i in libcnbpcnclbjcmd43{1..8}.so; do
+		rm -rf ${ED}usr/lib32/${i}
+		ln -sf ${ED}usr/lib32/${i}.3.3.0 ${ED}usr/lib32/${i}
+	done
+	for i in libcnbpcnclui43{1..8}.so; do
+		rm -rf ${ED}usr/lib32/${i}
+		ln -sf ${ED}usr/lib32/${i}.4.1.0 ${ED}usr/lib32/${i}
+	done
+	for i in libcnbpess43{1..8}.so; do
+		rm -rf ${ED}usr/lib32/${i}
+		ln -sf ${ED}usr/lib32/${i}.4.3.1 ${ED}usr/lib32/${i}
+	done
+	for i in libcnbpo43{1,2}.so; do
+		rm -rf ${ED}usr/lib32/${i}
+		ln -sf ${ED}usr/lib32/${i}.1.0.3 ${ED}usr/lib32/${i}
+	done
+	for i in libcnbpo43{3,6,8}.so; do
+		rm -rf ${ED}usr/lib32/${i}
+		ln -sf ${ED}usr/lib32/${i}.1.0.1 ${ED}usr/lib32/${i}
+	done
+	for i in libcnbpo43{4,5,7}.so; do
+		rm -rf ${ED}usr/lib32/${i}
+		ln -sf ${ED}usr/lib32/${i}.1.0.4 ${ED}usr/lib32/${i}
+	done
+}
