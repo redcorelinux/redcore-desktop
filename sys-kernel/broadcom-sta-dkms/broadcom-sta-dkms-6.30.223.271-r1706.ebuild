@@ -8,12 +8,11 @@ inherit eutils
 DESCRIPTION="Broadcom's IEEE 802.11a/b/g/n hybrid Linux device driver source"
 HOMEPAGE="http://www.broadcom.com/support/802.11/"
 SRC_BASE="http://www.broadcom.com/docs/linux_sta/hybrid-v35"
-SRC_URI="x86? ( ${SRC_BASE}-nodebug-pcoem-${PV//\./_}.tar.gz )
-	amd64? ( ${SRC_BASE}_64-nodebug-pcoem-${PV//\./_}.tar.gz )
+SRC_URI="amd64? ( ${SRC_BASE}_64-nodebug-pcoem-${PV//\./_}.tar.gz )
 	http://www.broadcom.com/docs/linux_sta/README_${PV}.txt -> README-${P}.txt"
 
 LICENSE="Broadcom"
-KEYWORDS="amd64 x86"
+KEYWORDS="amd64"
 SLOT="0"
 RESTRICT="mirror"
 
