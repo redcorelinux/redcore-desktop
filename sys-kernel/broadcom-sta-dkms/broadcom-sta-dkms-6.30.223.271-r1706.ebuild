@@ -32,7 +32,10 @@ src_prepare() {
 		"${FILESDIR}/broadcom-sta-6.30.223.248-r3-Wno-date-time.patch" \
 		"${FILESDIR}/broadcom-sta-6.30.223.271-r1-linux-3.18.patch" \
 		"${FILESDIR}/broadcom-sta-6.30.223.271-r2-linux-4.3-v2.patch" \
-		"${FILESDIR}/broadcom-sta-6.30.223.271-r3-linux-4.7.patch"
+		"${FILESDIR}/broadcom-sta-6.30.223.271-r4-linux-4.7.patch" \
+		"${FILESDIR}/broadcom-sta-6.30.223.271-r4-linux-4.8.patch" \
+		"${FILESDIR}/broadcom-sta-6.30.223.271-r4-linux-4.11.patch" \
+		"${FILESDIR}/broadcom-sta-6.30.223.271-r4-linux-4.12.patch"
 
 	epatch_user
 }
