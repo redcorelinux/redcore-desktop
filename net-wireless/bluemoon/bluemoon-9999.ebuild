@@ -3,18 +3,12 @@
 # $Id$
 
 EAPI=5
-inherit qmake-utils
+inherit qmake-utils git-r3
 
 DESCRIPTION="Bluetooth Manager for qt5"
 HOMEPAGE="https://github.com/sklins/BlueMoon.git"
-
-if [[ ${PV} = *9999* ]]; then
-	inherit git-r3
-	EGIT_REPO_URI="https://github.com/sklins/BlueMoon.git"
-fi
-
-KEYWORD="~amd64"
-
+EGIT_REPO_URI="https://github.com/sklins/BlueMoon.git"
+KEYWORDS="~amd64"
 LICENSE="GPL-2 LGPL-2.1+"
 SLOT="0"
 
