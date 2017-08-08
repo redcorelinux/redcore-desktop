@@ -14,7 +14,7 @@ HOMEPAGE="http://projects.gnome.org/NetworkManager/"
 
 LICENSE="GPL-2+"
 SLOT="0"
-IUSE="bluetooth +introspection +modemmanager"
+IUSE="+introspection +modemmanager"
 KEYWORDS="amd64 x86"
 
 RDEPEND="!gnome-extra/nm-applet
@@ -31,7 +31,6 @@ RDEPEND="!gnome-extra/nm-applet
 	>=net-misc/networkmanager-0.9.8
 	net-misc/mobile-broadband-provider-info
 
-	bluetooth? ( >=net-wireless/gnome-bluetooth-2.27.6 )
 	introspection? ( >=dev-libs/gobject-introspection-0.9.6 )
 	modemmanager? ( >=net-misc/modemmanager-0.7.990 )
 	virtual/freedesktop-icon-theme
