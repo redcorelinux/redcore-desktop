@@ -14,7 +14,7 @@ HOMEPAGE="http://projects.gnome.org/NetworkManager/"
 
 LICENSE="GPL-2+"
 SLOT="0"
-IUSE="bluetooth gconf +introspection modemmanager"
+IUSE="bluetooth +introspection +modemmanager"
 KEYWORDS="amd64 x86"
 
 RDEPEND="!gnome-extra/nm-applet
@@ -22,7 +22,6 @@ RDEPEND="!gnome-extra/nm-applet
 	>=dev-libs/glib-2.26:2
 	>=dev-libs/dbus-glib-0.88
 	>=gnome-base/gconf-2.26:2
-	>=gnome-base/libgnome-keyring-2.20
 	>=sys-apps/dbus-1.4.1
 	>=sys-auth/polkit-0.96-r1
 	>=x11-libs/gtk+-2.20:2
@@ -33,9 +32,6 @@ RDEPEND="!gnome-extra/nm-applet
 	net-misc/mobile-broadband-provider-info
 
 	bluetooth? ( >=net-wireless/gnome-bluetooth-2.27.6 )
-	gconf? (
-		>=gnome-base/gconf-2.20:2
-		gnome-base/libgnome-keyring )
 	introspection? ( >=dev-libs/gobject-introspection-0.9.6 )
 	modemmanager? ( >=net-misc/modemmanager-0.7.990 )
 	virtual/freedesktop-icon-theme
@@ -51,9 +47,9 @@ src_configure() {
 		--with-gtkver=2 \
 		--disable-more-warnings \
 		--disable-static \
+		--disable-migration \
 		--localstatedir=/var \
 		$(use_with bluetooth) \
-		$(use_enable gconf migration) \
 		$(use_enable introspection) \
 		$(use_with modemmanager modem-manager-1)
 }
