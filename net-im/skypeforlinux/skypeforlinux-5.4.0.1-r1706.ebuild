@@ -20,7 +20,8 @@ S="${WORKDIR}"
 QA_PREBUILT=opt/skypeforlinux/skypeforlinux
 RESTRICT="mirror bindist strip" #299368
 
-RDEPEND="dev-libs/atk[${MULTILIB_USEDEP}]
+RDEPEND="app-crypt/libsecret
+	dev-libs/atk[${MULTILIB_USEDEP}]
 	dev-libs/expat[${MULTILIB_USEDEP}]
 	dev-libs/glib:2[${MULTILIB_USEDEP}]
 	dev-libs/nspr[${MULTILIB_USEDEP}]
