@@ -48,7 +48,6 @@ src_configure() {
 		--disable-static \
 		--disable-migration \
 		--localstatedir=/var \
-		$(use_with bluetooth) \
 		$(use_enable introspection) \
 		$(use_with modemmanager modem-manager-1)
 }
