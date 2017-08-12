@@ -31,8 +31,3 @@ src_compile() {
 src_install() {
 	doins -r ${S}/*
 }
-
-pkg_postinst() {
-	rm -rf /usr/lib/debug/.build-id/cc/9bf854bde2b8dba8d107f2c94d35ef7127db1d
-	rm -rf /usr/lib/debug/.build-id/cc/9bf854bde2b8dba8d107f2c94d35ef7127db1d.debug
-}
