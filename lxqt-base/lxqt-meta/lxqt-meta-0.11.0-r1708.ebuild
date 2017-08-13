@@ -25,6 +25,7 @@ RDEPEND="
 	~lxqt-base/lxqt-qtplugin-${PV}
 	~lxqt-base/lxqt-runner-${PV}
 	~lxqt-base/lxqt-session-${PV}
+	~lxqt-base/lxqt-l10n-${PV}
 	virtual/ttf-fonts
 	about? ( ~lxqt-base/lxqt-about-${PV} )
 	admin? ( ~lxqt-base/lxqt-admin-${PV} )
