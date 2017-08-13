@@ -23,6 +23,7 @@ DEPEND="
 		>=dev-qt/qtxmlpatterns-4.8.6:4
 		>=dev-qt/qtsql-4.8.6:4[sqlite]
 		>=dev-qt/qtdbus-4.8.6:4
+		>=dev-libs/qjson-0.8.1
 		media-libs/phonon[qt4]
 	)
 	qt5? (
@@ -38,7 +39,6 @@ DEPEND="
 		media-libs/phonon[qt5]
 	)
 	vlc? ( >=media-video/vlc-2.2.0 )
-	>=dev-libs/qjson-0.8.1
 	>=media-libs/taglib-1.9.1-r2
 	>=net-libs/htmlcxx-0.85
 	mpv? ( media-video/mpv[libmpv] )
