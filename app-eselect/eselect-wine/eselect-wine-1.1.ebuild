@@ -9,12 +9,11 @@ SRC_URI="http://bitbucket.org/NP-Hardass/${PN}/raw/v${PV}/wine.eselect -> wine.e
 
 LICENSE="GPL-2+"
 SLOT="0"
-KEYWORDS="amd64 x86"
+KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 RDEPEND="app-admin/eselect
-	dev-util/desktop-file-utils
-	!!app-emulation/wine:0"
+	dev-util/desktop-file-utils"
 
 S=${WORKDIR}
 
