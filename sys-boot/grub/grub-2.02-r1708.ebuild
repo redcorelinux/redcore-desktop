@@ -82,6 +82,7 @@ DEPEND="${RDEPEND}
 	sys-devel/bison
 	sys-apps/help2man
 	sys-apps/texinfo
+	sys-boot/grub-config-redcore
 	fonts? ( media-libs/freetype:2 )
 	grub_platforms_xen? ( app-emulation/xen-tools:= )
 	grub_platforms_xen-32? ( app-emulation/xen-tools:= )
@@ -274,9 +275,6 @@ src_install() {
 	if use multislot; then
 		mv "${ED%/}"/usr/share/info/grub{,2}.info || die
 	fi
-
-	insinto /etc/default
-	newins "${FILESDIR}"/grub.default-3 grub
 }
 
 pkg_postinst() {
