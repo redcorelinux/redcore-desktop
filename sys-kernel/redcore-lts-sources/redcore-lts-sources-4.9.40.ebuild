@@ -22,5 +22,5 @@ RESTRICT="mirror"
 IUSE="sources_standalone"
 
 DEPEND="${DEPEND}
-	sources_standalone? ( !=sys-kernel/linux-redcore-${PVR} )
-	!sources_standalone? ( =sys-kernel/linux-redcore-${PVR} )"
+	sources_standalone? ( !=sys-kernel/linux-redcore-lts-${PVR} )
+	!sources_standalone? ( =sys-kernel/linux-redcore-lts-${PVR} )"
