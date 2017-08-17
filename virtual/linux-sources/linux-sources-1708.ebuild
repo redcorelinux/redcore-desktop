@@ -11,7 +11,11 @@ SRC_URI=""
 LICENSE=""
 SLOT="0"
 KEYWORDS="amd64 x86"
-IUSE="firmware"
+IUSE="+firmware"
 
-DEPEND="firmware? ( sys-kernel/linux-firmware )"
-RDEPEND="sys-kernel/redcore-sources"
+RDEPEND="
+	firmware? ( sys-kernel/linux-firmware )
+	|| (
+		sys-kernel/redcore-sources
+		sys-kernel/redcore-lts-sources
+	)"
