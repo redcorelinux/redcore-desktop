@@ -25,7 +25,7 @@ src_install() {
 
 pkg_preinst() {
 	if [[ -f ""${ROOT}"etc/default/grub" ]]; then
-		mv ""${ROOT}"etc/default/grub" ""${ROOT}"etc/default/grub.backup"
+		cp -avx ""${ROOT}"etc/default/grub" ""${ROOT}"etc/default/grub.backup"
 	fi
 }
 
