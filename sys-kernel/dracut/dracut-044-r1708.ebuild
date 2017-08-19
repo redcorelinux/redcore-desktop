@@ -12,12 +12,17 @@ SRC_URI="mirror://kernel/linux/utils/boot/${PN}/${P}.tar.xz"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="amd64 x86"
-IUSE="debug selinux systemd"
+IUSE="debug selinux systemd +microcode"
 
 RESTRICT="test"
 
 CDEPEND="virtual/udev
 	systemd? ( >=sys-apps/systemd-199 )
+	microcode? (
+		sys-firmware/intel-microcode
+		sys-kernel/linux-firmware
+	)
+	sys-kernel/dracut-config-redcore
 	"
 RDEPEND="${CDEPEND}
 	app-arch/cpio
@@ -155,9 +160,6 @@ src_install() {
 
 	insinto /etc/logrotate.d
 	newins dracut.logrotate dracut
-	
-	insinto /etc/dracut.conf.d
-	doins "${FILESDIR}"/redcore-dracut.conf
 	
 	dodir /var/lib/dracut/overlay
 
