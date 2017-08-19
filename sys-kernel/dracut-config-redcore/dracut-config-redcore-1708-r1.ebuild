@@ -4,7 +4,7 @@
 
 EAPI=5
 
-DESCRIPTION="Redcore Linux GRUB configuration files"
+DESCRIPTION="Redcore Linux Dracut configuration files"
 HOMEPAGE=""
 SRC_URI=""
 
@@ -27,4 +27,10 @@ pkg_preinst() {
 	if [[ -f ""${ROOT}"etc/dracut.conf.d/redcore-dracut.conf" ]]; then
 		mv ""${ROOT}"etc/dracut.conf.d/redcore-dracut.conf" ""${ROOT}"etc/dracut.conf.d/redcore-dracut.conf.backup"
 	fi
+}
+
+pkg_postinst() {
+	elog "Your previous Dracut configuration was saved as /etc/dracut.conf.d/redcore-dracut.conf.backup"
+	elog "Please adjust the new configuration to suit you and regenerate the Dracut initramfs image"
+	elog "by using : /usr/bin/dracut -f"
 }

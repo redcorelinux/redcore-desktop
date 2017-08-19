@@ -28,3 +28,9 @@ pkg_preinst() {
 		mv ""${ROOT}"etc/default/grub" ""${ROOT}"etc/default/grub.backup"
 	fi
 }
+
+pkg_postinst() {
+	elog "Your previous GRUB configuration was saved as /etc/default/grub.backup"
+	elog "Please adjust the new configuration to suit you and regenerate the GRUB menu"
+	elog "by using : /usr/sbin/grub2-mkconfig -o /boot/grub/grub.cfg"
+}
