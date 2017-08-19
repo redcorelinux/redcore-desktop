@@ -19,7 +19,7 @@ GRUB_TIMEOUT="5"
 #GRUB_TIMEOUT_STYLE=menu
 
 # Append parameters to the linux kernel command line for non-recovery entries
-GRUB_CMDLINE_LINUX_DEFAULT="quiet scsi_mod.use_blk_mq=1 loglevel=1 console=tty1 splash=silent,theme:default modprobe.blacklist=vboxvideo"
+GRUB_CMDLINE_LINUX_DEFAULT="quiet loglevel=1 console=tty1 splash=silent,theme:default modprobe.blacklist=vboxvideo"
 
 # Uncomment to disable graphical terminal (grub-pc only)
 #GRUB_TERMINAL=console
