@@ -22,7 +22,7 @@ CDEPEND="virtual/udev
 		sys-kernel/linux-firmware
 	)
 	plymouth? ( sys-boot/plymouth )
-	splash? (media-gfx/splashutils)
+	splash? ( media-gfx/splashutils )
 	systemd? ( >=sys-apps/systemd-199 )
 	sys-kernel/dracut-config-redcore
 	"
