@@ -12,16 +12,18 @@ SRC_URI="mirror://kernel/linux/utils/boot/${PN}/${P}.tar.xz"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="amd64 x86"
-IUSE="debug selinux systemd +microcode"
+IUSE="debug +microcode +plymouth selinux splash systemd"
 
 RESTRICT="test"
 
 CDEPEND="virtual/udev
-	systemd? ( >=sys-apps/systemd-199 )
 	microcode? (
 		sys-firmware/intel-microcode
 		sys-kernel/linux-firmware
 	)
+	plymouth? ( sys-boot/plymouth )
+	splash? (media-gfx/splashutils)
+	systemd? ( >=sys-apps/systemd-199 )
 	sys-kernel/dracut-config-redcore
 	"
 RDEPEND="${CDEPEND}

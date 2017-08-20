@@ -56,7 +56,7 @@ src_configure() {
 		--with-system-root-install=no
 		--localstatedir=/var
 		--without-rhgb-compat-link
-		--enable-systemd-integration
+		--disable-systemd-integration
 		$(use_enable debug tracing)
 		$(use_enable gtk gtk)
 		$(use_enable libkms)
