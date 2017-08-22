@@ -1,7 +1,7 @@
 diff -Nur a/src/modules/openrcdmcryptcfg/main.py b/src/modules/openrcdmcryptcfg/main.py
 --- a/src/modules/openrcdmcryptcfg/main.py	1970-01-01 01:00:00.000000000 +0100
-+++ b/src/modules/openrcdmcryptcfg/main.py	2017-06-03 17:34:02.791096200 +0100
-@@ -0,0 +1,59 @@
++++ b/src/modules/openrcdmcryptcfg/main.py	2017-08-22 19:23:32.660085460 +0100
+@@ -0,0 +1,61 @@
 +#!/usr/bin/env python3
 +# -*- coding: utf-8 -*-
 +#
@@ -31,19 +31,21 @@ diff -Nur a/src/modules/openrcdmcryptcfg/main.py b/src/modules/openrcdmcryptcfg/
 +    crypto_source = ""
 +
 +    for partition in partitions:
-+        if partition["mountPoint"] == "/home" and "luksMapperName" in partition:
++        if partition["mountPoint"] == "/home" and not "luksMapperName" in partition:
++            pass
++
++        elif partition["mountPoint"] == "/home" and "luksMapperName" in partition:
 +            crypto_target = partition["luksMapperName"]
 +            crypto_source = "/dev/disk/by-uuid/{!s}".format(partition["uuid"])
-+        
-+    if not "luksMapperName" in partition:
-+            return None
++            with open(os.path.join(root_mount_point, dmcrypt_conf_path), 'a+') as dmcrypt_file:
++                dmcrypt_file.write("\ntarget=" + crypto_target)
++                dmcrypt_file.write("\nsource=" + crypto_source)
++                dmcrypt_file.write("\nkey=/crypto_keyfile.bin")
++                dmcrypt_file.write("\n")
++                dmcrypt_file.close()
 +
-+    with open(os.path.join(root_mount_point, dmcrypt_conf_path), 'a+') as dmcrypt_file:
-+        dmcrypt_file.write("\ntarget=" + crypto_target)
-+        dmcrypt_file.write("\nsource=" + crypto_source)
-+        dmcrypt_file.write("\nkey=/crypto_keyfile.bin")
-+        dmcrypt_file.write("\n")
-+        dmcrypt_file.close()
++        elif not partition["mountPoint"] == "/home" in partition:
++            pass
 +
 +    return None
 +
@@ -63,7 +65,7 @@ diff -Nur a/src/modules/openrcdmcryptcfg/main.py b/src/modules/openrcdmcryptcfg/
 +    return write_dmcrypt_conf(partitions, root_mount_point, dmcrypt_conf_path)
 diff -Nur a/src/modules/openrcdmcryptcfg/module.desc b/src/modules/openrcdmcryptcfg/module.desc
 --- a/src/modules/openrcdmcryptcfg/module.desc	1970-01-01 01:00:00.000000000 +0100
-+++ b/src/modules/openrcdmcryptcfg/module.desc	2017-06-03 14:39:12.592391951 +0100
++++ b/src/modules/openrcdmcryptcfg/module.desc	2017-08-22 13:11:15.198714035 +0100
 @@ -0,0 +1,5 @@
 +---
 +type:       "job"
@@ -72,7 +74,7 @@ diff -Nur a/src/modules/openrcdmcryptcfg/module.desc b/src/modules/openrcdmcrypt
 +script:     "main.py"
 diff -Nur a/src/modules/openrcdmcryptcfg/openrcdmcryptcfg.conf b/src/modules/openrcdmcryptcfg/openrcdmcryptcfg.conf
 --- a/src/modules/openrcdmcryptcfg/openrcdmcryptcfg.conf	1970-01-01 01:00:00.000000000 +0100
-+++ b/src/modules/openrcdmcryptcfg/openrcdmcryptcfg.conf	2017-06-03 14:44:03.981411513 +0100
++++ b/src/modules/openrcdmcryptcfg/openrcdmcryptcfg.conf	2017-08-22 13:11:15.198714035 +0100
 @@ -0,0 +1,2 @@
 +---
 +configFilePath: /etc/conf.d/dmcrypt
