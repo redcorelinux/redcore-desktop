@@ -105,13 +105,6 @@ python_install() {
 python_install_all() {
 	dodoc docs/{CHANGES,PyManual,README,wxPackage,wxPythonManual}.txt
 
-	for x in {Py{AlaMode,Crust,Shell},XRCed}; do
-		newmenu distrib/${x}.desktop ${x}-${SLOT}.desktop
-	done
-	newicon wx/py/PyCrust_32.png PyCrust-${SLOT}.png
-	newicon wx/py/PySlices_32.png PySlices-${SLOT}.png
-	newicon wx/tools/XRCed/XRCed_32.png XRCed-${SLOT}.png
-
 	if use examples; then
 		docinto demo
 		dodoc -r "${DOC_S}"/demo/.
