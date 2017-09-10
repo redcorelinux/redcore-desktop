@@ -11,13 +11,13 @@ K_ROGKERNEL_NAME="redcore-lts"
 K_ROGKERNEL_SELF_TARBALL_NAME="redcore-lts"
 K_ROGKERNEL_URI_CONFIG="yes"
 K_ONLY_SOURCES="1"
-K_ROGKERNEL_FORCE_SUBLEVEL="40"
+K_ROGKERNEL_FORCE_SUBLEVEL="49"
 K_KERNEL_NEW_VERSIONING="1"
 
 inherit redcore-kernel
 
 KEYWORDS="amd64 x86"
-DESCRIPTION="Official Redcore Linux Standard kernel sources"
+DESCRIPTION="Official Redcore Linux LTS kernel sources"
 RESTRICT="mirror"
 IUSE="sources_standalone"
 
