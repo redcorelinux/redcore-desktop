@@ -13,7 +13,7 @@ HOMEPAGE="http://redcorelinux.org"
 
 EGIT_BRANCH=master
 EGIT_REPO_URI="https://gitlab.com/redcore/sisyphus.git"
-EGIT_COMMIT="711e30e342f4dcc0ad3c242789d95b19996bcd4a"
+EGIT_COMMIT="10191fd4927c6882f7c7b10b530db4b84bd921bf"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -30,7 +30,7 @@ RDEPEND="${DEPEND}
 
 src_install() {
 	default
-	dosym /usr/bin/${PN}-cli.py /usr/bin/${PN}
+	dosym /usr/share/${PN}/${PN}-cli.py /usr/bin/${PN}
 	dodir /var/lib/${PN}/{csv,db}
 	if ! use gui; then
 		rm -rf ${ED}usr/bin/${PN}-gui
