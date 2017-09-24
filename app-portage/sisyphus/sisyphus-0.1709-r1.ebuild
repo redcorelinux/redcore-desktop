@@ -2,19 +2,15 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI=6
+EAPI=5
 
 PYTHON_COMPAT=( python3_4 )
 
-inherit eutils git-r3 python-r1
+inherit eutils python-r1
 
 DESCRIPTION="A simple portage python wrapper which works like other package managers(apt-get/yum/dnf)"
 HOMEPAGE="http://redcorelinux.org"
-
-EGIT_BRANCH=master
-EGIT_REPO_URI="https://gitlab.com/redcore/sisyphus.git"
-EGIT_COMMIT="a7c7d9a93cb86e11bf27589bea8789ef1cba4550"
-
+SRC_URI="https://github.com/redcorelinux/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="amd64 x86"
@@ -27,6 +23,10 @@ RDEPEND="${DEPEND}
 	dev-python/urllib3[${PYTHON_USEDEP}]
 	sys-apps/portage[${PYTHON_USEDEP}]
 	gui? ( dev-python/PyQt5[designer,gui,widgets,${PYTHON_USEDEP}] )"
+
+src_prepare() {
+	epatch ${FILESDIR}/${P}-r1.patch
+}
 
 src_install() {
 	default
