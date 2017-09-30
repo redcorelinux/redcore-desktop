@@ -1,0 +1,30 @@
+diff --git a/src/backend/libsisyphus.py b/src/backend/libsisyphus.py
+index f49e9da..2f8e150 100755
+--- a/src/backend/libsisyphus.py
++++ b/src/backend/libsisyphus.py
+@@ -254,12 +254,6 @@ def sisyphus_pkg_sysinfo():
+     subprocess.check_call(['emerge', '--info'])
+ 
+ def sisyphus_db_rescue():
+-    if os.path.exists(sisyphus_remote_csv_path_pre):
+-        os.remove(sisyphus_remote_csv_path_pre)
+-    if os.path.exists(sisyphus_removable_csv_path_pre):
+-        os.remove(sisyphus_removable_csv_path_pre)
+-    if os.path.exists(sisyphus_local_csv_path_pre):
+-        os.remove(sisyphus_local_csv_path_pre)
+     if os.path.exists(sisyphus_database_path):
+         os.remove(sisyphus_database_path)
+     sisyphus_pkg_system_update()
+diff --git a/src/frontend/cli/sisyphus-cli.py b/src/frontend/cli/sisyphus-cli.py
+index ee90c6f..c8a8bd9 100755
+--- a/src/frontend/cli/sisyphus-cli.py
++++ b/src/frontend/cli/sisyphus-cli.py
+@@ -17,7 +17,7 @@
+     elif "remove-orphans" in sys.argv[1:]:
+         sisyphus_pkg_remove_orphans()
+     elif "update" in sys.argv[1:]:
+-        sisyphus_pkg_system_update
++        sisyphus_pkg_system_update()
+     elif "upgrade" in sys.argv[1:]:
+         sisyphus_pkg_system_upgrade()
+     elif "search" in sys.argv[1:]:
