@@ -1,15 +1,11 @@
 diff --git a/src/backend/libsisyphus.py b/src/backend/libsisyphus.py
-index f49e9da..2f8e150 100755
+index f49e9da..c19bd88 100755
 --- a/src/backend/libsisyphus.py
 +++ b/src/backend/libsisyphus.py
-@@ -254,12 +254,6 @@ def sisyphus_pkg_sysinfo():
-     subprocess.check_call(['emerge', '--info'])
- 
- def sisyphus_db_rescue():
--    if os.path.exists(sisyphus_remote_csv_path_pre):
--        os.remove(sisyphus_remote_csv_path_pre)
--    if os.path.exists(sisyphus_removable_csv_path_pre):
--        os.remove(sisyphus_removable_csv_path_pre)
+@@ -258,8 +258,6 @@ def sisyphus_db_rescue():
+         os.remove(sisyphus_remote_csv_path_pre)
+     if os.path.exists(sisyphus_removable_csv_path_pre):
+         os.remove(sisyphus_removable_csv_path_pre)
 -    if os.path.exists(sisyphus_local_csv_path_pre):
 -        os.remove(sisyphus_local_csv_path_pre)
      if os.path.exists(sisyphus_database_path):
