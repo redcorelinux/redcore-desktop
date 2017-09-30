@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI=5
+EAPI=6
 
 PYTHON_COMPAT=( python3_4 )
 
@@ -24,10 +24,6 @@ RDEPEND="${DEPEND}
 	sys-apps/portage[${PYTHON_USEDEP}]
 	gui? ( dev-python/PyQt5[designer,gui,widgets,${PYTHON_USEDEP}] )"
 
-src_prepare() {
-	epatch ${FILESDIR}/${P}-r1.patch
-}
-
 src_install() {
 	default
 	dosym /usr/share/${PN}/${PN}-cli.py /usr/bin/${PN}
@@ -42,4 +38,8 @@ src_install() {
 		rm -rf ${ED}usr/share/pixmaps
 		rm -rf ${ED}usr/share/polkit-1
 	fi
+}
+
+pkg_postinst() {
+	sisyphus rescue
 }
