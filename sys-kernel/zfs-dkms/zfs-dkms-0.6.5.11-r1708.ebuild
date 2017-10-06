@@ -6,10 +6,10 @@ EAPI=5
 
 inherit eutils
 
-MY_PN="spl"
+MY_PN="zfs"
 MY_P="${MY_PN}-${PV}"
 
-DESCRIPTION="Solaris Porting Layer sources for linux"
+DESCRIPTION="ZFS sources for linux"
 HOMEPAGE="http://zfsonlinux.org/"
 SRC_URI="https://github.com/zfsonlinux/zfs/releases/download/zfs-${PV}/${MY_P}.tar.gz"
 
@@ -46,7 +46,6 @@ src_install() {
 
 pkg_postinst() {
 	dkms add ${PN}/${PV}
-	dkms install ${PN}/${PV}
 }
 
 pkg_prerm() {

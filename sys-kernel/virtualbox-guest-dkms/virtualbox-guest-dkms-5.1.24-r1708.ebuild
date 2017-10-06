@@ -6,10 +6,9 @@ EAPI=5
 
 inherit eutils
 
-MY_P=vbox-kernel-module-src-${PV}
-DESCRIPTION="Kernel Modules source for Virtualbox"
+DESCRIPTION="Kernel Modules (guest) source for Virtualbox"
 HOMEPAGE="http://www.virtualbox.org/"
-SRC_URI="https://dev.gentoo.org/~polynomial-c/virtualbox/${MY_P}.tar.xz"
+SRC_URI="http://mirror.archlinux.ro/archlinux/community/os/x86_64/${P}-1-x86_64.pkg.tar.xz"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -19,10 +18,10 @@ IUSE=""
 DEPEND="sys-kernel/dkms"
 RDEPEND="${DEPEND}"
 
-S=${WORKDIR}
+S="${WORKDIR}"/usr/src/vboxguest-${PV}_OSE
 
 src_prepare() {
-	grep -lR linux/autoconf.h *  | xargs sed -i -e 's:<linux/autoconf.h>:<generated/autoconf.h>:'
+	epatch ${FILESDIR}/dkms.patch
 }
 
 src_compile() {
@@ -30,7 +29,6 @@ src_compile() {
 }
 
 src_install() {
-	cp ${FILESDIR}/dkms.conf ${S}
 	dodir /usr/src/${P}
 	insinto /usr/src/${P}
 	doins -r ${S}/*
@@ -38,7 +36,6 @@ src_install() {
 
 pkg_postinst() {
 	dkms add ${PN}/${PV}
-	dkms install ${PN}/${PV}
 }
 
 pkg_prerm() {

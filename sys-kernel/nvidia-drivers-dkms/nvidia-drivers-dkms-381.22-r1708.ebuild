@@ -39,7 +39,6 @@ src_install() {
 
 pkg_postinst() {
 	dkms add ${PN}/${PV}
-	dkms install ${PN}/${PV}
 }
 
 pkg_prerm() {
