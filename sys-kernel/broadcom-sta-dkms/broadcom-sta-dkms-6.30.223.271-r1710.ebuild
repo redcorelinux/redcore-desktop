@@ -40,19 +40,20 @@ src_prepare() {
 }
 
 src_compile(){
-    :
+	:
 }
 
 src_install() {
-    dodir /usr/src/${P}
-    insinto /usr/src/${P}
-    doins -r "${S}"/*
+	dodir /usr/src/${P}
+	insinto /usr/src/${P}
+	doins -r "${S}"/*
 }
 
 pkg_postinst() {
-    dkms add ${PN}/${PV}
+	dkms add ${PN}/${PV}
+	dkms install ${PN}/${PV}
 }
 
 pkg_prerm() {
-    dkms remove ${PN}/${PV} --all
+	dkms remove ${PN}/${PV} --all
 }
