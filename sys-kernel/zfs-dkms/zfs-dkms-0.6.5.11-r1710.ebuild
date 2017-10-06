@@ -18,8 +18,7 @@ LICENSE="GPL-2"
 KEYWORDS="amd64"
 IUSE=""
 DEPEND="sys-kernel/dkms"
-RDEPEND="${DEPEND}
-	~sys-kernel/spl-dkms-${PV}"
+RDEPEND="${DEPEND}"
 
 S="${WORKDIR}/${MY_P}"
 
