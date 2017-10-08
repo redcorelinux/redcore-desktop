@@ -1,7 +1,7 @@
 # Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=5
+EAPI=6
 
 inherit eutils
 
@@ -20,6 +20,7 @@ RDEPEND="
 	systemd? ( sys-apps/systemd )"
 
 src_prepare() {
+	default
 	epatch ${FILESDIR}/${P}-openrc-run.patch
 }
 

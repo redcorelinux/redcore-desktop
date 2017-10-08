@@ -7,7 +7,7 @@ inherit qmake-utils versionator
 
 MIN_PV="$(get_version_component_range 1-3)"
 
-DESCRIPTION="Qt5 frontend for fsarchiver"
+DESCRIPTION="Qt5 frontend for fsarchiver backup tool"
 HOMEPAGE="http://qt4-fsarchiver.sourceforge.net/"
 SRC_URI="mirror://sourceforge/project/qt4-fsarchiver/${PN}/source/${P}-0.tar.gz"
 LICENSE="GPL-2"

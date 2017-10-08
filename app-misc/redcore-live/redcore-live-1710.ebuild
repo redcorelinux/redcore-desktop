@@ -21,9 +21,3 @@ RDEPEND=""
 src_install() {
 	default
 }
-
-pkg_postrm() {
-	for service in "redcorelive.service" ; do
-		find "${ROOT}etc/systemd/system" -name "$service" -delete
-	done
-}
