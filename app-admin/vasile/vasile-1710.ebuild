@@ -11,7 +11,7 @@ HOMEPAGE="http://redcorelinux.org"
 
 EGIT_BRANCH="master"
 EGIT_REPO_URI="https://gitlab.com/redcore/vasile.git"
-EGIT_COMMIT="df72fb2fc4d8cba010c63da579bafd0cc5964655"
+EGIT_COMMIT="c79f7cb3dd4159357e923906c75d0a0c86f17534"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -37,4 +37,7 @@ src_install() {
 
 pkg_postinst() {
 	sisyphus update
+	mkdir -p /usr/ports/gentoo/packages
+	mkdir -p /usr/ports/gentoo/distfiles
+	chown portage:portage /usr/ports/gentoo/distfiles
 }
