@@ -13,7 +13,7 @@ SRC_URI="https://github.com/CDrummond/cantata/releases/download/v${PV}/${P}.tar.
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="cdda cddb cdio http-server mtp musicbrainz replaygain taglib udisks"
+IUSE="cdda cddb cdio http-server mtp musicbrainz replaygain streaming taglib udisks"
 REQUIRED_USE="
 	?? ( cdda cdio )
 	cdda? ( udisks || ( cddb musicbrainz ) )
@@ -48,6 +48,7 @@ RDEPEND="
 		media-sound/mpg123
 		virtual/ffmpeg
 	)
+	streaming? ( media-video/vlc:0= )
 	taglib? (
 		media-libs/taglib[asf(+),mp4(+)]
 		media-libs/taglib-extras
@@ -61,6 +62,8 @@ DEPEND="${RDEPEND}
 
 # cantata has no tests
 RESTRICT="test"
+
+PATCHES=( "${FILESDIR}/${P}-headers.patch" )
 
 src_prepare() {
 	remove_locale() {
@@ -88,10 +91,10 @@ src_configure() {
 		-DLRELEASE_EXECUTABLE="$(qt5_get_bindir)/lrelease"
 		-DENABLE_FFMPEG=$(usex replaygain)
 		-DENABLE_MPG123=$(usex replaygain)
+		-DENABLE_HTTP_STREAM_PLAYBACK=$(usex streaming)
 		-DENABLE_TAGLIB=$(usex taglib)
 		-DENABLE_TAGLIB_EXTRAS=$(usex taglib)
 		-DENABLE_DEVICES_SUPPORT=$(usex udisks)
-		-DENABLE_HTTP_STREAM_PLAYBACK=OFF
 		-DENABLE_REMOTE_DEVICES=OFF
 		-DENABLE_UDISKS2=ON
 	)
