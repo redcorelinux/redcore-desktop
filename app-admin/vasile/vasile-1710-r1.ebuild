@@ -11,7 +11,7 @@ HOMEPAGE="http://redcorelinux.org"
 
 EGIT_BRANCH="master"
 EGIT_REPO_URI="https://gitlab.com/redcore/vasile.git"
-EGIT_COMMIT="c79f7cb3dd4159357e923906c75d0a0c86f17534"
+EGIT_COMMIT="699cb3baa9ad52bd242eca902e9807d8f2c41b23"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -33,11 +33,13 @@ src_install() {
 	dodir /usr/$(get_libdir)/${PN}
 	insinto /usr/$(get_libdir)/${PN}
 	doins ${S}/libvasile
+
+	dodir /var/cache/packages
+	dodir /var/cache/distfiles
 }
 
 pkg_postinst() {
-	sisyphus update
-	mkdir -p /usr/ports/gentoo/packages
-	mkdir -p /usr/ports/gentoo/distfiles
-	chown portage:portage /usr/ports/gentoo/distfiles
+	chown portage:portage /var/cache/distfiles
+	chmod 775 /var/cache/distfiles
+	/usr/bin/vasile --binmode
 }
