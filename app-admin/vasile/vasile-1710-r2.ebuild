@@ -41,5 +41,4 @@ src_install() {
 pkg_postinst() {
 	chown portage:portage /var/cache/distfiles
 	chmod 775 /var/cache/distfiles
-	/usr/bin/vasile --binmode
 }
