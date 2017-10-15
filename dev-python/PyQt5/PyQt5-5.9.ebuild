@@ -106,6 +106,11 @@ pyqt_use_enable() {
 	fi
 }
 
+src_prepare() {
+	default
+	eapply ${FILESDIR}/pyqt-support-new-qt.patch
+}
+
 src_configure() {
 	configuration() {
 		local myconf=(
