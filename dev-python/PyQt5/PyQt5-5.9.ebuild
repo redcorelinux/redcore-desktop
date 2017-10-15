@@ -113,6 +113,7 @@ src_prepare() {
 
 src_configure() {
 	configuration() {
+		cp -avx ${S}/config-tests .
 		local myconf=(
 			"${PYTHON}"
 			"${S}"/configure.py
