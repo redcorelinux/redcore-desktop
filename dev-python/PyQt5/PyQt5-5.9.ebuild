@@ -160,11 +160,11 @@ src_configure() {
 
 		eqmake5 -recursive ${PN}.pro
 	}
-	python_foreach_impl run_in_build_dir configuration
+	python_foreach_impl configuration
 }
 
 src_compile() {
-	python_foreach_impl run_in_build_dir default
+	python_foreach_impl default
 }
 
 src_install() {
@@ -189,7 +189,7 @@ src_install() {
 		multibuild_merge_root "${tmp_root}" "${D}"
 		python_optimize
 	}
-	python_foreach_impl run_in_build_dir installation
+	python_foreach_impl installation
 
 	einstalldocs
 	use doc && dodoc -r doc/html
