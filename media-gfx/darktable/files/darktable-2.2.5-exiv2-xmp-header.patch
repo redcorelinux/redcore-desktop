@@ -1,0 +1,12 @@
+diff -Nur a/src/common/exif.cc b/src/common/exif.cc
+--- a/src/common/exif.cc	2017-05-28 15:22:21.000000000 +0100
++++ b/src/common/exif.cc	2017-10-17 19:25:19.417747333 +0100
+@@ -46,7 +46,7 @@
+ #include <exiv2/exif.hpp>
+ #include <exiv2/image.hpp>
+ #include <exiv2/preview.hpp>
+-#include <exiv2/xmp.hpp>
++#include <exiv2/xmp_exiv2.hpp>
+ 
+ #include <pugixml.hpp>
+ 

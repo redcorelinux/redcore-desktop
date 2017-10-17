@@ -76,6 +76,7 @@ pkg_pretend() {
 
 src_prepare() {
 	use cpu_flags_x86_sse3 && append-flags -msse3
+	eapply ${FILESDIR}/${P}-exiv2-xmp-header.patch
 
 	cmake-utils_src_prepare
 }
