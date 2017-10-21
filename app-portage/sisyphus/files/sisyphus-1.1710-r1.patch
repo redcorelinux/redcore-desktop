@@ -1,0 +1,46 @@
+diff --git a/src/backend/libsisyphus.py b/src/backend/libsisyphus.py
+index 5f62119..4f7fda5 100755
+--- a/src/backend/libsisyphus.py
++++ b/src/backend/libsisyphus.py
+@@ -112,10 +112,24 @@ def sync_sisyphus_database_removable_packages_table():
+ @animation.wait('syncing remote databases')
+ def redcore_sync():
+     check_if_root()
+-    sync_redcore_portage_tree_and_desktop_overlay()
+-    sync_redcore_portage_config()
+-    sync_sisyphus_database_remote_packages_table()
+-    sync_sisyphus_database_removable_packages_table()
++
++    fetch_sisyphus_remote_packages_table_csv()
++    if filecmp.cmp(sisyphus_remote_csv_path_pre, sisyphus_remote_csv_path_post):
++        os.remove(sisyphus_remote_csv_path_post)
++    else:
++        sync_redcore_portage_tree_and_desktop_overlay()
++        sync_redcore_portage_config()
++        sync_sisyphus_database_remote_packages_table()
++        sync_sisyphus_database_removable_packages_table()
++
++    fetch_sisyphus_removable_packages_table_csv()
++    if filecmp.cmp(sisyphus_removable_csv_path_pre, sisyphus_removable_csv_path_post):
++        os.remove(sisyphus_removable_csv_path_post)
++    else:
++        sync_redcore_portage_tree_and_desktop_overlay()
++        sync_redcore_portage_config()
++        sync_sisyphus_database_remote_packages_table()
++        sync_sisyphus_database_removable_packages_table()
+ 
+ def generate_sisyphus_local_packages_table_csv_pre():
+     subprocess.check_call(['/usr/share/sisyphus/helpers/make_local_csv_pre']) # this is really hard to do in python, so we cheat with a bash helper script
+diff --git a/src/frontend/gui/sisyphus-gui.py b/src/frontend/gui/sisyphus-gui.py
+index d64f431..027c90c 100755
+--- a/src/frontend/gui/sisyphus-gui.py
++++ b/src/frontend/gui/sisyphus-gui.py
+@@ -172,7 +172,7 @@ def loadDatabase(self):
+                 AND i.name = a.name
+                 AND i.slot = a.slot
+                 WHERE %s LIKE %s %s
+-                AND a.timestamp <> i.timestamp
++                AND a.timestamp > i.timestamp
+             ''' % (Sisyphus.SEARCHFIELD, Sisyphus.SEARCHTERM, FILTEROUT)),
+             ])
+         with sqlite3.connect(sisyphus_database_path) as db:

@@ -24,6 +24,11 @@ RDEPEND="${DEPEND}
 	sys-apps/portage[${PYTHON_USEDEP}]
 	gui? ( dev-python/PyQt5[designer,gui,widgets,${PYTHON_USEDEP}] )"
 
+src_prepare() {
+	default
+	eapply ${FILESDIR}/${P}-r1.patch
+}
+
 src_install() {
 	default
 	dosym /usr/share/${PN}/${PN}-cli.py /usr/bin/${PN}
