@@ -56,6 +56,10 @@ RDEPEND="${CDEPEND}
 	dev-qt/qtsvg:5
 	>=lxde-base/lxmenu-data-0.1.2"
 
+src_prepare() {
+	epatch "${FILESDIR}"/lxqt-menu-cleanup.patch
+}
+
 src_configure() {
 	local mycmakeargs i y
 	mycmakeargs=( -DPULL_TRANSLATIONS=OFF )
