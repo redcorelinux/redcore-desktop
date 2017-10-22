@@ -27,9 +27,7 @@ CDEPEND=">=dev-libs/glib-2.18:2
 	dev-qt/qtx11extras:5
 	>=x11-libs/libfm-1.2.5:=
 	x11-libs/libfm-qt:=
-	x11-libs/libxcb:=
-	!<lxqt-base/lxqt-common-0.11*
-"
+	x11-libs/libxcb:="
 RDEPEND="${CDEPEND}
 	x11-misc/xdg-utils
 	virtual/eject

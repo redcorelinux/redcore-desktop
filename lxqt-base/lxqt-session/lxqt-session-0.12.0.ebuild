@@ -30,15 +30,14 @@ CDEPEND="
 	kde-frameworks/kwindowsystem:5[X]
 	~lxqt-base/liblxqt-${PV}
 	x11-libs/libX11
-	x11-misc/xdg-user-dirs
-	!<lxqt-base/lxqt-common-0.11*"
+	x11-misc/xdg-user-dirs"
 DEPEND="${CDEPEND}
 	dev-qt/linguist-tools:5
 	dev-util/intltool
 	sys-devel/gettext
 	virtual/pkgconfig"
 RDEPEND="${CDEPEND}
-	=lxqt-base/lxqt-themes-0.12*"
+	~lxqt-base/lxqt-themes-${PV}"
 
 src_configure() {
 	local mycmakeargs=( -DPULL_TRANSLATIONS=OFF )

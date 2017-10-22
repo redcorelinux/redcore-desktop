@@ -20,8 +20,7 @@ LICENSE="LGPL-2.1+"
 SLOT="0"
 
 DEPEND="~lxqt-base/liblxqt-${PV}"
-RDEPEND="${DEPEND}
-	!<lxqt-base/lxqt-common-0.11*"
+RDEPEND="${DEPEND}"
 PDEPEND="~lxqt-base/lxqt-session-${PV}"
 
 src_configure() {
