@@ -32,6 +32,6 @@ DEPEND="dev-qt/qtgui:5
 RDEPEND="${DEPEND}"
 
 src_install() {
-	rm -rf ${ED}usr/share/${PN}
 	cmake-utils_src_install
+	rm -rf ${ED}usr/share/${PN}
 }
