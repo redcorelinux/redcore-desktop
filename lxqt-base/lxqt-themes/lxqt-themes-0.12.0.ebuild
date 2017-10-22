@@ -21,7 +21,7 @@ SLOT="0"
 
 DEPEND="~lxqt-base/liblxqt-${PV}"
 RDEPEND="${DEPEND}
-	!<x11-misc/lxqt-common-0.11*"
+	!<lxqt-base/lxqt-common-0.11*"
 PDEPEND="~lxqt-base/lxqt-session-${PV}"
 
 src_configure() {

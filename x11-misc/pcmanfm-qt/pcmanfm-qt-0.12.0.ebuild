@@ -28,7 +28,7 @@ CDEPEND=">=dev-libs/glib-2.18:2
 	>=x11-libs/libfm-1.2.5:=
 	x11-libs/libfm-qt:=
 	x11-libs/libxcb:=
-	!<x11-misc/lxqt-common-0.11*
+	!<lxqt-base/lxqt-common-0.11*
 "
 RDEPEND="${CDEPEND}
 	x11-misc/xdg-utils

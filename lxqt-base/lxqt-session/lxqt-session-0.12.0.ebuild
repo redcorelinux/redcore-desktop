@@ -31,7 +31,7 @@ CDEPEND="
 	~lxqt-base/liblxqt-${PV}
 	x11-libs/libX11
 	x11-misc/xdg-user-dirs
-	!<x11-misc/lxqt-common-0.11*"
+	!<lxqt-base/lxqt-common-0.11*"
 DEPEND="${CDEPEND}
 	dev-qt/linguist-tools:5
 	dev-util/intltool

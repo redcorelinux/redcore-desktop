@@ -29,7 +29,7 @@ RDEPEND="
 	~lxqt-base/liblxqt-${PV}
 	>=dev-libs/libqtxdg-3.1.0
 	sys-auth/polkit-qt[qt5(+)]
-	!<x11-misc/lxqt-common-0.11*"
+	!<lxqt-base/lxqt-common-0.11*"
 DEPEND="${RDEPEND}
 	dev-qt/linguist-tools:5
 	virtual/pkgconfig"

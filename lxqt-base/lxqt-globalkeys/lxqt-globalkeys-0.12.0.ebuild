@@ -31,7 +31,7 @@ RDEPEND="
 	x11-libs/libSM
 	x11-libs/libX11
 	x11-libs/libXext
-	!<x11-misc/lxqt-common-0.11*
+	!<lxqt-base/lxqt-common-0.11*
 "
 DEPEND="${RDEPEND}
 	dev-qt/linguist-tools:5
