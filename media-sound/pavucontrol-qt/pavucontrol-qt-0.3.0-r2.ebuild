@@ -31,7 +31,7 @@ DEPEND="dev-qt/qtgui:5
 	media-sound/pulseaudio"
 RDEPEND="${DEPEND}"
 
-src_prepare() {
-	local mycmakeargs=( -DUPDATE_TRANSLATIONS=OFF )
-	cmake-utils_src_prepare
+src_install() {
+	rm -rf ${ED}usr/share/${PN}
+	cmake-utils_src_install
 }
