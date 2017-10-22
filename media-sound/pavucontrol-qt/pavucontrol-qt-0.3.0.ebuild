@@ -4,17 +4,21 @@
 
 EAPI=6
 
-inherit eutils git-r3 cmake-utils
+inherit eutils cmake-utils
 
 DESCRIPTION="Qt port of pavucontrol"
 HOMEPAGE="http://lxqt.org"
-EGIT_REPO_URI="https://github.com/lxde/pavucontrol-qt.git"
-EGIT_BRANCH="master"
-EGIT_COMMIT="4ce124ce49071a97f9185a6e619608e8481a337a"
+
+if [[ ${PV} = *9999* ]]; then
+	inherit git-r3
+	EGIT_REPO_URI="git://git.lxde.org/git/lxde/${PN}.git"
+else
+	SRC_URI="https://github.com/lxde/${PN}/releases/download/${PV}/${P}.tar.xz"
+	KEYWORDS="amd64 ~arm ~arm64 ~x86"
+fi
 
 LICENSE="GPL"
 SLOT="0"
-KEYWORDS="amd64 x86"
 IUSE=""
 
 DEPEND="dev-qt/qtgui:5
@@ -27,6 +31,6 @@ DEPEND="dev-qt/qtgui:5
 RDEPEND="${DEPEND}"
 
 src_prepare() {
-	epatch ${FILESDIR}/xdg-user-dirs-cmake-fix.patch
+	local mycmakeargs=( -DPULL_TRANSLATIONS=OFF )
 	cmake-utils_src_prepare
 }
