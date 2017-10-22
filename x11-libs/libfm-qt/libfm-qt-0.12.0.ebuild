@@ -17,7 +17,7 @@ DESCRIPTION="Qt port of libfm, a library providing components to build desktop f
 HOMEPAGE="http://lxqt.org/"
 
 LICENSE="LGPL-2.1+"
-SLOT="0/3"
+SLOT="0/4"
 
 RDEPEND="
 	dev-libs/glib:2
@@ -27,12 +27,10 @@ RDEPEND="
 	dev-qt/qtx11extras:5
 	>=lxde-base/menu-cache-0.4.1
 	>=x11-libs/libfm-1.2.5:=
-	x11-libs/libxcb:=
-	!<x11-misc/pcmanfm-qt-0.12.0
-"
+	x11-libs/libxcb:="
 DEPEND="${RDEPEND}
 	dev-qt/linguist-tools:5
-	lxqt-base/liblxqt
+	~lxqt-base/liblxqt-${PV}
 	virtual/pkgconfig
 "
 
