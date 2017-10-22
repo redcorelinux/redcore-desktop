@@ -2,9 +2,10 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=5
+
 inherit cmake-utils
 
-DESCRIPTION="Daemon and library for global keyboard shortcuts registration"
+DESCRIPTION="LXQT session manager"
 HOMEPAGE="http://lxqt.org/"
 
 if [[ ${PV} = *9999* ]]; then
@@ -18,24 +19,33 @@ fi
 LICENSE="GPL-2 LGPL-2.1+"
 SLOT="0"
 
-RDEPEND="
+CDEPEND="
+	>=dev-libs/libqtxdg-3.1.0
 	dev-qt/qtcore:5
 	dev-qt/qtdbus:5
 	dev-qt/qtgui:5
 	dev-qt/qtwidgets:5
 	dev-qt/qtx11extras:5
 	dev-qt/qtxml:5
+	kde-frameworks/kwindowsystem:5[X]
 	~lxqt-base/liblxqt-${PV}
-	>=dev-libs/libqtxdg-3.1.0
-	x11-libs/libICE
-	x11-libs/libSM
 	x11-libs/libX11
-	x11-libs/libXext"
-DEPEND="${RDEPEND}
+	x11-misc/xdg-user-dirs"
+DEPEND="${CDEPEND}
 	dev-qt/linguist-tools:5
-"
+	dev-util/intltool
+	!lxqt-base/lxqt-common
+	sys-devel/gettext
+	virtual/pkgconfig"
+RDEPEND="${CDEPEND}
+	~lxqt-base/lxqt-themes-${PV}"
 
 src_configure() {
 	local mycmakeargs=( -DPULL_TRANSLATIONS=OFF )
 	cmake-utils_src_configure
+}
+
+src_install(){
+	cmake-utils_src_install
+	doman lxqt-config-session/man/*.1 lxqt-session/man/*.1
 }

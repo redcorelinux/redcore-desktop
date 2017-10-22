@@ -13,8 +13,9 @@ KEYWORDS="amd64 ~arm64 ~x86"
 IUSE="+about +admin +branding +filemanager +styles +icons +sddm +lximage minimal +oxygen +policykit
 	+powermanagement +ssh-askpass sudo"
 REQUIRED_USE="oxygen? ( icons )"
+DEPEND="!lxqt-base/lxqt-common"
 
-RDEPEND="
+RDEPEND="${DEPEND}
 	>=lxde-base/lxmenu-data-0.1.2
 	>=lxde-base/lxappearance-0.5.5
 	~lxqt-base/lxqt-themes-${PV}
@@ -43,8 +44,7 @@ RDEPEND="
 			sys-apps/systemd[policykit(-)] ) )
 	powermanagement? ( ~lxqt-base/lxqt-powermanagement-${PV} )
 	ssh-askpass? ( ~lxqt-base/lxqt-openssh-askpass-${PV} )
-	sudo? ( ~lxqt-base/lxqt-sudo-${PV} )
-	!lxqt-base/lxqt-common"
+	sudo? ( ~lxqt-base/lxqt-sudo-${PV} )"
 
 # Note: we prefer kde-frameworks/oxygen-icons over other icon sets, as the initial
 # install expects oxygen icons, until the user specifies otherwise (bug 543380)

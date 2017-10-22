@@ -50,7 +50,8 @@ CDEPEND="
 	volume? ( alsa? ( media-libs/alsa-lib )
 		pulseaudio? ( media-sound/pulseaudio ) )"
 DEPEND="${CDEPEND}
-	dev-qt/linguist-tools:5"
+	dev-qt/linguist-tools:5
+	!lxqt-base/lxqt-common"
 RDEPEND="${CDEPEND}
 	dev-qt/qtsvg:5
 	>=lxde-base/lxmenu-data-0.1.2"

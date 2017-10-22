@@ -29,7 +29,8 @@ RDEPEND="
 	kde-frameworks/kwindowsystem:5
 	~lxqt-base/liblxqt-${PV}"
 DEPEND="${RDEPEND}
-	dev-qt/linguist-tools:5"
+	dev-qt/linguist-tools:5
+	!lxqt-base/lxqt-common"
 
 src_configure() {
 	local mycmakeargs=( -DPULL_TRANSLATIONS=OFF )
