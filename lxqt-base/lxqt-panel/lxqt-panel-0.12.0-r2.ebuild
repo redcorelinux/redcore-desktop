@@ -58,6 +58,7 @@ RDEPEND="${CDEPEND}
 
 src_prepare() {
 	epatch "${FILESDIR}"/lxqt-menu-cleanup.patch
+	cmake-utils_src_prepare
 }
 
 src_configure() {
