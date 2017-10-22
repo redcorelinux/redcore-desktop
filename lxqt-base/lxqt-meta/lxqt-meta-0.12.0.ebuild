@@ -43,7 +43,8 @@ RDEPEND="
 			sys-apps/systemd[policykit(-)] ) )
 	powermanagement? ( ~lxqt-base/lxqt-powermanagement-${PV} )
 	ssh-askpass? ( ~lxqt-base/lxqt-openssh-askpass-${PV} )
-	sudo? ( ~lxqt-base/lxqt-sudo-${PV} )"
+	sudo? ( ~lxqt-base/lxqt-sudo-${PV} )
+	!lxqt-base/lxqt-common"
 
 # Note: we prefer kde-frameworks/oxygen-icons over other icon sets, as the initial
 # install expects oxygen icons, until the user specifies otherwise (bug 543380)
