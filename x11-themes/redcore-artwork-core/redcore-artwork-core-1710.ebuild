@@ -6,7 +6,7 @@ inherit eutils
 
 DESCRIPTION="Offical Redcore Linux Core Artwork"
 HOMEPAGE="http://redcorelinux.org"
-SRC_URI="http://mirror.math.princeton.edu/pub/redcorelinux/distfiles/${P}.tar.xz"
+SRC_URI="http://mirror.math.princeton.edu/pub/redcorelinux/distfiles/${PN}.tar.xz"
 
 LICENSE="CCPL-Attribution-ShareAlike-3.0"
 SLOT="0"
