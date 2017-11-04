@@ -4,15 +4,11 @@
 
 EAPI=6
 
-inherit eutils git-r3
+inherit eutils
 
 DESCRIPTION="Versatile Advanced Script for ISO and Latest Enchantments"
 HOMEPAGE="http://redcorelinux.org"
-
-EGIT_BRANCH="master"
-EGIT_REPO_URI="https://gitlab.com/redcore/vasile.git"
-EGIT_COMMIT="699cb3baa9ad52bd242eca902e9807d8f2c41b23"
-
+SRC_URI="https://github.com/redcorelinux/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="amd64"
@@ -27,13 +23,8 @@ RDEPEND="${DEPEND}
 	sys-fs/squashfs-tools"
 
 src_install() {
-	dodir /usr/bin
-	exeinto /usr/bin
-	doexe ${S}/${PN}
-	dodir /usr/$(get_libdir)/${PN}
-	insinto /usr/$(get_libdir)/${PN}
-	doins ${S}/libvasile
-
+	default
+	dosym /usr/bin/${PN}.sh /usr/bin/${PN}
 	dodir /var/cache/packages
 	dodir /var/cache/distfiles
 }
