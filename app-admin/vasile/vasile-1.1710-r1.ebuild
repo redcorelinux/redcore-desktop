@@ -22,6 +22,11 @@ RDEPEND="${DEPEND}
 	sys-fs/mtools
 	sys-fs/squashfs-tools"
 
+src_prepare() {
+	default
+	eapply "${FILESDIR}/${P}-r1.patch"
+}
+
 src_install() {
 	default
 	dosym /usr/bin/${PN}.sh /usr/bin/${PN}
