@@ -292,9 +292,8 @@ pkg_postinst() {
 				"${EROOT}"etc/runlevels
 		fi
 	fi
-
+	# Redcore Linux change : enable DKMS at boot runlevel
 	if use dkms; then
-		elog "Adding DKMS to boot runlevel (Redcore Linux tweak)"
 		ln -sf /etc/init.d/dkms /etc/runlevels/boot
 	fi
 
