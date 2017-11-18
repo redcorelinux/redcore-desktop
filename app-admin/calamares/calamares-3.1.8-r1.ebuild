@@ -48,10 +48,8 @@ DEPEND="
 RDEPEND=">=app-misc/calamares-runtime-1.0[branding]"
 
 src_prepare() {
-	# by default, calamares writes UUID=partition-uuid in fstab, regardless
-	# is luks or not. This is utterly broken for many reasons. The patch
-	# below will make calamares to write proper /dev/mapper entries.
-	epatch "${FILESDIR}"/${P}-luks-fstab-write-devmapper.patch
+	# build against kpmcore-3.2
+	epatch "${FILESDIR}"/${P}-kpmcore-3.2.patch
 	# support auto-unlocking encrypted /home partition via OpenRC's dmcrypt service
 	epatch -p1 "${FILESDIR}"/${P}-openrc-dmcrypt-cfg.patch
 	# replace calamares installer desktop icon
