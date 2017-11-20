@@ -50,6 +50,8 @@ RDEPEND=">=app-misc/calamares-runtime-1.0[branding]"
 src_prepare() {
 	# build against kpmcore-3.2
 	epatch "${FILESDIR}"/${P}-kpmcore-3.2.patch
+	# don't run locale-gen during system installation, we run it ourselves during stage4 bootstrap...this patch should speed up installation significantly
+	epatch "${FILESDIR}"/${P}-dont-run-locale-gen.patch
 	# support auto-unlocking encrypted /home partition via OpenRC's dmcrypt service
 	epatch -p1 "${FILESDIR}"/${P}-openrc-dmcrypt-cfg.patch
 	# replace calamares installer desktop icon
