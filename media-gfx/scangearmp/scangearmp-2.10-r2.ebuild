@@ -76,7 +76,8 @@ pkg_setup() {
 
     _prefix="/usr/"
     _bindir="${_prefix}/bin"
-    _libdir="/usr/$(get_libdir)" # either lib or lib32
+    _libdir32="/usr/lib32"
+    _libdir64="/usr/lib64"
     _gimpdir="${_libdir}/gimp/2.0/plug-ins"
     _udevdir="/etc/udev/rules.d"
 
@@ -171,17 +172,25 @@ src_install() {
     fi
 
     if use x86; then
-        cp -a ${_prid}/libs_bin32/* ${D}${_libdir} || die
-        cp -a com/libs_bin32/* ${D}${_libdir} || die
+        cp -a ${_prid}/libs_bin32/* ${D}${_libdir32} || die
+        cp -a com/libs_bin32/* ${D}${_libdir32} || die
     else # amd54
-        cp -a ${_prid}/libs_bin64/* ${D}${_libdir} || die
-        cp -a com/libs_bin64/* ${D}${_libdir} || die
+        cp -a ${_prid}/libs_bin64/* ${D}${_libdir64} || die
+        cp -a com/libs_bin64/* ${D}${_libdir64} || die
     fi
-    cp -a ${_prid}/*.DAT ${D}${_libdir}/bjlib || die
-    cp -a ${_prid}/*.tbl ${D}${_libdir}/bjlib || die
-    cp com/ini/canon_mfp_net.ini ${D}${_libdir}/bjlib || die
-    chmod 644 ${D}${_libdir}/bjlib/* || die
-    chmod 666 ${D}${_libdir}/bjlib/canon_mfp_net.ini || die
+	if use x86; then
+		cp -a ${_prid}/*.DAT ${D}${_libdir32}/bjlib || die
+		cp -a ${_prid}/*.tbl ${D}${_libdir32}/bjlib || die
+		cp com/ini/canon_mfp_net.ini ${D}${_libdir32}/bjlib || die
+		chmod 644 ${D}${_libdir32}/bjlib/* || die
+		chmod 666 ${D}${_libdir32}/bjlib/canon_mfp_net.ini || die
+	else # amd64
+		cp -a ${_prid}/*.DAT ${D}${_libdir64}/bjlib || die
+		cp -a ${_prid}/*.tbl ${D}${_libdir64}/bjlib || die
+		cp com/ini/canon_mfp_net.ini ${D}${_libdir64}/bjlib || die
+		chmod 644 ${D}${_libdir64}/bjlib/* || die
+		chmod 666 ${D}${_libdir64}/bjlib/canon_mfp_net.ini || die
+	fi
 
     # usb
     if use usb; then
