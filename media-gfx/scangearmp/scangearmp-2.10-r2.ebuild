@@ -172,9 +172,11 @@ src_install() {
     fi
 
     if use x86; then
+		dodir ${D}${_libdir32} || die
         cp -a ${_prid}/libs_bin32/* ${D}${_libdir32} || die
         cp -a com/libs_bin32/* ${D}${_libdir32} || die
     else # amd54
+		dodir ${D}${_libdir64} || die
         cp -a ${_prid}/libs_bin64/* ${D}${_libdir64} || die
         cp -a com/libs_bin64/* ${D}${_libdir64} || die
     fi
