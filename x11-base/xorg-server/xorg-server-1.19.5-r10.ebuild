@@ -230,7 +230,7 @@ src_install() {
 
 	# enable click using touchpad (https://bugs.redcorelinux.org/show_bug.cgi?id=48)
 	insinto /usr/share/X11/xorg.conf.d
-	newins "${FILESDIR}"/99-synaptics-overrides.conf
+	doins "${FILESDIR}"/99-synaptics-overrides.conf
 }
 
 pkg_postinst() {
