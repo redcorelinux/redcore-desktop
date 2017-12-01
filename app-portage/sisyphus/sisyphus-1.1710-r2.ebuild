@@ -4,7 +4,7 @@
 
 EAPI=6
 
-PYTHON_COMPAT=( python3_4 )
+PYTHON_COMPAT=( python3_5 )
 
 inherit eutils python-r1
 
@@ -16,7 +16,7 @@ SLOT="0"
 KEYWORDS="amd64 x86"
 IUSE="+gui"
 
-DEPEND="dev-lang/python:3.4[sqlite]"
+DEPEND="dev-lang/python:3.5[sqlite]"
 RDEPEND="${DEPEND}
 	app-portage/gentoolkit[${PYTHON_USEDEP}]
 	dev-python/animation[${PYTHON_USEDEP}]
@@ -26,7 +26,7 @@ RDEPEND="${DEPEND}
 
 src_prepare() {
 	default
-	eapply ${FILESDIR}/${P}-r1.patch
+	eapply ${FILESDIR}/${P}-r2.patch
 }
 
 src_install() {
