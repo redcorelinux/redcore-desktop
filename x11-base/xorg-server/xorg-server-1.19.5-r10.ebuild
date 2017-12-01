@@ -227,6 +227,10 @@ src_install() {
 	# install the @x11-module-rebuild set for Portage
 	insinto /usr/share/portage/config/sets
 	newins "${FILESDIR}"/xorg-sets.conf xorg.conf
+
+	# enable click using touchpad (https://bugs.redcorelinux.org/show_bug.cgi?id=48)
+	insinto /usr/share/X11/xorg.conf.d
+	newins "${FILESDIR}"/99-synaptics-overrides.conf
 }
 
 pkg_postinst() {
