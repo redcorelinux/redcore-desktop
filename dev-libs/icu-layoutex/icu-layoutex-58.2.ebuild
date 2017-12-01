@@ -1,12 +1,11 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=6
 
 inherit eutils flag-o-matic toolchain-funcs autotools multilib-minimal
 
-DESCRIPTION="International Components for Unicode"
+DESCRIPTION="External layout part of International Components for Unicode"
 HOMEPAGE="http://www.icu-project.org/"
 SRC_URI="http://download.icu-project.org/files/icu4c/${PV/_/}/icu4c-${PV//./_}-src.tgz"
 
@@ -14,25 +13,23 @@ LICENSE="BSD"
 
 SLOT="0/${PV}"
 
-KEYWORDS="alpha amd64 arm ~arm64 hppa ia64 ~m68k ~mips ppc ppc64 ~s390 ~sh sparc x86 ~amd64-fbsd ~x86-fbsd"
-IUSE="debug doc examples static-libs"
+KEYWORDS="alpha amd64 hppa ia64 ppc ppc64 x86"
+IUSE="debug static-libs"
 
-DEPEND="
-	virtual/pkgconfig
-	doc? (
-		app-doc/doxygen[dot]
-	)
+RDEPEND="
+	~dev-libs/icu-${PV}[${MULTILIB_USEDEP}]
+	dev-libs/icu-le-hb[${MULTILIB_USEDEP}]
 "
 
-S="${WORKDIR}/${PN}/source"
+DEPEND="
+	virtual/pkgconfig[${MULTILIB_USEDEP}]
+	${RDEPEND}
+"
 
-MULTILIB_CHOST_TOOLS=(
-	/usr/bin/icu-config
-)
+S="${WORKDIR}/${PN/-layoutex}/source"
 
 PATCHES=(
 	"${FILESDIR}/${PN}-58.1-remove-bashisms.patch"
-	"${FILESDIR}/${PN}-58.1-iterator.patch"
 )
 
 src_prepare() {
@@ -50,11 +47,6 @@ src_prepare() {
 	sed -i \
 		-e "s:LDFLAGSICUDT=-nodefaultlibs -nostdlib:LDFLAGSICUDT=:" \
 		config/mh-linux || die
-
-	# Append doxygen configuration to configure
-	sed -i \
-		-e 's:icudefs.mk:icudefs.mk Doxyfile:' \
-		configure.ac || die
 
 	eautoreconf
 }
@@ -84,14 +76,11 @@ multilib_src_configure() {
 	local myeconfargs=(
 		--disable-renaming
 		--disable-samples
-		--disable-layoutex
+		--enable-layoutex
 		$(use_enable debug)
 		$(use_enable static-libs static)
 	)
 
-	multilib_is_native_abi && myeconfargs+=(
-		$(use_enable examples samples)
-	)
 	tc-is-cross-compiler && myeconfargs+=(
 		--with-cross-build="${WORKDIR}"/host
 	)
@@ -101,15 +90,6 @@ multilib_src_configure() {
 
 	ECONF_SOURCE=${S} \
 	econf "${myeconfargs[@]}"
-}
-
-multilib_src_compile() {
-	default
-
-	if multilib_is_native_abi && use doc; then
-		doxygen -u Doxyfile || die
-		doxygen Doxyfile || die
-	fi
 }
 
 multilib_src_test() {
@@ -123,20 +103,13 @@ multilib_src_test() {
 	# CINTLTST_OPTS: cintltst options
 	#   -e: Exhaustive testing
 	#   -v: Increased verbosity
+	pushd layoutex &>/dev/null || die
 	emake -j1 VERBOSE="1" check
+	popd &>/dev/null || die
 }
 
 multilib_src_install() {
+	pushd layoutex &>/dev/null || die
 	default
-
-	if multilib_is_native_abi && use doc; then
-		docinto html
-		dodoc -r doc/html/*
-	fi
-}
-
-multilib_src_install_all() {
-	einstalldocs
-	docinto html
-	dodoc ../readme.html
+	popd &>/dev/null || die
 }
