@@ -4,7 +4,7 @@
 
 EAPI=5
 
-PYTHON_COMPAT=( python3_4 )
+PYTHON_COMPAT=( python3_5 )
 
 DESCRIPTION="Calamares distribution-independent installer framework runtime meta-package (containing all the runtime dependencies)"
 SRC_URI=""
@@ -17,7 +17,7 @@ IUSE="+branding +python"
 DEPEND=""
 RDEPEND="
 	python? (
-		>=dev-libs/boost-1.55.0-r2[python_targets_python3_4]
+		>=dev-libs/boost-1.55.0-r2[python_targets_python3_5]
 	)
 	branding? ( >=x11-themes/redcore-artwork-calamares-1.0 )
 	>=app-misc/calamares-config-redcore-1.0
