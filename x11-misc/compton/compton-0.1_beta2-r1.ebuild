@@ -46,6 +46,11 @@ pkg_setup() {
 	fi
 }
 
+src_prepare() {
+	default
+	eapply ${FILESDIR}/makefile.patch
+}
+
 src_compile() {
 	emake docs
 
