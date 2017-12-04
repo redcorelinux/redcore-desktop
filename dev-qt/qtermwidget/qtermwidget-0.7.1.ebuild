@@ -27,6 +27,11 @@ RDEPEND="${DEPEND}"
 
 S="${WORKDIR}/${PN}-${PV}/pyqt"
 
+src_prepare () {
+	default
+	eapply -p2 "${FILESDIR}"/${P}-pyqt5.7-compat.patch
+}
+
 src_compile () {
 	python_foreach_impl python config.py
 	emake || die
