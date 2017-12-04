@@ -39,4 +39,5 @@ src_compile () {
 
 src_install () {
 	default
+	rm -rf ${ED}usr/share/doc
 }
