@@ -66,6 +66,7 @@ src_prepare() {
 		-e "s!^Categories=.*!Categories=Network;InstantMessaging;Telephony;!" \
 		-e "/^OnlyShowIn=/d" \
 		-i usr/share/applications/skypeforlinux.desktop || die
+	epatch "${FILESDIR}"/"${PN}"-8.11-proxy.patch
 }
 
 src_install() {
