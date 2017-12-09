@@ -6,7 +6,7 @@ EAPI=5
 inherit eutils gnome2-utils xdg-utils systemd
 
 # Major version
-MV="${PV/\.*}"
+MV="13"
 MY_PN="${PN}${MV}"
 DESCRIPTION="All-In-One Solution for Remote Access and Support over the Internet"
 HOMEPAGE="https://www.teamviewer.com"
