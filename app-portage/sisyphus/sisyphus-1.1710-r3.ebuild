@@ -4,7 +4,7 @@
 
 EAPI=6
 
-PYTHON_COMPAT=( python3_5 )
+PYTHON_COMPAT=( python3_{4,5,6} )
 
 inherit eutils python-r1
 
@@ -16,7 +16,7 @@ SLOT="0"
 KEYWORDS="amd64 x86"
 IUSE="+gui"
 
-DEPEND="dev-lang/python:3.5[sqlite]"
+DEPEND="dev-lang/python[sqlite]"
 RDEPEND="${DEPEND}
 	app-portage/gentoolkit[${PYTHON_USEDEP}]
 	dev-python/animation[${PYTHON_USEDEP}]
@@ -26,11 +26,21 @@ RDEPEND="${DEPEND}
 
 src_prepare() {
 	default
-	eapply ${FILESDIR}/${P}-r2.patch
+	eapply ${FILESDIR}/${P}-r3.patch
 }
 
 src_install() {
 	default
+
+	inject_libsisyphus() {
+		# FIXME, ugly hack
+		python_moduleinto "$(python_get_sitedir)/.."
+		python_domodule src/backend/libsisyphus.py
+		rm -rf ${D}$(python_get_sitedir)
+	}
+
+	python_foreach_impl inject_libsisyphus
+
 	dosym /usr/share/${PN}/${PN}-cli.py /usr/bin/${PN}
 	dodir /var/lib/${PN}/{csv,db}
 	if ! use gui; then
