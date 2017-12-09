@@ -3,7 +3,7 @@
 
 EAPI=5
 
-inherit eutils gnome2-utils xdg-utils systemd unpacker
+inherit eutils gnome2-utils xdg-utils systemd
 
 # Major version
 MV="${PV/\.*}"
@@ -14,7 +14,7 @@ SRC_URI="amd64? ( https://dl.tvcdn.de/download/linux/version_13x/${PN}_${PV}_amd
 
 IUSE="system-xdg systemd"
 
-LICENSE="TeamViewer LGPL-2.1" #LGPL for bundled wine
+LICENSE="TeamViewer"
 SLOT="${MV}"
 KEYWORDS="amd64 x86"
 
