@@ -13,7 +13,6 @@ DESCRIPTION="A library providing Qt implementation of DBusMenu specification"
 HOMEPAGE="https://launchpad.net/libdbusmenu-qt/"
 SRC_URI="https://launchpad.net/ubuntu/+archive/primary/+files/${MY_PN}_${MY_PV}.orig.tar.gz"
 KEYWORDS="amd64 x86"
-PATCHES=( "${FILESDIR}/${P}-optionaltests.patch" )
 LICENSE="LGPL-2"
 SLOT="0"
 IUSE="debug doc +qt5"
