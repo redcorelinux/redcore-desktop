@@ -5,7 +5,7 @@
 EAPI=5
 
 MY_PN="${PN/qt5/qt}"
-MY_PV=${PV/_pre/+14.10.}
+MY_PV=${PV/_pre/+16.04.}
 
 inherit multibuild multilib virtualx cmake-multilib
 
