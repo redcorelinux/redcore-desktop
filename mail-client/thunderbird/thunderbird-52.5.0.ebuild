@@ -4,7 +4,7 @@
 EAPI=6
 WANT_AUTOCONF="2.1"
 MOZ_ESR=""
-MOZ_LIGHTNING_VER="5.4.1"
+MOZ_LIGHTNING_VER="5.4.5"
 MOZ_LIGHTNING_GDATA_VER="3.3"
 
 # This list can be updated using scripts/get_langs.sh from the mozilla overlay
@@ -17,7 +17,7 @@ uk vi zh-CN zh-TW )
 MOZ_PV="${PV/_beta/b}"
 
 # Patches
-PATCHFF="firefox-52.2-patches-01"
+PATCHFF="firefox-52.5-patches-02"
 
 MOZ_HTTP_URI="https://archive.mozilla.org/pub/${PN}/releases"
 
@@ -30,12 +30,12 @@ MOZ_P="${PN}-${MOZ_PV}"
 MOZCONFIG_OPTIONAL_GTK2ONLY=1
 MOZCONFIG_OPTIONAL_WIFI=1
 
-inherit flag-o-matic toolchain-funcs mozconfig-v6.52 makeedit autotools pax-utils check-reqs nsplugins mozlinguas-v2 fdo-mime gnome2-utils
+inherit flag-o-matic toolchain-funcs mozconfig-v6.52 makeedit autotools pax-utils check-reqs nsplugins mozlinguas-v2 xdg-utils gnome2-utils
 
 DESCRIPTION="Thunderbird Mail Client"
 HOMEPAGE="http://www.mozilla.com/en-US/thunderbird/"
 
-KEYWORDS="~alpha amd64 ~arm ~ppc ~ppc64 ~x86 ~x86-fbsd ~amd64-linux ~x86-linux"
+KEYWORDS="~alpha amd64 ~arm ~ppc ~ppc64 x86 ~x86-fbsd ~amd64-linux ~x86-linux"
 SLOT="0"
 LICENSE="MPL-2.0 GPL-2 LGPL-2.1"
 IUSE="bindist crypt hardened ldap lightning +minimal mozdom rust selinux"
@@ -53,7 +53,6 @@ ASM_DEPEND=">=dev-lang/yasm-1.1"
 CDEPEND="
 	>=dev-libs/nss-3.28.3
 	>=dev-libs/nspr-4.13.1
-	crypt? ( >=x11-plugins/enigmail-1.9.7 )
 	"
 
 DEPEND="rust? ( dev-lang/rust )
@@ -64,6 +63,7 @@ DEPEND="rust? ( dev-lang/rust )
 
 RDEPEND="${CDEPEND}
 	selinux? ( sec-policy/selinux-thunderbird )
+	crypt? ( >=x11-plugins/enigmail-1.9.8.3-r1 )
 "
 
 S="${WORKDIR}/${MOZ_P}"
@@ -209,12 +209,12 @@ src_configure() {
 	fi
 
 	# workaround for funky/broken upstream configure...
-	SHELL="${SHELL:-${EPREFIX%/}/bin/bash}" \
+	SHELL="${SHELL:-${EPREFIX}/bin/bash}" \
 	emake V=1 -f client.mk configure
 }
 
 src_compile() {
-	MOZ_MAKE_FLAGS="${MAKEOPTS}" SHELL="${SHELL}" \
+	MOZ_MAKE_FLAGS="${MAKEOPTS}" SHELL="${SHELL:-${EPREFIX}/bin/bash}" \
 	emake V=1 -f client.mk
 }
 
@@ -296,16 +296,6 @@ src_install() {
 		doins -r "${T}/${emid}"
 	fi
 
-	if use crypt; then
-		emid=$(sed -n '/<em:id>/!d; s/.*\({.*}\).*/\1/; p; q' "${EROOT}"usr/share/enigmail/install.rdf)
-		if [[ -n ${emid} ]]; then
-			dosym "${EPREFIX}"/usr/share/enigmail ${MOZILLA_FIVE_HOME}/extensions/${emid}
-		else
-			eerror "${EPREFIX}/usr/share/enigmail/install.rdf: No such file or directory"
-			die "<EM:ID> tag for x11-plugins/enigmail could not be found!"
-		fi
-	fi
-
 	# Required in order to use plugins and even run thunderbird on hardened.
 	pax-mark pm "${ED}"${MOZILLA_FIVE_HOME}/{thunderbird,thunderbird-bin,plugin-container}
 
@@ -317,30 +307,19 @@ src_install() {
 
 pkg_preinst() {
 	gnome2_icon_savelist
-
-	# Because PM's dont seem to properly merge a symlink replacing a directory
-	if use crypt ; then
-		local emid=$(sed -n '/<em:id>/!d; s/.*\({.*}\).*/\1/; p; q' "${EROOT}"usr/share/enigmail/install.rdf)
-		local emidpath="${EROOT%/}"${MOZILLA_FIVE_HOME}/extensions/${emid}
-		if [[ -z ${emid} ]]; then
-			eerror "${EROOT%/}/usr/share/enigmail/install.rdf: No such file or directory"
-			die "Could not find enigmail on disk during pkg_preinst()"
-		fi
-		if [[ ! -h "${emidpath}" ]] && [[ -d "${emidpath}" ]]; then
-			rm -Rf "${emidpath}" || (
-			eerror "Could not remove enigmail directory from previous installation,"
-			eerror "You must remove this by hand and rename the symbolic link yourself:"
-			eerror
-			eerror "\t cd ${EPREFIX}${MOZILLA_FIVE_HOME}/extensions"
-			eerror "\t rm -Rf ${emid}"
-			eerror "\t mv ${emid}.backup* ${emid}" )
-		fi
-	fi
 }
 
 pkg_postinst() {
-	fdo-mime_desktop_database_update
+	xdg_desktop_database_update
 	gnome2_icon_cache_update
+
+	if use crypt; then
+		elog
+		elog "USE=crypt will be dropped from thunderbird with version 52.6.0 as"
+		elog "x11-plugins/enigmail-1.9.8.3-r1 and above is now a fully standalone"
+		elog "package.  For continued enigmail support in thunderbird please add"
+		elog "x11-plugins/enigmail to your @world set."
+	fi
 
 	elog
 	elog "If you experience problems with plugins please issue the"
@@ -357,6 +336,6 @@ pkg_postinst() {
 }
 
 pkg_postrm() {
-	fdo-mime_desktop_database_update
+	xdg_desktop_database_update
 	gnome2_icon_cache_update
 }
