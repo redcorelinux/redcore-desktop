@@ -3,7 +3,7 @@
 
 EAPI=5
 
-inherit cmake-utils
+inherit cmake-utils eutils
 
 DESCRIPTION="LXQT session manager"
 HOMEPAGE="http://lxqt.org/"
@@ -39,6 +39,11 @@ DEPEND="${CDEPEND}
 	virtual/pkgconfig"
 RDEPEND="${CDEPEND}
 	~lxqt-base/lxqt-themes-${PV}"
+
+src_prepare () {
+	epatch ${FILESDIR}/${PN}-override-default-platformplugin.patch
+	cmake-utils_src_prepare
+}
 
 src_configure() {
 	local mycmakeargs=( -DPULL_TRANSLATIONS=OFF )
