@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=5
-inherit cmake-utils
+inherit cmake-utils eutils
 
 DESCRIPTION="LXQt system configuration control center"
 HOMEPAGE="http://lxqt.org/"
@@ -42,6 +42,11 @@ DEPEND="${CDEPEND}
 	dev-qt/linguist-tools:5"
 RDEPEND="${CDEPEND}
 	x11-apps/setxkbmap"
+
+src_prepare() {
+	epatch "${FILESDIR}"/"${PN}"-hide-unwanted-appearance-settings.patch
+	cmake-utils_src_prepare
+}
 
 src_configure() {
 	local mycmakeargs=( -DPULL_TRANSLATIONS=OFF )
