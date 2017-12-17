@@ -20,3 +20,5 @@ DEPEND=">=app-text/qtspell-0.8.0[qt5]
 	scanner? ( media-gfx/sane-backends )
 	app-text/podofo
 	media-libs/libjpeg-turbo"
+
+RDEPEND=${DEPEND}
