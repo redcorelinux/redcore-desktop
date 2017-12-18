@@ -23,7 +23,6 @@ RDEPEND="${DEPEND}
 	~lxqt-base/lxqt-globalkeys-${PV}
 	~lxqt-base/lxqt-notificationd-${PV}
 	~lxqt-base/lxqt-panel-${PV}
-	~lxqt-base/lxqt-qtplugin-${PV}
 	~lxqt-base/lxqt-runner-${PV}
 	~lxqt-base/lxqt-session-${PV}
 	~lxqt-base/lxqt-l10n-${PV}
