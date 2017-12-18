@@ -6,6 +6,8 @@ EAPI=5
 
 PYTHON_COMPAT=( python3_{4,5,6} )
 
+inherit eutils python-r1
+
 DESCRIPTION="Calamares distribution-independent installer framework runtime meta-package (containing all the runtime dependencies)"
 SRC_URI=""
 
@@ -57,3 +59,25 @@ RDEPEND="
 	sys-auth/polkit-qt5
 	sys-fs/udisks:2
 	virtual/udev"
+
+S=${WORKDIR}
+
+src_unpack() {
+	:
+}
+
+src_prepare() {
+	:
+}
+
+src_configure() {
+	:
+}
+
+src_compile() {
+	:
+}
+
+src_install() {
+	:
+}
