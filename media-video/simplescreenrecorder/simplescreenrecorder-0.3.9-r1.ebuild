@@ -18,7 +18,7 @@ if [[ ${PV} = 9999 ]] ; then
 	EGIT_BOOTSTRAP=""
 else
 	SRC_URI="https://github.com/MaartenBaert/${PKGNAME}/archive/${PV}.tar.gz -> ${P}.tar.gz"
-	KEYWORDS="amd64 ~x86"
+	KEYWORDS="~amd64 ~x86"
 	S="${WORKDIR}/${PKGNAME}-${PV}"
 fi
 
@@ -44,6 +44,10 @@ RDEPEND="
 	pulseaudio? ( media-sound/pulseaudio )
 "
 DEPEND="${RDEPEND}"
+
+PATCHES=(
+	"${FILESDIR}/${P}-pulseaudio_dep.patch"
+)
 
 pkg_setup() {
 	if [[ ${ABI} == amd64 ]]; then
