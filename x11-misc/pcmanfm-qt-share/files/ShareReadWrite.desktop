@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Action
+Name=Samba Network Share (readwrite)
+Profiles=profile-zero;
+
+[X-Action-Profile profile-zero]
+Exec=/usr/bin/net usershare add %w %f "" Everyone:F guest_ok=y && chmod = 777 %f
+Name=Default profile
