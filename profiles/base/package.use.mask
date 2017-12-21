@@ -7,6 +7,14 @@
 # This file is only for generic masks. For arch-specific masks (i.e.
 # mask everywhere, unmask on arch/*) use arch/base.
 
+# James Le Cuirot <chewi@gentoo.org> (17 Dec 2017)
+# Java 9 is not yet fully supported on Gentoo. Having a masked
+# gentoo-vm flag allows us to provide it without it breaking Gentoo
+# packages. Those who wish to experiment with it as a fully recognised
+# Gentoo JVM can unmask the flag.
+dev-java/oracle-jdk-bin:9 gentoo-vm
+dev-java/oracle-jre-bin:9 gentoo-vm
+
 # Andreas K. Hüttel <dilfridge@gentoo.org> (04 Nov 2017)
 # Requires audacious, which is masked. Bug 632513
 =media-libs/freeverb3-3.1.2_pre20151102-r1 jack
@@ -29,10 +37,6 @@ dev-qt/qtdeclarative:4 webkit
 dev-qt/qtdemo:4 webkit
 dev-python/PyQt4 webkit
 dev-python/pyside:0 webkit
-
-# Mike Gilbert <floppym@gentoo.org> (10 Oct 2017)
-# Depends on old ffmpeg-2, which no longer exists in the repo.
-<=media-tv/tvheadend-4.0.9 ffmpeg
 
 # Pawel Hajdan jr <phajdan.jr@gentoo.org> (18 Sep 2017)
 # Ian Stakenvicius <axs@gentoo.org> (27 Sep 2017)
@@ -339,7 +343,7 @@ app-arch/cfv bittorrent
 # Fabian Groffen <grobian@gentoo.org> (08 Sep 2015)
 # GnuTLS support is currently broken/causes hang, bug #559834
 # http://dev.mutt.org/trac/ticket/3772
->=mail-client/mutt-1.5.23-r8 gnutls
+<mail-client/mutt-1.9.0 gnutls
 
 # Jason Zaman <perfinion@gentoo.org> (06 Sep 2015)
 # This is for cgmanager which is linux only.
@@ -488,10 +492,6 @@ dev-libs/elfutils threads
 # Since this is new and unused yet, keep it masked for now and check
 # with upstream if there is something that can be done to fix the issue.
 media-libs/cogl gstreamer
-
-# Andrey Grozin <grozin@gentoo.org> (12 Nov 2013)
-# berkdb support works only for sys-libs/db-6.0 which is masked
-sci-physics/reduze berkdb
 
 # Michał Górny <mgorny@gentoo.org> (10 Nov 2013)
 # (on behalf of python@)

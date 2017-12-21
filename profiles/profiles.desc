@@ -7,6 +7,6 @@
 #arch		profile_directory				status
 
 # AMD64 Profiles
-amd64           redcore/linux/amd64/13.0                           stable
+amd64           default/linux/amd64/13.0                           stable
 
 # vim: set ts=8:
