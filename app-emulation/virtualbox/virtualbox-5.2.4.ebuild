@@ -4,13 +4,13 @@
 EAPI=6
 
 PYTHON_COMPAT=( python2_7 )
-inherit eutils fdo-mime flag-o-matic java-pkg-opt-2 linux-info multilib pax-utils python-single-r1 toolchain-funcs udev
+inherit eutils flag-o-matic java-pkg-opt-2 linux-info multilib pax-utils python-single-r1 toolchain-funcs udev xdg-utils
 
 MY_PV="${PV/beta/BETA}"
 MY_PV="${MY_PV/rc/RC}"
 MY_P=VirtualBox-${MY_PV}
 SRC_URI="http://download.virtualbox.org/virtualbox/${MY_PV}/${MY_P}.tar.bz2
-	https://dev.gentoo.org/~polynomial-c/${PN}/patchsets/${PN}-5.1.18-patches-01.tar.xz"
+	https://dev.gentoo.org/~polynomial-c/${PN}/patchsets/${PN}-5.2.0-patches-01.tar.xz"
 S="${WORKDIR}/${MY_P}"
 
 DESCRIPTION="Family of powerful x86 virtualization products for enterprise and home use"
@@ -18,7 +18,7 @@ HOMEPAGE="http://www.virtualbox.org/"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="amd64 x86"
+KEYWORDS="amd64 ~x86"
 IUSE="alsa debug doc headless java libressl lvm pam pax_kernel pulseaudio +opengl python +qt5 +sdk +udev vboxwebsrv vnc"
 
 RDEPEND="!app-emulation/virtualbox-bin
@@ -55,7 +55,7 @@ RDEPEND="!app-emulation/virtualbox-bin
 	udev? ( >=virtual/udev-171 )
 	vnc? ( >=net-libs/libvncserver-0.9.9 )"
 DEPEND="${RDEPEND}
-	>=dev-util/kbuild-0.1.9998_pre20131130-r1
+	>=dev-util/kbuild-0.1.9998.3127
 	>=dev-lang/yasm-0.6.2
 	sys-devel/bin86
 	sys-libs/libcap
@@ -182,13 +182,13 @@ src_prepare() {
 	fi
 
 	# Only add nopie patch when we're on hardened
-	if ! gcc-specs-pie ; then
-		rm "${WORKDIR}"/patches/050_${PN}-*-nopie.patch || die
+	if  gcc-specs-pie ; then
+		eapply "${FILESDIR}/050_virtualbox-5.1.24-nopie.patch"
 	fi
 
 	# Only add paxmark patch when we're on pax_kernel
 	if use pax_kernel ; then
-		epatch "${FILESDIR}"/virtualbox-5.1.4-paxmark-bldprogs.patch || die
+		eapply "${FILESDIR}"/virtualbox-5.1.4-paxmark-bldprogs.patch
 	fi
 
 	eapply "${WORKDIR}/patches"
@@ -410,7 +410,7 @@ src_install() {
 }
 
 pkg_postinst() {
-	fdo-mime_desktop_database_update
+	xdg_desktop_database_update
 
 	if use udev ; then
 		udevadm control --reload-rules \
@@ -455,5 +455,5 @@ pkg_postinst() {
 }
 
 pkg_postrm() {
-	fdo-mime_desktop_database_update
+	xdg_desktop_database_update
 }

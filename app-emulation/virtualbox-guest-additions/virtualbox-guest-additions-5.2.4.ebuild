@@ -10,14 +10,16 @@ MY_PV="${MY_PV/rc/RC}"
 MY_P=VirtualBox-${MY_PV}
 DESCRIPTION="VirtualBox kernel modules and user-space tools for Gentoo guests"
 HOMEPAGE="http://www.virtualbox.org/"
-SRC_URI="http://download.virtualbox.org/virtualbox/${MY_PV}/${MY_P}.tar.bz2"
+SRC_URI="http://download.virtualbox.org/virtualbox/${MY_PV}/${MY_P}.tar.bz2
+	https://dev.gentoo.org/~polynomial-c/virtualbox/patchsets/virtualbox-5.1.30-patches-02.tar.xz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="amd64 x86"
+KEYWORDS="amd64 ~x86"
 IUSE="X"
 
-RDEPEND="X? ( x11-apps/xrandr
+RDEPEND="
+	X? ( x11-apps/xrandr
 		x11-apps/xrefresh
 		x11-libs/libXmu
 		x11-libs/libX11
@@ -30,19 +32,22 @@ RDEPEND="X? ( x11-apps/xrandr
 		x11-proto/glproto )
 	sys-apps/dbus
 	~sys-kernel/virtualbox-guest-dkms-${PV}
-	!!x11-drivers/xf86-input-virtualbox"
-DEPEND="${RDEPEND}
-	>=dev-util/kbuild-0.1.9998_pre20131130
+	!!x11-drivers/xf86-input-virtualbox
+	!x11-drivers/xf86-video-virtualbox
+"
+DEPEND="
+	${RDEPEND}
+	>=dev-util/kbuild-0.1.9998.3127
 	>=dev-lang/yasm-0.6.2
 	sys-devel/bin86
 	sys-libs/pam
 	sys-power/iasl
 	X? ( x11-proto/renderproto )
-	!X? ( x11-proto/xproto )"
-PDEPEND="X? ( ~x11-drivers/xf86-video-virtualbox-${PV} )"
-
-BUILD_TARGETS="all"
-BUILD_TARGET_ARCH="${ARCH}"
+	!X? ( x11-proto/xproto )
+"
+PDEPEND="
+	X? ( x11-drivers/xf86-video-vboxvideo )
+"
 
 S="${WORKDIR}/${MY_P}"
 
@@ -54,9 +59,6 @@ pkg_setup() {
 
 src_unpack() {
 	unpack ${A}
-
-	"${S}"/src/VBox/Additions/linux/export_modules "${WORKDIR}/vbox-kmod.tar.gz"
-	unpack ./vbox-kmod.tar.gz
 
 	cd "${S}"
 	rm -rf kBuild/bin tools
@@ -78,6 +80,9 @@ src_prepare() {
 	done
 
 	sed -e '/^check_gcc$/d' -i configure || die
+
+	rm "${WORKDIR}/patches/011_virtualbox-5.1.30-sysmacros.patch" || die
+	eapply "${WORKDIR}/patches"
 
 	eapply_user
 }
@@ -105,7 +110,8 @@ src_configure() {
 src_compile() {
 	MAKE="kmk" \
 	emake TOOL_YASM_AS=yasm \
-	VBOX_ONLY_ADDITIONS=1
+	VBOX_ONLY_ADDITIONS=1 \
+	KBUILD_VERBOSE=2
 }
 
 src_install() {
