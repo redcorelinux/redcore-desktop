@@ -26,7 +26,7 @@ RDEPEND="${DEPEND}
 
 src_prepare() {
 	default
-	eapply ${FILESDIR}/${P}-r3.patch
+	eapply ${FILESDIR}/${P}-r4.patch
 }
 
 src_install() {
