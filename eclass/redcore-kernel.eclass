@@ -521,8 +521,6 @@ _remove_dkms_modules() {
 
 redcore-kernel_pkg_postinst() {
 	if _is_kernel_binary; then
-		# Update kernel initramfs to match user customizations
-		use splash && update_redcore_kernel_initramfs_splash
 		# generate initramfs with dracut
 		if use dracut ; then
 			_dracut_initramfs_create
@@ -548,9 +546,9 @@ redcore-kernel_pkg_prerm() {
 redcore-kernel_pkg_postrm() {
 	if _is_kernel_binary; then
 		_dracut_initramfs_delete
+		_remove_dkms_modules
+		_grub2_update_grubcfg
 	fi
-	_remove_dkms_modules
-	_grub2_update_grubcfg
 }
 
 # export all the available functions here
