@@ -14,17 +14,14 @@ AMD64_FBSD_NV_PACKAGE="NVIDIA-FreeBSD-x86_64-${PV}"
 DESCRIPTION="NVIDIA Accelerated Graphics Driver"
 HOMEPAGE="http://www.nvidia.com/ http://www.nvidia.com/Download/Find.aspx"
 SRC_URI="
-	amd64-fbsd? ( ${NV_URI}FreeBSD-x86_64/${PV}/${AMD64_FBSD_NV_PACKAGE}.tar.gz )
 	amd64? ( ${NV_URI}Linux-x86_64/${PV}/${AMD64_NV_PACKAGE}.run )
-	x86-fbsd? ( ${NV_URI}FreeBSD-x86/${PV}/${X86_FBSD_NV_PACKAGE}.tar.gz )
-	x86? ( ${NV_URI}Linux-x86/${PV}/${X86_NV_PACKAGE}.run )
 	tools? ( ${NV_URI}nvidia-settings/nvidia-settings-${PV}.tar.bz2 )
 "
 
 LICENSE="GPL-2 NVIDIA-r1"
-SLOT="0/${PV%.*}"
-KEYWORDS="-* amd64 x86 ~amd64-fbsd ~x86-fbsd"
-IUSE="acpi multilib kernel_FreeBSD kernel_linux pax_kernel static-libs +tools +X"
+SLOT="0/${PV}"
+KEYWORDS="-* amd64"
+IUSE="acpi +dkms multilib kernel_FreeBSD kernel_linux pax_kernel static-libs +tools +X"
 RESTRICT="bindist mirror"
 EMULTILIB_PKG="true"
 
@@ -52,6 +49,7 @@ DEPEND="${COMMON}
 	)"
 RDEPEND="${COMMON}
 	acpi? ( sys-power/acpid )
+	dkms? ( ~sys-kernel/${PN}-dkms-${PV} )
 	tools? ( !media-video/nvidia-settings )
 	X? (
 		<x11-base/xorg-server-1.19.99:=
@@ -79,11 +77,11 @@ nvidia_drivers_versions_check() {
 		die "Unexpected \${DEFAULT_ABI} = ${DEFAULT_ABI}"
 	fi
 
-	if use kernel_linux && kernel_is ge 4 13; then
+	if use kernel_linux && kernel_is ge 4 14; then
 		ewarn "Gentoo supports kernels which are supported by NVIDIA"
 		ewarn "which are limited to the following kernels:"
-		ewarn "<sys-kernel/gentoo-sources-4.13"
-		ewarn "<sys-kernel/vanilla-sources-4.13"
+		ewarn "<sys-kernel/gentoo-sources-4.14"
+		ewarn "<sys-kernel/vanilla-sources-4.14"
 		ewarn ""
 		ewarn "You are free to utilize eapply_user to provide whatever"
 		ewarn "support you feel is appropriate, but will not receive"
