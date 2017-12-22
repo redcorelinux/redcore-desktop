@@ -1,0 +1,27 @@
+diff -Nur a/kernel/nv-drm.c b/kernel/nv-drm.c
+--- a/kernel/nv-drm.c	2017-09-14 21:51:09.000000000 +0100
++++ b/kernel/nv-drm.c	2017-12-22 15:29:01.080842070 +0000
+@@ -121,8 +121,12 @@
+ {
+     int ret = 0;
+ #if defined(NV_DRM_AVAILABLE)
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 14, 0)
++    ret = drm_legacy_pci_init(&nv_drm_driver, pci_driver);
++#else
+     ret = drm_pci_init(&nv_drm_driver, pci_driver);
+ #endif
++#endif
+     return ret;
+ }
+ 
+@@ -131,6 +135,10 @@
+ )
+ {
+ #if defined(NV_DRM_AVAILABLE)
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 14, 0)
++    drm_legacy_pci_exit(&nv_drm_driver, pci_driver);
++#else
+     drm_pci_exit(&nv_drm_driver, pci_driver);
+ #endif
++#endif
+ }
