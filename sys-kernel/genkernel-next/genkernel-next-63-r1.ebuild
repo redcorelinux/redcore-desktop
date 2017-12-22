@@ -50,6 +50,7 @@ src_prepare() {
 	sed -i "/^GK_V=/ s:GK_V=.*:GK_V=${PV}:g" "${S}/genkernel" || \
 		die "Could not setup release"
 
+	epatch "${FILESDIR}"/"${P}"-skip-firmware-install.patch
 	epatch_user
 }
 

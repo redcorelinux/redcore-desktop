@@ -1,0 +1,17 @@
+diff -Nur a/gen_compile.sh b/gen_compile.sh
+--- a/gen_compile.sh	2015-02-16 10:03:04.000000000 +0000
++++ b/gen_compile.sh	2017-12-22 20:42:03.648220913 +0000
+@@ -293,10 +293,9 @@
+     local firmware_in_kernel_line=`fgrep CONFIG_FIRMWARE_IN_KERNEL "${KERNEL_OUTPUTDIR}"/.config`
+     if [ -n "${firmware_in_kernel_line}" -a "${firmware_in_kernel_line}" != CONFIG_FIRMWARE_IN_KERNEL=y ]
+     then
+-        print_info 1 "        >> Installing firmware ('make firmware_install') due to CONFIG_FIRMWARE_IN_KERNEL != y..."
+-        MAKEOPTS="${MAKEOPTS} -j1" compile_generic "firmware_install" kernel
+-    else
+-        print_info 1 "        >> Not installing firmware as it's included in the kernel already (CONFIG_FIRMWARE_IN_KERNEL=y)..."
++        print_info 1 "        >> Skip firmware installation as we rely on external linux-firmware package..."
++	else
++        print_info 1 "        >> Skip firmware installation as we rely on external linux-firmware package..."
+     fi
+ 
+     local tmp_kernel_binary=$(find_kernel_binary ${KERNEL_BINARY_OVERRIDE:-${KERNEL_BINARY}})
