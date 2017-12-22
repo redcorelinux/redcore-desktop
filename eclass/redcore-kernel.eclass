@@ -478,8 +478,6 @@ _kernel_src_compile() {
 	rm -rf "${S}"/temp
 
 	# creating workdirs
-	# some kernels fail with make 3.82 if firmware dir is not created
-	mkdir "${WORKDIR}"/lib/lib/firmware -p
 	mkdir "${WORKDIR}"/cache
 	mkdir "${S}"/temp
 
@@ -552,23 +550,11 @@ _kernel_src_compile() {
 }
 
 redcore-kernel_src_install() {
-	if [ -n "${K_FIRMWARE_PACKAGE}" ]; then
-		_firmwares_src_install
-	elif [ -n "${K_ONLY_SOURCES}" ]; then
+	if [ -n "${K_ONLY_SOURCES}" ]; then
 		_kernel_sources_src_install
 	else
 		_kernel_src_install
 	fi
-	# File collisions between slots, debug stuff
-	# not really needed for a kernel
-	rm -rf "${D}/usr/lib/debug"
-}
-
-_firmwares_src_install() {
-	dodir /lib/firmware
-	keepdir /lib/firmware
-	cd "${S}" || die
-	emake INSTALL_FW_PATH="${D}/lib/firmware" firmware_install || die "cannot install firmwares"
 }
 
 _kernel_sources_src_install() {
