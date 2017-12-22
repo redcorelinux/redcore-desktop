@@ -33,50 +33,6 @@ K_ROGKERNEL_PATCH_UPSTREAM_TARBALL="${K_ROGKERNEL_PATCH_UPSTREAM_TARBALL:-0}"
 # Force the rewrite of SUBLEVEL in kernel sources Makefile
 K_ROGKERNEL_FORCE_SUBLEVEL="${K_ROGKERNEL_FORCE_SUBLEVEL:-}"
 
-# @ECLASS-VARIABLE: K_ROGKERNEL_RESET_EXTRAVERSION
-# @DESCRIPTION:
-# Force the rewrite of EXTRAVERSION in kernel sources Makefile (setting it to "")
-K_ROGKERNEL_RESET_EXTRAVERSION="${K_ROGKERNEL_RESET_EXTRAVERSION:-}"
-
-# @ECLASS-VARIABLE: K_ROGKERNEL_LONGTERM
-# @DESCRIPTION:
-# Consider Kernel stable patchset as longterm (changing URL)
-K_ROGKERNEL_LONGTERM="${K_ROGKERNEL_LONGTERM:-}"
-
-# @ECLASS-VARIABLE: K_KERNEL_SOURCES_PKG
-# @DESCRIPTION:
-# The kernel sources package used to build this kernel binary
-K_KERNEL_SOURCES_PKG="${K_KERNEL_SOURCES_PKG:-${CATEGORY}/${PN/*-}-sources-${PVR}}"
-
-# @ECLASS-VARIABLE: K_KERNEL_PATCH_VER
-# @DESCRIPTION:
-# If set to "3" for example, it applies the upstream kernel
-# patch corresponding to patch-${KV_MAJOR}.${KV_MINOR}.${KV_PATCH}.3.${K_TARBALL_EXT}
-# @TODO: deprecate and remove once 2.6.x kernels are retired
-K_KERNEL_PATCH_VER="${K_KERNEL_PATCH_VER:-}"
-
-# @ECLASS-VARIABLE: K_KERNEL_PATCH_HOTFIXES
-# @DESCRIPTION:
-# If there is the need to quickly apply patches to the kernel
-# without bumping the kernel patch tarball (for eg. in case
-# of just released security fixes), set this variable in your ebuild
-# pointing to space separated list of patch paths.
-K_KERNEL_PATCH_HOTFIXES="${K_KERNEL_PATCH_HOTFIXES:-}"
-
-# @ECLASS-VARIABLE: K_KERNEL_DISABLE_PR_EXTRAVERSION
-# @DESCRIPTION:
-# Set this to "1" if you want to tell kernel-2 eclass to
-# not use ${PR} in kernel EXTRAVERSION (K_NOUSEPR). Otherwise, set
-# this to "0" to not set K_NOUSEPR at all.
-K_KERNEL_DISABLE_PR_EXTRAVERSION="${K_KERNEL_DISABLE_PR_EXTRAVERSION:-1}"
-
-# @ECLASS-VARIABLE: K_KERNEL_SLOT_USEPVR
-# @DESCRIPTION:
-# Set this to "1" if you want to use ${PVR} in SLOT variable, instead of ${PV}
-# sys-kernel/linux-vserver (vserver-sources) require this. This won't work for
-# firmware pkgs.
-K_KERNEL_SLOT_USEPVR="${K_KERNEL_SLOT_USEPVR:-0}"
-
 # @ECLASS-VARIABLE: K_KERNEL_NEW_VERSIONING
 # @DESCRIPTION:
 # Set this to "1" if your kernel ebuild uses the new Linux kernel upstream
@@ -92,24 +48,6 @@ K_KERNEL_NEW_VERSIONING="${K_KERNEL_NEW_VERSIONING:-1}"
 # --kernel-target= flag.
 K_KERNEL_IMAGE_NAME="${K_KERNEL_IMAGE_NAME:-}"
 
-# @ECLASS-VARIABLE: K_KERNEL_LTS
-# @DESCRIPTION:
-# Set this to 1 to mark the kernel as Long Term Stable. "virtual/linux-binary-lts"
-# shall be appended to ${PROVIDE}.
-K_KERNEL_LTS="${K_KERNEL_LTS:-}"
-
-# @ECLASS-VARIABLE: K_KERNEL_IMAGE_PATH
-# @DESCRIPTION:
-# Set this to a custom relative kernel image path to override the default
-# one. This value if set, is passed to genkernel through the
-# --kernel-binary= flag.
-K_KERNEL_IMAGE_PATH="${K_KERNEL_IMAGE_PATH:-}"
-
-# @ECLASS-VARIABLE: K_ROGKERNEL_FIRMWARE
-# @DESCRIPTION:
-# Set this to "1" if your ebuild is a kernel firmware package
-K_FIRMWARE_PACKAGE="${K_FIRMWARE_PACKAGE:-}"
-
 # @ECLASS-VARIABLE: K_ONLY_SOURCES
 # @DESCRIPTION:
 # For every kernel binary package, there is a kernel source package associated
@@ -121,25 +59,6 @@ K_ONLY_SOURCES="${K_ONLY_SOURCES:-}"
 # Minimum required version of sys-kernel/linux-formware package, if any
 K_REQUIRED_LINUX_FIRMWARE_VER="${K_REQUIRED_LINUX_FIRMWARE_VER:-}"
 
-# @ECLASS-VARIABLE: K_WORKAROUND_SOURCES_COLLISION
-# @DESCRIPTION:
-# For kernel binary packages, Workaround file collisions with kernel
-# sources already providing certain files (like Makefile). Used
-# by linux-openvz and linux-vserver
-K_WORKAROUND_SOURCES_COLLISION="${K_WORKAROUND_SOURCES_COLLISION:-}"
-
-# @ECLASS-VARIABLE: K_WORKAROUND_USE_REAL_EXTRAVERSION
-# @DESCRIPTION:
-# Some kernel sources are shipped with their own EXTRAVERSION and
-# we're kindly asked to not touch it, if this is your case, set
-# this variable and depmod will work correctly.
-K_WORKAROUND_USE_REAL_EXTRAVERSION="${K_WORKAROUND_USE_REAL_EXTRAVERSION:-}"
-
-# @ECLASS-VARIABLE: K_ROGKERNEL_ZFS
-# @DESCRIPTION:
-# If set, this kernel features ZFS.
-K_ROGKERNEL_ZFS="${K_ROGKERNEL_ZFS:-}"
-
 # @ECLASS-VARIABLE: K_GENKERNEL_ARGS
 # @DESCRIPTION:
 # Provide extra genkernel arguments using K_GENKERNEL_ARGS
@@ -149,21 +68,6 @@ K_GENKERNEL_ARGS="${K_GENKERNEL_ARGS:-}"
 # @DESCRIPTION:
 # [ARM ONLY] Provide the ramdisk load address to be used with mkimage
 K_MKIMAGE_RAMDISK_ADDRESS="${K_MKIMAGE_RAMDISK_ADDRESS:-}"
-
-# @ECLASS-VARIABLE: K_MKIMAGE_RAMDISK_ENTRYPOINT
-# @DESCRIPTION:
-# [ARM ONLY] Provide the ramdisk entry point address to be used with mkimage
-K_MKIMAGE_RAMDISK_ENTRYPOINT="${K_MKIMAGE_RAMDISK_ENTRYPOINT:-}"
-
-# @ECLASS-VARIABLE: K_MKIMAGE_WRAP_INITRAMFS
-# @DESCRIPTION:
-# [ARM ONLY] Execute mkimage against the generated initramfs Default is yes ("1").
-K_MKIMAGE_WRAP_INITRAMFS="${K_MKIMAGE_WRAP_INITRAMFS:-1}"
-
-# @ECLASS-VARIABLE: K_MKIMAGE_KERNEL_ADDRESS
-# @DESCRIPTION:
-# [ARM ONLY] Provide the kernel load address to be used with mkimage
-K_MKIMAGE_KERNEL_ADDRESS="${K_MKIMAGE_KERNEL_ADDRESS:-}"
 
 KERN_INITRAMFS_SEARCH_NAME="${KERN_INITRAMFS_SEARCH_NAME:-initramfs-genkernel*${K_ROGKERNEL_NAME}}"
 
@@ -185,35 +89,11 @@ detect_arch
 
 DESCRIPTION="Redcore Linux kernel functions and phases"
 
-
-K_LONGTERM_URL_STR=""
-if [ -n "${K_ROGKERNEL_LONGTERM}" ]; then
-	K_LONGTERM_URL_STR="/longterm/v${KV_MAJOR}.${KV_MINOR}.${KV_PATCH}"
-fi
-
 ## kernel-2 eclass settings
-if [ "${K_ROGKERNEL_PATCH_UPSTREAM_TARBALL}" = "1" ]; then
-	_patch_name="$(get_version_component_range 1-2)-${K_ROGKERNEL_SELF_TARBALL_NAME}-${PVR}.patch.xz"
-	SRC_URI="${KERNEL_URI}"
-	UNIPATCH_LIST="${UNIPATCH_LIST} ${DISTDIR}/${_patch_name}"
-	unset _patch_name
-elif [ -n "${K_ROGKERNEL_SELF_TARBALL_NAME}" ]; then
+if [ -n "${K_ROGKERNEL_SELF_TARBALL_NAME}" ]; then
 	SRC_URI="http://mirror.math.princeton.edu/pub/redcorelinux/distfiles/linux-${PVR}+${K_ROGKERNEL_SELF_TARBALL_NAME}.tar.${K_TARBALL_EXT}"
 else
 	SRC_URI="${KERNEL_URI}"
-fi
-
-if [ -z "${K_ROGKERNEL_SELF_TARBALL_NAME}" ]; then
-	if [ -n "${K_KERNEL_PATCH_VER}" ]; then
-		K_PATCH_NAME="patch-${KV_MAJOR}.${KV_MINOR}.${KV_PATCH}.${K_KERNEL_PATCH_VER}.${K_TARBALL_EXT}"
-		SRC_URI="${SRC_URI}
-			mirror://kernel/linux/kernel/v${KV_MAJOR}.${KV_MINOR}${K_LONGTERM_URL_STR}/${K_PATCH_NAME}"
-		UNIPATCH_LIST="${DISTDIR}/${K_PATCH_NAME}
-			${UNIPATCH_LIST}"
-	fi
-fi
-if [ -n "${K_KERNEL_PATCH_HOTFIXES}" ]; then
-	UNIPATCH_LIST="${UNIPATCH_LIST} ${K_KERNEL_PATCH_HOTFIXES}"
 fi
 
 _get_real_kv_full() {
@@ -246,18 +126,14 @@ KV_OUT_DIR="/usr/src/linux-${KV_FULL}"
 S="${WORKDIR}/linux-${KV_FULL}"
 
 
-if [ -n "${K_FIRMWARE_PACKAGE}" ]; then
-	SLOT="0"
-elif [ "${K_KERNEL_SLOT_USEPVR}" = "1" ]; then
-	SLOT="${PVR}"
-elif [ "${K_KERNEL_NEW_VERSIONING}" = "1" ]; then
+if [ "${K_KERNEL_NEW_VERSIONING}" = "1" ]; then
 	SLOT="$(get_version_component_range 1-3)"
 else
 	SLOT="${PV}"
 fi
 
 _is_kernel_binary() {
-	if [ -z "${K_ONLY_SOURCES}" ] && [ -z "${K_FIRMWARE_PACKAGE}" ]; then
+	if [ -z "${K_ONLY_SOURCES}" ]; then
 		# yes it is
 		return 0
 	else
@@ -266,26 +142,9 @@ _is_kernel_binary() {
 	fi
 }
 
-_is_kernel_lts() {
-	local _ver="$(get_version_component_range 1-3)"
-	[ "${_ver}" = "3.0" ] && return 0
-	[ "${_ver}" = "3.2" ] && return 0
-	[ "${_ver}" = "3.4" ] && return 0
-	[ "${_ver}" = "3.10" ] && return 0
-	[ "${_ver}" = "3.12" ] && return 0
-	[ "${_ver}" = "3.14" ] && return 0
-	[ "${_ver}" = "4.1"  ] && return 0
-	[ "${_ver}" = "4.4"  ] && return 0
-	return 1
-}
-
 # provide extra virtual pkg
 if _is_kernel_binary; then
 	PROVIDE="virtual/linux-binary"
-# LTS support
-	if [ "${K_KERNEL_LTS}" = "1" ] || _is_kernel_lts; then
-		PROVIDE+=" virtual/linux-binary-lts"
-	fi
 fi
 
 if [ -n "${K_ROGKERNEL_SELF_TARBALL_NAME}" ]; then
@@ -327,15 +186,12 @@ _set_config_file_vars() {
 	_config_file_set=1
 }
 
-if [ -n "${K_ONLY_SOURCES}" ] || [ -n "${K_FIRMWARE_PACKAGE}" ]; then
+if [ -n "${K_ONLY_SOURCES}" ] ; then
 	IUSE="${IUSE}"
 	DEPEND="sys-apps/sed"
 	RDEPEND="${RDEPEND}"
 else
 	IUSE="btrfs dmraid dracut iscsi luks lvm mdadm splash"
-	if [ -n "${K_ROGKERNEL_ZFS}" ]; then
-		IUSE="${IUSE} zfs"
-	fi
 	DEPEND="app-arch/xz-utils
 		sys-apps/sed
 		sys-devel/autoconf
@@ -384,7 +240,7 @@ redcore-kernel_pkg_setup() {
 
 redcore-kernel_src_unpack() {
 	local okv="${OKV}"
-	if [ -n "${K_ROGKERNEL_SELF_TARBALL_NAME}" ] && [ "${K_ROGKERNEL_PATCH_UPSTREAM_TARBALL}" != "1" ]; then
+	if [ -n "${K_ROGKERNEL_SELF_TARBALL_NAME}" ] ; then
 		OKV="${PVR}+${K_ROGKERNEL_SELF_TARBALL_NAME}"
 	fi
 	if [ "${K_KERNEL_NEW_VERSIONING}" = "1" ]; then
@@ -397,11 +253,6 @@ redcore-kernel_src_unpack() {
 		# patch out Makefile with proper sublevel
 		sed -i "s:^SUBLEVEL = .*:SUBLEVEL = ${K_ROGKERNEL_FORCE_SUBLEVEL}:" \
 			"${S}/Makefile" || die
-	fi
-	if [ -n "${K_ROGKERNEL_RESET_EXTRAVERSION}" ]; then
-		sed -i "s:^EXTRAVERSION =.*:EXTRAVERSION = :" "${S}/Makefile" || die
-		# some sources could have multiple append-based EXTRAVERSIONs
-		sed -i "s/^EXTRAVERSION :=.*//" "${S}/Makefile" || die
 	fi
 	OKV="${okv}"
 }
@@ -472,9 +323,6 @@ _kernel_src_compile() {
 	use mdadm && GKARGS+=( "--mdadm" )
 	use luks && GKARGS+=( "--luks" )
 	use lvm && GKARGS+=( "--lvm" )
-	if [ -n "${K_ROGKERNEL_ZFS}" ]; then
-		use zfs && GKARGS+=( "--zfs" )
-	fi
 
 	export DEFAULT_KERNEL_SOURCE="${S}"
 	export CMD_KERNEL_DIR="${S}"
@@ -485,13 +333,6 @@ _kernel_src_compile() {
 		fi
 	done
 	[ -z "${mkopts}" ] && mkopts="-j3"
-
-	if [ -n "${K_KERNEL_IMAGE_NAME}" ]; then
-		GKARGS+=( "--kernel-target=${K_KERNEL_IMAGE_NAME}" )
-	fi
-	if [ -n "${K_KERNEL_IMAGE_PATH}" ]; then
-		GKARGS+=( "--kernel-binary=${K_KERNEL_IMAGE_PATH}" )
-	fi
 
 	# Workaround bug in splash_geninitramfs corrupting the initramfs
 	# if xz compression is used (newer genkernel >3.4.24)
@@ -602,18 +443,6 @@ _kernel_src_install() {
 
 	# drop ${D}/lib/firmware, virtual/linux-firmwares provides it
 	rm -rf "${D}/lib/firmware"
-
-	if [ -n "${K_WORKAROUND_SOURCES_COLLISION}" ]; then
-		# Fixing up Makefile collision if already installed by
-		# openvz-sources
-		einfo "Workarounding source package collisions"
-		make_file="${KV_OUT_DIR/\//}/Makefile"
-		einfo "Makefile: ${make_file}"
-		if [ -f "${ROOT}/${make_file}" ]; then
-			elog "Removing ${D}/${make_file}"
-			rm -f "${D}/${make_file}"
-		fi
-	fi
 }
 
 redcore-kernel_pkg_preinst() {
@@ -630,15 +459,7 @@ _get_real_extraversion() {
 }
 
 _get_release_level() {
-	if [[ -n "${K_WORKAROUND_USE_REAL_EXTRAVERSION}" ]]; then
-		echo "${KV_MAJOR}.${KV_MINOR}.${KV_PATCH}$(_get_real_extraversion)"
-	elif [[ "${KV_MAJOR}${KV_MINOR}" -eq 26 ]]; then
-		echo "${KV_FULL}"
-	elif [[ "${OKV/.*}" -ge "3" ]] && [[ "${KV_PATCH}" = "0" ]]; then
-		echo "${KV_FULL}"
-	else
-		echo "${KV_FULL}"
-	fi
+	echo "${KV_FULL}"
 }
 
 _dracut_initramfs_create() {
