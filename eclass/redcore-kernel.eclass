@@ -379,11 +379,7 @@ _update_depmod() {
 }
 
 redcore-kernel_pkg_setup() {
-	if [ -n "${K_FIRMWARE_PACKAGE}" ]; then
-		einfo "Preparing kernel firmwares"
-	else
-		einfo "Preparing kernel and its modules"
-	fi
+	einfo "Preparing kernel and its modules"
 }
 
 redcore-kernel_src_unpack() {
@@ -415,25 +411,11 @@ redcore-kernel_src_prepare() {
 }
 
 redcore-kernel_src_compile() {
-	if [ -n "${K_FIRMWARE_PACKAGE}" ]; then
-		_firmwares_src_compile
-	elif [ -n "${K_ONLY_SOURCES}" ]; then
+	if [ -n "${K_ONLY_SOURCES}" ]; then
 		kernel-2_src_compile
 	else
 		_kernel_src_compile
 	fi
-}
-
-_firmwares_src_compile() {
-	einfo "Starting to compile firmwares..."
-	_kernel_copy_config "${S}/.config"
-	cd "${S}" || die "cannot find source dir"
-
-	export LDFLAGS=""
-	OLDARCH="${ARCH}"
-	unset ARCH
-	emake firmware || die "cannot compile firmwares"
-	ARCH="${OLDARCH}"
 }
 
 _kernel_copy_config() {
