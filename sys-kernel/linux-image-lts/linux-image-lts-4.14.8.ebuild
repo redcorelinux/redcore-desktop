@@ -35,7 +35,6 @@ pkg_setup() {
 	unset ARCH ; unset LDFLAGS #will interfere with Makefile if set
 }
 
-
 src_prepare() {
     default
 	epatch "${FILESDIR}"/config-disable-gcc-plugins.patch
@@ -60,7 +59,8 @@ src_install() {
 	insinto usr/src/linux-"${KV_FULL}"
 	doins Module.symvers
 	doins System.map
-	doins vmlinux
+	exeinto usr/src/linux-"${KV_FULL}"
+	doexe vmlinux
 
 	emake INSTALL_MOD_PATH="${D}" modules_install
 

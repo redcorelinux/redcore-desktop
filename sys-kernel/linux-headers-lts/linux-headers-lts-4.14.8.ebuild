@@ -17,7 +17,7 @@ LICENSE="GPL-2"
 SLOT="${PV}"
 IUSE=""
 
-RESTRICT="binchecks strip mirror"
+RESTRICT="strip mirror"
 DEPEND="
 	app-arch/xz-utils
 	sys-devel/autoconf
@@ -31,7 +31,6 @@ pkg_setup() {
 	export REAL_ARCH="$ARCH"
 	unset ARCH ; unset LDFLAGS #will interfere with Makefile if set
 }
-
 
 src_prepare() {
     default
@@ -47,6 +46,5 @@ src_compile() {
 
 src_install() {
 	dodir usr/src/linux-"${KV_FULL}"
-	insinto usr/src/linux-"${KV_FULL}"
-	doins -r "${S}"/*
+	cp -ax "${S}"/* "${D}"usr/src/linux-"${KV_FULL}"
 }
