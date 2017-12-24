@@ -22,3 +22,9 @@ DEPEND="
 	$(add_qt_dep qtnetwork)
 	$(add_qt_dep qtwidgets)"
 RDEPEND="${DEPEND}"
+
+src_prepare() {
+	default
+	eapply "${FILESDIR}"/"${P}"-r99999.patch
+	cmake-utils_src_prepare
+}
