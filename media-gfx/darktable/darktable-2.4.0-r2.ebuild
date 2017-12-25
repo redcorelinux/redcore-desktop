@@ -75,8 +75,9 @@ pkg_pretend() {
 }
 
 src_prepare() {
+	default
 	use cpu_flags_x86_sse3 && append-flags -msse3
-
+	eapply "${FILESDIR}"/"${P}"-find-opencl.patch
 	cmake-utils_src_prepare
 }
 
