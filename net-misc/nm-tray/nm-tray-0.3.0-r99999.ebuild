@@ -21,7 +21,8 @@ DEPEND="
 	$(add_qt_dep linguist-tools)
 	$(add_qt_dep qtnetwork)
 	$(add_qt_dep qtwidgets)"
-RDEPEND="${DEPEND}"
+RDEPEND="${DEPEND}
+	x11-terms/xterm"
 
 src_prepare() {
 	default
