@@ -53,11 +53,7 @@ CDEPEND="
 	graphicsmagick? ( media-gfx/graphicsmagick )
 	jpeg2k? ( media-libs/openjpeg:0 )
 	libsecret? ( >=app-crypt/libsecret-0.18 )
-	opencl? (
-		sys-devel/clang:4=
-		sys-devel/llvm:4=
-		virtual/opencl
-	)
+	opencl? ( virtual/opencl )
 	openexr? ( media-libs/openexr:0= )
 	webp? ( media-libs/libwebp:0= )"
 RDEPEND="${CDEPEND}
