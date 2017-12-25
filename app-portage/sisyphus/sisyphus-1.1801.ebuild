@@ -1,6 +1,5 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 2016-2017 Redcore Linux Project
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=6
 
@@ -22,12 +21,7 @@ RDEPEND="${DEPEND}
 	dev-python/animation[${PYTHON_USEDEP}]
 	dev-python/urllib3[${PYTHON_USEDEP}]
 	sys-apps/portage[${PYTHON_USEDEP}]
-	gui? ( dev-python/PyQt5[designer,gui,widgets,${PYTHON_USEDEP}] )"
-
-src_prepare() {
-	default
-	eapply ${FILESDIR}/${P}-r4.patch
-}
+	gui? ( dev-python/PyQt5[designer,gui,widgets,${PYTHON_USEDEP}] sys-apps/gentoo-functions )"
 
 src_install() {
 	default
