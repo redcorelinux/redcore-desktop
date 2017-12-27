@@ -24,7 +24,7 @@ fi
 
 LICENSE="GPL-3"
 SLOT="0"
-IUSE=""
+IUSE="ffmpeg jack"
 
 RDEPEND="
 	dev-qt/qtcore:5
@@ -45,8 +45,8 @@ RDEPEND="
 	media-libs/x264
 	media-plugins/frei0r-plugins
 	media-sound/lame
-	media-video/ffmpeg
-	virtual/jack
+	ffmpeg? ( media-video/ffmpeg )
+	jack? ( virtual/jack )
 "
 
 DEPEND="${RDEPEND}"
