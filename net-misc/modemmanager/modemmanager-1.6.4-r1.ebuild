@@ -77,6 +77,9 @@ src_install() {
 		doins "${FILESDIR}"/01-org.freedesktop.ModemManager1.rules
 	fi
 
+	# create OpenRC service file
+	newinitd "${FILESDIR}/init.d.ModemManager" ModemManager
+
 	readme.gentoo_create_doc
 }
 
