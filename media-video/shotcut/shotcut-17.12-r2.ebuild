@@ -33,6 +33,7 @@ RDEPEND="
 	dev-qt/qtmultimedia:5
 	dev-qt/qtnetwork:5
 	dev-qt/qtopengl:5
+	dev-qt/qtquickcontrols:5
 	dev-qt/qtsql:5
 	dev-qt/qtwebkit:5
 	dev-qt/qtwebsockets:5
@@ -41,7 +42,7 @@ RDEPEND="
 	media-libs/ladspa-sdk
 	media-libs/libsdl:0
 	media-libs/libvpx
-	media-libs/mlt[ffmpeg,frei0r,qt5,sdl,xml]
+	media-libs/mlt[ffmpeg,frei0r,qt5,sdl,xml,melt]
 	media-libs/x264
 	media-plugins/frei0r-plugins
 	media-sound/lame
