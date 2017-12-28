@@ -34,5 +34,6 @@ src_unpack() {
 
 src_install() {
 	mv * "${D}" || die
+	sed -i "s/Icon=\/opt\/wmail-desktop\/icon.png/Icon=wmail/g" ${D}usr/share/applications/wmail.desktop
 	fperms 0755 /opt/${PN}-desktop/WMail || die
 }
