@@ -185,6 +185,10 @@ multilib_src_install() {
 		insinto /usr/share/devhelp/books/avahi
 		doins avahi.devhelp || die
 	fi
+
+	if ! use gtk && ! use gtk3 && ! use qt4; then
+		rm -rf ${D}usr/share/applications
+	fi
 }
 
 multilib_src_install_all() {
