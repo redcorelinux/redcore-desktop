@@ -208,4 +208,8 @@ src_install() {
 		dodoc play.rb thumbs.rb
 	fi
 	# TODO: java perl php tcl
+
+	if use qt5 && use melt; then
+		dosym melt usr/bin/qmelt
+	fi
 }
