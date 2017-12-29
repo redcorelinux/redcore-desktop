@@ -28,7 +28,8 @@ src_unpack() {
 }
 
 src_prepare() {
-	epatch ${FILESDIR}/${P}-conf.patch
+	epatch ""${FILESDIR}"/"${P}"-conf.patch"
+	epatch ""${FILESDIR}"/"${P}"-kernel-4.14.9.patch"
 }
 
 src_install() {
