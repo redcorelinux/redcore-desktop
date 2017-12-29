@@ -72,6 +72,9 @@ src_install() {
 	for KSYMS in build source ; do
 		dosym ../../../usr/src/linux-"${KV_FULL}" lib/modules/"${KV_FULL}"/"${KSYMS}"
 	done
+
+	# remove firmware files
+	rm -rf "${D}"lib/firmware
 }
 
 _grub2_update_grubcfg() {
