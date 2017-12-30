@@ -17,6 +17,5 @@ RDEPEND="
 	firmware? ( sys-kernel/linux-firmware )
 	|| (
 		sys-kernel/linux-headers-lts
-		sys-kernel/redcore-sources
-		sys-kernel/redcore-lts-sources
+		sys-kernel/linux-headers
 	)"
