@@ -6,7 +6,7 @@ inherit eutils qmake-utils
 
 DESCRIPTION="A specialized Qt frontend for FFmpeg and other free media tools"
 HOMEPAGE="http://qtlmovie.sourceforge.net/doc/qtlmovie-intro.html"
-SRC_URI="https://github.com/redcorelinux/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://github.com/${PN}/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="amd64 x86"
@@ -22,10 +22,27 @@ RDEPEND="
 "
 DEPEND="${RDEPEND}"
 
-src_configure() { 
-   eqmake5 PREFIX="${EPREFIX}/usr"  ${PN}.pro 
+src_configure() {
+	eqmake5 PREFIX="${EPREFIX}/usr"  "src/QtlMovie.pro"
 }
 
-src_install() { 
-   make INSTALL_ROOT=${D} install || die 
+src_install() {
+	# FIXME
+	# This project has a very weird source code
+	# make does work, but make install doesn't
+	# so we must do everything by hand, for now
+	dodir usr/bin
+	exeinto usr/bin
+	doexe QtlMovie/QtlMovie
+	dodir usr/share/applications
+	insinto usr/share/applications
+	doins build/QtlMovie.desktop
+	dodir usr/share/qt5/translations
+	insinto usr/share/qt5/translations
+	for localesrc in QtlMovie libQtl libQts; do
+		doins "${localesrc}"/locale/*qm
+	done
+	dodir usr/share/pixmaps
+	insinto usr/share/pixmaps
+	newins src/QtlMovie/images/qtlmovie-48.png qtlmovie.png
 }
