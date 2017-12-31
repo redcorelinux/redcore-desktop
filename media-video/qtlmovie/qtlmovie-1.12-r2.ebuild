@@ -21,10 +21,10 @@ DEPEND="
 	dev-qt/qtsvg:5
 "
 RDEPEND="${DEPEND}
-	app-cdr/cdrtools
 	app-cdr/dvd+rw-tools
 	media-video/ccextractor
 	media-video/dvdauthor
+	virtual/cdrtools
 	virtual/ffmpeg"
 
 src_configure() {
