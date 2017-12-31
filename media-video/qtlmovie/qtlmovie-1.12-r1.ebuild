@@ -12,7 +12,7 @@ SLOT="0"
 KEYWORDS="amd64 x86"
 IUSE=""
 
-RDEPEND=" 
+DEPEND=" 
 	dev-qt/qtcore:5
 	dev-qt/qtgui:5
 	dev-qt/qtmultimedia:5
@@ -20,7 +20,12 @@ RDEPEND="
 	dev-qt/qtwidgets:5
 	dev-qt/qtsvg:5
 "
-DEPEND="${RDEPEND}"
+RDEPEND="${DEPEND}
+	app-cdr/cdrtools
+	app-cdr/dvd+rw-tools
+	media-video/ccextractor
+	media-video/dvdauthor
+	virtual/ffmpeg"
 
 src_configure() {
 	eqmake5 PREFIX="${EPREFIX}/usr"  "src/QtlMovie.pro"
