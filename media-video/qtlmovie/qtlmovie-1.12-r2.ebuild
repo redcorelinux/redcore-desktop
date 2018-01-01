@@ -50,4 +50,5 @@ src_install() {
 	dodir usr/share/pixmaps
 	insinto usr/share/pixmaps
 	newins src/QtlMovie/images/qtlmovie-48.png qtlmovie.png
+	sed -i "s/Categories=Qt;AudioVideo;MultiMedia;DiscBurning;System;Filesystem;/Categories=AudioVideo;Video;/g" "${D}"usr/share/applications/QtlMovie.desktop
 }

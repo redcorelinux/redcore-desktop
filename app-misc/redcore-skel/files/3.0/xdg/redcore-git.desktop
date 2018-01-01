@@ -3,7 +3,7 @@ Encoding=UTF-8
 Type=Application
 
 Exec=xdg-open https://gitlab.com/groups/redcore
-Icon=/usr/share/pixmaps/redcore-weblink.png
+Icon=redcore-weblink
 
 Name=Redcore Git Repos
 Name[ro]=Depozite Redcore

@@ -3,7 +3,7 @@ Encoding=UTF-8
 Type=Application
 
 Exec=xdg-open http://webchat.freenode.net/?channels=redcorelinux
-Icon=/usr/share/pixmaps/redcore-weblink.png
+Icon=redcore-weblink
 
 Name=Get Live Help
 Name[ro]=Cere Ajutor Online

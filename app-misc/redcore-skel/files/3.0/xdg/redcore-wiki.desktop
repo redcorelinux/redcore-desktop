@@ -3,7 +3,7 @@ Encoding=UTF-8
 Type=Application
 
 Exec=xdg-open http://wiki.redcorelinux.org
-Icon=/usr/share/pixmaps/redcore-weblink.png
+Icon=redcore-weblink
 
 Name=Redcore Documentation
 Name[ro]=Documentație Redcore
