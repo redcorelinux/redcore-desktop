@@ -22,6 +22,8 @@ DEPEND="
 	>=lxqt-base/lxqt-build-tools-0.4.0"
 RDEPEND="${DEPEND}"
 
+PATCHES=( "${FILESDIR}"/"${PN}"-r99999.patch )
+
 src_install() {
 	cmake-utils_src_install
 	rm -rf "${D}"usr/share/"${PN}"
