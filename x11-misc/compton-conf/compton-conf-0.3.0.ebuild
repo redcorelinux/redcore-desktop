@@ -21,3 +21,8 @@ DEPEND="
 	$(add_qt_dep qtwidgets)
 	>=lxqt-base/lxqt-build-tools-0.4.0"
 RDEPEND="${DEPEND}"
+
+src_install() {
+	cmake-utils_src_install
+	rm -rf "${D}"usr/share/"${PN}"
+}
