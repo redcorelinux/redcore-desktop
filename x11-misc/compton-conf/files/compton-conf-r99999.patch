@@ -49,20 +49,6 @@ index 5f596a5..3f6e199 100644
  file(GLOB DESKTOP_FILES_IN *.desktop.in)
  
  # Translations **********************************
-diff --git a/compton-conf.desktop.in b/compton-conf.desktop.in
-index d7fb52e..4b6b56a 100644
---- a/compton-conf.desktop.in
-+++ b/compton-conf.desktop.in
-@@ -5,7 +5,7 @@ GenericName=Compton Configuration
- Comment=Configure Compton window effects
- TryExec=compton-conf
- Exec=compton-conf
--Icon=preferences-system-windows
--Categories=Settings;DesktopSettings;Qt;LXQt;
-+Icon=compton
-+Categories=Settings;DesktopSettings;Qt;LXQt;X-XFCE-SettingsDialog;X-XFCE-PersonalSettings;
- 
- #TRANSLATIONS_DIR=translations
 diff --git a/compton.conf.example b/compton.conf.example
 index 9919602..d2d4589 100644
 --- a/compton.conf.example
