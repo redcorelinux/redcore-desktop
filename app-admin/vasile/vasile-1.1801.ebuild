@@ -1,13 +1,12 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 2016-2017 Redcore Linux Project
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=6
 
 inherit eutils
 
 DESCRIPTION="Versatile Advanced Script for ISO and Latest Enchantments"
-HOMEPAGE="http://redcorelinux.org"
+HOMEPAGE="https://redcorelinux.org"
 SRC_URI="https://github.com/redcorelinux/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 LICENSE="GPL-2"
 SLOT="0"
@@ -22,16 +21,11 @@ RDEPEND="${DEPEND}
 	sys-fs/mtools
 	sys-fs/squashfs-tools"
 
-src_prepare() {
-	default
-	eapply "${FILESDIR}/${P}-r1.patch"
-}
-
 src_install() {
 	default
-	dosym /usr/bin/${PN}.sh /usr/bin/${PN}
-	dodir /var/cache/packages
-	dodir /var/cache/distfiles
+	dosym ../../usr/bin/"${PN}".sh usr/bin/"${PN}"
+	dodir var/cache/packages
+	dodir var/cache/distfiles
 }
 
 pkg_postinst() {
