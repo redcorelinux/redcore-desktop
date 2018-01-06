@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
-inherit eutils flag-o-matic linux-info linux-mod multilib-minimal nvidia-driver \
+inherit eutils flag-o-matic linux-info multilib-minimal nvidia-driver \
 	portability toolchain-funcs unpacker user udev
 
 NV_URI="http://http.download.nvidia.com/XFree86/"
@@ -119,6 +119,7 @@ pkg_setup() {
 }
 
 src_prepare() {
+	default
 	local man_file
 	for man_file in "${NV_MAN}"/*1.gz; do
 		gunzip $man_file || die
