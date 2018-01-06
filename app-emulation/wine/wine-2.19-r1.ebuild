@@ -546,11 +546,6 @@ multilib_src_install_all() {
 		dosym /usr/bin/wine{64,} # 404331
 		dosym /usr/bin/wine{64,}-preloader
 	fi
-
-	# respect LINGUAS when installing man pages, #469418
-	for l in de fr pl; do
-		use linguas_${l} || rm -r "${D}"usr/share/man/${l}*
-	done
 }
 
 pkg_preinst() {
