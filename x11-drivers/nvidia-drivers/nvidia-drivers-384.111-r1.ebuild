@@ -96,7 +96,7 @@ nvidia_drivers_versions_check() {
 	use x86 && CONFIG_CHECK+=" ~HIGHMEM"
 
 	# Now do the above checks
-	use kernel_linux && check_extra_config
+	check_extra_config
 }
 
 pkg_pretend() {
@@ -123,9 +123,6 @@ src_prepare() {
 	for man_file in "${NV_MAN}"/*1.gz; do
 		gunzip $man_file || die
 	done
-
-	# Allow user patches so they can support RC kernels and whatever else
-	eapply_user
 
 	if ! [ -f nvidia_icd.json ]; then
 		cp nvidia_icd.json.template nvidia_icd.json || die
@@ -300,9 +297,7 @@ src_install() {
 		newins \
 			nvidia-application-profiles-${PV}-rc nvidia-application-profiles-rc
 
-		# There is no icon in the FreeBSD tarball.
-		use kernel_FreeBSD || \
-			doicon ${NV_OBJ}/nvidia-settings.png
+		doicon ${NV_OBJ}/nvidia-settings.png
 
 		domenu "${FILESDIR}"/nvidia-settings.desktop
 
