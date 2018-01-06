@@ -384,7 +384,7 @@ src_install() {
 	fi
 
 	if use tools; then
-		emake -C "${S}"/nvidia-settings-${PV}/src/ \
+		emake -C "${S}"/nvidia-settings-${NV_TOOLS_PV}/src/ \
 			DESTDIR="${D}" \
 			GTK3_AVAILABLE=$(usex gtk3 1 0) \
 			LIBDIR="${D}/usr/$(get_libdir)" \
@@ -395,10 +395,10 @@ src_install() {
 			install
 
 		if use static-libs; then
-			dolib.a "${S}"/nvidia-settings-${PV}/src/libXNVCtrl/libXNVCtrl.a
+			dolib.a "${S}"/nvidia-settings-${NV_TOOLS_PV}/src/libXNVCtrl/libXNVCtrl.a
 
 			insinto /usr/include/NVCtrl
-			doins "${S}"/nvidia-settings-${PV}/src/libXNVCtrl/*.h
+			doins "${S}"/nvidia-settings-${NV_TOOLS_PV}/src/libXNVCtrl/*.h
 		fi
 
 		insinto /usr/share/nvidia/
