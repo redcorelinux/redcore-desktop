@@ -2,21 +2,14 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
-inherit eutils flag-o-matic linux-info multilib-minimal nvidia-driver \
-	portability toolchain-funcs unpacker user udev
+inherit eutils flag-o-matic multilib-minimal portability toolchain-funcs unpacker
 
 NV_URI="http://http.download.nvidia.com/XFree86/"
 AMD64_NV_PACKAGE="NVIDIA-Linux-x86_64-${PV}"
-NV_TOOLS_PV="384.98"
 
 DESCRIPTION="NVIDIA Accelerated Graphics Driver"
 HOMEPAGE="http://www.nvidia.com/ http://www.nvidia.com/Download/Find.aspx"
-SRC_URI="
-	amd64? ( ${NV_URI}Linux-x86_64/${PV}/${AMD64_NV_PACKAGE}.run )
-	tools? (
-		https://github.com/NVIDIA/nvidia-settings/archive/${NV_TOOLS_PV}.tar.gz -> nvidia-settings-${NV_TOOLS_PV}.tar.gz
-	)
-"
+SRC_URI="amd64? ( ${NV_URI}Linux-x86_64/${PV}/${AMD64_NV_PACKAGE}.run )"
 
 LICENSE="GPL-2 NVIDIA-r2"
 SLOT="0/${PV}"
@@ -25,45 +18,23 @@ RESTRICT="bindist mirror"
 EMULTILIB_PKG="true"
 
 IUSE="acpi compat +dkms gtk3 multilib static-libs +tools wayland +X"
-REQUIRED_USE="
-	tools? ( X )
-	static-libs? ( tools )
-"
 
 COMMON="
 	app-eselect/eselect-opencl
-	tools? (
-		dev-libs/atk
-		dev-libs/glib:2
-		dev-libs/jansson
-		gtk3? (
-			x11-libs/gtk+:3
-		)
-		x11-libs/cairo
-		x11-libs/gdk-pixbuf[X]
-		x11-libs/gtk+:2
-		x11-libs/libX11
-		x11-libs/libXext
-		x11-libs/libXrandr
-		x11-libs/libXv
-		x11-libs/libXxf86vm
-		x11-libs/pango[X]
-	)
 	X? (
 		>=app-eselect/eselect-opengl-1.0.9
 		app-misc/pax-utils
-	)
-"
+	)"
 DEPEND="
 	${COMMON}
-	virtual/linux-sources
-	tools? ( sys-apps/dbus )
-"
+	virtual/linux-sources"
+PDEPEND="
+	tools? ( x11-misc/nvidia-settings )"
 RDEPEND="
 	${COMMON}
+	${PDEPEND}
 	acpi? ( sys-power/acpid )
 	dkms? ( ~sys-kernel/${PN}-dkms-${PV} )
-	tools? ( !media-video/nvidia-settings )
 	wayland? ( dev-libs/wayland[${MULTILIB_USEDEP}] )
 	X? (
 		<x11-base/xorg-server-1.19.99:=
@@ -78,35 +49,7 @@ QA_PREBUILT="opt/* usr/lib*"
 
 S=${WORKDIR}/
 
-nvidia_drivers_versions_check() {
-	if use amd64 && has_multilib_profile && \
-		[ "${DEFAULT_ABI}" != "amd64" ]; then
-		eerror "This ebuild doesn't currently support changing your default ABI"
-		die "Unexpected \${DEFAULT_ABI} = ${DEFAULT_ABI}"
-	fi
-
-	# Since Nvidia ships many different series of drivers, we need to give the user
-	# some kind of guidance as to what version they should install. This tries
-	# to point the user in the right direction but can't be perfect. check
-	# nvidia-driver.eclass
-	nvidia-driver-check-warning
-
-	# Kernel features/options to check for
-	CONFIG_CHECK="~ZONE_DMA ~MTRR ~SYSVIPC ~!LOCKDEP"
-	use x86 && CONFIG_CHECK+=" ~HIGHMEM"
-
-	# Now do the above checks
-	check_extra_config
-}
-
-pkg_pretend() {
-	nvidia_drivers_versions_check
-}
-
 pkg_setup() {
-	nvidia_drivers_versions_check
-
-	# try to turn off distcc and ccache for people that have a problem with it
 	export DISTCC_DISABLE=1
 	export CCACHE_DISABLE=1
 
@@ -128,30 +71,6 @@ src_prepare() {
 	if ! [ -f nvidia_icd.json ]; then
 		cp nvidia_icd.json.template nvidia_icd.json || die
 		sed -i -e 's:__NV_VK_ICD__:libGLX_nvidia.so.0:g' nvidia_icd.json || die
-	fi
-}
-
-src_compile() {
-	cd "${NV_SRC}"
-	if use tools; then
-		emake -C "${S}"/nvidia-settings-${NV_TOOLS_PV}/src \
-			AR="$(tc-getAR)" \
-			CC="$(tc-getCC)" \
-			LIBDIR="$(get_libdir)" \
-			NV_VERBOSE=1 \
-			RANLIB="$(tc-getRANLIB)" \
-			DO_STRIP= \
-			build-xnvctrl
-
-		emake -C "${S}"/nvidia-settings-${NV_TOOLS_PV}/src \
-			CC="$(tc-getCC)" \
-			GTK3_AVAILABLE=$(usex gtk3 1 0) \
-			LD="$(tc-getCC)" \
-			LIBDIR="$(get_libdir)" \
-			NVML_ENABLED=0 \
-			NV_USE_BUNDLED_LIBJANSSON=0 \
-			NV_VERBOSE=1 \
-			DO_STRIP=
 	fi
 }
 
@@ -238,7 +157,6 @@ src_install() {
 	dodoc "${NV_DOC}/NVIDIA_Changelog"
 	doman "${NV_MAN}"/nvidia-smi.1
 	use X && doman "${NV_MAN}"/nvidia-xconfig.1
-	use tools && doman "${NV_MAN}"/nvidia-settings.1
 	doman "${NV_MAN}"/nvidia-cuda-mps-control.1
 
 	docinto html
@@ -273,39 +191,6 @@ src_install() {
 	newconfd "${FILESDIR}/nvidia-persistenced.conf" nvidia-persistenced
 	newinitd "${FILESDIR}/nvidia-persistenced.init" nvidia-persistenced
 
-	if use tools; then
-		emake -C "${S}"/nvidia-settings-${NV_TOOLS_PV}/src/ \
-			DESTDIR="${D}" \
-			GTK3_AVAILABLE=$(usex gtk3 1 0) \
-			LIBDIR="${D}/usr/$(get_libdir)" \
-			NV_USE_BUNDLED_LIBJANSSON=0 \
-			NV_VERBOSE=1 \
-			PREFIX=/usr \
-			DO_STRIP= \
-			install
-
-		if use static-libs; then
-			dolib.a "${S}"/nvidia-settings-${NV_TOOLS_PV}/src/libXNVCtrl/libXNVCtrl.a
-
-			insinto /usr/include/NVCtrl
-			doins "${S}"/nvidia-settings-${NV_TOOLS_PV}/src/libXNVCtrl/*.h
-		fi
-
-		insinto /usr/share/nvidia/
-		doins nvidia-application-profiles-${PV}-key-documentation
-
-		insinto /etc/nvidia
-		newins \
-			nvidia-application-profiles-${PV}-rc nvidia-application-profiles-rc
-
-		doicon ${NV_OBJ}/nvidia-settings.png
-
-		domenu "${FILESDIR}"/nvidia-settings.desktop
-
-		exeinto /etc/X11/xinit/xinitrc.d
-		newexe "${FILESDIR}"/95-nvidia-settings-r1 95-nvidia-settings
-	fi
-
 	dobin ${NV_OBJ}/nvidia-bug-report.sh
 
 	if has_multilib_profile && use multilib; then
@@ -320,8 +205,6 @@ src_install() {
 	fi
 
 	is_final_abi || die "failed to iterate through all ABIs"
-
-	readme.gentoo_create_doc
 }
 
 src_install-libs() {
@@ -389,23 +272,17 @@ src_install-libs() {
 }
 
 pkg_preinst() {
-	# Clean the dynamic libGL stuff's home to ensure
-	# we dont have stale libs floating around
 	if [ -d "${ROOT}"/usr/lib/opengl/nvidia ]; then
 		rm -rf "${ROOT}"/usr/lib/opengl/nvidia/*
 	fi
-	# Make sure we nuke the old nvidia-glx's env.d file
 	if [ -e "${ROOT}"/etc/env.d/09nvidia ]; then
 		rm -f "${ROOT}"/etc/env.d/09nvidia
 	fi
 }
 
 pkg_postinst() {
-	# Switch to the nvidia implementation
 	use X && "${ROOT}"/usr/bin/eselect opengl set --use-old nvidia
 	"${ROOT}"/usr/bin/eselect opencl set --use-old nvidia
-
-	readme.gentoo_print_elog
 
 	if ! use X; then
 		elog "You have elected to not install the X.org driver. Along with"
@@ -414,13 +291,6 @@ pkg_postinst() {
 		elog "and fan will run at max speed which may not be desirable."
 		elog "Use the 'nvidia-smi' init script to have your card and fan"
 		elog "speed scale appropriately."
-		elog
-	fi
-	if ! use tools; then
-		elog "USE=tools controls whether the nvidia-settings application"
-		elog "is installed. If you would like to use it, enable that"
-		elog "flag and re-emerge this ebuild. Optionally you can install"
-		elog "media-video/nvidia-settings"
 		elog
 	fi
 }
