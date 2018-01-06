@@ -38,5 +38,5 @@ pkg_postinst() {
 	chmod 775 /var/cache/distfiles
 
 	# auto switch to Redcore Linux profile
-	"${ROOT}"/usr/bin/eselect profile set redcore:default/linux/amd64/13.0
+	"${ROOT}"/usr/bin/eselect profile set "redcore:default/linux/amd64/13.0"
 }
