@@ -6,18 +6,15 @@ inherit eutils flag-o-matic linux-info linux-mod multilib-minimal nvidia-driver 
 	portability toolchain-funcs unpacker user udev
 
 NV_URI="http://http.download.nvidia.com/XFree86/"
-X86_NV_PACKAGE="NVIDIA-Linux-x86-${PV}"
 AMD64_NV_PACKAGE="NVIDIA-Linux-x86_64-${PV}"
-ARM_NV_PACKAGE="NVIDIA-Linux-armv7l-gnueabihf-${PV}"
-X86_FBSD_NV_PACKAGE="NVIDIA-FreeBSD-x86-${PV}"
-AMD64_FBSD_NV_PACKAGE="NVIDIA-FreeBSD-x86_64-${PV}"
+NV_TOOLS_PV="384.98"
 
 DESCRIPTION="NVIDIA Accelerated Graphics Driver"
 HOMEPAGE="http://www.nvidia.com/ http://www.nvidia.com/Download/Find.aspx"
 SRC_URI="
 	amd64? ( ${NV_URI}Linux-x86_64/${PV}/${AMD64_NV_PACKAGE}.run )
 	tools? (
-		https://github.com/NVIDIA/nvidia-settings/archive/${PV}.tar.gz -> nvidia-settings-${PV}.tar.gz
+		https://github.com/NVIDIA/nvidia-settings/archive/${NV_TOOLS_PV}.tar.gz -> nvidia-settings-${NV_TOOLS_PV}.tar.gz
 	)
 "
 
@@ -210,7 +207,7 @@ src_compile() {
 	fi
 
 	if use tools; then
-		emake -C "${S}"/nvidia-settings-${PV}/src \
+		emake -C "${S}"/nvidia-settings-${NV_TOOLS_PV}/src \
 			AR="$(tc-getAR)" \
 			CC="$(tc-getCC)" \
 			LIBDIR="$(get_libdir)" \
@@ -219,7 +216,7 @@ src_compile() {
 			DO_STRIP= \
 			build-xnvctrl
 
-		emake -C "${S}"/nvidia-settings-${PV}/src \
+		emake -C "${S}"/nvidia-settings-${NV_TOOLS_PV}/src \
 			CC="$(tc-getCC)" \
 			GTK3_AVAILABLE=$(usex gtk3 1 0) \
 			LD="$(tc-getCC)" \
