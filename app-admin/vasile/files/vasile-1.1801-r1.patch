@@ -7,7 +7,7 @@ index 0f66964..323afba 100644
  	ln -sf "$jailportcfgsource" "$jailportcfgtarget"
  	ln -sf "$jailportcfgtarget"/make.conf.amd64-binmode "$jailportcfgtarget"/make.conf
 -	eselect profile set 1
-+	eselect profile set redcore:default/linux/amd64/13.0
++	eselect profile set "redcore:default/linux/amd64/13.0"
  	env-update
  	. /etc/profile
  }
@@ -16,7 +16,7 @@ index 0f66964..323afba 100644
  	ln -sf "$jailportcfgsource" "$jailportcfgtarget"
  	ln -sf "$jailportcfgtarget"/make.conf.amd64-mixedmode "$jailportcfgtarget"/make.conf
 -	eselect profile set 1
-+	eselect profile set redcore:default/linux/amd64/13.0
++	eselect profile set "redcore:default/linux/amd64/13.0"
  	env-update
  	. /etc/profile
  }
@@ -25,7 +25,7 @@ index 0f66964..323afba 100644
  	ln -sf "$jailportcfgsource" "$jailportcfgtarget"
  	ln -sf "$jailportcfgtarget"/make.conf.amd64-srcmode "$jailportcfgtarget"/make.conf
 -	eselect profile set 1
-+	eselect profile set redcore:default/linux/amd64/13.0
++	eselect profile set "redcore:default/linux/amd64/13.0"
  	env-update
  	. /etc/profile
  }
