@@ -32,7 +32,6 @@ PDEPEND="
 	tools? ( x11-misc/nvidia-settings )"
 RDEPEND="
 	${COMMON}
-	${PDEPEND}
 	acpi? ( sys-power/acpid )
 	dkms? ( ~sys-kernel/${PN}-dkms-${PV} )
 	wayland? ( dev-libs/wayland[${MULTILIB_USEDEP}] )
