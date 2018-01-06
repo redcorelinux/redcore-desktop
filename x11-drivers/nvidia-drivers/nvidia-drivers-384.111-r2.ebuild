@@ -17,7 +17,7 @@ KEYWORDS="-* amd64"
 RESTRICT="bindist mirror"
 EMULTILIB_PKG="true"
 
-IUSE="acpi compat +dkms gtk3 multilib static-libs +tools wayland +X"
+IUSE="acpi compat +dkms multilib +tools wayland +X"
 
 COMMON="
 	app-eselect/eselect-opencl
@@ -113,6 +113,32 @@ donvidia() {
 }
 
 src_install() {
+	# Xorg DDX && GLX, GLVND, Vulkan ICD
+	if use X; then
+		insinto /usr/$(get_libdir)/xorg/modules/drivers
+		doins ${NV_X11}/nvidia_drv.so
+
+		donvidia ${NV_X11}/libglx.so.${NV_SOVER} \
+			/usr/$(get_libdir)/opengl/nvidia/extensions
+
+		if has_version '>=x11-base/xorg-server-1.16'; then
+			insinto /usr/share/X11/xorg.conf.d
+			newins {,50-}nvidia-drm-outputclass.conf
+		fi
+
+		insinto /usr/share/glvnd/egl_vendor.d
+		doins ${NV_X11}/10_nvidia.json
+
+		insinto /etc/vulkan/icd.d
+		doins ${NV_X11}/nvidia_icd.json
+	fi
+
+	# Wayland
+	if use wayland; then
+		insinto /usr/share/egl/egl_external_platform.d
+		doins ${NV_X11}/10_nvidia_wayland.json
+	fi
+
 	# NVIDIA kernel <-> userspace driver config lib
 	donvidia ${NV_OBJ}/libnvidia-cfg.so.${NV_SOVER}
 
@@ -123,52 +149,15 @@ src_install() {
 	donvidia ${NV_OBJ}/libnvcuvid.so.${NV_SOVER}
 	donvidia ${NV_OBJ}/libnvidia-encode.so.${NV_SOVER}
 
-	if use X; then
-		# Xorg DDX driver
-		insinto /usr/$(get_libdir)/xorg/modules/drivers
-		doins ${NV_X11}/nvidia_drv.so
-
-		# Xorg GLX driver
-		donvidia ${NV_X11}/libglx.so.${NV_SOVER} \
-			/usr/$(get_libdir)/opengl/nvidia/extensions
-
-		# Xorg nvidia.conf
-		if has_version '>=x11-base/xorg-server-1.16'; then
-			insinto /usr/share/X11/xorg.conf.d
-			newins {,50-}nvidia-drm-outputclass.conf
-		fi
-
-		insinto /usr/share/glvnd/egl_vendor.d
-		doins ${NV_X11}/10_nvidia.json
-	fi
-
-	if use wayland; then
-		insinto /usr/share/egl/egl_external_platform.d
-		doins ${NV_X11}/10_nvidia_wayland.json
-	fi
-
 	# OpenCL ICD for NVIDIA
 	insinto /etc/OpenCL/vendors
 	doins ${NV_OBJ}/nvidia.icd
-
-	# Documentation
-	newdoc "${NV_DOC}/README.txt" README
-	dodoc "${NV_DOC}/NVIDIA_Changelog"
-	doman "${NV_MAN}"/nvidia-smi.1
-	use X && doman "${NV_MAN}"/nvidia-xconfig.1
-	doman "${NV_MAN}"/nvidia-cuda-mps-control.1
-
-	docinto html
-	dodoc -r ${NV_DOC}/html/*
 
 	# Helper Apps
 	exeinto /opt/bin/
 
 	if use X; then
 		doexe ${NV_OBJ}/nvidia-xconfig
-
-		insinto /etc/vulkan/icd.d
-		doins nvidia_icd.json
 	fi
 
 	doexe ${NV_OBJ}/nvidia-cuda-mps-control
@@ -176,6 +165,7 @@ src_install() {
 	doexe ${NV_OBJ}/nvidia-debugdump
 	doexe ${NV_OBJ}/nvidia-persistenced
 	doexe ${NV_OBJ}/nvidia-smi
+	dobin ${NV_OBJ}/nvidia-bug-report.sh
 
 	# install nvidia-modprobe setuid and symlink in /usr/bin (bug #505092)
 	doexe ${NV_OBJ}/nvidia-modprobe
@@ -183,14 +173,26 @@ src_install() {
 	fperms 4710 /opt/bin/nvidia-modprobe
 	dosym /{opt,usr}/bin/nvidia-modprobe
 
-	doman nvidia-cuda-mps-control.1
-	doman nvidia-modprobe.1
-	doman nvidia-persistenced.1
+	# init
 	newinitd "${FILESDIR}/nvidia-smi.init" nvidia-smi
 	newconfd "${FILESDIR}/nvidia-persistenced.conf" nvidia-persistenced
 	newinitd "${FILESDIR}/nvidia-persistenced.init" nvidia-persistenced
 
-	dobin ${NV_OBJ}/nvidia-bug-report.sh
+	# manpages
+	if use X ; then
+		doman "${NV_MAN}"/nvidia-xconfig.1
+	fi
+
+	doman "${NV_MAN}"/nvidia-smi.1
+	doman "${NV_MAN}"/nvidia-cuda-mps-control.1
+	doman "${NV_MAN}"/nvidia-modprobe.1
+	doman "${NV_MAN}"/nvidia-persistenced.1
+
+	# docs
+	newdoc "${NV_DOC}/README.txt" README
+	dodoc "${NV_DOC}/NVIDIA_Changelog"
+	docinto html
+	dodoc -r ${NV_DOC}/html/*
 
 	if has_multilib_profile && use multilib; then
 		local OABI=${ABI}
@@ -274,17 +276,17 @@ pkg_preinst() {
 	if [ -d "${ROOT}"/usr/lib/opengl/nvidia ]; then
 		rm -rf "${ROOT}"/usr/lib/opengl/nvidia/*
 	fi
+
 	if [ -e "${ROOT}"/etc/env.d/09nvidia ]; then
 		rm -f "${ROOT}"/etc/env.d/09nvidia
 	fi
 }
 
 pkg_postinst() {
-	use X && "${ROOT}"/usr/bin/eselect opengl set --use-old nvidia
-	"${ROOT}"/usr/bin/eselect opencl set --use-old nvidia
-
-	if ! use X; then
-		elog "You have elected to not install the X.org driver. Along with"
+	if use X; then
+		"${ROOT}"/usr/bin/eselect opengl set --use-old nvidia
+	else
+		elog "You have selected to not install the X.org driver. Along with"
 		elog "this the OpenGL libraries and VDPAU libraries were not"
 		elog "installed. Additionally, once the driver is loaded your card"
 		elog "and fan will run at max speed which may not be desirable."
@@ -292,12 +294,18 @@ pkg_postinst() {
 		elog "speed scale appropriately."
 		elog
 	fi
+
+	"${ROOT}"/usr/bin/eselect opencl set --use-old nvidia
 }
 
 pkg_prerm() {
-	use X && "${ROOT}"/usr/bin/eselect opengl set --use-old xorg-x11
+	if use X; then
+		"${ROOT}"/usr/bin/eselect opengl set --use-old xorg-x11
+	fi
 }
 
 pkg_postrm() {
-	use X && "${ROOT}"/usr/bin/eselect opengl set --use-old xorg-x11
+	if use X; then
+		"${ROOT}"/usr/bin/eselect opengl set --use-old xorg-x11
+	fi
 }
