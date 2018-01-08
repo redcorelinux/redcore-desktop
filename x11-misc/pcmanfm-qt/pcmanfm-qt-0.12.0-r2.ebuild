@@ -18,7 +18,7 @@ HOMEPAGE="https://wiki.lxde.org/en/PCManFM"
 
 LICENSE="GPL-2+"
 SLOT="0"
-IUSE="+samba"
+IUSE="samba"
 
 CDEPEND=">=dev-libs/glib-2.18:2
 	dev-qt/qtcore:5
