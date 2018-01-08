@@ -18,6 +18,7 @@ HOMEPAGE="https://wiki.lxde.org/en/PCManFM"
 
 LICENSE="GPL-2+"
 SLOT="0"
+IUSE="+samba"
 
 CDEPEND=">=dev-libs/glib-2.18:2
 	dev-qt/qtcore:5
@@ -29,6 +30,9 @@ CDEPEND=">=dev-libs/glib-2.18:2
 	x11-libs/libfm-qt:=
 	x11-libs/libxcb:="
 RDEPEND="${CDEPEND}
+	samba? ( net-fs/samba
+		x11-misc/pcmanfm-qt-share
+	)
 	x11-misc/xdg-utils
 	virtual/eject
 	virtual/freedesktop-icon-theme"
