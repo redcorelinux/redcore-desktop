@@ -62,10 +62,12 @@ QA_MULTILIB_PATHS="
 	"
 
 PATCHES=(
-	"${FILESDIR}"/044-0001-base-dracut-lib.sh-dev_unit_name-guard-against-dev-b.patch
-	"${FILESDIR}"/044-0002-systemd-initrd-add-initrd-root-device.target.patch
-	"${FILESDIR}"/044-0003-50-dracut.install-use-bin-bash-shebang.patch
-	"${FILESDIR}"/044-0004-redcore-change-default-initramfs-name.patch
+	""${FILESDIR}"/044-0001-base-dracut-lib.sh-dev_unit_name-guard-against-dev-b.patch"
+	""${FILESDIR}"/044-0002-systemd-initrd-add-initrd-root-device.target.patch"
+	""${FILESDIR}"/044-0003-50-dracut.install-use-bin-bash-shebang.patch"
+	""${FILESDIR}"/044-0004-redcore-change-default-initramfs-name.patch"
+	""${FILESDIR}"/"${P}"-bash-4.4.patch"
+	""${FILESDIR}"/"${P}"-preserve-xattrs-when-copying.patch"
 )
 
 #
