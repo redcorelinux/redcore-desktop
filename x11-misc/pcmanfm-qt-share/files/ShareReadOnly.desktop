@@ -1,6 +1,6 @@
 [Desktop Entry]
 Type=Action
-Name=Samba Network Share (readonly)
+Name=Samba network share (readonly)
 Profiles=profile-zero;
 
 [X-Action-Profile profile-zero]
