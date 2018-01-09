@@ -292,10 +292,6 @@ pkg_postinst() {
 				"${EROOT}"etc/runlevels
 		fi
 	fi
-	# Redcore Linux change : enable DKMS at boot runlevel
-	if use dkms; then
-		ln -sf /etc/init.d/dkms /etc/runlevels/boot
-	fi
 
 	if use hppa; then
 		elog "Setting the console font does not work on all HPPA consoles."
@@ -338,5 +334,28 @@ pkg_postinst() {
 		ewarn "as soon as possible. Not doing so could leave you with a system"
 		ewarn "without networking."
 		ewarn
+	fi
+
+	# Redcore Linux tweaks:
+
+	#1 : move dbus service to boot runlevel
+	if [ -e "${ROOT}"etc/init.d/dbus ]; then
+		if [ "$(rc-config list boot | grep dbus)" != "" ]; then
+			ewarn "dbus is currently started from boot runlevel, skiping"
+		elif [ "$(rc-config list default | grep dbus)" != "" ]; then
+			ewarn "dbus is currently started from default runlevel, moving"
+			"${ROOT}"sbin/rc-update del dbus default
+			"${ROOT}"sbin/rc-update del dbus boot
+		fi
+	fi
+
+	#2 : add dkms service to boot runlevel
+	if [ -e "${ROOT}"etc/init.d/dkms ] && use dkms; then
+		if [ "$(rc-config list boot | grep dkms)" != "" ]; then
+			ewarn "dkms is currently started from boot runlevel, skiping"
+		else
+			ewarn "dkms is currently not started from boot runlevel, enabling"
+			"${ROOT}"sbin/rc-update add dkms boot
+		fi
 	fi
 }
