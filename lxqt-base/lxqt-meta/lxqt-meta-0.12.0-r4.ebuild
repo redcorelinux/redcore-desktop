@@ -41,7 +41,8 @@ RDEPEND="${DEPEND}
 		x11-misc/obconf-qt )
 	policykit? ( ~lxqt-base/lxqt-policykit-${PV}
 		|| ( sys-auth/consolekit[policykit(-)]
-			sys-apps/systemd[policykit(-)] ) )
+			sys-apps/systemd[policykit(-)] 
+			sys-auth/elogind[policykit(-)] ) )
 	powermanagement? ( ~lxqt-base/lxqt-powermanagement-${PV} )
 	ssh-askpass? ( ~lxqt-base/lxqt-openssh-askpass-${PV} )
 	sudo? ( ~lxqt-base/lxqt-sudo-${PV} )"
