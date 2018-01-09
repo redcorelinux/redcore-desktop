@@ -18,7 +18,7 @@ fi
 
 LICENSE="BSD-2"
 SLOT="0"
-IUSE="audit debug +dkms ncurses pam newnet prefix +netifrc selinux +settingsd static-libs
+IUSE="audit debug +dkms elogind ncurses pam newnet prefix +netifrc selinux +settingsd static-libs
 	unicode kernel_linux kernel_FreeBSD"
 
 COMMON_DEPEND="kernel_FreeBSD? ( || ( >=sys-freebsd/freebsd-ubin-9.0_rc sys-process/fuser-bsd ) )
@@ -28,6 +28,8 @@ COMMON_DEPEND="kernel_FreeBSD? ( || ( >=sys-freebsd/freebsd-ubin-9.0_rc sys-proc
 		virtual/pam
 	)
 	audit? ( sys-process/audit )
+	dkms? ( sys-kernel/dkms  )
+	elogind? ( sys-auth/elogind )
 	kernel_linux? (
 		sys-process/psmisc
 		!<sys-process/procps-3.3.9-r2
@@ -40,7 +42,6 @@ COMMON_DEPEND="kernel_FreeBSD? ( || ( >=sys-freebsd/freebsd-ubin-9.0_rc sys-proc
 	!<sys-fs/udev-init-scripts-27"
 DEPEND="${COMMON_DEPEND}
 	virtual/os-headers
-	dkms? ( sys-kernel/dkms )
 	ncurses? ( virtual/pkgconfig )
 	settingsd? ( app-admin/openrc-settingsd )"
 RDEPEND="${COMMON_DEPEND}
@@ -327,8 +328,27 @@ pkg_postinst() {
 
 	# Redcore Linux tweaks:
 
-	#1 : move dbus service to boot runlevel
-	if [ -e "${ROOT}"etc/init.d/dbus ]; then
+	#1 : add dkms service to boot runlevel
+	if [ -e "${ROOT}"etc/init.d/dkms ] && use dkms; then
+		if [ "$(rc-config list boot | grep dkms)" != "" ]; then
+			ewarn "found dkms service in boot runlevel, skiping"
+		else
+			ewarn "not found dkms service in boot runlevel, enabling"
+			"${ROOT}"sbin/rc-update add dkms boot
+		fi
+	fi
+
+	# Tweaks #2 and #3 are part of consolekit -> elogind migration plan
+	# In order to properly integrate elogind into Redcore Linux's boot process
+	# We must follow a few steps :
+	# step 1 : move dbus service to boot runlevel (elogind needs it)
+	# step 2 : enable elogind service in boot runlevel (uses dbus from step 1)
+	# step 3 : disable consolekit && cgmanager services
+	# We also must be sure we don't break existing setups
+	# So we make everything elogind USE conditional
+
+	#2 : move dbus service to boot runlevel
+	if [ -e "${ROOT}"etc/init.d/dbus ] && use elogind; then
 		if [ "$(rc-config list boot | grep dbus)" != "" ]; then
 			ewarn "found dbus service in boot runlevel, skiping"
 			ewarn
@@ -340,15 +360,23 @@ pkg_postinst() {
 		fi
 	fi
 
-	#2 : add dkms service to boot runlevel
-	if [ -e "${ROOT}"etc/init.d/dkms ] && use dkms; then
-		if [ "$(rc-config list boot | grep dkms)" != "" ]; then
-			ewarn "found dkms service in boot runlevel, skiping"
-			ewarn
+	#3 : enable elogind service && disable consolekit && cgmanager services
+	if [ -e "${ROOT}"etc/init.d/elogind ] && use elogind; then
+		if [ "$(rc-config list boot | grep elogind)" != "" ]; then
+			ewarn "found elogind service in boot runlevel, skiping"
 		else
-			ewarn "not found dkms service in boot runlevel, enabling"
-			ewarn
-			"${ROOT}"sbin/rc-update add dkms boot
+			ewarn "not found elogind service in boot runlevel, enabling"
+			"${ROOT}"sbin/rc-update add elogind boot
+		fi
+
+		if [ "$(rc-config list default | grep consolekit)" != "" ]; then
+			ewarn "found consolekit service in default runlevel, disabling"
+			"${ROOT}"sbin/rc-update del consolekit default
+		fi
+
+		if [ "$(rc-config list default | grep cgmanager)" != "" ]; then
+			ewarn "found cgmanager service in default runlevel, disabling"
+			"${ROOT}"sbin/rc-update del consolekit default
 		fi
 	fi
 }
