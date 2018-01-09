@@ -11,7 +11,12 @@ KEYWORDS="amd64 ~arm x86"
 
 LICENSE="GPL-2+ MIT CC-BY-3.0 CC-BY-SA-3.0 public-domain"
 SLOT="0"
-IUSE="+branding consolekit +pam systemd"
+IUSE="+branding consolekit elogind +pam systemd"
+
+REQUIRED_USE="elogind? ( !systemd !consolekit )
+	systemd? ( !elogind !consolekit )
+	consolekit? ( !elogind !systemd )
+"
 
 RDEPEND=">=dev-qt/qtcore-5.6:5
 	>=dev-qt/qtdbus-5.6:5
@@ -22,6 +27,7 @@ RDEPEND=">=dev-qt/qtcore-5.6:5
 	x11-libs/libxcb[xkb(-)]
 	branding? ( x11-themes/redcore-theme-sddm )
 	consolekit? ( >=sys-auth/consolekit-0.9.4 )
+	elogind? ( sys-auth/elogind )
 	pam? ( sys-libs/pam )
 	systemd? ( sys-apps/systemd:= )
 	!systemd? ( || ( sys-power/upower sys-power/upower-pm-utils ) )"
@@ -35,9 +41,9 @@ DEPEND="${RDEPEND}
 
 PATCHES=(
 	"${FILESDIR}/${PN}-0.13.0-pam_kwallet.patch"
-	# fix for flags handling and bug 563108
 	"${FILESDIR}/${PN}-0.12.0-respect-user-flags.patch"
 	"${FILESDIR}/${P}-avatars.patch"
+	"${FILESDIR}/${PN}-enable-elogind.patch"
 )
 
 pkg_pretend() {
@@ -49,7 +55,9 @@ pkg_pretend() {
 }
 
 src_prepare() {
-	use consolekit && eapply "${FILESDIR}/${P}-consolekit.patch"
+	if use consolekit; then
+		eapply "${FILESDIR}/${P}-consolekit.patch"
+	fi
 
 	cmake-utils_src_prepare
 }
@@ -58,6 +66,7 @@ src_configure() {
 	local mycmakeargs=(
 		-DENABLE_PAM=$(usex pam)
 		-DNO_SYSTEMD=$(usex '!systemd')
+		-DUSE_ELOGIND=$(usex 'elogind')
 		-DBUILD_MAN_PAGES=ON
 		-DDBUS_CONFIG_FILENAME="org.freedesktop.sddm.conf"
 		)
@@ -65,14 +74,14 @@ src_configure() {
 	cmake-utils_src_configure
 }
 
-src_compile() {
-	cmake-utils_src_compile
-}
-
 src_install() {
 	cmake-utils_src_install
-	rm -rf ${ED}/etc/sddm.conf
-	cp -avx ${FILESDIR}/sddm-redcore.conf ${ED}etc/sddm.conf
+	# overwrite sddm.conf 
+	if use consolekit; then
+		cp -avx ${FILESDIR}/sddm-redcore-consolekit.conf ${ED}etc/sddm.conf
+	elif use elogind; then
+		cp -avx ${FILESDIR}/sddm-redcore-elogind.conf ${ED}etc/sddm.conf
+	fi
 }
 
 pkg_postinst() {
