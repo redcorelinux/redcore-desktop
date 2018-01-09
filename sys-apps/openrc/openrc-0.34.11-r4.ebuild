@@ -350,12 +350,14 @@ pkg_postinst() {
 	#2 : move dbus service to boot runlevel
 	if [ -e "${ROOT}"etc/init.d/dbus ] && use elogind; then
 		if [ "$(rc-config list boot | grep dbus)" != "" ]; then
-			ewarn "found dbus service in boot runlevel, skiping"
 			ewarn
+			ewarn "found dbus service in boot runlevel, skiping"
 		elif [ "$(rc-config list default | grep dbus)" != "" ]; then
 			ewarn "found dbus service in default runlevel, moving"
-			ewarn
 			"${ROOT}"sbin/rc-update del dbus default
+			"${ROOT}"sbin/rc-update add dbus boot
+		else
+			ewarn "not found dbus service in boot runlevel, enabling"
 			"${ROOT}"sbin/rc-update add dbus boot
 		fi
 	fi
