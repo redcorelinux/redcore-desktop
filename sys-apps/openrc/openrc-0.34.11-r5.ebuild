@@ -378,7 +378,7 @@ pkg_postinst() {
 
 		if [ "$(rc-config list default | grep cgmanager)" != "" ]; then
 			ewarn "found cgmanager service in default runlevel, disabling"
-			"${ROOT}"sbin/rc-update del consolekit default
+			"${ROOT}"sbin/rc-update del cgmanager default
 		fi
 	fi
 }
