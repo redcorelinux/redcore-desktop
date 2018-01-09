@@ -318,17 +318,6 @@ pkg_postinst() {
 	# update the dependency tree after touching all files #224171
 	[[ "${EROOT}" = "/" ]] && "${EROOT}/${LIBDIR}"/rc/bin/rc-depend -u
 
-	if ! use newnet && ! use netifrc; then
-		ewarn "You have emerged OpenRc without network support. This"
-		ewarn "means you need to SET UP a network manager such as"
-		ewarn "	net-misc/netifrc, net-misc/dhcpcd, net-misc/wicd,"
-		ewarn "net-misc/NetworkManager, or net-vpn/badvpn."
-		ewarn "Or, you have the option of emerging openrc with the newnet"
-		ewarn "use flag and configuring /etc/conf.d/network and"
-		ewarn "/etc/conf.d/staticroute if you only use static interfaces."
-		ewarn
-	fi
-
 	if use newnet && [ ! -e "${EROOT}"etc/runlevels/boot/network ]; then
 		ewarn "Please add the network service to your boot runlevel"
 		ewarn "as soon as possible. Not doing so could leave you with a system"
@@ -341,20 +330,24 @@ pkg_postinst() {
 	#1 : move dbus service to boot runlevel
 	if [ -e "${ROOT}"etc/init.d/dbus ]; then
 		if [ "$(rc-config list boot | grep dbus)" != "" ]; then
-			ewarn "dbus is currently started from boot runlevel, skiping"
+			ewarn "found dbus service in boot runlevel, skiping"
+			ewarn
 		elif [ "$(rc-config list default | grep dbus)" != "" ]; then
-			ewarn "dbus is currently started from default runlevel, moving"
+			ewarn "found dbus service in default runlevel, moving"
+			ewarn
 			"${ROOT}"sbin/rc-update del dbus default
-			"${ROOT}"sbin/rc-update del dbus boot
+			"${ROOT}"sbin/rc-update add dbus boot
 		fi
 	fi
 
 	#2 : add dkms service to boot runlevel
 	if [ -e "${ROOT}"etc/init.d/dkms ] && use dkms; then
 		if [ "$(rc-config list boot | grep dkms)" != "" ]; then
-			ewarn "dkms is currently started from boot runlevel, skiping"
+			ewarn "found dkms service in boot runlevel, skiping"
+			ewarn
 		else
-			ewarn "dkms is currently not started from boot runlevel, enabling"
+			ewarn "not found dkms service in boot runlevel, enabling"
+			ewarn
 			"${ROOT}"sbin/rc-update add dkms boot
 		fi
 	fi
