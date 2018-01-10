@@ -68,6 +68,7 @@ PATCHES=(
 	""${FILESDIR}"/044-0004-redcore-change-default-initramfs-name.patch"
 	""${FILESDIR}"/"${P}"-bash-4.4.patch"
 	""${FILESDIR}"/"${P}"-preserve-xattrs-when-copying.patch"
+	""${FILESDIR}"/"${P}"-backport-fix-for-microcode-loading.patch"
 )
 
 #
