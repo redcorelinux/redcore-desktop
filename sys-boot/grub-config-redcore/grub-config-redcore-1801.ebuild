@@ -17,20 +17,24 @@ RDEPEND="sys-boot/grub"
 
 S="${FILESDIR}"
 
-src_install() {
-	dodir "/etc/default" || die
-	insinto "/etc/default" || die
-	doins -r "${S}/"* || die
-}
-
 pkg_preinst() {
+	# Backup GRUB configuration file
 	if [[ -f ""${ROOT}"etc/default/grub" ]]; then
 		cp -avx ""${ROOT}"etc/default/grub" ""${ROOT}"etc/default/grub.backup"
 	fi
 }
 
+src_install() {
+	# if we overwrite /etc/default/grub we may break users setup
+	# so install the new GRUB configuration file as example only
+	dodir "etc/default" || die
+	insinto "etc/default" || die
+	newins grub grub.example || die
+}
+
 pkg_postinst() {
-	elog "Your previous GRUB configuration was saved as /etc/default/grub.backup"
-	elog "Please adjust the new configuration to suit you and regenerate the GRUB menu"
-	elog "by using : /usr/sbin/grub2-mkconfig -o /boot/grub/grub.cfg"
+	# Restore GRUB configuration file
+	if [[ -f ""${ROOT}"etc/default/grub.backup" ]]; then
+		cp -avx ""${ROOT}"etc/default/grub.backup" ""${ROOT}"etc/default/grub"
+	fi
 }
