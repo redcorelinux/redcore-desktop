@@ -1,11 +1,17 @@
 diff -Nur a/etc.Linux/modprobe.d/blacklist.conf b/etc.Linux/modprobe.d/blacklist.conf
 --- a/etc.Linux/modprobe.d/blacklist.conf	1970-01-01 01:00:00.000000000 +0100
-+++ b/etc.Linux/modprobe.d/blacklist.conf	2017-01-04 17:35:32.196531159 +0000
-@@ -0,0 +1 @@
++++ b/etc.Linux/modprobe.d/blacklist.conf	2018-01-12 08:36:45.815582426 +0000
+@@ -0,0 +1,7 @@
 +blacklist vboxvideo
++blacklist b43
++blacklist b44
++blacklist b43legacy
++blacklist ssb
++blacklist brcmsmac
++blacklist bcma
 diff -Nur a/etc.Linux/os-release b/etc.Linux/os-release
---- a/etc.Linux/os-release	2012-05-17 05:21:08.000000000 +0100
-+++ b/etc.Linux/os-release	2017-01-04 17:36:01.981119062 +0000
+--- a/etc.Linux/os-release	2017-06-09 19:37:50.000000000 +0100
++++ b/etc.Linux/os-release	2018-01-12 08:35:13.951741903 +0000
 @@ -1,7 +1,7 @@
 -NAME=Gentoo
 -ID=gentoo
@@ -14,9 +20,9 @@ diff -Nur a/etc.Linux/os-release b/etc.Linux/os-release
 +ID=redcore
 +PRETTY_NAME="Redcore/Linux"
  ANSI_COLOR="1;32"
--HOME_URL="http://www.gentoo.org/"
--SUPPORT_URL="http://www.gentoo.org/main/en/support.xml"
+-HOME_URL="https://www.gentoo.org/"
+-SUPPORT_URL="https://www.gentoo.org/support/"
 -BUG_REPORT_URL="https://bugs.gentoo.org/"
-+HOME_URL="http://redcorelinux.org"
-+SUPPORT_URL="http://wiki.redcorelinux.org"
-+BUG_REPORT_URL="http://bugs.redcorelinux.org"
++HOME_URL="https://redcorelinux.org/"
++SUPPORT_URL="https://wiki.redcorelinux.org/"
++BUG_REPORT_URL="https://bugs.redcorelinux.org/"
