@@ -30,6 +30,7 @@ src_install() {
 	dodir "etc/dracut.conf.d" || die
 	insinto "etc/dracut.conf.d" || die
 	newins redcore-dracut.conf redcore-dracut.conf.example || die
+}
 
 pkg_postinst() {
 	# Restore Dracut configuration file
