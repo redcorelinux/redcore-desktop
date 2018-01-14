@@ -2,9 +2,11 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=3
+EAPI=6
 
-inherit eutils
+PYTHON_COMPAT=( python2_7 )
+
+inherit eutils python-r1
 
 DESCRIPTION="Program to view free channels"
 HOMEPAGE="http://code.google.com/p/tv-maxe"
@@ -15,12 +17,12 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="+sqlite +vlc"
 
-DEPEND="dev-lang/python:2.7[sqlite]"
+DEPEND="dev-lang/python[sqlite]"
 RDEPEND="${DEPEND}
 	vlc? ( media-video/vlc )
-	dev-python/pillow
-	dev-python/python-virtkey
-	dev-python/pygtk
+	dev-python/pillow[${PYTHON_USEDEP}]
+	dev-python/python-virtkey[${PYTHON_USEDEP}]
+	dev-python/pygtk[${PYTHON_USEDEP}]
 	media-tv/sopcast
 	media-video/rtmpdump
 	virtual/ffmpeg"
@@ -28,7 +30,8 @@ RDEPEND="${DEPEND}
 S="${WORKDIR}/${PN}-${PV}"
 
 src_prepare() {
-	epatch ${FILESDIR}/${PN}_disable_locale.patch
+	default
+	eapply ${FILESDIR}/${PN}_disable_locale.patch
 	sed -i "s/python/python2/g" ${PN}/${PN}
 }
 
