@@ -7,7 +7,7 @@ EGIT_REPO_URI="https://gitlab.com/redcore/redcore-skel.git"
 inherit eutils git-r3 fdo-mime
 
 DESCRIPTION="Redcore Linux skel tree"
-HOMEPAGE="http://redcorelinux.org"
+HOMEPAGE="https://redcorelinux.org"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="amd64 x86"
@@ -20,23 +20,30 @@ RDEPEND="
 	x11-themes/redcore-artwork-community
 	x11-themes/redcore-artwork-core"
 
+S="${WORKDIR}/${P}"
+
 src_install () {
-	dodir /etc/xdg/menus
-	cp "${S}"/* "${D}"/etc/ -Ra
-	chown root:root "${D}"/etc/skel -R
+	dodir etc/skel
+	insinto etc/skel
+	doins -r skel/*
+	doins -r skel/.*
 
-	dodir /usr/share/desktop-directories
-	cp "${FILESDIR}"/3.0/xdg/*.directory "${D}"/usr/share/desktop-directories/
-	dodir /usr/share/redcore
-	cp -a "${FILESDIR}"/3.0/* "${D}"/usr/share/redcore/
-	doicon "${FILESDIR}"/3.0/img/redcore-weblink.png
+	dodir usr/share/desktop-directories
+	insinto usr/share/desktop-directories
+	doins "${FILESDIR}"/menu/xdg/*.directory
 
-	dodir /etc/xdg/autostart
-	insinto /etc/xdg/autostart
+	dodir usr/share/redcore
+	insinto usr/share/redcore
+	doins -r "${FILESDIR}"/menu/*
+
+	doicon "${FILESDIR}"/menu/img/redcore-weblink.png
+
+	dodir etc/xdg/autostart
+	insinto etc/xdg/autostart
 	doins "${FILESDIR}"/loginsound.desktop
 
-	dodir /usr/share/sounds
-	insinto /usr/share/sounds
+	dodir usr/share/sounds
+	insinto usr/share/sounds
 	doins "${FILESDIR}"/redcore.ogg
 }
 
