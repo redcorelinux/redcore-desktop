@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=NVIDIA X Server Settings
+Type=Application
+Comment=NVIDIA Linux X11 Settings Utility
+Exec=nvidia-settings
+TryExec=nvidia-settings
+Icon=nvidia-settings
+Categories=Settings;System;

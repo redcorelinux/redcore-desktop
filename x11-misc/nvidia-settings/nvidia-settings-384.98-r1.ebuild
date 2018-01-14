@@ -67,7 +67,7 @@ src_install() {
 	doins src/libXNVCtrl/*.h
 
 	doicon doc/${PN}.png
-	make_desktop_entry ${PN} "NVIDIA X Server Settings" ${PN} Settings
+	domenu ${FILESDIR}/${PN}.desktop
 
 	dodoc doc/*.txt
 }
