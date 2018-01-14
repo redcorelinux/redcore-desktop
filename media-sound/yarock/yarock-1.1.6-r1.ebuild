@@ -40,7 +40,7 @@ DEPEND="
 	)
 	vlc? ( >=media-video/vlc-2.2.0 )
 	>=media-libs/taglib-1.9.1-r2
-	>=net-libs/htmlcxx-0.85
+	>=dev-cpp/htmlcxx-0.85
 	mpv? ( media-video/mpv[libmpv] )
 "
 
