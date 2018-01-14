@@ -13,38 +13,36 @@ SRC_URI="https://launchpad.net/~venerix/+archive/ubuntu/pkg/+files/${PN}_${PV}-0
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="+sqlite +vlc mplayer"
+IUSE="+sqlite +vlc"
 
 DEPEND="dev-lang/python:2.7[sqlite]"
-RDEPEND="dev-python/pillow
-	mplayer? ( || (
-		media-video/mplayer2
-		media-video/mplayer
-	) )
+RDEPEND="${DEPEND}
 	vlc? ( media-video/vlc )
-	virtual/ffmpeg
+	dev-python/pillow
 	dev-python/python-virtkey
 	dev-python/pygtk
-	dev-lang/python:2.7[sqlite]
 	media-tv/sopcast
-	media-video/rtmpdump"
+	media-video/rtmpdump
+	virtual/ffmpeg"
 
 S="${WORKDIR}/${PN}-${PV}"
 
 src_prepare() {
-	sed -i "s|python|python2|g" ${S}/${PN}/${PN} || die "Cannot sed file"
 	epatch ${FILESDIR}/${PN}_disable_locale.patch
+	sed -i "s/python/python2/g" ${PN}/${PN}
 }
 
 src_install() {
-	cd "${S}"
-	dodir /usr/share/${PN} || die
-	insinto /usr/share/${PN} || die
-	doins -r "${S}"/${PN}/* || die
-	fperms 755 /usr/share/${PN}/${PN} || die "Errors on permission giving"
-	fperms 755 /usr/share/${PN} || die "Errors on permission folder giving"
-	dosym /usr/share/${PN}/${PN} /usr/bin/${PN} || die "Not too many symbolic links"
+	dodir usr/bin
+	exeinto usr/bin
+	doexe ${PN}/${PN}
+
+	dodir usr/share/${PN}
+	insinto usr/share/${PN}
+	doins -r ${PN}/*
+
+	newicon ${PN}/tvmaxe_mini.png tv-maxe.png
 	make_desktop_entry tv-maxe TV-maxe \
-		"/usr/share/tv-maxe/tvmaxe_mini.png" \
+		"tv-maxe" \
 		AudioVideo
 }
