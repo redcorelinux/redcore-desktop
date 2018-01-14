@@ -14,9 +14,9 @@ KEYWORDS="amd64 x86"
 IUSE=""
 DEPEND=""
 RDEPEND="
+	media-fonts/roboto
+	x11-themes/material-icon-theme
 	x11-themes/redcore-theme
-	x11-themes/numix-icon-theme
-	x11-themes/numix-icon-theme-circle
 	x11-themes/redcore-artwork-community
 	x11-themes/redcore-artwork-core"
 
