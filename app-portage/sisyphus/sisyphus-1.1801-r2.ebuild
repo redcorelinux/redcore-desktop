@@ -36,7 +36,12 @@ src_install() {
 	python_foreach_impl inject_libsisyphus
 
 	dosym /usr/share/${PN}/${PN}-cli.py /usr/bin/${PN}
-	dodir /var/lib/${PN}/{csv,db}
+	dodir var/lib/${PN}/{csv,db}
+	
+	dodir etc/${PN}
+	insinto etc/${PN}
+	doins ${FILESDIR}/mirrors.conf
+ 
 	if ! use gui; then
 		rm -rf ${ED}usr/bin/${PN}-gui
 		rm -rf ${ED}usr/bin/${PN}-gui-pkexec
