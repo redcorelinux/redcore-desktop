@@ -1,4 +1,4 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -14,12 +14,12 @@ SRC_PATH="stable"
 [[ ${PV} = *_rc* ]] && SRC_PATH="rc"
 
 SRC_URI="mirror://samba/${SRC_PATH}/${MY_P}.tar.gz
-	https://dev.gentoo.org/~polynomial-c/samba-disable-python-patches-4.5.0_rc1.tar.xz"
+	https://dev.gentoo.org/~polynomial-c/samba-4.5.11-disable-python-patches.tar.xz"
 [[ ${PV} = *_rc* ]] || \
-KEYWORDS="alpha amd64 ~arm ~arm64 ia64 ppc ppc64 sparc x86"
+KEYWORDS="~alpha amd64 ~arm ~arm64 ~ia64 ~ppc ~ppc64 ~sparc ~x86"
 
 DESCRIPTION="Samba Suite Version 4"
-HOMEPAGE="https://www.samba.org/"
+HOMEPAGE="http://www.samba.org/"
 LICENSE="GPL-3"
 
 SLOT="0"
@@ -49,6 +49,7 @@ CDEPEND="${PYTHON_DEPS}
 	dev-python/subunit[${PYTHON_USEDEP},${MULTILIB_USEDEP}]
 	sys-apps/attr[${MULTILIB_USEDEP}]
 	>=sys-libs/ldb-1.1.27[ldap(+)?,python(+),${MULTILIB_USEDEP}]
+	<sys-libs/ldb-1.1.30[ldap(+)?,python(+),${MULTILIB_USEDEP}]
 	sys-libs/libcap
 	sys-libs/ncurses:0=[${MULTILIB_USEDEP}]
 	sys-libs/readline:0=
@@ -106,6 +107,7 @@ PATCHES=(
 	"${FILESDIR}/${PN}-glibc-2.26-no_rpc.patch" #637320
 )
 
+#CONFDIR="${FILESDIR}/$(get_version_component_range 1-2)"
 CONFDIR="${FILESDIR}/4.4"
 
 WAF_BINARY="${S}/buildtools/bin/waf"
@@ -139,7 +141,7 @@ src_prepare() {
 }
 
 multilib_src_configure() {
-	# when specifying libs for samba build you must append NONE to the end to
+	# when specifying libs for samba build you must append NONE to the end to 
 	# stop it automatically including things
 	local bundled_libs="NONE"
 	if ! use system-heimdal && ! use system-mitkrb5 ; then
@@ -160,6 +162,7 @@ multilib_src_configure() {
 		--disable-rpath-install
 		--nopyc
 		--nopyo
+		--disable-cephfs
 	)
 	if multilib_is_native_abi ; then
 		myconf+=(
@@ -234,7 +237,7 @@ multilib_src_install() {
 
 		# create symlink for cups (bug #552310)
 		if use cups ; then
-			dosym /usr/bin/smbspool /usr/libexec/cups/backend/smb
+			dosym ../../../bin/smbspool /usr/libexec/cups/backend/smb
 		fi
 
 		# install example config file
@@ -276,7 +279,7 @@ pkg_postinst() {
 	ewarn "controller work previously known as 'samba4'."
 
 	elog "For further information and migration steps make sure to read "
-	elog "https://www.samba.org/samba/history/${P}.html "
-	elog "https://www.samba.org/samba/history/${PN}-4.5.0.html and"
-	elog "https://wiki.samba.org/index.php/Samba4/HOWTO "
+	elog "http://samba.org/samba/history/${P}.html "
+	elog "http://samba.org/samba/history/${PN}-4.5.0.html and"
+	elog "http://wiki.samba.org/index.php/Samba4/HOWTO "
 }
