@@ -1,0 +1,45 @@
+diff --git a/src/backend/libsisyphus.py b/src/backend/libsisyphus.py
+index defc5cf..6a89563 100755
+--- a/src/backend/libsisyphus.py
++++ b/src/backend/libsisyphus.py
+@@ -10,15 +10,14 @@
+ import sys
+ import time
+ import urllib3
++import io
+ 
+ redcore_portage_tree_path = '/usr/portage'
+ redcore_desktop_overlay_path = '/var/lib/layman/redcore-desktop'
+ redcore_portage_config_path = '/opt/redcore-build'
+ 
+-sisyphus_remote_csv_url = 'http://mirror.math.princeton.edu/pub/redcorelinux/csv/remote_packages_pre.csv'
+ sisyphus_remote_csv_path_pre = '/var/lib/sisyphus/csv/remote_packages_pre.csv'
+ sisyphus_remote_csv_path_post = '/var/lib/sisyphus/csv/remote_packages_post.csv'
+-sisyphus_removable_csv_url = 'http://mirror.math.princeton.edu/pub/redcorelinux/csv/removable_packages_pre.csv'
+ sisyphus_removable_csv_path_pre = '/var/lib/sisyphus/csv/removable_packages_pre.csv'
+ sisyphus_removable_csv_path_post = '/var/lib/sisyphus/csv/removable_packages_post.csv'
+ sisyphus_local_csv_path_pre = '/var/lib/sisyphus/csv/local_packages_pre.csv'
+@@ -48,6 +47,11 @@ def check_system_mode():
+             sys.exit(1)
+ 
+ def fetch_sisyphus_remote_packages_table_csv():
++    portage_call = subprocess.Popen(['emerge', '--info', '--verbose'], stdout=subprocess.PIPE)
++    for portage_output in io.TextIOWrapper(portage_call.stdout, encoding="utf-8"):
++        if "PORTAGE_BINHOST" in portage_output.rstrip():
++            sisyphus_remote_csv_url = str(portage_output.rstrip().split("=")[1].strip('\"').strip('/packages') + '/csv' + '/remote_packages_pre.csv')
++
+     http = urllib3.PoolManager()
+     
+     if not os.path.isfile(sisyphus_remote_csv_path_pre):
+@@ -59,6 +63,11 @@ def fetch_sisyphus_remote_packages_table_csv():
+             shutil.copyfileobj(tmp_buffer, output_file)
+ 
+ def fetch_sisyphus_removable_packages_table_csv():
++    portage_call = subprocess.Popen(['emerge', '--info', '--verbose'], stdout=subprocess.PIPE)
++    for portage_output in io.TextIOWrapper(portage_call.stdout, encoding="utf-8"):
++        if "PORTAGE_BINHOST" in portage_output.rstrip():
++            sisyphus_removable_csv_url = str(portage_output.rstrip().split("=")[1].strip('\"').strip('/packages') + '/csv' + '/removable_packages_pre.csv')
++
+     http = urllib3.PoolManager()
+ 
+     if not os.path.isfile(sisyphus_removable_csv_path_pre):
