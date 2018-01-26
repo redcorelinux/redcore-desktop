@@ -23,13 +23,11 @@ RDEPEND="
 	dev-perl/Term-ReadLine-Gnu
 	dev-perl/Text-CharWidth
 	dev-perl/LWP-Protocol-https
-	dev-perl/LWP-UserAgent-Cached
 	virtual/perl-Encode
 	virtual/perl-File-Path
 	virtual/perl-File-Spec
 	virtual/perl-Getopt-Long
 	virtual/perl-Scalar-List-Utils
-	virtual/perl-threads
 	virtual/perl-Term-ANSIColor
 	virtual/perl-Term-ReadLine
 	virtual/perl-Text-ParseWords
