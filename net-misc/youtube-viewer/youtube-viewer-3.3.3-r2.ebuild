@@ -23,6 +23,7 @@ RDEPEND="
 	dev-perl/Term-ReadLine-Gnu
 	dev-perl/Text-CharWidth
 	dev-perl/LWP-Protocol-https
+	dev-perl/Unicode-LineBreak
 	virtual/perl-Encode
 	virtual/perl-File-Path
 	virtual/perl-File-Spec
