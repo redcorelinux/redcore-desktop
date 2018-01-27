@@ -1,0 +1,12 @@
+diff -Nur a/data/guvcview.desktop.in.in b/data/guvcview.desktop.in.in
+--- a/data/guvcview.desktop.in.in	2017-02-08 16:04:21.000000000 +0000
++++ b/data/guvcview.desktop.in.in	2018-01-27 11:44:55.801092448 +0000
+@@ -5,7 +5,7 @@
+ _Comment=A video viewer and capturer for the linux uvc driver
+ TryExec=guvcview
+ Exec=guvcview
+-Icon=@prefix@/share/pixmaps/guvcview/guvcview.png
++Icon=guvcview
+ Terminal=false
+ Type=Application
+ Categories=Video;AudioVideo;
