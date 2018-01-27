@@ -45,6 +45,8 @@ src_install () {
 	dodir usr/share/sounds
 	insinto usr/share/sounds
 	doins "${FILESDIR}"/redcore.ogg
+
+	rm -rf ${D}etc/.git
 }
 
 pkg_postinst() {
