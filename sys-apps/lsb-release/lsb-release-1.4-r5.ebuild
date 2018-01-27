@@ -34,8 +34,8 @@ src_install() {
 	mkdir -p "${D}/etc"
 	cat > "${D}/etc/lsb-release" <<- EOF
 		DISTRIB_ID="Redcore"
-		DISTRIB_RELEASE="1710"
-		DISTRIB_CODENAME="Helvetios"
-		DISTRIB_DESCRIPTION="Redcore 1710 Helvetios"
+		DISTRIB_RELEASE="1801"
+		DISTRIB_CODENAME="Intercrus"
+		DISTRIB_DESCRIPTION="Redcore 1801 Intercrus"
 	EOF
 }
