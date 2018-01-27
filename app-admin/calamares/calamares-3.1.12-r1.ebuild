@@ -55,7 +55,7 @@ src_prepare() {
 	# support auto-unlocking encrypted partitions via OpenRC's dmcrypt service
 	epatch -p1 "${FILESDIR}"/${PN}-openrc-dmcrypt-cfg-r1.patch
 	# replace calamares installer desktop icon
-	sed -i "s/Icon=calamares/Icon=redcore-logo/g" "${S}/calamares.desktop"
+	sed -i "s/Icon=calamares/Icon=start-here/g" "${S}/calamares.desktop"
 	# fix installer doesn't start from desktop launcher (IMPROVE THIS UGLY THINGY)
 	sed -i "s/pkexec //g" "${S}/calamares.desktop"
 	sed -i "s/calamares/calamares-pkexec/g" "${S}/calamares.desktop"
