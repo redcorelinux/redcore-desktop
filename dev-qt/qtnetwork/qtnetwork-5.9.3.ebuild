@@ -3,7 +3,7 @@
 
 EAPI=6
 QT5_MODULE="qtbase"
-inherit qt5-build
+inherit qt5-build-r10000
 
 DESCRIPTION="Network abstraction library for the Qt5 framework"
 
@@ -49,5 +49,5 @@ src_configure() {
 		$(qt_use libproxy)
 		$(usex ssl -openssl-linked '')
 	)
-	qt5-build_src_configure
+	qt5-build-r10000_src_configure
 }

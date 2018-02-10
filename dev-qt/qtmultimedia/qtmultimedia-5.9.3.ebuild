@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
-inherit qt5-build
+inherit qt5-build-r10000
 
 DESCRIPTION="Multimedia (audio, video, radio, camera) library for the Qt5 framework"
 
@@ -51,7 +51,7 @@ src_prepare() {
 		src/gsttools/gsttools.pro \
 		src/plugins/gstreamer/common.pri
 
-	qt5-build_src_prepare
+	qt5-build-r10000_src_prepare
 }
 
 src_configure() {
@@ -61,5 +61,5 @@ src_configure() {
 		$(qt_use gstreamer)
 		$(qt_use pulseaudio)
 	)
-	qt5-build_src_configure
+	qt5-build-r10000_src_configure
 }

@@ -3,7 +3,7 @@
 
 EAPI=6
 QT5_MODULE="qtconnectivity"
-inherit qt5-build
+inherit qt5-build-r10000
 
 DESCRIPTION="Bluetooth support library for the Qt5 framework"
 
@@ -29,5 +29,5 @@ src_prepare() {
 
 	qt_use_disable_mod qml quick src/src.pro
 
-	qt5-build_src_prepare
+	qt5-build-r10000_src_prepare
 }

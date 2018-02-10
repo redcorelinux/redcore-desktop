@@ -3,7 +3,7 @@
 
 EAPI=6
 QT5_MODULE="qtbase"
-inherit qt5-build
+inherit qt5-build-r10000
 
 DESCRIPTION="Multi-threading concurrence support library for the Qt5 framework"
 

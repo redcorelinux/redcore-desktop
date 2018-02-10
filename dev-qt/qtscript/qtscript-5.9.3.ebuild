@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
-inherit qt5-build
+inherit qt5-build-r10000
 
 DESCRIPTION="Application scripting library for the Qt5 framework (deprecated)"
 
@@ -25,12 +25,12 @@ src_prepare() {
 	qt_use_disable_mod scripttools widgets \
 		src/src.pro
 
-	qt5-build_src_prepare
+	qt5-build-r10000_src_prepare
 }
 
 src_configure() {
 	local myqmakeargs=(
 		JAVASCRIPTCORE_JIT=$(usex jit 'yes' 'no')
 	)
-	qt5-build_src_configure
+	qt5-build-r10000_src_configure
 }

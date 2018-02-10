@@ -3,7 +3,7 @@
 
 EAPI=6
 QT5_MODULE="qttools"
-inherit qt5-build
+inherit qt5-build-r10000
 
 DESCRIPTION="Tools for working with Qt translation data files"
 
@@ -31,5 +31,5 @@ src_prepare() {
 	qt_use_disable_mod qml qmldevtools-private \
 		src/linguist/lupdate/lupdate.pro
 
-	qt5-build_src_prepare
+	qt5-build-r10000_src_prepare
 }

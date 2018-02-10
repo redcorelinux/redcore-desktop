@@ -3,7 +3,7 @@
 
 EAPI=6
 QT5_MODULE="qttools"
-inherit qt5-build
+inherit qt5-build-r10000
 
 DESCRIPTION="Qt5 module for integrating online documentation into applications"
 

@@ -3,7 +3,7 @@
 
 EAPI=6
 QT5_MODULE="qttools"
-inherit qt5-build
+inherit qt5-build-r10000
 
 DESCRIPTION="WYSIWYG tool for designing and building Qt-based GUIs"
 
@@ -36,5 +36,5 @@ src_prepare() {
 	qt_use_disable_mod webkit webkitwidgets \
 		src/designer/src/plugins/plugins.pro
 
-	qt5-build_src_prepare
+	qt5-build-r10000_src_prepare
 }

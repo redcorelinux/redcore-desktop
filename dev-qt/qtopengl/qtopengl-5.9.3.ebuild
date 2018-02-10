@@ -4,7 +4,7 @@
 EAPI=6
 QT5_MODULE="qtbase"
 VIRTUALX_REQUIRED="test"
-inherit qt5-build
+inherit qt5-build-r10000
 
 DESCRIPTION="OpenGL support library for the Qt5 framework (deprecated)"
 
@@ -30,5 +30,5 @@ src_configure() {
 	local myconf=(
 		-opengl $(usex gles2 es2 desktop)
 	)
-	qt5-build_src_configure
+	qt5-build-r10000_src_configure
 }

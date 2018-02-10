@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
-inherit qt5-build
+inherit qt5-build-r10000
 
 DESCRIPTION="Wayland platform plugin for Qt"
 
@@ -35,5 +35,5 @@ src_prepare() {
 
 	use xcomposite || rm -r config.tests/xcomposite || die
 
-	qt5-build_src_prepare
+	qt5-build-r10000_src_prepare
 }

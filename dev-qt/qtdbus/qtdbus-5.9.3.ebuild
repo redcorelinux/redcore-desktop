@@ -3,7 +3,7 @@
 
 EAPI=6
 QT5_MODULE="qtbase"
-inherit qt5-build
+inherit qt5-build-r10000
 
 DESCRIPTION="Qt5 module for inter-process communication over the D-Bus protocol"
 
@@ -34,5 +34,5 @@ src_configure() {
 	local myconf=(
 		-dbus-linked
 	)
-	qt5-build_src_configure
+	qt5-build-r10000_src_configure
 }

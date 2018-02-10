@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
-inherit qt5-build
+inherit qt5-build-r10000
 
 DESCRIPTION="Set of next generation Qt Quick controls for the Qt5 framework"
 
@@ -26,5 +26,5 @@ src_prepare() {
 	qt_use_disable_mod widgets widgets \
 		src/imports/platform/platform.pro
 
-	qt5-build_src_prepare
+	qt5-build-r10000_src_prepare
 }

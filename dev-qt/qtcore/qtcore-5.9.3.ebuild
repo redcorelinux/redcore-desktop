@@ -3,7 +3,7 @@
 
 EAPI=6
 QT5_MODULE="qtbase"
-inherit qt5-build
+inherit qt5-build-r10000
 
 DESCRIPTION="Cross-platform application development framework"
 
@@ -42,11 +42,11 @@ src_configure() {
 		$(qt_use !icu iconv)
 		$(qt_use systemd journald)
 	)
-	qt5-build_src_configure
+	qt5-build-r10000_src_configure
 }
 
 src_install() {
-	qt5-build_src_install
+	qt5-build-r10000_src_install
 
 	local flags=(
 		ALSA CUPS DBUS EGL EGLFS EGL_X11 EVDEV FONTCONFIG FREETYPE

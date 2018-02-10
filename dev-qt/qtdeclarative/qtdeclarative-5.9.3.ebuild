@@ -3,7 +3,7 @@
 
 EAPI=6
 PYTHON_COMPAT=( python2_7 python3_{4,5,6} )
-inherit python-any-r1 qt5-build
+inherit python-any-r1 qt5-build-r10000
 
 DESCRIPTION="The QML and Quick modules for the Qt5 framework"
 
@@ -52,5 +52,5 @@ src_prepare() {
 		tests/auto/quick/quick.pro \
 		tests/auto/quick/examples/examples.pro
 
-	qt5-build_src_prepare
+	qt5-build-r10000_src_prepare
 }
