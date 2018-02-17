@@ -12,7 +12,7 @@ DESCRIPTION="Official Redcore Linux LTS Kernel Sources"
 HOMEPAGE="https://gitlab.com/redcore/kernel"
 SRC_URI="https://github.com/redcorelinux/kernel/archive/linux-${KV_FULL}.tar.gz"
 
-KEYWORDS="amd64"
+KEYWORDS="~amd64"
 LICENSE="GPL-2"
 SLOT="${PV}"
 IUSE=""
