@@ -42,6 +42,7 @@ DOC_CONTENTS="
 
 src_prepare() {
 	epatch "${FILESDIR}/${PN}-redcore-defaults.patch"
+	epatch "${FILESDIR}/${PV}-include-sysmacros.patch"
 
 	sed -i 's:/bin/systemd-tty-ask-password-agent:/usr/bin/systemd-tty-ask-password-agent:g' \
 		systemd-units/systemd-ask-password-plymouth.service.in || die \

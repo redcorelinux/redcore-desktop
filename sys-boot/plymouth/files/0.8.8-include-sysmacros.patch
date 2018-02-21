@@ -1,0 +1,11 @@
+diff -Nur a/src/libply-splash-core/ply-terminal.c b/src/libply-splash-core/ply-terminal.c
+--- a/src/libply-splash-core/ply-terminal.c	2012-09-26 17:50:53.000000000 +0100
++++ b/src/libply-splash-core/ply-terminal.c	2018-02-21 11:04:49.318694569 +0000
+@@ -32,6 +32,7 @@
+ #include <sys/socket.h>
+ #include <sys/stat.h>
+ #include <sys/types.h>
++#include <sys/sysmacros.h>
+ #include <termios.h>
+ #include <unistd.h>
+ #include <wchar.h>
