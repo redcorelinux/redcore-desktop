@@ -30,6 +30,7 @@ S="${WORKDIR}/${PN/-layoutex}/source"
 
 PATCHES=(
 	"${FILESDIR}/${PN}-58.1-remove-bashisms.patch"
+	"${FILESDIR}/icu-${PV}-glibc226.patch"
 )
 
 src_prepare() {
