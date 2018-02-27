@@ -1,0 +1,44 @@
+diff --git a/src/backend/f_modeswitch.sh b/src/backend/f_modeswitch.sh
+index 323afba..4f6c271 100644
+--- a/src/backend/f_modeswitch.sh
++++ b/src/backend/f_modeswitch.sh
+@@ -101,7 +101,7 @@ injectportfulltree () {
+ setbinmodecfg () {
+ 	ln -sf "$jailportcfgsource" "$jailportcfgtarget"
+ 	ln -sf "$jailportcfgtarget"/make.conf.amd64-binmode "$jailportcfgtarget"/make.conf
+-	eselect profile set redcore:default/linux/amd64/13.0
++	eselect profile set default/linux/amd64/17.0/hardened
+ 	env-update
+ 	. /etc/profile
+ }
+@@ -115,7 +115,7 @@ binmode () {
+ setmixedmodecfg () {
+ 	ln -sf "$jailportcfgsource" "$jailportcfgtarget"
+ 	ln -sf "$jailportcfgtarget"/make.conf.amd64-mixedmode "$jailportcfgtarget"/make.conf
+-	eselect profile set redcore:default/linux/amd64/13.0
++	eselect profile set default/linux/amd64/17.0/hardened
+ 	env-update
+ 	. /etc/profile
+ }
+@@ -129,7 +129,7 @@ mixedmode () {
+ setsrcmodecfg () {
+ 	ln -sf "$jailportcfgsource" "$jailportcfgtarget"
+ 	ln -sf "$jailportcfgtarget"/make.conf.amd64-srcmode "$jailportcfgtarget"/make.conf
+-	eselect profile set redcore:default/linux/amd64/13.0
++	eselect profile set default/linux/amd64/17.0/hardened
+ 	env-update
+ 	. /etc/profile
+ }
+diff --git a/src/backend/v_jail.sh b/src/backend/v_jail.sh
+index 7752a0a..83fcdaf 100644
+--- a/src/backend/v_jail.sh
++++ b/src/backend/v_jail.sh
+@@ -4,7 +4,7 @@ export local distupstream="gentoo"
+ export local distname="redcore"
+ export local disttarget="desktop"
+ export local distver="1"
+-export local kernver="$(readlink /usr/src/linux)"
++export local kernver="$(readlink /usr/src/linux|sed -e "s/\linux-//g" -e "s/\///g")"
+ 
+ export local jailx64=""$distname"_"$distver"_core_x64.squashfs"
+ export local jailx64sum=""$jailx64".md5sum"
