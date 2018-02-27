@@ -21,6 +21,11 @@ RDEPEND="${DEPEND}
 	sys-fs/mtools
 	sys-fs/squashfs-tools"
 
+src_prepare() {
+	default
+	eapply "${FILESDIR}"/"${PN}"-use-hardened-profile.patch
+}
+
 src_install() {
 	default
 	dosym ../../usr/bin/"${PN}".sh usr/bin/"${PN}"
@@ -31,7 +36,4 @@ src_install() {
 pkg_postinst() {
 	chown portage:portage /var/cache/distfiles
 	chmod 775 /var/cache/distfiles
-
-	# auto switch to Redcore Linux profile
-	"${ROOT}"/usr/bin/eselect profile set "redcore:default/linux/amd64/13.0"
 }
