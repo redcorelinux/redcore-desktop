@@ -1,5 +1,5 @@
 diff --git a/src/backend/libsisyphus.py b/src/backend/libsisyphus.py
-index defc5cf..6a89563 100755
+index defc5cf..5944ef4 100755
 --- a/src/backend/libsisyphus.py
 +++ b/src/backend/libsisyphus.py
 @@ -10,15 +10,14 @@
@@ -26,7 +26,7 @@ index defc5cf..6a89563 100755
 +    portage_call = subprocess.Popen(['emerge', '--info', '--verbose'], stdout=subprocess.PIPE)
 +    for portage_output in io.TextIOWrapper(portage_call.stdout, encoding="utf-8"):
 +        if "PORTAGE_BINHOST" in portage_output.rstrip():
-+            sisyphus_remote_csv_url = str(portage_output.rstrip().split("=")[1].strip('\"').strip('/packages') + '/csv' + '/remote_packages_pre.csv')
++            sisyphus_remote_csv_url = str(portage_output.rstrip().split("=")[1].strip('\"').replace('packages', 'csv') + 'remote_packages_pre.csv')
 +
      http = urllib3.PoolManager()
      
@@ -38,7 +38,7 @@ index defc5cf..6a89563 100755
 +    portage_call = subprocess.Popen(['emerge', '--info', '--verbose'], stdout=subprocess.PIPE)
 +    for portage_output in io.TextIOWrapper(portage_call.stdout, encoding="utf-8"):
 +        if "PORTAGE_BINHOST" in portage_output.rstrip():
-+            sisyphus_removable_csv_url = str(portage_output.rstrip().split("=")[1].strip('\"').strip('/packages') + '/csv' + '/removable_packages_pre.csv')
++            sisyphus_removable_csv_url = str(portage_output.rstrip().split("=")[1].strip('\"').replace('packages', 'csv') + 'removable_packages_pre.csv')
 +
      http = urllib3.PoolManager()
  
