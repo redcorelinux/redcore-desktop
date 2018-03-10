@@ -6,7 +6,7 @@ PYTHON_COMPAT=( python2_7 python3_4 python3_5 python3_6 )
 
 EGIT_REPO_URI="http://llvm.org/git/${PN}.git
 	https://github.com/llvm-mirror/${PN}.git"
-EGIT_COMMIT="0c31bd5e8d277bee26f34162c246a321f086ad55"
+EGIT_COMMIT="a8b683ef7dd2fe729ef18167283502c29e6d9090"
 
 if [[ ${PV} = 9999* ]]; then
 	GIT_ECLASS="git-r3"
@@ -34,6 +34,7 @@ IUSE=""
 
 RDEPEND="
 	|| (
+		sys-devel/clang:6
 		sys-devel/clang:5
 		sys-devel/clang:4
 		>=sys-devel/clang-3.9:0
@@ -41,7 +42,7 @@ RDEPEND="
 DEPEND="${RDEPEND}
 	${PYTHON_DEPS}"
 
-LLVM_MAX_SLOT=5
+LLVM_MAX_SLOT=6
 
 llvm_check_deps() {
 	has_version "sys-devel/clang:${LLVM_SLOT}"
