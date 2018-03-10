@@ -44,8 +44,8 @@ RDEPEND="
 DEPEND="
 	${RDEPEND}
 	dev-qt/linguist-tools:5
+	dev-qt/qttest:5
 	dev-qt/qtconcurrent:5
-	test? ( dev-qt/qttest:5 )
 "
 
 src_prepare() {
@@ -60,9 +60,10 @@ src_configure() {
 		-DWITH_GUI_TESTS=OFF
 		-DWITH_TESTS="$(usex test)"
 		-DWITH_XC_AUTOTYPE="$(usex autotype)"
+		-DWITH_XC_BROWSER="$(usex browser)"
 		-DWITH_XC_HTTP=OFF
 		-DWITH_XC_NETWORKING="$(usex network)"
-		-DWITH_XC_BROWSER="$(usex browser)"
+		-DWITH_XC_SSHAGENT=ON
 		-DWITH_XC_YUBIKEY="$(usex yubikey)"
 	)
 	cmake-utils_src_configure
