@@ -243,6 +243,9 @@ DEPEND="${RDEPEND}
 	$(python_gen_any_dep ">=dev-python/mako-0.7.3[\${PYTHON_USEDEP}]")
 "
 
+PATCHES=( "${FILESDIR}"/fixLlvm6apichange.patch
+	"${FILESDIR}"/enableFastMath.patch )
+
 S="${WORKDIR}/${MY_P}"
 EGIT_CHECKOUT_DIR=${S}
 
@@ -284,6 +287,7 @@ pkg_setup() {
 }
 
 src_prepare() {
+	default
 	[[ ${PV} == 9999 ]] && eautoreconf
 	eapply_user
 }
