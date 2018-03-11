@@ -47,3 +47,11 @@ src_install() {
 	dodir usr/src/linux-"${KV_FULL}"
 	cp -ax "${S}"/* "${D}"usr/src/linux-"${KV_FULL}"
 }
+
+_kernel_sources_delete() {
+    rm -rf "${ROOT}"usr/src/linux-"${KV_FULL}"
+}
+
+pkg_postrm() {
+	_kernel_sources_delete
+}
