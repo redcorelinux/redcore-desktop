@@ -17,7 +17,7 @@ remove_some_bundled_libs () {
 }
 
 preload_some_system_libs () {
-	export LD_PRELOAD='/usr/lib32/gcc/x86_64-pc-linux-gnu/6.4.0/32/libstdc++.so.6 /usr/lib32/gcc/x86_64-pc-linux-gnu/6.4.0/32/libgcc_s.so.1 /usr/lib64/gcc/x86_64-pc-linux-gnu/6.4.0/libgcc_s.so.1 /usr/lib64/gcc/x86_64-pc-linux-gnu/6.4.0/32/libstdc++.so.6'
+	export LD_PRELOAD='/usr/lib32/gcc/x86_64-pc-linux-gnu/7.3.0/32/libstdc++.so.6 /usr/lib32/gcc/x86_64-pc-linux-gnu/7.3.0/32/libgcc_s.so.1 /usr/lib64/gcc/x86_64-pc-linux-gnu/7.3.0/libgcc_s.so.1 /usr/lib64/gcc/x86_64-pc-linux-gnu/7.3.0/32/libstdc++.so.6'
 	# steam must be told where nvidia opengl libs live on gentoo systems
 	# but this will break optimus, so check if we detect bbswitch in here
 	# if we do, we do not preload nvidia opengl, as it will break steam
