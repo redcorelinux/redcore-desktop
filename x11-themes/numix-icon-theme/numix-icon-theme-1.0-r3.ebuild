@@ -14,8 +14,7 @@ LICENSE="GPL-3.0+"
 SLOT="0"
 KEYWORDS="amd64 x86"
 
-RDEPEND="x11-themes/gnome-icon-theme
-		x11-themes/hicolor-icon-theme"
+RDEPEND="x11-themes/hicolor-icon-theme"
 DEPEND="${RDEPEND}"
 
 S="${WORKDIR}"/"${P}"
