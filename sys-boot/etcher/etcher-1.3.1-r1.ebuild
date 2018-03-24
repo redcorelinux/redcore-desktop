@@ -34,7 +34,6 @@ src_unpack() {
 
 src_install() {
 	mv * "${D}" || die
-	sed -i "s/Icon=etcher-electron/Icon=icon-iw/g" "${D}"usr/share/applications/"${PN}"-electron.desktop
 	sed -i "s/Utility/System/g" "${D}"usr/share/applications/"${PN}"-electron.desktop
 	fperms 0755 /opt/Etcher/"${PN}"-electron || die
 }
