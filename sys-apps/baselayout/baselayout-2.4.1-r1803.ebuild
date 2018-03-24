@@ -164,7 +164,7 @@ src_prepare() {
 	echo "LDPATH='${ldpaths#:}'" >> etc/env.d/50baselayout
 
 	# rc-scripts version for testing of features that *should* be present
-	echo "Redcore Linux 1801 - Intercrus" > etc/gentoo-release
+	echo "Redcore Linux Hardened 1803 - Jupiter" > etc/gentoo-release
 }
 
 src_install() {
