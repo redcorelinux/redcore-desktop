@@ -38,8 +38,15 @@ src_install() {
 	dodir usr/bin
 	exeinto usr/bin
 	doexe ${PN}
+	doexe ${FILESDIR}/${PN}-pkexec
 	dodir usr/share/applications
 	insinto usr/share/applications
 	doins extra/${PN}.desktop
-	doicon extra/${PN}.png 
+	dodir usr/share/polkit-1/actions
+	insinto usr/share/polkit-1/actions
+	doins ${FILESDIR}/org.redcorelinux.radeon-profile.policy
+	doicon extra/${PN}.png
+
+	# Ugly hack to force Radeon Profile to go through policykit
+	sed -i "s/Exec=radeon-profile/Exec=radeon-profile-pkexec/g" "${D}"usr/share/applications/${PN}.desktop
 }
