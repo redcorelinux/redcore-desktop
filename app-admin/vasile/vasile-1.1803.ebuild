@@ -21,11 +21,6 @@ RDEPEND="${DEPEND}
 	sys-fs/mtools
 	sys-fs/squashfs-tools"
 
-src_prepare() {
-	default
-	eapply "${FILESDIR}"/"${PN}"-use-hardened-profile.patch
-}
-
 src_install() {
 	default
 	dosym ../../usr/bin/"${PN}".sh usr/bin/"${PN}"
