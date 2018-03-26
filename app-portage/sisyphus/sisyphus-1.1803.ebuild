@@ -23,11 +23,6 @@ RDEPEND="${DEPEND}
 	sys-apps/portage[${PYTHON_USEDEP}]
 	gui? ( dev-python/PyQt5[designer,gui,widgets,${PYTHON_USEDEP}] sys-apps/gentoo-functions )"
 
-src_prepare() {
-	default
-	eapply "${FILESDIR}/${P}-remove-csv-hardcode.patch"
-}
-
 src_install() {
 	default
 
@@ -50,7 +45,7 @@ src_install() {
 	if ! use gui; then
 		rm -rf ${ED}usr/bin/${PN}-gui
 		rm -rf ${ED}usr/bin/${PN}-gui-pkexec
-		rm -rf ${ED}usr/share/${PN}/*py
+		rm -rf ${ED}usr/share/${PN}/${PN}-gui.py
 		rm -rf ${ED}usr/share/${PN}/icon
 		rm -rf ${ED}usr/share/${PN}/ui
 		rm -rf ${ED}usr/share/applications
