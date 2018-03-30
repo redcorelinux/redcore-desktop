@@ -5,21 +5,21 @@ EAPI=6
 
 inherit eutils git-r3
 
-DESCRIPTION="Official Redcore Linux GTK theme"
+DESCRIPTION="Official Redcore Linux LXQT theme"
 HOMEPAGE="http://redcorelinux.org"
 
 EGIT_BRANCH="master"
-EGIT_REPO_URI="https://gitlab.com/redcore/redcore-theme.git"
+EGIT_REPO_URI="https://gitlab.com/redcore/redcore-theme-lxqt.git"
 
 LICENSE="GPLv3"
 SLOT="0"
 KEYWORDS="x86 amd64"
 IUSE=""
-RDEPEND="x11-themes/gtk-engines-murrine
-	x11-themes/gtk-engines-unico"
+RDEPEND=""
 
 src_install() {
 	rm README.md
-	insinto /usr/share/themes
+	dodir usr/share/lxqt/themes
+	insinto usr/share/lxqt/themes
 	doins -r *
 }

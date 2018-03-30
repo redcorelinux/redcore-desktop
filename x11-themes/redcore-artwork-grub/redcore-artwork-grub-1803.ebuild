@@ -17,10 +17,10 @@ KEYWORDS="amd64 x86"
 IUSE=""
 RDEPEND=""
 
-S="${WORKDIR}/${PN}-${PV}"
+S="${WORKDIR}/${P}"
 
 src_install () {
-	dodir /usr/share/grub/themes || die
-	insinto /usr/share/grub/themes || die 
-	doins -r "${S}"/cdroot/boot/grub/themes/redcore || die
+	dodir usr/share/grub/themes
+	insinto usr/share/grub/themes
+	doins -r "${S}"/cdroot/boot/grub/themes/redcore
 }
