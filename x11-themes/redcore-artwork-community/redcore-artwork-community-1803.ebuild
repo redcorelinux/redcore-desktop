@@ -16,6 +16,8 @@ IUSE=""
 DEPEND=""
 RDEPEND="${DEPEND}"
 
+S="${WORKDIR}"/"${PN}"
+
 src_install() {
 	# Wallpapers by V3n3RiX
 	dodir usr/share/backgrounds/redcore-community
