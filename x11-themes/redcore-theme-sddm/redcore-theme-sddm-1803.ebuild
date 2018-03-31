@@ -16,7 +16,7 @@ IUSE=""
 S="${FILESDIR}"
 
 src_install() {
-	dodir "/usr/share/sddm/themes" || die
-	insinto "/usr/share/sddm/themes" || die
-	doins -r "${S}/"* || die
+	dodir usr/share/sddm/themes
+	insinto usr/share/sddm/themes
+	doins -r ${S}/*
 }
