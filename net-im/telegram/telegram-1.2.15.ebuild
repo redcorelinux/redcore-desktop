@@ -7,10 +7,7 @@ inherit eutils gnome2-utils xdg
 
 DESCRIPTION="Official desktop client for Telegram (binary package)"
 HOMEPAGE="https://desktop.telegram.org"
-SRC_URI="
-	https://github.com/telegramdesktop/tdesktop/archive/v${PV}.tar.gz -> tdesktop-${PV}.tar.gz
-	amd64? ( https://updates.tdesktop.com/tlinux/tsetup.${PV}.tar.xz )
-"
+SRC_URI="https://updates.tdesktop.com/tlinux/tsetup.${PV}.tar.xz"
 
 LICENSE="telegram"
 SLOT="0"
