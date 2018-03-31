@@ -6,7 +6,7 @@ inherit eutils
 
 DESCRIPTION="Offical Redcore Linux Core Artwork"
 HOMEPAGE="https://redcorelinux.org"
-SRC_URI="http://mirror.math.princeton.edu/pub/redcorelinux/distfiles/${P}.tar.xz"
+SRC_URI="http://mirror.math.princeton.edu/pub/redcorelinux/distfiles/${PN}.tar.xz"
 
 LICENSE="CCPL-Attribution-ShareAlike-3.0"
 SLOT="0"
@@ -14,7 +14,7 @@ KEYWORDS="x86 amd64"
 IUSE=""
 RDEPEND="sys-apps/findutils"
 
-S="${WORKDIR}"/"${P}"
+S="${WORKDIR}"/"${PN}"
 
 src_install() {
 	# Cursors
@@ -31,7 +31,6 @@ src_install() {
 	doins logo/*.png
 
 	# Plymouth theme
-
 	insinto usr/share/plymouth
 	doins plymouth/bizcom.png
 	insinto usr/share/plymouth/themes
