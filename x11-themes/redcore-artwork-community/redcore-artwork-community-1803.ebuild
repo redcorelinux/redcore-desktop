@@ -6,7 +6,7 @@ EAPI=5
 
 DESCRIPTION="Redcore Linux Community Wallpapers"
 HOMEPAGE="http://redcorelinux.org"
-SRC_URI="http://mirror.math.princeton.edu/pub/redcorelinux/distfiles/${P}.tar.xz"
+SRC_URI="http://mirror.math.princeton.edu/pub/redcorelinux/distfiles/${PN}.tar.xz"
 
 LICENSE=""
 SLOT="0"
@@ -17,14 +17,19 @@ DEPEND=""
 RDEPEND="${DEPEND}"
 
 src_install() {
-	# Wallpapers by pentruprieteni.com, thanks
+	# Wallpapers by V3n3RiX
 	dodir usr/share/backgrounds/redcore-community
 	insinto usr/share/backgrounds/redcore-community
+	doins -r by_venerix/*
+
+	# Wallpapers by pentruprieteni.com, thanks
+	dodir usr/share/backgrounds/by_pp
+	insinto usr/share/backgrounds/by_pp
 	doins -r by_pp/*
 
 	# Photos by Mellita Parjolea, thanks
-	dodir usr/share/backgrounds/by_mellita_p
-	insinto usr/share/backgrounds/by_mellita_p
+	dodir usr/share/backgrounds/by_mellita
+	insinto usr/share/backgrounds/by_mellita
 	doins -r by_mellita/*
 
 	# If you want your wallpapers in here, let me know
