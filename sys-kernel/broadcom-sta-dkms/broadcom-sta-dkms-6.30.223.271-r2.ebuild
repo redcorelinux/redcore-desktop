@@ -34,7 +34,8 @@ src_prepare() {
 		"${FILESDIR}/broadcom-sta-6.30.223.271-r4-linux-4.7.patch" \
 		"${FILESDIR}/broadcom-sta-6.30.223.271-r4-linux-4.8.patch" \
 		"${FILESDIR}/broadcom-sta-6.30.223.271-r4-linux-4.11.patch" \
-		"${FILESDIR}/broadcom-sta-6.30.223.271-r4-linux-4.12.patch"
+		"${FILESDIR}/broadcom-sta-6.30.223.271-r4-linux-4.12.patch" \
+		"${FILESDIR}/broadcom-sta-6.30.223.271-r4-linux-4.15.patch"
 
 	epatch_user
 }
@@ -44,8 +45,8 @@ src_compile(){
 }
 
 src_install() {
-    dodir /usr/src/${P}
-    insinto /usr/src/${P}
+    dodir usr/src/${P}
+    insinto usr/src/${P}
     doins -r "${S}"/*
 }
 
