@@ -18,7 +18,7 @@ fi
 
 LICENSE="BSD-2"
 SLOT="0"
-IUSE="audit debug +dkms elogind ncurses pam newnet prefix +netifrc selinux +settingsd static-libs
+IUSE="audit debug +dkms elogind ncurses pam newnet +plymouth prefix +netifrc selinux +settingsd static-libs
 	unicode kernel_linux kernel_FreeBSD"
 
 COMMON_DEPEND="kernel_FreeBSD? ( || ( >=sys-freebsd/freebsd-ubin-9.0_rc sys-process/fuser-bsd ) )
@@ -34,6 +34,7 @@ COMMON_DEPEND="kernel_FreeBSD? ( || ( >=sys-freebsd/freebsd-ubin-9.0_rc sys-proc
 		sys-process/psmisc
 		!<sys-process/procps-3.3.9-r2
 	)
+	plymouth? ( sys-boot/plymouth-openrc-plugin )
 	selinux? (
 		sys-apps/policycoreutils
 		>=sys-libs/libselinux-2.6
