@@ -27,6 +27,7 @@ RDEPEND="${DEPEND}
 src_prepare() {
 	default
 	eapply "${FILESDIR}"/"${PN}"-use-dateutil.patch
+	eapply "${FILESDIR}"/"${PN}"-drop-datetime.patch
 }
 
 src_install() {
