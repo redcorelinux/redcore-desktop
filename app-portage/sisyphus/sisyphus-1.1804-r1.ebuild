@@ -19,9 +19,15 @@ DEPEND="dev-lang/python[sqlite]"
 RDEPEND="${DEPEND}
 	app-portage/gentoolkit[${PYTHON_USEDEP}]
 	dev-python/animation[${PYTHON_USEDEP}]
+	dev-python/python-dateutil[${PYTHON_USEDEP}]
 	dev-python/urllib3[${PYTHON_USEDEP}]
 	sys-apps/portage[${PYTHON_USEDEP}]
 	gui? ( dev-python/PyQt5[designer,gui,widgets,${PYTHON_USEDEP}] sys-apps/gentoo-functions )"
+
+src_prepare() {
+	default
+	eapply "${FILESDIR}"/"${PN}"-use-dateutil.patch
+}
 
 src_install() {
 	default
