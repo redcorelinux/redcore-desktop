@@ -1,27 +1,20 @@
 diff -Nur a/dkms.conf b/dkms.conf
---- a/dkms.conf	2018-02-28 07:51:25.000000000 +0000
-+++ b/dkms.conf	2018-04-11 14:50:24.512910897 +0100
-@@ -14,18 +14,10 @@
- # hope that it will be useful, but WITHOUT ANY WARRANTY of any kind.
+--- a/dkms.conf	2017-12-19 21:31:10.000000000 +0000
++++ b/dkms.conf	2017-12-22 02:51:53.824679071 +0000
+@@ -15,7 +15,7 @@
  #
  
--PACKAGE_NAME="vboxguest"
--PACKAGE_VERSION=5.2.8_OSE
-+PACKAGE_NAME="virtualbox-guest-dkms"
-+PACKAGE_VERSION=5.2.8
+ PACKAGE_NAME="vboxguest"
+-PACKAGE_VERSION=5.2.4_OSE
++PACKAGE_VERSION=5.2.4
  AUTOINSTALL=yes
  
--BUILT_MODULE_NAME[0]="vboxguest"
--BUILT_MODULE_LOCATION[0]="vboxguest"
--DEST_MODULE_LOCATION[0]="/kernel/misc"
--
--BUILT_MODULE_NAME[1]="vboxsf"
--BUILT_MODULE_LOCATION[1]="vboxsf"
--DEST_MODULE_LOCATION[1]="/kernel/misc"
+ BUILT_MODULE_NAME[0]="vboxguest"
+@@ -25,7 +25,3 @@
+ BUILT_MODULE_NAME[1]="vboxsf"
+ BUILT_MODULE_LOCATION[1]="vboxsf"
+ DEST_MODULE_LOCATION[1]="/kernel/misc"
 -
 -BUILT_MODULE_NAME[2]="vboxvideo"
 -BUILT_MODULE_LOCATION[2]="vboxvideo"
 -DEST_MODULE_LOCATION[2]="/kernel/misc"
-+BUILT_MODULE_NAME[0]="vboxsf"
-+BUILT_MODULE_LOCATION[0]="vboxsf"
-+DEST_MODULE_LOCATION[0]="/extra/dkms"
