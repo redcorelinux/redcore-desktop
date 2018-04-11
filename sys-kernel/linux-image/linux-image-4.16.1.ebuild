@@ -37,7 +37,8 @@ PATCHES=( "${FILESDIR}"/enable_alx_wol.patch
 	"${FILESDIR}"/0001-Revert-x86-ACPI-cstate-Allow-ACPI-C1-FFH-MWAIT-use-o.patch
 	"${FILESDIR}"/mute-pps_state_mismatch.patch
 	"${FILESDIR}"/drop_ancient-and-wrong-msg.patch
-	"${FILESDIR}"/uksm-4.16.patch )
+	"${FILESDIR}"/linux-hardened.patch
+	"${FILESDIR}"/uksm-for-linux-hardened.patch )
 
 S="${WORKDIR}"/linux-"${PV}"
 
@@ -50,7 +51,7 @@ src_prepare() {
 	default
 	emake mrproper
 	sed -ri "s|^(EXTRAVERSION =).*|\1 -${EXTRAVERSION}|" Makefile
-	cp "${FILESDIR}"/"${EXTRAVERSION}"-4.16-amd64.config .config
+	cp "${FILESDIR}"/"${EXTRAVERSION}"-amd64.config .config
 }
 
 src_compile() {
