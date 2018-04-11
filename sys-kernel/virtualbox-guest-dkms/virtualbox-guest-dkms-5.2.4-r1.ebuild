@@ -20,18 +20,18 @@ RDEPEND="${DEPEND}"
 
 S="${WORKDIR}"/usr/src/vboxguest-${PV}_OSE
 
-src_prepare() {
-	epatch ${FILESDIR}/dkms.patch
-}
-
 src_compile() {
 	:
 }
 
 src_install() {
-	dodir /usr/src/${P}
-	insinto /usr/src/${P}
+	dodir usr/src/${P}
+	insinto usr/src/${P}
 	doins -r ${S}/*
+	# delete shipped dkms.conf
+	rm -rf ${ED}usr/src/${P}/dkms.conf
+	# inject our dkms.conf
+	doins ${FILESDIR}/dkms.conf
 }
 
 pkg_postinst() {
