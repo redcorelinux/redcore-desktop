@@ -37,6 +37,7 @@ PATCHES=( "${FILESDIR}"/enable_alx_wol.patch
 	"${FILESDIR}"/0001-Revert-x86-ACPI-cstate-Allow-ACPI-C1-FFH-MWAIT-use-o.patch
 	"${FILESDIR}"/mute-pps_state_mismatch.patch
 	"${FILESDIR}"/drop_ancient-and-wrong-msg.patch
+	"${FILESDIR}"/nouveau-pascal-backlight.patch
 	"${FILESDIR}"/linux-hardened.patch
 	"${FILESDIR}"/uksm-for-linux-hardened.patch )
 
