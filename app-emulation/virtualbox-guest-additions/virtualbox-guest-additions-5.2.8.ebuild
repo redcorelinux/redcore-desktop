@@ -148,39 +148,3 @@ src_install() {
 
 	systemd_dounit "${FILESDIR}/${PN}.service"
 }
-
-pkg_postinst() {
-	if ! use X ; then
-		elog "use flag X is off, enable it to install the"
-		elog "X Window System video driver."
-	fi
-	elog ""
-	elog "Please add users to the \"vboxguest\" group so they can"
-	elog "benefit from seamless mode, auto-resize and clipboard."
-	elog ""
-	elog "The vboxsf group has been added to make automount services work."
-	elog "These services are part of the shared folders support."
-	elog ""
-	elog "Please add:"
-	elog "/etc/init.d/${PN}"
-	elog "to the default runlevel in order to start"
-	elog "needed services."
-	elog "To use the VirtualBox X driver, use the following"
-	elog "file as your /etc/X11/xorg.conf:"
-	elog "    /usr/share/doc/${PF}/xorg.conf.vbox"
-	elog ""
-	elog "Also make sure you use the Mesa library for OpenGL:"
-	elog "    eselect opengl set xorg-x11"
-	elog ""
-	elog "An autostart .desktop file has been installed to start"
-	elog "VBoxClient in desktop sessions."
-	elog ""
-	elog "You can mount shared folders with:"
-	elog "    mount -t vboxsf <shared_folder_name> <mount_point>"
-	elog ""
-	elog "Warning:"
-	elog "this ebuild is only needed if you are running gentoo"
-	elog "inside a VirtualBox Virtual Machine, you don't need"
-	elog "it to run VirtualBox itself."
-	elog ""
-}

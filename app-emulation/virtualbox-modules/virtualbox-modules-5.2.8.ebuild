@@ -31,6 +31,6 @@ src_compile() {
 }
 
 src_install() {
-	insinto /usr/lib/modules-load.d/
+	insinto usr/"$(get_libdir)"/modules-load.d/
 	doins "${FILESDIR}"/virtualbox.conf
 }
