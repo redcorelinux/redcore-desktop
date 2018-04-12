@@ -33,7 +33,7 @@ PATCHES=( "${FILESDIR}"/enable_alx_wol.patch
 	"${FILESDIR}"/mute-pps_state_mismatch.patch
 	"${FILESDIR}"/drop_ancient-and-wrong-msg.patch
 	"${FILESDIR}"/nouveau-pascal-backlight.patch
-	"${FILESDIR}"/linux-hardened.patch
+	"${FILESDIR}"/linux-hardened-v2.patch
 	"${FILESDIR}"/uksm-for-linux-hardened.patch )
 
 S="${WORKDIR}"/linux-"${PV}"
