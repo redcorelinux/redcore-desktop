@@ -1,4 +1,4 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -9,13 +9,13 @@ MY_PV="${PV/beta/BETA}"
 MY_PV="${MY_PV/rc/RC}"
 MY_P=VirtualBox-${MY_PV}
 DESCRIPTION="VirtualBox kernel modules and user-space tools for Gentoo guests"
-HOMEPAGE="https://www.virtualbox.org/"
-SRC_URI="https://download.virtualbox.org/virtualbox/${MY_PV}/${MY_P}.tar.bz2
+HOMEPAGE="http://www.virtualbox.org/"
+SRC_URI="http://download.virtualbox.org/virtualbox/${MY_PV}/${MY_P}.tar.bz2
 	https://dev.gentoo.org/~polynomial-c/virtualbox/patchsets/virtualbox-5.1.30-patches-02.tar.xz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="amd64"
+KEYWORDS="amd64 ~x86"
 IUSE="X"
 
 RDEPEND="
@@ -59,15 +59,12 @@ pkg_setup() {
 
 src_unpack() {
 	unpack ${A}
+
 	cd "${S}"
 	rm -rf kBuild/bin tools
 }
 
 src_prepare() {
-	pushd "${WORKDIR}" &>/dev/null || die
-	eapply "${FILESDIR}"/vboxguest-4.1.0-log-use-c99.patch
-	popd &>/dev/null || die
-
 	cp "${FILESDIR}/${PN}-5-localconfig" LocalConfig.kmk || die
 	use X || echo "VBOX_WITH_X11_ADDITIONS :=" >> LocalConfig.kmk
 
@@ -150,4 +147,40 @@ src_install() {
 	doins "${FILESDIR}"/xorg.conf.vbox
 
 	systemd_dounit "${FILESDIR}/${PN}.service"
+}
+
+pkg_postinst() {
+	if ! use X ; then
+		elog "use flag X is off, enable it to install the"
+		elog "X Window System video driver."
+	fi
+	elog ""
+	elog "Please add users to the \"vboxguest\" group so they can"
+	elog "benefit from seamless mode, auto-resize and clipboard."
+	elog ""
+	elog "The vboxsf group has been added to make automount services work."
+	elog "These services are part of the shared folders support."
+	elog ""
+	elog "Please add:"
+	elog "/etc/init.d/${PN}"
+	elog "to the default runlevel in order to start"
+	elog "needed services."
+	elog "To use the VirtualBox X driver, use the following"
+	elog "file as your /etc/X11/xorg.conf:"
+	elog "    /usr/share/doc/${PF}/xorg.conf.vbox"
+	elog ""
+	elog "Also make sure you use the Mesa library for OpenGL:"
+	elog "    eselect opengl set xorg-x11"
+	elog ""
+	elog "An autostart .desktop file has been installed to start"
+	elog "VBoxClient in desktop sessions."
+	elog ""
+	elog "You can mount shared folders with:"
+	elog "    mount -t vboxsf <shared_folder_name> <mount_point>"
+	elog ""
+	elog "Warning:"
+	elog "this ebuild is only needed if you are running gentoo"
+	elog "inside a VirtualBox Virtual Machine, you don't need"
+	elog "it to run VirtualBox itself."
+	elog ""
 }
