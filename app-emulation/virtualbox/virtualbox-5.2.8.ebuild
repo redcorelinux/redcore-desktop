@@ -4,7 +4,7 @@
 EAPI=6
 
 PYTHON_COMPAT=( python2_7 )
-inherit eutils flag-o-matic java-pkg-opt-2 linux-info multilib pax-utils python-single-r1 tmpfiles toolchain-funcs udev xdg-utils
+inherit eutils flag-o-matic linux-info multilib pax-utils python-single-r1 tmpfiles toolchain-funcs udev xdg-utils
 
 MY_PV="${PV/beta/BETA}"
 MY_PV="${MY_PV/rc/RC}"
@@ -18,7 +18,7 @@ SRC_URI="https://download.virtualbox.org/virtualbox/${MY_PV}/${MY_P}.tar.bz2
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="amd64"
-IUSE="alsa debug doc headless java libressl lvm pam pax_kernel pulseaudio +opengl python +qt5 +sdk +udev vboxwebsrv vnc"
+IUSE="alsa debug doc headless libressl lvm pam pax_kernel pulseaudio +opengl python +qt5 +sdk +udev vboxwebsrv vnc"
 
 RDEPEND="!app-emulation/virtualbox-bin
 	~app-emulation/virtualbox-modules-${PV}
@@ -70,15 +70,12 @@ DEPEND="${RDEPEND}
 		dev-texlive/texlive-fontsextra
 	)
 	!headless? ( x11-libs/libXinerama )
-	java? ( >=virtual/jdk-1.6 )
 	pam? ( sys-libs/pam )
 	pax_kernel? ( sys-apps/elfix )
 	pulseaudio? ( media-sound/pulseaudio )
 	qt5? ( dev-qt/linguist-tools:5 )
 	vboxwebsrv? ( net-libs/gsoap[-gnutls(-)] )
 	${PYTHON_DEPS}"
-RDEPEND="${RDEPEND}
-	java? ( >=virtual/jre-1.6 )"
 
 QA_TEXTRELS_x86="usr/lib/virtualbox-ose/VBoxGuestPropSvc.so
 	usr/lib/virtualbox/VBoxSDL.so
@@ -115,9 +112,7 @@ QA_TEXTRELS_x86="usr/lib/virtualbox-ose/VBoxGuestPropSvc.so
 S="${WORKDIR}/${MY_P}"
 
 REQUIRED_USE="
-	java? ( sdk )
 	python? ( sdk )
-	vboxwebsrv? ( java )
 	${PYTHON_REQUIRED_USE}
 "
 
@@ -137,8 +132,6 @@ pkg_setup() {
 		einfo "You have disabled the \"python\" USE flag. This will only"
 		einfo "disable the python bindings being installed."
 	fi
-	java-pkg-opt-2_pkg_setup
-	python-single-r1_pkg_setup
 
 	tc-ld-disable-gold #bug 488176
 	tc-export CC CXX LD AR RANLIB
@@ -176,13 +169,6 @@ src_prepare() {
 			src/VBox/HostServices/Makefile.kmk || die
 	fi
 
-	# add correct java path
-	if use java ; then
-		sed "s@/usr/lib/jvm/java-6-sun@$(java-config -O)@" \
-			-i "${S}"/Config.kmk || die
-		java-pkg-opt-2_src_prepare
-	fi
-
 	# Only add nopie patch when we're on hardened
 	if  gcc-specs-pie ; then
 		eapply "${FILESDIR}/050_virtualbox-5.1.24-nopie.patch"
@@ -204,10 +190,10 @@ src_configure() {
 		--with-g++="$(tc-getCXX)"
 		--disable-dbus
 		--disable-kmods
+		--disable-java
 		$(usex alsa '' --disable-alsa)
 		$(usex debug --build-debug '')
 		$(usex doc '' --disable-docs)
-		$(usex java '' --disable-java)
 		$(usex lvm '' --disable-devmapper)
 		$(usex pulseaudio '' --disable-pulse)
 		$(usex python '' --disable-python)
@@ -387,10 +373,6 @@ src_install() {
 		insinto ${vbox_inst_path}
 		doins -r sdk
 
-		if use java ; then
-			java-pkg_regjar "${D}${vbox_inst_path}/sdk/bindings/xpcom/java/vboxjxpcom.jar"
-			java-pkg_regso "${D}${vbox_inst_path}/libvboxjxpcom.so"
-		fi
 	fi
 
 	if use udev ; then
