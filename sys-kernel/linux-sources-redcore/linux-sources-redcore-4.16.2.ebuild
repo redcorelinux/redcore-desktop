@@ -39,6 +39,9 @@ PATCHES=( "${FILESDIR}"/enable_alx_wol.patch
 S="${WORKDIR}"/linux-"${PV}"
 
 pkg_setup() {
+	export KBUILD_BUILD_USER="nexus"
+	export KBUILD_BUILD_HOST="nexus.redcorelinux.org"
+
 	export REAL_ARCH="$ARCH"
 	unset ARCH ; unset LDFLAGS #will interfere with Makefile if set
 }
