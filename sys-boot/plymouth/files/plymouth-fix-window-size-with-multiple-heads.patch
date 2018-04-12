@@ -1,0 +1,21 @@
+diff -Nur a/src/plugins/splash/script/script-lib-sprite.c b/src/plugins/splash/script/script-lib-sprite.c
+--- a/src/plugins/splash/script/script-lib-sprite.c	2012-09-26 17:50:53.000000000 +0100
++++ b/src/plugins/splash/script/script-lib-sprite.c	2018-04-12 01:20:25.782074829 +0100
+@@ -233,7 +233,7 @@
+       if (width == 0)
+         width = ply_pixel_display_get_width (display->pixel_display);
+       else
+-        width = MIN (width, ply_pixel_display_get_width (display->pixel_display));
++        width = MAX (width, ply_pixel_display_get_width (display->pixel_display));
+     }
+   return script_return_obj (script_obj_new_number (width));
+ }
+@@ -273,7 +273,7 @@
+       if (height == 0)
+         height = ply_pixel_display_get_height (display->pixel_display);
+       else
+-        height = MIN (height, ply_pixel_display_get_height (display->pixel_display));
++        height = MAX (height, ply_pixel_display_get_height (display->pixel_display));
+     }
+   return script_return_obj (script_obj_new_number (height));
+ }
