@@ -25,9 +25,7 @@ COMMON="
 		>=app-eselect/eselect-opengl-1.0.9
 		app-misc/pax-utils
 	)"
-DEPEND="
-	${COMMON}
-	virtual/linux-sources"
+DEPEND="${COMMON}"
 PDEPEND="
 	tools? ( x11-misc/nvidia-settings )"
 RDEPEND="
