@@ -30,10 +30,10 @@ src_compile() {
 }
 
 src_install() {
-	cp ${FILESDIR}/dkms.conf ${S}
-	dodir /usr/src/${P}
-	insinto /usr/src/${P}
+	dodir usr/src/${P}
+	insinto usr/src/${P}
 	doins -r ${S}/*
+	doins ${FILESDIR}/dkms.conf
 }
 
 pkg_postinst() {
