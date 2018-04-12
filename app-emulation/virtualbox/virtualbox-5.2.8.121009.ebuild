@@ -47,8 +47,7 @@ fi
 DEPEND="app-arch/unzip
 	${PYTHON_DEPS}"
 
-RDEPEND="!!app-emulation/virtualbox
-	!app-emulation/virtualbox-additions
+RDEPEND="!app-emulation/virtualbox-additions
 	~app-emulation/virtualbox-modules-${MAIN_PV}
 	!headless? (
 		dev-libs/glib
