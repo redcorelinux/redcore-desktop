@@ -12,7 +12,7 @@ DESCRIPTION="Official Redcore Linux Kernel Sources"
 HOMEPAGE="https://redcorelinux.org"
 SRC_URI="https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-${PV}.tar.xz"
 
-KEYWORDS="~amd64"
+KEYWORDS="amd64"
 LICENSE="GPL-2"
 SLOT="${PV}"
 IUSE=""
@@ -30,6 +30,7 @@ PATCHES=( "${FILESDIR}"/enable_alx_wol.patch
 	"${FILESDIR}"/0001-Revert-swiotlb-remove-various-exports.patch
 	"${FILESDIR}"/0001-Revert-x86-ACPI-cstate-Allow-ACPI-C1-FFH-MWAIT-use-o.patch
 	"${FILESDIR}"/0001-Make-it-possible-to-disable-SWIOTLB-code-on-admgpu-a.patch
+	"${FILESDIR}"/dma_coherent_ok-logic.patch
 	"${FILESDIR}"/mute-pps_state_mismatch.patch
 	"${FILESDIR}"/drop_ancient-and-wrong-msg.patch
 	"${FILESDIR}"/nouveau-pascal-backlight.patch
