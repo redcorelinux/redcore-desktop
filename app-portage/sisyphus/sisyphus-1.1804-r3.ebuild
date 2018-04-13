@@ -28,6 +28,7 @@ src_prepare() {
 	default
 	eapply "${FILESDIR}"/"${PN}"-use-dateutil.patch
 	eapply "${FILESDIR}"/"${PN}"-drop-datetime.patch
+	eapply "${FILESDIR}"/"${PN}"-update.patch
 }
 
 src_install() {
