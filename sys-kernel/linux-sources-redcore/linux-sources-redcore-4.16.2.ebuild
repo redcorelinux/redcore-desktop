@@ -30,6 +30,7 @@ PATCHES=( "${FILESDIR}"/enable_alx_wol.patch
 	"${FILESDIR}"/0001-Revert-swiotlb-remove-various-exports.patch
 	"${FILESDIR}"/0001-Revert-x86-ACPI-cstate-Allow-ACPI-C1-FFH-MWAIT-use-o.patch
 	"${FILESDIR}"/0001-Make-it-possible-to-disable-SWIOTLB-code-on-admgpu-a.patch
+	"${FILESDIR}"/revert-disable-CRTCs-with-NULL-FB-on-their-primary-plane.patch
 	"${FILESDIR}"/dma_coherent_ok-logic.patch
 	"${FILESDIR}"/mute-pps_state_mismatch.patch
 	"${FILESDIR}"/drop_ancient-and-wrong-msg.patch
