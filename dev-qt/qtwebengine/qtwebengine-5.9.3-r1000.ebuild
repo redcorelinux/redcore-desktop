@@ -77,12 +77,7 @@ DEPEND="${RDEPEND}
 	pax_kernel? ( sys-apps/elfix )
 "
 
-PATCHES=(
-	"${FILESDIR}/${PN}-5.9.3-icu-60.1.patch"
-	"${FILESDIR}/${PN}-5.9.4-jpeg-9-1.patch"
-	"${FILESDIR}/${PN}-5.9.4-jpeg-9-2.patch"
-)
-
+PATCHES=( "${FILESDIR}/${P}-icu-60.1.patch" )
 
 src_prepare() {
 	use pax_kernel && PATCHES+=( "${FILESDIR}/${PN}-5.9.3-paxmark-mksnapshot.patch" )

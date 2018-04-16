@@ -33,8 +33,6 @@ RDEPEND="${COMMON_DEPEND}
 	!<dev-qt/qtquickcontrols-5.7:5
 "
 
-PATCHES=( "${FILESDIR}/${P}-texture-memleak.patch" )
-
 src_prepare() {
 	use jit || PATCHES+=("${FILESDIR}/${PN}-5.4.2-disable-jit.patch")
 
