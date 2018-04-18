@@ -3,8 +3,6 @@
 
 EAPI=6
 
-CMAKE_USE_DIR="${S}/src/MEGAShellExtDolphin"
-CMAKE_IN_SOURCE_BUILD=y
 inherit gnome2 cmake-utils qmake-utils
 
 DESCRIPTION="Easy automated syncing with MEGA Cloud Drive"
@@ -35,6 +33,8 @@ DEPEND="${RDEPEND}
 	qt5? ( dev-qt/linguist-tools:5 )"
 
 S="${WORKDIR}"/MEGAsync-"${PV}"_Linux
+CMAKE_USE_DIR="${S}"/src/MEGAShellExtDolphin
+CMAKE_IN_SOURCE_BUILD=y
 
 src_prepare() {
 	local PATCHES=(
