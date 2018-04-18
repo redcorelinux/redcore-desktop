@@ -32,7 +32,6 @@ COMMON_DEPEND="
 	dev-libs/libxslt:=
 	dev-libs/nspr:=
 	>=dev-libs/nss-3.26:=
-	>=dev-libs/re2-0.2016.05.01:=
 	gnome-keyring? ( >=gnome-base/libgnome-keyring-3.12:= )
 	>=media-libs/alsa-lib-1.0.19:=
 	media-libs/fontconfig:=
@@ -302,6 +301,7 @@ src_prepare() {
 		third_party/protobuf
 		third_party/protobuf/third_party/six
 		third_party/qcms
+		third_party/re2
 		third_party/s2cellid
 		third_party/sfntly
 		third_party/skia
@@ -440,7 +440,6 @@ src_configure() {
 		libxml
 		libxslt
 		openh264
-		re2
 		snappy
 		yasm
 		zlib
