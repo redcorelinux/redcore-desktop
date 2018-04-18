@@ -16,6 +16,7 @@ IUSE=""
 DEPEND="sys-apps/gentoo-functions"
 RDEPEND="${DEPEND}
 	dev-libs/libisoburn
+	dev-vcs/git
 	sys-boot/grub:2
 	sys-kernel/dkms
 	sys-fs/mtools
