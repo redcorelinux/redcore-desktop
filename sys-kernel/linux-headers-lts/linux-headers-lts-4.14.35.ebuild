@@ -28,6 +28,9 @@ RDEPEND="${DEPEND}"
 S="$WORKDIR/kernel-linux-${KV_FULL}"
 
 pkg_setup() {
+	export KBUILD_BUILD_USER="nexus"
+	export KBUILD_BUILD_HOST="nexus.redcorelinux.org"
+
 	export REAL_ARCH="$ARCH"
 	unset ARCH ; unset LDFLAGS #will interfere with Makefile if set
 }
