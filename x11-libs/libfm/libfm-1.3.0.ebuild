@@ -13,7 +13,7 @@ SRC_URI="https://github.com/lxde/libfm/archive/${PV}.tar.gz -> ${MY_P}.tar.gz"
 
 KEYWORDS="~alpha amd64 arm ~arm64 ~mips ppc x86 ~amd64-linux ~x86-linux"
 LICENSE="GPL-2"
-SLOT="0/4.5.0" #copy ABI_VERSION because it seems upstream change it randomly
+SLOT="0/5.0.1" #copy ABI_VERSION because it seems upstream change it randomly
 IUSE="+automount debug doc examples exif gtk gtk3 udisks vala"
 
 COMMON_DEPEND=">=dev-libs/glib-2.18:2
@@ -45,10 +45,6 @@ S="${WORKDIR}"/${MY_P}
 REQUIRED_USE="udisks? ( automount ) doc? ( gtk ) gtk3? ( gtk )"
 
 src_prepare() {
-	# Fix use after free bug, see
-	# https://github.com/lxde/libfm/pull/11/commits/9e3a809c6a8a5079f05e04edac9457d317822321
-	epatch "${FILESDIR}"/libfm-fix-use-after-free.diff
-
 	if ! use doc; then
 		sed -ie '/^SUBDIR.*=/s#docs##' "${S}"/Makefile.am || die "sed failed"
 		sed -ie '/^[[:space:]]*docs/d' configure.ac || die "sed failed"
@@ -91,7 +87,7 @@ src_configure() {
 			$(use_enable examples demo) \
 			$(use_enable debug) \
 			$(use_enable udisks) \
-			$(use_enable vala actions) \
+			$(use_enable vala old-actions) \
 			$(use_enable doc gtk-doc) \
 			--with-html-dir=/usr/share/doc/${PF}/html
 	else
@@ -103,7 +99,7 @@ src_configure() {
 			$(use_enable exif) \
 			$(use_enable debug) \
 			$(use_enable udisks) \
-			$(use_enable vala actions) \
+			$(use_enable vala old-actions) \
 			$(use_with gtk) \
 			$(use_enable doc gtk-doc) \
 			--with-html-dir=/usr/share/doc/${PF}/html
