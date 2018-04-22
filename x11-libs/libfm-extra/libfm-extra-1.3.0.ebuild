@@ -11,9 +11,9 @@ DESCRIPTION="A library for file management"
 HOMEPAGE="http://pcmanfm.sourceforge.net/"
 SRC_URI="https://github.com/lxde/libfm/archive/${PV}.tar.gz -> ${MY_P}.tar.gz"
 
-KEYWORDS="~alpha amd64 arm ~arm64 ~mips ppc x86 ~amd64-linux ~x86-linux"
+KEYWORDS="amd64"
 LICENSE="GPL-2"
-SLOT="0/4.1.0" #copy ABI_VERSION because it seems upstream change it randomly
+SLOT="0/4.10.0" #copy ABI_VERSION because it seems upstream change it randomly
 IUSE=""
 
 RDEPEND=">=dev-libs/glib-2.18:2"

@@ -19,7 +19,7 @@ SRC_URI="mirror://sourceforge/${PN}/${P}.tar.xz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~alpha amd64 arm ~arm64 ~mips ppc x86"
+KEYWORDS="amd64"
 IUSE="debug gtk gtk3"
 
 RDEPEND=">=dev-libs/glib-2.18:2
