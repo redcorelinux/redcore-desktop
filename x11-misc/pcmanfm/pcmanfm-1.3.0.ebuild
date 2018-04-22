@@ -39,8 +39,6 @@ S="${WORKDIR}"/${MY_P}
 
 REQUIRED_USE="gtk3? ( gtk )"
 
-PATCHES=( "${FILESDIR}"/${PN}-1.2.5-CVE-2017-8934.patch )
-
 src_prepare() {
 	default
 
