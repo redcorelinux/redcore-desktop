@@ -13,7 +13,7 @@ SRC_URI="https://github.com/lxde/libfm/archive/${PV}.tar.gz -> ${MY_P}.tar.gz"
 
 KEYWORDS="amd64"
 LICENSE="GPL-2"
-SLOT="0/4.10.0" #copy ABI_VERSION because it seems upstream change it randomly
+SLOT="0/5.0.1" #copy ABI_VERSION because it seems upstream change it randomly
 IUSE="+automount debug doc examples exif gtk gtk3 udisks vala"
 
 COMMON_DEPEND=">=dev-libs/glib-2.18:2
