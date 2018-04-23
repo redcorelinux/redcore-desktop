@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=5
-inherit autotools xdg-utils
+inherit eutils autotools xdg-utils
 
 MY_PV=${PV/_/}
 MY_PN="libfm"
@@ -27,6 +27,7 @@ DEPEND="${RDEPEND}
 S="${WORKDIR}"/${MY_P}
 
 src_prepare() {
+	epatch "${FILESDIR}"/add_file_compare_attributes.patch
 	sed -ie '/^SUBDIR.*=/s#docs##' "${S}"/Makefile.am || die "sed failed"
 	sed -ie '/^[[:space:]]*docs/d' configure.ac || die "sed failed"
 	sed -i -e "s:-O0::" -e "/-DG_ENABLE_DEBUG/s: -g::" \

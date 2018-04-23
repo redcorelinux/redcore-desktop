@@ -45,6 +45,7 @@ S="${WORKDIR}"/${MY_P}
 REQUIRED_USE="udisks? ( automount ) doc? ( gtk ) gtk3? ( gtk )"
 
 src_prepare() {
+	epatch "${FILESDIR}"/add_file_compare_attributes.patch
 	if ! use doc; then
 		sed -ie '/^SUBDIR.*=/s#docs##' "${S}"/Makefile.am || die "sed failed"
 		sed -ie '/^[[:space:]]*docs/d' configure.ac || die "sed failed"
