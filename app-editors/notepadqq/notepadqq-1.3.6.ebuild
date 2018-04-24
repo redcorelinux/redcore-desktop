@@ -1,14 +1,11 @@
 # Copyright 1999-2016 Gentoo Foundation 
 # Distributed under the terms of the GNU General Public License v2 
-# $Header: /dev-util/notepadqq-9999.ebuild,v 0.1 frostwork $ 
 
 EAPI=5
-inherit eutils qmake-utils git-r3
+inherit eutils qmake-utils
 
 DESCRIPTION="Notepad++-like editor for Linux"
-EGIT_REPO_URI="https://github.com/${PN}/${PN}.git"
-EGIT_COMMIT="ab074d30e02d49e0fe6957c1523e7fed239aff7d"
-
+SRC_URI="https://github.com/notepadqq/notepadqq/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="amd64 x86"
