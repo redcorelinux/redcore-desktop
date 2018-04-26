@@ -99,9 +99,12 @@ src_configure() {
 		-DENABLE_PRINT_SUPPORT=$(usex printsupport)
 		-DENABLE_QT_GESTURE_EVENTS=$(usex printsupport)
 		-DENABLE_QT_WEBCHANNEL=$(usex webchannel)
+		-DENABLE_WEBKIT2=$(usex qml)
+		-DENABLE_JIT=$(usex jit)
 		-DUSE_GSTREAMER=$(usex gstreamer)
 		-DUSE_MEDIA_FOUNDATION=$(usex multimedia)
 		-DUSE_QT_MULTIMEDIA=$(usex multimedia)
+		-DCMAKE_BUILD_TYPE=Release
 		-DPORT=Qt
 		-DENABLE_TOOLS=OFF
 		-DENABLE_API_TESTS=OFF
