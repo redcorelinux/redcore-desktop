@@ -2,112 +2,141 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
+CMAKE_MAKEFILE_GENERATOR="ninja"
 PYTHON_COMPAT=( python2_7 )
-QT_MIN_VER="5.9.3:5"
-inherit cmake-utils python-any-r1 qt5-build-r10000 versionator
+USE_RUBY="ruby20 ruby21 ruby22 ruby23"
 
-DESCRIPTION="WebKit rendering library for the Qt5 framework (deprecated)"
+inherit check-reqs cmake-utils eutils flag-o-matic python-any-r1 ruby-single toolchain-funcs versionator
 
-if [[ ${QT5_BUILD_TYPE} == release ]]; then
-	KEYWORDS="amd64"
-fi
+MY_P="qtwebkit-5.212.0-alpha2" # FIXME: ${PV}
+DESCRIPTION="Open source web browser engine"
+HOMEPAGE="https://github.com/annulen/webkit"
+SRC_URI="https://github.com/annulen/webkit/releases/download/${MY_P}/${MY_P}.tar.xz"
+QV="5.2" # Minimum Qt version
 
-SRC_URI="https://github.com/annulen/webkit/releases/download/${P/_/-}/${P/_/-}.tar.xz"
+SLOT=5
 
-# TODO: qttestlib
+LICENSE="LGPL-2+ BSD"
+KEYWORDS="amd64"
 
-IUSE="geolocation gstreamer gles2 +jit multimedia opengl orientation printsupport qml test webchannel webp"
-REQUIRED_USE="?? ( gstreamer multimedia )"
+IUSE="+geolocation +gstreamer +jit +hyphen multimedia nsplugin orientation opengl +printsupport qml +webp X"
 
-RDEPEND="
-	dev-db/sqlite:3
-	dev-libs/icu:=
-	>=dev-libs/leveldb-1.18-r1
-	dev-libs/libxml2:2
-	dev-libs/libxslt
-	>=dev-qt/qtcore-${QT_MIN_VER}[icu]
-	>=dev-qt/qtgui-${QT_MIN_VER}
-	>=dev-qt/qtnetwork-${QT_MIN_VER}
-	>=dev-qt/qtsql-${QT_MIN_VER}
-	>=dev-qt/qtwidgets-${QT_MIN_VER}
-	media-libs/fontconfig:1.0
-	media-libs/libpng:0=
-	>=sys-libs/zlib-1.2.5
-	virtual/jpeg:0
-	virtual/opengl
-	x11-libs/libX11
-	x11-libs/libXcomposite
-	x11-libs/libXrender
-	geolocation? ( >=dev-qt/qtpositioning-${QT_MIN_VER} )
-	gstreamer? (
-		dev-libs/glib:2
-		media-libs/gstreamer:1.0
-		media-libs/gst-plugins-base:1.0
-	)
-	multimedia? ( >=dev-qt/qtmultimedia-${QT_MIN_VER}[widgets] )
-	opengl? (
-		>=dev-qt/qtgui-${QT_MIN_VER}[gles2=]
-		>=dev-qt/qtopengl-${QT_MIN_VER}
-	)
-	orientation? ( >=dev-qt/qtsensors-${QT_MIN_VER} )
-	printsupport? ( >=dev-qt/qtprintsupport-${QT_MIN_VER} )
-	qml? ( >=dev-qt/qtdeclarative-${QT_MIN_VER} )
-	webchannel? ( >=dev-qt/qtwebchannel-${QT_MIN_VER} )
-	webp? ( media-libs/libwebp:0= )
+REQUIRED_USE="
+	nsplugin? ( X )
+	qml? ( opengl )
+	?? ( gstreamer multimedia )
 "
+
+# Dependencies found at Source/cmake/OptionsQt.cmake
+RDEPEND="
+	dev-db/sqlite:3=
+	>=dev-libs/icu-3.8.1-r1:=
+	>=dev-libs/libxml2-2.8:2
+	>=dev-libs/libxslt-1.1.7
+	>=media-libs/libpng-1.4:0=
+	media-libs/libwebp:=
+	virtual/jpeg:0=
+	>=dev-qt/qtcore-${QV}
+	>=dev-qt/qtgui-${QV}
+	>=dev-qt/qtnetwork-${QV}
+	>=dev-qt/qtwidgets-${QV}
+
+	geolocation? ( >=dev-qt/qtpositioning-${QV} )
+	gstreamer? (
+		>=dev-libs/glib-2.36:2
+		>=media-libs/gstreamer-1.2:1.0
+		>=media-libs/gst-plugins-base-1.2:1.0
+		>=media-libs/gst-plugins-bad-1.6.0:1.0 )
+	hyphen? ( dev-libs/hyphen )
+	multimedia? ( >=dev-qt/qtmultimedia-${QV}[widgets] )
+	opengl? ( >=dev-qt/qtopengl-${QV} )
+	orientation? ( >=dev-qt/qtsensors-${QV} )
+	printsupport? ( >=dev-qt/qtprintsupport-${QV} )
+	qml? (
+		>=dev-qt/qtdeclarative-${QV}
+		>=dev-qt/qtwebchannel-${QV}[qml] )
+	X? (
+		x11-libs/libX11
+		x11-libs/libXcomposite
+		x11-libs/libXrender )
+"
+
+# Need real bison, not yacc
 DEPEND="${RDEPEND}
 	${PYTHON_DEPS}
-	dev-lang/ruby
-	dev-util/gperf
-	sys-devel/bison
-	sys-devel/flex
-	virtual/rubygems
-	test? ( >=dev-qt/qttest-${QT_MIN_VER} )
+	${RUBY_DEPS}
+	>=dev-lang/perl-5.10
+	>=dev-util/gperf-3.0.1
+	>=sys-devel/bison-2.4.3
+	>=sys-devel/flex-2.5.34
+	|| ( >=sys-devel/gcc-4.9 >=sys-devel/clang-3.3 )
+	virtual/pkgconfig
 "
 
-PATCHES=(
-	"${FILESDIR}/${PN}-fixes.patch"
-)
+S="${WORKDIR}/${MY_P}"
 
-S=${WORKDIR}/${P/_/-}
+CHECKREQS_DISK_BUILD="1G" # Debug build requires much more see bug #417307
+
+pkg_pretend() {
+	if [[ ${MERGE_TYPE} != "binary" ]] ; then
+		if is-flagq "-g*" && ! is-flagq "-g*0" ; then
+			einfo "Checking for sufficient disk space to build ${PN} with debugging CFLAGS"
+			check-reqs_pkg_pretend
+		fi
+	fi
+}
+
+pkg_setup() {
+	if [[ ${MERGE_TYPE} != "binary" ]] && is-flagq "-g*" && ! is-flagq "-g*0" ; then
+		check-reqs_pkg_setup
+	fi
+
+	python-any-r1_pkg_setup
+}
 
 src_prepare() {
-	# force using system library
-	sed -i -e 's/qtConfig(system-jpeg)/true/' \
-		-e 's/qtConfig(system-png)/true/' \
-		Tools/qmake/mkspecs/features/functions.prf || die
-
-	qt_use_disable_config opengl opengl Tools/qmake/mkspecs/features/functions.prf
-
-	qt_use_disable_mod geolocation positioning Tools/qmake/mkspecs/features/functions.prf
-	qt_use_disable_mod multimedia multimediawidgets Tools/qmake/mkspecs/features/functions.prf
-	qt_use_disable_mod orientation sensors Tools/qmake/mkspecs/features/functions.prf
-	qt_use_disable_mod printsupport printsupport Tools/qmake/mkspecs/features/functions.prf
-	qt_use_disable_mod qml quick Tools/qmake/mkspecs/features/functions.prf
-
-	use webp || sed -i -e '/config_libwebp: WEBKIT_CONFIG += use_webp/d' \
-		Tools/qmake/mkspecs/features/functions.prf || die
-
-	qt5-build-r10000_src_prepare
+	epatch "${FILESDIR}/qtwebkit-fixes.patch"
+	cmake-utils_src_prepare
 }
 
 src_configure() {
+	# Respect CC, otherwise fails on prefix #395875
+	tc-export CC
+
+	# older glibc needs this for INTPTR_MAX, bug #533976
+	if has_version "<sys-libs/glibc-2.18" ; then
+		append-cppflags "-D__STDC_LIMIT_MACROS"
+	fi
+
+	# Multiple rendering bugs on youtube, github, etc without this, bug #547224
+	append-flags $(test-flags -fno-strict-aliasing)
+
+	local ruby_interpreter=""
+
+	if has_version "virtual/rubygems[ruby_targets_ruby23]"; then
+		ruby_interpreter="-DRUBY_EXECUTABLE=$(type -P ruby23)"
+	elif has_version "virtual/rubygems[ruby_targets_ruby22]"; then
+		ruby_interpreter="-DRUBY_EXECUTABLE=$(type -P ruby22)"
+	elif has_version "virtual/rubygems[ruby_targets_ruby21]"; then
+		ruby_interpreter="-DRUBY_EXECUTABLE=$(type -P ruby21)"
+	else
+		ruby_interpreter="-DRUBY_EXECUTABLE=$(type -P ruby20)"
+	fi
+
 	local mycmakeargs=(
+		-DENABLE_API_TESTS=OFF
 		-DENABLE_DEVICE_ORIENTATION=$(usex orientation)
-		-DENABLE_GAMEPAD_DEPRECATED=OFF
 		-DENABLE_GEOLOCATION=$(usex geolocation)
-		-DENABLE_PRINT_SUPPORT=$(usex printsupport)
-		-DENABLE_QT_GESTURE_EVENTS=$(usex printsupport)
-		-DENABLE_QT_WEBCHANNEL=$(usex webchannel)
-		-DENABLE_WEBKIT2=$(usex qml)
 		-DENABLE_JIT=$(usex jit)
+		-DENABLE_NETSCAPE_PLUGIN_API=$(usex nsplugin)
+		-DENABLE_OPENGL=$(usex opengl)
+		-DENABLE_WEBKIT2=$(usex qml)
 		-DUSE_GSTREAMER=$(usex gstreamer)
-		-DUSE_MEDIA_FOUNDATION=$(usex multimedia)
 		-DUSE_QT_MULTIMEDIA=$(usex multimedia)
+		-DENABLE_X11_TARGET=$(usex X)
 		-DCMAKE_BUILD_TYPE=Release
 		-DPORT=Qt
-		-DENABLE_TOOLS=OFF
-		-DENABLE_API_TESTS=OFF
+		${ruby_interpreter}
 	)
 
 	cmake-utils_src_configure
@@ -118,11 +147,5 @@ src_compile() {
 }
 
 src_install() {
-	qt5-build-r10000_src_install
-
-	# bug 572056
-	if [[ ! -f ${D%/}${QT5_LIBDIR}/libQt5WebKit.so ]]; then
-		eerror "${CATEGORY}/${PF} could not build due to a broken ruby environment."
-		die 'Check "eselect ruby" and ensure you have a working ruby in your $PATH'
-	fi
+	cmake-utils_src_install
 }
