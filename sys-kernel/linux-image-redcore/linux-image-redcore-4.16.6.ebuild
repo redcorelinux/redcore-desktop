@@ -103,7 +103,7 @@ _dracut_initrd_create() {
 	if [[ -x $(which dracut) ]]; then
 		elog "Generating initrd for "${KV_FULL}", please wait"
 		addpredict /etc/ld.so.cache~
-		dracut -f --no-hostonly-cmdline --kver="${KV_FULL}" "${ROOT}"boot/initrd-"${KV_FULL}"
+		dracut -N -f --kver="${KV_FULL}" "${ROOT}"boot/initrd-"${KV_FULL}"
 	else
 		elog "It looks like you're not using dracut, you must generate an initrd by hand"
 	fi
