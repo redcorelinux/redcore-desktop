@@ -64,10 +64,6 @@ src_unpack() {
 }
 
 src_prepare() {
-	pushd "${WORKDIR}" &>/dev/null || die
-	eapply "${FILESDIR}"/vboxguest-4.1.0-log-use-c99.patch
-	popd &>/dev/null || die
-
 	cp "${FILESDIR}/${PN}-5-localconfig" LocalConfig.kmk || die
 	use X || echo "VBOX_WITH_X11_ADDITIONS :=" >> LocalConfig.kmk
 
