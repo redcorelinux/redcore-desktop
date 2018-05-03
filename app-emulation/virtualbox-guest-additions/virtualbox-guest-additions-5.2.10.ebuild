@@ -15,7 +15,7 @@ SRC_URI="https://download.virtualbox.org/virtualbox/${MY_PV}/${MY_P}.tar.bz2
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="amd64"
 IUSE="X"
 
 RDEPEND="
@@ -28,8 +28,7 @@ RDEPEND="
 		x11-libs/libXau
 		x11-libs/libXdmcp
 		x11-libs/libSM
-		x11-libs/libICE
-		x11-proto/glproto )
+		x11-libs/libICE )
 	sys-apps/dbus
 	~sys-kernel/virtualbox-guest-dkms-${PV}
 	!!x11-drivers/xf86-input-virtualbox
@@ -42,12 +41,13 @@ DEPEND="
 	sys-devel/bin86
 	sys-libs/pam
 	sys-power/iasl
-	X? ( x11-proto/renderproto )
-	!X? ( x11-proto/xproto )
+	x11-base/xorg-proto
 "
 PDEPEND="
 	X? ( x11-drivers/xf86-video-vboxvideo )
 "
+BUILD_TARGETS="all"
+BUILD_TARGET_ARCH="${ARCH}"
 
 S="${WORKDIR}/${MY_P}"
 
@@ -70,6 +70,13 @@ src_prepare() {
 
 	cp "${FILESDIR}/${PN}-5-localconfig" LocalConfig.kmk || die
 	use X || echo "VBOX_WITH_X11_ADDITIONS :=" >> LocalConfig.kmk
+
+	for vboxheader in {product,revision,version}-generated.h ; do
+		for mdir in vbox{guest,sf} ; do
+			ln -sf "${S}"/out/linux.${ARCH}/release/${vboxheader} \
+				"${WORKDIR}/${mdir}/${vboxheader}"
+		done
+	done
 
 	sed -e '/^check_gcc$/d' -i configure || die
 
@@ -145,7 +152,7 @@ src_install() {
 
 	insinto /etc/xdg/autostart
 	doins "${FILESDIR}"/vboxclient.desktop
-
+	
 	insinto /usr/share/doc/${PF}
 	doins "${FILESDIR}"/xorg.conf.vbox
 
