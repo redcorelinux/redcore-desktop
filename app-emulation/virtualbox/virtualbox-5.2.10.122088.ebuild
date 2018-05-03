@@ -29,7 +29,6 @@ SDK_P="VirtualBoxSDK-${SDK_PV}"
 DESCRIPTION="Family of powerful x86 virtualization products for enterprise and home use"
 HOMEPAGE="https://www.virtualbox.org/"
 SRC_URI="amd64? ( https://download.virtualbox.org/virtualbox/${MY_PV}/${MY_P}_amd64.run )
-	x86? ( https://download.virtualbox.org/virtualbox/${MY_PV}/${MY_P}_x86.run )
 	https://download.virtualbox.org/virtualbox/${MY_PV}/${EXTP_P}.vbox-extpack -> ${EXTP_P}.tar.gz"
 
 LICENSE="GPL-2 PUEL"
@@ -77,7 +76,7 @@ RDEPEND="!app-emulation/virtualbox-additions
 	${PYTHON_DEPS}"
 
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
-S=${WORKDIR}
+S="${WORKDIR}"
 
 QA_PREBUILT="opt/VirtualBox/*"
 

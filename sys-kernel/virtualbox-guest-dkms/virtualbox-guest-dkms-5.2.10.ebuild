@@ -21,7 +21,7 @@ RDEPEND="${DEPEND}"
 S="${WORKDIR}"/usr/src/vboxguest-${PV}_OSE
 
 src_compile() {
-	:
+	:;
 }
 
 src_install() {

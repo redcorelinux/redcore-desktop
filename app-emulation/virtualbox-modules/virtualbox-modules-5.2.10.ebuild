@@ -27,7 +27,7 @@ pkg_setup() {
 }
 
 src_compile() {
-	:
+	:;
 }
 
 src_install() {
