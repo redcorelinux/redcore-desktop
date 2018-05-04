@@ -15,6 +15,7 @@ SRC_URI="https://download.virtualbox.org/virtualbox/${MY_PV}/${MY_P}.tar.bz2
 
 LICENSE="GPL-2"
 SLOT="0"
+KEYWORDS="amd64"
 IUSE="X"
 
 RDEPEND="
@@ -35,7 +36,6 @@ RDEPEND="
 "
 DEPEND="
 	${RDEPEND}
-	>=dev-util/kbuild-0.1.9998.3127
 	>=dev-lang/yasm-0.6.2
 	sys-devel/bin86
 	sys-libs/pam
@@ -58,20 +58,11 @@ pkg_setup() {
 
 src_unpack() {
 	unpack ${A}
-	cd "${S}"
-	rm -rf kBuild/bin tools
 }
 
 src_prepare() {
 	cp "${FILESDIR}/${PN}-5-localconfig" LocalConfig.kmk || die
 	use X || echo "VBOX_WITH_X11_ADDITIONS :=" >> LocalConfig.kmk
-
-	for vboxheader in {product,revision,version}-generated.h ; do
-		for mdir in vbox{guest,sf} ; do
-			ln -sf "${S}"/out/linux.${ARCH}/release/${vboxheader} \
-				"${WORKDIR}/${mdir}/${vboxheader}"
-		done
-	done
 
 	sed -e '/^check_gcc$/d' -i configure || die
 
@@ -102,7 +93,7 @@ src_configure() {
 }
 
 src_compile() {
-	MAKE="kmk" \
+	MAKE=""${S}"/kBuild/bin/linux.amd64/kmk" \
 	emake TOOL_YASM_AS=yasm \
 	VBOX_ONLY_ADDITIONS=1 \
 	KBUILD_VERBOSE=2
