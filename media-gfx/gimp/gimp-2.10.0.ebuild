@@ -12,6 +12,7 @@ inherit versionator virtualx autotools gnome2 multilib python-single-r1 ltprune
 DESCRIPTION="GNU Image Manipulation Program"
 HOMEPAGE="https://www.gimp.org/"
 SRC_URI="mirror://gimp/v$(get_version_component_range 1-2)/${MY_P}.tar.bz2"
+KEYWORDS="~amd64"
 LICENSE="GPL-3 LGPL-3"
 SLOT="2"
 
