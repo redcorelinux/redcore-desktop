@@ -1,0 +1,87 @@
+diff -Nur a/data/scripts/wayland-session b/data/scripts/wayland-session
+--- a/data/scripts/wayland-session	2016-08-22 18:51:12.000000000 +0100
++++ b/data/scripts/wayland-session	2018-05-04 11:53:18.083001476 +0100
+@@ -11,13 +11,6 @@
+     [ -z "$BASH" ] && exec $SHELL $0 "$@"
+     set +o posix
+     [ -f /etc/profile ] && . /etc/profile
+-    if [ -f $HOME/.bash_profile ]; then
+-      . $HOME/.bash_profile
+-    elif [ -f $HOME/.bash_login ]; then
+-      . $HOME/.bash_login
+-    elif [ -f $HOME/.profile ]; then
+-      . $HOME/.profile
+-    fi
+     ;;
+ */zsh)
+     [ -z "$ZSH_NAME" ] && exec $SHELL $0 "$@"
+@@ -25,22 +18,19 @@
+     zhome=${ZDOTDIR:-$HOME}
+     # zshenv is always sourced automatically.
+     [ -f $zdir/zprofile ] && . $zdir/zprofile
+-    [ -f $zhome/.zprofile ] && . $zhome/.zprofile
+     [ -f $zdir/zlogin ] && . $zdir/zlogin
+-    [ -f $zhome/.zlogin ] && . $zhome/.zlogin
+     emulate -R sh
+     ;;
+   */csh|*/tcsh)
+     # [t]cshrc is always sourced automatically.
+     # Note that sourcing csh.login after .cshrc is non-standard.
+     wlsess_tmp=`mktemp /tmp/wlsess-env-XXXXXX`
+-    $SHELL -c "if (-f /etc/csh.login) source /etc/csh.login; if (-f ~/.login) source ~/.login; /bin/sh -c 'export -p' >! $wlsess_tmp"
++    $SHELL -c "if (-f /etc/csh.login) source /etc/csh.login; /bin/sh -c 'export -p' >! $wlsess_tmp"
+     . $wlsess_tmp
+     rm -f $wlsess_tmp
+     ;;
+   *) # Plain sh, ksh, and anything we do not know.
+     [ -f /etc/profile ] && . /etc/profile
+-    [ -f $HOME/.profile ] && . $HOME/.profile
+     ;;
+ esac
+ 
+diff -Nur a/data/scripts/Xsession b/data/scripts/Xsession
+--- a/data/scripts/Xsession	2016-08-22 18:51:12.000000000 +0100
++++ b/data/scripts/Xsession	2018-05-04 11:53:38.548659869 +0100
+@@ -11,13 +11,6 @@
+     [ -z "$BASH" ] && exec $SHELL $0 "$@"
+     set +o posix
+     [ -f /etc/profile ] && . /etc/profile
+-    if [ -f $HOME/.bash_profile ]; then
+-      . $HOME/.bash_profile
+-    elif [ -f $HOME/.bash_login ]; then
+-      . $HOME/.bash_login
+-    elif [ -f $HOME/.profile ]; then
+-      . $HOME/.profile
+-    fi
+     ;;
+ */zsh)
+     [ -z "$ZSH_NAME" ] && exec $SHELL $0 "$@"
+@@ -25,27 +18,23 @@
+     zhome=${ZDOTDIR:-$HOME}
+     # zshenv is always sourced automatically.
+     [ -f $zdir/zprofile ] && . $zdir/zprofile
+-    [ -f $zhome/.zprofile ] && . $zhome/.zprofile
+     [ -f $zdir/zlogin ] && . $zdir/zlogin
+-    [ -f $zhome/.zlogin ] && . $zhome/.zlogin
+     emulate -R sh
+     ;;
+   */csh|*/tcsh)
+     # [t]cshrc is always sourced automatically.
+     # Note that sourcing csh.login after .cshrc is non-standard.
+     xsess_tmp=`mktemp /tmp/xsess-env-XXXXXX`
+-    $SHELL -c "if (-f /etc/csh.login) source /etc/csh.login; if (-f ~/.login) source ~/.login; /bin/sh -c 'export -p' >! $xsess_tmp"
++    $SHELL -c "if (-f /etc/csh.login) source /etc/csh.login; /bin/sh -c 'export -p' >! $xsess_tmp"
+     . $xsess_tmp
+     rm -f $xsess_tmp
+     ;;
+   *) # Plain sh, ksh, and anything we do not know.
+     [ -f /etc/profile ] && . /etc/profile
+-    [ -f $HOME/.profile ] && . $HOME/.profile
+     ;;
+ esac
+ 
+ [ -f /etc/xprofile ] && . /etc/xprofile
+-[ -f $HOME/.xprofile ] && . $HOME/.xprofile
+ 
+ # run all system xinitrc shell scripts.
+ if [ -d /etc/X11/xinit/xinitrc.d ]; then
