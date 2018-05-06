@@ -15,6 +15,8 @@ SLOT="0"
 KEYWORDS="amd64 x86"
 IUSE="+gui"
 
+PATCHES=( "${FILESDIR}"/30fb816f2482fd06a60b557de5bf7cf6e8212d2a.patch )
+
 DEPEND="dev-lang/python[sqlite]"
 RDEPEND="${DEPEND}
 	app-portage/gentoolkit[${PYTHON_USEDEP}]
