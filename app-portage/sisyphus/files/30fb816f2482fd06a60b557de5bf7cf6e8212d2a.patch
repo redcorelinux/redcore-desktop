@@ -1,5 +1,5 @@
 diff --git a/src/helpers/make_local_csv b/src/helpers/make_local_csv
-index 91e00bb..fadc41e 100755
+index 91e00bb..50e704b 100755
 --- a/src/helpers/make_local_csv
 +++ b/src/helpers/make_local_csv
 @@ -1,7 +1,7 @@
@@ -7,7 +7,7 @@ index 91e00bb..fadc41e 100755
  
  makecsv() {
 -	qlist -ICScv|sed -e "s/\//\,/" -e "s/[\t ]/\,/" -e "s/\:/\,/" >> /tmp/localPackagesPre.csv
-+	qlist -ICSv|sed -e "s/\//\,/" -e "s/[\t ]/\,/" -e "s/\:/\,/" >> /tmp/localPackagesPre.csv
++	qlist -ICSv|sed -e "s/\//\,/" -e "s/[\t ]/\,/" -e "s/\:/\,/" -re "s/-([0-9])/,\1/" >> /tmp/localPackagesPre.csv
  	mv /tmp/localPackagesPre.csv /var/lib/sisyphus/csv/
  }
  
