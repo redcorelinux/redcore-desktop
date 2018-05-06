@@ -81,4 +81,9 @@ src_install() {
 
 	sed -e "s/@libdir@/$(get_libdir)/" "${FILESDIR}"/${PN}.conf.in > ${PN}.conf || die
 	newconfd ${PN}.conf ${PN}
+
+	# workaround for "RUN{builtin}: 'uaccess' unknown /lib64/udev/rules.d/73-seat-late.rules:15" warning
+	# we can safely remove the rule since it's part of systemd, and eudev doesn't support ACL's anyway
+	# this should be fixed in >=sys-fs/eudev-3.3 and >=sys-auth/elogind-235.3
+	rm -rf ${ED}lib/udev/rules.d/73-seat-late.rules
 }
