@@ -1,6 +1,5 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/x11-apps/xinit/xinit-1.3.3.ebuild,v 1.10 2013/10/08 05:03:50 ago Exp $
 
 EAPI=5
 
@@ -9,7 +8,7 @@ inherit xorg-2
 DESCRIPTION="X Window System initializer"
 
 LICENSE="${LICENSE} GPL-2"
-KEYWORDS="alpha amd64 arm hppa ia64 ~mips ppc ppc64 ~s390 ~sh sparc x86 ~amd64-fbsd ~x86-fbsd ~arm-linux ~x86-linux"
+KEYWORDS="alpha amd64 ~arm ~arm64 ~hppa ia64 ~mips ppc ppc64 ~s390 ~sh sparc x86 ~amd64-fbsd ~x86-fbsd ~arm-linux ~x86-linux"
 IUSE="+minimal"
 
 RDEPEND="
@@ -27,19 +26,15 @@ PDEPEND="x11-apps/xrdb
 	)
 "
 
-# if a user uses startx to start the session, but then exits it from DE
-# X server doesnt catch session termination and remove the authfile
-# because of this tens of .serverauthfile files can be found in $HOME
-# this patch makes X to use .Xauthority as authfile, as it should be
-
 PATCHES=(
 	"${FILESDIR}/${PN}-1.3.3-gentoo-customizations.patch"
-	"${FILESDIR}/use_xauthority_as_xserverauthfile.patch" 
+	"${FILESDIR}/${PN}-1.4.0-startx-current-vt.patch"
+	"${FILESDIR}/use_xauthority_as_xserverauthfile.patch"
 )
 
 src_configure() {
 	XORG_CONFIGURE_OPTIONS=(
-		--with-xinitdir=/etc/X11/xinit
+		--with-xinitdir="${EPREFIX}"/etc/X11/xinit
 	)
 	xorg-2_src_configure
 }
@@ -49,11 +44,12 @@ src_install() {
 
 	exeinto /etc/X11
 	doexe "${FILESDIR}"/chooser.sh "${FILESDIR}"/startDM.sh
+	exeinto /etc/X11/Sessions
+	doexe "${FILESDIR}"/Xsession
 	exeinto /etc/X11/xinit
-	doexe "${FILESDIR}"/xserverrc
+	newexe "${FILESDIR}"/xserverrc.1 xserverrc
 	exeinto /etc/X11/xinit/xinitrc.d/
-	doexe "${FILESDIR}/00-xhost"
-
+	doexe "${FILESDIR}"/00-xhost
 }
 
 pkg_postinst() {
