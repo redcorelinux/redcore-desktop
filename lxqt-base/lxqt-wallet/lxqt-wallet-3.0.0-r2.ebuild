@@ -1,6 +1,5 @@
 # Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=6
 
@@ -14,7 +13,7 @@ EGIT_COMMIT="1ad0c22c169c6fa43b767ae8bdbc972af376b8d1"
 
 LICENSE="BSD-2"
 SLOT="0"
-KEYWORDS="amd64 x86"
+KEYWORDS="amd64"
 IUSE="kwallet +libsecret"
 
 DEPEND="dev-qt/qtcore:5
