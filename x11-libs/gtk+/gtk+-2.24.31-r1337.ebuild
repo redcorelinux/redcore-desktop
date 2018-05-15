@@ -115,8 +115,8 @@ set_gtk2_confdir() {
 
 src_prepare() {
 	# marshalers code was pre-generated with glib-2.31, upstream bug #662109
-	rm -v gdk/gdkmarshalers.c gtk/gtkmarshal.c gtk/gtkmarshalers.c \
-		perf/marshalers.c || die
+	rm -v gdk/gdkmarshalers.{c,h} gtk/gtkmarshal.{c,h} gtk/gtkmarshalers.{c,h} \
+		perf/marshalers.{c,h} gtk/gtkaliasdef.c gtk/gtkalias.h || die
 
 	# Stop trying to build unmaintained docs, bug #349754, upstream bug #623150
 	strip_builddir SUBDIRS tutorial docs/Makefile.{am,in}
@@ -172,6 +172,8 @@ src_prepare() {
 
 	# Fix beep when overwriting at the end of a gtkentry, from gtk-2-24 branch
 	eapply "${FILESDIR}"/${PN}-2.24.31-fix-gtkentry-beep.patch
+
+	eapply "${FILESDIR}"/${PN}-2.24.31-fix-gtk-symbols-for-glib-2.54.3.patch
 
 	eautoreconf
 	gnome2_src_prepare
