@@ -22,6 +22,8 @@ RDEPEND="${DEPEND}
 	sys-fs/mtools
 	sys-fs/squashfs-tools"
 
+PATCHES=( "${FILESDIR}"/master-branch.patch )
+
 src_install() {
 	default
 	dosym ../../usr/bin/"${PN}".sh usr/bin/"${PN}"
