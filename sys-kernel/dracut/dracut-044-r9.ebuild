@@ -70,6 +70,7 @@ PATCHES=(
 	""${FILESDIR}"/"${P}"-preserve-xattrs-when-copying.patch"
 	""${FILESDIR}"/"${P}"-backport-fix-for-microcode-loading.patch"
 	""${FILESDIR}"/"${P}"-ext4-and-f2fs-need-crc32X-too.patch"
+	""${FILESDIR}"/sort-fixup-creating-early-microcode.patch"
 )
 
 #
