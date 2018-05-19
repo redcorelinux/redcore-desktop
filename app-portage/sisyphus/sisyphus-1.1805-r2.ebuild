@@ -15,7 +15,8 @@ SLOT="0"
 KEYWORDS="amd64 x86"
 IUSE="+gui"
 
-PATCHES=( "${FILESDIR}"/30fb816f2482fd06a60b557de5bf7cf6e8212d2a.patch )
+PATCHES=( "${FILESDIR}"/30fb816f2482fd06a60b557de5bf7cf6e8212d2a.patch
+	"${FILESDIR}"/4fa81a14d7e657e3976c26c64748b5963a55c56d.patch )
 
 DEPEND="dev-lang/python[sqlite]"
 RDEPEND="${DEPEND}
@@ -55,8 +56,4 @@ src_install() {
 		rm -rf ${ED}usr/share/pixmaps
 		rm -rf ${ED}usr/share/polkit-1
 	fi
-}
-
-pkg_postinst() {
-	sisyphus rescue
 }
