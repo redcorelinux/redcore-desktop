@@ -26,7 +26,6 @@ DEPEND="
 	$(add_qt_dep qtgui)
 	$(add_qt_dep qtwidgets)
 	dev-libs/glib:2
-	gnome-base/gsettings-desktop-schemas
 	x11-libs/gtk+:2
 	x11-libs/gtk+:3
 	x11-libs/libXcursor
@@ -35,6 +34,8 @@ RDEPEND="${DEPEND}
 	$(add_plasma_dep kde-cli-tools)
 	!kde-plasma/kde-gtk-config:4
 "
+
+PATCHES=( "${FILESDIR}"/redhat-or-not-go-dconf-and-flatpak-yourself-or-try-again-with-a-option-to-disable.patch )
 
 src_configure() {
 	local mycmakeargs=(
