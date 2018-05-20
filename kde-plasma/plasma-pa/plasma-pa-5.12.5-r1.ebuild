@@ -23,7 +23,9 @@ DEPEND="
 	dev-libs/glib:2
 	gnome-base/gconf:2
 	media-libs/libcanberra
-	media-sound/pulseaudio[gnome]
+	media-sound/pulseaudio
 "
 
 RDEPEND="${DEPEND}"
+
+PATCHES=( "${FILESDIR}"/plasma-pa-no-GCONF-we-DONT-need-thx.patch )
