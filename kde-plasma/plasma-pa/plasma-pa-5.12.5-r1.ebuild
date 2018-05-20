@@ -21,7 +21,6 @@ DEPEND="
 	$(add_qt_dep qtgui)
 	$(add_qt_dep qtwidgets)
 	dev-libs/glib:2
-	gnome-base/gconf:2
 	media-libs/libcanberra
 	media-sound/pulseaudio
 "
