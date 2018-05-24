@@ -16,7 +16,8 @@ KEYWORDS="amd64 x86"
 IUSE="+gui"
 
 PATCHES=( "${FILESDIR}"/30fb816f2482fd06a60b557de5bf7cf6e8212d2a.patch
-	"${FILESDIR}"/4fa81a14d7e657e3976c26c64748b5963a55c56d.patch )
+	"${FILESDIR}"/4fa81a14d7e657e3976c26c64748b5963a55c56d.patch
+	"${FILESDIR}"/3e34420beb774d76d1f3e6b4ed0efd2c3c5b3e65.patch )
 
 DEPEND="dev-lang/python[sqlite]"
 RDEPEND="${DEPEND}
