@@ -1,0 +1,12 @@
+diff --git a/kernel/sched/topology.c b/kernel/sched/topology.c
+index 093f2ceba..808998fe1 100644
+--- a/kernel/sched/topology.c
++++ b/kernel/sched/topology.c
+@@ -1164,6 +1164,7 @@ sd_init(struct sched_domain_topology_level *tl,
+ 		sd->smt_gain = 1178; /* ~15% */
+ 
+ 	} else if (sd->flags & SD_SHARE_PKG_RESOURCES) {
++		sd->flags |= SD_PREFER_SIBLING;
+ 		sd->imbalance_pct = 117;
+ 		sd->cache_nice_tries = 1;
+ 		sd->busy_idx = 2;

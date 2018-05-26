@@ -8,9 +8,9 @@ inherit eutils
 EXTRAVERSION="redcore-lts"
 KV_FULL="${PV}-${EXTRAVERSION}"
 
-DESCRIPTION="Official Redcore Linux LTS Kernel Sources"
-HOMEPAGE="https://gitlab.com/redcore/kernel"
-SRC_URI="https://github.com/redcorelinux/kernel/archive/linux-${KV_FULL}.tar.gz"
+DESCRIPTION="Official Redcore Linux Kernel Sources"
+HOMEPAGE="https://redcorelinux.org"
+SRC_URI="https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-${PV}.tar.xz"
 
 KEYWORDS="amd64"
 LICENSE="GPL-2"
@@ -25,7 +25,16 @@ DEPEND="
 	sys-devel/make"
 RDEPEND="${DEPEND}"
 
-S="$WORKDIR/kernel-linux-${KV_FULL}"
+PATCHES=( "${FILESDIR}"/enable_alx_wol.patch
+	"${FILESDIR}"/introduce-NUMA-identity-node-sched-domain.patch
+	"${FILESDIR}"/k10temp-add-ZEN-support.patch
+	"${FILESDIR}"/mute-pps_state_mismatch.patch
+	"${FILESDIR}"/restore-SD_PREFER_SIBLING-on-MC-domains.patch
+	"${FILESDIR}"/Revert-ath10k-activate-user-space-firmware-loading.patch
+	"${FILESDIR}"/linux-hardened.patch
+	"${FILESDIR}"/uksm-for-linux-hardened.patch )
+
+S="${WORKDIR}"/linux-"${PV}"
 
 pkg_setup() {
 	export KBUILD_BUILD_USER="nexus"
@@ -39,7 +48,7 @@ src_prepare() {
 	default
 	emake mrproper
 	sed -ri "s|^(EXTRAVERSION =).*|\1 -${EXTRAVERSION}|" Makefile
-	cp "redcore/config/"${EXTRAVERSION}"-4.14-amd64.config" .config
+	cp "${FILESDIR}"/"${EXTRAVERSION}"-amd64.config .config
 }
 
 src_compile() {
@@ -52,7 +61,7 @@ src_install() {
 }
 
 _kernel_sources_delete() {
-    rm -rf "${ROOT}"usr/src/linux-"${KV_FULL}"
+	rm -rf "${ROOT}"usr/src/linux-"${KV_FULL}"
 }
 
 pkg_postrm() {

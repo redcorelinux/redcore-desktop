@@ -8,9 +8,9 @@ inherit eutils
 EXTRAVERSION="redcore-lts"
 KV_FULL="${PV}-${EXTRAVERSION}"
 
-DESCRIPTION="Official Redcore Linux LTS Kernel Image"
-HOMEPAGE="https://gitlab.com/redcore/kernel"
-SRC_URI="https://github.com/redcorelinux/kernel/archive/linux-${KV_FULL}.tar.gz"
+DESCRIPTION="Official Redcore Linux Kernel Image"
+HOMEPAGE="https://redcorelinux.org"
+SRC_URI="https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-${PV}.tar.xz"
 
 KEYWORDS="amd64"
 LICENSE="GPL-2"
@@ -25,13 +25,22 @@ DEPEND="
 	sys-devel/make
 	cryptsetup? ( sys-fs/cryptsetup )
 	dmraid? ( sys-fs/dmraid )
-	dracut? ( sys-kernel/dracut )
-	dkms? ( sys-kernel/dkms ~sys-kernel/linux-headers-lts-${PV} )
+	dracut? ( >=sys-kernel/dracut-0.44-r8 )
+	dkms? ( sys-kernel/dkms ~sys-kernel/linux-sources-redcore-lts-${PV} )
 	mdadm? ( sys-fs/mdadm )
-	>=sys-kernel/linux-firmware-20171206"
+	>=sys-kernel/linux-firmware-20180314"
 RDEPEND="${DEPEND}"
 
-S="$WORKDIR/kernel-linux-${KV_FULL}"
+PATCHES=( "${FILESDIR}"/enable_alx_wol.patch
+	"${FILESDIR}"/introduce-NUMA-identity-node-sched-domain.patch
+	"${FILESDIR}"/k10temp-add-ZEN-support.patch
+	"${FILESDIR}"/mute-pps_state_mismatch.patch
+	"${FILESDIR}"/restore-SD_PREFER_SIBLING-on-MC-domains.patch	
+	"${FILESDIR}"/Revert-ath10k-activate-user-space-firmware-loading.patch
+	"${FILESDIR}"/linux-hardened.patch
+	"${FILESDIR}"/uksm-for-linux-hardened.patch )
+
+S="${WORKDIR}"/linux-"${PV}"
 
 pkg_setup() {
 	export KBUILD_BUILD_USER="nexus"
@@ -45,7 +54,7 @@ src_prepare() {
 	default
 	emake mrproper
 	sed -ri "s|^(EXTRAVERSION =).*|\1 -${EXTRAVERSION}|" Makefile
-	cp "redcore/config/"${EXTRAVERSION}"-4.14-amd64.config" .config
+	cp "${FILESDIR}"/"${EXTRAVERSION}"-amd64.config .config
 }
 
 src_compile() {
@@ -90,7 +99,7 @@ _dracut_initrd_create() {
 	if [[ -x $(which dracut) ]]; then
 		elog "Generating initrd for "${KV_FULL}", please wait"
 		addpredict /etc/ld.so.cache~
-		dracut -f --no-hostonly-cmdline --kver="${KV_FULL}" "${ROOT}"boot/initrd-"${KV_FULL}"
+		dracut -N -f --kver="${KV_FULL}" "${ROOT}"boot/initrd-"${KV_FULL}"
 	else
 		elog "It looks like you're not using dracut, you must generate an initrd by hand"
 	fi
