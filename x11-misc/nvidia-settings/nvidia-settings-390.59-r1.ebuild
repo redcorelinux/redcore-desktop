@@ -36,7 +36,7 @@ RDEPEND="${COMMON_DEPEND}
 	x11-drivers/nvidia-drivers"
 DEPEND="${RDEPEND}
 	virtual/pkgconfig
-	x11-proto/xproto"
+	x11-base/xorg-proto"
 
 src_compile() {
 	einfo "Building libXNVCtrl..."
