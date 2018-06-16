@@ -21,7 +21,6 @@ DEPEND="dev-lang/python[sqlite]"
 RDEPEND="${DEPEND}
 	vlc? ( media-video/vlc )
 	dev-python/pillow[${PYTHON_USEDEP}]
-	dev-python/python-virtkey[${PYTHON_USEDEP}]
 	dev-python/pygtk[${PYTHON_USEDEP}]
 	media-tv/sopcast
 	media-video/rtmpdump
