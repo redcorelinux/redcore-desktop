@@ -35,7 +35,7 @@ RDEPEND="${COMMON_DEPEND}
 DEPEND="${COMMON_DEPEND}
 	app-text/asciidoc
 	virtual/pkgconfig
-	x11-proto/xproto
+	x11-base/xorg-proto
 	drm? ( x11-libs/libdrm )"
 
 nobuildit() { use $1 || echo yes ; }
