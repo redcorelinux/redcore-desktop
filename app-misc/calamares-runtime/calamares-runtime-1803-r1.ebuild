@@ -23,24 +23,24 @@ RDEPEND="
 	)
 	branding? ( ~x11-themes/redcore-artwork-calamares-${PV} )
 	~app-misc/calamares-config-redcore-${PV}
-	>=dev-qt/designer-5.6.0:5
-	>=dev-qt/linguist-tools-5.6.0:5
-	>=dev-qt/qtconcurrent-5.6.0:5
-	>=dev-qt/qtcore-5.6.0:5
-	>=dev-qt/qtdbus-5.6.0:5
-	>=dev-qt/qtdeclarative-5.6.0:5
-	>=dev-qt/qtgui-5.6.0:5
-	>=dev-qt/qtnetwork-5.6.0:5
-	>=dev-qt/qtopengl-5.6.0:5
-	>=dev-qt/qtprintsupport-5.6.0:5
-	>=dev-qt/qtscript-5.6.0:5
-	>=dev-qt/qtsvg-5.6.0:5
-	>=dev-qt/qttest-5.6.0:5
-	>=dev-qt/qtwebengine-5.6.0:5
-	>=dev-qt/qtwebchannel-5.6.0:5
-	>=dev-qt/qtwidgets-5.6.0:5
-	>=dev-qt/qtxml-5.6.0:5
-	>=dev-qt/qtxmlpatterns-5.6.0:5
+	>=dev-qt/designer-5.9.0:5
+	>=dev-qt/linguist-tools-5.9.0:5
+	>=dev-qt/qtconcurrent-5.9.0:5
+	>=dev-qt/qtcore-5.9.0:5
+	>=dev-qt/qtdbus-5.9.0:5
+	>=dev-qt/qtdeclarative-5.9.0:5
+	>=dev-qt/qtgui-5.9.0:5
+	>=dev-qt/qtnetwork-5.9.0:5
+	>=dev-qt/qtopengl-5.9.0:5
+	>=dev-qt/qtprintsupport-5.9.0:5
+	>=dev-qt/qtscript-5.9.0:5
+	>=dev-qt/qtsvg-5.9.0:5
+	>=dev-qt/qttest-5.9.0:5
+	>=dev-qt/qtwebengine-5.9.0:5
+	>=dev-qt/qtwebchannel-5.9.0:5
+	>=dev-qt/qtwidgets-5.9.0:5
+	>=dev-qt/qtxml-5.9.0:5
+	>=dev-qt/qtxmlpatterns-5.9.0:5
 	>=dev-cpp/yaml-cpp-0.5.1
 	>=dev-libs/libatasmart-0.19
 	>=kde-frameworks/kconfig-5.18.0
@@ -54,7 +54,7 @@ RDEPEND="
 	>=sys-apps/dmidecode-2.12-r1
 	>=sys-fs/squashfs-tools-4.3:0[xattr]
 	>=sys-power/upower-0.99.0-r1
-	>=sys-libs/kpmcore-3.0.2
+	>=sys-libs/kpmcore-3.2.0
 	sys-boot/os-prober
 	sys-auth/polkit-qt5
 	sys-fs/udisks:2
