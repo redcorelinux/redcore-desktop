@@ -1295,18 +1295,6 @@ diff -Nur a/include/linux/vmalloc.h b/include/linux/vmalloc.h
  #ifndef CONFIG_MMU
  extern void *__vmalloc_node_flags(unsigned long size, int node, gfp_t flags);
  static inline void *__vmalloc_node_flags_caller(unsigned long size, int node,
-diff -Nur a/include/net/regulatory.h b/include/net/regulatory.h
---- a/include/net/regulatory.h	2018-05-25 15:18:02.000000000 +0100
-+++ b/include/net/regulatory.h	2018-05-26 19:24:34.836783066 +0100
-@@ -78,7 +78,7 @@
- 	int wiphy_idx;
- 	enum nl80211_reg_initiator initiator;
- 	enum nl80211_user_reg_hint_type user_reg_hint_type;
--	char alpha2[2];
-+	char alpha2[3];
- 	enum nl80211_dfs_regions dfs_region;
- 	bool intersect;
- 	bool processed;
 diff -Nur a/init/Kconfig b/init/Kconfig
 --- a/init/Kconfig	2018-05-25 15:18:02.000000000 +0100
 +++ b/init/Kconfig	2018-05-26 19:24:34.836783066 +0100
