@@ -1,4 +1,4 @@
-# Copyright 2016-2017 Redcore Linux Project
+# Copyright 2016-2018 Redcore Linux Project
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -7,7 +7,7 @@ inherit eutils
 
 DESCRIPTION="Versatile Advanced Script for ISO and Latest Enchantments"
 HOMEPAGE="https://redcorelinux.org"
-SRC_URI="https://github.com/redcorelinux/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://gitlab.com/redcore/${PN}/-/archive/v${PV}/${PN}-v${PV}.tar.gz -> ${P}.tar.gz"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="amd64"
@@ -22,7 +22,7 @@ RDEPEND="${DEPEND}
 	sys-fs/mtools
 	sys-fs/squashfs-tools"
 
-PATCHES=( "${FILESDIR}"/master-branch.patch )
+S=${WORKDIR}/${PN}-v${PV}
 
 src_install() {
 	default
