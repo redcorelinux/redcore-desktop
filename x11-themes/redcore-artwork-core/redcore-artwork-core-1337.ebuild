@@ -39,5 +39,5 @@ src_install() {
 
 pkg_postinst() {
 	# regenerate initramfs to include plymouth theme changes
-	dracut -f --no-hostonly-cmdline
+	dracut -N -f --no-hostonly-cmdline
 }
