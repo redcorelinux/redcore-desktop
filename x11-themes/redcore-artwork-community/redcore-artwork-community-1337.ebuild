@@ -19,10 +19,10 @@ RDEPEND="${DEPEND}"
 S="${WORKDIR}"/"${PN}"
 
 src_install() {
-	# Wallpapers by V3n3RiX
+	# default wallpaper
 	dodir usr/share/backgrounds/redcore-community
 	insinto usr/share/backgrounds/redcore-community
-	doins -r by_venerix/*
+	doins -r defaults/*
 
 	# Wallpapers by pentruprieteni.com, thanks
 	dodir usr/share/backgrounds/by_pp
@@ -33,6 +33,16 @@ src_install() {
 	dodir usr/share/backgrounds/by_mellita
 	insinto usr/share/backgrounds/by_mellita
 	doins -r by_mellita/*
+
+	# Wallpapers by Ioan Parjolea (joly), thanks
+	dodir usr/share/backgrounds/by_joly
+	insinto usr/share/backgrounds/by_joly
+	doins -r by_joly/*
+
+	# Wallpapers by Toma S. Muntean, thanks
+	dodir usr/share/backgrounds/by_tomas
+	insinto usr/share/backgrounds/by_tomas
+	doins -r by_tomas/*
 
 	# If you want your wallpapers in here, let me know
 	# I will add them only if you own the rights for them
