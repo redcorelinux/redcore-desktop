@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
-inherit qt5-build
+inherit qt5-build-r10000
 
 DESCRIPTION="Implementation of the WebSocket protocol for the Qt5 framework"
 
@@ -23,5 +23,5 @@ RDEPEND="${DEPEND}"
 src_prepare() {
 	qt_use_disable_mod qml quick src/src.pro
 
-	qt5-build_src_prepare
+	qt5-build-r10000_src_prepare
 }

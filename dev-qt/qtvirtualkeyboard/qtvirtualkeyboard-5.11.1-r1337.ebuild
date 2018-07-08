@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
-inherit qt5-build
+inherit qt5-build-r10000
 
 DESCRIPTION="Virtual keyboard plugin for the Qt5 framework"
 
@@ -34,5 +34,5 @@ src_configure() {
                         lang-pt_PT lang-ro_RO lang-ru_RU lang-sv_SE"
 	)
 
-	qt5-build_src_configure
+	qt5-build-r10000_src_configure
 }

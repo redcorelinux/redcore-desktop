@@ -3,7 +3,7 @@
 
 EAPI=6
 QT5_MODULE="qttools"
-inherit qt5-build
+inherit qt5-build-r10000
 
 DESCRIPTION="Qt documentation generator"
 
@@ -33,5 +33,5 @@ src_prepare() {
 	# QT_TARGET_SUBDIRS causing build to fail
 	sed -e '1iload(qt_find_clang)\' -i src/qdoc/qdoc.pro || die
 
-	qt5-build_src_prepare
+	qt5-build-r10000_src_prepare
 }

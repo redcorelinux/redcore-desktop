@@ -3,7 +3,7 @@
 
 EAPI=6
 QT5_MODULE="qttools"
-inherit desktop gnome2-utils qt5-build
+inherit desktop gnome2-utils qt5-build-r10000
 
 DESCRIPTION="Graphical tool for translating Qt applications"
 
@@ -28,7 +28,7 @@ QT5_TARGET_SUBDIRS=(
 )
 
 src_install() {
-	qt5-build_src_install
+	qt5-build-r10000_src_install
 
 	local size
 	for size in 16 32 48 64 128; do
@@ -38,11 +38,11 @@ src_install() {
 }
 
 pkg_postinst() {
-	qt5-build_pkg_postinst
+	qt5-build-r10000_pkg_postinst
 	gnome2_icon_cache_update
 }
 
 pkg_postrm() {
-	qt5-build_pkg_postrm
+	qt5-build-r10000_pkg_postrm
 	gnome2_icon_cache_update
 }

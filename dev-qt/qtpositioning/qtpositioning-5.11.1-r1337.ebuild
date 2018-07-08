@@ -3,7 +3,7 @@
 
 EAPI=6
 QT5_MODULE="qtlocation"
-inherit qt5-build
+inherit qt5-build-r10000
 
 DESCRIPTION="Physical position determination library for the Qt5 framework"
 

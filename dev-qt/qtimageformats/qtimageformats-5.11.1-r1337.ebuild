@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
-inherit qt5-build
+inherit qt5-build-r10000
 
 DESCRIPTION="Additional format plugins for the Qt image I/O system"
 
@@ -25,5 +25,5 @@ RDEPEND="${DEPEND}"
 src_configure() {
 	qt_use_compile_test jpeg2k jasper
 	qt_use_compile_test mng libmng
-	qt5-build_src_configure
+	qt5-build-r10000_src_configure
 }

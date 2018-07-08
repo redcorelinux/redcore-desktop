@@ -3,7 +3,7 @@
 
 EAPI=6
 PYTHON_COMPAT=( python2_7 )
-inherit multiprocessing pax-utils python-any-r1 qt5-build
+inherit multiprocessing pax-utils python-any-r1 qt5-build-r10000
 
 DESCRIPTION="Library for rendering dynamic web content in Qt5 C++ and QML applications"
 
@@ -105,7 +105,7 @@ src_prepare() {
 
 	qt_use_disable_mod widgets widgets src/src.pro
 
-	qt5-build_src_prepare
+	qt5-build-r10000_src_prepare
 }
 
 src_configure() {
@@ -123,11 +123,11 @@ src_configure() {
 		$(usex system-ffmpeg '-ffmpeg' '')
 		$(usex system-icu '-webengine-icu' '')
 	)
-	qt5-build_src_configure
+	qt5-build-r10000_src_configure
 }
 
 src_install() {
-	qt5-build_src_install
+	qt5-build-r10000_src_install
 
 	# bug 601472
 	if [[ ! -f ${D%/}${QT5_LIBDIR}/libQt5WebEngine.so ]]; then

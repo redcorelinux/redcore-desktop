@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
-inherit qt5-build
+inherit qt5-build-r10000
 
 DESCRIPTION="The Location module for the Qt5 framework"
 
@@ -40,5 +40,5 @@ src_configure() {
 	# qmake is run in the root directory. Bug 633776.
 	mkdir -p "${QT5_BUILD_DIR}" || die
 	qt5_qmake "${QT_BUILD_DIR}"
-	qt5-build_src_configure
+	qt5-build-r10000_src_configure
 }

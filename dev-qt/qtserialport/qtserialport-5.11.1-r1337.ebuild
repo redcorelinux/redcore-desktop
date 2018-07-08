@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
-inherit qt5-build
+inherit qt5-build-r10000
 
 DESCRIPTION="Serial port abstraction library for the Qt5 framework"
 
@@ -23,5 +23,5 @@ src_prepare() {
 	sed -i -e 's/:qtConfig(libudev)//' \
 		src/serialport/serialport-lib.pri || die
 
-	qt5-build_src_prepare
+	qt5-build-r10000_src_prepare
 }

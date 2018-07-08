@@ -4,7 +4,7 @@
 EAPI=6
 QT5_MODULE="qtbase"
 VIRTUALX_REQUIRED="test"
-inherit qt5-build
+inherit qt5-build-r10000
 
 DESCRIPTION="Printing support library for the Qt5 framework"
 
@@ -38,5 +38,5 @@ src_configure() {
 		$(qt_use cups)
 		-opengl $(usex gles2 es2 desktop)
 	)
-	qt5-build_src_configure
+	qt5-build-r10000_src_configure
 }

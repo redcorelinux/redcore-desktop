@@ -4,7 +4,7 @@
 EAPI=6
 QT5_MODULE="qtbase"
 VIRTUALX_REQUIRED="test"
-inherit qt5-build
+inherit qt5-build-r10000
 
 DESCRIPTION="Unit testing library for the Qt5 framework"
 

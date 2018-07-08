@@ -3,7 +3,7 @@
 
 EAPI=6
 QT5_MODULE="qtbase"
-inherit qt5-build
+inherit qt5-build-r10000
 
 DESCRIPTION="Set of components for creating classic desktop-style UIs for the Qt5 framework"
 
@@ -53,5 +53,5 @@ src_configure() {
 		$(qt_use xcb xkbcommon system)
 		$(usex xcb '-xcb-xlib -xinput2 -xkb' '')
 	)
-	qt5-build_src_configure
+	qt5-build-r10000_src_configure
 }

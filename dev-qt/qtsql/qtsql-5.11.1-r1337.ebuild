@@ -3,7 +3,7 @@
 
 EAPI=6
 QT5_MODULE="qtbase"
-inherit qt5-build
+inherit qt5-build-r10000
 
 DESCRIPTION="SQL abstraction library for the Qt5 framework"
 
@@ -53,5 +53,5 @@ src_configure() {
 	use odbc && myconf+=("-I${EPREFIX}/usr/include/iodbc")
 	use postgres && myconf+=("-I${EPREFIX}/usr/include/postgresql/pgsql")
 
-	qt5-build_src_configure
+	qt5-build-r10000_src_configure
 }

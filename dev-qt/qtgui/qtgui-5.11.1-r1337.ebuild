@@ -3,7 +3,7 @@
 
 EAPI=6
 QT5_MODULE="qtbase"
-inherit qt5-build
+inherit qt5-build-r10000
 
 DESCRIPTION="The GUI module and platform plugins for the Qt5 framework"
 
@@ -139,7 +139,7 @@ src_prepare() {
 	use vnc || sed -i -e '/SUBDIRS += vnc/d' \
 		src/plugins/platforms/platforms.pro || die
 
-	qt5-build_src_prepare
+	qt5-build-r10000_src_prepare
 }
 
 src_configure() {
@@ -166,5 +166,5 @@ src_configure() {
 		$(qt_use xcb xkbcommon-x11 system)
 		$(usex xcb '-xcb-xlib -xinput2 -xkb' '')
 	)
-	qt5-build_src_configure
+	qt5-build-r10000_src_configure
 }

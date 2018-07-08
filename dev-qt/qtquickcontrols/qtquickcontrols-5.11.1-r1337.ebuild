@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
-inherit qt5-build
+inherit qt5-build-r10000
 
 DESCRIPTION="Set of controls used in conjunction with Qt Quick to build complete interfaces"
 
@@ -28,5 +28,5 @@ src_prepare() {
 		tests/auto/controls/controls.pro \
 		tests/auto/testplugin/testplugin.pro
 
-	qt5-build_src_prepare
+	qt5-build-r10000_src_prepare
 }

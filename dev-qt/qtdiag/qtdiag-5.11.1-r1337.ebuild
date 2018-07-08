@@ -3,7 +3,7 @@
 
 EAPI=6
 QT5_MODULE="qttools"
-inherit qt5-build
+inherit qt5-build-r10000
 
 DESCRIPTION="Tool for reporting diagnostic information about Qt and its environment"
 
@@ -32,5 +32,5 @@ src_prepare() {
 	qt_use_disable_mod widgets widgets \
 		src/qtdiag/qtdiag.pro
 
-	qt5-build_src_prepare
+	qt5-build-r10000_src_prepare
 }

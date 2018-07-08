@@ -3,7 +3,7 @@
 
 EAPI=6
 QT5_MODULE="qttools"
-inherit desktop gnome2-utils qt5-build
+inherit desktop gnome2-utils qt5-build-r10000
 
 DESCRIPTION="Graphical tool that lets you introspect D-Bus objects and messages"
 
@@ -27,7 +27,7 @@ QT5_TARGET_SUBDIRS=(
 )
 
 src_install() {
-	qt5-build_src_install
+	qt5-build-r10000_src_install
 
 	doicon -s 32 src/qdbus/qdbusviewer/images/qdbusviewer.png
 	newicon -s 128 src/qdbus/qdbusviewer/images/qdbusviewer-128.png qdbusviewer.png
@@ -35,11 +35,11 @@ src_install() {
 }
 
 pkg_postinst() {
-	qt5-build_pkg_postinst
+	qt5-build-r10000_pkg_postinst
 	gnome2_icon_cache_update
 }
 
 pkg_postrm() {
-	qt5-build_pkg_postrm
+	qt5-build-r10000_pkg_postrm
 	gnome2_icon_cache_update
 }
