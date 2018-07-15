@@ -1,4 +1,4 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -16,7 +16,7 @@ HOMEPAGE="https://wiki.gnome.org/Projects/NetworkManager"
 LICENSE="GPL-2+"
 SLOT="0" # add subslot if libnm-util.so.2 or libnm-glib.so.4 bumps soname version
 
-IUSE="audit bluetooth connection-sharing consolekit +dhclient dhcpcd elogind gnutls +introspection json kernel_linux +nss +modemmanager ncurses ofono policykit +ppp resolvconf selinux systemd teamd test vala +wext +wifi"
+IUSE="audit bluetooth connection-sharing consolekit +dhclient dhcpcd elogind gnutls +introspection json kernel_linux +nss +modemmanager ncurses ofono ovs policykit +ppp resolvconf selinux systemd teamd test vala +wext +wifi"
 
 REQUIRED_USE="
 	modemmanager? ( ppp )
@@ -26,11 +26,10 @@ REQUIRED_USE="
 	?? ( consolekit elogind systemd )
 "
 
-KEYWORDS="~alpha amd64 ~arm ~arm64 ~ia64 ppc ppc64 ~sparc x86"
+KEYWORDS="~alpha amd64 ~arm ~arm64 ~ia64 ~ppc ~ppc64 ~sparc x86"
 
 # gobject-introspection-0.10.3 is needed due to gnome bug 642300
 # wpa_supplicant-0.7.3-r3 is needed due to bug 359271
-# TODO: need multilib janson (linked to libnm.so)
 COMMON_DEPEND="
 	>=sys-apps/dbus-1.2[${MULTILIB_USEDEP}]
 	>=dev-libs/dbus-glib-0.100[${MULTILIB_USEDEP}]
@@ -56,11 +55,12 @@ COMMON_DEPEND="
 		dev-libs/libgcrypt:0=[${MULTILIB_USEDEP}]
 		>=net-libs/gnutls-2.12:=[${MULTILIB_USEDEP}] )
 	introspection? ( >=dev-libs/gobject-introspection-0.10.3:= )
-	json? ( dev-libs/jansson )
+	json? ( dev-libs/jansson[${MULTILIB_USEDEP}] )
 	modemmanager? ( >=net-misc/modemmanager-0.7.991:0= )
 	ncurses? ( >=dev-libs/newt-0.52.15 )
 	nss? ( >=dev-libs/nss-3.11:=[${MULTILIB_USEDEP}] )
 	ofono? ( net-misc/ofono )
+	ovs? ( dev-libs/jansson )
 	ppp? ( >=net-dialup/ppp-2.4.5:=[ipv6] )
 	resolvconf? ( net-dns/openresolv )
 	selinux? ( sys-libs/libselinux )
@@ -181,12 +181,13 @@ multilib_src_configure() {
 		$(use_with dhclient)
 		$(use_with dhcpcd)
 		$(multilib_native_use_enable introspection)
-		$(multilib_native_use_enable json json-validation)
+		$(use_enable json json-validation)
 		$(multilib_native_use_enable ppp)
 		--without-libpsl
 		$(multilib_native_use_with modemmanager modem-manager-1)
 		$(multilib_native_use_with ncurses nmtui)
 		$(multilib_native_use_with ofono)
+		$(multilib_native_use_enable ovs)
 		$(multilib_native_use_with resolvconf)
 		$(multilib_native_use_with selinux)
 		$(multilib_native_use_with systemd systemd-journal)
@@ -289,6 +290,9 @@ multilib_src_install_all() {
 	# Allow users in plugdev group to modify system connections
 	insinto /usr/share/polkit-1/rules.d/
 	doins "${FILESDIR}/01-org.freedesktop.NetworkManager.settings.modify.system.rules"
+
+	# Empty
+	rmdir "${ED%/}"/var{/lib{/NetworkManager,},} || die
 }
 
 pkg_postinst() {
