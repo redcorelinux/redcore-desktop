@@ -4,11 +4,11 @@
 
 EAPI=5
 
-inherit eutils unpacker
+inherit eutils rpm
 
 DESCRIPTION="Additional proprietary codecs for opera"
 HOMEPAGE="http://ffmpeg.org/"
-SRC_URI="http://mirrors.kernel.org/ubuntu/pool/universe/c/chromium-browser/chromium-codecs-ffmpeg-extra_${PV}-0ubuntu0.16.04.1_amd64.deb"
+SRC_URI="http://mirror.yandex.ru/fedora/russianfedora/russianfedora/nonfree/fedora/updates/27/x86_64/opera-stable-libffmpeg-${PV}-1.fc27.R.x86_64.rpm"
 
 LICENSE="LGPL2.1"
 SLOT="0"
@@ -23,7 +23,7 @@ RESTRICT="mirror strip"
 S="${WORKDIR}"
 
 src_unpack() {
-	unpack_deb ${A}
+	rpm_src_unpack ${A}
 }
 
 src_prepare() {
@@ -37,5 +37,5 @@ src_compile() {
 src_install() {
 	dodir usr/$(get_libdir)/opera/lib_extra
 	insinto usr/$(get_libdir)/opera/lib_extra
-	doins ${S}/usr/lib/chromium-browser/libffmpeg.so
+	doins ${S}/usr/lib64/opera-stable/lib_extra/libffmpeg.so
 }
