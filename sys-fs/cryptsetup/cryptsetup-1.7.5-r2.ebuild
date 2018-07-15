@@ -14,7 +14,7 @@ SRC_URI="mirror://kernel/linux/utils/${PN}/v$(get_version_component_range 1-2)/$
 
 LICENSE="GPL-2+"
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86"
+KEYWORDS="amd64"
 CRYPTO_BACKENDS="+gcrypt kernel nettle openssl"
 # we don't support nss since it doesn't allow cryptsetup to be built statically
 # and it's missing ripemd160 support so it can't provide full backward compatibility
@@ -110,6 +110,13 @@ src_test() {
 	default
 }
 
+pkg_preinst() {
+	# backup dmcrypt configuration file, avoid etc-update
+	if [[ -f ""${ROOT}"etc/conf.d/dmcrypt" ]]; then
+		cp -avx ""${ROOT}"etc/conf.d/dmcrypt" ""${ROOT}"etc/conf.d/dmcrypt.backup"
+	fi
+}
+
 src_install() {
 	default
 	if use static ; then
@@ -119,8 +126,15 @@ src_install() {
 	fi
 	prune_libtool_files --modules
 
-	newconfd "${FILESDIR}"/1.6.7-dmcrypt.confd dmcrypt
+	newconfd "${FILESDIR}"/1.6.7-dmcrypt.confd dmcrypt.example # install as example
 	newinitd "${FILESDIR}"/1.6.7-dmcrypt.rc dmcrypt
 
 	use python && cd python && distutils-r1_src_install
+}
+
+pkg_postinst() {
+	# restore dmcrypt configuration file, avoid etc-update
+	if [[ -f ""${ROOT}"etc/conf.d/dmcrypt.backup" ]]; then
+		cp -avx ""${ROOT}"etc/conf.d/dmcrypt.backup" ""${ROOT}"etc/conf.d/dmcrypt"
+	fi
 }
