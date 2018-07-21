@@ -45,6 +45,7 @@ _cgit_migration_warning() {
 	einfo ""
 	einfo "Before reseting, you may want to backup any of your local changes (mixedmode && srcmode users only)"
 	einfo ""
+}
 
 pkg_postinst() {
 	chown portage:portage /var/cache/distfiles
