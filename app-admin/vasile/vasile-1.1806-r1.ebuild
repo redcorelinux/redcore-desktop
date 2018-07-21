@@ -22,6 +22,8 @@ RDEPEND="${DEPEND}
 	sys-fs/mtools
 	sys-fs/squashfs-tools"
 
+PATCHES=( ${FILESDIR}/nuke-gitlab-switch-to-cgit.patch )
+
 S=${WORKDIR}/${PN}-v${PV}
 
 src_install() {
@@ -31,7 +33,21 @@ src_install() {
 	dodir var/cache/distfiles
 }
 
+_cgit_migration_warning() {
+	einfo ""
+	einfo "We nuked Gitlab due to service unreliability, so from now on vasile will use our own git instance"
+	einfo ""
+	einfo "You must reset your current mode using:"
+	einfo ""
+	einfo "vasile --binmode (for binmode)"
+	einfo "vasile --mixedmode (for mixedmode)"
+	einfo "vasile --srcmode (for srcmode)"
+	einfo ""
+	einfo "Before reseting, you may want to backup any of your local changes (mixedmode && srcmode users only)"
+	einfo ""
+
 pkg_postinst() {
 	chown portage:portage /var/cache/distfiles
 	chmod 775 /var/cache/distfiles
+	_cgit_migration_warning
 }
