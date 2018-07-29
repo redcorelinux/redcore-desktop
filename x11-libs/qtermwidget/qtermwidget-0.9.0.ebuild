@@ -17,5 +17,7 @@ DEPEND="
 	dev-qt/qtcore:5
 	dev-qt/qtgui:5
 	dev-qt/qtwidgets:5
+	>=dev-libs/libqtxdg-3.2.0
+	>=lxqt-base/lxqt-build-tools-0.5.0
 "
 RDEPEND="${DEPEND}"
