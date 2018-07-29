@@ -20,7 +20,7 @@ DEPEND="dev-qt/qtgui:5
 	dev-qt/qtdbus:5
 	dev-qt/linguist-tools:5
 	dev-libs/glib
-	>=lxqt-base/liblxqt-3.2.0
+	>=lxqt-base/liblxqt-0.13.0
 	>=lxqt-base/lxqt-build-tools-0.5.0
 	media-sound/pulseaudio"
 RDEPEND="${DEPEND}"
