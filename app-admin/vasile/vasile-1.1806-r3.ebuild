@@ -35,17 +35,17 @@ src_install() {
 }
 
 _migration_warning() {
-	einfo ""
-	einfo "We nuked Gitlab due to service unreliability, vasile will use pagure.io from now on"
-	einfo ""
-	einfo "You must reset your current mode using:"
-	einfo ""
-	einfo "vasile --binmode (for binmode)"
-	einfo "vasile --mixedmode (for mixedmode)"
-	einfo "vasile --srcmode (for srcmode)"
-	einfo ""
-	einfo "Before reseting, you may want to backup any of your local changes (mixedmode && srcmode users only)"
-	einfo ""
+	elog ""
+	elog "We nuked Gitlab due to service unreliability, vasile will use pagure.io from now on"
+	elog ""
+	elog "You must reset your current mode using:"
+	elog ""
+	elog "vasile --binmode (for binmode)"
+	elog "vasile --mixedmode (for mixedmode)"
+	elog "vasile --srcmode (for srcmode)"
+	elog ""
+	elog "Before reseting, you may want to backup any of your local changes (mixedmode && srcmode users only)"
+	elog ""
 }
 
 pkg_postinst() {
