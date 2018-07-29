@@ -20,8 +20,9 @@ RDEPEND="
 	dev-qt/qtwidgets:5
 	dev-qt/qtx11extras:5
 	dev-qt/qtxml:5
-	~lxqt-base/liblxqt-${PV}
 	>=dev-libs/libqtxdg-3.2.0
+	~lxqt-base/liblxqt-${PV}
+	>=x11-libs/libfm-qt-0.13.1
 	x11-libs/libICE
 	x11-libs/libSM
 	x11-libs/libX11
