@@ -16,6 +16,7 @@ SLOT="0"
 RDEPEND=">=dev-libs/glib-2.50.0
 	dev-qt/qtcore:5"
 DEPEND="${RDEPEND}
+	>=dev-libs/libqtxdg-3.2.0
 	dev-qt/linguist-tools:5"
 
 src_configure() {
