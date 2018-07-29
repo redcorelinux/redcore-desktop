@@ -23,9 +23,9 @@ RDEPEND="
 "
 DEPEND="${RDEPEND}"
 
-src_configure() {
-	local mycmakeargs=( -DUPDATE_TRANSLATIONS=OFF )
-	cmake-utils_src_configure
+src_install() {
+	rm -rf ${ED}usr/share/${PN}/translations
+	cmake-utils_src_install
 }
 
 pkg_preinst() {
