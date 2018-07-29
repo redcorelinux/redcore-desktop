@@ -12,7 +12,7 @@ DESCRIPTION="Qt port of libfm, a library providing components to build desktop f
 HOMEPAGE="http://lxqt.org/"
 
 LICENSE="LGPL-2.1+"
-SLOT="0/3.1"
+SLOT="0/5.0.0"
 
 RDEPEND="
 	dev-libs/glib:2
