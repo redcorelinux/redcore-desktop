@@ -24,8 +24,8 @@ RDEPEND="
 DEPEND="${RDEPEND}"
 
 src_install() {
-	rm -rf ${ED}usr/share/${PN}/translations
 	cmake-utils_src_install
+	rm -rf ${ED}usr/share/${PN}/translations
 }
 
 pkg_preinst() {
