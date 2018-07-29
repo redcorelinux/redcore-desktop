@@ -22,7 +22,7 @@ CDEPEND=">=dev-libs/glib-2.50.0:2
 	dev-qt/qtwidgets:5
 	dev-qt/qtx11extras:5
 	>=x11-libs/libfm-1.3.0:=
-	x11-libs/libfm-qt:=
+	>=x11-libs/libfm-qt-0.13.1:=
 	x11-libs/libxcb:="
 RDEPEND="${CDEPEND}
 	samba? ( net-fs/samba
