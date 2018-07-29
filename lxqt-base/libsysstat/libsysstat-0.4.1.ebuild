@@ -18,4 +18,7 @@ RDEPEND="
 "
 DEPEND="${RDEPEND}
 	dev-qt/linguist-tools:5
+	dev-libs/libqtxdg
+	lxqt-base/lxqt-build-tools
+	lxqt-base/liblxqt
 "
