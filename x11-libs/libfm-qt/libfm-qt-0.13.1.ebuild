@@ -6,7 +6,7 @@ EAPI=6
 inherit cmake-utils
 
 SRC_URI="https://github.com/lxde/${PN}/releases/download/${PV}/${P}.tar.xz"
-KEYWORDS="~amd64"
+KEYWORDS="amd64"
 
 DESCRIPTION="Qt port of libfm, a library providing components to build desktop file managers"
 HOMEPAGE="http://lxqt.org/"

@@ -8,7 +8,7 @@ DESCRIPTION="LXQt system configuration control center"
 HOMEPAGE="http://lxqt.org/"
 
 SRC_URI="https://github.com/lxde/${PN}/releases/download/${PV}/${P}.tar.xz"
-KEYWORDS="~amd64"
+KEYWORDS="amd64"
 IUSE="+gtk"
 
 LICENSE="GPL-2 LGPL-2.1+"
@@ -41,6 +41,7 @@ RDEPEND="${CDEPEND}
 
 src_prepare() {
 	if use gtk; then
+		# Redcore patch, to disable no longer working appearance settings when using qgtk2 platform plugin
 		epatch "${FILESDIR}"/"${PN}"-hide-unwanted-appearance-settings.patch
 		cmake-utils_src_prepare
 	else

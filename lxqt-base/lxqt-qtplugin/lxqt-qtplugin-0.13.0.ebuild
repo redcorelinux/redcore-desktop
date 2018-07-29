@@ -8,7 +8,7 @@ DESCRIPTION="LXQt system integration plugin for Qt"
 HOMEPAGE="http://lxqt.org/"
 
 SRC_URI="https://github.com/lxde/${PN}/releases/download/${PV}/${P}.tar.xz"
-KEYWORDS="~amd64"
+KEYWORDS="amd64"
 
 LICENSE="LGPL-2.1+"
 SLOT="0"

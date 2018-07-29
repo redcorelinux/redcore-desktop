@@ -9,7 +9,7 @@ DESCRIPTION="LXQT session manager"
 HOMEPAGE="http://lxqt.org/"
 
 SRC_URI="https://github.com/lxde/${PN}/releases/download/${PV}/${P}.tar.xz"
-KEYWORDS="~amd64"
+KEYWORDS="amd64"
 IUSE="+gtk"
 
 LICENSE="GPL-2 LGPL-2.1+"
@@ -39,6 +39,7 @@ RDEPEND="${CDEPEND}
 
 src_prepare () {
 	if use gtk; then
+		# Redcore patch, to override default platform plugin to qgtk2
 		epatch ${FILESDIR}/${PN}-override-default-platformplugin.patch
 		cmake-utils_src_prepare
 	else

@@ -9,7 +9,7 @@ HOMEPAGE="http://lxqt.org/"
 
 LICENSE="metapackage"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="amd64"
 IUSE="+about +admin +branding +compton +filemanager +gtk +icons +sddm +lximage minimal +oxygen +policykit
 	+powermanagement +ssh-askpass sudo"
 REQUIRED_USE="oxygen? ( icons )"
