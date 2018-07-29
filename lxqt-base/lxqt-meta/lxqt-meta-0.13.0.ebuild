@@ -10,7 +10,7 @@ HOMEPAGE="http://lxqt.org/"
 LICENSE="metapackage"
 SLOT="0"
 KEYWORDS="~amd64"
-IUSE="+about +admin +branding +compton +filemanager +gtkstyle +icons +sddm +lximage minimal +oxygen +policykit
+IUSE="+about +admin +branding +compton +filemanager +gtk +icons +sddm +lximage minimal +oxygen +policykit
 	+powermanagement +ssh-askpass sudo"
 REQUIRED_USE="oxygen? ( icons )"
 DEPEND="!!lxqt-base/lxqt-common"
@@ -32,7 +32,9 @@ RDEPEND="${DEPEND}
 	branding? ( x11-themes/redcore-theme-lxqt )
 	compton? ( x11-misc/compton x11-misc/compton-conf )
 	filemanager? ( >=x11-misc/pcmanfm-qt-${PV} )
-	gtkstyle? ( dev-qt/qt5-styleplugins )
+	gtk? ( dev-qt/qt5-styleplugins
+		x11-libs/gtk+:2 )
+	!gtk? ( ~lxqt-base/lxqt-qtplugin-${PV} )
 	icons? ( oxygen? ( kde-frameworks/oxygen-icons )
 		!oxygen? ( virtual/freedesktop-icon-theme ) )
 	sddm? ( x11-misc/sddm )

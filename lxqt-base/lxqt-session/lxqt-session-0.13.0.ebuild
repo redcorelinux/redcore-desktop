@@ -10,6 +10,7 @@ HOMEPAGE="http://lxqt.org/"
 
 SRC_URI="https://github.com/lxde/${PN}/releases/download/${PV}/${P}.tar.xz"
 KEYWORDS="~amd64"
+IUSE="+gtk"
 
 LICENSE="GPL-2 LGPL-2.1+"
 SLOT="0"
@@ -25,7 +26,8 @@ CDEPEND="
 	kde-frameworks/kwindowsystem:5[X]
 	~lxqt-base/liblxqt-${PV}
 	x11-libs/libX11
-	x11-misc/xdg-user-dirs"
+	x11-misc/xdg-user-dirs
+	gtk? ( ~lxqt-base/lxqt-config-${PV}[gtk] )"
 DEPEND="${CDEPEND}
 	dev-qt/linguist-tools:5
 	dev-util/intltool
@@ -36,8 +38,12 @@ RDEPEND="${CDEPEND}
 	~lxqt-base/lxqt-themes-${PV}"
 
 src_prepare () {
-	epatch ${FILESDIR}/${PN}-override-default-platformplugin.patch
-	cmake-utils_src_prepare
+	if use gtk; then
+		epatch ${FILESDIR}/${PN}-override-default-platformplugin.patch
+		cmake-utils_src_prepare
+	else
+		cmake-utils_src_prepare
+	fi
 }
 
 src_configure() {
