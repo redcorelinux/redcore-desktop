@@ -20,7 +20,7 @@ RDEPEND="
 	dev-qt/qtgui:5
 	dev-qt/qtwidgets:5
 	~lxqt-base/liblxqt-${PV}
-	~x11-libs/libfm-qt-${PV}
+	>=x11-libs/libfm-qt-0.13.1
 	x11-libs/libX11"
 DEPEND="${RDEPEND}
 	dev-qt/linguist-tools:5"
