@@ -23,6 +23,11 @@ RDEPEND="
 "
 DEPEND="${RDEPEND}"
 
+src_configure() {
+	local mycmakeargs=( -DUPDATE_TRANSLATIONS=OFF )
+	cmake-utils_src_configure
+}
+
 pkg_preinst() {
 	gnome2_icon_savelist
 }
