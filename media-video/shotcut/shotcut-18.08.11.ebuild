@@ -56,9 +56,5 @@ src_configure() {
 
 src_install() {
 	emake INSTALL_ROOT="${D}" install
-
-	newicon "${S}/icons/shotcut-logo-64.png" "${PN}.png"
-	make_desktop_entry shotcut "Shotcut"
-
 	einstalldocs
 }
