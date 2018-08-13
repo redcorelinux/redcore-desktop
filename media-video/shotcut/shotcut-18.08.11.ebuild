@@ -57,4 +57,6 @@ src_configure() {
 src_install() {
 	emake INSTALL_ROOT="${D}" install
 	einstalldocs
+	# weird icon name
+	sed -i "s/Icon=org.shotcut.Shotcut/Icon=shotcut/g" "${D}"usr/share/applications/org.shotcut.Shotcut.desktop
 }
