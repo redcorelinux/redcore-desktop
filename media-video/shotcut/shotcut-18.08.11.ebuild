@@ -59,4 +59,6 @@ src_install() {
 	einstalldocs
 	# weird icon name
 	sed -i "s/Icon=org.shotcut.Shotcut/Icon=shotcut/g" "${D}"usr/share/applications/org.shotcut.Shotcut.desktop
+	# inject a default icon to replace the weird one above
+	newicon "${S}/icons/shotcut-logo-64.png" "${PN}.png"
 }
