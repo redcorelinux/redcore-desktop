@@ -60,8 +60,5 @@ src_install() {
 	newicon "${S}/icons/shotcut-logo-64.png" "${PN}.png"
 	make_desktop_entry shotcut "Shotcut"
 
-	insinto "/usr/share/${PN}/translations"
-	doins translations/*.qm
-
 	einstalldocs
 }
