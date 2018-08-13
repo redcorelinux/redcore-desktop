@@ -2,12 +2,13 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
+
 PYTHON_COMPAT=( python2_7 )
 # this ebuild currently only supports installing ruby bindings for a single ruby version
 # so USE_RUBY must contain only a single value (the latest stable) as the ebuild calls
 # /usr/bin/${USE_RUBY} directly
 USE_RUBY="ruby23"
-inherit eutils flag-o-matic multilib python-single-r1 ruby-single toolchain-funcs
+inherit flag-o-matic python-single-r1 ruby-single toolchain-funcs
 
 DESCRIPTION="Open source multimedia framework for television broadcasting"
 HOMEPAGE="https://www.mltframework.org/"
@@ -17,7 +18,7 @@ LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="amd64 ~x86 ~x86-fbsd ~amd64-linux ~x86-linux"
 IUSE="compressed-lumas cpu_flags_x86_mmx cpu_flags_x86_sse cpu_flags_x86_sse2 debug ffmpeg fftw frei0r
-gtk jack kdenlive libav libsamplerate lua melt opencv opengl python qt5 rtaudio ruby sdl sdl2 vdpau xine xml"
+gtk jack kdenlive libav libsamplerate lua melt opencv opengl python qt5 rtaudio ruby sdl vdpau xine xml"
 # java perl php tcl vidstab
 IUSE="${IUSE} kernel_linux"
 
@@ -27,7 +28,7 @@ REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
 COMMON_DEPEND="
 	>=media-libs/libebur128-1.2.2
 	ffmpeg? (
-		libav? ( media-video/libav:0=[vdpau?] )
+		libav? ( >=media-video/libav-12:0=[vdpau?] )
 		!libav? ( media-video/ffmpeg:0=[vdpau?] )
 	)
 	fftw? ( sci-libs/fftw:3.0= )
@@ -57,15 +58,11 @@ COMMON_DEPEND="
 		x11-libs/libX11
 	)
 	rtaudio? (
-		media-libs/rtaudio
+		>=media-libs/rtaudio-4.1.2
 		kernel_linux? ( media-libs/alsa-lib )
 	)
 	ruby? ( ${RUBY_DEPS} )
 	sdl? (
-		>=media-libs/libsdl-1.2.10[X,opengl,video]
-		>=media-libs/sdl-image-1.2.4
-	)
-	sdl2? (
 		media-libs/libsdl2[X,opengl,video]
 		media-libs/sdl2-image
 	)
@@ -93,6 +90,8 @@ RDEPEND="${COMMON_DEPEND}
 "
 
 DOCS=( AUTHORS ChangeLog NEWS README docs/{framework,melt,mlt{++,-xml}}.txt )
+
+PATCHES=( "${FILESDIR}"/${P}-swig-underlinking.patch )
 
 pkg_setup() {
 	use python && python-single-r1_pkg_setup
@@ -122,14 +121,13 @@ src_configure() {
 		--enable-motion-est
 		--target-arch=$(tc-arch)
 		--disable-kde
+		--disable-sdl
 		--disable-swfdec
 		$(use_enable debug)
 		$(use compressed-lumas && echo ' --luma-compress')
 		$(use_enable cpu_flags_x86_sse sse)
 		$(use_enable cpu_flags_x86_sse2 sse2)
 		$(use_enable gtk gtk2)
-		$(use_enable sdl)
-		$(use_enable sdl2)
 		$(use_enable jack jackrack)
 		$(use_enable ffmpeg avformat)
 		$(use ffmpeg && echo ' --avformat-swscale')
@@ -141,6 +139,7 @@ src_configure() {
 		$(use_enable libsamplerate resample)
 		$(use_enable rtaudio)
 		$(use vdpau && echo ' --avformat-vdpau')
+		$(use_enable sdl sdl2)
 		$(use_enable xml)
 		$(use_enable xine)
 		$(use_enable kdenlive)
@@ -221,4 +220,6 @@ src_install() {
 	if use qt5 && use melt; then
 		dosym melt usr/bin/qmelt
 	fi
+
+	# TODO: java perl php tcl
 }

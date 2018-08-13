@@ -1,18 +1,12 @@
-The build system tries to link to installed system libraries first, which
-fails because the ABI has changed...
-
+diff --git a/src/swig/ruby/build b/src/swig/ruby/build
+index 2d0cc0d..1a8aee7 100755
 --- a/src/swig/ruby/build
 +++ b/src/swig/ruby/build
-@@ -5,9 +5,11 @@
-   exit 0
- end
- system( "ln -sf ../mlt.i" )
-+system( "ln -sf ../../framework/libmlt.so" )
-+system( "ln -sf ../../mlt++/libmlt++.so" )
+@@ -8,6 +8,6 @@ system( "ln -sf ../mlt.i" )
  system( "swig -c++ -ruby -I../../mlt++ -I../.. mlt.i" )
  $CFLAGS = $CFLAGS.to_s + " -I../.. " + (ENV.has_key?('CXXFLAGS')? ENV['CXXFLAGS'] : '')
  $CXXFLAGS = $CXXFLAGS.to_s + " -I../.. " + (ENV.has_key?('CXXFLAGS')? ENV['CXXFLAGS'] : '')
 -$LDFLAGS = $LDFLAGS.to_s + " -L../../mlt++ -lmlt++"
-+$LIBS += " -lmlt++ -lmlt -lstdc++"
++$LDFLAGS = $LDFLAGS.to_s + " -L../../mlt++ -lmlt++ -L../../framework -lmlt"
  create_makefile('mlt')
  system( "make V=1" )
