@@ -32,7 +32,7 @@ LICENSE="
 	PSF-2
 	unRAR
 "
-KEYWORDS="amd64 ~arm x86"
+KEYWORDS="~amd64 ~arm ~x86"
 SLOT="0"
 IUSE="ios +udisks"
 
@@ -202,7 +202,7 @@ src_install() {
 
 	# Bug #472690 - Avoid sandbox violations
 	addpredict /dev/dri/
-
+	
 	#dodir "/usr/$(get_libdir)/python2.7/site-packages" # for init_calibre.py
 	#dodir $(python_get_sitedir)
 	PATH=${T}:${PATH} PYTHONPATH=${S}/src${PYTHONPATH:+:}${PYTHONPATH} \
