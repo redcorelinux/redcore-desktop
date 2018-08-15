@@ -54,6 +54,9 @@ src_configure() {
 
 src_install(){
 	cmake-utils_src_install
+	dodir "/etc/xdg/lxqt"
+	insinto "/etc/xdg/lxqt"
+	doins "${FILESDIR}/session.conf"
 	doman lxqt-config-session/man/*.1 lxqt-session/man/*.1
 	dodir "/etc/X11/Sessions"
 	dosym  "/usr/bin/startlxqt" "/etc/X11/Sessions/lxqt"
