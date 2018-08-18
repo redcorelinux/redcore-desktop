@@ -18,7 +18,7 @@ fi
 
 LICENSE="BSD-2"
 SLOT="0"
-IUSE="audit debug +dkms elogind ncurses pam newnet +plugin prefix +netifrc selinux +settingsd static-libs
+IUSE="+apparmor audit debug +dkms elogind ncurses pam newnet +plugin prefix +netifrc selinux +settingsd static-libs
 	unicode kernel_linux kernel_FreeBSD"
 
 COMMON_DEPEND="kernel_FreeBSD? ( || ( >=sys-freebsd/freebsd-ubin-9.0_rc sys-process/fuser-bsd ) )
@@ -26,6 +26,9 @@ COMMON_DEPEND="kernel_FreeBSD? ( || ( >=sys-freebsd/freebsd-ubin-9.0_rc sys-proc
 	pam? (
 		sys-auth/pambase
 		virtual/pam
+	)
+	apparmor? ( sys-apps/apparmor
+		sys-apps/apparmor-utils
 	)
 	audit? ( sys-process/audit )
 	dkms? ( sys-kernel/dkms  )
@@ -380,6 +383,16 @@ pkg_postinst() {
 		if [ "$(rc-config list default | grep cgmanager)" != "" ]; then
 			ewarn "found cgmanager service in default runlevel, disabling"
 			"${ROOT}"sbin/rc-update del cgmanager default
+		fi
+	fi
+
+	#4 : add apparmor service to boot runlevel
+	if [ -e "${ROOT}"/etc/init.d/apparmor ] && use apparmor; then
+		if [ "$(rc-config list boot | grep apparmor)" != "" ]; then
+			ewarn "found apparmor service in boot runlevel, skipping"
+		else
+			ewarn "not found apparmor service in boot runlevel, enabling"
+			"${ROOT}"sbin/rc-update add apparmor boot
 		fi
 	fi
 }
