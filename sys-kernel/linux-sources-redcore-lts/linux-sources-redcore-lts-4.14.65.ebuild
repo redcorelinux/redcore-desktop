@@ -25,14 +25,14 @@ DEPEND="
 	sys-devel/make"
 RDEPEND="${DEPEND}"
 
-PATCHES=( "${FILESDIR}"/enable_alx_wol.patch
-	"${FILESDIR}"/introduce-NUMA-identity-node-sched-domain.patch
+PATCHES=( "${FILESDIR}"/introduce-NUMA-identity-node-sched-domain.patch
 	"${FILESDIR}"/k10temp-add-ZEN-support.patch
 	"${FILESDIR}"/mute-pps_state_mismatch.patch
 	"${FILESDIR}"/restore-SD_PREFER_SIBLING-on-MC-domains.patch
 	"${FILESDIR}"/Revert-ath10k-activate-user-space-firmware-loading.patch
 	"${FILESDIR}"/linux-hardened.patch
-	"${FILESDIR}"/uksm-for-linux-hardened.patch )
+	"${FILESDIR}"/uksm-for-linux-hardened.patch
+	"${FILESDIR}"/0015-Enable-BFQ-io-scheduler-by-default.patch )
 
 S="${WORKDIR}"/linux-"${PV}"
 
