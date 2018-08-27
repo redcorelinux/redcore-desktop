@@ -23,7 +23,7 @@ RDEPEND="${DEPEND}"
 S="${WORKDIR}/${MY_P}"
 
 src_prepare() {
-	epatch "${FILESDIR}/kernel-4.18.patch"
+	:
 }
 
 src_configure() {
