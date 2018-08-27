@@ -33,7 +33,6 @@ AUTOTOOLS_IN_SOURCE_BUILD="1"
 DOCS=( AUTHORS DISCLAIMER )
 
 src_prepare() {
-	epatch "${FILESDIR}/kernel-4.18.patch"
 	# Workaround for hard coded path
 	sed -i "s|/sbin/lsmod|/bin/lsmod|" "${S}/scripts/check.sh" || \
 		die "Cannot patch check.sh"
