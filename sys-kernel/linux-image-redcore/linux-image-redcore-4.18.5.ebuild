@@ -31,17 +31,16 @@ DEPEND="
 	>=sys-kernel/linux-firmware-20180314"
 RDEPEND="${DEPEND}"
 
-PATCHES=( "${FILESDIR}"/enable_alx_wol.patch
-	"${FILESDIR}"/0001-Revert-ath10k-activate-user-space-firmware-loading-a.patch
-	"${FILESDIR}"/0001-Revert-swiotlb-remove-various-exports.patch
-	"${FILESDIR}"/0001-Revert-x86-ACPI-cstate-Allow-ACPI-C1-FFH-MWAIT-use-o.patch
-	"${FILESDIR}"/0001-Make-it-possible-to-disable-SWIOTLB-code-on-admgpu-a.patch
-	"${FILESDIR}"/fix-spectre_v2-mitigation-strings.patch
+PATCHES=( "${FILESDIR}"/0001-Revert-x86-ACPI-cstate-Allow-ACPI-C1-FFH-MWAIT-use-o.patch
 	"${FILESDIR}"/ata-fix-NCQ-LOG-strings-and-move-to-debug.patch
-	"${FILESDIR}"/mute-pps_state_mismatch.patch
 	"${FILESDIR}"/drop_ancient-and-wrong-msg.patch
+	"${FILESDIR}"/enable_alx_wol.patch
+	"${FILESDIR}"/mute-pps_state_mismatch.patch
 	"${FILESDIR}"/nouveau-pascal-backlight.patch
-	"${FILESDIR}"/linux-hardened-v3.patch
+	"${FILESDIR}"/radeon_dp_aux_transfer_native-no-ratelimited_debug.patch
+	"${FILESDIR}"/revert-patches-causing-instant-reboot.patch
+	"${FILESDIR}"/workaround-BIOS-bugs-on-CCP-SVE-ryzen-TR.patch
+	"${FILESDIR}"/linux-hardened.patch
 	"${FILESDIR}"/uksm-for-linux-hardened.patch )
 
 S="${WORKDIR}"/linux-"${PV}"
