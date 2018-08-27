@@ -76,6 +76,7 @@ pkg_setup() {
 }
 
 src_prepare() {
+	epatch "${FILESDIR}/kernel-4.18.patch"
 	# Update paths
 	sed -e "s|/sbin/lsmod|/bin/lsmod|" \
 		-e "s|/usr/bin/scsi-rescan|/usr/sbin/rescan-scsi-bus|" \
