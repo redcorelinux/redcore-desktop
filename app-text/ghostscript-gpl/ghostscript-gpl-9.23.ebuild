@@ -187,20 +187,6 @@ src_install() {
 	cd "${S}/ijs" || die
 	emake DESTDIR="${D}" install
 
-	# rename the original cidfmap to cidfmap.GS
-	mv "${ED}/usr/share/ghostscript/${PVM}/Resource/Init/cidfmap"{,.GS} || die
-
-	# install our own cidfmap to handle CJK fonts
-	insinto /usr/share/ghostscript/${PVM}/Resource/Init
-	doins \
-		"${WORKDIR}/fontmaps/CIDFnmap" \
-		"${WORKDIR}/fontmaps/cidfmap"
-	for X in ${LANGS} ; do
-		if use l10n_${X} ; then
-			doins "${WORKDIR}/fontmaps/cidfmap.${X/-/_}"
-		fi
-	done
-
 	# install the CMaps from poppler-data properly, bug #409361
 	dosym ../../../poppler/cMaps "/usr/share/ghostscript/${PVM}/Resource/CMap"
 
