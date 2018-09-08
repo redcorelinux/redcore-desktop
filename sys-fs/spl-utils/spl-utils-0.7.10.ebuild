@@ -9,7 +9,7 @@ MY_P="${MY_PN}-${PV}"
 
 SRC_URI="https://github.com/zfsonlinux/zfs/releases/download/zfs-${PV}/${MY_P}.tar.gz"
 
-DESCRIPTION="The Solaris Porting Layer is a Linux kernel module which provides many of the Solaris kernel APIs"
+DESCRIPTION="Userland utilities for SPL Linux kernel module"
 HOMEPAGE="http://zfsonlinux.org/"
 
 LICENSE="GPL-2"
