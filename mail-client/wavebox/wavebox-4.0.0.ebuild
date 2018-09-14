@@ -7,7 +7,7 @@ EAPI=6
 inherit eutils
 
 MY_PN="Wavebox"
-MY_PV="3_14_6"
+MY_PV="4_0_0"
 MY_P="${MY_PN}_${MY_PV}"
 
 DESCRIPTION="The next generation of web-desktop communication"
