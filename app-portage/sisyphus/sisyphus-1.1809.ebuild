@@ -1,47 +1,49 @@
-# Copyright 2016-2017 Redcore Linux Project
+# Copyright 2016-2018 Redcore Linux Project
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
 
 PYTHON_COMPAT=( python3_{4,5,6} )
 
-inherit eutils python-r1
+inherit eutils python-r1 git-r3
 
 DESCRIPTION="A simple portage python wrapper which works like other package managers(apt-get/yum/dnf)"
 HOMEPAGE="http://redcorelinux.org"
-SRC_URI="https://github.com/redcorelinux/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
+
+EGIT_REPO_URI="https://pagure.io/redcore/sisyphus.git"
+EGIT_BRANCH="master"
+EGIT_COMMIT="ac10326fcf926f11fd21f69efd896b5ead503b26"
+
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="amd64 x86"
 IUSE="+gui"
 
-PATCHES=( "${FILESDIR}"/30fb816f2482fd06a60b557de5bf7cf6e8212d2a.patch
-	"${FILESDIR}"/4fa81a14d7e657e3976c26c64748b5963a55c56d.patch
-	"${FILESDIR}"/3e34420beb774d76d1f3e6b4ed0efd2c3c5b3e65.patch )
-
 DEPEND="dev-lang/python[sqlite]"
 RDEPEND="${DEPEND}
 	app-portage/gentoolkit[${PYTHON_USEDEP}]
+	app-portage/portage-utils
 	dev-python/animation[${PYTHON_USEDEP}]
 	dev-python/python-dateutil[${PYTHON_USEDEP}]
 	dev-python/urllib3[${PYTHON_USEDEP}]
+	dev-python/wget[${PYTHON_USEDEP}]
 	sys-apps/portage[${PYTHON_USEDEP}]
-	gui? ( dev-python/PyQt5[designer,gui,widgets,${PYTHON_USEDEP}] sys-apps/gentoo-functions )"
+	sys-apps/gentoo-functions
+	gui? ( dev-python/PyQt5[designer,gui,widgets,${PYTHON_USEDEP}] )"
 
 src_install() {
 	default
 
 	inject_libsisyphus() {
-		# FIXME, ugly hack
-		python_moduleinto "$(python_get_sitedir)/.."
+		python_moduleinto "$(python_get_sitedir)"
 		python_domodule src/backend/libsisyphus.py
-		rm -rf ${D}$(python_get_sitedir)
 	}
 
 	python_foreach_impl inject_libsisyphus
 
 	dosym /usr/share/${PN}/${PN}-cli.py /usr/bin/${PN}
 	dodir var/lib/${PN}/{csv,db}
+	keepdir var/lib/${PN}/{csv,db}
 	
 	dodir etc/${PN}
 	insinto etc/${PN}
