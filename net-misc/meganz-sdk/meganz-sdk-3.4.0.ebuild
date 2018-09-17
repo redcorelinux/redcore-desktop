@@ -6,7 +6,7 @@ EAPI=6
 inherit flag-o-matic qmake-utils autotools db-use
 DESCRIPTION="MEGA C++ SDK"
 HOMEPAGE="https://github.com/meganz/sdk"
-SRC_URI="https://github.com/meganz/sdk/archive/v3.3.3.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://github.com/meganz/sdk/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="BSD-2"
 SLOT="0"
