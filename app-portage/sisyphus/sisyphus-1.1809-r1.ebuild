@@ -12,7 +12,7 @@ HOMEPAGE="http://redcorelinux.org"
 
 EGIT_REPO_URI="https://pagure.io/redcore/sisyphus.git"
 EGIT_BRANCH="master"
-EGIT_COMMIT="ac10326fcf926f11fd21f69efd896b5ead503b26"
+EGIT_COMMIT="8dc2ab082f49b4bfaa9a4de05fe97bbddaf1eecf"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -44,11 +44,11 @@ src_install() {
 	dosym /usr/share/${PN}/${PN}-cli.py /usr/bin/${PN}
 	dodir var/lib/${PN}/{csv,db}
 	keepdir var/lib/${PN}/{csv,db}
-	
+
 	dodir etc/${PN}
 	insinto etc/${PN}
 	doins ${FILESDIR}/mirrors.conf
- 
+
 	if ! use gui; then
 		rm -rf ${ED}usr/bin/${PN}-gui
 		rm -rf ${ED}usr/bin/${PN}-gui-pkexec
