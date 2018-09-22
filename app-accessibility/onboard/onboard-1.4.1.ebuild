@@ -38,7 +38,6 @@ DEPEND="${COMMON_DEPEND}
 RDEPEND="${COMMON_DEPEND}
 	app-accessibility/at-spi2-core
 	app-text/iso-codes
-	gnome-extra/mousetweaks
 	x11-libs/libxkbfile"
 
 RESTRICT="mirror"
