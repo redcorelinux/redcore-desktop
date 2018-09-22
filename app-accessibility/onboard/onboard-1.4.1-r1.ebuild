@@ -23,6 +23,7 @@ COMMON_DEPEND="app-text/hunspell:=
 	dev-python/pygobject:3[${PYTHON_USEDEP}]
 	dev-python/python-distutils-extra[${PYTHON_USEDEP}]
 	gnome-base/dconf
+	gnome-base/gsettings-desktop-schemas
 	gnome-base/librsvg
 	media-libs/libcanberra
 	sys-apps/dbus
@@ -38,6 +39,7 @@ DEPEND="${COMMON_DEPEND}
 RDEPEND="${COMMON_DEPEND}
 	app-accessibility/at-spi2-core
 	app-text/iso-codes
+	gnome-extra/mousetweaks
 	x11-libs/libxkbfile"
 
 RESTRICT="mirror"
