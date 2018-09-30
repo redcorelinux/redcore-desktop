@@ -14,6 +14,12 @@ HOMEPAGE="http://lxqt.org/"
 LICENSE="LGPL-2.1+"
 SLOT="0/5.0.0"
 
+PATCHES=(
+	"${FILESDIR}/${P}-check-if-app-exists-before-opening.patch"
+	"${FILESDIR}/${P}-fix-smb-error.patch"
+	"${FILESDIR}/${P}-correctly-handle-mountable-types.patch"
+)
+
 RDEPEND="
 	dev-libs/glib:2
 	dev-qt/qtcore:5
