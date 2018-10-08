@@ -203,19 +203,36 @@ src_install() {
 	mv "${D}/usr/bin/rustdoc" "${D}/usr/bin/rustdoc-${PV}" || die
 	mv "${D}/usr/bin/rust-gdb" "${D}/usr/bin/rust-gdb-${PV}" || die
 	mv "${D}/usr/bin/rust-lldb" "${D}/usr/bin/rust-lldb-${PV}" || die
+
+	# Redcore Linux (install unversioned binaries as well)
+	cp "${D}/usr/bin/rustc-${PV}" "${D}/usr/bin/rustc" || die
+	cp "${D}/usr/bin/rustdoc-${PV}" "${D}/usr/bin/rustdoc" || die
+	cp "${D}/usr/bin/rust-gdb-${PV}" "${D}/usr/bin/rust-gdb" || die
+	cp "${D}/usr/bin/rust-lldb-${PV}" "${D}/usr/bin/rust-lldb" || die
+
 	if use cargo; then
 		mv "${D}/usr/bin/cargo" "${D}/usr/bin/cargo-${PV}" || die
+		# Redcore Linux (install unversioned binaries as well)
+		cp "${D}/usr/bin/cargo-${PV}" "${D}/usr/bin/cargo" || die
 	fi
 	if use clippy; then
 		mv "${D}/usr/bin/clippy-driver" "${D}/usr/bin/clippy-driver-${PV}" || die
 		mv "${D}/usr/bin/cargo-clippy" "${D}/usr/bin/cargo-clippy-${PV}" || die
+		# Redcore Linux (install unversioned binaries as well)
+		cp "${D}/usr/bin/clippy-driver-${PV}" "${D}/usr/bin/clippy-driver" || die
+		cp "${D}/usr/bin/cargo-clippy-${PV}" "${D}/usr/bin/cargo-clippy" || die
 	fi
 	if use rls; then
 		mv "${D}/usr/bin/rls" "${D}/usr/bin/rls-${PV}" || die
+		# Redcore Linux (install unversioned binaries as well)
+		cp "${D}/usr/bin/rls-${PV}" "${D}/usr/bin/rls" || die
 	fi
 	if use rustfmt; then
 		mv "${D}/usr/bin/rustfmt" "${D}/usr/bin/rustfmt-${PV}" || die
 		mv "${D}/usr/bin/cargo-fmt" "${D}/usr/bin/cargo-fmt-${PV}" || die
+		# Redcore Linux (install unversioned binaries as well)
+		cp "${D}/usr/bin/rustfmt-${PV}" "${D}/usr/bin/rustfmt" || die
+		cp "${D}/usr/bin/cargo-fmt-${PV}" "${D}/usr/bin/cargo-fmt" || die
 	fi
 
 	# Copy shared library versions of standard libraries for all targets
@@ -241,48 +258,10 @@ src_install() {
 		MANPATH="/usr/share/${P}/man"
 	EOF
 	doenvd "${T}"/50${P}
-
-	cat <<-EOF > "${T}/provider-${P}"
-		/usr/bin/rustdoc
-		/usr/bin/rust-gdb
-		/usr/bin/rust-lldb
-	EOF
-	if use cargo; then
-		echo /usr/bin/cargo >> "${T}/provider-${P}"
-	fi
-	if use clippy; then
-		echo /usr/bin/clippy-driver >> "${T}/provider-${P}"
-		echo /usr/bin/cargo-clippy >> "${T}/provider-${P}"
-	fi
-	if use rls; then
-		echo /usr/bin/rls >> "${T}/provider-${P}"
-	fi
-	if use rustfmt; then
-		echo /usr/bin/rustfmt >> "${T}/provider-${P}"
-		echo /usr/bin/cargo-fmt >> "${T}/provider-${P}"
-	fi
-	dodir /etc/env.d/rust
-	insinto /etc/env.d/rust
-	doins "${T}/provider-${P}"
 }
 
 pkg_postinst() {
 	eselect rust update --if-unset
-
-	elog "Rust installs a helper script for calling GDB and LLDB,"
-	elog "for your convenience it is installed under /usr/bin/rust-{gdb,lldb}-${PV}."
-
-	if has_version app-editors/emacs || has_version app-editors/emacs-vcs; then
-		elog "install app-emacs/rust-mode to get emacs support for rust."
-	fi
-
-	if has_version app-editors/gvim || has_version app-editors/vim; then
-		elog "install app-vim/rust-vim to get vim support for rust."
-	fi
-
-	if has_version 'app-shells/zsh'; then
-		elog "install app-shells/rust-zshcomp to get zsh completion for rust."
-	fi
 }
 
 pkg_postrm() {
