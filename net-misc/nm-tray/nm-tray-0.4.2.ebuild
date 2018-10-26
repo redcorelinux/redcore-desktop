@@ -23,9 +23,3 @@ DEPEND="
 	$(add_qt_dep qtwidgets)"
 RDEPEND="${DEPEND}
 	x11-terms/xterm"
-
-src_prepare() {
-	default
-	eapply "${FILESDIR}"/"${P}"-r99999.patch
-	cmake-utils_src_prepare
-}
