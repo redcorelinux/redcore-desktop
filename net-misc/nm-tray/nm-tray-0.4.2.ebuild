@@ -23,3 +23,8 @@ DEPEND="
 	$(add_qt_dep qtwidgets)"
 RDEPEND="${DEPEND}
 	x11-terms/xterm"
+
+src_install() {
+	cmake-utils_src_install
+	mv ${D}/usr/etc ${D}/etc
+}
