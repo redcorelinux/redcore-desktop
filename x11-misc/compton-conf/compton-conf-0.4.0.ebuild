@@ -19,10 +19,8 @@ DEPEND="
 	$(add_qt_dep qtgui)
 	$(add_qt_dep linguist-tools)
 	$(add_qt_dep qtwidgets)
-	>=lxqt-base/lxqt-build-tools-0.4.0"
+	>=lxqt-base/lxqt-build-tools-0.5.0"
 RDEPEND="${DEPEND}"
-
-PATCHES=( "${FILESDIR}"/"${PN}"-r99999.patch )
 
 src_install() {
 	cmake-utils_src_install
