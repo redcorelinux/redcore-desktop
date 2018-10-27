@@ -5,20 +5,12 @@ EAPI=6
 
 PYTHON_COMPAT=( python2_7 python3_{5,6} pypy )
 
-inherit multiprocessing multilib-build python-any-r1 toolchain-funcs
+inherit multiprocessing multilib-build python-any-r1 rust-toolchain toolchain-funcs
 
-if [[ ${PV} = *beta* ]]; then
-	betaver=${PV//*beta}
-	BETA_SNAPSHOT="${betaver:0:4}-${betaver:4:2}-${betaver:6:2}"
-	MY_P="rustc-beta"
-	SLOT="beta/${PV}"
-	SRC="${BETA_SNAPSHOT}/rustc-beta-src.tar.xz"
-else
-	SLOT="stable/1.29"
-	MY_P="rustc-${PV}"
-	SRC="${MY_P}-src.tar.xz"
-	KEYWORDS="amd64 ~arm64 x86"
-fi
+SLOT="stable/1.29"
+MY_P="rustc-${PV}"
+SRC="${MY_P}-src.tar.xz"
+KEYWORDS="~amd64"
 
 CHOST_amd64=x86_64-unknown-linux-gnu
 CHOST_x86=i686-unknown-linux-gnu
@@ -35,10 +27,7 @@ DESCRIPTION="Systems programming language from Mozilla"
 HOMEPAGE="https://www.rust-lang.org/"
 
 SRC_URI="https://static.rust-lang.org/dist/${SRC} -> rustc-${PV}-src.tar.xz
-	amd64? ( https://static.rust-lang.org/dist/${RUST_STAGE0_amd64}.tar.xz )
-	x86? ( https://static.rust-lang.org/dist/${RUST_STAGE0_x86}.tar.xz )
-	arm64? ( https://static.rust-lang.org/dist/${RUST_STAGE0_arm64}.tar.xz )
-"
+		$(rust_all_arch_uris rust-${RUST_STAGE0_VERSION})"
 
 ALL_LLVM_TARGETS=( AArch64 AMDGPU ARM BPF Hexagon Lanai Mips MSP430
 	NVPTX PowerPC Sparc SystemZ X86 XCore )
@@ -75,6 +64,8 @@ REQUIRED_USE="|| ( ${ALL_LLVM_TARGETS[*]} )
 				x86? ( cpu_flags_x86_sse2 )"
 
 S="${WORKDIR}/${MY_P}-src"
+
+PATCHES=( "${FILESDIR}"/${PV}-clippy-sysroot.patch )
 
 toml_usex() {
 	usex "$1" true false
@@ -125,7 +116,7 @@ src_configure() {
 	local rust_stage0_root="${WORKDIR}"/rust-stage0
 
 	rust_target_name="CHOST_${ARCH}"
-	rust_target="${!rust_target_name}"
+	rust_target="$(rust_abi)"
 
 	cat <<- EOF > "${S}"/config.toml
 		[llvm]
@@ -148,7 +139,7 @@ src_configure() {
 		tools = [${tools}]
 		[install]
 		prefix = "${EPREFIX}/usr"
-		libdir = "$(get_libdir)"
+		libdir = "$(get_libdir)/${P}"
 		docdir = "share/doc/${P}"
 		mandir = "share/${P}/man"
 		[rust]
@@ -203,6 +194,7 @@ src_install() {
 	mv "${D}/usr/bin/rust-gdb" "${D}/usr/bin/rust-gdb-${PV}" || die
 	mv "${D}/usr/bin/rust-lldb" "${D}/usr/bin/rust-lldb-${PV}" || die
 
+
 	# Redcore Linux (install unversioned binaries as well)
 	cp "${D}/usr/bin/rustc-${PV}" "${D}/usr/bin/rustc" || die
 	cp "${D}/usr/bin/rustdoc-${PV}" "${D}/usr/bin/rustdoc" || die
@@ -244,7 +236,7 @@ src_install() {
 		abi_libdir=$(get_abi_LIBDIR ${v##*.})
 		rust_target=$(get_abi_CHOST ${v##*.})
 		mkdir -p "${D}/usr/${abi_libdir}"
-		cp "${D}/usr/$(get_libdir)/rustlib/${rust_target}/lib"/*.so \
+		cp "${D}/usr/$(get_libdir)/${P}/rustlib/${rust_target}/lib"/*.so \
 		   "${D}/usr/${abi_libdir}" || die
 	done
 
