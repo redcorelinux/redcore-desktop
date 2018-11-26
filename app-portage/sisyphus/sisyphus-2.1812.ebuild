@@ -12,7 +12,7 @@ HOMEPAGE="http://redcorelinux.org"
 
 EGIT_REPO_URI="https://pagure.io/redcore/sisyphus.git"
 EGIT_BRANCH="master"
-EGIT_COMMIT="001a240b21ec60ab1e30352095fb94e06b3ccf58"
+EGIT_COMMIT="8cf0e391e659917fd73d2ddbea7cc1bd2fa8cdae"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -42,7 +42,6 @@ src_install() {
 	python_foreach_impl inject_libsisyphus
 
 	dosym /usr/share/${PN}/${PN}-cli.py /usr/bin/${PN}
-	dodir var/lib/${PN}/{csv,db}
 	keepdir var/lib/${PN}/{csv,db}
 
 	dodir etc/${PN}
