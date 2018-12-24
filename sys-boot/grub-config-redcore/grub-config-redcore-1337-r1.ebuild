@@ -27,6 +27,7 @@ pkg_preinst() {
 	if [[ -f ""${ROOT}"etc/default/grub" ]]; then
 		mv ""${ROOT}"etc/default/grub" ""${ROOT}"etc/default/grub.bak"
 	fi
+}
 
 pkg_postinst() {
 	if [[ -f ""${ROOT}"etc/default/grub.bak" ]]; then
