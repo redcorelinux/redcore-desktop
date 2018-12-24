@@ -12,7 +12,8 @@ LICENSE="CCPL-Attribution-ShareAlike-3.0"
 SLOT="0"
 KEYWORDS="x86 amd64"
 IUSE=""
-RDEPEND="sys-apps/findutils"
+RDEPEND="sys-apps/findutils
+	>=x11-themes/hicolor-icon-theme-0.10"
 
 S="${WORKDIR}"/"${PN}"
 
@@ -37,7 +38,15 @@ src_install() {
 	doins -r plymouth/themes/redcore
 }
 
+_dracut_initramfs_regen() {
+	if [ -x $(which dracut) ]; then
+		dracut -N -f --no-hostonly-cmdline
+	fi
+}
+
 pkg_postinst() {
 	# regenerate initramfs to include plymouth theme changes
-	dracut -N -f --no-hostonly-cmdline
+	if [ $(stat -c %d:%i /) == $(stat -c %d:%i /proc/1/root/.) ]; then
+		_dracut_initramfs_regen
+	fi
 }
