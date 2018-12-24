@@ -10,7 +10,7 @@ HOMEPAGE="https://redcorelinux.org"
 
 EGIT_REPO_URI="https://pagure.io/redcore/vasile.git"
 EGIT_BRANCH="master"
-EGIT_COMMIT="b39fec41fb8548a8284c6451c8d1c1656d10d79e"
+EGIT_COMMIT="5ebe15d1c7588ac5784a874d68cdb556bff776a6"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -29,6 +29,6 @@ RDEPEND="${DEPEND}
 src_install() {
 	default
 	dosym ../../usr/bin/"${PN}".sh usr/bin/"${PN}"
-	keepdir var/cache/packages
-	keepdir var/cache/distfiles
+	dodir var/cache/packages
+	dodir var/cache/distfiles
 }
