@@ -21,7 +21,7 @@ SRC_URI="mirror://gnu/binutils/${MY_P}.tar.xz
 LICENSE="|| ( GPL-3 LGPL-3 )"
 # The shared lib SONAMEs use the ${PV} in them.
 # -r1 is a one-off subslot bump where SONAME changed for bug #666100
-SLOT="0/${PV}-r1"
+SLOT="0/${PVR}"
 IUSE="64-bit-bfd multitarget nls static-libs"
 KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~amd64-fbsd ~x86-fbsd"
 
