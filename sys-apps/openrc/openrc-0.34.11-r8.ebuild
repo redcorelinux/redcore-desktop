@@ -73,11 +73,11 @@ src_prepare() {
 		local ver="git-${EGIT_VERSION:0:6}"
 		sed -i "/^GITVER[[:space:]]*=/s:=.*:=${ver}:" mk/gitver.mk || die
 	fi
-	
+
 	if use dkms ; then
 		epatch "${FILESDIR}"/${PN}-dkms.patch
 	fi
-	
+
 	epatch "${FILESDIR}"/${PN}-enable-rclogger.patch
 	epatch "${FILESDIR}"/${PN}-disable-cgroupsv2.patch
 }
@@ -296,21 +296,6 @@ pkg_postinst() {
 			cp -RPp "${EROOT}"usr/share/${PN}/runlevels/nonetwork \
 				"${EROOT}"etc/runlevels
 		fi
-	fi
-
-	if use hppa; then
-		elog "Setting the console font does not work on all HPPA consoles."
-		elog "You can still enable it by running:"
-		elog "# rc-update add consolefont boot"
-	fi
-
-	# Handle the conf.d/local.{start,stop} -> local.d transition
-	if path_exists -o "${EROOT}"etc/conf.d/local.{start,stop} ; then
-		elog "Moving your ${EROOT}etc/conf.d/local.{start,stop}"
-		elog "files to ${EROOT}etc/local.d"
-		mv "${EROOT}"etc/conf.d/local.start "${EROOT}"etc/local.d/baselayout1.start
-		mv "${EROOT}"etc/conf.d/local.stop "${EROOT}"etc/local.d/baselayout1.stop
-		chmod +x "${EROOT}"etc/local.d/*{start,stop}
 	fi
 
 	if use kernel_linux && [[ "${EROOT}" = "/" ]]; then
