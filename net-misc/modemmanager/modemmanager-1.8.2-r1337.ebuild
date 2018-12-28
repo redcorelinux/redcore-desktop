@@ -1,4 +1,4 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -8,32 +8,32 @@ VALA_USE_DEPEND="vapigen"
 inherit gnome2 user readme.gentoo-r1 systemd udev vala
 
 DESCRIPTION="Modem and mobile broadband management libraries"
-HOMEPAGE="https://cgit.freedesktop.org/ModemManager/ModemManager/"
+HOMEPAGE="https://www.freedesktop.org/wiki/Software/ModemManager/"
 SRC_URI="https://www.freedesktop.org/software/ModemManager/ModemManager-${PV}.tar.xz"
 
 LICENSE="GPL-2+"
 SLOT="0/1" # subslot = dbus interface version, i.e. N in org.freedesktop.ModemManager${N}
 KEYWORDS="~alpha amd64 arm ~arm64 ~ia64 ~mips ppc ppc64 ~sparc x86"
 
-IUSE="+introspection mbim policykit +qmi systemd vala"
+IUSE="+introspection mbim policykit +qmi systemd +udev vala"
 REQUIRED_USE="
 	vala? ( introspection )
 "
 
 RDEPEND="
 	>=dev-libs/glib-2.36.0:2
-	>=virtual/libgudev-230:=
+	udev? ( >=virtual/libgudev-230:= )
 	introspection? ( >=dev-libs/gobject-introspection-0.9.6:= )
-	mbim? ( >=net-libs/libmbim-1.14.0 )
+	mbim? ( >=net-libs/libmbim-1.16.0 )
 	policykit? ( >=sys-auth/polkit-0.106[introspection] )
-	qmi? ( >=net-libs/libqmi-1.16.0:= )
+	qmi? ( >=net-libs/libqmi-1.20.0:= )
 	systemd? ( >=sys-apps/systemd-209 )
 "
 DEPEND="${RDEPEND}
 	dev-util/gdbus-codegen
+	dev-util/glib-utils
 	>=dev-util/gtk-doc-am-1
-	>=dev-util/intltool-0.40
-	>=sys-devel/gettext-0.19.3
+	>=sys-devel/gettext-0.19.8
 	virtual/pkgconfig
 	vala? ( $(vala_depend) )
 "
@@ -41,8 +41,9 @@ DEPEND="${RDEPEND}
 S="${WORKDIR}/ModemManager-${PV}"
 
 src_prepare() {
-	DOC_CONTENTS="If your USB modem shows up as a Flash drive when you plug it in,
-		You should install sys-apps/usb_modeswitch which will automatically
+	DOC_CONTENTS="
+		If your USB modem shows up only as a storage device when you plug it in,
+		then you should install sys-apps/usb_modeswitch, which will automatically
 		switch it over to USB modem mode whenever you plug it in.\n"
 
 	if use policykit; then
@@ -57,13 +58,15 @@ src_prepare() {
 src_configure() {
 	gnome2_src_configure \
 		--disable-more-warnings \
-		--with-udev-base-dir="$(get_udevdir)" \
 		--disable-static \
 		--with-dist-version=${PVR} \
+		--with-udev-base-dir="$(get_udevdir)" \
+		$(use_with udev) \
 		$(use_enable introspection) \
 		$(use_with mbim) \
 		$(use_with policykit polkit) \
-		$(usex systemd --with-suspend-resume=systemd --with-suspend-resume=no) \
+		$(use_with systemd systemd-suspend-resume) \
+		$(use_with systemd systemd-journal) \
 		$(use_with qmi) \
 		$(use_enable vala)
 }
@@ -105,6 +108,11 @@ pkg_postinst() {
 			elog "without changing its behavior, you may want to remove it."
 			;;
 		esac
+	fi
+
+	if ! use udev; then
+		ewarn "You have built ModemManager without udev support. You may have to teach it"
+		ewarn "about your modem port manually."
 	fi
 
 	systemd_reenable ModemManager.service
