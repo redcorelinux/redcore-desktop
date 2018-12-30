@@ -2,9 +2,7 @@
 Encoding=UTF-8
 Type=Application
 
-Exec=xdg-open http://wiki.redcorelinux.org
+Exec=xdg-open https://wiki.redcorelinux.org
 Icon=redcore-weblink
 
-Name=Redcore Documentation
-Name[ro]=Documentație Redcore
-
+Name=Redcore Linux Documentation

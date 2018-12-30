@@ -2,8 +2,7 @@
 Encoding=UTF-8
 Type=Application
 
-Exec=xdg-open https://gitlab.com/groups/redcore
+Exec=xdg-open http://git.redcorelinux.org/cgit/
 Icon=redcore-weblink
 
-Name=Redcore Git Repos
-Name[ro]=Depozite Redcore
+Name=Redcore Linux Git Repos

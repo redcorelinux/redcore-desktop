@@ -2,7 +2,7 @@
 # $Header: $
 
 EAPI=6
-EGIT_REPO_URI="https://gitlab.com/redcore/redcore-skel.git"
+EGIT_REPO_URI="https://pagure.io/redcore/redcore-skel.git"
 
 inherit eutils git-r3 fdo-mime
 
