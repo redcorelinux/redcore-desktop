@@ -14,8 +14,11 @@ KEYWORDS="~amd64"
 IUSE="jpeg qt5"
 
 RDEPEND="
-	jpeg? ( >=virtual/jpeg-0-r2:0=[${MULTILIB_USEDEP}]
-	>=media-libs/libv4l-${PV}[jpeg]
+	jpeg? (
+		>=virtual/jpeg-0-r2:0=[${MULTILIB_USEDEP}]
+		>=media-libs/libv4l-${PV}[jpeg]
+	)
+	!jpeg? ( >=media-libs/libv4l-${PV}[!jpeg] )
 	qt5? (
 		dev-qt/qtcore:5
 		dev-qt/qtgui:5
