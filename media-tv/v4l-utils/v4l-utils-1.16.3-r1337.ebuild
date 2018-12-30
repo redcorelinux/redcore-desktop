@@ -28,8 +28,6 @@ DEPEND="${RDEPEND}
 	sys-devel/gettext
 	virtual/pkgconfig"
 
-PATCHES=( "${FILESDIR}"/${PN}-1.14.1-sysmacros.patch ) #580910
-
 src_configure() {
 	if use qt5; then
 		append-cxxflags -std=c++11
