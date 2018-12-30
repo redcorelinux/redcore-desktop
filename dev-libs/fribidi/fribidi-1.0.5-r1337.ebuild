@@ -3,7 +3,7 @@
 
 EAPI=6
 
-inherit multilib-minimal
+inherit meson multilib-minimal
 
 DESCRIPTION="A free implementation of the unicode bidirectional algorithm"
 HOMEPAGE="https://fribidi.org/"
@@ -11,27 +11,22 @@ SRC_URI="https://github.com/fribidi/fribidi/releases/download/v${PV}/${P}.tar.bz
 
 LICENSE="LGPL-2.1+"
 SLOT="0"
-KEYWORDS="~alpha amd64 arm arm64 ~hppa ia64 ~mips ppc ppc64 ~s390 ~sh sparc x86 ~amd64-fbsd ~x86-fbsd ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~x64-solaris ~x86-solaris"
-IUSE="static-libs"
+KEYWORDS="amd64"
+IUSE=""
 
 RDEPEND=""
 DEPEND="${RDEPEND}
 	virtual/pkgconfig[${MULTILIB_USEDEP}]"
 
-DOCS=( AUTHORS NEWS README ChangeLog THANKS )
-
 PATCHES=( "${FILESDIR}"/no-config-h.diff )
 
 multilib_src_configure() {
-	local myeconfargs=(
-		--enable-shared
-		$(use_enable static-libs static)
-		--disable-debug
+	local emesonargs=(
+		-Ddocs=false
 	)
-	ECONF_SOURCE="${S}" econf "${myeconfargs[@]}"
+	meson_src_configure
 }
 
-multilib_src_install_all() {
-	einstalldocs
-	find "${ED}" -name '*.la' -delete || die
+multilib_src_install() {
+	meson_src_install
 }
