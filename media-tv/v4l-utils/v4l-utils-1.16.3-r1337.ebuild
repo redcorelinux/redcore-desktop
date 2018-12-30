@@ -11,9 +11,11 @@ SRC_URI="http://linuxtv.org/downloads/v4l-utils/${P}.tar.bz2"
 LICENSE="GPL-2+ LGPL-2.1+"
 SLOT="0"
 KEYWORDS="~amd64"
-IUSE="qt5"
+IUSE="jpeg qt5"
 
-RDEPEND=">=media-libs/libv4l-${PV}
+RDEPEND="
+	jpeg? ( >=virtual/jpeg-0-r2:0=[${MULTILIB_USEDEP}]
+	>=media-libs/libv4l-${PV}[jpeg]
 	qt5? (
 		dev-qt/qtcore:5
 		dev-qt/qtgui:5
@@ -44,7 +46,7 @@ src_configure() {
 		--disable-static \
 		$(use_enable qt5 qv4l2) \
 		--with-udevdir="$(get_udevdir)" \
-		--without-jpeg \
+		$(use_with jpeg) \
 		"${qt5_paths[@]}"
 }
 
