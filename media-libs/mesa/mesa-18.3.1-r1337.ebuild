@@ -3,7 +3,7 @@
 
 EAPI=6
 
-PYTHON_COMPAT=( python2_7 )
+PYTHON_COMPAT=( python3_4 python3_5 python3_6 python3_7 )
 
 inherit llvm meson multilib-minimal pax-utils python-any-r1
 
@@ -41,12 +41,12 @@ IUSE="${IUSE_VIDEO_CARDS}
 	vulkan wayland xa xvmc"
 
 REQUIRED_USE="
-	d3d9?   ( dri3 )
+	d3d9?   ( dri3 || ( video_cards_r300 video_cards_r600 video_cards_radeonsi video_cards_nouveau video_cards_vmware ) )
 	gles1?  ( egl )
 	gles2?  ( egl )
 	vulkan? ( dri3
-			  || ( video_cards_i965 video_cards_radeonsi )
-			  video_cards_radeonsi? ( llvm ) )
+			|| ( video_cards_i965 video_cards_radeonsi )
+			video_cards_radeonsi? ( llvm ) )
 	wayland? ( egl gbm )
 	video_cards_freedreno?  ( gallium )
 	video_cards_intel?  ( classic )
@@ -55,7 +55,7 @@ REQUIRED_USE="
 	video_cards_imx?    ( gallium video_cards_vivante )
 	video_cards_nouveau? ( || ( classic gallium ) )
 	video_cards_radeon? ( || ( classic gallium )
-						  gallium? ( x86? ( llvm ) amd64? ( llvm ) ) )
+						gallium? ( x86? ( llvm ) amd64? ( llvm ) ) )
 	video_cards_r100?   ( classic )
 	video_cards_r200?   ( classic )
 	video_cards_r300?   ( gallium x86? ( llvm ) amd64? ( llvm ) )
@@ -67,7 +67,7 @@ REQUIRED_USE="
 	video_cards_vmware? ( gallium )
 "
 
-LIBDRM_DEPSTRING=">=x11-libs/libdrm-2.4.93"
+LIBDRM_DEPSTRING=">=x11-libs/libdrm-2.4.96"
 RDEPEND="
 	!app-eselect/eselect-mesa
 	>=app-eselect/eselect-opengl-1.3.0
@@ -95,7 +95,7 @@ RDEPEND="
 		)
 		lm_sensors? ( sys-apps/lm_sensors:=[${MULTILIB_USEDEP}] )
 		opencl? (
-					dev-libs/ocl-icd[khronos-headers]
+					dev-libs/ocl-icd[khronos-headers,${MULTILIB_USEDEP}]
 					dev-libs/libclc
 					virtual/libelf:0=[${MULTILIB_USEDEP}]
 				)
@@ -245,16 +245,6 @@ llvm_check_deps() {
 }
 
 pkg_pretend() {
-	if use d3d9; then
-		if ! use video_cards_r300 &&
-		   ! use video_cards_r600 &&
-		   ! use video_cards_radeonsi &&
-		   ! use video_cards_nouveau &&
-		   ! use video_cards_vmware; then
-			ewarn "Ignoring USE=d3d9       since VIDEO_CARDS does not contain r300, r600, radeonsi, nouveau, or vmware"
-		fi
-	fi
-
 	if use opencl; then
 		if ! use video_cards_r600 &&
 		   ! use video_cards_radeonsi; then
@@ -295,7 +285,6 @@ pkg_pretend() {
 	fi
 
 	if ! use gallium; then
-		use d3d9       && ewarn "Ignoring USE=d3d9       since USE does not contain gallium"
 		use lm_sensors && ewarn "Ignoring USE=lm_sensors since USE does not contain gallium"
 		use llvm       && ewarn "Ignoring USE=llvm       since USE does not contain gallium"
 		use opencl     && ewarn "Ignoring USE=opencl     since USE does not contain gallium"
@@ -309,6 +298,10 @@ pkg_pretend() {
 	if ! use llvm; then
 		use opencl     && ewarn "Ignoring USE=opencl     since USE does not contain llvm"
 	fi
+}
+
+python_check_deps() {
+	has_version ">=dev-python/mako-0.8.0[${PYTHON_USEDEP}]"
 }
 
 pkg_setup() {
