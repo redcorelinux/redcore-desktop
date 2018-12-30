@@ -1,0 +1,14 @@
+diff -Nur a/contrib/test/Makefile.am b/contrib/test/Makefile.am
+--- a/contrib/test/Makefile.am	2017-12-27 13:51:17.000000000 +0000
++++ b/contrib/test/Makefile.am	2018-12-30 16:35:57.823533861 +0000
+@@ -17,8 +17,10 @@
+ endif
+ 
+ if HAVE_SDL
++if HAVE_JPEG
+ noinst_PROGRAMS += sdlcam
+ endif
++endif
+ 
+ driver_test_SOURCES = driver-test.c
+ driver_test_LDADD = ../../utils/libv4l2util/libv4l2util.la

@@ -28,6 +28,8 @@ DEPEND="${RDEPEND}
 	sys-devel/gettext
 	virtual/pkgconfig"
 
+PATCHES=( "${FILESDIR}/sdlcam-only-build-if-using-jpeg.patch" )
+
 src_configure() {
 	if use qt5; then
 		append-cxxflags -std=c++11

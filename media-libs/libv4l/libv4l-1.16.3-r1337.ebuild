@@ -28,6 +28,8 @@ DEPEND="${RDEPEND}
 
 S=${WORKDIR}/${MY_P}
 
+PATCHES=( "${FILESDIR}/sdlcam-only-build-if-using-jpeg.patch" )
+
 pkg_setup() {
 	CONFIG_CHECK="~SHMEM"
 	linux-info_pkg_setup
