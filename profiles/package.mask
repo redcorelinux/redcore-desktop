@@ -24,8 +24,8 @@ lxqt-base/lxqt-powermanagement::gentoo
 lxqt-base/lxqt-runner::gentoo
 lxqt-base/lxqt-session::gentoo
 media-libs/mesa::gentoo
->media-tv/kodi-17.6-r1337
->media-video/ffmpeg-3.4.5-r1337
+>media-tv/kodi-17.6-r1337::gentoo
+>media-video/ffmpeg-3.4.5-r1337::gentoo
 net-fs/samba::gentoo
 sys-apps/baselayout::gentoo
 sys-apps/openrc::gentoo
