@@ -110,13 +110,6 @@ src_test() {
 	default
 }
 
-pkg_preinst() {
-	# backup dmcrypt configuration file, avoid etc-update
-	if [[ -f ""${ROOT}"etc/conf.d/dmcrypt" ]]; then
-		cp -avx ""${ROOT}"etc/conf.d/dmcrypt" ""${ROOT}"etc/conf.d/dmcrypt.backup"
-	fi
-}
-
 src_install() {
 	default
 	if use static ; then
@@ -132,9 +125,14 @@ src_install() {
 	use python && cd python && distutils-r1_src_install
 }
 
+pkg_preinst() {
+	if [[ -f ""${ROOT}"etc/conf.d/dmcrypt" ]]; then
+		mv ""${ROOT}"etc/conf.d/dmcrypt" ""${ROOT}"etc/conf.d/dmcrypt.bak"
+	fi
+}
+
 pkg_postinst() {
-	# restore dmcrypt configuration file, avoid etc-update
-	if [[ -f ""${ROOT}"etc/conf.d/dmcrypt.backup" ]]; then
-		cp -avx ""${ROOT}"etc/conf.d/dmcrypt.backup" ""${ROOT}"etc/conf.d/dmcrypt"
+	if [[ -f ""${ROOT}"etc/conf.d/dmcrypt.bak" ]]; then
+		mv ""${ROOT}"etc/conf.d/dmcrypt.bak" ""${ROOT}"etc/conf.d/dmcrypt"
 	fi
 }
