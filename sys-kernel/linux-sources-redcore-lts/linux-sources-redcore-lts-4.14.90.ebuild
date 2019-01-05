@@ -49,6 +49,7 @@ PATCHES=( "${FILESDIR}"/introduce-NUMA-identity-node-sched-domain.patch
 	"${FILESDIR}"/0014-Swap-sucks.patch
 	"${FILESDIR}"/0015-MuQSS.c-needs-irq_regs.h-to-use-get_irq_regs.patch
 	"${FILESDIR}"/0016-unfuck-MuQSS-on-linux-4_14_15+.patch
+	"${FILESDIR}"/0017-unfuck-MuQSS-on-linux-4_14_75+.patch
 	"${FILESDIR}"/0001-BFQ-v8r12-20171108.patch
 	"${FILESDIR}"/0002-BFQ-v8r12-20180404.patch )
 
