@@ -1,5 +1,5 @@
 diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
-index 9841bad6f271..99aab439ba8e 100644
+index 5f3d58142600..c5566972d058 100644
 --- a/Documentation/admin-guide/kernel-parameters.txt
 +++ b/Documentation/admin-guide/kernel-parameters.txt
 @@ -490,16 +490,6 @@
@@ -19,7 +19,7 @@ index 9841bad6f271..99aab439ba8e 100644
  	cio_ignore=	[S390]
  			See Documentation/s390/CommonIO for details.
  	clk_ignore_unused
-@@ -2977,6 +2967,11 @@
+@@ -2981,6 +2971,11 @@
  			the specified number of seconds.  This is to be used if
  			your oopses keep scrolling off the screen.
  
@@ -71,10 +71,10 @@ index 694968c7523c..002d86416ef8 100644
  
  The value in this file affects behavior of handling NMI. When the
 diff --git a/Makefile b/Makefile
-index 025156791e90..c45debf0a8e2 100644
+index 280c7193e246..c869bc294766 100644
 --- a/Makefile
 +++ b/Makefile
-@@ -706,6 +706,9 @@ endif
+@@ -714,6 +714,9 @@ endif
  KBUILD_CFLAGS += $(stackp-flag)
  
  ifeq ($(cc-name),clang)
@@ -85,10 +85,10 @@ index 025156791e90..c45debf0a8e2 100644
  KBUILD_CFLAGS += $(call cc-disable-warning, format-invalid-specifier)
  KBUILD_CFLAGS += $(call cc-disable-warning, gnu)
 diff --git a/arch/Kconfig b/arch/Kconfig
-index 4e01862f58e4..111da81b4277 100644
+index 77b3e21c4844..3dff252446ac 100644
 --- a/arch/Kconfig
 +++ b/arch/Kconfig
-@@ -443,6 +443,11 @@ config GCC_PLUGIN_LATENT_ENTROPY
+@@ -446,6 +446,11 @@ config GCC_PLUGIN_LATENT_ENTROPY
  	  is some slowdown of the boot process (about 0.5%) and fork and
  	  irq processing.
  
@@ -100,7 +100,7 @@ index 4e01862f58e4..111da81b4277 100644
  	  Note that entropy extracted this way is not cryptographically
  	  secure!
  
-@@ -536,7 +541,7 @@ config CC_STACKPROTECTOR
+@@ -539,7 +544,7 @@ config CC_STACKPROTECTOR
  choice
  	prompt "Stack Protector buffer overflow detection"
  	depends on HAVE_CC_STACKPROTECTOR
@@ -109,7 +109,7 @@ index 4e01862f58e4..111da81b4277 100644
  	help
  	  This option turns on the "stack-protector" GCC feature. This
  	  feature puts, at the beginning of functions, a canary value on
-@@ -738,7 +743,7 @@ config ARCH_MMAP_RND_BITS
+@@ -741,7 +746,7 @@ config ARCH_MMAP_RND_BITS
  	int "Number of bits to use for ASLR of mmap base address" if EXPERT
  	range ARCH_MMAP_RND_BITS_MIN ARCH_MMAP_RND_BITS_MAX
  	default ARCH_MMAP_RND_BITS_DEFAULT if ARCH_MMAP_RND_BITS_DEFAULT
@@ -118,7 +118,7 @@ index 4e01862f58e4..111da81b4277 100644
  	depends on HAVE_ARCH_MMAP_RND_BITS
  	help
  	  This value can be used to select the number of bits to use to
-@@ -772,7 +777,7 @@ config ARCH_MMAP_RND_COMPAT_BITS
+@@ -775,7 +780,7 @@ config ARCH_MMAP_RND_COMPAT_BITS
  	int "Number of bits to use for ASLR of mmap base address for compatible applications" if EXPERT
  	range ARCH_MMAP_RND_COMPAT_BITS_MIN ARCH_MMAP_RND_COMPAT_BITS_MAX
  	default ARCH_MMAP_RND_COMPAT_BITS_DEFAULT if ARCH_MMAP_RND_COMPAT_BITS_DEFAULT
@@ -127,7 +127,7 @@ index 4e01862f58e4..111da81b4277 100644
  	depends on HAVE_ARCH_MMAP_RND_COMPAT_BITS
  	help
  	  This value can be used to select the number of bits to use to
-@@ -955,6 +960,7 @@ config ARCH_HAS_REFCOUNT
+@@ -958,6 +963,7 @@ config ARCH_HAS_REFCOUNT
  
  config REFCOUNT_FULL
  	bool "Perform full reference count validation at the expense of speed"
@@ -136,10 +136,10 @@ index 4e01862f58e4..111da81b4277 100644
  	  Enabling this switches the refcounting infrastructure from a fast
  	  unchecked atomic_t implementation to a fully state checked
 diff --git a/arch/arm64/Kconfig b/arch/arm64/Kconfig
-index 1bbb89d37f57..e3776376cafa 100644
+index c30cd78b6918..ba32a283f027 100644
 --- a/arch/arm64/Kconfig
 +++ b/arch/arm64/Kconfig
-@@ -927,6 +927,7 @@ endif
+@@ -926,6 +926,7 @@ endif
  
  config ARM64_SW_TTBR0_PAN
  	bool "Emulate Privileged Access Never using TTBR0_EL1 switching"
@@ -147,7 +147,7 @@ index 1bbb89d37f57..e3776376cafa 100644
  	help
  	  Enabling this option prevents the kernel from accessing
  	  user-space memory directly by pointing TTBR0_EL1 to a reserved
-@@ -1053,6 +1054,7 @@ config RANDOMIZE_BASE
+@@ -1052,6 +1053,7 @@ config RANDOMIZE_BASE
  	bool "Randomize the address of the kernel image"
  	select ARM64_MODULE_PLTS if MODULES
  	select RELOCATABLE
@@ -224,10 +224,10 @@ index 9e773732520c..91359f45b5fc 100644
  
  /*
 diff --git a/arch/x86/Kconfig b/arch/x86/Kconfig
-index 1c63a4b5320d..54f70e88db20 100644
+index 4f393eb9745f..1a31f8fc82ed 100644
 --- a/arch/x86/Kconfig
 +++ b/arch/x86/Kconfig
-@@ -1154,8 +1154,7 @@ config VM86
+@@ -1145,8 +1145,7 @@ config VM86
         default X86_LEGACY_VM86
  
  config X86_16BIT
@@ -237,7 +237,7 @@ index 1c63a4b5320d..54f70e88db20 100644
  	depends on MODIFY_LDT_SYSCALL
  	---help---
  	  This option is required by programs like Wine to run 16-bit
-@@ -2229,7 +2228,7 @@ config COMPAT_VDSO
+@@ -2220,7 +2219,7 @@ config COMPAT_VDSO
  choice
  	prompt "vsyscall table for legacy applications"
  	depends on X86_64
@@ -246,7 +246,7 @@ index 1c63a4b5320d..54f70e88db20 100644
  	help
  	  Legacy user code that does not know how to find the vDSO expects
  	  to be able to issue three syscalls by calling fixed addresses in
-@@ -2319,8 +2318,7 @@ config CMDLINE_OVERRIDE
+@@ -2310,8 +2309,7 @@ config CMDLINE_OVERRIDE
  	  be set to 'N' under normal conditions.
  
  config MODIFY_LDT_SYSCALL
@@ -388,10 +388,10 @@ index 3a091cea36c5..0931c05a3348 100644
 -extern unsigned long align_vdso_addr(unsigned long);
  #endif /* _ASM_X86_ELF_H */
 diff --git a/arch/x86/include/asm/tlbflush.h b/arch/x86/include/asm/tlbflush.h
-index 875ca99b82ee..77edc169f7a2 100644
+index e31040333f0c..14f3f214c9d1 100644
 --- a/arch/x86/include/asm/tlbflush.h
 +++ b/arch/x86/include/asm/tlbflush.h
-@@ -258,6 +258,7 @@ static inline void cr4_set_bits(unsigned long mask)
+@@ -302,6 +302,7 @@ static inline void cr4_set_bits(unsigned long mask)
  	unsigned long cr4;
  
  	cr4 = this_cpu_read(cpu_tlbstate.cr4);
@@ -399,7 +399,7 @@ index 875ca99b82ee..77edc169f7a2 100644
  	if ((cr4 | mask) != cr4) {
  		cr4 |= mask;
  		this_cpu_write(cpu_tlbstate.cr4, cr4);
-@@ -271,6 +272,7 @@ static inline void cr4_clear_bits(unsigned long mask)
+@@ -315,6 +316,7 @@ static inline void cr4_clear_bits(unsigned long mask)
  	unsigned long cr4;
  
  	cr4 = this_cpu_read(cpu_tlbstate.cr4);
@@ -407,7 +407,7 @@ index 875ca99b82ee..77edc169f7a2 100644
  	if ((cr4 & ~mask) != cr4) {
  		cr4 &= ~mask;
  		this_cpu_write(cpu_tlbstate.cr4, cr4);
-@@ -283,6 +285,7 @@ static inline void cr4_toggle_bits(unsigned long mask)
+@@ -327,6 +329,7 @@ static inline void cr4_toggle_bits(unsigned long mask)
  	unsigned long cr4;
  
  	cr4 = this_cpu_read(cpu_tlbstate.cr4);
@@ -415,7 +415,7 @@ index 875ca99b82ee..77edc169f7a2 100644
  	cr4 ^= mask;
  	this_cpu_write(cpu_tlbstate.cr4, cr4);
  	__write_cr4(cr4);
-@@ -391,6 +394,7 @@ static inline void __native_flush_tlb_global(void)
+@@ -435,6 +438,7 @@ static inline void __native_flush_tlb_global(void)
  	raw_local_irq_save(flags);
  
  	cr4 = this_cpu_read(cpu_tlbstate.cr4);
@@ -424,10 +424,10 @@ index 875ca99b82ee..77edc169f7a2 100644
  	native_write_cr4(cr4 ^ X86_CR4_PGE);
  	/* write old PGE again and flush TLBs */
 diff --git a/arch/x86/kernel/cpu/common.c b/arch/x86/kernel/cpu/common.c
-index dd02ee4fa8cd..f991b4f69f21 100644
+index 51e49f6fe8e1..7ee813033624 100644
 --- a/arch/x86/kernel/cpu/common.c
 +++ b/arch/x86/kernel/cpu/common.c
-@@ -1658,7 +1658,6 @@ void cpu_init(void)
+@@ -1669,7 +1669,6 @@ void cpu_init(void)
  	wrmsrl(MSR_KERNEL_GS_BASE, 0);
  	barrier();
  
@@ -436,7 +436,7 @@ index dd02ee4fa8cd..f991b4f69f21 100644
  
  	/*
 diff --git a/arch/x86/kernel/process.c b/arch/x86/kernel/process.c
-index 988a98f34c66..dc36d2d9078a 100644
+index a98d1cdd6299..7426eb5d1c03 100644
 --- a/arch/x86/kernel/process.c
 +++ b/arch/x86/kernel/process.c
 @@ -40,6 +40,8 @@
@@ -446,9 +446,9 @@ index 988a98f34c66..dc36d2d9078a 100644
 +#include <asm/elf.h>
 +#include <linux/sizes.h>
  
- /*
-  * per-CPU TSS segments. Threads are completely 'soft' on Linux,
-@@ -719,7 +721,10 @@ unsigned long arch_align_stack(unsigned long sp)
+ #include "process.h"
+ 
+@@ -782,7 +784,10 @@ unsigned long arch_align_stack(unsigned long sp)
  
  unsigned long arch_randomize_brk(struct mm_struct *mm)
  {
@@ -582,10 +582,10 @@ index 01e2b353a2b9..9aeddca4a29f 100644
  	struct list_head *cpu_list, local_list;
  
 diff --git a/drivers/ata/libata-core.c b/drivers/ata/libata-core.c
-index 6938bd86ff1c..89e202988379 100644
+index 04f406d7e973..60d8c59fa824 100644
 --- a/drivers/ata/libata-core.c
 +++ b/drivers/ata/libata-core.c
-@@ -5147,7 +5147,7 @@ void ata_qc_free(struct ata_queued_cmd *qc)
+@@ -5148,7 +5148,7 @@ void ata_qc_free(struct ata_queued_cmd *qc)
  	struct ata_port *ap;
  	unsigned int tag;
  
@@ -594,7 +594,7 @@ index 6938bd86ff1c..89e202988379 100644
  	ap = qc->ap;
  
  	qc->flags = 0;
-@@ -5164,7 +5164,7 @@ void __ata_qc_complete(struct ata_queued_cmd *qc)
+@@ -5165,7 +5165,7 @@ void __ata_qc_complete(struct ata_queued_cmd *qc)
  	struct ata_port *ap;
  	struct ata_link *link;
  
@@ -779,7 +779,7 @@ index b811442c5ce6..4f62a63cbcb1 100644
  	  A pseudo terminal (PTY) is a software device consisting of two
  	  halves: a master and a slave. The slave device behaves identical to
 diff --git a/drivers/tty/tty_io.c b/drivers/tty/tty_io.c
-index 562d31073f9a..2184b9b5485f 100644
+index 83376caa571b..4aa47ca17268 100644
 --- a/drivers/tty/tty_io.c
 +++ b/drivers/tty/tty_io.c
 @@ -171,6 +171,7 @@ static void free_tty_struct(struct tty_struct *tty)
@@ -790,7 +790,7 @@ index 562d31073f9a..2184b9b5485f 100644
  	kfree(tty);
  }
  
-@@ -2154,11 +2155,19 @@ static int tty_fasync(int fd, struct file *filp, int on)
+@@ -2159,11 +2160,19 @@ static int tty_fasync(int fd, struct file *filp, int on)
   *	FIXME: may race normal receive processing
   */
  
@@ -810,7 +810,7 @@ index 562d31073f9a..2184b9b5485f 100644
  	if ((current->signal->tty != tty) && !capable(CAP_SYS_ADMIN))
  		return -EPERM;
  	if (get_user(ch, p))
-@@ -2841,6 +2850,7 @@ struct tty_struct *alloc_tty_struct(struct tty_driver *driver, int idx)
+@@ -2846,6 +2855,7 @@ struct tty_struct *alloc_tty_struct(struct tty_driver *driver, int idx)
  	tty->index = idx;
  	tty_line_name(driver, idx, tty->name);
  	tty->dev = tty_get_device(tty);
@@ -819,7 +819,7 @@ index 562d31073f9a..2184b9b5485f 100644
  	return tty;
  }
 diff --git a/drivers/usb/core/hub.c b/drivers/usb/core/hub.c
-index a9db0887edca..95464d2471c2 100644
+index a073cb5be013..e9dfece7b7ce 100644
 --- a/drivers/usb/core/hub.c
 +++ b/drivers/usb/core/hub.c
 @@ -38,6 +38,8 @@
@@ -831,7 +831,7 @@ index a9db0887edca..95464d2471c2 100644
  /* Protect struct usb_device->state and ->children members
   * Note: Both are also protected by ->dev.sem, except that ->state can
   * change to USB_STATE_NOTATTACHED even when the semaphore isn't held. */
-@@ -4816,6 +4818,12 @@ static void hub_port_connect(struct usb_hub *hub, int port1, u16 portstatus,
+@@ -4818,6 +4820,12 @@ static void hub_port_connect(struct usb_hub *hub, int port1, u16 portstatus,
  			goto done;
  		return;
  	}
@@ -866,17 +866,21 @@ index 0da4d748b4e6..69fcee853363 100644
  err:
  	up_write(&mm->mmap_sem);
 diff --git a/fs/namei.c b/fs/namei.c
-index 0b46b858cd42..3ae8e72341da 100644
+index d1e467b7b9de..0d96ad71b700 100644
 --- a/fs/namei.c
 +++ b/fs/namei.c
-@@ -902,8 +902,8 @@ static inline void put_link(struct nameidata *nd)
+@@ -902,10 +902,10 @@ static inline void put_link(struct nameidata *nd)
  		path_put(&last->link);
  }
  
 -int sysctl_protected_symlinks __read_mostly = 0;
 -int sysctl_protected_hardlinks __read_mostly = 0;
+-int sysctl_protected_fifos __read_mostly;
+-int sysctl_protected_regular __read_mostly;
 +int sysctl_protected_symlinks __read_mostly = 1;
 +int sysctl_protected_hardlinks __read_mostly = 1;
++int sysctl_protected_fifos __read_mostly = 2;
++int sysctl_protected_regular __read_mostly = 2;
  
  /**
   * may_follow_link - Check symlink following for unsafe situations
@@ -989,10 +993,10 @@ index f640dcbc880c..2b4f5d651f19 100644
  {
  	return true;
 diff --git a/include/linux/fs.h b/include/linux/fs.h
-index cc613f20e5a6..7606596d6c2e 100644
+index f6a577edec67..fa3a6caeca6c 100644
 --- a/include/linux/fs.h
 +++ b/include/linux/fs.h
-@@ -3392,4 +3392,15 @@ static inline bool dir_relax_shared(struct inode *inode)
+@@ -3383,4 +3383,15 @@ static inline bool dir_relax_shared(struct inode *inode)
  extern bool path_noexec(const struct path *path);
  extern void inode_nohighmem(struct inode *inode);
  
@@ -1102,7 +1106,7 @@ index df32d2508290..c992d130b94d 100644
  const struct kobj_ns_type_operations *kobj_child_ns_ops(struct kobject *parent);
  const struct kobj_ns_type_operations *kobj_ns_ops(struct kobject *kobj);
 diff --git a/include/linux/mm.h b/include/linux/mm.h
-index a26cf767407e..e0a700be00e3 100644
+index 58f2263de4de..e90dc5d98c7f 100644
 --- a/include/linux/mm.h
 +++ b/include/linux/mm.h
 @@ -525,7 +525,7 @@ static inline int is_vmalloc_or_module_addr(const void *x)
@@ -1206,10 +1210,10 @@ index ae5ed6492d54..fd0786124504 100644
  #ifndef CONFIG_SLOB
  	if (__builtin_constant_p(size) &&
 diff --git a/include/linux/slub_def.h b/include/linux/slub_def.h
-index 2038ab531616..a88f322c8c8b 100644
+index f8ced87a2efe..cd61c8d2aa6e 100644
 --- a/include/linux/slub_def.h
 +++ b/include/linux/slub_def.h
-@@ -120,6 +120,11 @@ struct kmem_cache {
+@@ -121,6 +121,11 @@ struct kmem_cache {
  	unsigned long random;
  #endif
  
@@ -1522,7 +1526,7 @@ index d203a5d6b726..2a6c3e2c57a6 100644
  static int bpf_jit_blind_insn(const struct bpf_insn *from,
  			      const struct bpf_insn *aux,
 diff --git a/kernel/bpf/syscall.c b/kernel/bpf/syscall.c
-index 4e933219fec6..0f37db32a2b1 100644
+index 5c9deed4524e..6d90aabecfc7 100644
 --- a/kernel/bpf/syscall.c
 +++ b/kernel/bpf/syscall.c
 @@ -37,7 +37,7 @@ static DEFINE_SPINLOCK(prog_idr_lock);
@@ -1552,7 +1556,7 @@ index 1e1c0236f55b..452062fe45ce 100644
  
  /**
 diff --git a/kernel/events/core.c b/kernel/events/core.c
-index 7c394ddf1ce6..9069886d38da 100644
+index 991af683ef9e..66f66b648707 100644
 --- a/kernel/events/core.c
 +++ b/kernel/events/core.c
 @@ -397,8 +397,13 @@ static cpumask_var_t perf_online_mask;
@@ -1569,7 +1573,7 @@ index 7c394ddf1ce6..9069886d38da 100644
  
  /* Minimum for 512 kiB + 1 user control page */
  int sysctl_perf_event_mlock __read_mostly = 512 + (PAGE_SIZE / 1024); /* 'free' kiB per user */
-@@ -9977,6 +9982,9 @@ SYSCALL_DEFINE5(perf_event_open,
+@@ -9984,6 +9989,9 @@ SYSCALL_DEFINE5(perf_event_open,
  	if (flags & ~PERF_FLAG_ALL)
  		return -EINVAL;
  
@@ -1580,7 +1584,7 @@ index 7c394ddf1ce6..9069886d38da 100644
  	if (err)
  		return err;
 diff --git a/kernel/fork.c b/kernel/fork.c
-index 91907a3701ce..8021b98c69e1 100644
+index 6a219fea4926..013703c020f6 100644
 --- a/kernel/fork.c
 +++ b/kernel/fork.c
 @@ -102,6 +102,11 @@
@@ -1595,7 +1599,7 @@ index 91907a3701ce..8021b98c69e1 100644
  
  /*
   * Minimum number of threads to boot the kernel
-@@ -1553,6 +1558,10 @@ static __latent_entropy struct task_struct *copy_process(
+@@ -1555,6 +1560,10 @@ static __latent_entropy struct task_struct *copy_process(
  	if ((clone_flags & (CLONE_NEWUSER|CLONE_FS)) == (CLONE_NEWUSER|CLONE_FS))
  		return ERR_PTR(-EINVAL);
  
@@ -1606,7 +1610,7 @@ index 91907a3701ce..8021b98c69e1 100644
  	/*
  	 * Thread groups must share signals as well, and detached threads
  	 * can only be started up within the thread group.
-@@ -2346,6 +2355,12 @@ SYSCALL_DEFINE1(unshare, unsigned long, unshare_flags)
+@@ -2348,6 +2357,12 @@ SYSCALL_DEFINE1(unshare, unsigned long, unshare_flags)
  	if (unshare_flags & CLONE_NEWNS)
  		unshare_flags |= CLONE_FS;
  
@@ -1655,10 +1659,10 @@ index a64eee0db39e..4d7de378fe4c 100644
  	__rcu_process_callbacks(&rcu_sched_ctrlblk);
  	__rcu_process_callbacks(&rcu_bh_ctrlblk);
 diff --git a/kernel/rcu/tree.c b/kernel/rcu/tree.c
-index 3e3650e94ae6..7ecd7a5d04b3 100644
+index 710ce1d6b982..4013b634e820 100644
 --- a/kernel/rcu/tree.c
 +++ b/kernel/rcu/tree.c
-@@ -2918,7 +2918,7 @@ __rcu_process_callbacks(struct rcu_state *rsp)
+@@ -2927,7 +2927,7 @@ __rcu_process_callbacks(struct rcu_state *rsp)
  /*
   * Do RCU core processing for the current CPU.
   */
@@ -1668,10 +1672,10 @@ index 3e3650e94ae6..7ecd7a5d04b3 100644
  	struct rcu_state *rsp;
  
 diff --git a/kernel/sched/fair.c b/kernel/sched/fair.c
-index 0cc7098c6dfd..3e69eaf4ddee 100644
+index 7240bb4a4090..9adcec5bcbd9 100644
 --- a/kernel/sched/fair.c
 +++ b/kernel/sched/fair.c
-@@ -8987,7 +8987,7 @@ static void nohz_idle_balance(struct rq *this_rq, enum cpu_idle_type idle) { }
+@@ -9005,7 +9005,7 @@ static void nohz_idle_balance(struct rq *this_rq, enum cpu_idle_type idle) { }
   * run_rebalance_domains is triggered when needed from the scheduler tick.
   * Also triggered for nohz idle balancing (with nohz_balancing_kick set).
   */
@@ -1730,7 +1734,7 @@ index a4c87cf27f9d..efb97a8dc568 100644
  	struct tasklet_struct *list;
  
 diff --git a/kernel/sysctl.c b/kernel/sysctl.c
-index 069550540a39..822783a174aa 100644
+index d330b1ce3b94..050278b12928 100644
 --- a/kernel/sysctl.c
 +++ b/kernel/sysctl.c
 @@ -66,6 +66,7 @@
@@ -1903,10 +1907,10 @@ index 069550540a39..822783a174aa 100644
  	{
  		.procname	= "ngroups_max",
 diff --git a/kernel/time/timer.c b/kernel/time/timer.c
-index 9fe525f410bf..6a85b0e1292e 100644
+index f17c76a1a05f..50f079d11488 100644
 --- a/kernel/time/timer.c
 +++ b/kernel/time/timer.c
-@@ -1624,7 +1624,7 @@ static inline void __run_timers(struct timer_base *base)
+@@ -1640,7 +1640,7 @@ static inline void __run_timers(struct timer_base *base)
  /*
   * This function runs timers and the timer-tq in bottom half context.
   */
@@ -1916,7 +1920,7 @@ index 9fe525f410bf..6a85b0e1292e 100644
  	struct timer_base *base = this_cpu_ptr(&timer_bases[BASE_STD]);
  
 diff --git a/kernel/user_namespace.c b/kernel/user_namespace.c
-index c490f1e4313b..dd03bd39d7bf 100644
+index ed80a88980f0..ff6d27d06af0 100644
 --- a/kernel/user_namespace.c
 +++ b/kernel/user_namespace.c
 @@ -24,6 +24,9 @@
@@ -1997,7 +2001,7 @@ index 86a709954f5a..6f15787fcb1b 100644
  	struct list_head *list = this_cpu_ptr(&blk_cpu_iopoll);
  	int rearm = 0, budget = irq_poll_budget;
 diff --git a/lib/kobject.c b/lib/kobject.c
-index 34f847252c02..4fda329de614 100644
+index bbbb067de8ec..fec2f780cf9b 100644
 --- a/lib/kobject.c
 +++ b/lib/kobject.c
 @@ -956,9 +956,9 @@ EXPORT_SYMBOL_GPL(kset_create_and_add);
@@ -2071,7 +2075,7 @@ index 2398776195d2..a8ffa2223ad1 100644
  		goto set_brk;
  
 diff --git a/mm/page_alloc.c b/mm/page_alloc.c
-index 59ccf455fcbd..929c2dae4954 100644
+index a2f365f40433..5e726e59de20 100644
 --- a/mm/page_alloc.c
 +++ b/mm/page_alloc.c
 @@ -67,6 +67,7 @@
@@ -2211,7 +2215,7 @@ index 485d9fbb8802..436461588804 100644
  	/*
  	 * Else we can use all the padding etc for the allocation
 diff --git a/mm/slab_common.c b/mm/slab_common.c
-index 91d271b90600..f4af25f18af2 100644
+index f6764cf162b8..015c8e4df318 100644
 --- a/mm/slab_common.c
 +++ b/mm/slab_common.c
 @@ -26,10 +26,10 @@
@@ -2246,7 +2250,7 @@ index 91d271b90600..f4af25f18af2 100644
  	4,	/* 16 */
  	5,	/* 24 */
 diff --git a/mm/slub.c b/mm/slub.c
-index 10e54c4acd19..23fa3d3be997 100644
+index 220d42e592ef..3decf87b1cf2 100644
 --- a/mm/slub.c
 +++ b/mm/slub.c
 @@ -125,6 +125,16 @@ static inline int kmem_cache_debug(struct kmem_cache *s)
@@ -2543,10 +2547,10 @@ index a77d68f2c1b6..d1f1d75f4d1f 100644
  }
  
 diff --git a/net/core/dev.c b/net/core/dev.c
-index 6ca771f2f25b..6da2c9c3e6a5 100644
+index 4337450a5fdb..5a3c7d217719 100644
 --- a/net/core/dev.c
 +++ b/net/core/dev.c
-@@ -4095,7 +4095,7 @@ int netif_rx_ni(struct sk_buff *skb)
+@@ -4117,7 +4117,7 @@ int netif_rx_ni(struct sk_buff *skb)
  }
  EXPORT_SYMBOL(netif_rx_ni);
  
@@ -2555,7 +2559,7 @@ index 6ca771f2f25b..6da2c9c3e6a5 100644
  {
  	struct softnet_data *sd = this_cpu_ptr(&softnet_data);
  
-@@ -5609,7 +5609,7 @@ static int napi_poll(struct napi_struct *n, struct list_head *repoll)
+@@ -5635,7 +5635,7 @@ static int napi_poll(struct napi_struct *n, struct list_head *repoll)
  	return work;
  }
  
@@ -2577,7 +2581,7 @@ index f48fe6fc7e8c..d78c52835c08 100644
  	  Normal TCP/IP networking is open to an attack known as "SYN
  	  flooding". This denial-of-service attack prevents legitimate remote
 diff --git a/scripts/mod/modpost.c b/scripts/mod/modpost.c
-index 54deaa1066cf..211f97bd5ee3 100644
+index 957f6041dd79..7be404c9fb47 100644
 --- a/scripts/mod/modpost.c
 +++ b/scripts/mod/modpost.c
 @@ -37,6 +37,7 @@ static int vmlinux_section_warnings = 1;
