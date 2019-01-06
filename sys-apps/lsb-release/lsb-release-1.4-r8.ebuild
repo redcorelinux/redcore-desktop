@@ -34,8 +34,8 @@ src_install() {
 	mkdir -p "${D}/etc"
 	cat > "${D}/etc/lsb-release" <<- EOF
 		DISTRIB_ID="Redcore"
-		DISTRIB_RELEASE="1806"
-		DISTRIB_CODENAME="Kepler"
-		DISTRIB_DESCRIPTION="Redcore Linux Hardened 1806 Kepler"
+		DISTRIB_RELEASE="1812"
+		DISTRIB_CODENAME="Luna"
+		DISTRIB_DESCRIPTION="Redcore Linux Hardened 1812 Luna"
 	EOF
 }
