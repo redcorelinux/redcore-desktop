@@ -33,8 +33,13 @@ else
 fi
 
 PATCHES=(
-	"${FILESDIR}"/gfxpayload.patch
-	"${FILESDIR}"/grub-2.02_beta2-KERNEL_GLOBS.patch
+	"${FILESDIR}"/01-xfs-accept-filesystem-with-sparse-inodes.patch
+	"${FILESDIR}"/02-support-multiple-early-initrd-images.patch
+	"${FILESDIR}"/03-relocation.patch
+	"${FILESDIR}"/04-Fix-packed-not-aligned-error-on-GCC-8.patch
+	"${FILESDIR}"/05-gfxpayload.patch
+	"${FILESDIR}"/06-KERNEL_GLOBS.patch
+	"${FILESDIR}"/07-Allow_GRUB_to_mount_ext234_filesystems_that_have_the_encryption_feature.patch
 )
 
 DEJAVU=dejavu-sans-ttf-2.37
