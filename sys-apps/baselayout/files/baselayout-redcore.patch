@@ -1,8 +1,7 @@
 diff -Nur a/etc.Linux/modprobe.d/blacklist.conf b/etc.Linux/modprobe.d/blacklist.conf
 --- a/etc.Linux/modprobe.d/blacklist.conf	1970-01-01 01:00:00.000000000 +0100
 +++ b/etc.Linux/modprobe.d/blacklist.conf	2018-01-12 08:36:45.815582426 +0000
-@@ -0,0 +1,7 @@
-+blacklist vboxvideo
+@@ -0,0 +1,6 @@
 +blacklist b43
 +blacklist b44
 +blacklist b43legacy
