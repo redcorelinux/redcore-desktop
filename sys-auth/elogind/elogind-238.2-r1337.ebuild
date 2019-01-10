@@ -99,4 +99,6 @@ src_install() {
 
 	sed -e "s/@libdir@/$(get_libdir)/" "${FILESDIR}"/${PN}.conf.in > ${PN}.conf || die
 	newconfd ${PN}.conf ${PN}
+
+	rm -rf ${ED}lib/udev/rules.d/73-seat-late.rules
 }
