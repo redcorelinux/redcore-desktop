@@ -1,0 +1,27 @@
+---
+componentName:  redcore_branding
+
+strings:
+    productName:         Redcore Linux Hardened
+    shortProductName:    Redcore
+    version:             1812
+    shortVersion:        1812
+    versionedName:       Redcore Linux Hardened 1812
+    shortVersionedName:  Redcore 1812
+    bootloaderEntryName: Redcore
+    productUrl:          https://redcorelinux.org/
+    supportUrl:          https://wiki.redcorelinux.org/
+    knownIssuesUrl:      https://bugs.redcorelinux.org/
+    releaseNotesUrl:     https://redcorelinux.org/
+
+images:
+    productLogo:         "redcore.png"
+    productIcon:         "redcore.png"
+    productWelcome:      "languages.png"
+
+slideshow:               "show.qml"
+
+style:
+   sidebarBackground:    "#520A0A"
+   sidebarText:          "#FFFFFF"
+   sidebarTextSelect:    "#520A0A"
