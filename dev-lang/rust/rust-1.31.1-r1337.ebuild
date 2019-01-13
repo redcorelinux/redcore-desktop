@@ -5,29 +5,29 @@ EAPI=6
 
 PYTHON_COMPAT=( python2_7 python3_{5,6} pypy )
 
-inherit multiprocessing multilib-build python-any-r1 rust-toolchain toolchain-funcs
+inherit check-reqs eapi7-ver estack flag-o-matic llvm multiprocessing multilib-build python-any-r1 rust-toolchain toolchain-funcs
 
-SLOT="stable/1.29"
-MY_P="rustc-${PV}"
-SRC="${MY_P}-src.tar.xz"
-KEYWORDS="~amd64"
+if [[ ${PV} = *beta* ]]; then
+	betaver=${PV//*beta}
+	BETA_SNAPSHOT="${betaver:0:4}-${betaver:4:2}-${betaver:6:2}"
+	MY_P="rustc-beta"
+	SLOT="beta/${PV}"
+	SRC="${BETA_SNAPSHOT}/rustc-beta-src.tar.xz"
+else
+	ABI_VER="$(ver_cut 1-2)"
+	SLOT="stable/${ABI_VER}"
+	MY_P="rustc-${PV}"
+	SRC="${MY_P}-src.tar.xz"
+	KEYWORDS="~amd64"
+fi
 
-CHOST_amd64=x86_64-unknown-linux-gnu
-CHOST_x86=i686-unknown-linux-gnu
-CHOST_arm64=aarch64-unknown-linux-gnu
-
-RUST_STAGE0_VERSION="1.28.0"
-RUST_STAGE0_amd64="rust-${RUST_STAGE0_VERSION}-${CHOST_amd64}"
-RUST_STAGE0_x86="rust-${RUST_STAGE0_VERSION}-${CHOST_x86}"
-RUST_STAGE0_arm64="rust-${RUST_STAGE0_VERSION}-${CHOST_arm64}"
-
-CARGO_DEPEND_VERSION="0.30.0"
+RUST_STAGE0_VERSION="1.$(($(ver_cut 2) - 1)).1"
 
 DESCRIPTION="Systems programming language from Mozilla"
 HOMEPAGE="https://www.rust-lang.org/"
 
 SRC_URI="https://static.rust-lang.org/dist/${SRC} -> rustc-${PV}-src.tar.xz
-		$(rust_all_arch_uris rust-${RUST_STAGE0_VERSION})"
+		$(rust_arch_uri x86_64-unknown-linux-gnu rust-${RUST_STAGE0_VERSION})"
 
 ALL_LLVM_TARGETS=( AArch64 AMDGPU ARM BPF Hexagon Lanai Mips MSP430
 	NVPTX PowerPC Sparc SystemZ X86 XCore )
@@ -36,46 +36,66 @@ LLVM_TARGET_USEDEPS=${ALL_LLVM_TARGETS[@]/%/?}
 
 LICENSE="|| ( MIT Apache-2.0 ) BSD-1 BSD-2 BSD-4 UoI-NCSA"
 
-IUSE="cargo clippy cpu_flags_x86_sse2 debug doc +jemalloc libressl rls rustfmt wasm ${ALL_LLVM_TARGETS[*]}"
+IUSE="clippy cpu_flags_x86_sse2 debug doc +jemalloc libressl rls rustfmt system-llvm wasm ${ALL_LLVM_TARGETS[*]}"
 
-RDEPEND=">=app-eselect/eselect-rust-0.3_pre20150425
+COMMON_DEPEND="
 		jemalloc? ( dev-libs/jemalloc )
-		cargo? (
-			sys-libs/zlib
-			!libressl? ( dev-libs/openssl:0= )
-			libressl? ( dev-libs/libressl:0= )
-			net-libs/libssh2
-			net-libs/http-parser:=
-			net-misc/curl[ssl]
-		)"
-DEPEND="${RDEPEND}
+		sys-libs/zlib
+		!libressl? ( dev-libs/openssl:0= )
+		libressl? ( dev-libs/libressl:0= )
+		net-libs/libssh2
+		net-libs/http-parser:=
+		net-misc/curl[ssl]
+		system-llvm? ( >=sys-devel/llvm-6:= )"
+DEPEND="${COMMON_DEPEND}
 	${PYTHON_DEPS}
 	|| (
 		>=sys-devel/gcc-4.7
 		>=sys-devel/clang-3.5
 	)
-	cargo? ( !dev-util/cargo )
-	rustfmt? ( !dev-util/rustfmt )
-	dev-util/cmake
-"
-PDEPEND="!cargo? ( >=dev-util/cargo-${CARGO_DEPEND_VERSION} )"
-
+	dev-util/cmake"
+RDEPEND="${COMMON_DEPEND}
+	!dev-util/cargo
+	rustfmt? ( !dev-util/rustfmt )"
 REQUIRED_USE="|| ( ${ALL_LLVM_TARGETS[*]} )
 				x86? ( cpu_flags_x86_sse2 )"
 
 S="${WORKDIR}/${MY_P}-src"
 
-PATCHES=( "${FILESDIR}"/${PV}-clippy-sysroot.patch )
+PATCHES=( "${FILESDIR}"/1.30.1-clippy-sysroot.patch )
 
 toml_usex() {
 	usex "$1" true false
 }
 
+pre_build_checks() {
+	CHECKREQS_DISK_BUILD="7G"
+	CHECKREQS_MEMORY="4G"
+	eshopts_push -s extglob
+	if is-flagq '-g?(gdb)?([1-9])'; then
+		CHECKREQS_DISK_BUILD="10G"
+		CHECKREQS_MEMORY="16G"
+	fi
+	eshopts_pop
+	check-reqs_pkg_setup
+}
+
+pkg_pretend() {
+	pre_build_checks
+}
+
+pkg_setup() {
+	pre_build_checks
+	python-any-r1_pkg_setup
+	if use system-llvm; then
+		llvm_pkg_setup
+	fi
+}
+
 src_prepare() {
 	local rust_stage0_root="${WORKDIR}"/rust-stage0
 
-	local rust_stage0_name="RUST_STAGE0_${ARCH}"
-	local rust_stage0="${!rust_stage0_name}"
+	local rust_stage0="rust-${RUST_STAGE0_VERSION}-$(rust_abi)"
 
 	"${WORKDIR}/${rust_stage0}"/install.sh --disable-ldconfig --destdir="${rust_stage0_root}" --prefix=/ || die
 
@@ -83,39 +103,30 @@ src_prepare() {
 }
 
 src_configure() {
-	local rust_target="" rust_targets="" rust_target_name arch_cflags
+	local rust_target="" rust_targets="" arch_cflags
 
 	# Collect rust target names to compile standard libs for all ABIs.
 	for v in $(multilib_get_enabled_abi_pairs); do
-		rust_target_name="CHOST_${v##*.}"
-		rust_targets="${rust_targets},\"${!rust_target_name}\""
+		rust_targets="${rust_targets},\"$(rust_abi $(get_abi_CHOST ${v##*.}))\""
 	done
 	if use wasm; then
 		rust_targets="${rust_targets},\"wasm32-unknown-unknown\""
 	fi
 	rust_targets="${rust_targets#,}"
 
-	local extended="false" tools=""
-	if use cargo; then
-		extended="true"
-		tools="\"cargo\","
-	fi
+	local extended="true" tools="\"cargo\","
 	if use clippy; then
-		extended="true"
 		tools="\"clippy\",$tools"
 	fi
 	if use rls; then
-		extended="true"
 		tools="\"rls\",\"analysis\",\"src\",$tools"
 	fi
 	if use rustfmt; then
-		extended="true"
 		tools="\"rustfmt\",$tools"
 	fi
 
 	local rust_stage0_root="${WORKDIR}"/rust-stage0
 
-	rust_target_name="CHOST_${ARCH}"
 	rust_target="$(rust_abi)"
 
 	cat <<- EOF > "${S}"/config.toml
@@ -124,6 +135,7 @@ src_configure() {
 		release-debuginfo = $(toml_usex debug)
 		assertions = $(toml_usex debug)
 		targets = "${LLVM_TARGETS// /;}"
+		link-shared = $(toml_usex system-llvm)
 		[build]
 		build = "${rust_target}"
 		host = ["${rust_target}"]
@@ -154,7 +166,7 @@ src_configure() {
 	EOF
 
 	for v in $(multilib_get_enabled_abi_pairs); do
-		rust_target=$(get_abi_CHOST ${v##*.})
+		rust_target=$(rust_abi $(get_abi_CHOST ${v##*.}))
 		arch_cflags="$(get_abi_CFLAGS ${v##*.})"
 
 		cat <<- EOF >> "${S}"/config.env
@@ -168,6 +180,11 @@ src_configure() {
 			linker = "$(tc-getCC)"
 			ar = "$(tc-getAR)"
 		EOF
+		if use system-llvm; then
+			cat <<- EOF >> "${S}"/config.toml
+				llvm-config = "$(get_llvm_prefix)/bin/llvm-config"
+			EOF
+		fi
 	done
 
 	if use wasm; then
@@ -189,43 +206,6 @@ src_install() {
 
 	env DESTDIR="${D}" "${EPYTHON}" ./x.py install || die
 
-	mv "${D}/usr/bin/rustc" "${D}/usr/bin/rustc-${PV}" || die
-	mv "${D}/usr/bin/rustdoc" "${D}/usr/bin/rustdoc-${PV}" || die
-	mv "${D}/usr/bin/rust-gdb" "${D}/usr/bin/rust-gdb-${PV}" || die
-	mv "${D}/usr/bin/rust-lldb" "${D}/usr/bin/rust-lldb-${PV}" || die
-
-
-	# Redcore Linux (install unversioned binaries as well)
-	cp "${D}/usr/bin/rustc-${PV}" "${D}/usr/bin/rustc" || die
-	cp "${D}/usr/bin/rustdoc-${PV}" "${D}/usr/bin/rustdoc" || die
-	cp "${D}/usr/bin/rust-gdb-${PV}" "${D}/usr/bin/rust-gdb" || die
-	cp "${D}/usr/bin/rust-lldb-${PV}" "${D}/usr/bin/rust-lldb" || die
-
-	if use cargo; then
-		mv "${D}/usr/bin/cargo" "${D}/usr/bin/cargo-${PV}" || die
-		# Redcore Linux (install unversioned binaries as well)
-		cp "${D}/usr/bin/cargo-${PV}" "${D}/usr/bin/cargo" || die
-	fi
-	if use clippy; then
-		mv "${D}/usr/bin/clippy-driver" "${D}/usr/bin/clippy-driver-${PV}" || die
-		mv "${D}/usr/bin/cargo-clippy" "${D}/usr/bin/cargo-clippy-${PV}" || die
-		# Redcore Linux (install unversioned binaries as well)
-		cp "${D}/usr/bin/clippy-driver-${PV}" "${D}/usr/bin/clippy-driver" || die
-		cp "${D}/usr/bin/cargo-clippy-${PV}" "${D}/usr/bin/cargo-clippy" || die
-	fi
-	if use rls; then
-		mv "${D}/usr/bin/rls" "${D}/usr/bin/rls-${PV}" || die
-		# Redcore Linux (install unversioned binaries as well)
-		cp "${D}/usr/bin/rls-${PV}" "${D}/usr/bin/rls" || die
-	fi
-	if use rustfmt; then
-		mv "${D}/usr/bin/rustfmt" "${D}/usr/bin/rustfmt-${PV}" || die
-		mv "${D}/usr/bin/cargo-fmt" "${D}/usr/bin/cargo-fmt-${PV}" || die
-		# Redcore Linux (install unversioned binaries as well)
-		cp "${D}/usr/bin/rustfmt-${PV}" "${D}/usr/bin/rustfmt" || die
-		cp "${D}/usr/bin/cargo-fmt-${PV}" "${D}/usr/bin/cargo-fmt" || die
-	fi
-
 	# Copy shared library versions of standard libraries for all targets
 	# into the system's abi-dependent lib directories because the rust
 	# installer only does so for the native ABI.
@@ -234,7 +214,7 @@ src_install() {
 			continue
 		fi
 		abi_libdir=$(get_abi_LIBDIR ${v##*.})
-		rust_target=$(get_abi_CHOST ${v##*.})
+		rust_target=$(rust_abi $(get_abi_CHOST ${v##*.}))
 		mkdir -p "${D}/usr/${abi_libdir}"
 		cp "${D}/usr/$(get_libdir)/${P}/rustlib/${rust_target}/lib"/*.so \
 		   "${D}/usr/${abi_libdir}" || die
@@ -249,12 +229,4 @@ src_install() {
 		MANPATH="/usr/share/${P}/man"
 	EOF
 	doenvd "${T}"/50${P}
-}
-
-pkg_postinst() {
-	eselect rust update --if-unset
-}
-
-pkg_postrm() {
-	eselect rust unset --if-invalid
 }

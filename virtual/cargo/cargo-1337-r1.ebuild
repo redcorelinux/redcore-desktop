@@ -11,4 +11,4 @@ LICENSE=""
 SLOT="0"
 KEYWORDS="amd64"
 
-RDEPEND="dev-lang/rust[cargo]"
+RDEPEND="dev-lang/rust"
