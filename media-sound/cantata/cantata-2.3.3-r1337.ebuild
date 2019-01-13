@@ -1,4 +1,4 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -8,12 +8,12 @@ inherit cmake-utils gnome2-utils l10n qmake-utils xdg-utils
 
 DESCRIPTION="Featureful and configurable Qt client for the music player daemon (MPD)"
 HOMEPAGE="https://github.com/CDrummond/cantata"
-SRC_URI="https://github.com/CDrummond/cantata/releases/download/v${PV}/${P}.tar.bz2"
+SRC_URI="https://github.com/CDrummond/${PN}/releases/download/v${PV}/${P}.tar.bz2"
 
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="cdda cddb cdio http-server mtp musicbrainz replaygain streaming taglib udisks zeroconf"
+IUSE="cdda cddb cdio http-server libav mtp musicbrainz replaygain streaming taglib udisks zeroconf"
 REQUIRED_USE="
 	?? ( cdda cdio )
 	cdda? ( udisks || ( cddb musicbrainz ) )
@@ -35,7 +35,6 @@ COMMON_DEPEND="
 	dev-qt/qtwidgets:5
 	dev-qt/qtxml:5
 	media-sound/mpd
-	|| ( kde-frameworks/breeze-icons:5 kde-frameworks/oxygen-icons:* )
 	sys-libs/zlib
 	virtual/libudev:=
 	cdda? ( media-sound/cdparanoia )
@@ -46,7 +45,8 @@ COMMON_DEPEND="
 	replaygain? (
 		media-libs/libebur128
 		media-sound/mpg123
-		virtual/ffmpeg
+		libav? ( media-video/libav:= )
+		!libav? ( media-video/ffmpeg:0= )
 	)
 	streaming? ( dev-qt/qtmultimedia:5 )
 	taglib? (
@@ -57,6 +57,7 @@ COMMON_DEPEND="
 "
 RDEPEND="${COMMON_DEPEND}
 	dev-lang/perl[ithreads]
+	|| ( kde-frameworks/breeze-icons:5 kde-frameworks/oxygen-icons:* )
 "
 DEPEND="${COMMON_DEPEND}
 	dev-qt/qtconcurrent:5
@@ -66,10 +67,7 @@ DEPEND="${COMMON_DEPEND}
 # cantata has no tests
 RESTRICT="test"
 
-PATCHES=(
-	"${FILESDIR}/${PN}-2.2.0-headers.patch"
-	"${FILESDIR}/${P}-opusfile.patch"
-)
+PATCHES=( "${FILESDIR}/${PN}-2.2.0-headers.patch" )
 
 src_prepare() {
 	remove_locale() {
