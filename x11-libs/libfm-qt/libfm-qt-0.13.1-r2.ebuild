@@ -12,7 +12,7 @@ DESCRIPTION="Qt port of libfm, a library providing components to build desktop f
 HOMEPAGE="http://lxqt.org/"
 
 LICENSE="LGPL-2.1+"
-SLOT="0/5.0.0"
+SLOT="0/5"
 
 PATCHES=(
 	"${FILESDIR}/${P}-check-if-app-exists-before-opening.patch"
