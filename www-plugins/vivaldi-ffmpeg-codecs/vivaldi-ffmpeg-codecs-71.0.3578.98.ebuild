@@ -4,11 +4,11 @@
 
 EAPI=5
 
-inherit eutils unpacker
+inherit eutils
 
 DESCRIPTION="Additional proprietary codecs for vivaldi"
 HOMEPAGE="http://ffmpeg.org/"
-SRC_URI="http://mirrors.kernel.org/ubuntu/pool/universe/c/chromium-browser/chromium-codecs-ffmpeg-extra_${PV}-0ubuntu0.14.04.1_amd64.deb"
+SRC_URI="https://repo.herecura.eu/herecura/x86_64/${P}-1-x86_64.pkg.tar.xz"
 
 LICENSE="LGPL2.1"
 SLOT="0"
@@ -22,10 +22,6 @@ RESTRICT="mirror strip"
 
 S="${WORKDIR}"
 
-src_unpack () {
-	unpack_deb ${A}
-}
-
 src_prepare() {
 	:
 }
@@ -37,5 +33,5 @@ src_compile() {
 src_install() {
 	dodir opt/vivaldi
 	insinto opt/vivaldi
-	doins ${S}/usr/lib/chromium-browser/libffmpeg.so
+	doins ${S}/opt/vivaldi/libffmpeg.so
 }
