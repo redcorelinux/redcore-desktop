@@ -42,6 +42,7 @@ DOC_CONTENTS="
 
 src_prepare() {
 	epatch "${FILESDIR}/${PN}-redcore-defaults.patch"
+	epatch "${FILESDIR}/${PN}-text-redcore-colors.patch"
 	epatch "${FILESDIR}/${PN}-include-sysmacros.patch"
 	epatch "${FILESDIR}/${PN}-fix-window-size-with-multiple-heads.patch"
 
@@ -82,12 +83,4 @@ src_install() {
 	dosym /usr/sbin/plymouthd /sbin/plymouthd
 
 	readme.gentoo_create_doc
-}
-
-pkg_postinst() {
-	readme.gentoo_print_elog
-	if ! has_version "sys-kernel/dracut[dracut_modules_plymouth]" && ! has_version "sys-kernel/genkernel-next[plymouth]"; then
-		ewarn "If you want initramfs builder with plymouth support, please emerge"
-		ewarn "sys-kernel/dracut[dracut_modules_plymouth] or sys-kernel/genkernel-next[plymouth]."
-	fi
 }
