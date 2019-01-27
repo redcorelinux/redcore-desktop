@@ -1,5 +1,5 @@
-gtk-theme-name="Redcore-nighttime"
-gtk-icon-theme-name="material-design-dark"
+gtk-theme-name="Redcore-daylight"
+gtk-icon-theme-name="material-design-light"
 gtk-font-name="Roboto 9"
 gtk-cursor-theme-name="Hacked-Red"
 gtk-cursor-theme-size=0
