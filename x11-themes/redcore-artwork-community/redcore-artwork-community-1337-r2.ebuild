@@ -2,11 +2,16 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI=5
+EAPI=6
+
+inherit eutils git-r3
 
 DESCRIPTION="Redcore Linux Community Wallpapers"
-HOMEPAGE="http://redcorelinux.org"
-SRC_URI="http://mirror.math.princeton.edu/pub/redcorelinux/distfiles/${PN}.tar.xz"
+HOMEPAGE="https://redcorelinux.org"
+
+EGIT_REPO_URI="https://pagure.io/redcore/redcore-wallpapers.git"
+EGIT_BRANCH="master"
+EGIT_COMMIT="a2a845112993670f1ecd5a9e67c0409b4c364104"
 
 LICENSE=""
 SLOT="0"
@@ -15,8 +20,6 @@ IUSE=""
 
 DEPEND=""
 RDEPEND="${DEPEND}"
-
-S="${WORKDIR}"/"${PN}"
 
 src_install() {
 	# default wallpaper
@@ -33,11 +36,6 @@ src_install() {
 	dodir usr/share/backgrounds/by_mellita
 	insinto usr/share/backgrounds/by_mellita
 	doins -r by_mellita/*
-
-	# Wallpapers by Ioan Parjolea (joly), thanks
-	dodir usr/share/backgrounds/by_joly
-	insinto usr/share/backgrounds/by_joly
-	doins -r by_joly/*
 
 	# Wallpapers by Toma S. Muntean, thanks
 	dodir usr/share/backgrounds/by_tomas
