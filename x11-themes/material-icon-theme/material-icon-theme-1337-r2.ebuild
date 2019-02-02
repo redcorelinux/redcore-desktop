@@ -3,7 +3,7 @@
 
 EAPI=6
 
-inherit eutils git-r3
+inherit eutils git-r3 gnome2-utils
 
 DESCRIPTION="Icon theme following the Google's material design specifications"
 HOMEPAGE="https://gitlab.com/bionel/bionel-icons"
@@ -25,4 +25,16 @@ src_install() {
 	dodir usr/share/icons
 	insinto usr/share/icons
 	doins -r material-icons/*
+}
+
+pkg_preinst() {
+	gnome2_icon_savelist
+}
+
+pkg_postinst() {
+	gnome2_icon_cache_update
+}
+
+pkg_postrm() {
+	gnome2_icon_cache_update
 }
