@@ -15,6 +15,8 @@ LICENSE="GPL-2+"
 SLOT="0"
 IUSE="samba"
 
+PATCHES=( "${FILESDIR}/${P}-use_view_action_icons_from_theme.patch" )
+
 CDEPEND=">=dev-libs/glib-2.50.0:2
 	dev-qt/qtcore:5
 	dev-qt/qtdbus:5
