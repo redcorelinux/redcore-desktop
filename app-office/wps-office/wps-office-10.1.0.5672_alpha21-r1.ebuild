@@ -50,6 +50,8 @@ NATIVE_DEPEND="
 	virtual/opengl
 	media-libs/tiff:3
 	sys-apps/util-linux
+	sys-libs/libcxx
+	sys-libs/libcxxabi
 	sys-libs/zlib
 	x11-libs/libdrm
 	x11-libs/libICE
