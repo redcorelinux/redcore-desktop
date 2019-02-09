@@ -1,0 +1,14 @@
+diff -Nur a/kernel/sched/MuQSS.c b/kernel/sched/MuQSS.c
+--- a/kernel/sched/MuQSS.c	2019-02-09 19:46:07.899912055 +0000
++++ b/kernel/sched/MuQSS.c	2019-02-09 19:48:03.743622465 +0000
+@@ -1011,6 +1011,10 @@
+ #define CPUIDLE_THREAD_BUSY	(16)
+ #define CPUIDLE_DIFF_NODE	(32)
+ 
++#ifdef CONFIG_SCHED_SMT
++DEFINE_STATIC_KEY_FALSE(sched_smt_present);
++#endif
++
+ /*
+  * The best idle CPU is chosen according to the CPUIDLE ranking above where the
+  * lowest value would give the most suitable CPU to schedule p onto next. The

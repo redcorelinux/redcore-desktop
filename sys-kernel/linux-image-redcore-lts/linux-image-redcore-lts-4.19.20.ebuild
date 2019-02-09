@@ -7,6 +7,7 @@ inherit eutils
 
 EXTRAVERSION="redcore-lts"
 KV_FULL="${PV}-${EXTRAVERSION}"
+KV_MAJOR="4.19"
 
 DESCRIPTION="Official Redcore Linux Kernel Image"
 HOMEPAGE="https://redcorelinux.org"
@@ -32,32 +33,34 @@ DEPEND="
 	>=sys-kernel/linux-firmware-20180314"
 RDEPEND="${DEPEND}"
 
-PATCHES=( "${FILESDIR}"/introduce-NUMA-identity-node-sched-domain.patch
-	"${FILESDIR}"/k10temp-add-ZEN-support.patch
-	"${FILESDIR}"/mute-pps_state_mismatch.patch
-	"${FILESDIR}"/restore-SD_PREFER_SIBLING-on-MC-domains.patch	
-	"${FILESDIR}"/Revert-ath10k-activate-user-space-firmware-loading.patch
-	"${FILESDIR}"/linux-hardened.patch
-	"${FILESDIR}"/uksm-linux-hardened.patch
-	"${FILESDIR}"/0001-MuQSS-version-0.162-CPU-scheduler-linux-hardened.patch
-	"${FILESDIR}"/0002-Make-preemptible-kernel-default.patch
-	"${FILESDIR}"/0003-Expose-vmsplit-for-our-poor-32-bit-users.patch
-	"${FILESDIR}"/0004-Create-highres-timeout-variants-of-schedule_timeout-.patch
-	"${FILESDIR}"/0005-Special-case-calls-of-schedule_timeout-1-to-use-the-.patch
-	"${FILESDIR}"/0006-Convert-msleep-to-use-hrtimers-when-active.patch
-	"${FILESDIR}"/0007-Replace-all-schedule-timeout-1-with-schedule_min_hrt.patch
-	"${FILESDIR}"/0008-Replace-all-calls-to-schedule_timeout_interruptible-.patch
-	"${FILESDIR}"/0009-Replace-all-calls-to-schedule_timeout_uninterruptibl.patch
-	"${FILESDIR}"/0010-Don-t-use-hrtimer-overlay-when-pm_freezing-since-som.patch
-	"${FILESDIR}"/0011-Make-hrtimer-granularity-and-minimum-hrtimeout-confi.patch
-	"${FILESDIR}"/0012-Reinstate-default-Hz-of-100-in-combination-with-MuQS.patch
-	"${FILESDIR}"/0013-Make-threaded-IRQs-optionally-the-default-which-can-.patch
-	"${FILESDIR}"/0014-Swap-sucks.patch
-	"${FILESDIR}"/0015-MuQSS.c-needs-irq_regs.h-to-use-get_irq_regs.patch
-	"${FILESDIR}"/0016-unfuck-MuQSS-on-linux-4_14_15+.patch
-	"${FILESDIR}"/0017-unfuck-MuQSS-on-linux-4_14_75+.patch
-	"${FILESDIR}"/0001-BFQ-v8r12-20171108.patch
-	"${FILESDIR}"/0002-BFQ-v8r12-20180404.patch )
+PATCHES=( 
+	"${FILESDIR}"/"${KV_MAJOR}"-ata-fix-NCQ-LOG-strings-and-move-to-debug.patch
+	"${FILESDIR}"/"${KV_MAJOR}"-ath10k-drop-WARN_ON-added-in-cd93b83ad927b2c7979e0add0343ace59328b461.patch
+	"${FILESDIR}"/"${KV_MAJOR}"-drop_ancient-and-wrong-msg.patch
+	"${FILESDIR}"/"${KV_MAJOR}"-enable_alx_wol.patch
+	"${FILESDIR}"/"${KV_MAJOR}"-mute-pps_state_mismatch.patch
+	"${FILESDIR}"/"${KV_MAJOR}"-nouveau-pascal-backlight.patch
+	"${FILESDIR}"/"${KV_MAJOR}"-radeon_dp_aux_transfer_native-no-ratelimited_debug.patch
+	"${FILESDIR}"/"${KV_MAJOR}"-revert-patches-causing-instant-reboot.patch
+	"${FILESDIR}"/"${KV_MAJOR}"-linux-hardened.patch
+	"${FILESDIR}"/"${KV_MAJOR}"-uksm-linux-hardened.patch
+	"${FILESDIR}"/"${KV_MAJOR}"-bfq-sq-mq-v9r1-2K190204-rc1.patch
+	"${FILESDIR}"/"${KV_MAJOR}"-0001-MultiQueue-Skiplist-Scheduler-version-v0.180-linux-hardened.patch
+	"${FILESDIR}"/"${KV_MAJOR}"-0002-Fix-Werror-build-failure-in-tools.patch
+	"${FILESDIR}"/"${KV_MAJOR}"-0003-Make-preemptible-kernel-default.patch
+	"${FILESDIR}"/"${KV_MAJOR}"-0004-Expose-vmsplit-for-our-poor-32-bit-users.patch
+	"${FILESDIR}"/"${KV_MAJOR}"-0005-Create-highres-timeout-variants-of-schedule_timeout-.patch
+	"${FILESDIR}"/"${KV_MAJOR}"-0006-Special-case-calls-of-schedule_timeout-1-to-use-the-.patch
+	"${FILESDIR}"/"${KV_MAJOR}"-0007-Convert-msleep-to-use-hrtimers-when-active.patch
+	"${FILESDIR}"/"${KV_MAJOR}"-0008-Replace-all-schedule-timeout-1-with-schedule_min_hrt.patch
+	"${FILESDIR}"/"${KV_MAJOR}"-0009-Replace-all-calls-to-schedule_timeout_interruptible-.patch
+	"${FILESDIR}"/"${KV_MAJOR}"-0010-Replace-all-calls-to-schedule_timeout_uninterruptibl.patch
+	"${FILESDIR}"/"${KV_MAJOR}"-0011-Don-t-use-hrtimer-overlay-when-pm_freezing-since-som.patch
+	"${FILESDIR}"/"${KV_MAJOR}"-0012-Make-threaded-IRQs-optionally-the-default-which-can-.patch
+	"${FILESDIR}"/"${KV_MAJOR}"-0013-Reinstate-default-Hz-of-100-in-combination-with-MuQS.patch
+	"${FILESDIR}"/"${KV_MAJOR}"-0014-Swap-sucks.patch
+	"${FILESDIR}"/"${KV_MAJOR}"-0015-unfuck-MuQSS-on-linux-4_19_10+.patch 
+)
 
 S="${WORKDIR}"/linux-"${PV}"
 
@@ -73,7 +76,7 @@ src_prepare() {
 	default
 	emake mrproper
 	sed -ri "s|^(EXTRAVERSION =).*|\1 -${EXTRAVERSION}|" Makefile
-	cp "${FILESDIR}"/"${EXTRAVERSION}"-amd64.config .config
+	cp "${FILESDIR}"/"${KV_MAJOR}"-"${EXTRAVERSION}"-amd64.config .config
 	rm -rf $(find . -type f|grep -F \.orig)
 }
 
