@@ -1,11 +1,23 @@
---- a/kernel/nvidia-drm/nvidia-drm-gem-nvkms-memory.c	2018-12-27 12:02:01.534608650 +1100
-+++ b/kernel/nvidia-drm/nvidia-drm-gem-nvkms-memory.c	2018-12-27 12:04:31.541940558 +1100
-@@ -237,7 +237,7 @@
+diff -Nur a/kernel/nvidia-drm/nvidia-drm-gem-nvkms-memory.c b/kernel/nvidia-drm/nvidia-drm-gem-nvkms-memory.c
+--- a/kernel/nvidia-drm/nvidia-drm-gem-nvkms-memory.c	2018-08-22 01:55:29.000000000 +0100
++++ b/kernel/nvidia-drm/nvidia-drm-gem-nvkms-memory.c	2019-02-10 03:22:49.318034507 +0000
+@@ -29,6 +29,7 @@
+ 
+ #include "nv-mm.h"
+ 
++#include <linux/version.h>
+ static void __nv_drm_gem_nvkms_memory_free(struct nv_drm_gem_object *nv_gem)
+ {
+     struct nv_drm_device *nv_dev = nv_gem->nv_dev;
+@@ -237,7 +238,11 @@
  
      page_offset = vmf->pgoff - drm_vma_node_start(&gem->vma_node);
  
--    ret = vm_insert_pfn(vma, address, pfn + page_offset);
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 19, 0)
 +    ret = vmf_insert_pfn(vma, address, pfn + page_offset);
++#else
+     ret = vm_insert_pfn(vma, address, pfn + page_offset);
++#endif
  
      switch (ret) {
          case 0:
