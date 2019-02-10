@@ -28,8 +28,10 @@ src_unpack() {
 }
 
 src_prepare() {
-	epatch "${FILESDIR}/kernel-4.16.patch"
-	epatch ""${FILESDIR}"/"${P}"-conf.patch"
+	epatch "${FILESDIR}"/kernel-4.16.patch
+	epatch "${FILESDIR}"/"${P}"-conf.patch
+	epatch "${FILESDIR}"/"${PV}"-vmf_insert_pfn.patch
+	epatch "${FILESDIR}"/"${PV}"-ipmi_user.patch
 }
 
 src_install() {
