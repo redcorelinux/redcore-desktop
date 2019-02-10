@@ -1,0 +1,11 @@
+--- a/kernel/nvidia-drm/nvidia-drm-gem-nvkms-memory.c	2018-12-27 12:02:01.534608650 +1100
++++ b/kernel/nvidia-drm/nvidia-drm-gem-nvkms-memory.c	2018-12-27 12:04:31.541940558 +1100
+@@ -237,7 +237,7 @@
+ 
+     page_offset = vmf->pgoff - drm_vma_node_start(&gem->vma_node);
+ 
+-    ret = vm_insert_pfn(vma, address, pfn + page_offset);
++    ret = vmf_insert_pfn(vma, address, pfn + page_offset);
+ 
+     switch (ret) {
+         case 0:

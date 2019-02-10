@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI=5
+EAPI=6
 
 inherit eutils
 
@@ -21,18 +21,18 @@ IUSE=""
 DEPEND="sys-kernel/dkms"
 RDEPEND="${DEPEND}"
 
+PATCHES=( 
+	"${FILESDIR}"/kernel-4.16.patch
+	"${FILESDIR}"/kernel-4.19.patch
+	"${FILESDIR}"/"${P}"-conf.patch
+	"${FILESDIR}"/"${PV}"-vmf_insert_pfn.patch
+	"${FILESDIR}"/"${PV}"-ipmi_user.patch 
+)
+
 S="${WORKDIR}/${AMD64_NV_PACKAGE}"
 
 src_unpack() {
 	sh ${DISTDIR}/${AMD64_NV_PACKAGE}.run --extract-only
-}
-
-src_prepare() {
-	epatch "${FILESDIR}"/kernel-4.16.patch
-	epatch "${FILESDIR}"/kernel-4.19.patch
-	epatch "${FILESDIR}"/"${P}"-conf.patch
-	epatch "${FILESDIR}"/"${PV}"-vmf_insert_pfn.patch
-	epatch "${FILESDIR}"/"${PV}"-ipmi_user.patch
 }
 
 src_install() {
