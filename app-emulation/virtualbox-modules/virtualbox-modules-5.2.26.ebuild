@@ -6,19 +6,17 @@ EAPI=6
 
 inherit eutils user
 
-MY_P=vbox-kernel-module-src-${PV}
 DESCRIPTION="Kernel Modules for Virtualbox"
 HOMEPAGE="http://www.virtualbox.org/"
 SRC_URI=""
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="amd64 x86"
+KEYWORDS="amd64"
 IUSE=""
 
 DEPEND="~sys-kernel/${PN}-dkms-${PV}"
-RDEPEND="${DEPEND}
-	!=app-emulation/virtualbox-9999"
+RDEPEND="${DEPEND}"
 
 S=${WORKDIR}
 
@@ -27,7 +25,7 @@ pkg_setup() {
 }
 
 src_compile() {
-	:;
+	:
 }
 
 src_install() {
