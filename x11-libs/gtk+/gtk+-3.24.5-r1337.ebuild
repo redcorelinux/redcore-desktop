@@ -1,23 +1,25 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
 GNOME2_LA_PUNT="yes"
+GNOME2_EAUTORECONF="yes"
 
-inherit autotools flag-o-matic gnome2 multilib virtualx multilib-minimal
+inherit flag-o-matic gnome2 multilib virtualx multilib-minimal
 
 DESCRIPTION="Gimp ToolKit +"
 HOMEPAGE="https://www.gtk.org/"
+SRC_URI+=" https://dev.gentoo.org/~leio/distfiles/${P}-patchset-20190206.tar.xz"
 
 LICENSE="LGPL-2+"
 SLOT="3"
-IUSE="aqua broadway cloudprint colord cups examples +introspection test vim-syntax wayland +X xinerama"
+IUSE="aqua broadway cloudprint colord cups examples gtk-doc +introspection test vim-syntax wayland +X xinerama"
 REQUIRED_USE="
 	|| ( aqua wayland X )
 	xinerama? ( X )
 "
 
-KEYWORDS="~alpha amd64 ~arm ~arm64 ~hppa ia64 ~mips ~ppc ~ppc64 ~s390 ~sh sparc x86 ~amd64-fbsd ~x86-fbsd ~amd64-linux ~arm-linux ~x86-linux ~ppc-macos ~x86-macos ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
+KEYWORDS="amd64"
 
 # Upstream wants us to do their job:
 # https://bugzilla.gnome.org/show_bug.cgi?id=768662#c1
@@ -27,12 +29,14 @@ RESTRICT="test"
 # bug #????
 COMMON_DEPEND="
 	>=dev-libs/atk-2.15[introspection?,${MULTILIB_USEDEP}]
-	>=dev-libs/glib-2.49.4:2[${MULTILIB_USEDEP}]
+	>=dev-libs/fribidi-0.19.7[${MULTILIB_USEDEP}]
+	>=dev-libs/glib-2.53.4:2[${MULTILIB_USEDEP}]
 	media-libs/fontconfig[${MULTILIB_USEDEP}]
-	>=media-libs/libepoxy-1.0[X(+)?,${MULTILIB_USEDEP}]
+	>=media-libs/libepoxy-1.4[X(+)?,${MULTILIB_USEDEP}]
 	>=x11-libs/cairo-1.14[aqua?,glib,svg,X?,${MULTILIB_USEDEP}]
 	>=x11-libs/gdk-pixbuf-2.30:2[introspection?,${MULTILIB_USEDEP}]
-	>=x11-libs/pango-1.37.3[introspection?,${MULTILIB_USEDEP}]
+	>=x11-libs/pango-1.41.0[introspection?,${MULTILIB_USEDEP}]
+	>=media-libs/harfbuzz-0.9:=
 	x11-misc/shared-mime-info
 
 	cloudprint? (
@@ -43,7 +47,7 @@ COMMON_DEPEND="
 	introspection? ( >=dev-libs/gobject-introspection-1.39:= )
 	wayland? (
 		>=dev-libs/wayland-1.9.91[${MULTILIB_USEDEP}]
-		>=dev-libs/wayland-protocols-1.9
+		>=dev-libs/wayland-protocols-1.12
 		media-libs/mesa[wayland,${MULTILIB_USEDEP}]
 		>=x11-libs/libxkbcommon-0.2[${MULTILIB_USEDEP}]
 	)
@@ -66,10 +70,12 @@ DEPEND="${COMMON_DEPEND}
 	dev-libs/libxslt
 	dev-libs/gobject-introspection-common
 	>=dev-util/gdbus-codegen-2.48
+	dev-util/glib-utils
 	>=dev-util/gtk-doc-am-1.20
+	gtk-doc? ( >=dev-util/gtk-doc-1.20 )
 	>=sys-devel/gettext-0.19.7[${MULTILIB_USEDEP}]
 	virtual/pkgconfig[${MULTILIB_USEDEP}]
-	 X? ( x11-base/xorg-proto )
+	X? ( x11-base/xorg-proto )
 	test? (
 		media-fonts/font-misc-misc
 		media-fonts/font-cursor-misc )
@@ -117,13 +123,15 @@ src_prepare() {
 		strip_builddir SRC_SUBDIRS examples Makefile.{am,in}
 	fi
 
+	# gtk-3-24 branch at morning of 2019-02-07 - fribidi explicit linking, compiler warning fixes, small bugfixes
+	eapply "${WORKDIR}"/patches
+
 	# gtk-update-icon-cache is installed by dev-util/gtk-update-icon-cache
 	eapply "${FILESDIR}"/${PN}-3.22.2-update-icon-cache.patch
 
 	# Fix broken autotools logic
 	eapply "${FILESDIR}"/${PN}-3.22.20-libcloudproviders-automagic.patch
 
-	eautoreconf
 	gnome2_src_prepare
 }
 
@@ -138,6 +146,7 @@ multilib_src_configure() {
 		$(use_enable cloudprint) \
 		$(use_enable colord) \
 		$(use_enable cups cups auto) \
+		$(multilib_native_use_enable gtk-doc) \
 		$(multilib_native_use_enable introspection) \
 		$(use_enable wayland wayland-backend) \
 		$(use_enable X x11-backend) \
