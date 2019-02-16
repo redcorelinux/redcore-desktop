@@ -1,10 +1,8 @@
-# Copyright 1999-2018 Gentoo Authors
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
-FRAMEWORKS_MINIMAL="5.50.0"
-QT_MINIMAL="5.11.1"
 KDE_TEST="true"
 KMNAME="plasma-workspace"
 inherit kde5
@@ -29,13 +27,12 @@ COMMON_DEPEND="
 DEPEND="${COMMON_DEPEND}
 "
 RDEPEND="${COMMON_DEPEND}
-	!kde-plasma/libkworkspace:4
 	!<kde-plasma/plasma-workspace-5.14.2:5
 "
 
 S="${S}/${PN}"
 
-PATCHES=( "${FILESDIR}/${PN}-5.14.2-standalone.patch" )
+PATCHES=( "${FILESDIR}/${PN}-5.14.90-standalone.patch" )
 
 src_prepare() {
 	# delete colliding libkworkspace translations, let kde5_src_prepare do its magic
@@ -51,8 +48,6 @@ src_prepare() {
 		_EOF_
 	fi
 
-	sed -e "/set/s/GENTOO_PV/${PV}/" \
-		-e "/set/s/GENTOO_QT_MINIMAL/${QT_MINIMAL}/" \
-		-e "/set/s/GENTOO_KF5_MINIMAL/${FRAMEWORKS_MINIMAL}/" \
+	sed -e "/set/s/GENTOO_PV/$(ver_cut 1-3)/" \
 		-i CMakeLists.txt || die "Failed to prepare CMakeLists.txt"
 }
