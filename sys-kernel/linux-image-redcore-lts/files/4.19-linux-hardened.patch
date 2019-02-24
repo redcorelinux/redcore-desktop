@@ -71,7 +71,7 @@ index 37a679501ddc..59b747920f4d 100644
  
  The value in this file affects behavior of handling NMI. When the
 diff --git a/Makefile b/Makefile
-index f1859811dca1..432040e2d299 100644
+index 2caa131ff306..42e5022af1d7 100644
 --- a/Makefile
 +++ b/Makefile
 @@ -698,6 +698,9 @@ stackp-flags-$(CONFIG_STACKPROTECTOR_STRONG)      := -fstack-protector-strong
@@ -567,10 +567,10 @@ index 15c1f5e12eb8..ff72cccec5b8 100644
  	struct list_head *cpu_list, local_list;
  
 diff --git a/drivers/ata/libata-core.c b/drivers/ata/libata-core.c
-index b8c3f9e6af89..bf65bc091cb6 100644
+index adf28788cab5..cd4b3501eda9 100644
 --- a/drivers/ata/libata-core.c
 +++ b/drivers/ata/libata-core.c
-@@ -5157,7 +5157,7 @@ void ata_qc_free(struct ata_queued_cmd *qc)
+@@ -5158,7 +5158,7 @@ void ata_qc_free(struct ata_queued_cmd *qc)
  	struct ata_port *ap;
  	unsigned int tag;
  
@@ -579,7 +579,7 @@ index b8c3f9e6af89..bf65bc091cb6 100644
  	ap = qc->ap;
  
  	qc->flags = 0;
-@@ -5174,7 +5174,7 @@ void __ata_qc_complete(struct ata_queued_cmd *qc)
+@@ -5175,7 +5175,7 @@ void __ata_qc_complete(struct ata_queued_cmd *qc)
  	struct ata_port *ap;
  	struct ata_link *link;
  
@@ -661,7 +661,7 @@ index e7d192ebecd7..1c682abd31ca 100644
  	return tty;
  }
 diff --git a/drivers/usb/core/hub.c b/drivers/usb/core/hub.c
-index cc62707c0251..21d78ae4b4ae 100644
+index 3adff4da2ee1..5416294d2bc9 100644
 --- a/drivers/usb/core/hub.c
 +++ b/drivers/usb/core/hub.c
 @@ -41,6 +41,8 @@
@@ -673,7 +673,7 @@ index cc62707c0251..21d78ae4b4ae 100644
  /* Protect struct usb_device->state and ->children members
   * Note: Both are also protected by ->dev.sem, except that ->state can
   * change to USB_STATE_NOTATTACHED even when the semaphore isn't held. */
-@@ -4933,6 +4935,12 @@ static void hub_port_connect(struct usb_hub *hub, int port1, u16 portstatus,
+@@ -4943,6 +4945,12 @@ static void hub_port_connect(struct usb_hub *hub, int port1, u16 portstatus,
  			goto done;
  		return;
  	}
@@ -687,7 +687,7 @@ index cc62707c0251..21d78ae4b4ae 100644
  		unit_load = 150;
  	else
 diff --git a/fs/exec.c b/fs/exec.c
-index 1ebf6e5a521d..73b8d839927c 100644
+index 1ebf6e5a521d..f86201f25a4c 100644
 --- a/fs/exec.c
 +++ b/fs/exec.c
 @@ -62,6 +62,7 @@
@@ -707,6 +707,15 @@ index 1ebf6e5a521d..73b8d839927c 100644
  	return 0;
  err:
  	up_write(&mm->mmap_sem);
+@@ -929,7 +932,7 @@ int kernel_read_file(struct file *file, void **buf, loff_t *size,
+ 		bytes = kernel_read(file, *buf + pos, i_size - pos, &pos);
+ 		if (bytes < 0) {
+ 			ret = bytes;
+-			goto out;
++			goto out_free;
+ 		}
+ 
+ 		if (bytes == 0)
 diff --git a/fs/namei.c b/fs/namei.c
 index 914178cdbe94..7422b5ce077a 100644
 --- a/fs/namei.c
@@ -972,10 +981,10 @@ index 70b7123f38c7..09f3019489b2 100644
  extern phys_addr_t per_cpu_ptr_to_phys(void *addr);
  
 diff --git a/include/linux/perf_event.h b/include/linux/perf_event.h
-index 53c500f0ca79..15c236b8aba3 100644
+index c2876e740514..45673e9e1770 100644
 --- a/include/linux/perf_event.h
 +++ b/include/linux/perf_event.h
-@@ -1179,6 +1179,11 @@ extern int perf_cpu_time_max_percent_handler(struct ctl_table *table, int write,
+@@ -1184,6 +1184,11 @@ extern int perf_cpu_time_max_percent_handler(struct ctl_table *table, int write,
  int perf_event_max_stack_handler(struct ctl_table *table, int write,
  				 void __user *buffer, size_t *lenp, loff_t *ppos);
  
@@ -1385,7 +1394,7 @@ index 1e1c0236f55b..452062fe45ce 100644
  
  /**
 diff --git a/kernel/events/core.c b/kernel/events/core.c
-index 5a97f34bc14c..a4a4fc1e1586 100644
+index 4fb9d5054618..ec52d87916ef 100644
 --- a/kernel/events/core.c
 +++ b/kernel/events/core.c
 @@ -397,8 +397,13 @@ static cpumask_var_t perf_online_mask;
@@ -1402,7 +1411,7 @@ index 5a97f34bc14c..a4a4fc1e1586 100644
  
  /* Minimum for 512 kiB + 1 user control page */
  int sysctl_perf_event_mlock __read_mostly = 512 + (PAGE_SIZE / 1024); /* 'free' kiB per user */
-@@ -10410,6 +10415,9 @@ SYSCALL_DEFINE5(perf_event_open,
+@@ -10426,6 +10431,9 @@ SYSCALL_DEFINE5(perf_event_open,
  	if (flags & ~PERF_FLAG_ALL)
  		return -EINVAL;
  
@@ -1501,10 +1510,10 @@ index 15301ed19da6..2a799dea7016 100644
  	struct rcu_state *rsp;
  
 diff --git a/kernel/sched/fair.c b/kernel/sched/fair.c
-index 7137bc343b4a..104e0855a018 100644
+index f7c375d1e601..6c5f522385fc 100644
 --- a/kernel/sched/fair.c
 +++ b/kernel/sched/fair.c
-@@ -9593,7 +9593,7 @@ static int idle_balance(struct rq *this_rq, struct rq_flags *rf)
+@@ -9594,7 +9594,7 @@ static int idle_balance(struct rq *this_rq, struct rq_flags *rf)
   * run_rebalance_domains is triggered when needed from the scheduler tick.
   * Also triggered for nohz idle balancing (with nohz_balancing_kick set).
   */
@@ -1574,7 +1583,7 @@ index 6f584861d329..1943fe60f3b9 100644
  
  void tasklet_init(struct tasklet_struct *t,
 diff --git a/kernel/sysctl.c b/kernel/sysctl.c
-index cc02050fd0c4..cca161854186 100644
+index 32dea29d05a0..391876c1ca97 100644
 --- a/kernel/sysctl.c
 +++ b/kernel/sysctl.c
 @@ -67,6 +67,7 @@
@@ -1922,7 +1931,7 @@ index f7cd9cb966c0..fda49841f4f2 100644
  		goto set_brk;
  
 diff --git a/mm/page_alloc.c b/mm/page_alloc.c
-index 9e45553cabd6..f5ec01e1498c 100644
+index a9de1dbb9a6c..da3b27a09065 100644
 --- a/mm/page_alloc.c
 +++ b/mm/page_alloc.c
 @@ -66,6 +66,7 @@
@@ -1949,7 +1958,7 @@ index 9e45553cabd6..f5ec01e1498c 100644
  #ifdef CONFIG_GCC_PLUGIN_LATENT_ENTROPY
  volatile unsigned long latent_entropy __latent_entropy;
  EXPORT_SYMBOL(latent_entropy);
-@@ -1027,6 +1037,13 @@ static __always_inline bool free_pages_prepare(struct page *page,
+@@ -1055,6 +1065,13 @@ static __always_inline bool free_pages_prepare(struct page *page,
  		debug_check_no_obj_freed(page_address(page),
  					   PAGE_SIZE << order);
  	}
@@ -1963,7 +1972,7 @@ index 9e45553cabd6..f5ec01e1498c 100644
  	arch_free_page(page, order);
  	kernel_poison_pages(page, 1 << order, 0);
  	kernel_map_pages(page, 1 << order, 0);
-@@ -1267,6 +1284,21 @@ static void __init __free_pages_boot_core(struct page *page, unsigned int order)
+@@ -1295,6 +1312,21 @@ static void __init __free_pages_boot_core(struct page *page, unsigned int order)
  	__ClearPageReserved(p);
  	set_page_count(p, 0);
  
@@ -1985,7 +1994,7 @@ index 9e45553cabd6..f5ec01e1498c 100644
  	page_zone(page)->managed_pages += nr_pages;
  	set_page_refcounted(page);
  	__free_pages(page, order);
-@@ -1855,8 +1887,8 @@ static inline int check_new_page(struct page *page)
+@@ -1876,8 +1908,8 @@ static inline int check_new_page(struct page *page)
  
  static inline bool free_pages_prezeroed(void)
  {
@@ -1996,7 +2005,7 @@ index 9e45553cabd6..f5ec01e1498c 100644
  }
  
  #ifdef CONFIG_DEBUG_VM
-@@ -1913,6 +1945,11 @@ static void prep_new_page(struct page *page, unsigned int order, gfp_t gfp_flags
+@@ -1934,6 +1966,11 @@ static void prep_new_page(struct page *page, unsigned int order, gfp_t gfp_flags
  
  	post_alloc_hook(page, order, gfp_flags);
  
@@ -2385,7 +2394,7 @@ index 26fc9b5f1b6c..7c9312ca8982 100644
  }
  
 diff --git a/net/core/dev.c b/net/core/dev.c
-index af097ca9cb4f..fda1753e5b65 100644
+index 5c8c0a572ee9..875f2cea68e9 100644
 --- a/net/core/dev.c
 +++ b/net/core/dev.c
 @@ -4519,7 +4519,7 @@ int netif_rx_ni(struct sk_buff *skb)
@@ -2435,7 +2444,7 @@ index cb0c889e13aa..305f52f58c1a 100644
  	  secure!
  
 diff --git a/scripts/mod/modpost.c b/scripts/mod/modpost.c
-index 5a5b3780456f..01eac2c6e7eb 100644
+index 5a77efd39b3f..e771cb100e66 100644
 --- a/scripts/mod/modpost.c
 +++ b/scripts/mod/modpost.c
 @@ -35,6 +35,7 @@ static int vmlinux_section_warnings = 1;
@@ -2467,9 +2476,9 @@ index 5a5b3780456f..01eac2c6e7eb 100644
  }
  };
  
-@@ -1229,10 +1237,10 @@ static Elf_Sym *find_elf_symbol(struct elf_info *elf, Elf64_Sword addr,
+@@ -1255,10 +1263,10 @@ static Elf_Sym *find_elf_symbol(struct elf_info *elf, Elf64_Sword addr,
  			continue;
- 		if (ELF_ST_TYPE(sym->st_info) == STT_SECTION)
+ 		if (!is_valid_name(elf, sym))
  			continue;
 -		if (sym->st_value == addr)
 -			return sym;
@@ -2480,7 +2489,7 @@ index 5a5b3780456f..01eac2c6e7eb 100644
  		if (d < 0)
  			d = addr - sym->st_value;
  		if (d < distance) {
-@@ -1391,7 +1399,11 @@ static void report_sec_mismatch(const char *modname,
+@@ -1393,7 +1401,11 @@ static void report_sec_mismatch(const char *modname,
  	char *prl_from;
  	char *prl_to;
  
@@ -2493,7 +2502,7 @@ index 5a5b3780456f..01eac2c6e7eb 100644
  	if (!sec_mismatch_verbose)
  		return;
  
-@@ -1515,6 +1527,14 @@ static void report_sec_mismatch(const char *modname,
+@@ -1517,6 +1529,14 @@ static void report_sec_mismatch(const char *modname,
  		fatal("There's a special handler for this mismatch type, "
  		      "we should never get here.");
  		break;
@@ -2508,7 +2517,7 @@ index 5a5b3780456f..01eac2c6e7eb 100644
  	}
  	fprintf(stderr, "\n");
  }
-@@ -2526,6 +2546,14 @@ int main(int argc, char **argv)
+@@ -2528,6 +2548,14 @@ int main(int argc, char **argv)
  		}
  	}
  	free(buf.p);

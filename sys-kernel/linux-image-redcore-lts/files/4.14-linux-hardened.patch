@@ -71,7 +71,7 @@ index 694968c7523c..002d86416ef8 100644
  
  The value in this file affects behavior of handling NMI. When the
 diff --git a/Makefile b/Makefile
-index 70cc37cb3e99..edc3de99b3cd 100644
+index 86fa9a371383..f7a041b5e9c7 100644
 --- a/Makefile
 +++ b/Makefile
 @@ -714,6 +714,9 @@ endif
@@ -279,7 +279,7 @@ index e32fc1f274d8..d08acc76502a 100644
  CONFIG_BSD_PROCESS_ACCT=y
  CONFIG_TASKSTATS=y
 diff --git a/arch/x86/entry/vdso/vma.c b/arch/x86/entry/vdso/vma.c
-index 1911310959f8..bba8dbbc07a8 100644
+index a77fd3c8d824..3a8f35c85ecf 100644
 --- a/arch/x86/entry/vdso/vma.c
 +++ b/arch/x86/entry/vdso/vma.c
 @@ -203,55 +203,9 @@ static int map_vdso(const struct vdso_image *image, unsigned long addr)
@@ -779,7 +779,7 @@ index b811442c5ce6..4f62a63cbcb1 100644
  	  A pseudo terminal (PTY) is a software device consisting of two
  	  halves: a master and a slave. The slave device behaves identical to
 diff --git a/drivers/tty/tty_io.c b/drivers/tty/tty_io.c
-index 417b81c67fe9..4e9bb7851ab1 100644
+index 7e351d205393..426e22697412 100644
 --- a/drivers/tty/tty_io.c
 +++ b/drivers/tty/tty_io.c
 @@ -171,6 +171,7 @@ static void free_tty_struct(struct tty_struct *tty)
@@ -810,7 +810,7 @@ index 417b81c67fe9..4e9bb7851ab1 100644
  	if ((current->signal->tty != tty) && !capable(CAP_SYS_ADMIN))
  		return -EPERM;
  	if (get_user(ch, p))
-@@ -2854,6 +2863,7 @@ struct tty_struct *alloc_tty_struct(struct tty_driver *driver, int idx)
+@@ -2855,6 +2864,7 @@ struct tty_struct *alloc_tty_struct(struct tty_driver *driver, int idx)
  	tty->index = idx;
  	tty_line_name(driver, idx, tty->name);
  	tty->dev = tty_get_device(tty);
@@ -819,7 +819,7 @@ index 417b81c67fe9..4e9bb7851ab1 100644
  	return tty;
  }
 diff --git a/drivers/usb/core/hub.c b/drivers/usb/core/hub.c
-index a073cb5be013..e9dfece7b7ce 100644
+index 4a4e666a8e09..8ee7835decc6 100644
 --- a/drivers/usb/core/hub.c
 +++ b/drivers/usb/core/hub.c
 @@ -38,6 +38,8 @@
@@ -831,7 +831,7 @@ index a073cb5be013..e9dfece7b7ce 100644
  /* Protect struct usb_device->state and ->children members
   * Note: Both are also protected by ->dev.sem, except that ->state can
   * change to USB_STATE_NOTATTACHED even when the semaphore isn't held. */
-@@ -4818,6 +4820,12 @@ static void hub_port_connect(struct usb_hub *hub, int port1, u16 portstatus,
+@@ -4828,6 +4830,12 @@ static void hub_port_connect(struct usb_hub *hub, int port1, u16 portstatus,
  			goto done;
  		return;
  	}
@@ -1672,10 +1672,10 @@ index 710ce1d6b982..4013b634e820 100644
  	struct rcu_state *rsp;
  
 diff --git a/kernel/sched/fair.c b/kernel/sched/fair.c
-index f33b24080b1c..99c5e423906f 100644
+index 4d54c1fe9623..92612d51d6e1 100644
 --- a/kernel/sched/fair.c
 +++ b/kernel/sched/fair.c
-@@ -8982,7 +8982,7 @@ static void nohz_idle_balance(struct rq *this_rq, enum cpu_idle_type idle) { }
+@@ -8983,7 +8983,7 @@ static void nohz_idle_balance(struct rq *this_rq, enum cpu_idle_type idle) { }
   * run_rebalance_domains is triggered when needed from the scheduler tick.
   * Also triggered for nohz idle balancing (with nohz_balancing_kick set).
   */
@@ -1734,7 +1734,7 @@ index a4c87cf27f9d..efb97a8dc568 100644
  	struct tasklet_struct *list;
  
 diff --git a/kernel/sysctl.c b/kernel/sysctl.c
-index d330b1ce3b94..050278b12928 100644
+index 3ad00bf90b3d..35c7d3336f87 100644
 --- a/kernel/sysctl.c
 +++ b/kernel/sysctl.c
 @@ -66,6 +66,7 @@
@@ -2547,7 +2547,7 @@ index a77d68f2c1b6..d1f1d75f4d1f 100644
  }
  
 diff --git a/net/core/dev.c b/net/core/dev.c
-index 4337450a5fdb..5a3c7d217719 100644
+index 54ba5b5bc55c..564f21fc2df5 100644
 --- a/net/core/dev.c
 +++ b/net/core/dev.c
 @@ -4117,7 +4117,7 @@ int netif_rx_ni(struct sk_buff *skb)
@@ -2581,7 +2581,7 @@ index f48fe6fc7e8c..d78c52835c08 100644
  	  Normal TCP/IP networking is open to an attack known as "SYN
  	  flooding". This denial-of-service attack prevents legitimate remote
 diff --git a/scripts/mod/modpost.c b/scripts/mod/modpost.c
-index 18bc8738e989..d2866f6dd736 100644
+index e36a673833ae..03914dfa0bd0 100644
 --- a/scripts/mod/modpost.c
 +++ b/scripts/mod/modpost.c
 @@ -37,6 +37,7 @@ static int vmlinux_section_warnings = 1;
@@ -2613,9 +2613,9 @@ index 18bc8738e989..d2866f6dd736 100644
  }
  };
  
-@@ -1240,10 +1248,10 @@ static Elf_Sym *find_elf_symbol(struct elf_info *elf, Elf64_Sword addr,
+@@ -1266,10 +1274,10 @@ static Elf_Sym *find_elf_symbol(struct elf_info *elf, Elf64_Sword addr,
  			continue;
- 		if (ELF_ST_TYPE(sym->st_info) == STT_SECTION)
+ 		if (!is_valid_name(elf, sym))
  			continue;
 -		if (sym->st_value == addr)
 -			return sym;
@@ -2626,7 +2626,7 @@ index 18bc8738e989..d2866f6dd736 100644
  		if (d < 0)
  			d = addr - sym->st_value;
  		if (d < distance) {
-@@ -1402,7 +1410,11 @@ static void report_sec_mismatch(const char *modname,
+@@ -1404,7 +1412,11 @@ static void report_sec_mismatch(const char *modname,
  	char *prl_from;
  	char *prl_to;
  
@@ -2639,7 +2639,7 @@ index 18bc8738e989..d2866f6dd736 100644
  	if (!sec_mismatch_verbose)
  		return;
  
-@@ -1526,6 +1538,14 @@ static void report_sec_mismatch(const char *modname,
+@@ -1528,6 +1540,14 @@ static void report_sec_mismatch(const char *modname,
  		fatal("There's a special handler for this mismatch type, "
  		      "we should never get here.");
  		break;
@@ -2654,7 +2654,7 @@ index 18bc8738e989..d2866f6dd736 100644
  	}
  	fprintf(stderr, "\n");
  }
-@@ -2539,6 +2559,14 @@ int main(int argc, char **argv)
+@@ -2541,6 +2561,14 @@ int main(int argc, char **argv)
  		}
  	}
  	free(buf.p);
