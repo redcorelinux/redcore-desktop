@@ -1,14 +1,15 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
-KDE_HANDBOOK="true"
+CMAKE_MAKEFILE_GENERATOR="emake" # FIXME
+KDE_HANDBOOK="forceoptional"
 inherit kde5
 
-DESCRIPTION="A utility that provides information about a computer system"
+DESCRIPTION="Utility providing information about the computer hardware"
 HOMEPAGE="https://www.kde.org/applications/system/kinfocenter/"
-KEYWORDS="~amd64 ~arm ~x86"
+KEYWORDS="~amd64 ~arm ~arm64 ~x86"
 IUSE="gles2 ieee1394 +opengl +pci wayland"
 
 REQUIRED_USE="wayland? ( || ( gles2 opengl ) )"
@@ -52,20 +53,23 @@ DEPEND="${COMMON_DEPEND}
 "
 RDEPEND="${COMMON_DEPEND}
 	$(add_plasma_dep kde-cli-tools)
+	$(add_qt_dep qtquickcontrols2)
 	!kde-apps/kcontrol:4
-	!kde-misc/about-distro
-	!kde-plasma/kinfocenter:4
 "
 
 src_configure() {
 	local mycmakeargs=(
-		$(cmake-utils_use_find_package gles2 OpenGLES)
 		$(cmake-utils_use_find_package ieee1394 RAW1394)
-		$(cmake-utils_use_find_package opengl OpenGL)
 		$(cmake-utils_use_find_package pci PCIUTILS)
 		$(cmake-utils_use_find_package wayland EGL)
 		$(cmake-utils_use_find_package wayland KF5Wayland)
 	)
+
+	if has_version "dev-qt/qtgui[gles2]"; then
+		mycmakeargs+=( $(cmake-utils_use_find_package gles2 OpenGLES) )
+	else
+		mycmakeargs+=( $(cmake-utils_use_find_package opengl OpenGL) )
+	fi
 
 	kde5_src_configure
 }
@@ -81,10 +85,13 @@ src_install() {
 }
 
 pkg_postinst() {
-	if ! has_version "net-fs/nfs-utils"; then
-		einfo "Installing net-fs/nfs-utils will enable the NFS information module."
-	fi
-	if ! has_version "net-fs/samba" || ! has_version "net-fs/samba[server]"; then
-		einfo "Installing net-fs/samba[server(+)] will enable the Samba status information module."
+	kde5_pkg_postinst
+
+	if [[ -z "${REPLACING_VERSIONS}" ]]; then
+		has_version "net-fs/nfs-utils" || \
+			elog "Installing net-fs/nfs-utils will enable the NFS information module."
+
+		has_version "net-fs/samba" || \
+			elog "Installing net-fs/samba will enable the Samba status information module."
 	fi
 }
