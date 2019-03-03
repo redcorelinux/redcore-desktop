@@ -1,7 +1,7 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 KDE_TEST="forceoptional"
 VIRTUALX_REQUIRED="test"
@@ -10,7 +10,7 @@ inherit kde5
 DESCRIPTION="KDE Plasma systemsettings kcm to set GTK application look&feel"
 HOMEPAGE="https://cgit.kde.org/kde-gtk-config.git"
 LICENSE="GPL-3"
-KEYWORDS="~amd64 ~arm ~x86"
+KEYWORDS="~amd64 ~arm ~arm64 ~x86"
 IUSE=""
 
 DEPEND="
@@ -32,7 +32,6 @@ DEPEND="
 "
 RDEPEND="${DEPEND}
 	$(add_plasma_dep kde-cli-tools)
-	!kde-plasma/kde-gtk-config:4
 "
 
 PATCHES=( "${FILESDIR}"/redhat-or-not-go-dconf-and-flatpak-yourself-or-try-again-with-a-option-to-disable.patch )
