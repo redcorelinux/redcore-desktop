@@ -41,6 +41,7 @@ MULTILIB_WRAPPED_HEADERS=(
 CDEPEND="
 	>=app-arch/libarchive-3.1.2[${MULTILIB_USEDEP}]
 	dev-lang/perl:=
+	dev-libs/jansson[${MULTILIB_USEDEP}]
 	dev-libs/libaio[${MULTILIB_USEDEP}]
 	dev-libs/libbsd[${MULTILIB_USEDEP}]
 	dev-libs/iniparser:0
