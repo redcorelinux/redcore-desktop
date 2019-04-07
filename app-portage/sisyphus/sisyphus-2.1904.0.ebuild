@@ -3,7 +3,7 @@
 
 EAPI=6
 
-PYTHON_COMPAT=( python3_{4,5,6} )
+PYTHON_COMPAT=( python3_{4,5,6,7} )
 
 inherit eutils python-r1 git-r3
 
@@ -12,7 +12,7 @@ HOMEPAGE="http://redcorelinux.org"
 
 EGIT_REPO_URI="https://pagure.io/redcore/sisyphus.git"
 EGIT_BRANCH="master"
-EGIT_COMMIT="42df0bc391b29cd42dff591c7e6cbe08558ae29c"
+EGIT_COMMIT="55ab0d11545c1f04f67236f3c741b1214acce050"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -24,7 +24,6 @@ RDEPEND="${DEPEND}
 	app-portage/gentoolkit[${PYTHON_USEDEP}]
 	app-portage/portage-utils
 	dev-python/animation[${PYTHON_USEDEP}]
-	dev-python/python-dateutil[${PYTHON_USEDEP}]
 	dev-python/urllib3[${PYTHON_USEDEP}]
 	dev-python/wget[${PYTHON_USEDEP}]
 	sys-apps/portage[${PYTHON_USEDEP}]
