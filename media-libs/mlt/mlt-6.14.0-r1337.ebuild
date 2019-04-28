@@ -1,8 +1,9 @@
-# Copyright 1999-2018 Gentoo Authors
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
+# TODO python3_{6,7} contrary to 6.14 changelog, still does not build.
 PYTHON_COMPAT=( python2_7 )
 # this ebuild currently only supports installing ruby bindings for a single ruby version
 # so USE_RUBY must contain only a single value (the latest stable) as the ebuild calls
@@ -16,16 +17,27 @@ SRC_URI="https://github.com/mltframework/${PN}/releases/download/v${PV}/${P}.tar
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="~amd64 ~x86 ~x86-fbsd ~amd64-linux ~x86-linux"
+KEYWORDS="~amd64 ~arm64 ~x86 ~x86-fbsd ~amd64-linux ~x86-linux"
 IUSE="compressed-lumas cpu_flags_x86_mmx cpu_flags_x86_sse cpu_flags_x86_sse2 debug ffmpeg fftw frei0r
-gtk jack kdenlive libav libsamplerate lua melt opencv opengl python qt5 rtaudio ruby sdl vdpau xine xml"
-# java perl php tcl vidstab
-IUSE="${IUSE} kernel_linux"
+gtk jack kdenlive kernel_linux libav libsamplerate lua melt opencv opengl python qt5 rtaudio ruby sdl
+vdpau vidstab xine xml"
+# java perl php tcl
 
 REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
 
+SWIG_DEPEND=">=dev-lang/swig-2.0"
+#	java? ( ${SWIG_DEPEND} >=virtual/jdk-1.5 )
+#	perl? ( ${SWIG_DEPEND} )
+#	php? ( ${SWIG_DEPEND} )
+#	tcl? ( ${SWIG_DEPEND} )
+BDEPEND="
+	virtual/pkgconfig
+	compressed-lumas? ( virtual/imagemagick-tools[png] )
+	lua? ( ${SWIG_DEPEND} virtual/pkgconfig )
+	python? ( ${SWIG_DEPEND} )
+	ruby? ( ${SWIG_DEPEND} )"
 #rtaudio will use OSS on non linux OSes
-RDEPEND="
+DEPEND="
 	>=media-libs/libebur128-1.2.2
 	ffmpeg? (
 		libav? ( >=media-video/libav-12:0=[vdpau?] )
@@ -66,6 +78,7 @@ RDEPEND="
 		media-libs/libsdl2[X,opengl,video]
 		media-libs/sdl2-image
 	)
+	vidstab? ( media-libs/vidstab )
 	xine? ( >=media-libs/xine-lib-1.1.2_pre20060328-r7 )
 	xml? ( >=dev-libs/libxml2-2.5 )"
 #	java? ( >=virtual/jre-1.5 )
@@ -73,27 +86,11 @@ RDEPEND="
 #	php? ( dev-lang/php )
 #	sox? ( media-sound/sox )
 #	tcl? ( dev-lang/tcl:0= )
-#	vidstab? ( media-libs/libvidstab )
-SWIG_DEPEND=">=dev-lang/swig-2.0"
-DEPEND="${RDEPEND}
-	virtual/pkgconfig
-	compressed-lumas? ( virtual/imagemagick-tools[png] )
-	lua? ( ${SWIG_DEPEND} virtual/pkgconfig )
-	python? ( ${SWIG_DEPEND} )
-	ruby? ( ${SWIG_DEPEND} )"
-#	java? ( ${SWIG_DEPEND} >=virtual/jdk-1.5 )
-#	perl? ( ${SWIG_DEPEND} )
-#	php? ( ${SWIG_DEPEND} )
-#	tcl? ( ${SWIG_DEPEND} )
+RDEPEND="${DEPEND}"
 
 DOCS=( AUTHORS ChangeLog NEWS README docs/{framework,melt,mlt{++,-xml}}.txt )
 
-PATCHES=(
-	"${FILESDIR}"/${PN}-6.10.0-swig-underlinking.patch
-	"${FILESDIR}"/${P}-seconds-digits.patch
-	"${FILESDIR}"/${P}-rgb-to-yuv-accuracy.patch
-	"${FILESDIR}"/${P}-frei0r-w-tractor.patch
-)
+PATCHES=( "${FILESDIR}"/${PN}-6.10.0-swig-underlinking.patch )
 
 pkg_setup() {
 	use python && python-single-r1_pkg_setup
@@ -139,6 +136,7 @@ src_configure() {
 		$(use_enable rtaudio)
 		$(use vdpau && echo ' --avformat-vdpau')
 		$(use_enable sdl sdl2)
+		$(use_enable vidstab vid.stab )
 		$(use_enable xml)
 		$(use_enable xine)
 		$(use_enable kdenlive)
@@ -219,5 +217,6 @@ src_install() {
 	if use qt5 && use melt; then
 		dosym melt usr/bin/qmelt
 	fi
+
 	# TODO: java perl php tcl
 }
