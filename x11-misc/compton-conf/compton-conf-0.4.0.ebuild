@@ -22,6 +22,15 @@ DEPEND="
 	>=lxqt-base/lxqt-build-tools-0.5.0"
 RDEPEND="${DEPEND}"
 
+src_configure() {
+	local mycmakeargs=(
+		-DPULL_TRANSLATIONS=NO
+	)
+
+	cmake-utils_src_configure
+}
+
+
 src_install() {
 	cmake-utils_src_install
 	rm -rf "${D}"usr/share/"${PN}"
