@@ -18,14 +18,13 @@ DEPEND="!!lxqt-base/lxqt-common"
 RDEPEND="${DEPEND}
 	>=lxde-base/lxmenu-data-0.1.2
 	>=lxde-base/lxappearance-0.5.5
-	~lxqt-base/lxqt-themes-${PV}
+	>=lxqt-base/lxqt-themes-0.14.0
 	~lxqt-base/lxqt-config-${PV}
 	~lxqt-base/lxqt-globalkeys-${PV}
 	~lxqt-base/lxqt-notificationd-${PV}
 	~lxqt-base/lxqt-panel-${PV}
 	~lxqt-base/lxqt-runner-${PV}
 	~lxqt-base/lxqt-session-${PV}
-	~lxqt-base/lxqt-l10n-${PV}
 	virtual/ttf-fonts
 	about? ( ~lxqt-base/lxqt-about-${PV} )
 	admin? ( ~lxqt-base/lxqt-admin-${PV} )
@@ -34,7 +33,7 @@ RDEPEND="${DEPEND}
 	filemanager? ( >=x11-misc/pcmanfm-qt-${PV} )
 	gtk? ( dev-qt/qt5-styleplugins
 		x11-libs/gtk+:2 )
-	!gtk? ( ~lxqt-base/lxqt-qtplugin-${PV} )
+	!gtk? ( >=lxqt-base/lxqt-qtplugin-0.14.0 )
 	icons? ( oxygen? ( kde-frameworks/oxygen-icons )
 		!oxygen? ( virtual/freedesktop-icon-theme ) )
 	sddm? ( x11-misc/sddm )
@@ -43,7 +42,7 @@ RDEPEND="${DEPEND}
 		x11-misc/obconf-qt )
 	policykit? ( ~lxqt-base/lxqt-policykit-${PV}
 		|| ( sys-auth/consolekit[policykit(-)]
-			sys-apps/systemd[policykit(-)] 
+			sys-apps/systemd[policykit(-)]
 			sys-auth/elogind[policykit(-)] ) )
 	powermanagement? ( ~lxqt-base/lxqt-powermanagement-${PV} )
 	ssh-askpass? ( ~lxqt-base/lxqt-openssh-askpass-${PV} )
