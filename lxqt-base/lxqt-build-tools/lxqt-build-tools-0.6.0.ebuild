@@ -1,25 +1,26 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
+
 inherit cmake-utils
 
-DESCRIPTION="Various packaging tools and scripts for LXQt applications"
-HOMEPAGE="http://lxqt.org/"
+DESCRIPTION="LXQt Build tools"
+HOMEPAGE="https://lxqt.org/"
 
-SRC_URI="https://github.com/lxde/${PN}/releases/download/${PV}/${P}.tar.xz"
-KEYWORDS="amd64"
+if [[ ${PV} = *9999* ]]; then
+	inherit git-r3
+	EGIT_REPO_URI="https://github.com/lxqt/${PN}.git"
+else
+	SRC_URI="https://downloads.lxqt.org/downloads/${PN}/${PV}/${P}.tar.xz"
+	KEYWORDS="~amd64 ~arm ~arm64 ~ppc64 ~x86"
+fi
 
-LICENSE="GPL-2 LGPL-2.1+"
+LICENSE="BSD"
 SLOT="0"
 
-RDEPEND=">=dev-libs/glib-2.50.0
-	dev-qt/qtcore:5"
-DEPEND="${RDEPEND}
-	>=dev-libs/libqtxdg-3.2.0
-	dev-qt/linguist-tools:5"
-
-src_configure() {
-	local mycmakeargs=( -DPULL_TRANSLATIONS=OFF )
-	cmake-utils_src_configure
-}
+DEPEND="
+	>=dev-libs/glib-2.50.0
+	dev-qt/qtcore:5
+"
+RDEPEND="${DEPEND}"
