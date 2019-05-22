@@ -41,7 +41,7 @@ RDEPEND="${CDEPEND}
 
 src_prepare() {
 	if use gtk; then
-		# Redcore patch, to disable no longer working appearance settings when using qgtk2 platform plugin
+		# Redcore Linux patch : hide no longer working appearance settings when using qgtk2 platform plugin
 		epatch "${FILESDIR}"/"${PN}"-hide-unwanted-appearance-settings.patch
 		cmake-utils_src_prepare
 	else

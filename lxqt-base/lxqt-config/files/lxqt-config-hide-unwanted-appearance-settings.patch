@@ -1,6 +1,6 @@
 diff -Nur a/lxqt-config-appearance/main.cpp b/lxqt-config-appearance/main.cpp
---- a/lxqt-config-appearance/main.cpp	2017-10-21 20:10:53.000000000 +0100
-+++ b/lxqt-config-appearance/main.cpp	2017-12-17 10:18:16.454195148 +0000
+--- a/lxqt-config-appearance/main.cpp	2019-02-24 00:16:01.000000000 +0000
++++ b/lxqt-config-appearance/main.cpp	2019-05-22 11:13:45.456936737 +0100
 @@ -30,10 +30,7 @@
  #include <LXQt/Settings>
  #include <LXQt/ConfigDialog>
@@ -9,29 +9,56 @@ diff -Nur a/lxqt-config-appearance/main.cpp b/lxqt-config-appearance/main.cpp
  #include "lxqtthemeconfig.h"
 -#include "styleconfig.h"
 -#include "fontsconfig.h"
+ #include "configothertoolkits.h"
  
  #include "../liblxqt-config-cursor/selectwnd.h"
- 
-@@ -59,22 +56,11 @@
-     app.setActivationWindow(dialog);
+@@ -66,23 +63,6 @@
  
      QSettings& qtSettings = *settings; // use lxqt config file for Qt settings in Qt5.
--    StyleConfig* stylePage = new StyleConfig(settings, &qtSettings, dialog);
+ 
+-    /*** Widget Style ***/
+-    StyleConfig* stylePage = new StyleConfig(settings, &qtSettings, &mConfigAppearanceSettings, configOtherToolKits, dialog);
 -    dialog->addPage(stylePage, QObject::tr("Widget Style"), QStringList() << "preferences-desktop-theme" << "preferences-desktop");
--    QObject::connect(dialog, SIGNAL(reset()), stylePage, SLOT(initControls()));
+-    QObject::connect(dialog, &LXQt::ConfigDialog::reset, stylePage, &StyleConfig::initControls);
+-    QObject::connect(stylePage, &StyleConfig::settingsChanged, dialog, [dialog] {
+-        dialog->enableButton(QDialogButtonBox::Apply, true); // enable Apply button when something is changed
+-    });
 -
+-    /*** Icon Theme ***/
 -    IconThemeConfig* iconPage = new IconThemeConfig(settings, dialog);
 -    dialog->addPage(iconPage, QObject::tr("Icons Theme"), QStringList() << "preferences-desktop-icons" << "preferences-desktop");
--    QObject::connect(dialog, SIGNAL(reset()), iconPage, SLOT(initControls()));
- 
+-    QObject::connect(dialog, &LXQt::ConfigDialog::reset, iconPage, &IconThemeConfig::initControls);
+-    QObject::connect(iconPage, &IconThemeConfig::settingsChanged, dialog, [dialog] {
+-        dialog->enableButton(QDialogButtonBox::Apply, true);
+-    });
+-    QObject::connect(iconPage, &IconThemeConfig::updateOtherSettings, configOtherToolKits, &ConfigOtherToolKits::setConfig);
+-
+     /*** LXQt Theme ***/
      LXQtThemeConfig* themePage = new LXQtThemeConfig(settings, dialog);
      dialog->addPage(themePage, QObject::tr("LXQt Theme"), QStringList() << "preferences-desktop-color" << "preferences-desktop");
-     QObject::connect(dialog, SIGNAL(reset()), themePage, SLOT(initControls()));
+@@ -91,14 +71,6 @@
+         dialog->enableButton(QDialogButtonBox::Apply, true);
+     });
  
+-    /*** Font ***/
 -    FontsConfig* fontsPage = new FontsConfig(settings, &qtSettings, dialog);
 -    dialog->addPage(fontsPage, QObject::tr("Font"), QStringList() << "preferences-desktop-font" << "preferences-desktop");
--    QObject::connect(dialog, SIGNAL(reset()), fontsPage, SLOT(initControls()));
--
+-    QObject::connect(dialog, &LXQt::ConfigDialog::reset, fontsPage, &FontsConfig::initControls);
+-    QObject::connect(fontsPage, &FontsConfig::updateOtherSettings, configOtherToolKits, &ConfigOtherToolKits::setConfig);
+-    QObject::connect(fontsPage, &FontsConfig::settingsChanged, dialog, [dialog] {
+-        dialog->enableButton(QDialogButtonBox::Apply, true);
+-    });
+ 
+     /*** Cursor Theme ***/
      SelectWnd* cursorPage = new SelectWnd(sessionSettings, dialog);
-     cursorPage->setCurrent();
-     dialog->addPage(cursorPage, QObject::tr("Cursor"), QStringList() << "input-mouse" << "preferences-desktop");
+@@ -112,10 +84,7 @@
+     QObject::connect(dialog, &LXQt::ConfigDialog::clicked, [=] (QDialogButtonBox::StandardButton btn) {
+         if (btn == QDialogButtonBox::Apply)
+         {
+-            stylePage->applyStyle();
+-            iconPage->applyIconTheme();
+             themePage->applyLxqtTheme();
+-            fontsPage->updateQtFont();
+             cursorPage->applyCusorTheme();
+             // disable Apply button after changes are applied
+             dialog->enableButton(btn, false);
