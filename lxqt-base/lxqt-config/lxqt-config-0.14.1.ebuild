@@ -1,22 +1,31 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=5
-inherit cmake-utils eutils
+EAPI=7
+
+inherit cmake-utils xdg-utils
 
 DESCRIPTION="LXQt system configuration control center"
-HOMEPAGE="http://lxqt.org/"
+HOMEPAGE="https://lxqt.org/"
 
-SRC_URI="https://github.com/lxde/${PN}/releases/download/${PV}/${P}.tar.xz"
-KEYWORDS="amd64"
-IUSE="+gtk"
+if [[ ${PV} = *9999* ]]; then
+	inherit git-r3
+	EGIT_REPO_URI="https://github.com/lxqt/${PN}.git"
+else
+	SRC_URI="https://downloads.lxqt.org/downloads/${PN}/${PV}/${P}.tar.xz"
+	KEYWORDS="~amd64 ~arm ~arm64 ~x86"
+fi
 
-LICENSE="GPL-2 LGPL-2.1+"
+LICENSE="GPL-2 GPL-2+ GPL-3 LGPL-2 LGPL-2+ LGPL-2.1+ WTFPL-2"
 SLOT="0"
+IUSE="+gtk +monitor +touchpad"
 
-CDEPEND="
-	>=dev-libs/libqtxdg-3.2.0
-	dev-qt/qtconcurrent:5
+BDEPEND="
+	dev-qt/linguist-tools:5
+	>=lxqt-base/lxqt-build-tools-0.6.0
+"
+DEPEND="
+	>=dev-libs/libqtxdg-3.3.1
 	dev-qt/qtcore:5
 	dev-qt/qtdbus:5
 	dev-qt/qtgui:5
@@ -24,25 +33,28 @@ CDEPEND="
 	dev-qt/qtx11extras:5
 	dev-qt/qtxml:5
 	kde-frameworks/kwindowsystem:5
-	kde-plasma/libkscreen:5=
-	~lxqt-base/liblxqt-${PV}
-	sys-libs/zlib
-	x11-libs/libICE
-	x11-libs/libSM
+	=lxqt-base/liblxqt-$(ver_cut 1-2)*
+	sys-libs/zlib:=
+	x11-apps/setxkbmap
 	x11-libs/libxcb:=
 	x11-libs/libX11
 	x11-libs/libXcursor
-	x11-libs/libXext
-	x11-libs/libXfixes"
-DEPEND="${CDEPEND}
-	dev-qt/linguist-tools:5"
-RDEPEND="${CDEPEND}
-	x11-apps/setxkbmap"
+	x11-libs/libXfixes
+	monitor? ( kde-plasma/libkscreen:5= )
+	touchpad? (
+		virtual/libudev
+		x11-drivers/xf86-input-libinput
+		x11-libs/libXext
+	)
+"
+RDEPEND="${DEPEND}
+	!lxqt-base/lxqt-l10n
+"
 
 src_prepare() {
 	if use gtk; then
 		# Redcore Linux patch : hide no longer working appearance settings when using qgtk2 platform plugin
-		epatch "${FILESDIR}"/"${PN}"-hide-unwanted-appearance-settings.patch
+		eapply "${FILESDIR}"/"${PN}"-hide-unwanted-appearance-settings.patch
 		cmake-utils_src_prepare
 	else
 		cmake-utils_src_prepare
@@ -50,11 +62,22 @@ src_prepare() {
 }
 
 src_configure() {
-	local mycmakeargs=( -DPULL_TRANSLATIONS=OFF )
+	local mycmakeargs=(
+		-DWITH_MONITOR="$(usex monitor)"
+		-DWITH_TOUCHPAD="$(usex touchpad)"
+	)
 	cmake-utils_src_configure
 }
 
-src_install(){
+src_install() {
 	cmake-utils_src_install
 	doman man/*.1 liblxqt-config-cursor/man/*.1 lxqt-config-appearance/man/*.1
+}
+
+pkg_postinst() {
+	xdg_icon_cache_update
+}
+
+pkg_postrm() {
+	xdg_icon_cache_update
 }
