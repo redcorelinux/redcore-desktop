@@ -1,25 +1,24 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
-EAPI=5
+EAPI=7
+
 inherit cmake-utils
 
-DESCRIPTION="LXQt themes"
-HOMEPAGE="http://lxqt.org/"
+DESCRIPTION="Themes, graphics and icons for LXQt"
+HOMEPAGE="https://lxqt.org/"
 
-SRC_URI="https://github.com/lxde/${PN}/releases/download/${PV}/${P}.tar.xz"
-KEYWORDS="amd64"
+if [[ ${PV} = *9999* ]]; then
+	inherit git-r3
+	EGIT_REPO_URI="https://github.com/lxqt/${PN}.git"
+else
+	SRC_URI="https://downloads.lxqt.org/downloads/${PN}/${PV}/${P}.tar.xz"
+	KEYWORDS="~amd64 ~arm ~arm64 ~x86"
+fi
 
 LICENSE="LGPL-2.1+"
 SLOT="0"
 
-DEPEND="~lxqt-base/liblxqt-${PV}
-	!!lxqt-base/lxqt-common"
+BDEPEND=">=lxqt-base/lxqt-build-tools-0.6.0"
+DEPEND=""
 RDEPEND="${DEPEND}"
-PDEPEND="~lxqt-base/lxqt-session-${PV}"
-
-src_configure() {
-	local mycmakeargs=( -DPULL_TRANSLATIONS=OFF )
-	cmake-utils_src_configure
-}
