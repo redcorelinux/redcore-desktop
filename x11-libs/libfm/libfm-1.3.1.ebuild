@@ -1,19 +1,19 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=5
+EAPI=7
 
-inherit autotools fdo-mime multilib vala
+inherit autotools multilib vala xdg-utils
 
 MY_PV=${PV/_/}
 MY_P="${PN}-${MY_PV}"
 DESCRIPTION="A library for file management"
-HOMEPAGE="http://pcmanfm.sourceforge.net/"
+HOMEPAGE="https://wiki.lxde.org/en/PCManFM"
 SRC_URI="https://github.com/lxde/libfm/archive/${PV}.tar.gz -> ${MY_P}.tar.gz"
 
-KEYWORDS="amd64"
+KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~mips ~ppc ~x86 ~amd64-linux ~x86-linux"
 LICENSE="GPL-2"
-SLOT="0/5.0.1" #copy ABI_VERSION because it seems upstream change it randomly
+SLOT="0/5.2.1" #copy ABI_VERSION because it seems upstream change it randomly
 IUSE="+automount debug doc examples exif gtk gtk3 udisks vala"
 
 COMMON_DEPEND=">=dev-libs/glib-2.18:2
@@ -42,10 +42,9 @@ DEPEND="${COMMON_DEPEND}
 
 S="${WORKDIR}"/${MY_P}
 
-REQUIRED_USE="udisks? ( automount ) doc? ( gtk ) gtk3? ( gtk )"
+REQUIRED_USE="udisks? ( automount ) doc? ( gtk )"
 
 src_prepare() {
-	epatch "${FILESDIR}"/add_file_compare_attributes.patch
 	if ! use doc; then
 		sed -ie '/^SUBDIR.*=/s#docs##' "${S}"/Makefile.am || die "sed failed"
 		sed -ie '/^[[:space:]]*docs/d' configure.ac || die "sed failed"
@@ -76,9 +75,11 @@ src_prepare() {
 	eautoreconf
 	rm -r autom4te.cache || die
 	use vala && export VALAC="$(type -p valac-$(vala_best_api_version))"
+
+	eapply_user
 }
 
-src_configure() {
+ src_configure() {
 	if use gtk3; then
 		econf \
 			--sysconfdir="${EPREFIX}/etc" \
@@ -133,9 +134,11 @@ pkg_preinst() {
 }
 
 pkg_postinst() {
-	fdo-mime_mime_database_update
+	xdg_mimeinfo_database_update
+	xdg_desktop_database_update
 }
 
 pkg_postrm() {
-	fdo-mime_mime_database_update
+	xdg_mimeinfo_database_update
+	xdg_desktop_database_update
 }
