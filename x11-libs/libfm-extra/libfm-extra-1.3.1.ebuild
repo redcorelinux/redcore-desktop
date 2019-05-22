@@ -1,8 +1,8 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=5
-inherit eutils autotools xdg-utils
+EAPI=7
+inherit autotools xdg-utils
 
 MY_PV=${PV/_/}
 MY_PN="libfm"
@@ -11,9 +11,9 @@ DESCRIPTION="A library for file management"
 HOMEPAGE="http://pcmanfm.sourceforge.net/"
 SRC_URI="https://github.com/lxde/libfm/archive/${PV}.tar.gz -> ${MY_P}.tar.gz"
 
-KEYWORDS="amd64"
+KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~mips ~ppc ~x86 ~amd64-linux ~x86-linux"
 LICENSE="GPL-2"
-SLOT="0/5.0.1" #copy ABI_VERSION because it seems upstream change it randomly
+SLOT="0/5.2.1" #copy ABI_VERSION because it seems upstream change it randomly
 IUSE=""
 
 RDEPEND=">=dev-libs/glib-2.18:2"
@@ -27,7 +27,6 @@ DEPEND="${RDEPEND}
 S="${WORKDIR}"/${MY_P}
 
 src_prepare() {
-	epatch "${FILESDIR}"/add_file_compare_attributes.patch
 	sed -ie '/^SUBDIR.*=/s#docs##' "${S}"/Makefile.am || die "sed failed"
 	sed -ie '/^[[:space:]]*docs/d' configure.ac || die "sed failed"
 	sed -i -e "s:-O0::" -e "/-DG_ENABLE_DEBUG/s: -g::" \
@@ -55,6 +54,7 @@ src_prepare() {
 
 	eautoreconf
 	rm -r autom4te.cache || die
+	eapply_user
 }
 
 src_configure() {
