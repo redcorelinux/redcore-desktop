@@ -38,7 +38,7 @@ DEPEND="
 	=lxqt-base/liblxqt-${MY_PV}
 	x11-libs/libX11
 	x11-misc/xdg-user-dirs
-	themes? ( =x11-themes/lxqt-themes-${MY_PV} )
+	themes? ( =lxqt-base/lxqt-themes-${MY_PV} )
 	udev? ( virtual/libudev )
 "
 RDEPEND="${DEPEND}
