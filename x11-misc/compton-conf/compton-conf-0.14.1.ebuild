@@ -19,17 +19,8 @@ DEPEND="
 	$(add_qt_dep qtgui)
 	$(add_qt_dep linguist-tools)
 	$(add_qt_dep qtwidgets)
-	>=lxqt-base/lxqt-build-tools-0.5.0"
+	>=lxqt-base/lxqt-build-tools-0.6.0"
 RDEPEND="${DEPEND}"
-
-src_configure() {
-	local mycmakeargs=(
-		-DPULL_TRANSLATIONS=NO
-	)
-
-	cmake-utils_src_configure
-}
-
 
 src_install() {
 	cmake-utils_src_install
