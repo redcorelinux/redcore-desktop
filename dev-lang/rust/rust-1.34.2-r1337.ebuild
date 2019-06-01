@@ -1,9 +1,9 @@
-# Copyright 1999-2018 Gentoo Authors
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
 
-PYTHON_COMPAT=( python2_7 python3_{5,6} pypy )
+PYTHON_COMPAT=( python2_7 python3_{5,6,7} pypy )
 
 inherit check-reqs eapi7-ver estack flag-o-matic llvm multiprocessing multilib-build python-any-r1 rust-toolchain toolchain-funcs
 
@@ -14,13 +14,14 @@ if [[ ${PV} = *beta* ]]; then
 	SLOT="beta/${PV}"
 	SRC="${BETA_SNAPSHOT}/rustc-beta-src.tar.xz"
 else
-	SLOT="stable/1.31"
+	ABI_VER="$(ver_cut 1-2)"
+	SLOT="stable/${ABI_VER}"
 	MY_P="rustc-${PV}"
 	SRC="${MY_P}-src.tar.xz"
 	KEYWORDS="~amd64"
 fi
 
-RUST_STAGE0_VERSION="1.$(($(ver_cut 2) - 1)).1"
+RUST_STAGE0_VERSION="1.$(($(ver_cut 2) - 1)).0"
 
 DESCRIPTION="Systems programming language from Mozilla"
 HOMEPAGE="https://www.rust-lang.org/"
@@ -29,23 +30,42 @@ SRC_URI="https://static.rust-lang.org/dist/${SRC} -> rustc-${PV}-src.tar.xz
 		$(rust_arch_uri x86_64-unknown-linux-gnu rust-${RUST_STAGE0_VERSION})"
 
 ALL_LLVM_TARGETS=( AArch64 AMDGPU ARM BPF Hexagon Lanai Mips MSP430
-	NVPTX PowerPC Sparc SystemZ X86 XCore )
+	NVPTX PowerPC Sparc SystemZ WebAssembly X86 XCore )
 ALL_LLVM_TARGETS=( "${ALL_LLVM_TARGETS[@]/#/llvm_targets_}" )
 LLVM_TARGET_USEDEPS=${ALL_LLVM_TARGETS[@]/%/?}
 
 LICENSE="|| ( MIT Apache-2.0 ) BSD-1 BSD-2 BSD-4 UoI-NCSA"
 
-IUSE="clippy cpu_flags_x86_sse2 debug doc +jemalloc libressl rls rustfmt system-llvm wasm ${ALL_LLVM_TARGETS[*]}"
+IUSE="clippy cpu_flags_x86_sse2 debug doc libressl rls rustfmt system-llvm wasm ${ALL_LLVM_TARGETS[*]}"
+
+# Please keep the LLVM dependency block separate. Since LLVM is slotted,
+# we need to *really* make sure we're not pulling one than more slot
+# simultaneously.
+
+# How to use it:
+# 1. List all the working slots (with min versions) in ||, newest first.
+# 2. Update the := to specify *max* version, e.g. < 9.
+# 3. Specify LLVM_MAX_SLOT, e.g. 8.
+LLVM_DEPEND="
+	|| (
+		sys-devel/llvm:8[llvm_targets_WebAssembly?]
+	)
+	<sys-devel/llvm-9:=
+"
+LLVM_MAX_SLOT=8
 
 COMMON_DEPEND="
-		jemalloc? ( dev-libs/jemalloc )
-		sys-libs/zlib
-		!libressl? ( dev-libs/openssl:0= )
-		libressl? ( dev-libs/libressl:0= )
-		net-libs/libssh2
-		net-libs/http-parser:=
-		net-misc/curl[ssl]
-		system-llvm? ( >=sys-devel/llvm-6:= )"
+	sys-libs/zlib
+	!libressl? ( dev-libs/openssl:0= )
+	libressl? ( dev-libs/libressl:0= )
+	net-libs/libssh2
+	net-libs/http-parser:=
+	net-misc/curl[ssl]
+	system-llvm? (
+		${LLVM_DEPEND}
+	)
+"
+
 DEPEND="${COMMON_DEPEND}
 	${PYTHON_DEPS}
 	|| (
@@ -57,11 +77,17 @@ RDEPEND="${COMMON_DEPEND}
 	!dev-util/cargo
 	rustfmt? ( !dev-util/rustfmt )"
 REQUIRED_USE="|| ( ${ALL_LLVM_TARGETS[*]} )
-				x86? ( cpu_flags_x86_sse2 )"
+	wasm? ( llvm_targets_WebAssembly )
+	x86? ( cpu_flags_x86_sse2 )
+"
+
+PATCHES=(
+	"${FILESDIR}"/0001-llvm-cmake-Add-additional-headers-only-if-they-exist.patch
+	"${FILESDIR}"/1.34.0-doc-build-fix.patch
+	"${FILESDIR}"/1.34.0-libressl.patch # bug 684224
+)
 
 S="${WORKDIR}/${MY_P}-src"
-
-PATCHES=( "${FILESDIR}"/1.30.1-clippy-sysroot.patch )
 
 toml_usex() {
 	usex "$1" true false
@@ -69,11 +95,9 @@ toml_usex() {
 
 pre_build_checks() {
 	CHECKREQS_DISK_BUILD="7G"
-	CHECKREQS_MEMORY="4G"
 	eshopts_push -s extglob
 	if is-flagq '-g?(gdb)?([1-9])'; then
 		CHECKREQS_DISK_BUILD="10G"
-		CHECKREQS_MEMORY="16G"
 	fi
 	eshopts_pop
 	check-reqs_pkg_setup
@@ -86,9 +110,7 @@ pkg_pretend() {
 pkg_setup() {
 	pre_build_checks
 	python-any-r1_pkg_setup
-	if use system-llvm; then
-		llvm_pkg_setup
-	fi
+	use system-llvm && llvm_pkg_setup
 }
 
 src_prepare() {
@@ -97,6 +119,12 @@ src_prepare() {
 	local rust_stage0="rust-${RUST_STAGE0_VERSION}-$(rust_abi)"
 
 	"${WORKDIR}/${rust_stage0}"/install.sh --disable-ldconfig --destdir="${rust_stage0_root}" --prefix=/ || die
+
+	# ugly hack for https://bugs.gentoo.org/679806
+	if use ppc64; then
+		sed -i 's/getentropy/gEtEnTrOpY/g' "${rust_stage0_root}"/bin/cargo || die
+		export OPENSSL_ppccap=0
+	fi
 
 	default
 }
@@ -134,6 +162,7 @@ src_configure() {
 		release-debuginfo = $(toml_usex debug)
 		assertions = $(toml_usex debug)
 		targets = "${LLVM_TARGETS// /;}"
+		experimental-targets = ""
 		link-shared = $(toml_usex system-llvm)
 		[build]
 		build = "${rust_target}"
@@ -157,7 +186,6 @@ src_configure() {
 		optimize = $(toml_usex !debug)
 		debuginfo = $(toml_usex debug)
 		debug-assertions = $(toml_usex debug)
-		use-jemalloc = $(toml_usex jemalloc)
 		default-linker = "$(tc-getCC)"
 		channel = "stable"
 		rpath = false
@@ -181,7 +209,7 @@ src_configure() {
 		EOF
 		if use system-llvm; then
 			cat <<- EOF >> "${S}"/config.toml
-				llvm-config = "$(get_llvm_prefix)/bin/llvm-config"
+				llvm-config = "$(get_llvm_prefix "${LLVM_MAX_SLOT}")/bin/llvm-config"
 			EOF
 		fi
 	done
@@ -196,14 +224,14 @@ src_configure() {
 
 src_compile() {
 	env $(cat "${S}"/config.env)\
-		"${EPYTHON}" ./x.py build --config="${S}"/config.toml -j$(makeopts_jobs) \
+		"${EPYTHON}" ./x.py build -v --config="${S}"/config.toml -j$(makeopts_jobs) \
 		--exclude src/tools/miri || die # https://github.com/rust-lang/rust/issues/52305
 }
 
 src_install() {
 	local rust_target abi_libdir
 
-	env DESTDIR="${D}" "${EPYTHON}" ./x.py install || die
+	env DESTDIR="${D}" "${EPYTHON}" ./x.py install -v || die
 
 	# Copy shared library versions of standard libraries for all targets
 	# into the system's abi-dependent lib directories because the rust
@@ -214,9 +242,9 @@ src_install() {
 		fi
 		abi_libdir=$(get_abi_LIBDIR ${v##*.})
 		rust_target=$(rust_abi $(get_abi_CHOST ${v##*.}))
-		mkdir -p "${D}/usr/${abi_libdir}"
-		cp "${D}/usr/$(get_libdir)/${P}/rustlib/${rust_target}/lib"/*.so \
-		   "${D}/usr/${abi_libdir}" || die
+		mkdir -p "${ED}/usr/${abi_libdir}"
+		cp "${ED}/usr/$(get_libdir)/${P}/rustlib/${rust_target}/lib"/*.so \
+		   "${ED}/usr/${abi_libdir}" || die
 	done
 
 	dodoc COPYRIGHT
@@ -224,8 +252,35 @@ src_install() {
 	# FIXME:
 	# Really not sure if that env is needed, specailly LDPATH
 	cat <<-EOF > "${T}"/50${P}
-		LDPATH="/usr/$(get_libdir)/${P}"
-		MANPATH="/usr/share/${P}/man"
+		LDPATH="${EPREFIX}/usr/$(get_libdir)/${P}"
+		MANPATH="${EPREFIX}/usr/share/${P}/man"
 	EOF
 	doenvd "${T}"/50${P}
+}
+
+pkg_postinst() {
+	eselect rust update --if-unset
+
+	elog "Rust installs a helper script for calling GDB and LLDB,"
+	elog "for your convenience it is installed under /usr/bin/rust-{gdb,lldb}-${PV}."
+
+	ewarn "cargo is now installed from dev-lang/rust{,-bin} instead of dev-util/cargo."
+	ewarn "This might have resulted in a dangling symlink for /usr/bin/cargo on some"
+	ewarn "systems. This can be resolved by calling 'sudo eselect rust set ${P}'."
+
+	if has_version app-editors/emacs || has_version app-editors/emacs-vcs; then
+		elog "install app-emacs/rust-mode to get emacs support for rust."
+	fi
+
+	if has_version app-editors/gvim || has_version app-editors/vim; then
+		elog "install app-vim/rust-vim to get vim support for rust."
+	fi
+
+	if has_version 'app-shells/zsh'; then
+		elog "install app-shells/rust-zshcomp to get zsh completion for rust."
+	fi
+}
+
+pkg_postrm() {
+	eselect rust unset --if-invalid
 }
