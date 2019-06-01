@@ -23,7 +23,7 @@ DEPEND="${RDEPEND}
 	virtual/pkgconfig
 	sys-devel/gettext
 	!!<=x11-libs/libfm-1.2.3
-	=x11-libs/libfm-$(ver_cut 1-2)*"
+	~x11-libs/libfm-${PV}"
 
 S="${WORKDIR}"/${MY_P}
 
