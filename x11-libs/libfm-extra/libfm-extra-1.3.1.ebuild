@@ -22,7 +22,8 @@ DEPEND="${RDEPEND}
 	>=dev-util/intltool-0.40
 	virtual/pkgconfig
 	sys-devel/gettext
-	!!<=x11-libs/libfm-1.2.3"
+	!!<=x11-libs/libfm-1.2.3
+	=x11-libs/libfm-$(ver_cut 1-2)*"
 
 S="${WORKDIR}"/${MY_P}
 
