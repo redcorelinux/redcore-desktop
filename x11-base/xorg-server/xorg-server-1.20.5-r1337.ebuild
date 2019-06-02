@@ -4,14 +4,13 @@
 EAPI=7
 
 XORG_DOC=doc
-XORG_EAUTORECONF="yes"
 inherit xorg-3 multilib flag-o-matic
 EGIT_REPO_URI="https://gitlab.freedesktop.org/xorg/xserver.git"
 
 DESCRIPTION="X.Org X servers"
 SLOT="0/${PV}"
 if [[ ${PV} != 9999* ]]; then
-	KEYWORDS="alpha amd64 arm arm64 ~hppa ia64 ~mips ppc ppc64 ~s390 ~sh ~sparc x86 ~amd64-fbsd ~x86-fbsd ~amd64-linux ~x86-linux"
+	KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~amd64-fbsd ~x86-fbsd ~amd64-linux ~x86-linux"
 fi
 
 IUSE_SERVERS="dmx kdrive wayland xephyr xnest xorg xvfb"
@@ -119,9 +118,9 @@ REQUIRED_USE="!minimal? (
 	xephyr? ( kdrive )"
 
 UPSTREAMED_PATCHES=(
-	"${FILESDIR}"/${P}-shm-reindent-shm_tmpfile-to-follow-our-standards.patch
-	"${FILESDIR}"/${P}-shm-Pick-the-shm-dir-at-run-time-not-build-time.patch
-	"${FILESDIR}"/${P}-shm-Use-memfd_create-when-possible.patch
+	"${FILESDIR}"/${PN}-1.20.4-shm-reindent-shm_tmpfile-to-follow-our-standards.patch
+	"${FILESDIR}"/${PN}-1.20.4-shm-Pick-the-shm-dir-at-run-time-not-build-time.patch
+	"${FILESDIR}"/${PN}-1.20.4-shm-Use-memfd_create-when-possible.patch
 )
 
 PATCHES=(
