@@ -1,0 +1,11 @@
+diff -Nur a/kernel/sched/MuQSS.c b/kernel/sched/MuQSS.c
+--- a/kernel/sched/MuQSS.c	2019-06-19 19:58:03.175461132 +0100
++++ b/kernel/sched/MuQSS.c	2019-06-19 20:00:22.120083431 +0100
+@@ -1013,6 +1013,7 @@
+ 
+ #ifdef CONFIG_SCHED_SMT
+ DEFINE_STATIC_KEY_FALSE(sched_smt_present);
++EXPORT_SYMBOL_GPL(sched_smt_present);
+ #endif
+ 
+ /*

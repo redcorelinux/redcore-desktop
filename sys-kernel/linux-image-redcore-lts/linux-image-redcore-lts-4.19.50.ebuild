@@ -5,7 +5,7 @@ EAPI=6
 
 inherit eutils
 
-EXTRAVERSION="redcore-lts-r2"
+EXTRAVERSION="redcore-lts"
 KV_FULL="${PV}-${EXTRAVERSION}"
 KV_MAJOR="4.19"
 
@@ -35,13 +35,11 @@ RDEPEND="${DEPEND}"
 
 PATCHES=( 
 	"${FILESDIR}"/"${KV_MAJOR}"-ata-fix-NCQ-LOG-strings-and-move-to-debug.patch
-	"${FILESDIR}"/"${KV_MAJOR}"-ath10k-drop-WARN_ON-added-in-cd93b83ad927b2c7979e0add0343ace59328b461.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-drop_ancient-and-wrong-msg.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-enable_alx_wol.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-mute-pps_state_mismatch.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-nouveau-pascal-backlight.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-radeon_dp_aux_transfer_native-no-ratelimited_debug.patch
-	"${FILESDIR}"/"${KV_MAJOR}"-revert-patches-causing-instant-reboot.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-linux-hardened.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-uksm-linux-hardened.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-0001-MultiQueue-Skiplist-Scheduler-version-v0.180-linux-hardened.patch
@@ -58,7 +56,8 @@ PATCHES=(
 	"${FILESDIR}"/"${KV_MAJOR}"-0012-Make-threaded-IRQs-optionally-the-default-which-can-.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-0013-Reinstate-default-Hz-of-100-in-combination-with-MuQS.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-0014-Swap-sucks.patch
-	"${FILESDIR}"/"${KV_MAJOR}"-0015-unfuck-MuQSS-on-linux-4_19_10+.patch 
+	"${FILESDIR}"/"${KV_MAJOR}"-0015-unfuck-MuQSS-on-linux-4_19_10+.patch
+	"${FILESDIR}"/"${KV_MAJOR}"-0016-unfuck-MuQSS-on-linux-4_19_20+.patch 
 )
 
 S="${WORKDIR}"/linux-"${PV}"
