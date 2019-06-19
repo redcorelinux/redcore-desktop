@@ -2,9 +2,9 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="5"
-PYTHON_COMPAT=( python{2_7,3_4,3_5} )
+PYTHON_COMPAT=( python{2_7,3_4,3_5,3_6} )
 
-inherit autotools-utils bash-completion-r1 flag-o-matic linux-info python-r1 systemd toolchain-funcs udev
+inherit autotools-utils bash-completion-r1 flag-o-matic python-r1 systemd toolchain-funcs udev
 
 MY_PN="zfs"
 MY_P="${MY_PN}-${PV}"
@@ -17,7 +17,7 @@ HOMEPAGE="http://zfsonlinux.org/"
 LICENSE="BSD-2 CDDL MIT"
 SLOT="0"
 KEYWORDS="amd64"
-IUSE="debug +rootfs test-suite"
+IUSE="debug test-suite"
 
 RESTRICT="test"
 
@@ -41,39 +41,11 @@ RDEPEND="${COMMON_DEPEND}
 		sys-process/procps
 		virtual/modutils
 		)
-	rootfs? (
-		app-arch/cpio
-		app-misc/pax-utils
-		!<sys-boot/grub-2.00-r2:2
-		)
 	sys-fs/udev-init-scripts
 	~sys-fs/spl-utils-${PV}"
 
 AT_M4DIR="config"
 AUTOTOOLS_IN_SOURCE_BUILD="1"
-
-pkg_setup() {
-	if use kernel_linux && use test-suite; then
-		linux-info_pkg_setup
-		if  ! linux_config_exists; then
-			ewarn "Cannot check the linux kernel configuration."
-		else
-			# recheck that we don't have usblp to collide with libusb
-			if use test-suite; then
-				if linux_chkconfig_present BLK_DEV_LOOP; then
-					eerror "The ZFS test suite requires loop device support enabled."
-					eerror "Please enable it:"
-					eerror "    CONFIG_BLK_DEV_LOOP=y"
-					eerror "in /usr/src/linux/.config or"
-					eerror "    Device Drivers --->"
-					eerror "        Block devices --->"
-					eerror "            [ ] Loopback device support"
-				fi
-			fi
-		fi
-	fi
-
-}
 
 src_prepare() {
 	# Update paths
