@@ -8,7 +8,7 @@ inherit eutils
 
 DESCRIPTION="Additional proprietary codecs for opera"
 HOMEPAGE="http://ffmpeg.org/"
-SRC_URI="https://repo.herecura.eu/herecura/x86_64/opera-beta-ffmpeg-codecs-${PV}-1-x86_64.pkg.tar.xz"
+SRC_URI="https://mirror.bytemark.co.uk/archlinux/community/os/x86_64/${P}-1-x86_64.pkg.tar.xz"
 
 LICENSE="LGPL2.1"
 SLOT="0"
@@ -33,5 +33,5 @@ src_compile() {
 src_install() {
 	dodir usr/$(get_libdir)/opera/lib_extra
 	insinto usr/$(get_libdir)/opera/lib_extra
-	doins ${S}/usr/lib/opera-beta/lib_extra/libffmpeg.so
+	doins ${S}/usr/lib/opera/lib_extra/libffmpeg.so
 }
