@@ -8,7 +8,7 @@ inherit eutils unpacker
 
 DESCRIPTION="The simplest way to keep notes"
 HOMEPAGE="https://github.com/Automattic/simplenote-electron"
-SRC_URI="https://github.com/Automattic/simplenote-electron/releases/download/v${PV}/Simplenote-${PV}-amd64.deb"
+SRC_URI="https://github.com/Automattic/simplenote-electron/releases/download/v${PV}/Simplenote-linux-${PV}-amd64.deb"
 
 LICENSE="GPL2"
 SLOT="0"
