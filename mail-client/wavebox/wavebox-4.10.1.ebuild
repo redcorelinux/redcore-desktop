@@ -1,4 +1,4 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 2016-2019 Redcore Linux Project
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -7,7 +7,7 @@ EAPI=6
 inherit eutils
 
 MY_PN="Wavebox"
-MY_PV="4_9_3"
+MY_PV="4_10_1"
 MY_P="${MY_PN}_${MY_PV}"
 
 DESCRIPTION="The next generation of web-desktop communication"
