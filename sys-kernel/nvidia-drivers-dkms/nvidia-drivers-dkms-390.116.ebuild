@@ -23,10 +23,7 @@ RDEPEND="${DEPEND}"
 
 PATCHES=( 
 	"${FILESDIR}"/kernel-4.16.patch
-	"${FILESDIR}"/kernel-4.19.patch
 	"${FILESDIR}"/"${P}"-conf.patch
-	"${FILESDIR}"/"${PV}"-vmf_insert_pfn.patch
-	"${FILESDIR}"/"${PV}"-ipmi_user.patch 
 )
 
 S="${WORKDIR}/${AMD64_NV_PACKAGE}"
