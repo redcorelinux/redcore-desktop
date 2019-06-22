@@ -12,7 +12,7 @@ HOMEPAGE="http://www.nvidia.com/ http://www.nvidia.com/Download/Find.aspx"
 SRC_URI="amd64? ( ${NV_URI}Linux-x86_64/${PV}/${AMD64_NV_PACKAGE}.run )"
 
 LICENSE="GPL-2 NVIDIA-r2"
-SLOT="0/${PV}"
+SLOT="0/390116"
 KEYWORDS="-* amd64"
 RESTRICT="bindist mirror"
 EMULTILIB_PKG="true"
@@ -27,11 +27,11 @@ COMMON="
 	)"
 DEPEND="${COMMON}"
 PDEPEND="
-	tools? ( x11-misc/nvidia-settings )"
+	tools? ( x11-misc/nvidia-settings:${SLOT} )"
 RDEPEND="
 	${COMMON}
 	acpi? ( sys-power/acpid )
-	dkms? ( ~sys-kernel/${PN}-dkms-${PV} )
+	dkms? ( sys-kernel/${PN}-dkms:${SLOT} )
 	wayland? ( dev-libs/wayland[${MULTILIB_USEDEP}] )
 	X? (
 		<x11-base/xorg-server-1.20.99:=
@@ -46,10 +46,7 @@ QA_PREBUILT="opt/* usr/lib*"
 
 PATCHES=( 
 	"${FILESDIR}"/kernel-4.16.patch
-	"${FILESDIR}"/kernel-4.19.patch
 	"${FILESDIR}"/"${P}"-conf.patch
-	"${FILESDIR}"/"${PV}"-vmf_insert_pfn.patch
-	"${FILESDIR}"/"${PV}"-ipmi_user.patch 
 )
 
 S=${WORKDIR}/
