@@ -10,7 +10,7 @@ HOMEPAGE="http://www.nvidia.com/"
 SRC_URI="https://github.com/NVIDIA/nvidia-settings/archive/${PV}.tar.gz -> nvidia-settings-${PV}.tar.gz"
 
 LICENSE="GPL-2"
-SLOT="0"
+SLOT="0/390116"
 KEYWORDS="-* amd64"
 IUSE="gtk3"
 
