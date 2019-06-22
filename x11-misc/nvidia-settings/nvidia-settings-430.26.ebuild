@@ -10,7 +10,7 @@ HOMEPAGE="http://www.nvidia.com/"
 SRC_URI="https://github.com/NVIDIA/nvidia-settings/archive/${PV}.tar.gz -> nvidia-settings-${PV}.tar.gz"
 
 LICENSE="GPL-2"
-SLOT="0/390116"
+SLOT="0/43026"
 KEYWORDS="-* amd64"
 IUSE="gtk3"
 
@@ -43,39 +43,39 @@ src_prepare() {
 	eapply "${FILESDIR}"/nvidia-settings-linker.patch
 }
 
+
 src_compile() {
-	emake -C src/ \
-		AR="$(tc-getAR)" \
-		CC="$(tc-getCC)" \
+	einfo "Building libXNVCtrl..."
+	emake -C src/libXNVCtrl \
 		DO_STRIP= \
-		LD="$(tc-getCC)" \
 		LIBDIR="$(get_libdir)" \
 		NVLD="$(tc-getLD)" \
 		NV_VERBOSE=1 \
-		RANLIB="$(tc-getRANLIB)" \
-		build-xnvctrl
+		OUTPUTDIR=. \
+		RANLIB="$(tc-getRANLIB)"
 
+	einfo "Building nvidia-settings..."
 	emake -C src/ \
-		CC="$(tc-getCC)" \
 		DO_STRIP= \
 		GTK3_AVAILABLE=$(usex gtk3 1 0) \
-		LD="$(tc-getCC)" \
 		LIBDIR="$(get_libdir)" \
 		NVLD="$(tc-getLD)" \
 		NVML_ENABLED=0 \
 		NV_USE_BUNDLED_LIBJANSSON=0 \
-		NV_VERBOSE=1
+		NV_VERBOSE=1 \
+		OUTPUTDIR=.
 }
 
 src_install() {
 	emake -C src/ \
 		DESTDIR="${D}" \
+		DO_STRIP= \
 		GTK3_AVAILABLE=$(usex gtk3 1 0) \
 		LIBDIR="${D}/usr/$(get_libdir)" \
 		NV_USE_BUNDLED_LIBJANSSON=0 \
 		NV_VERBOSE=1 \
+		OUTPUTDIR=. \
 		PREFIX=/usr \
-		DO_STRIP= \
 		install
 
 	insinto /usr/$(get_libdir)
