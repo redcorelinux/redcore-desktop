@@ -35,7 +35,7 @@ src_unpack() {
 src_install() {
 	mv * "${D}" || die
 	sed -i "s/Utility/System/g" "${D}"usr/share/applications/balena-"${PN}"-electron.desktop
-	sed -i "s/Icon\=balena-etcher-electron/Icon\=etcher/g" "${D}"usr/share/applications/balena-"${PN}"-electron.desktop
+	sed -i "s/Icon\=balena\-etcher\-electron/Icon\=etcher\-electron/g" "${D}"usr/share/applications/balena-"${PN}"-electron.desktop
 	rm -rf "${D}"usr/share/doc
 	fperms 0755 /opt/balenaEtcher/balena-"${PN}"-electron || die
 }
