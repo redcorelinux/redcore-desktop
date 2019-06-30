@@ -1,19 +1,22 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
-inherit desktop qmake-utils
+inherit qmake-utils xdg
 
 DESCRIPTION="A free, open source, cross-platform video editor"
 HOMEPAGE="https://www.shotcut.org/"
 SRC_URI="https://github.com/mltframework/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 
-KEYWORDS="~amd64 ~x86"
 LICENSE="GPL-3"
 SLOT="0"
 IUSE=""
+KEYWORDS="~amd64 ~x86"
 
+BDEPEND="
+	dev-qt/linguist-tools:5
+"
 RDEPEND="
 	dev-qt/qtcore:5
 	dev-qt/qtdeclarative:5
@@ -32,7 +35,7 @@ RDEPEND="
 	media-libs/ladspa-sdk
 	media-libs/libsdl:0
 	media-libs/libvpx
-	>=media-libs/mlt-6.10.0[ffmpeg,frei0r,qt5,sdl,xml]
+	>=media-libs/mlt-6.16.0-r1[ffmpeg,frei0r,qt5,sdl,xml]
 	media-libs/x264
 	media-plugins/frei0r-plugins
 	media-sound/lame
@@ -40,25 +43,21 @@ RDEPEND="
 	virtual/jack
 "
 DEPEND="${RDEPEND}
-	dev-qt/linguist-tools:5
+	dev-qt/qtconcurrent:5
+	dev-qt/qtx11extras:5
 "
 
-src_prepare() {
-	local mylrelease="$(qt5_get_bindir)/lrelease"
-	"${mylrelease}" "${S}/src/src.pro" || die "preparing locales failed"
-
-	default
-}
-
 src_configure() {
-	eqmake5 PREFIX="${EPREFIX}/usr"
+	eqmake5 \
+		PREFIX="${EPREFIX}/usr" \
+		SHOTCUT_VERSION="${PV}"
 }
 
 src_install() {
 	emake INSTALL_ROOT="${D}" install
 	einstalldocs
-	# weird icon name
+	# start : Redcore Linux Project tweaks
 	sed -i "s/Icon=org.shotcut.Shotcut/Icon=shotcut/g" "${D}"usr/share/applications/org.shotcut.Shotcut.desktop
-	# inject a default icon to replace the weird one above
 	newicon "${S}/icons/shotcut-logo-64.png" "${PN}.png"
+	# stop : Redcore Linux Project tweaks
 }
