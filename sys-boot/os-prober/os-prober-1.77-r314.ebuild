@@ -1,7 +1,7 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 inherit readme.gentoo-r1 toolchain-funcs
 
 DESCRIPTION="Utility to detect other OSs on a set of drives"
@@ -10,7 +10,7 @@ SRC_URI="mirror://debian/pool/main/${PN::1}/${PN}/${PN}_${PV}.tar.xz"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="amd64 x86"
+KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 # grub-mount needed per bug #607518
@@ -20,8 +20,12 @@ DEPEND=""
 # bug 594250
 QA_MULTILIB_PATHS="usr/lib/os-prober/.*"
 
-PATCHES=( "${FILESDIR}"/${PN}-1.76-exherbo.patch
-		"${FILESDIR}"/${PN}-redcore.patch )
+# start : Redcore Linux Project tweaks
+PATCHES=( 
+	"${FILESDIR}"/${PN}-1.76-exherbo.patch
+	"${FILESDIR}"/os-prober-redcore.patch 
+)
+# stop : Redcore Linux Project tweaks
 
 DOC_CONTENTS="
 	If you intend for os-prober to detect versions of Windows installed on
@@ -60,14 +64,14 @@ src_install() {
 	esac
 
 	for dir in os-probes{,/mounted,/init} linux-boot-probes{,/mounted}; do
-		exeinto /usr/lib/$dir
-		doexe $dir/common/*
-		if [[ -d $dir/$debarch ]]; then
-			doexe $dir/$debarch/*
+		exeinto /usr/lib/${dir}
+		doexe ${dir}/common/*
+		if [[ -d ${dir}/${debarch} ]]; then
+			doexe ${dir}/${debarch}/*
 		fi
-		if [[ -d $dir/$debarch/efi ]]; then
-			exeinto /usr/lib/$dir/efi
-			doexe $dir/$debarch/efi/*
+		if [[ -d ${dir}/${debarch}/efi ]]; then
+			exeinto /usr/lib/${dir}/efi
+			doexe ${dir}/${debarch}/efi/*
 		fi
 	done
 
