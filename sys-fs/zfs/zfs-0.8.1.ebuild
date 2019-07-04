@@ -12,7 +12,6 @@ SLOT="0"
 KEYWORDS="amd64"
 IUSE=""
 
-DEPEND="~sys-fs/spl-${PV}
-	~sys-fs/zfs-utils-${PV}
+DEPEND="~sys-fs/zfs-utils-${PV}
 	~sys-kernel/zfs-dkms-${PV}"
 RDEPEND="${DEPEND}"
