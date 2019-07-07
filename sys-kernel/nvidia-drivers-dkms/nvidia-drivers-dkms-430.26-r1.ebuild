@@ -21,7 +21,8 @@ IUSE=""
 DEPEND="sys-kernel/dkms"
 RDEPEND="${DEPEND}"
 
-PATCHES=( 
+PATCHES=(
+	"${FILESDIR}"/fs62142.patch 
 	"${FILESDIR}"/"${P}"-conf.patch
 )
 
