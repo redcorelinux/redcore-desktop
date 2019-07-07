@@ -23,7 +23,7 @@ S="${WORKDIR}"
 
 src_prepare() {
 	cp "${FILESDIR}"/dkms.conf "${S}" || die
-	
+
 	epatch \
 		"${FILESDIR}/broadcom-sta-6.30.223.141-makefile.patch" \
 		"${FILESDIR}/broadcom-sta-6.30.223.141-eth-to-wlan.patch" \
@@ -35,25 +35,29 @@ src_prepare() {
 		"${FILESDIR}/broadcom-sta-6.30.223.271-r4-linux-4.8.patch" \
 		"${FILESDIR}/broadcom-sta-6.30.223.271-r4-linux-4.11.patch" \
 		"${FILESDIR}/broadcom-sta-6.30.223.271-r4-linux-4.12.patch" \
-		"${FILESDIR}/broadcom-sta-6.30.223.271-r4-linux-4.15.patch"
+		"${FILESDIR}/broadcom-sta-6.30.223.271-r4-linux-4.15.patch" \
+		"${FILESDIR}/broadcom-sta-6.30.223.271-r4-linux-5.1.patch"
 
 	epatch_user
 }
 
 src_compile(){
-    :
+	:
 }
 
 src_install() {
-    dodir usr/src/${P}
-    insinto usr/src/${P}
-    doins -r "${S}"/*
+	dodir usr/src/${P}
+	insinto usr/src/${P}
+	doins -r "${S}"/*
+	dodir etc/modprobe.d
+	insinto etc/modprobe.d
+	doins "${FILESDIR}"/"${PN}".conf
 }
 
 pkg_postinst() {
-    dkms add ${PN}/${PV}
+	dkms add ${PN}/${PV}
 }
 
 pkg_prerm() {
-    dkms remove ${PN}/${PV} --all
+	dkms remove ${PN}/${PV} --all
 }
