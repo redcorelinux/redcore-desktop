@@ -28,6 +28,7 @@ pkgsetup() {
 }
 
 src_prepare() {
+	default
 	:
 }
 
