@@ -36,7 +36,8 @@ PATCHES=(
 	"${FILESDIR}"/"${KV_MAJOR}"-fix-acpi_dbg_level.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-radeon_dp_aux_transfer_native-no-ratelimited_debug.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-Unknow-SSD-HFM128GDHTNG-8310B-QUIRK_NO_APST.patch
-	"${FILESDIR}"/"${KV_MAJOR}"-linux-hardened.patch
+	"${FILESDIR}"/"${KV_MAJOR}"-0001-uksm-initial-submission-linux-hardened.patch
+	"${FILESDIR}"/"${KV_MAJOR}"-0001-uksm-apply-52d1e606ee733.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-uksm-linux-hardened.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-0001-MultiQueue-Skiplist-Scheduler-version-0.192-linux-hardened.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-0002-Fix-Werror-build-failure-in-tools.patch
