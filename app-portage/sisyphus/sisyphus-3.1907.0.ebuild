@@ -11,8 +11,9 @@ DESCRIPTION="A simple portage python wrapper which works like other package mana
 HOMEPAGE="http://redcorelinux.org"
 
 EGIT_REPO_URI="https://pagure.io/redcore/sisyphus.git"
+EGIT_REPO_URI="https://gitlab.com/redcore/sisyphus.git"
 EGIT_BRANCH="master"
-EGIT_COMMIT="266820fbac1cac1d5330021482bcee33728e5dbe"
+EGIT_COMMIT="1c37d0c8dc00d9d34b7f137b4651d08a7f6547fb"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -24,6 +25,7 @@ RDEPEND="${DEPEND}
 	app-portage/gentoolkit[${PYTHON_USEDEP}]
 	app-portage/portage-utils
 	dev-python/animation[${PYTHON_USEDEP}]
+	dev-python/pygit2[${PYTHON_USEDEP}]
 	dev-python/urllib3[${PYTHON_USEDEP}]
 	dev-python/wget[${PYTHON_USEDEP}]
 	sys-apps/portage[${PYTHON_USEDEP}]
