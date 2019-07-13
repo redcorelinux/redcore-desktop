@@ -13,7 +13,7 @@ HOMEPAGE="http://redcorelinux.org"
 EGIT_REPO_URI="https://pagure.io/redcore/sisyphus.git"
 EGIT_REPO_URI="https://gitlab.com/redcore/sisyphus.git"
 EGIT_BRANCH="master"
-EGIT_COMMIT="1c37d0c8dc00d9d34b7f137b4651d08a7f6547fb"
+EGIT_COMMIT="463ff0de30ee9193f6d637a6555dce06bccc9d43"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -22,6 +22,7 @@ IUSE="+gui"
 
 DEPEND="dev-lang/python[sqlite]"
 RDEPEND="${DEPEND}
+	app-misc/tmux
 	app-portage/gentoolkit[${PYTHON_USEDEP}]
 	app-portage/portage-utils
 	dev-python/animation[${PYTHON_USEDEP}]
