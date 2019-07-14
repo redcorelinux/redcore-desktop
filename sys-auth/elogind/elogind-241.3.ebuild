@@ -1,7 +1,7 @@
-# Copyright 1999-2018 Gentoo Authors
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 inherit linux-info meson pam udev xdg-utils
 
@@ -11,7 +11,7 @@ SRC_URI="https://github.com/${PN}/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="CC0-1.0 LGPL-2.1+ public-domain"
 SLOT="0"
-KEYWORDS="amd64 ~arm x86"
+KEYWORDS="amd64 arm arm64 ~ia64 ~ppc ~ppc64 ~sparc x86"
 IUSE="+acl debug doc +pam +policykit selinux"
 
 COMMON_DEPEND="
@@ -41,7 +41,7 @@ PDEPEND="
 
 DOCS=( src/libelogind/sd-bus/GVARIANT-SERIALIZATION )
 
-PATCHES=( "${FILESDIR}/${PN}-238.1-docs.patch" )
+PATCHES=( "${FILESDIR}/${PN}-241.1-docs.patch" )
 
 pkg_setup() {
 	local CONFIG_CHECK="~CGROUPS ~EPOLL ~INOTIFY_USER ~SIGNALFD ~TIMERFD"
@@ -80,11 +80,11 @@ src_configure() {
 		-Ddefault-hierarchy=${cgroupmode}
 		-Ddefault-kill-user-processes=false
 		-Dacl=$(usex acl true false)
-		-Ddebug-extra=$(usex debug elogind false)
 		--buildtype $(usex debug debug release)
 		-Dhtml=$(usex doc auto false)
 		-Dpam=$(usex pam true false)
 		-Dselinux=$(usex selinux true false)
+		-Dutmp=$(usex elibc_musl false true)
 	)
 
 	meson_src_configure
@@ -100,5 +100,5 @@ src_install() {
 	sed -e "s/@libdir@/$(get_libdir)/" "${FILESDIR}"/${PN}.conf.in > ${PN}.conf || die
 	newconfd ${PN}.conf ${PN}
 
-	rm -rf ${ED}lib/udev/rules.d/73-seat-late.rules
+	rm -rf ${ED}/lib/udev/rules.d/73-seat-late.rules
 }
