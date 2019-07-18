@@ -29,6 +29,7 @@ COMMON_DEPEND="kernel_FreeBSD? ( || ( >=sys-freebsd/freebsd-ubin-9.0_rc sys-proc
 	)
 	apparmor? ( sys-apps/apparmor
 		sys-apps/apparmor-utils
+		sec-policy/apparmor-profiles
 	)
 	audit? ( sys-process/audit )
 	dkms? ( sys-kernel/dkms  )
