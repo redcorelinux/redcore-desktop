@@ -1,0 +1,17 @@
+diff -Nur a/dracut.sh b/dracut.sh
+--- a/dracut.sh	2018-07-06 09:37:51.000000000 +0100
++++ b/dracut.sh	2019-07-19 22:33:11.571832132 +0100
+@@ -791,11 +791,11 @@
+         outfile="$efidir/Linux/linux-$kernel${MACHINE_ID:+-${MACHINE_ID}}${BUILD_ID:+-${BUILD_ID}}.efi"
+     else
+         if [[ -e "/boot/vmlinuz-$kernel" ]]; then
+-            outfile="/boot/initramfs-$kernel.img"
++            outfile="/boot/initrd-$kernel"
+         elif [[ $MACHINE_ID ]] && ( [[ -d /boot/${MACHINE_ID} ]] || [[ -L /boot/${MACHINE_ID} ]] ); then
+             outfile="/boot/${MACHINE_ID}/$kernel/initrd"
+         else
+-            outfile="/boot/initramfs-$kernel.img"
++            outfile="/boot/initrd-$kernel"
+         fi
+     fi
+ fi
