@@ -7,11 +7,11 @@ inherit eutils qmake-utils
 
 DESCRIPTION="Opensource school/high-school/university timetable scheduling software"
 HOMEPAGE="http://lalescu.ro/liviu/fet/"
-SRC_URI="http://lalescu.ro/liviu/fet/download/fet-5.30.3.tar.bz2"
+SRC_URI="http://lalescu.ro/liviu/${PN}/download/${P}.tar.bz2"
 
 LICENSE="AGPL3"
 SLOT="0"
-KEYWORDS="amd64 x86"
+KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 DEPEND="dev-qt/qtgui:5
