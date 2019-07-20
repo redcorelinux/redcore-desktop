@@ -22,7 +22,7 @@ src_install() {
 	dodir etc/samba
 	insinto etc/samba
 	newins redcore-smb.conf smb.conf
-	dodir var/lib/samba/usershare
+	keepdir var/lib/samba/usershare
 }
 
 pkg_preinst() {
