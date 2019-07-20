@@ -12,7 +12,7 @@ HOMEPAGE="https://www.nvidia.com/ http://www.nvidia.com/Download/Find.aspx"
 SRC_URI="amd64? ( ${NV_URI}Linux-x86_64/${PV}/${AMD64_NV_PACKAGE}.run )"
 
 LICENSE="GPL-2 NVIDIA-r2"
-SLOT="0/43026"
+SLOT="0/43034"
 KEYWORDS="-* amd64"
 RESTRICT="bindist mirror"
 EMULTILIB_PKG="true"
