@@ -3,12 +3,12 @@
 
 EAPI=7
 
-CMAKE_MAKEFILE_GENERATOR="emake" # FIXME
+CMAKE_MIN_VERSION=3.14.3
 KDE_HANDBOOK="forceoptional"
 inherit kde5
 
 DESCRIPTION="Utility providing information about the computer hardware"
-HOMEPAGE="https://www.kde.org/applications/system/kinfocenter/"
+HOMEPAGE="https://kde.org/applications/system/kinfocenter/"
 KEYWORDS="~amd64 ~arm ~arm64 ~x86"
 IUSE="gles2 ieee1394 +opengl +pci wayland"
 
@@ -54,7 +54,6 @@ DEPEND="${COMMON_DEPEND}
 RDEPEND="${COMMON_DEPEND}
 	$(add_plasma_dep kde-cli-tools)
 	$(add_qt_dep qtquickcontrols2)
-	!kde-apps/kcontrol:4
 "
 
 src_configure() {
@@ -77,6 +76,7 @@ src_configure() {
 src_install() {
 	kde5_src_install
 
+	# TODO: Make this fully obsolete by /etc/os-release
 	insinto /etc/xdg
 	doins "${FILESDIR}"/kcm-about-distrorc
 
