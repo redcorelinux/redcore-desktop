@@ -9,7 +9,7 @@ inherit eutils git-r3
 DESCRIPTION="Redcore Linux Community Wallpapers"
 HOMEPAGE="https://redcorelinux.org"
 
-EGIT_REPO_URI="https://pagure.io/redcore/redcore-wallpapers.git"
+EGIT_REPO_URI="https://gitlab.com/redcore/redcore-wallpapers.git"
 EGIT_BRANCH="master"
 EGIT_COMMIT="aebe9faba665bebb25f66f016933e6793416eaa9"
 
