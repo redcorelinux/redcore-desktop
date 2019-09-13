@@ -18,9 +18,11 @@ KEYWORDS="~amd64"
 
 IUSE=""
 
-RDEPEND="dev-qt/qtcore:5
-         x11-libs/gtk+:2
-         x11-libs/libX11"
+RDEPEND="dev-qt/qtcore:5=
+	dev-qt/qtgui:5=
+	dev-qt/qtwidgets:5=
+	x11-libs/gtk+:2
+	x11-libs/libX11"
 DEPEND="${RDEPEND}"
 
 src_configure() {
