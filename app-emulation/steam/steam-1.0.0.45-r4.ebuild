@@ -22,7 +22,6 @@ RDEPEND="
 	sys-apps/dbus
 	sys-apps/gentoo-functions
 	media-libs/freetype
-	media-libs/libtxc_dxtn
 	x11-libs/gdk-pixbuf
 	gnome-extra/zenity
 	amd64? (
