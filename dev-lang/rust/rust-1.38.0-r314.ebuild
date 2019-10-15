@@ -14,7 +14,7 @@ if [[ ${PV} = *beta* ]]; then
 	SLOT="beta/${PV}"
 	SRC="${BETA_SNAPSHOT}/rustc-beta-src.tar.xz"
 else
-	ABI_VER="1.37"
+	ABI_VER="1,38"
 	SLOT="stable/${ABI_VER}"
 	MY_P="rustc-${PV}"
 	SRC="${MY_P}-src.tar.xz"
@@ -30,7 +30,7 @@ SRC_URI="https://static.rust-lang.org/dist/${SRC} -> rustc-${PV}-src.tar.xz
 	$(rust_arch_uri x86_64-unknown-linux-gnu rust-${RUST_STAGE0_VERSION})"
 
 ALL_LLVM_TARGETS=( AArch64 AMDGPU ARM BPF Hexagon Lanai Mips MSP430
-	NVPTX PowerPC Sparc SystemZ WebAssembly X86 XCore )
+	NVPTX PowerPC RISCV Sparc SystemZ WebAssembly X86 XCore )
 ALL_LLVM_TARGETS=( "${ALL_LLVM_TARGETS[@]/#/llvm_targets_}" )
 LLVM_TARGET_USEDEPS=${ALL_LLVM_TARGETS[@]/%/?}
 
@@ -39,7 +39,7 @@ LICENSE="|| ( MIT Apache-2.0 ) BSD-1 BSD-2 BSD-4 UoI-NCSA"
 IUSE="clippy cpu_flags_x86_sse2 debug doc libressl rls rustfmt system-llvm wasm ${ALL_LLVM_TARGETS[*]}"
 
 # Please keep the LLVM dependency block separate. Since LLVM is slotted,
-# we need to *really* make sure we're not pulling one than more slot
+# we need to *really* make sure we're not pulling more than one slot
 # simultaneously.
 
 # How to use it:
@@ -48,12 +48,12 @@ IUSE="clippy cpu_flags_x86_sse2 debug doc libressl rls rustfmt system-llvm wasm 
 # 3. Specify LLVM_MAX_SLOT, e.g. 8.
 LLVM_DEPEND="
 	|| (
-		sys-devel/llvm:8[llvm_targets_WebAssembly?]
-		wasm? ( =sys-devel/lld-8* )
+		sys-devel/llvm:9[llvm_targets_WebAssembly?]
+		wasm? ( =sys-devel/lld-9* )
 	)
-	<sys-devel/llvm-9:=
+	<sys-devel/llvm-10:=
 "
-LLVM_MAX_SLOT=8
+LLVM_MAX_SLOT=9
 
 COMMON_DEPEND="
 	sys-libs/zlib
@@ -85,13 +85,12 @@ REQUIRED_USE="|| ( ${ALL_LLVM_TARGETS[*]} )
 	wasm? ( llvm_targets_WebAssembly )
 	x86? ( cpu_flags_x86_sse2 )
 "
+QA_FLAGS_IGNORED="usr/bin/* usr/lib*/${P}"
 
 PATCHES=(
-	"${FILESDIR}"/0001-llvm-cmake-Add-additional-headers-only-if-they-exist.patch
-	"${FILESDIR}"/1.34.2-fix-custom-libdir.patch
-	"${FILESDIR}"/1.35.0-revert-commits-triggering-multiple-llvm-rebuilds.patch
+	"${FILESDIR}"/1.38.0-fix-custom-libdir.patch
+	"${FILESDIR}"/1.38.0-fix-multiple-llvm-rebuilds.patch
 	"${FILESDIR}"/1.36.0-libressl.patch
-	"${FILESDIR}"/1.36.0-libressl3.patch
 )
 
 S="${WORKDIR}/${MY_P}-src"
@@ -101,10 +100,10 @@ toml_usex() {
 }
 
 pre_build_checks() {
-	CHECKREQS_DISK_BUILD="7G"
+	CHECKREQS_DISK_BUILD="9G"
 	eshopts_push -s extglob
 	if is-flagq '-g?(gdb)?([1-9])'; then
-		CHECKREQS_DISK_BUILD="10G"
+		CHECKREQS_DISK_BUILD="14G"
 	fi
 	eshopts_pop
 	check-reqs_pkg_setup
