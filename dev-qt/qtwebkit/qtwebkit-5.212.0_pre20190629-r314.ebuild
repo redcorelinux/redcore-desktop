@@ -76,6 +76,8 @@ RDEPEND="${DEPEND}"
 
 S="${WORKDIR}/${MY_P}"
 
+PATCHES=( "${FILESDIR}/${P}-icu-65.patch" )
+
 CHECKREQS_DISK_BUILD="16G" # bug 417307
 
 _check_reqs() {
