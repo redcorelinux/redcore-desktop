@@ -89,6 +89,7 @@ DEPEND="${RDEPEND}
 	sys-apps/help2man
 	sys-apps/texinfo
 	sys-boot/grub-config-redcore
+	sys-devel/automake:1.15
 	fonts? (
 		media-libs/freetype:2
 		virtual/pkgconfig
