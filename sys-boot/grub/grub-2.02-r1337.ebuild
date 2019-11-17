@@ -40,6 +40,7 @@ PATCHES=(
 	"${FILESDIR}"/05-gfxpayload.patch
 	"${FILESDIR}"/06-KERNEL_GLOBS.patch
 	"${FILESDIR}"/07-Allow_GRUB_to_mount_ext234_filesystems_that_have_the_encryption_feature.patch
+	"${FILESDIR}"/08-find-freetype.patch
 )
 
 DEJAVU=dejavu-sans-ttf-2.37
@@ -88,7 +89,10 @@ DEPEND="${RDEPEND}
 	sys-apps/help2man
 	sys-apps/texinfo
 	sys-boot/grub-config-redcore
-	fonts? ( media-libs/freetype:2 )
+	fonts? (
+		media-libs/freetype:2
+		virtual/pkgconfig
+	)
 	grub_platforms_xen? ( app-emulation/xen-tools:= )
 	grub_platforms_xen-32? ( app-emulation/xen-tools:= )
 	static? (
@@ -97,6 +101,7 @@ DEPEND="${RDEPEND}
 			app-arch/bzip2[static-libs(+)]
 			media-libs/freetype[static-libs(+)]
 			sys-libs/zlib[static-libs(+)]
+			virtual/pkgconfig
 		)
 	)
 	test? (
@@ -196,6 +201,8 @@ grub_configure() {
 	esac
 
 	local myeconfargs=(
+		FREETYPE="pkg-config freetype2"
+		BUILD_FREETYPE="pkg-config freetype2"
 		--disable-werror
 		--program-prefix=
 		--libdir="${EPREFIX}"/usr/lib
