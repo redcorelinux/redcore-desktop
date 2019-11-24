@@ -46,7 +46,6 @@ RDEPEND="${COMMON_DEPEND}
 	>=app-shells/bash-4.0:0
 	sys-apps/coreutils[xattr(-)]
 	|| (
-		>=sys-apps/sysvinit-2.87-r3
 		sys-apps/openrc[sysv-utils,selinux?]
 		sys-apps/systemd[sysv-utils]
 	)
