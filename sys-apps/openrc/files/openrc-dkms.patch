@@ -1,11 +1,11 @@
 diff -Nur a/init.d/modules.in b/init.d/modules.in
---- a/init.d/modules.in	2017-05-16 01:06:10.000000000 +0100
-+++ b/init.d/modules.in	2017-05-21 15:56:25.581977335 +0100
+--- a/init.d/modules.in	2019-08-20 22:23:37.000000000 +0100
++++ b/init.d/modules.in	2019-11-24 01:54:56.882771015 +0000
 @@ -14,6 +14,7 @@
  depend()
  {
  	use isapnp
 +	need dkms
- 	want modules-load
+ 	provide modules-load
  	keyword -docker -lxc -openvz -prefix -systemd-nspawn -vserver
  }
