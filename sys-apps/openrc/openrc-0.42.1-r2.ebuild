@@ -241,4 +241,12 @@ pkg_postinst() {
 			"${ROOT}"/sbin/rc-update add haveged default
 		fi
 	fi
+
+	if use sysv-utils; then
+		export local xtty
+		for xtty in `seq 1 6`; do
+			ln -s "${ROOT}"/etc/init.d/agetty "${ROOT}"/etc/init.d/agetty.tty"${xtty}"
+			"${ROOT}"/sbin/rc-update add agetty.tty"${xtty}" default
+		done
+	fi
 }
