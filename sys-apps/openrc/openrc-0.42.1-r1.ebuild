@@ -191,38 +191,38 @@ pkg_postinst() {
 	fi
 
 	# Redcore Linux Hardened :
-	if [ -e "${ROOT}"etc/init.d/dkms ] && use dkms; then
+	if [ -e "${ROOT}"/etc/init.d/dkms ] && use dkms; then
 		if [ "$(rc-config list boot | grep dkms)" != "" ]; then
 			einfo
 		else
-			"${ROOT}"sbin/rc-update add dkms boot
+			"${ROOT}"/sbin/rc-update add dkms boot
 		fi
 	fi
 
-	if [ -e "${ROOT}"etc/init.d/dbus ] && use elogind; then
+	if [ -e "${ROOT}"/etc/init.d/dbus ] && use elogind; then
 		if [ "$(rc-config list boot | grep dbus)" != "" ]; then
 			einfo
 		elif [ "$(rc-config list default | grep dbus)" != "" ]; then
-			"${ROOT}"sbin/rc-update del dbus default
-			"${ROOT}"sbin/rc-update add dbus boot
+			"${ROOT}"/sbin/rc-update del dbus default
+			"${ROOT}"/sbin/rc-update add dbus boot
 		else
-			"${ROOT}"sbin/rc-update add dbus boot
+			"${ROOT}"/sbin/rc-update add dbus boot
 		fi
 	fi
 
-	if [ -e "${ROOT}"etc/init.d/elogind ] && use elogind; then
+	if [ -e "${ROOT}"/etc/init.d/elogind ] && use elogind; then
 		if [ "$(rc-config list boot | grep elogind)" != "" ]; then
 			einfo
 		else
-			"${ROOT}"sbin/rc-update add elogind boot
+			"${ROOT}"/sbin/rc-update add elogind boot
 		fi
 
 		if [ "$(rc-config list default | grep consolekit)" != "" ]; then
-			"${ROOT}"sbin/rc-update del consolekit default
+			"${ROOT}"/sbin/rc-update del consolekit default
 		fi
 
 		if [ "$(rc-config list default | grep cgmanager)" != "" ]; then
-			"${ROOT}"sbin/rc-update del cgmanager default
+			"${ROOT}"/sbin/rc-update del cgmanager default
 		fi
 	fi
 
@@ -230,7 +230,7 @@ pkg_postinst() {
 		if [ "$(rc-config list boot | grep apparmor)" != "" ]; then
 			einfo
 		else
-			"${ROOT}"sbin/rc-update add apparmor boot
+			"${ROOT}"/sbin/rc-update add apparmor boot
 		fi
 	fi
 
@@ -238,7 +238,7 @@ pkg_postinst() {
 		if [ "$(rc-config list default | grep haveged)" != "" ]; then
 			einfo
 		else
-			"${ROOT}"sbin/rc-update add haveged default
+			"${ROOT}"/sbin/rc-update add haveged default
 		fi
 	fi
 }
