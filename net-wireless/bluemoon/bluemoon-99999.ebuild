@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI=5
+EAPI=6
 inherit qmake-utils git-r3
 
 DESCRIPTION="Bluetooth Manager for qt5"
@@ -19,10 +19,11 @@ DEPEND="
 "
 RDEPEND="${DEPEND}"
 
+PATCHES=( "${FILESDIR}"/icon.patch )
+
 S=${S}/BlueMoon
 src_configure() {
 	mv ../icons/scalable_bluemoon.svg blue_moon.svg
-	epatch ${FILESDIR}/icon.patch
 	eqmake5
 }
 
