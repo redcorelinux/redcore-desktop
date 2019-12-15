@@ -1,7 +1,7 @@
 # Copyright 2016-2019 Redcore Linux Project
 # Distributed under the terms of the GNU General Public License v2 
 
-EAPI=5
+EAPI=6
 
 inherit eutils qmake-utils git-r3
 
@@ -36,5 +36,5 @@ src_configure() {
 }
 
 src_install() {
-	make INSTALL_ROOT=${D} install || die
+	emake INSTALL_ROOT=${D} install || die
 }
