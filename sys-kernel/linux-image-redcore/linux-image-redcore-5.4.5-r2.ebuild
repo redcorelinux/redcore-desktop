@@ -5,7 +5,7 @@ EAPI=6
 
 inherit eutils
 
-EXTRAVERSION="redcore-r1"
+EXTRAVERSION="redcore-r2"
 KV_FULL="${PV}-${EXTRAVERSION}"
 KV_MAJOR="5.4"
 
