@@ -19,7 +19,7 @@ KEYWORDS="~amd64"
 
 LICENSE="BSD-2 CDDL MIT"
 SLOT="0"
-IUSE="custom-cflags debug python test-suite static-libs"
+IUSE="debug python test-suite static-libs"
 
 COMMON_DEPEND="
 	${PYTHON_DEPS}
