@@ -9,7 +9,7 @@ inherit eutils unpacker
 MY_PN=virtualbox-dkms
 DESCRIPTION="Kernel Modules source for Virtualbox"
 HOMEPAGE="http://www.virtualbox.org/"
-SRC_URI="http://ftp.de.debian.org/debian/pool/contrib/v/virtualbox/${MY_PN}_${PV}-dfsg-7_all.deb"
+SRC_URI="http://ftp.de.debian.org/debian/pool/contrib/v/virtualbox/${MY_PN}_${PV}-dfsg-3_amd64.deb"
 
 LICENSE="GPL-2"
 SLOT="0"
