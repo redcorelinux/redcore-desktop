@@ -36,7 +36,7 @@ SRC_URI="amd64? ( https://download.virtualbox.org/virtualbox/${MY_PV}/${MY_P}_am
 LICENSE="GPL-2 PUEL"
 SLOT="0"
 IUSE="+additions +chm headless python vboxwebsrv rdesktop-vrdp"
-RESTRICT="mirror"
+RESTRICT="bindist mirror"
 
 if [[ "${PV}" != *beta* ]] ; then
 	SRC_URI+="
@@ -47,8 +47,9 @@ fi
 DEPEND="app-arch/unzip
 	${PYTHON_DEPS}"
 
-RDEPEND="!app-emulation/virtualbox-additions
-	~app-emulation/virtualbox-modules-${MAIN_PV}
+RDEPEND="
+	!app-emulation/virtualbox-additions
+	~app-emulation/virtualbox-modules-${MY_PV,,}
 	!headless? (
 		dev-libs/glib
 		media-libs/fontconfig
@@ -193,7 +194,7 @@ src_install() {
 		rm -rf VBoxSDL VirtualBox{,VM} VBoxKeyboard.so
 	fi
 
-	doins -r * || die
+	doins -r *
 
 	# create symlinks for working around unsupported $ORIGIN/.. in VBoxC.so (setuid)
 	dosym ../VBoxVMM.so /opt/VirtualBox/components/VBoxVMM.so
