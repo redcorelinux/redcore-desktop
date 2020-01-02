@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI=5
+EAPI=7
 
 inherit eutils
 
@@ -22,9 +22,7 @@ RDEPEND="${DEPEND}"
 
 S="${WORKDIR}/${MY_P}"
 
-src_prepare() {
-	:
-}
+PATCHES=( "${FILESDIR}"/Use_NMH_WAIT_EXEC_with_call.patch )
 
 src_configure() {
 	:
