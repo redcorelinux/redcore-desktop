@@ -61,7 +61,8 @@ RESTRICT="test"
 
 S="${WORKDIR}/${MY_P}"
 
-PATCHES=( "${FILESDIR}/bash-completion-sudo.patch" )
+PATCHES=( "${FILESDIR}/bash-completion-sudo.patch"
+	"${FILESDIR}/Use_NMH_WAIT_EXEC_with_call.patch" )
 
 src_prepare() {
 	default

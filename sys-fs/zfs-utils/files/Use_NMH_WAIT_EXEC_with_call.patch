@@ -1,0 +1,12 @@
+diff -Nur a/module/zfs/vdev_disk.c b/module/zfs/vdev_disk.c
+--- a/module/zfs/vdev_disk.c	2019-09-25 21:44:42.626286618 +0100
++++ b/module/zfs/vdev_disk.c	2020-01-02 10:29:56.356741395 +0000
+@@ -220,7 +220,7 @@
+ 	char *envp[] = { NULL };
+ 
+ 	argv[2] = kmem_asprintf(SET_SCHEDULER_CMD, device, elevator);
+-	error = call_usermodehelper(argv[0], argv, envp, UMH_NO_WAIT);
++	error = call_usermodehelper(argv[0], argv, envp, UMH_WAIT_EXEC);
+ 	strfree(argv[2]);
+ #endif /* HAVE_ELEVATOR_CHANGE */
+ 	if (error) {
