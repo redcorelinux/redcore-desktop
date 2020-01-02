@@ -5,7 +5,7 @@ EAPI=6
 
 inherit eutils
 
-EXTRAVERSION="redcore-r2"
+EXTRAVERSION="redcore-r5"
 KV_FULL="${PV}-${EXTRAVERSION}"
 KV_MAJOR="5.4"
 
@@ -46,21 +46,8 @@ PATCHES=(
 	"${FILESDIR}"/"${KV_MAJOR}"-acer-wmi-silence-unknow-functions-messages.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-amdgpu-dc_link-drop-some-asserts.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-nvme-hwmon.patch
-	"${FILESDIR}"/"${KV_MAJOR}"-0001-linux-hardened.patch
-	"${FILESDIR}"/"${KV_MAJOR}"-0001-uksm-linux-hardened.patch
-	"${FILESDIR}"/"${KV_MAJOR}"-0001-MultiQueue-Skiplist-Scheduler-v0.196-linux-hardened.patch
-	"${FILESDIR}"/"${KV_MAJOR}"-0002-Make-preemptible-kernel-default.patch
-	"${FILESDIR}"/"${KV_MAJOR}"-0003-Expose-vmsplit-for-our-poor-32-bit-users.patch
-	"${FILESDIR}"/"${KV_MAJOR}"-0004-Create-highres-timeout-variants-of-schedule_timeout-.patch
-	"${FILESDIR}"/"${KV_MAJOR}"-0005-Special-case-calls-of-schedule_timeout-1-to-use-the-.patch
-	"${FILESDIR}"/"${KV_MAJOR}"-0006-Convert-msleep-to-use-hrtimers-when-active.patch
-	"${FILESDIR}"/"${KV_MAJOR}"-0007-Replace-all-schedule-timeout-1-with-schedule_min_hrt.patch
-	"${FILESDIR}"/"${KV_MAJOR}"-0008-Replace-all-calls-to-schedule_timeout_interruptible-.patch
-	"${FILESDIR}"/"${KV_MAJOR}"-0009-Replace-all-calls-to-schedule_timeout_uninterruptibl.patch
-	"${FILESDIR}"/"${KV_MAJOR}"-0010-Don-t-use-hrtimer-overlay-when-pm_freezing-since-som.patch
-	"${FILESDIR}"/"${KV_MAJOR}"-0011-Make-threaded-IRQs-optionally-the-default-which-can-.patch
-	"${FILESDIR}"/"${KV_MAJOR}"-0012-Reinstate-default-Hz-of-100-in-combination-with-MuQS.patch
-	"${FILESDIR}"/"${KV_MAJOR}"-0013-Swap-sucks.patch
+	"${FILESDIR}"/"${KV_MAJOR}"-linux-hardened.patch
+	"${FILESDIR}"/"${KV_MAJOR}"-uksm-linux-hardened.patch
 )
 
 S="${WORKDIR}"/linux-"${PV}"
