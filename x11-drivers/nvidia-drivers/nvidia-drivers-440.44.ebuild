@@ -145,12 +145,18 @@ src_install() {
 
 		insinto /usr/share/glvnd/egl_vendor.d
 		doins ${NV_X11}/10_nvidia.json
+
+		insinto /etc/vulkan/icd.d
+		doins ${NV_X11}/nvidia_icd.json
 	fi
 
 	if use wayland; then
 		insinto /usr/share/egl/egl_external_platform.d
 		doins ${NV_X11}/10_nvidia_wayland.json
 	fi
+
+	insinto /etc/modprobe.d
+	doins "${FILESDIR}"/nvidia.conf
 
 	# OpenCL ICD for NVIDIA
 	insinto /etc/OpenCL/vendors
@@ -161,9 +167,6 @@ src_install() {
 
 	if use X; then
 		doexe ${NV_OBJ}/nvidia-xconfig
-
-		insinto /etc/vulkan/icd.d
-		doins nvidia_icd.json
 	fi
 
 	doexe ${NV_OBJ}/nvidia-cuda-mps-control

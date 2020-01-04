@@ -144,6 +144,9 @@ src_install() {
 		doins ${NV_X11}/10_nvidia_wayland.json
 	fi
 
+	insinto /etc/modprobe.d
+	doins "${FILESDIR}"/nvidia.conf
+
 	# NVIDIA kernel <-> userspace driver config lib
 	donvidia ${NV_OBJ}/libnvidia-cfg.so.${NV_SOVER}
 
@@ -173,8 +176,8 @@ src_install() {
 
 	# install nvidia-modprobe setuid and symlink in /usr/bin (bug #505092)
 	doexe ${NV_OBJ}/nvidia-modprobe
-	#fowners root:video /opt/bin/nvidia-modprobe
-	#fperms 4710 /opt/bin/nvidia-modprobe
+	fowners root:video /opt/bin/nvidia-modprobe
+	fperms 4710 /opt/bin/nvidia-modprobe
 	dosym /{opt,usr}/bin/nvidia-modprobe
 
 	# init
