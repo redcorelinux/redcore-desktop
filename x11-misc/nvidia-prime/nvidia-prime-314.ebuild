@@ -20,5 +20,5 @@ S="${FILESDIR}"
 src_install() {
 	dobin prime-run
 	insinto /usr/share/X11/xorg.conf.d
-	newins nvidia-prime.conf 50-nvidia-prime.conf
+	newins nvidia-prime.conf 60-nvidia-prime.conf
 }
