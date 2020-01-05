@@ -281,7 +281,7 @@ _dracut_initramfs_regen() {
 	if [ -x $(which dracut) ]; then
 		dracut -N -f --no-hostonly-cmdline
 	fi
-)
+}
 
 pkg_preinst() {
 	if [ -d "${ROOT}"/usr/lib/opengl/nvidia ]; then
