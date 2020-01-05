@@ -144,7 +144,7 @@ src_install() {
 		doins ${NV_X11}/10_nvidia_wayland.json
 	fi
 
-	insinto /etc/modprobe.d
+	insinto /lib/modprobe.d
 	doins "${FILESDIR}"/nvidia.conf
 
 	# NVIDIA kernel <-> userspace driver config lib
