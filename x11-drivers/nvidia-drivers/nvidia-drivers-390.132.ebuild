@@ -279,6 +279,12 @@ src_install-libs() {
 	fi
 }
 
+_dracut_initramfs_regen() {
+	if [ -x $(which dracut) ]; then
+		dracut -N -f --no-hostonly-cmdline
+	fi
+}
+
 pkg_preinst() {
 	if [ -d "${ROOT}"/usr/lib/opengl/nvidia ]; then
 		rm -rf "${ROOT}"/usr/lib/opengl/nvidia/*
@@ -303,6 +309,9 @@ pkg_postinst() {
 		elog "speed scale appropriately."
 		elog
 	fi
+	if [ $(stat -c %d:%i /) == $(stat -c %d:%i /proc/1/root/.) ]; then
+		_dracut_initramfs_regen
+	fi
 }
 
 pkg_prerm() {
@@ -314,5 +323,8 @@ pkg_prerm() {
 pkg_postrm() {
 	if ! use libglvnd; then
 		use X && "${ROOT}"/usr/bin/eselect opengl set --use-old xorg-x11
+	fi
+	if [ $(stat -c %d:%i /) == $(stat -c %d:%i /proc/1/root/.) ]; then
+		_dracut_initramfs_regen
 	fi
 }
