@@ -71,8 +71,10 @@ RDEPEND="
 	pulseaudio? ( media-sound/pulseaudio[abi_x86_32,caps] )
 	!pulseaudio? ( media-sound/apulse[abi_x86_32] )"
 
+S="${FILESDIR}"
+
 src_install() {
-	dobin "${FILESDIR}"/redcore-steam-native
+	dobin redcore-steam-native
 	insinto usr/share/applications
-	doins "${FILESDIR}"/"{P}".desktop
+	doins "{P}".desktop
 }
