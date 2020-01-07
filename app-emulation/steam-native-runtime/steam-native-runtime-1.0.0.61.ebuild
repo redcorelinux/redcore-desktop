@@ -14,6 +14,7 @@ IUSE="+trayicon pulseaudio"
 
 DEPEND=""
 RDEPEND="
+	app-emulation/steam
 	app-arch/bzip2[abi_x86_32]
 	dev-libs/atk[abi_x86_32]
 	dev-libs/dbus-glib[abi_x86_32]
