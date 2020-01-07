@@ -76,5 +76,5 @@ S="${FILESDIR}"
 src_install() {
 	dobin redcore-steam-native
 	insinto usr/share/applications
-	doins "{P}".desktop
+	doins "${PN}".desktop
 }
