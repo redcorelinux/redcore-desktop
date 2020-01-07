@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+
+# steam-runtime is a somewhat a mess bundled with old libraries
+# due to this reason, system native graphic drivers may not load
+#
+# if we remove some bundled libs and preload some system libs
+# system native graphic drivers will be able to load
+#
+# however we must do this everytime when we launch steam, because
+# steam-runtime is being fixed right away by steam client
+
+
+source /lib/gentoo/functions.sh
+
+do_remove () {
+	einfo "Removing bundled libraries (libxcb, libstdc++, libgcc_s)"
+	find /home/$USER/.local/share/Steam -name 'libxcb*' -type f | grep -v installed | xargs rm -rf
+	find /home/$USER/.local/share/Steam -name 'libstdc++.so.6*' -type f | grep -v installed | xargs rm -rf
+	find /home/$USER/.local/share/Steam -name 'libgcc_s*' -type f | grep -v installed | xargs rm -rf
+}
+
+do_preload () {
+	einfo "Preloading system libraries (libstdc++, libgcc_s)"
+	export LD_PRELOAD='/usr/lib64/gcc/x86_64-pc-linux-gnu/8.2.0/32/libstdc++.so.6 /usr/lib64/gcc/x86_64-pc-linux-gnu/8.2.0/32/libgcc_s.so.1 /usr/lib64/gcc/x86_64-pc-linux-gnu/8.2.0/libgcc_s.so.1 /usr/lib64/gcc/x86_64-pc-linux-gnu/8.2.0/32/libstdc++.so.6'
+}
+
+launch_steam () {
+	do_remove
+	do_preload
+	export DISPLAY=:0
+	export STEAM_RUNTIME=0
+	export STEAM_RUNTIME_HEAVY=0
+	export DBUS_FATAL_WARNINGS=0
+	steam
+}
+
+launch_steam
