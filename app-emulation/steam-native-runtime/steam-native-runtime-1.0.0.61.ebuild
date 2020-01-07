@@ -42,7 +42,7 @@ RDEPEND="
 	sys-apps/dbus[abi_x86_32,X]
 	sys-libs/libudev-compat[abi_x86_32]
 	sys-libs/zlib[abi_x86_32]
-	virtual/jpeg[abi_x86_32
+	virtual/jpeg[abi_x86_32]
 	virtual/opengl[abi_x86_32]
 	virtual/libusb[abi_x86_32]
 	x11-libs/gdk-pixbuf[abi_x86_32]
