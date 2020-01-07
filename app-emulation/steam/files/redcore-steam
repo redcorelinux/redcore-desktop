@@ -28,6 +28,7 @@ launch_steam () {
 	do_remove
 	do_preload
 	export DISPLAY=:0
+	export DBUS_FATAL_WARNINGS=0
 	steam
 }
 
