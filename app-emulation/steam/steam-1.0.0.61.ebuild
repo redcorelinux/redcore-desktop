@@ -15,27 +15,19 @@ SLOT="0"
 KEYWORDS="~amd64"
 
 RDEPEND="
-	virtual/ttf-fonts
 	dev-util/desktop-file-utils
-	x11-themes/hicolor-icon-theme
-	net-misc/curl
-	sys-apps/dbus
-	sys-apps/gentoo-functions
-	media-libs/freetype
-	x11-libs/gdk-pixbuf
 	gnome-extra/zenity
-	amd64? (
-		media-libs/alsa-lib[abi_x86_32(-)]
-		media-libs/mesa[abi_x86_32(-)]
-		x11-libs/libX11[abi_x86_32(-)]
-		x11-libs/libxcb[abi_x86_32(-)]
-	)
-	x86? (
-		media-libs/alsa-lib
-		media-libs/mesa
-		x11-libs/libX11
-		x11-libs/libxcb
-	)"
+	media-libs/alsa-lib[abi_x86_32(-)]
+	media-libs/freetype[abi_x86_32(-)]
+	media-libs/mesa[abi_x86_32(-)]
+	net-misc/curl[abi_x86_32(-)]
+	sys-apps/dbus[abi_x86_32(-),X]
+	sys-apps/gentoo-functions
+	virtual/ttf-fonts
+	x11-libs/gdk-pixbuf[abi_x86_32(-)]
+	x11-libs/libX11[abi_x86_32(-)]
+	x11-libs/libxcb[abi_x86_32(-)]
+	x11-themes/hicolor-icon-theme"
 
 S="${WORKDIR}"/"${PN}"
 
