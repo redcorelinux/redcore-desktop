@@ -132,7 +132,7 @@ _dracut_initrd_delete() {
 _dkms_modules_delete() {
 	if [[ -x $(which dkms) ]] ; then
 		export local DKMSMOD
-		for DKMSMOD in $(dkms status | cut -d " " -f1,2 | sed -e 's/,//g' | sed -e 's/ /\//g' | sed -e 's/://g') ; do
+		for DKMSMOD in $(dkms status | cut -d " " -f1,2 | sed -e 's/,//g' | sed -e 's/ /\//g' | sed -e 's/://g' | uniq) ; do
 			dkms remove "${DKMSMOD}" -k "${KV_FULL}"
 		done
 	fi
