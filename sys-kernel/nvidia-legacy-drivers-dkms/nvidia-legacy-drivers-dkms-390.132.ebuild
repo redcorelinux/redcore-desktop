@@ -19,7 +19,8 @@ KEYWORDS="amd64"
 IUSE=""
 
 DEPEND="sys-kernel/dkms"
-RDEPEND="${DEPEND}"
+RDEPEND="${DEPEND}
+	!!sys-kernel/nvidia-drivers-dkms"
 
 PATCHES=( 
 	"${FILESDIR}"/kernel-4.16.patch
