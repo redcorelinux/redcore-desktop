@@ -33,6 +33,7 @@ COMMON_DEPEND="
 	>=x11-libs/libvdpau-1.0"
 
 RDEPEND="${COMMON_DEPEND}
+	!!x11-misc/nvidia-legacy-settings
 	x11-drivers/nvidia-drivers:${SLOT}"
 DEPEND="${RDEPEND}
 	virtual/pkgconfig

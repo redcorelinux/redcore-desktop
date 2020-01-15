@@ -19,7 +19,8 @@ KEYWORDS="amd64"
 IUSE=""
 
 DEPEND="sys-kernel/dkms"
-RDEPEND="${DEPEND}"
+RDEPEND="${DEPEND}
+	!!sys-kernel/nvidia-legacy-drivers-dkms"
 
 PATCHES=(
 	"${FILESDIR}"/fs62142.patch 
