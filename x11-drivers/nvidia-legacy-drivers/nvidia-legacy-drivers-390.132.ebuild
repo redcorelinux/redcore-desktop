@@ -31,9 +31,10 @@ COMMON="
 	)"
 DEPEND="${COMMON}"
 PDEPEND="
-	tools? ( x11-misc/nvidia-settings:${SLOT} )"
+	tools? ( x11-misc/nvidia-legacy-settings:${SLOT} )"
 RDEPEND="
 	${COMMON}
+	!!x11-drivers/nvidia-drivers
 	acpi? ( sys-power/acpid )
 	dkms? ( sys-kernel/${PN}-dkms:${SLOT} )
 	wayland? ( dev-libs/wayland[${MULTILIB_USEDEP}] )

@@ -4,7 +4,7 @@ diff -Nur a/kernel/dkms.conf b/kernel/dkms.conf
 @@ -1,12 +1,20 @@
 -PACKAGE_NAME="nvidia"
 -PACKAGE_VERSION="__VERSION_STRING"
-+PACKAGE_NAME="nvidia-drivers-dkms"
++PACKAGE_NAME="nvidia-legacy-drivers-dkms"
 +PACKAGE_VERSION="390.132"
  AUTOINSTALL="yes"
  
