@@ -7,7 +7,7 @@ inherit eutils multilib toolchain-funcs
 
 DESCRIPTION="NVIDIA Linux X11 Settings Utility"
 HOMEPAGE="http://www.nvidia.com/"
-SRC_URI="https://github.com/NVIDIA/nvidia-settings/archive/${PV}.tar.gz -> nvidia-settings-${PV}.tar.gz"
+SRC_URI="https://github.com/NVIDIA/nvidia-settings/archive/${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0/390132"
@@ -33,14 +33,17 @@ COMMON_DEPEND="
 	>=x11-libs/libvdpau-1.0"
 
 RDEPEND="${COMMON_DEPEND}
-	x11-drivers/nvidia-drivers:${SLOT}"
+	!!x11-misc/nvidia-settings
+	x11-drivers/nvidia-legacy-drivers:${SLOT}"
 DEPEND="${RDEPEND}
 	virtual/pkgconfig
 	x11-base/xorg-proto"
 
+S=${WORKDIR}/nvidia-settings-${PV}
+
 src_prepare() {
 	default
-	eapply "${FILESDIR}"/nvidia-settings-linker.patch
+	eapply "${FILESDIR}"/nvidia-legacy-settings-linker.patch
 }
 
 src_compile() {
@@ -84,7 +87,7 @@ src_install() {
 	insinto /usr/include/NVCtrl
 	doins src/libXNVCtrl/*.h
 
-	doicon doc/${PN}.png
+	doicon doc/nvidia-settings.png
 	domenu ${FILESDIR}/${PN}.desktop
 
 	dodoc doc/*.txt
