@@ -1,4 +1,4 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -67,14 +67,14 @@ CDEPEND="libglvnd? (
 		>=x11-libs/libX11-1.1.5
 		>=x11-libs/libXext-1.0.5
 		>=media-libs/mesa-18[X(+),egl,gbm]
-		media-libs/libepoxy[X,egl(+)]
+		>=media-libs/libepoxy-1.5.4[X,egl(+)]
 	)
 	udev? ( virtual/libudev:= )
 	unwind? ( sys-libs/libunwind )
 	wayland? (
 		>=dev-libs/wayland-1.3.0
-		media-libs/libepoxy[egl(+)]
-		>=dev-libs/wayland-protocols-1.1
+		>=media-libs/libepoxy-1.5.4[egl(+)]
+		>=dev-libs/wayland-protocols-1.18
 	)
 	>=x11-apps/xinit-1.3.3-r1
 	systemd? (
@@ -180,6 +180,15 @@ pkg_setup() {
 	)
 }
 
+src_configure() {
+	# Needed since commit 2a1a96d956f4 ("glamor: Add a function to get the
+	# driver name via EGL_MESA_query_driver") neglected to add autotools
+	# support
+	append-cflags -DGLAMOR_HAS_EGL_QUERY_DRIVER
+
+	xorg-3_src_configure
+}
+
 src_install() {
 	xorg-3_src_install
 
@@ -201,6 +210,7 @@ src_install() {
 	# enable clicks using touchpad (https://bugs.redcorelinux.org/show_bug.cgi?id=48)
 	insinto /usr/share/X11/xorg.conf.d
 	doins "${FILESDIR}"/99-synaptics-overrides.conf
+
 
 	find "${ED}"/var -type d -empty -delete || die
 }
