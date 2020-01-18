@@ -1,9 +1,0 @@
-diff -Nur a/data/init.d/openrc-settingsd.in b/data/init.d/openrc-settingsd.in
---- a/data/init.d/openrc-settingsd.in	2012-09-07 11:17:04.117221490 +0100
-+++ b/data/init.d/openrc-settingsd.in	2017-07-04 15:37:13.978576313 +0100
-@@ -1,4 +1,4 @@
--#!/sbin/runscript
-+#!/sbin/openrc-run
- # Copyright 2012 Alexandre Rostovtsev <tetromino@gentoo.org>
- # Distributed under the terms of the GNU General Public License v2
- 
