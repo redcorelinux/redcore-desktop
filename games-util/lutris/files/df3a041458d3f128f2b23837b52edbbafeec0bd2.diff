@@ -1,0 +1,39 @@
+diff --git a/lutris/runners/wine.py b/lutris/runners/wine.py
+index 97126726a..f792451f2 100644
+--- a/lutris/runners/wine.py
++++ b/lutris/runners/wine.py
+@@ -743,6 +743,7 @@ def toggle_dxvk(self, enable, version=None, dxvk_manager: dxvk.DXVKManager = Non
+         if version.lower() != "manual":
+             if enable:
+                 if not dxvk_manager.is_available():
++                    logger.info("DXVK %s is not available yet, downloading...")
+                     dxvk_manager.download()
+                 dxvk_manager.enable()
+             else:
+diff --git a/lutris/util/downloader.py b/lutris/util/downloader.py
+index da8038cfd..8b96af80f 100644
+--- a/lutris/util/downloader.py
++++ b/lutris/util/downloader.py
+@@ -113,6 +113,9 @@ def async_download(self, stop_request=None):
+         if self.referer:
+             headers["Referer"] = self.referer
+         response = requests.get(self.url, headers=headers, stream=True)
++        if response.status_code != 200:
++            logger.info("%s returned a %s error" % (self.url, response.status_code))
++        response.raise_for_status()
+         self.full_size = int(response.headers.get("Content-Length", "").strip() or 0)
+         for chunk in response.iter_content(chunk_size=1024 * 1024):
+             if not self.file_pointer:
+diff --git a/lutris/util/extract.py b/lutris/util/extract.py
+index 4e05d9bdf..3bd78e5f3 100644
+--- a/lutris/util/extract.py
++++ b/lutris/util/extract.py
+@@ -113,7 +113,7 @@ def extract_archive(path, to_directory=".", merge_single=True, extractor=None):
+     try:
+         _do_extract(path, temp_path, opener, mode, extractor)
+     except (OSError, zlib.error, tarfile.ReadError, EOFError) as ex:
+-        logger.exception("Extraction failed: %s", ex)
++        logger.error("Extraction failed: %s", ex)
+         raise ExtractFailure(str(ex))
+     if merge_single:
+         extracted = os.listdir(temp_path)
