@@ -4,9 +4,8 @@
 EAPI=7
 
 PYTHON_COMPAT=( python2_7 )
-USE_RUBY="ruby24 ruby25 ruby26 ruby27"
 MY_P="${PN}-${PV/_pre20190629/-alpha3}" # present as upgrade over previous snapshot
-inherit check-reqs cmake flag-o-matic python-any-r1 qmake-utils ruby-single toolchain-funcs
+inherit check-reqs cmake flag-o-matic python-any-r1 qmake-utils toolchain-funcs
 
 DESCRIPTION="WebKit rendering library for the Qt5 framework (deprecated)"
 HOMEPAGE="https://www.qt.io/"
@@ -28,11 +27,13 @@ QT_MIN_VER="5.9.1:5"
 BDEPEND="
 	${PYTHON_DEPS}
 	${RUBY_DEPS}
+	dev-lang/ruby:2.5
 	dev-lang/perl
 	dev-util/gperf
 	>=sys-devel/bison-2.4.3
 	sys-devel/flex
 	virtual/pkgconfig
+	virtual/rubygems
 "
 DEPEND="
 	dev-db/sqlite:3
@@ -119,17 +120,8 @@ src_configure() {
 		-DENABLE_WEBKIT2=$(usex qml)
 		$(cmake_use_find_package webp WebP)
 		-DENABLE_X11_TARGET=$(usex X)
+		-DRUBY_EXECUTABLE=$(type -P ruby25)
 	)
-
-	if has_version "virtual/rubygems[ruby_targets_ruby27]"; then
-		mycmakeargs+=( -DRUBY_EXECUTABLE=$(type -P ruby27) )
-	elif has_version "virtual/rubygems[ruby_targets_ruby26]"; then
-		mycmakeargs+=( -DRUBY_EXECUTABLE=$(type -P ruby26) )
-	elif has_version "virtual/rubygems[ruby_targets_ruby25]"; then
-		mycmakeargs+=( -DRUBY_EXECUTABLE=$(type -P ruby25) )
-	else
-		mycmakeargs+=( -DRUBY_EXECUTABLE=$(type -P ruby24) )
-	fi
 
 	cmake_src_configure
 }
