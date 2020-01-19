@@ -7,10 +7,10 @@ inherit eutils multilib toolchain-funcs
 
 DESCRIPTION="NVIDIA Linux X11 Settings Utility"
 HOMEPAGE="http://www.nvidia.com/"
-SRC_URI="https://github.com/NVIDIA/nvidia-settings/archive/${PV}.tar.gz -> nvidia-settings-${PV}.tar.gz"
+SRC_URI="https://github.com/NVIDIA/nvidia-settings/archive/${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-2"
-SLOT="0/44044"
+SLOT="0"
 KEYWORDS="-* amd64"
 IUSE="gtk3"
 
@@ -33,50 +33,52 @@ COMMON_DEPEND="
 	>=x11-libs/libvdpau-1.0"
 
 RDEPEND="${COMMON_DEPEND}
-	!!x11-misc/nvidia-legacy-settings
-	x11-drivers/nvidia-drivers:${SLOT}"
+	!!x11-misc/nvidia-settings
+	~x11-drivers/nvidia-legacy-drivers-${PV}:${SLOT}"
 DEPEND="${RDEPEND}
 	virtual/pkgconfig
 	x11-base/xorg-proto"
 
+S=${WORKDIR}/nvidia-settings-${PV}
+
 src_prepare() {
 	default
-	eapply "${FILESDIR}"/nvidia-settings-linker.patch
+	eapply "${FILESDIR}"/nvidia-legacy-settings-linker.patch
 }
 
-
 src_compile() {
-	einfo "Building libXNVCtrl..."
-	emake -C src/libXNVCtrl \
+	emake -C src/ \
+		AR="$(tc-getAR)" \
+		CC="$(tc-getCC)" \
 		DO_STRIP= \
+		LD="$(tc-getCC)" \
 		LIBDIR="$(get_libdir)" \
 		NVLD="$(tc-getLD)" \
 		NV_VERBOSE=1 \
-		OUTPUTDIR=. \
-		RANLIB="$(tc-getRANLIB)"
+		RANLIB="$(tc-getRANLIB)" \
+		build-xnvctrl
 
-	einfo "Building nvidia-settings..."
 	emake -C src/ \
+		CC="$(tc-getCC)" \
 		DO_STRIP= \
 		GTK3_AVAILABLE=$(usex gtk3 1 0) \
+		LD="$(tc-getCC)" \
 		LIBDIR="$(get_libdir)" \
 		NVLD="$(tc-getLD)" \
 		NVML_ENABLED=0 \
 		NV_USE_BUNDLED_LIBJANSSON=0 \
-		NV_VERBOSE=1 \
-		OUTPUTDIR=.
+		NV_VERBOSE=1
 }
 
 src_install() {
 	emake -C src/ \
 		DESTDIR="${D}" \
-		DO_STRIP= \
 		GTK3_AVAILABLE=$(usex gtk3 1 0) \
 		LIBDIR="${D}/usr/$(get_libdir)" \
 		NV_USE_BUNDLED_LIBJANSSON=0 \
 		NV_VERBOSE=1 \
-		OUTPUTDIR=. \
 		PREFIX=/usr \
+		DO_STRIP= \
 		install
 
 	insinto /usr/$(get_libdir)
@@ -85,7 +87,7 @@ src_install() {
 	insinto /usr/include/NVCtrl
 	doins src/libXNVCtrl/*.h
 
-	doicon doc/${PN}.png
+	doicon doc/nvidia-settings.png
 	domenu ${FILESDIR}/${PN}.desktop
 
 	dodoc doc/*.txt
