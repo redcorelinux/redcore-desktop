@@ -49,8 +49,7 @@ RDEPEND="
 	x11-libs/libnotify
 "
 
-PATCHES=( "${FILESDIR}/${P}-gtk.patch"
-	"${FILESDIR}/df3a041458d3f128f2b23837b52edbbafeec0bd2.diff" )
+PATCHES=( "${FILESDIR}/df3a041458d3f128f2b23837b52edbbafeec0bd2.diff" )
 
 python_install_all() {
 	local DOCS=( AUTHORS README.rst docs/installers.rst )
