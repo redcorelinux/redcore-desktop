@@ -22,8 +22,6 @@ RDEPEND="${DEPEND}"
 
 S="${WORKDIR}/${MY_P}"
 
-PATCHES=( "${FILESDIR}"/Use_NMH_WAIT_EXEC_with_call.patch )
-
 src_configure() {
 	:
 }

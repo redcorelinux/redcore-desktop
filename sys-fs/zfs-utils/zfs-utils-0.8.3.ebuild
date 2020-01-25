@@ -4,7 +4,7 @@
 EAPI=7
 
 DISTUTILS_OPTIONAL=1
-PYTHON_COMPAT=( python{2_7,3_{5,6,7}} )
+PYTHON_COMPAT=( python{2_7,3_{6,7,8}} )
 
 inherit bash-completion-r1 flag-o-matic distutils-r1 toolchain-funcs udev
 
@@ -61,8 +61,7 @@ RESTRICT="test"
 
 S="${WORKDIR}/${MY_P}"
 
-PATCHES=( "${FILESDIR}/bash-completion-sudo.patch"
-	"${FILESDIR}/Use_NMH_WAIT_EXEC_with_call.patch" )
+PATCHES=( "${FILESDIR}/bash-completion-sudo.patch" )
 
 src_prepare() {
 	default
