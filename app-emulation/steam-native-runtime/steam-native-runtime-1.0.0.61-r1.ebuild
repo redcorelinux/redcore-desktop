@@ -10,7 +10,7 @@ SRC_URI=""
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="amd64"
-IUSE="+trayicon pulseaudio"
+IUSE="pulseaudio"
 
 DEPEND=""
 RDEPEND="
@@ -67,7 +67,6 @@ RDEPEND="
 	x11-libs/libXtst[abi_x86_32]
 	x11-libs/pango[abi_x86_32]
 
-	trayicon? ( dev-libs/libappindicator:2[abi_x86_32] )
 	pulseaudio? ( media-sound/pulseaudio[abi_x86_32,caps] )
 	!pulseaudio? ( media-sound/apulse[abi_x86_32] )"
 
