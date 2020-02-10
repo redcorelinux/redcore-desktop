@@ -1,10 +1,10 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
-PYTHON_COMPAT=( python3_{5,6,7} )
-PYTHON_REQ_USE='threads(+),xml(+)'
 
+PYTHON_COMPAT=( python3_{6,7,8} )
+PYTHON_REQ_USE='threads(+),xml(+)'
 inherit python-single-r1 waf-utils multilib-minimal linux-info systemd pam
 
 MY_PV="${PV/_rc/rc}"
@@ -23,8 +23,8 @@ LICENSE="GPL-3"
 
 SLOT="0"
 
-IUSE="acl addc addns ads ceph client cluster cups debug dmapi fam gpg iprint 
-json ldap pam profiling-data python quota selinux syslog system-heimdal 
+IUSE="acl addc addns ads ceph client cluster cups debug dmapi fam gpg iprint
+json ldap pam profiling-data python quota selinux syslog system-heimdal
 +system-mitkrb5 systemd test winbind zeroconf"
 
 MULTILIB_WRAPPED_HEADERS=(
@@ -44,31 +44,32 @@ CDEPEND="
 	dev-lang/perl:=
 	dev-libs/libaio[${MULTILIB_USEDEP}]
 	dev-libs/libbsd[${MULTILIB_USEDEP}]
-	dev-libs/jansson[${MULTILIB_USEDEP}]
 	dev-libs/libgcrypt:0
 	dev-libs/iniparser:0
 	dev-libs/popt[${MULTILIB_USEDEP}]
-	dev-python/subunit[${PYTHON_USEDEP},${MULTILIB_USEDEP}]
 	>=dev-util/cmocka-1.1.1[${MULTILIB_USEDEP}]
 	>=net-libs/gnutls-3.2.0
 	net-libs/libnsl:=[${MULTILIB_USEDEP}]
 	sys-apps/attr[${MULTILIB_USEDEP}]
-	>=sys-libs/ldb-2.0.7[ldap(+)?,python?,${PYTHON_USEDEP},${MULTILIB_USEDEP}]
-	<sys-libs/ldb-2.2.0[ldap(+)?,python?,${PYTHON_USEDEP},${MULTILIB_USEDEP}]
+	>=sys-libs/ldb-2.0.8[ldap(+)?,python?,${PYTHON_SINGLE_USEDEP},${MULTILIB_USEDEP}]
+	<sys-libs/ldb-2.2.0[ldap(+)?,python?,${PYTHON_SINGLE_USEDEP},${MULTILIB_USEDEP}]
 	sys-libs/libcap
 	sys-libs/ncurses:0=[${MULTILIB_USEDEP}]
 	sys-libs/readline:0=
-	>=sys-libs/talloc-2.2.0[python?,${PYTHON_USEDEP},${MULTILIB_USEDEP}]
-	>=sys-libs/tdb-1.4.2[python?,${PYTHON_USEDEP},${MULTILIB_USEDEP}]
-	>=sys-libs/tevent-0.10.0[python?,${PYTHON_USEDEP},${MULTILIB_USEDEP}]
+	>=sys-libs/talloc-2.2.0[python?,${PYTHON_SINGLE_USEDEP},${MULTILIB_USEDEP}]
+	>=sys-libs/tdb-1.4.2[python?,${PYTHON_SINGLE_USEDEP},${MULTILIB_USEDEP}]
+	>=sys-libs/tevent-0.10.0[python?,${PYTHON_SINGLE_USEDEP},${MULTILIB_USEDEP}]
 	sys-libs/zlib[${MULTILIB_USEDEP}]
 	virtual/libiconv
 	pam? ( sys-libs/pam )
 	acl? ( virtual/acl )
-	addns? (
-		net-dns/bind-tools[gssapi]
-		dev-python/dnspython:=[${PYTHON_USEDEP}]
-	)
+	$(python_gen_cond_dep "
+		dev-python/subunit[\${PYTHON_MULTI_USEDEP},${MULTILIB_USEDEP}]
+		addns? (
+			net-dns/bind-tools[gssapi]
+			dev-python/dnspython:=[\${PYTHON_MULTI_USEDEP}]
+		)
+	")
 	ceph? ( sys-cluster/ceph )
 	cluster? (
 		net-libs/rpcsvc-proto
@@ -211,6 +212,8 @@ multilib_src_configure() {
 		$(multilib_native_use_with quota quotas)
 		$(multilib_native_use_with syslog)
 		$(multilib_native_use_with systemd)
+		--systemd-install-services
+		--with-systemddir="$(systemd_get_systemunitdir)"
 		$(multilib_native_use_with winbind)
 		$(multilib_native_usex python '' '--disable-python')
 		$(multilib_native_use_enable zeroconf avahi)
@@ -219,6 +222,8 @@ multilib_src_configure() {
 		$(use_with debug lttng)
 		$(use_with ldap)
 		$(use_with profiling-data)
+		# bug #683148
+		--jobs 1
 	)
 
 	multilib_is_native_abi && myconf+=( --with-shared-modules=${SHAREDMODS} )
@@ -267,26 +272,25 @@ multilib_src_install() {
 		newconfd "${CONFDIR}/samba4.confd" samba
 
 		systemd_dotmpfilesd "${FILESDIR}"/samba.conf
-		systemd_dounit "${FILESDIR}"/nmbd.service
-		systemd_dounit "${FILESDIR}"/smbd.{service,socket}
-		systemd_newunit "${FILESDIR}"/smbd_at.service 'smbd@.service'
-		systemd_dounit "${FILESDIR}"/winbindd.service
-		systemd_dounit "${FILESDIR}"/samba.service
+		use addc || rm "${D}/$(systemd_get_systemunitdir)/samba.service" || die
+
+		# Preserve functionality for old gentoo-specific unit names
+		dosym nmb.service "$(systemd_get_systemunitdir)/nmbd.service"
+		dosym smb.service "$(systemd_get_systemunitdir)/smbd.service"
+		dosym winbind.service "$(systemd_get_systemunitdir)/winbindd.service"
 	fi
 
 	if use pam && use winbind ; then
 		newpamd "${CONFDIR}/system-auth-winbind.pam" system-auth-winbind
 		# bugs #376853 and #590374
 		insinto /etc/security
-		doins examples/pam_winbind/pam_winbind.conf || die
+		doins examples/pam_winbind/pam_winbind.conf
 	fi
 
 	keepdir /var/cache/samba
 	keepdir /var/lib/ctdb
 	keepdir /var/lib/samba/{bind-dns,private}
-	keepdir /var/lock/samba
 	keepdir /var/log/samba
-	keepdir /var/run/{ctdb,samba}
 }
 
 multilib_src_install_all() {
