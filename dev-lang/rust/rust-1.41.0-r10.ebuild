@@ -150,7 +150,7 @@ pkg_setup() {
 src_prepare() {
 	if ! use system-bootstrap; then
 		local rust_stage0_root="${WORKDIR}"/rust-stage0
-		local rust_stage0="rust-${RUST_STAGE0_VERSION}-$(rust_abi)"
+		local rust_stage0="rustc-${RUST_STAGE0_VERSION}-$(rust_abi)"
 
 		"${WORKDIR}/${rust_stage0}"/install.sh --disable-ldconfig \
 			--destdir="${rust_stage0_root}" --prefix=/ || die
