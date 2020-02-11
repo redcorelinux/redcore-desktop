@@ -28,7 +28,7 @@ HOMEPAGE="https://www.rust-lang.org/"
 
 SRC_URI="
 	https://static.rust-lang.org/dist/${SRC} -> rustc-${PV}-src.tar.xz
-	!system-bootstrap? ( $(rust_arch_uri x86_64-unknown-linux-gnu rustc-${RUST_STAGE0_VERSION}) )
+	!system-bootstrap? ( $(rust_arch_uri x86_64-unknown-linux-gnu rust-${RUST_STAGE0_VERSION}) )
 "
 
 ALL_LLVM_TARGETS=( AArch64 AMDGPU ARM BPF Hexagon Lanai Mips MSP430
@@ -150,7 +150,7 @@ pkg_setup() {
 src_prepare() {
 	if ! use system-bootstrap; then
 		local rust_stage0_root="${WORKDIR}"/rust-stage0
-		local rust_stage0="rustc-${RUST_STAGE0_VERSION}-$(rust_abi)"
+		local rust_stage0="rust-${RUST_STAGE0_VERSION}-$(rust_abi)"
 
 		"${WORKDIR}/${rust_stage0}"/install.sh --disable-ldconfig \
 			--destdir="${rust_stage0_root}" --prefix=/ || die
