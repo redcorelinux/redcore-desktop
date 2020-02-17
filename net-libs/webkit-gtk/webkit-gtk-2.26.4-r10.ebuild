@@ -3,7 +3,7 @@
 
 EAPI=6
 CMAKE_MAKEFILE_GENERATOR="ninja"
-PYTHON_COMPAT=( python{2_7,3_6,3_7} )
+PYTHON_COMPAT=( python{3_6,3_7} )
 CMAKE_MIN_VERSION=3.10
 
 inherit check-reqs cmake-utils flag-o-matic gnome2 pax-utils python-any-r1 toolchain-funcs virtualx
@@ -164,8 +164,7 @@ pkg_setup() {
 src_prepare() {
 	eapply "${FILESDIR}/${PN}-2.24.4-eglmesaext-include.patch" # bug 699054 # https://bugs.webkit.org/show_bug.cgi?id=204108
 	eapply "${FILESDIR}"/2.26.2-fix-arm-non-unified-build.patch # bug 704194
-	eapply "${FILESDIR}"/${PV}-fix-gtk-doc.patch # bug 704550 - retest without it once we can depend on >=gtk-doc-1.32
-	eapply "${FILESDIR}"/${PV}-fix-noGL-wayland-build.patch
+	eapply "${FILESDIR}"/2.26.3-fix-gtk-doc.patch # bug 704550 - retest without it once we can depend on >=gtk-doc-1.32
 	cmake-utils_src_prepare
 	gnome2_src_prepare
 }
