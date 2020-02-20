@@ -9,7 +9,7 @@ DESCRIPTION="Realtek RTL8811CU/RTL8821CU USB Wi-Fi adapter driver for Linux"
 HOMEPAGE="https://github.com/brektrou/rtl8821CU"
 
 EGIT_REPO_URI="https://github.com/brektrou/rtl8821CU.git"
-EGIT_BRANCH="master"
+EGIT_BRANCH="5.8.1"
 
 LICENSE="GPL-2"
 KEYWORDS="amd64"
