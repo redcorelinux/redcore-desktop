@@ -4,7 +4,7 @@
 
 EAPI=6
 
-inherit eutils user
+inherit eutils
 
 DESCRIPTION="Kernel Modules for Virtualbox"
 HOMEPAGE="http://www.virtualbox.org/"
@@ -15,14 +15,12 @@ SLOT="0"
 KEYWORDS="amd64"
 IUSE=""
 
-DEPEND="~sys-kernel/${PN}-dkms-${PV}"
+DEPEND="
+	acct-group/vboxusers
+	~sys-kernel/${PN}-dkms-${PV}"
 RDEPEND="${DEPEND}"
 
 S=${WORKDIR}
-
-pkg_setup() {
-	enewgroup vboxusers
-}
 
 src_compile() {
 	:
