@@ -24,6 +24,7 @@ RDEPEND="${DEPEND}
 
 PATCHES=( 
 	"${FILESDIR}"/kernel-4.16.patch
+	"${FILESDIR}"/kernel-5.5.patch
 	"${FILESDIR}"/"${P}"-conf.patch
 )
 

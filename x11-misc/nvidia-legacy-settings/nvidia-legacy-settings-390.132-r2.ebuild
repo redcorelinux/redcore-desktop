@@ -43,7 +43,8 @@ S=${WORKDIR}/nvidia-settings-${PV}
 
 src_prepare() {
 	default
-	eapply "${FILESDIR}"/nvidia-legacy-settings-linker.patch
+	eapply "${FILESDIR}"/"${PN}"-linker.patch
+	eapply "${FILESDIR}"/"${PN}"-fno-common.patch
 }
 
 src_compile() {
