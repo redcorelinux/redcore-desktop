@@ -35,7 +35,6 @@ PATCHES=(
 	"${FILESDIR}"/"${KV_MAJOR}"-nouveau-pascal-backlight.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-radeon_dp_aux_transfer_native-no-ratelimited_debug.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-linux-hardened.patch
-	"${FILESDIR}"/"${KV_MAJOR}"-linux-hardened-disable-stealth-networking.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-uksm-linux-hardened.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-0001-MultiQueue-Skiplist-Scheduler-version-v0.180-linux-hardened.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-0002-Fix-Werror-build-failure-in-tools.patch
