@@ -538,6 +538,308 @@ index df0fc997dc3e..bd8eed8de6c1 100644
  	help
  	  Say Y here if you want to support the /dev/port device. The /dev/port
  	  device is similar to /dev/mem, but for I/O ports.
+diff --git a/drivers/char/random.c b/drivers/char/random.c
+index 01b8868b9bed..13b8635519fe 100644
+--- a/drivers/char/random.c
++++ b/drivers/char/random.c
+@@ -350,11 +350,20 @@
+ /*
+  * Configuration information
+  */
++#ifdef CONFIG_HARDENED_RANDOM
++#define INPUT_POOL_SHIFT	18
++#define OUTPUT_POOL_SHIFT	16
++#else
+ #define INPUT_POOL_SHIFT	12
+-#define INPUT_POOL_WORDS	(1 << (INPUT_POOL_SHIFT-5))
+ #define OUTPUT_POOL_SHIFT	10
++#endif
++#define INPUT_POOL_WORDS	(1 << (INPUT_POOL_SHIFT-5))
+ #define OUTPUT_POOL_WORDS	(1 << (OUTPUT_POOL_SHIFT-5))
++#ifdef CONFIG_HARDENED_RANDOM
++#define SEC_XFER_SIZE		32768
++#else
+ #define SEC_XFER_SIZE		512
++#endif
+ #define EXTRACT_SIZE		10
+ 
+ 
+@@ -363,9 +372,6 @@
+ /*
+  * To allow fractional bits to be tracked, the entropy_count field is
+  * denominated in units of 1/8th bits.
+- *
+- * 2*(ENTROPY_SHIFT + poolbitshift) must <= 31, or the multiply in
+- * credit_entropy_bits() needs to be 64 bits wide.
+  */
+ #define ENTROPY_SHIFT 3
+ #define ENTROPY_BITS(r) ((r)->entropy_count >> ENTROPY_SHIFT)
+@@ -428,17 +434,28 @@ static int random_write_wakeup_bits = 28 * OUTPUT_POOL_WORDS;
+  * polynomial which improves the resulting TGFSR polynomial to be
+  * irreducible, which we have made here.
+  */
+-static const struct poolinfo {
++static struct poolinfo {
+ 	int poolbitshift, poolwords, poolbytes, poolfracbits;
+-#define S(x) ilog2(x)+5, (x), (x)*4, (x) << (ENTROPY_SHIFT+5)
+-	int tap1, tap2, tap3, tap4, tap5;
+-} poolinfo_table[] = {
++#define S(x) \
++	.poolbitshift = ilog2(x)+5, \
++	.poolwords = (x), \
++	.poolbytes = (x)*4, \
++	.poolfracbits = (x) << (ENTROPY_SHIFT+5)
++	int tap[5];
++} __randomize_layout poolinfo_table[] = {
++#ifdef CONFIG_HARDENED_RANDOM
++	/* x^8192 + x^104 + x^76 + x^51 +x^25 + x + 1 */
++	{ S(8192),	.tap = { 104,	76,	51,	25,	1 } },
++	/* x^2048 + x^26 + x^19 + x^14 + x^7 + x + 1 */
++	{ S(2048),	.tap = { 26,	19,	14,	7,	1 } }
++#else
+ 	/* was: x^128 + x^103 + x^76 + x^51 +x^25 + x + 1 */
+ 	/* x^128 + x^104 + x^76 + x^51 +x^25 + x + 1 */
+-	{ S(128),	104,	76,	51,	25,	1 },
++	{ S(128),	.tap = { 104,	76,	51,	25,	1 } },
+ 	/* was: x^32 + x^26 + x^20 + x^14 + x^7 + x + 1 */
+ 	/* x^32 + x^26 + x^19 + x^14 + x^7 + x + 1 */
+-	{ S(32),	26,	19,	14,	7,	1 },
++	{ S(32),	.tap = { 26,	19,	14,	7,	1 } },
++#endif
+ #if 0
+ 	/* x^2048 + x^1638 + x^1231 + x^819 + x^411 + x + 1  -- 115 */
+ 	{ S(2048),	1638,	1231,	819,	411,	1 },
+@@ -482,7 +499,7 @@ struct crng_state {
+ 	__u32		state[16];
+ 	unsigned long	init_time;
+ 	spinlock_t	lock;
+-};
++} __randomize_layout;
+ 
+ static struct crng_state primary_crng = {
+ 	.lock = __SPIN_LOCK_UNLOCKED(primary_crng.lock),
+@@ -542,7 +559,7 @@ struct entropy_store {
+ 	unsigned int initialized:1;
+ 	unsigned int last_data_init:1;
+ 	__u8 last_data[EXTRACT_SIZE];
+-};
++} __randomize_layout;
+ 
+ static ssize_t extract_entropy(struct entropy_store *r, void *buf,
+ 			       size_t nbytes, int min, int rsvd);
+@@ -553,6 +570,8 @@ static void crng_reseed(struct crng_state *crng, struct entropy_store *r);
+ static void push_to_pool(struct work_struct *work);
+ static __u32 input_pool_data[INPUT_POOL_WORDS] __latent_entropy;
+ static __u32 blocking_pool_data[OUTPUT_POOL_WORDS] __latent_entropy;
++/* this actually doesn't need latent entropy */
++static __u32 secondary_xfer_buffer[OUTPUT_POOL_WORDS];
+ 
+ static struct entropy_store input_pool = {
+ 	.poolinfo = &poolinfo_table[0],
+@@ -571,9 +590,78 @@ static struct entropy_store blocking_pool = {
+ 					push_to_pool),
+ };
+ 
++#ifdef CONFIG_HARDENED_RANDOM
++static __u32 const twist_table[64][4] = {
++	{ 0x6a09e668, 0xbb67ae86, 0x3c6ef373, 0xa54ff53a },
++	{ 0x510e5280, 0x9b05688c, 0x1f83d9ac, 0x5be0cd19 },
++	{ 0xcbbb9d5e, 0x629a292a, 0x9159015a, 0x152fecd9 },
++	{ 0x67332668, 0x8eb44a87, 0xdb0c2e0d, 0x47b5481e },
++	{ 0xae5f9157, 0xcf6c85d4, 0x2f73477d, 0x6d1826cb },
++	{ 0x8b43d457, 0xe360b597, 0x1c456003, 0x6f196331 },
++	{ 0xd94ebeb2, 0x0cc4a612, 0x261dc1f3, 0x5815a7be },
++	{ 0x70b7ed68, 0xa1513c69, 0x44f93636, 0x720dcdfe },
++	{ 0xb467369e, 0xca320b76, 0x34e0d42e, 0x49c7d9be },
++	{ 0x87abb9f2, 0xc463a2fc, 0xec3fc3f4, 0x27277f6d },
++	{ 0x610bebf3, 0x7420b49f, 0xd1fd8a34, 0xe4773594 },
++	{ 0x092197f6, 0x1b530c96, 0x869d6343, 0xeee52e50 },
++	{ 0x1107668a, 0x21fba37c, 0x43ab9fb6, 0x75a9f91d },
++	{ 0x8630501a, 0xd7cd8174, 0x007fe010, 0x0379f514 },
++	{ 0x066b651b, 0x0764ab84, 0x0a4b06be, 0x0c3578c1 },
++	{ 0x0d2962a5, 0x11e039f4, 0x1857b7bf, 0x1a29bf2e },
++	{ 0x1b11a32f, 0x1cdf34e8, 0x23183042, 0x25b89093 },
++	{ 0x2a0c06a1, 0x2ae79843, 0x2c9cda69, 0x2f281f24 },
++	{ 0x32841259, 0x3502e64e, 0x377c9c21, 0x39204cda },
++	{ 0x3b91bf66, 0x3ecc38ca, 0x40665609, 0x43947938 },
++	{ 0x47830769, 0x484ae4b8, 0x4c2b2b75, 0x4cf03d21 },
++	{ 0x4f3cbb11, 0x50c2d3b5, 0x5308af16, 0x560a7a9a },
++	{ 0x5788d981, 0x584769b4, 0x59c34f06, 0x5e2d564c },
++	{ 0x6116d760, 0x62894c10, 0x6569b58c, 0x66d7b394 },
++	{ 0x68f9f8dc, 0x6d34f03d, 0x6de8372f, 0x742687a4 },
++	{ 0x76356021, 0x799d1235, 0x7ba455f4, 0x7da8d73b },
++	{ 0x7e546743, 0x80554bdc, 0x83a63a3c, 0x85a01e39 },
++	{ 0x879774ac, 0x883eac9f, 0x8a32aae0, 0x8c243210 },
++	{ 0x8d6e8781, 0x8e134b6f, 0x91ea5892, 0x95166fe4 },
++	{ 0x95b817e6, 0x96faa747, 0x98dca135, 0x9abc6593 },
++	{ 0x9b5bd55a, 0x9f136df7, 0xa04ebd79, 0xa225f6ed },
++	{ 0xa4970e49, 0xa79f5a6b, 0xaa0869af, 0xad06dcbd },
++	{ 0xaf68312e, 0xb12efe0b, 0xb2f3ef5b, 0xb420e03a },
++	{ 0xb6785656, 0xb837d738, 0xb9613115, 0xbbb18efb },
++	{ 0xbcd89621, 0xc0db3814, 0xc3b2f2a3, 0xc71638d9 },
++	{ 0xc7a6240f, 0xca73166e, 0xcb01f3ba, 0xcc1f293d },
++	{ 0xccad81c8, 0xcf72acaf, 0xd34c7258, 0xd4649b7a },
++	{ 0xd4f07147, 0xd607a013, 0xd9d3b47b, 0xdae803b5 },
++	{ 0xdb71ef1a, 0xdc854e24, 0xe1dcf0ea, 0xe2eca719 },
++	{ 0xe50a4ad8, 0xe7ac0990, 0xe9c46d3a, 0xeacfc33c },
++	{ 0xec5fb417, 0xedee611c, 0xf18bc533, 0xf292ef77 },
++	{ 0xf41cab36, 0xf5a531ec, 0xf7aeb45d, 0xf93474e9 },
++	{ 0xfc3c7559, 0xfd3e1962, 0xfebf9bc1, 0xff3fdbf2 },
++	{ 0x01bf3cab, 0x023ebd6b, 0x03bc8288, 0x06365a0f },
++	{ 0x06b4c1d2, 0x092afcc1, 0x09a8ad2c, 0x0b21093c },
++	{ 0x0f83d25e, 0x107c1074, 0x10f803d0, 0x11ef938d },
++	{ 0x136212e8, 0x14d390a4, 0x16beab25, 0x182dd7d5 },
++	{ 0x199c09bf, 0x1ed27f46, 0x1f4b2d3e, 0x21a502bc },
++	{ 0x23849e06, 0x25d9d3da, 0x273ef0ca, 0x28a326f6 },
++	{ 0x2a7cb5e4, 0x2d4019ba, 0x2e2b1e73, 0x2f8aec73 },
++	{ 0x30e9ddcc, 0x315ea828, 0x32bc75cf, 0x357587f0 },
++	{ 0x37b7de93, 0x3bc31ec6, 0x3c35b24a, 0x3d1a949b },
++	{ 0x3e713d15, 0x3ee347da, 0x4038e0bf, 0x411c2bae },
++	{ 0x418daf9a, 0x4270749e, 0x4516b0b0, 0x45876dcb },
++	{ 0x46d92246, 0x4e448a56, 0x4f9141c0, 0x50dd3e71 },
++	{ 0x5296c45b, 0x56738aac, 0x58961d02, 0x5b9010c1 },
++	{ 0x5c6913ae, 0x5cd577f2, 0x5dae0649, 0x5ef24aeb },
++	{ 0x60a199af, 0x6178ce9b, 0x61e44c97, 0x6326551c },
++	{ 0x65a86b29, 0x67bd7e12, 0x6827e41c, 0x68fc7925 },
++	{ 0x6966a836, 0x6a3acfa3, 0x6b78828a, 0x6df2017d },
++	{ 0x7068fdbb, 0x720c4495, 0x747f226b, 0x75b7a753 },
++	{ 0x7687a9e0, 0x77bf2d48, 0x795d98d4, 0x7a2c690b },
++	{ 0x7bc93fa8, 0x7c974690, 0x7f6653f3, 0x80333127 },
++	{ 0x81660244, 0x81cc2760, 0x829840e3, 0x83c9edd4 }
++};
++#else
+ static __u32 const twist_table[8] = {
+ 	0x00000000, 0x3b6e20c8, 0x76dc4190, 0x4db26158,
+ 	0xedb88320, 0xd6d6a3e8, 0x9b64c2b0, 0xa00ae278 };
++#endif
+ 
+ /*
+  * This function adds bytes into the entropy "pool".  It does not
+@@ -588,17 +676,14 @@ static __u32 const twist_table[8] = {
+ static void _mix_pool_bytes(struct entropy_store *r, const void *in,
+ 			    int nbytes)
+ {
+-	unsigned long i, tap1, tap2, tap3, tap4, tap5;
++	unsigned long i, n, t1, t2, tap[5];
+ 	int input_rotate;
+ 	int wordmask = r->poolinfo->poolwords - 1;
+ 	const char *bytes = in;
+ 	__u32 w;
+ 
+-	tap1 = r->poolinfo->tap1;
+-	tap2 = r->poolinfo->tap2;
+-	tap3 = r->poolinfo->tap3;
+-	tap4 = r->poolinfo->tap4;
+-	tap5 = r->poolinfo->tap5;
++	for (n = 0; n < 5; n++)
++		tap[n] = r->poolinfo->tap[n];
+ 
+ 	input_rotate = r->input_rotate;
+ 	i = r->add_ptr;
+@@ -610,14 +695,17 @@ static void _mix_pool_bytes(struct entropy_store *r, const void *in,
+ 
+ 		/* XOR in the various taps */
+ 		w ^= r->pool[i];
+-		w ^= r->pool[(i + tap1) & wordmask];
+-		w ^= r->pool[(i + tap2) & wordmask];
+-		w ^= r->pool[(i + tap3) & wordmask];
+-		w ^= r->pool[(i + tap4) & wordmask];
+-		w ^= r->pool[(i + tap5) & wordmask];
++		for (n = 0; n < 5; n++)
++			w ^= r->pool[(i + tap[n]) & wordmask];
+ 
+ 		/* Mix the result back in with a twist */
++#ifdef CONFIG_HARDENED_RANDOM
++		t1 = rol32(w, 14) & 0x1FFF;	// 0-63, 1111111111111
++		t2 = rol32(w, t1) & 0x3;	// 0-3, 11
++		r->pool[i] = (w >> 3) ^ twist_table[t1][t2];
++#else
+ 		r->pool[i] = (w >> 3) ^ twist_table[w & 7];
++#endif
+ 
+ 		/*
+ 		 * Normally, we add 7 bits of rotation to the pool.
+@@ -655,7 +743,7 @@ struct fast_pool {
+ 	unsigned long	last;
+ 	unsigned short	reg_idx;
+ 	unsigned char	count;
+-};
++} __randomize_layout;
+ 
+ /*
+  * This is a fast mixing routine used by the interrupt randomness
+@@ -750,7 +838,7 @@ static void credit_entropy_bits(struct entropy_store *r, int nbits)
+ 		/* The +2 corresponds to the /4 in the denominator */
+ 
+ 		do {
+-			unsigned int anfrac = min(pnfrac, pool_size/2);
++			__u64 anfrac = min(pnfrac, pool_size/2);
+ 			unsigned int add =
+ 				((pool_size - entropy_count)*anfrac*3) >> s;
+ 
+@@ -1134,7 +1222,7 @@ static ssize_t extract_crng_user(void __user *buf, size_t nbytes)
+ 
+ 		extract_crng(tmp);
+ 		i = min_t(int, nbytes, CHACHA_BLOCK_SIZE);
+-		if (copy_to_user(buf, tmp, i)) {
++		if (i > sizeof(tmp) || copy_to_user(buf, tmp, i)) {
+ 			ret = -EFAULT;
+ 			break;
+ 		}
+@@ -1162,9 +1250,9 @@ static ssize_t extract_crng_user(void __user *buf, size_t nbytes)
+ struct timer_rand_state {
+ 	cycles_t last_time;
+ 	long last_delta, last_delta2;
+-};
++} __randomize_layout;
+ 
+-#define INIT_TIMER_RAND_STATE { INITIAL_JIFFIES, };
++#define INIT_TIMER_RAND_STATE { .last_time = INITIAL_JIFFIES };
+ 
+ /*
+  * Add device- or boot-specific data to the input pool to help
+@@ -1407,20 +1495,18 @@ static void xfer_secondary_pool(struct entropy_store *r, size_t nbytes)
+ 
+ static void _xfer_secondary_pool(struct entropy_store *r, size_t nbytes)
+ {
+-	__u32	tmp[OUTPUT_POOL_WORDS];
+-
+ 	int bytes = nbytes;
+ 
+ 	/* pull at least as much as a wakeup */
+ 	bytes = max_t(int, bytes, random_read_wakeup_bits / 8);
+ 	/* but never more than the buffer size */
+-	bytes = min_t(int, bytes, sizeof(tmp));
++	bytes = min_t(int, bytes, sizeof(secondary_xfer_buffer));
+ 
+ 	trace_xfer_secondary_pool(r->name, bytes * 8, nbytes * 8,
+ 				  ENTROPY_BITS(r), ENTROPY_BITS(r->pull));
+-	bytes = extract_entropy(r->pull, tmp, bytes,
++	bytes = extract_entropy(r->pull, secondary_xfer_buffer, bytes,
+ 				random_read_wakeup_bits / 8, 0);
+-	mix_pool_bytes(r, tmp, bytes);
++	mix_pool_bytes(r, secondary_xfer_buffer, bytes);
+ 	credit_entropy_bits(r, bytes*8);
+ }
+ 
+@@ -1650,7 +1736,7 @@ static ssize_t extract_entropy_user(struct entropy_store *r, void __user *buf,
+ 
+ 		extract_buf(r, tmp);
+ 		i = min_t(int, nbytes, EXTRACT_SIZE);
+-		if (copy_to_user(buf, tmp, i)) {
++		if (i > sizeof(tmp) || copy_to_user(buf, tmp, i)) {
+ 			ret = -EFAULT;
+ 			break;
+ 		}
+@@ -2353,7 +2439,7 @@ struct batched_entropy {
+ 	};
+ 	unsigned int position;
+ 	spinlock_t batch_lock;
+-};
++} __randomize_layout;
+ 
+ /*
+  * Get a random word for internal kernel use only. The quality of the random
 diff --git a/drivers/tty/Kconfig b/drivers/tty/Kconfig
 index c7623f99ac0f..859c2782c8e2 100644
 --- a/drivers/tty/Kconfig
@@ -616,6 +918,33 @@ index 4ac74b354801..7c2cb5b3a449 100644
  	if (hub_is_superspeed(hub->hdev))
  		unit_load = 150;
  	else
+diff --git a/fs/debugfs/inode.c b/fs/debugfs/inode.c
+index 7b975dbb2bb4..43fdb33a1fc0 100644
+--- a/fs/debugfs/inode.c
++++ b/fs/debugfs/inode.c
+@@ -36,6 +36,10 @@ static struct vfsmount *debugfs_mount;
+ static int debugfs_mount_count;
+ static bool debugfs_registered;
+ 
++#ifdef CONFIG_HARDENED_SYSFS_RESTRICT
++extern int sysfs_restricted;
++#endif
++
+ /*
+  * Don't allow access attributes to be changed whilst the kernel is locked down
+  * so that we can use the file mode as part of a heuristic to determine whether
+@@ -559,6 +563,11 @@ struct dentry *debugfs_create_dir(const char *name, struct dentry *parent)
+ 		return failed_creating(dentry);
+ 	}
+ 
++#ifdef CONFIG_HARDENED_SYSFS_RESTRICT
++	if (sysfs_restricted)
++		inode->i_mode = S_IFDIR | S_IRWXU;
++	else
++#endif
+ 	inode->i_mode = S_IFDIR | S_IRWXU | S_IRUGO | S_IXUGO;
+ 	inode->i_op = &debugfs_dir_inode_operations;
+ 	inode->i_fop = &simple_dir_operations;
 diff --git a/fs/exec.c b/fs/exec.c
 index c27231234764..4038334db213 100644
 --- a/fs/exec.c
@@ -638,10 +967,21 @@ index c27231234764..4038334db213 100644
  err:
  	up_write(&mm->mmap_sem);
 diff --git a/fs/namei.c b/fs/namei.c
-index bd1c0ca4151c..8f67ca391509 100644
+index e81521c87f98..8c933ad857e0 100644
 --- a/fs/namei.c
 +++ b/fs/namei.c
-@@ -877,10 +877,10 @@ static inline void put_link(struct nameidata *nd)
+@@ -124,6 +124,10 @@
+ 
+ #define EMBEDDED_NAME_MAX	(PATH_MAX - offsetof(struct filename, iname))
+ 
++#ifdef CONFIG_HARDENED_FIFO
++extern int fifo_restrictions;
++#endif
++
+ struct filename *
+ getname_flags(const char __user *filename, int flags, int *empty)
+ {
+@@ -877,10 +881,10 @@ static inline void put_link(struct nameidata *nd)
  		path_put(&last->link);
  }
  
@@ -656,6 +996,55 @@ index bd1c0ca4151c..8f67ca391509 100644
  
  /**
   * may_follow_link - Check symlink following for unsafe situations
+@@ -3242,6 +3246,32 @@ static int lookup_open(struct nameidata *nd, struct path *path,
+ 	return error;
+ }
+ 
++/*
++ * Handles possibly restricted FIFO operations
++ * if the user doesn't own this directory.
++ */
++static int fifo_restricted(const struct dentry *dentry,
++                const struct vfsmount *mnt,
++				const struct dentry *dir,
++				const int flag,
++				const int acc_mode) {
++#ifdef CONFIG_HARDENED_FIFO
++	const struct cred *cred;
++	struct inode *inode, *dir_inode;
++
++	cred = current_cred();
++	inode = d_backing_inode(dentry);
++	dir_inode = d_backing_inode(dir);
++
++	if (fifo_restrictions && S_ISFIFO(inode->i_mode) &&
++	    !(flag & O_EXCL) && (dir_inode->i_mode & S_ISVTX) &&
++	    !uid_eq(inode->i_uid, dir_inode->i_uid) &&
++	    !uid_eq(cred->fsuid, inode->i_uid))
++		return -EACCES;
++#endif
++	return 0;
++}
++
+ /*
+  * Handle the last step of open()
+  */
+@@ -3360,6 +3390,15 @@ static int do_last(struct nameidata *nd,
+ 		return -ENOENT;
+ 	}
+ 
++	/*
++	 * Only check if O_CREAT is specified, all other checks need to go
++	 *  into may_open().
++	 */
++	if (fifo_restricted(path.dentry, path.mnt, dir, open_flag, acc_mode)) {
++		path_to_nameidata(&path, nd);
++		return -EACCES;
++	}
++
+ 	/*
+ 	 * create/update audit record if it already exists.
+ 	 */
 diff --git a/fs/nfs/Kconfig b/fs/nfs/Kconfig
 index 295a7a21b774..3aed361bc0f9 100644
 --- a/fs/nfs/Kconfig
@@ -715,6 +1104,77 @@ index c38e4c2e1221..6135fbaf7298 100644
  
  	generic_fillattr(inode, stat);
  	return 0;
+diff --git a/fs/sysfs/dir.c b/fs/sysfs/dir.c
+index aa85f2874a9f..9b85cc73f70f 100644
+--- a/fs/sysfs/dir.c
++++ b/fs/sysfs/dir.c
+@@ -18,6 +18,10 @@
+ 
+ DEFINE_SPINLOCK(sysfs_symlink_target_lock);
+ 
++#ifdef CONFIG_HARDENED_SYSFS_RESTRICT
++extern int sysfs_restricted;
++#endif
++
+ void sysfs_warn_dup(struct kernfs_node *parent, const char *name)
+ {
+ 	char *buf;
+@@ -40,12 +44,20 @@ void sysfs_warn_dup(struct kernfs_node *parent, const char *name)
+ int sysfs_create_dir_ns(struct kobject *kobj, const void *ns)
+ {
+ 	struct kernfs_node *parent, *kn;
++	const char* name;
++	umode_t mode;
+ 	kuid_t uid;
+ 	kgid_t gid;
+ 
++#ifdef CONFIG_HARDENED_SYSFS_RESTRICT
++	const char *parent_name;
++#endif
++
+ 	if (WARN_ON(!kobj))
+ 		return -EINVAL;
+ 
++	name = kobject_name(kobj);
++
+ 	if (kobj->parent)
+ 		parent = kobj->parent->sd;
+ 	else
+@@ -56,12 +68,30 @@ int sysfs_create_dir_ns(struct kobject *kobj, const void *ns)
+ 
+ 	kobject_get_ownership(kobj, &uid, &gid);
+ 
+-	kn = kernfs_create_dir_ns(parent, kobject_name(kobj),
+-				  S_IRWXU | S_IRUGO | S_IXUGO, uid, gid,
+-				  kobj, ns);
++#ifdef CONFIG_HARDENED_SYSFS_RESTRICT
++	if (sysfs_restricted) {
++		parent_name = parent->name;
++		mode = S_IRWXU;
++
++		if ((!strcmp(parent_name, "") && (!strcmp(name, "devices") ||
++			!strcmp(name, "fs"))) ||
++		    (!strcmp(parent_name, "devices") && !strcmp(name, "system")) ||
++		    (!strcmp(parent_name, "fs") && (!strcmp(name, "selinux") ||
++		    !strcmp(name, "fuse") || !strcmp(name, "ecryptfs"))) ||
++		    (!strcmp(parent_name, "system") && !strcmp(name, "cpu")))
++			mode |= S_IRUGO | S_IXUGO;
++	}
++	else
++		mode = S_IRWXU | S_IRUGO | S_IXUGO;
++#else
++	mode = S_IRWXU | S_IRUGO | S_IXUGO;
++#endif
++
++	kn = kernfs_create_dir_ns(parent, name, mode, uid, gid, kobj, ns);
++
+ 	if (IS_ERR(kn)) {
+ 		if (PTR_ERR(kn) == -EEXIST)
+-			sysfs_warn_dup(parent, kobject_name(kobj));
++			sysfs_warn_dup(parent, name);
+ 		return PTR_ERR(kn);
+ 	}
+ 
 diff --git a/fs/userfaultfd.c b/fs/userfaultfd.c
 index d99d166fd892..7a4f2854feb8 100644
 --- a/fs/userfaultfd.c
@@ -1145,6 +1605,22 @@ index 4e7809408073..0b58a5176a25 100644
  #ifndef CONFIG_MMU
  extern void *__vmalloc_node_flags(unsigned long size, int node, gfp_t flags);
  static inline void *__vmalloc_node_flags_caller(unsigned long size, int node,
+diff --git a/include/uapi/linux/ip.h b/include/uapi/linux/ip.h
+index e42d13b55cf3..3228bcfe7599 100644
+--- a/include/uapi/linux/ip.h
++++ b/include/uapi/linux/ip.h
+@@ -66,7 +66,11 @@
+ 
+ #define IPVERSION	4
+ #define MAXTTL		255
++#ifdef CONFIG_HARDENED_STEALTH_NETWORKING
++#define IPDEFTTL	128
++#else
+ #define IPDEFTTL	64
++#endif
+ 
+ #define IPOPT_OPTVAL 0
+ #define IPOPT_OLEN   1
 diff --git a/init/Kconfig b/init/Kconfig
 index 0328b53d09ad..fde78a967939 100644
 --- a/init/Kconfig
@@ -1406,6 +1882,24 @@ index 755d8160e001..ed909f8050b2 100644
  	err = check_unshare_flags(unshare_flags);
  	if (err)
  		goto bad_unshare_out;
+diff --git a/kernel/kmod.c b/kernel/kmod.c
+index bc6addd9152b..008be43f6cdd 100644
+--- a/kernel/kmod.c
++++ b/kernel/kmod.c
+@@ -149,6 +149,13 @@ int __request_module(bool wait, const char *fmt, ...)
+ 	if (ret)
+ 		return ret;
+ 
++#ifdef CONFIG_HARDENED_MODULE_LOAD
++	if (uid_eq(current_uid(), GLOBAL_ROOT_UID)) {
++		printk(KERN_ALERT "denied attempt to auto-load module %.64s\n", module_name);
++		return -EPERM;
++	}
++#endif
++
+ 	if (atomic_dec_if_positive(&kmod_concurrent_max) < 0) {
+ 		pr_warn_ratelimited("request_module: kmod_concurrent_max (%u) close to 0 (max_modprobes: %u), for module %s, throttling...",
+ 				    atomic_read(&kmod_concurrent_max),
 diff --git a/kernel/power/snapshot.c b/kernel/power/snapshot.c
 index d65f2d5ab694..145e3c62c380 100644
 --- a/kernel/power/snapshot.c
@@ -1520,7 +2014,7 @@ index 0427a86743a4..5e6a9b4ccb41 100644
  
  void tasklet_init(struct tasklet_struct *t,
 diff --git a/kernel/sysctl.c b/kernel/sysctl.c
-index 70665934d53e..8ea67d08b926 100644
+index 70665934d53e..9b2fc21fb844 100644
 --- a/kernel/sysctl.c
 +++ b/kernel/sysctl.c
 @@ -68,6 +68,7 @@
@@ -1531,13 +2025,19 @@ index 70665934d53e..8ea67d08b926 100644
  
  #include "../lib/kstrtox.h"
  
-@@ -104,12 +105,19 @@
+@@ -104,12 +105,25 @@
  #if defined(CONFIG_SYSCTL)
  
  /* External variables not in a header file. */
 +#if IS_ENABLED(CONFIG_USB)
 +int deny_new_usb __read_mostly = 0;
 +EXPORT_SYMBOL(deny_new_usb);
++#endif
++#ifdef CONFIG_HARDENED_SYSFS_RESTRICT
++int __read_mostly sysfs_restricted = 1;
++#endif
++#ifdef CONFIG_HARDENED_FIFO
++int __read_mostly fifo_restrictions = 1;
 +#endif
  extern int suid_dumpable;
  #ifdef CONFIG_COREDUMP
@@ -1551,7 +2051,7 @@ index 70665934d53e..8ea67d08b926 100644
  extern int pid_max;
  extern int pid_max_min, pid_max_max;
  extern int percpu_pagelist_fraction;
-@@ -121,32 +129,32 @@ extern int sysctl_nr_trim_pages;
+@@ -121,32 +135,32 @@ extern int sysctl_nr_trim_pages;
  
  /* Constants used for minimum and  maximum */
  #ifdef CONFIG_LOCKUP_DETECTOR
@@ -1599,7 +2099,7 @@ index 70665934d53e..8ea67d08b926 100644
  static const int cap_last_cap = CAP_LAST_CAP;
  
  /*
-@@ -154,9 +162,12 @@ static const int cap_last_cap = CAP_LAST_CAP;
+@@ -154,9 +168,12 @@ static const int cap_last_cap = CAP_LAST_CAP;
   * and hung_task_check_interval_secs
   */
  #ifdef CONFIG_DETECT_HUNG_TASK
@@ -1613,7 +2113,7 @@ index 70665934d53e..8ea67d08b926 100644
  #ifdef CONFIG_INOTIFY_USER
  #include <linux/inotify.h>
  #endif
-@@ -301,19 +312,19 @@ static struct ctl_table sysctl_base_table[] = {
+@@ -301,19 +318,19 @@ static struct ctl_table sysctl_base_table[] = {
  };
  
  #ifdef CONFIG_SCHED_DEBUG
@@ -1641,7 +2141,7 @@ index 70665934d53e..8ea67d08b926 100644
  #endif
  
  static struct ctl_table kern_table[] = {
-@@ -546,6 +557,15 @@ static struct ctl_table kern_table[] = {
+@@ -546,6 +563,15 @@ static struct ctl_table kern_table[] = {
  		.proc_handler	= proc_dointvec,
  	},
  #endif
@@ -1657,7 +2157,7 @@ index 70665934d53e..8ea67d08b926 100644
  #ifdef CONFIG_PROC_SYSCTL
  	{
  		.procname	= "tainted",
-@@ -901,6 +921,37 @@ static struct ctl_table kern_table[] = {
+@@ -901,6 +927,59 @@ static struct ctl_table kern_table[] = {
  		.extra1		= SYSCTL_ZERO,
  		.extra2		= &two,
  	},
@@ -1686,6 +2186,28 @@ index 70665934d53e..8ea67d08b926 100644
 +	{
 +		.procname	= "deny_new_usb",
 +		.data		= &deny_new_usb,
++		.maxlen		= sizeof(int),
++		.mode		= 0644,
++		.proc_handler	= proc_dointvec_minmax_sysadmin,
++		.extra1		= SYSCTL_ZERO,
++		.extra2		= SYSCTL_ONE,
++	},
++#endif
++#ifdef CONFIG_HARDENED_SYSFS_RESTRICT
++	{
++		.procname	= "sysfs_restricted",
++		.data		= &sysfs_restricted,
++		.maxlen		= sizeof(int),
++		.mode		= 0644,
++		.proc_handler	= proc_dointvec_minmax_sysadmin,
++		.extra1		= SYSCTL_ZERO,
++		.extra2		= SYSCTL_ONE,
++	},
++#endif
++#ifdef CONFIG_HARDENED_FIFO
++	{
++		.procname	= "fifo_restrictions",
++		.data		= &fifo_restrictions,
 +		.maxlen		= sizeof(int),
 +		.mode		= 0644,
 +		.proc_handler	= proc_dointvec_minmax_sysadmin,
@@ -2082,7 +2604,7 @@ index ade6c257d4b4..f8f9ebd51296 100644
  static int __init setup_slab_nomerge(char *str)
  {
 diff --git a/mm/slub.c b/mm/slub.c
-index 20d72cb20515..6690bce322a4 100644
+index 20d72cb20515..3820def7e275 100644
 --- a/mm/slub.c
 +++ b/mm/slub.c
 @@ -125,6 +125,12 @@ static inline int kmem_cache_debug(struct kmem_cache *s)
@@ -2205,25 +2727,7 @@ index 20d72cb20515..6690bce322a4 100644
  		/* If object's reuse doesn't have to be delayed */
  		if (!slab_free_hook(s, object)) {
  			/* Move object to the new freelist */
-@@ -1460,6 +1510,17 @@ static inline bool slab_free_freelist_hook(struct kmem_cache *s,
- 			*head = object;
- 			if (!*tail)
- 				*tail = object;
-+		} else if (slab_want_init_on_free(s) && s->ctor) {
-+			/* Objects that are put into quarantine by KASAN will
-+			 * still undergo free_consistency_checks() and thus
-+			 * need to show a valid freepointer to check_object().
-+			 *
-+			 * Note that doing this for all caches (not just ctor
-+			 * ones, which have s->offset != NULL)) causes a GPF,
-+			 * due to KASAN poisoning and the way set_freepointer()
-+			 * eventually dereferences the freepointer.
-+			 */
-+			set_freepointer(s, object, NULL);
- 		}
- 	} while (object != old_tail);
- 
-@@ -1473,8 +1534,9 @@ static void *setup_object(struct kmem_cache *s, struct page *page,
+@@ -1473,8 +1523,9 @@ static void *setup_object(struct kmem_cache *s, struct page *page,
  				void *object)
  {
  	setup_object_debug(s, page, object);
@@ -2234,7 +2738,7 @@ index 20d72cb20515..6690bce322a4 100644
  		kasan_unpoison_object_data(s, object);
  		s->ctor(object);
  		kasan_poison_object_data(s, object);
-@@ -2752,8 +2814,28 @@ static __always_inline void *slab_alloc_node(struct kmem_cache *s,
+@@ -2752,8 +2803,28 @@ static __always_inline void *slab_alloc_node(struct kmem_cache *s,
  
  	maybe_wipe_obj_freeptr(s, object);
  
@@ -2264,7 +2768,7 @@ index 20d72cb20515..6690bce322a4 100644
  
  	slab_post_alloc_hook(s, gfpflags, 1, &object);
  
-@@ -3136,7 +3218,7 @@ int kmem_cache_alloc_bulk(struct kmem_cache *s, gfp_t flags, size_t size,
+@@ -3136,7 +3207,7 @@ int kmem_cache_alloc_bulk(struct kmem_cache *s, gfp_t flags, size_t size,
  			  void **p)
  {
  	struct kmem_cache_cpu *c;
@@ -2273,12 +2777,13 @@ index 20d72cb20515..6690bce322a4 100644
  
  	/* memcg and kmem_cache debug support */
  	s = slab_pre_alloc_hook(s, flags);
-@@ -3176,11 +3258,35 @@ int kmem_cache_alloc_bulk(struct kmem_cache *s, gfp_t flags, size_t size,
+@@ -3176,11 +3247,38 @@ int kmem_cache_alloc_bulk(struct kmem_cache *s, gfp_t flags, size_t size,
  	local_irq_enable();
  
  	/* Clear memory outside IRQ disabled fastpath loop */
 -	if (unlikely(slab_want_init_on_alloc(flags, s))) {
 +	if (has_sanitize_verify(s)) {
++		size_t offset = s->offset ? 0 : sizeof(void *);
  		int j;
  
 -		for (j = 0; j < i; j++)
@@ -2287,10 +2792,12 @@ index 20d72cb20515..6690bce322a4 100644
 +			 * in the post-alloc hook), so let's do it temporarily.
 +			 */
 +			kasan_unpoison_object_data(s, p[j]);
-+			BUG_ON(memchr_inv(p[j], 0, s->object_size));
++			BUG_ON(memchr_inv(p[j] + offset, 0, s->object_size - offset));
 +			if (s->ctor)
 +				s->ctor(p[j]);
 +			kasan_poison_object_data(s, p[j]);
++			if (unlikely(flags & __GFP_ZERO) && offset)
++				memset(p[j], 0, sizeof(void *));
 +		}
 +	} else if (unlikely(slab_want_init_on_alloc(flags, s))) {
 +		int j;
@@ -2311,7 +2818,7 @@ index 20d72cb20515..6690bce322a4 100644
  	}
  
  	/* memcg and kmem_cache debug support */
-@@ -3214,9 +3320,9 @@ EXPORT_SYMBOL(kmem_cache_alloc_bulk);
+@@ -3214,9 +3312,9 @@ EXPORT_SYMBOL(kmem_cache_alloc_bulk);
   * and increases the number of allocations possible without having to
   * take the list_lock.
   */
@@ -2324,7 +2831,7 @@ index 20d72cb20515..6690bce322a4 100644
  
  /*
   * Calculate the order of allocation given an slab object size.
-@@ -3384,6 +3490,7 @@ static void early_kmem_cache_node_alloc(int node)
+@@ -3384,6 +3482,7 @@ static void early_kmem_cache_node_alloc(int node)
  	init_object(kmem_cache_node, n, SLUB_RED_ACTIVE);
  	init_tracking(kmem_cache_node, n);
  #endif
@@ -2332,7 +2839,7 @@ index 20d72cb20515..6690bce322a4 100644
  	n = kasan_kmalloc(kmem_cache_node, n, sizeof(struct kmem_cache_node),
  		      GFP_KERNEL);
  	page->freelist = get_freepointer(kmem_cache_node, n);
-@@ -3544,6 +3651,9 @@ static int calculate_sizes(struct kmem_cache *s, int forced_order)
+@@ -3544,6 +3643,9 @@ static int calculate_sizes(struct kmem_cache *s, int forced_order)
  		size += sizeof(void *);
  	}
  
@@ -2342,7 +2849,7 @@ index 20d72cb20515..6690bce322a4 100644
  #ifdef CONFIG_SLUB_DEBUG
  	if (flags & SLAB_STORE_USER)
  		/*
-@@ -3616,6 +3726,10 @@ static int kmem_cache_open(struct kmem_cache *s, slab_flags_t flags)
+@@ -3616,6 +3718,10 @@ static int kmem_cache_open(struct kmem_cache *s, slab_flags_t flags)
  #ifdef CONFIG_SLAB_FREELIST_HARDENED
  	s->random = get_random_long();
  #endif
@@ -2353,7 +2860,7 @@ index 20d72cb20515..6690bce322a4 100644
  
  	if (!calculate_sizes(s, -1))
  		goto error;
-@@ -3891,6 +4005,8 @@ void __check_heap_object(const void *ptr, unsigned long n, struct page *page,
+@@ -3891,6 +3997,8 @@ void __check_heap_object(const void *ptr, unsigned long n, struct page *page,
  		offset -= s->red_left_pad;
  	}
  
@@ -2362,7 +2869,7 @@ index 20d72cb20515..6690bce322a4 100644
  	/* Allow address range falling entirely within usercopy region. */
  	if (offset >= s->useroffset &&
  	    offset - s->useroffset <= s->usersize &&
-@@ -3924,7 +4040,11 @@ size_t __ksize(const void *object)
+@@ -3924,7 +4032,11 @@ size_t __ksize(const void *object)
  	page = virt_to_head_page(object);
  
  	if (unlikely(!PageSlab(page))) {
@@ -2374,7 +2881,7 @@ index 20d72cb20515..6690bce322a4 100644
  		return page_size(page);
  	}
  
-@@ -4769,7 +4889,7 @@ enum slab_stat_type {
+@@ -4769,7 +4881,7 @@ enum slab_stat_type {
  #define SO_TOTAL	(1 << SL_TOTAL)
  
  #ifdef CONFIG_MEMCG
@@ -2439,6 +2946,39 @@ index 82325d3d1371..240e3ae8e298 100644
  {
  	struct softnet_data *sd = this_cpu_ptr(&softnet_data);
  	unsigned long time_limit = jiffies +
+diff --git a/net/core/sysctl_net_core.c b/net/core/sysctl_net_core.c
+index 9f9e00ba3ad7..962c6ca661e4 100644
+--- a/net/core/sysctl_net_core.c
++++ b/net/core/sysctl_net_core.c
+@@ -43,6 +43,10 @@ EXPORT_SYMBOL(sysctl_fb_tunnels_only_for_init_net);
+ int sysctl_devconf_inherit_init_net __read_mostly;
+ EXPORT_SYMBOL(sysctl_devconf_inherit_init_net);
+ 
++#ifdef CONFIG_HARDENED_STEALTH_NETWORKING
++int sysctl_stealth_blackhole __read_mostly = 1;
++#endif
++
+ #ifdef CONFIG_RPS
+ static int rps_sock_flow_sysctl(struct ctl_table *table, int write,
+ 				void __user *buffer, size_t *lenp, loff_t *ppos)
+@@ -512,6 +516,17 @@ static struct ctl_table net_core_table[] = {
+ 		.proc_handler	= set_default_qdisc
+ 	},
+ #endif
++#ifdef CONFIG_HARDENED_STEALTH_NETWORKING
++	{
++		.procname	= "ip_blackhole",
++		.data		= &sysctl_stealth_blackhole,
++		.maxlen		= sizeof(int),
++		.mode		= 0644,
++		.proc_handler   = proc_dointvec_minmax,
++		.extra1		= SYSCTL_ZERO,
++		.extra2		= SYSCTL_ONE,
++	},
++#endif
+ #endif /* CONFIG_NET */
+ 	{
+ 		.procname	= "netdev_budget",
 diff --git a/net/ipv4/Kconfig b/net/ipv4/Kconfig
 index 03381f3e12ba..8ea409f37436 100644
 --- a/net/ipv4/Kconfig
@@ -2451,6 +2991,389 @@ index 03381f3e12ba..8ea409f37436 100644
  	---help---
  	  Normal TCP/IP networking is open to an attack known as "SYN
  	  flooding". This denial-of-service attack prevents legitimate remote
+diff --git a/net/ipv4/icmp.c b/net/ipv4/icmp.c
+index ac95ba78b903..249c6970e67c 100644
+--- a/net/ipv4/icmp.c
++++ b/net/ipv4/icmp.c
+@@ -190,6 +190,10 @@ struct icmp_control {
+ 	short   error;		/* This ICMP is classed as an error message */
+ };
+ 
++#ifdef CONFIG_HARDENED_STEALTH_NETWORKING
++extern int sysctl_stealth_blackhole;
++#endif
++
+ static const struct icmp_control icmp_pointers[NR_ICMP_TYPES+1];
+ 
+ /*
+@@ -929,6 +933,11 @@ static bool icmp_echo(struct sk_buff *skb)
+ {
+ 	struct net *net;
+ 
++#ifdef CONFIG_HARDENED_STEALTH_NETWORKING
++	if (likely(sysctl_stealth_blackhole) && !(skb->dev->flags & IFF_LOOPBACK))
++		return true;
++#endif
++
+ 	net = dev_net(skb_dst(skb)->dev);
+ 	if (!net->ipv4.sysctl_icmp_echo_ignore_all) {
+ 		struct icmp_bxm icmp_param;
+@@ -955,6 +964,12 @@ static bool icmp_echo(struct sk_buff *skb)
+ static bool icmp_timestamp(struct sk_buff *skb)
+ {
+ 	struct icmp_bxm icmp_param;
++
++#ifdef CONFIG_HARDENED_STEALTH_NETWORKING
++	if (likely(sysctl_stealth_blackhole) && !(skb->dev->flags & IFF_LOOPBACK))
++		return true;
++#endif
++
+ 	/*
+ 	 *	Too short.
+ 	 */
+diff --git a/net/ipv4/igmp.c b/net/ipv4/igmp.c
+index 480d0b22db1a..b5f73fb34156 100644
+--- a/net/ipv4/igmp.c
++++ b/net/ipv4/igmp.c
+@@ -132,6 +132,10 @@
+ 	 ((in_dev)->mr_v2_seen && \
+ 	  time_before(jiffies, (in_dev)->mr_v2_seen)))
+ 
++#ifdef CONFIG_HARDENED_STEALTH_NETWORKING
++extern int sysctl_stealth_blackhole;
++#endif
++
+ static int unsolicited_report_interval(struct in_device *in_dev)
+ {
+ 	int interval_ms, interval_jiffies;
+@@ -735,6 +739,11 @@ static int igmp_send_report(struct in_device *in_dev, struct ip_mc_list *pmc,
+ 	__be32	dst;
+ 	int hlen, tlen;
+ 
++#ifdef CONFIG_HARDENED_STEALTH_NETWORKING
++	if (likely(sysctl_stealth_blackhole))
++		return -1;
++#endif
++
+ 	if (type == IGMPV3_HOST_MEMBERSHIP_REPORT)
+ 		return igmpv3_send_report(in_dev, pmc);
+ 
+diff --git a/net/ipv4/tcp_input.c b/net/ipv4/tcp_input.c
+index 6f7155d91313..e320249ecf67 100644
+--- a/net/ipv4/tcp_input.c
++++ b/net/ipv4/tcp_input.c
+@@ -313,11 +313,13 @@ static void tcp_ecn_rcv_synack(struct tcp_sock *tp, const struct tcphdr *th)
+ 		tp->ecn_flags &= ~TCP_ECN_OK;
+ }
+ 
++#ifndef CONFIG_HARDENED_NO_SIMULT_CONNECT
+ static void tcp_ecn_rcv_syn(struct tcp_sock *tp, const struct tcphdr *th)
+ {
+ 	if ((tp->ecn_flags & TCP_ECN_OK) && (!th->ece || !th->cwr))
+ 		tp->ecn_flags &= ~TCP_ECN_OK;
+ }
++#endif
+ 
+ static bool tcp_ecn_rcv_ecn_echo(const struct tcp_sock *tp, const struct tcphdr *th)
+ {
+@@ -6026,6 +6028,7 @@ static int tcp_rcv_synsent_state_process(struct sock *sk, struct sk_buff *skb,
+ 	    tcp_paws_reject(&tp->rx_opt, 0))
+ 		goto discard_and_undo;
+ 
++#ifndef CONFIG_HARDENED_NO_SIMULT_CONNECT
+ 	if (th->syn) {
+ 		/* We see SYN without ACK. It is attempt of
+ 		 * simultaneous connect with crossed SYNs.
+@@ -6077,6 +6080,7 @@ static int tcp_rcv_synsent_state_process(struct sock *sk, struct sk_buff *skb,
+ 		goto discard;
+ #endif
+ 	}
++#endif
+ 	/* "fifth, if neither of the SYN or RST bits is set then
+ 	 * drop the segment and return."
+ 	 */
+diff --git a/net/ipv4/tcp_ipv4.c b/net/ipv4/tcp_ipv4.c
+index eda64871f983..892c7e1a6f95 100644
+--- a/net/ipv4/tcp_ipv4.c
++++ b/net/ipv4/tcp_ipv4.c
+@@ -90,6 +90,10 @@ static int tcp_v4_md5_hash_hdr(char *md5_hash, const struct tcp_md5sig_key *key,
+ struct inet_hashinfo tcp_hashinfo;
+ EXPORT_SYMBOL(tcp_hashinfo);
+ 
++#ifdef CONFIG_HARDENED_STEALTH_NETWORKING
++extern int sysctl_stealth_blackhole;
++#endif
++
+ static u32 tcp_v4_init_seq(const struct sk_buff *skb)
+ {
+ 	return secure_tcp_seq(ip_hdr(skb)->daddr,
+@@ -1590,6 +1594,9 @@ int tcp_v4_do_rcv(struct sock *sk, struct sk_buff *skb)
+ 	return 0;
+ 
+ reset:
++#ifdef CONFIG_HARDENED_STEALTH_NETWORKING
++	if (!likely(sysctl_stealth_blackhole))
++#endif
+ 	tcp_v4_send_reset(rsk, skb);
+ discard:
+ 	kfree_skb(skb);
+@@ -1832,6 +1839,27 @@ int tcp_v4_rcv(struct sk_buff *skb)
+ 	if (!pskb_may_pull(skb, th->doff * 4))
+ 		goto discard_it;
+ 
++#ifdef CONFIG_HARDENED_STEALTH_NETWORKING
++	if (likely(sysctl_stealth_blackhole) &&
++	    (
++			th->res1 || !tcp_flag_word(th) ||
++			tcp_flag_word(th) == TCP_FLAG_PSH ||
++			tcp_flag_word(th) & (TCP_FLAG_CWR | TCP_FLAG_ECE) ||
++			(
++				tcp_flag_word(th) &
++					(TCP_FLAG_SYN | TCP_FLAG_FIN | TCP_FLAG_RST) &&
++				tcp_flag_word(th) & TCP_FLAG_URG
++			) ||
++			(
++				tcp_flag_word(th) &
++					(TCP_FLAG_FIN | TCP_FLAG_RST) &&
++				tcp_flag_word(th) & TCP_FLAG_SYN
++			)
++		)
++	)
++		goto discard_it;
++#endif
++
+ 	/* An explanation is required here, I think.
+ 	 * Packet length and doff are validated by header prediction,
+ 	 * provided case of th->doff==0 is eliminated.
+@@ -1845,12 +1873,22 @@ int tcp_v4_rcv(struct sk_buff *skb)
+ lookup:
+ 	sk = __inet_lookup_skb(&tcp_hashinfo, skb, __tcp_hdrlen(th), th->source,
+ 			       th->dest, sdif, &refcounted);
+-	if (!sk)
++	if (!sk) {
++#ifdef CONFIG_HARDENED_STEALTH_NETWORKING
++		ret = 1;
++#endif
++
+ 		goto no_tcp_socket;
++	}
+ 
+ process:
+-	if (sk->sk_state == TCP_TIME_WAIT)
++	if (sk->sk_state == TCP_TIME_WAIT) {
++#ifdef CONFIG_HARDENED_STEALTH_NETWORKING
++		ret = 2;
++#endif
++
+ 		goto do_time_wait;
++	}
+ 
+ 	if (sk->sk_state == TCP_NEW_SYN_RECV) {
+ 		struct request_sock *req = inet_reqsk(sk);
+@@ -1970,6 +2008,11 @@ int tcp_v4_rcv(struct sk_buff *skb)
+ bad_packet:
+ 		__TCP_INC_STATS(net, TCP_MIB_INERRS);
+ 	} else {
++#ifdef CONFIG_HARDENED_STEALTH_NETWORKING
++		if (!sysctl_stealth_blackhole || (ret == 1 &&
++						  (skb->dev->flags & IFF_LOOPBACK)))
++#endif
++
+ 		tcp_v4_send_reset(NULL, skb);
+ 	}
+ 
+diff --git a/net/ipv4/tcp_minisocks.c b/net/ipv4/tcp_minisocks.c
+index c802bc80c400..9efacbc3b3e6 100644
+--- a/net/ipv4/tcp_minisocks.c
++++ b/net/ipv4/tcp_minisocks.c
+@@ -30,6 +30,10 @@
+ #include <net/xfrm.h>
+ #include <net/busy_poll.h>
+ 
++#ifdef CONFIG_HARDENED_STEALTH_NETWORKING
++extern int sysctl_stealth_blackhole;
++#endif
++
+ static bool tcp_in_window(u32 seq, u32 end_seq, u32 s_win, u32 e_win)
+ {
+ 	if (seq == s_win)
+@@ -790,6 +794,10 @@ struct sock *tcp_check_req(struct sock *sk, struct sk_buff *skb,
+ 		 * avoid becoming vulnerable to outside attack aiming at
+ 		 * resetting legit local connections.
+ 		 */
++#ifdef CONFIG_HARDENED_STEALTH_NETWORKING
++		if (!sysctl_stealth_blackhole || skb->dev->flags & IFF_LOOPBACK)
++#endif
++
+ 		req->rsk_ops->send_reset(sk, skb);
+ 	} else if (fastopen) { /* received a valid RST pkt */
+ 		reqsk_fastopen_remove(sk, req, true);
+diff --git a/net/ipv4/udp.c b/net/ipv4/udp.c
+index 7ae7065758bd..802677524936 100644
+--- a/net/ipv4/udp.c
++++ b/net/ipv4/udp.c
+@@ -125,6 +125,10 @@ EXPORT_SYMBOL(udp_memory_allocated);
+ #define MAX_UDP_PORTS 65536
+ #define PORTS_PER_CHAIN (MAX_UDP_PORTS / UDP_HTABLE_SIZE_MIN)
+ 
++#ifdef CONFIG_HARDENED_STEALTH_NETWORKING
++extern int sysctl_stealth_blackhole;
++#endif
++
+ static int udp_lib_lport_inuse(struct net *net, __u16 num,
+ 			       const struct udp_hslot *hslot,
+ 			       unsigned long *bitmap,
+@@ -2337,6 +2341,9 @@ int __udp4_lib_rcv(struct sk_buff *skb, struct udp_table *udptable,
+ 		goto csum_error;
+ 
+ 	__UDP_INC_STATS(net, UDP_MIB_NOPORTS, proto == IPPROTO_UDPLITE);
++#ifdef CONFIG_HARDENED_STEALTH_NETWORKING
++	if (!likely(sysctl_stealth_blackhole) || (skb->dev->flags & IFF_LOOPBACK))
++#endif
+ 	icmp_send(skb, ICMP_DEST_UNREACH, ICMP_PORT_UNREACH, 0);
+ 
+ 	/*
+diff --git a/net/ipv6/icmp.c b/net/ipv6/icmp.c
+index 62c997201970..c43f64b7c7a5 100644
+--- a/net/ipv6/icmp.c
++++ b/net/ipv6/icmp.c
+@@ -68,6 +68,10 @@
+ 
+ #include <linux/uaccess.h>
+ 
++#ifdef CONFIG_HARDENED_STEALTH_NETWORKING
++extern int sysctl_stealth_blackhole;
++#endif
++
+ /*
+  *	The ICMP socket(s). This is the most convenient way to flow control
+  *	our ICMP output as well as maintain a clean interface throughout
+@@ -867,6 +871,9 @@ static int icmpv6_rcv(struct sk_buff *skb)
+ 
+ 	switch (type) {
+ 	case ICMPV6_ECHO_REQUEST:
++#ifdef CONFIG_HARDENED_STEALTH_NETWORKING
++		if (!sysctl_stealth_blackhole || skb->dev->flags & IFF_LOOPBACK)
++#endif
+ 		if (!net->ipv6.sysctl.icmpv6_echo_ignore_all)
+ 			icmpv6_echo_reply(skb);
+ 		break;
+diff --git a/net/ipv6/tcp_ipv6.c b/net/ipv6/tcp_ipv6.c
+index b42fa41cfceb..cd866ab245c7 100644
+--- a/net/ipv6/tcp_ipv6.c
++++ b/net/ipv6/tcp_ipv6.c
+@@ -68,6 +68,10 @@
+ 
+ #include <trace/events/tcp.h>
+ 
++#ifdef CONFIG_HARDENED_STEALTH_NETWORKING
++extern int sysctl_stealth_blackhole;
++#endif
++
+ static void	tcp_v6_send_reset(const struct sock *sk, struct sk_buff *skb);
+ static void	tcp_v6_reqsk_send_ack(const struct sock *sk, struct sk_buff *skb,
+ 				      struct request_sock *req);
+@@ -1407,6 +1411,10 @@ static int tcp_v6_do_rcv(struct sock *sk, struct sk_buff *skb)
+ 	return 0;
+ 
+ reset:
++#ifdef CONFIG_HARDENED_STEALTH_NETWORKING
++	if (!likely(sysctl_stealth_blackhole))
++#endif
++
+ 	tcp_v6_send_reset(sk, skb);
+ discard:
+ 	if (opt_skb)
+@@ -1505,6 +1513,27 @@ INDIRECT_CALLABLE_SCOPE int tcp_v6_rcv(struct sk_buff *skb)
+ 	if (!pskb_may_pull(skb, th->doff*4))
+ 		goto discard_it;
+ 
++#ifdef CONFIG_HARDENED_STEALTH_NETWORKING
++	if (likely(sysctl_stealth_blackhole) &&
++	    (
++			th->res1 || !tcp_flag_word(th) ||
++			tcp_flag_word(th) == TCP_FLAG_PSH ||
++			tcp_flag_word(th) & (TCP_FLAG_CWR | TCP_FLAG_ECE) ||
++			(
++				tcp_flag_word(th) &
++					(TCP_FLAG_SYN | TCP_FLAG_FIN | TCP_FLAG_RST) &&
++				tcp_flag_word(th) & TCP_FLAG_URG
++			) ||
++			(
++				tcp_flag_word(th) &
++					(TCP_FLAG_FIN | TCP_FLAG_RST) &&
++				tcp_flag_word(th) & TCP_FLAG_SYN
++			)
++		)
++	)
++		goto discard_it;
++#endif
++
+ 	if (skb_checksum_init(skb, IPPROTO_TCP, ip6_compute_pseudo))
+ 		goto csum_error;
+ 
+@@ -1515,12 +1544,22 @@ INDIRECT_CALLABLE_SCOPE int tcp_v6_rcv(struct sk_buff *skb)
+ 	sk = __inet6_lookup_skb(&tcp_hashinfo, skb, __tcp_hdrlen(th),
+ 				th->source, th->dest, inet6_iif(skb), sdif,
+ 				&refcounted);
+-	if (!sk)
++	if (!sk) {
++#ifdef CONFIG_HARDENED_STEALTH_NETWORKING
++		ret = 1;
++#endif
++
+ 		goto no_tcp_socket;
++	}
+ 
+ process:
+-	if (sk->sk_state == TCP_TIME_WAIT)
++	if (sk->sk_state == TCP_TIME_WAIT) {
++#ifdef CONFIG_HARDENED_STEALTH_NETWORKING
++		ret = 2;
++#endif
++
+ 		goto do_time_wait;
++	}
+ 
+ 	if (sk->sk_state == TCP_NEW_SYN_RECV) {
+ 		struct request_sock *req = inet_reqsk(sk);
+@@ -1633,6 +1672,11 @@ INDIRECT_CALLABLE_SCOPE int tcp_v6_rcv(struct sk_buff *skb)
+ bad_packet:
+ 		__TCP_INC_STATS(net, TCP_MIB_INERRS);
+ 	} else {
++#ifdef CONFIG_HARDENED_STEALTH_NETWORKING
++		if (!sysctl_stealth_blackhole || (ret == 1 &&
++						  (skb->dev->flags & IFF_LOOPBACK)))
++#endif
++
+ 		tcp_v6_send_reset(NULL, skb);
+ 	}
+ 
+diff --git a/net/ipv6/udp.c b/net/ipv6/udp.c
+index 9fec580c968e..aaba8b13ba66 100644
+--- a/net/ipv6/udp.c
++++ b/net/ipv6/udp.c
+@@ -54,6 +54,10 @@
+ #include <trace/events/skb.h>
+ #include "udp_impl.h"
+ 
++#ifdef CONFIG_HARDENED_STEALTH_NETWORKING
++extern int sysctl_stealth_blackhole;
++#endif
++
+ static u32 udp6_ehashfn(const struct net *net,
+ 			const struct in6_addr *laddr,
+ 			const u16 lport,
+@@ -923,6 +927,9 @@ int __udp6_lib_rcv(struct sk_buff *skb, struct udp_table *udptable,
+ 		goto csum_error;
+ 
+ 	__UDP6_INC_STATS(net, UDP_MIB_NOPORTS, proto == IPPROTO_UDPLITE);
++#ifdef CONFIG_HARDENED_STEALTH_NETWORKING
++	if (!likely(sysctl_stealth_blackhole) || skb->dev->flags & IFF_LOOPBACK)
++#endif
+ 	icmpv6_send(skb, ICMPV6_DEST_UNREACH, ICMPV6_PORT_UNREACH, 0);
+ 
+ 	kfree_skb(skb);
 diff --git a/scripts/Makefile.modpost b/scripts/Makefile.modpost
 index 952fff485546..59ffccdb1be4 100644
 --- a/scripts/Makefile.modpost
@@ -2586,7 +3509,7 @@ index d2a30a7b3f07..ff57a5fe8029 100644
  	return err;
  }
 diff --git a/security/Kconfig b/security/Kconfig
-index 2a1a2d396228..3b7a71410f88 100644
+index 2a1a2d396228..66eb3db67eb0 100644
 --- a/security/Kconfig
 +++ b/security/Kconfig
 @@ -9,7 +9,7 @@ source "security/keys/Kconfig"
@@ -2679,6 +3602,135 @@ index 2a1a2d396228..3b7a71410f88 100644
  config STATIC_USERMODEHELPER
  	bool "Force all usermode helper calls through a single binary"
  	help
+@@ -293,3 +329,128 @@ source "security/Kconfig.hardening"
+ 
+ endmenu
+ 
++menu "Hardened Enhancements"
++
++config HARDENED_RANDOM
++	bool "Enhance the random number generator"
++	default n
++	help
++		Enabling this option enhances the Linux kernel random number generator.
++		This is done by:
++			- Increasing the pool size from 4096 bits to 262144 bits. ( 512B -> 32KB )
++			- Increasing the diffusion via the linear feedback shift register.
++			- Defines newer 64-bit polynomial fields for the input and output pools.
++
++		Overall, this enhances the total entropy available to the system and further
++		enhances the random number generator.
++
++
++config HARDENED_STEALTH_NETWORKING
++	bool "Enable stealth networking [GRSECURITY]"
++	default n
++	depends on NET
++	help
++		If you say Y here, neither TCP resets nor ICMP
++		destination-unreachable packets will be sent in response to packets
++		sent to ports for which no associated listening process exists.
++		This feature supports both IPV4 and IPV6 and exempts the
++		loopback interface from blackholing.  Enabling this feature
++		makes a host more resilient to DoS attacks and reduces network
++		visibility against scanners.
++
++		The blackhole feature as-implemented is equivalent to the FreeBSD
++		blackhole feature, as it prevents RST responses to all packets, not
++		just SYNs.  Under most application behavior this causes no
++		problems, but applications (like haproxy) may not close certain
++		connections in a way that cleanly terminates them on the remote
++		end, leaving the remote host in LAST_ACK state.  Because of this
++		side-effect and to prevent intentional LAST_ACK DoSes, this
++		feature also adds automatic mitigation against such attacks.
++		The mitigation drastically reduces the amount of time a socket
++		can spend in LAST_ACK state.  If you're using haproxy and not
++		all servers it connects to have this option enabled, consider
++		disabling this feature on the haproxy host.
++
++		If the sysctl option is enabled, a sysctl option with names
++		"ip_blackhole" will be created.
++		This sysctl, "ip_blackhole" takes the standard zero/non-zero
++		on/off toggle to enable or disable this feature.
++
++
++config HARDENED_NO_SIMULT_CONNECT
++	bool "Disable simultaneous TCP connections [GRSECURITY]"
++	default n
++	depends on NET
++	help
++	  If you say Y here, a feature by Willy Tarreau will be enabled that
++	  removes a weakness in Linux's strict implementation of TCP that
++	  allows two clients to connect to each other without either entering
++	  a listening state.  The weakness allows an attacker to easily prevent
++	  a client from connecting to a known server provided the source port
++	  for the connection is guessed correctly.
++
++	  As the weakness could be used to prevent an antivirus or IPS from
++	  fetching updates, or prevent an SSL gateway from fetching a CRL,
++	  it should be eliminated by enabling this option.  Though Linux is
++	  one of few operating systems supporting simultaneous connect, it
++	  has no legitimate use in practice and is rarely supported by firewalls.
++
++
++config HARDENED_SYSFS_RESTRICT
++	bool "Restrict SysFS & DebugFS [GRSECURITY]"
++	default y
++	depends on SYSFS
++	help
++	  If you say Y here, sysfs (the pseudo-filesystem mounted at /sys) and
++	  any filesystem normally mounted under it (e.g. debugfs) will be
++	  mostly accessible only by root.  These filesystems generally provide access
++	  to hardware and debug information that isn't appropriate for unprivileged
++	  users of the system.  Sysfs and debugfs have also become a large source
++	  of new vulnerabilities, ranging from infoleaks to local compromise.
++	  There has been very little oversight with an eye toward security involved
++	  in adding new exporters of information to these filesystems, so their
++	  use is discouraged.
++	  To enable or disable this feature at runtime, use the sysctl
++	  kernel.sysfs_restricted.
++	  For reasons of compatibility, a few directories have been whitelisted
++	  for access by non-root users:
++	  /sys/fs/selinux
++	  /sys/fs/fuse
++	  /sys/devices/system/cpu
++
++
++config HARDENED_FIFO
++	bool "Restrict FIFO [GRSECURITY]"
++	default y
++	help
++	  If you say Y here, users will not be able to write to FIFOs they don't
++	  own in world-writable +t directories (e.g. /tmp), unless the owner of
++	  the FIFO is the same owner of the directory it's held in.  If the sysctl
++	  option is enabled, a sysctl option with name "fifo_restrictions" is
++	  created.
++
++
++config HARDENED_MODULE_LOAD
++	bool "Harden module auto-loading [GRSECURITY]"
++	default y
++	depends on MODULES
++	help
++	  If you say Y here, module auto-loading in response to use of some
++	  feature implemented by an unloaded module will be restricted to
++	  root users.  Enabling this option helps defend against attacks
++	  by unprivileged users who abuse the auto-loading behavior to
++	  cause a vulnerable module to load that is then exploited.
++
++	  If this option prevents a legitimate use of auto-loading for a
++	  non-root user, the administrator can execute modprobe manually
++	  with the exact name of the module mentioned in the alert log.
++	  Alternatively, the administrator can add the module to the list
++	  of modules loaded at boot by modifying init scripts.
++
++	  Modification of init scripts will most likely be needed on
++	  Ubuntu servers with encrypted home directory support enabled,
++	  as the first non-root user logging in will cause the ecb(aes),
++	  ecb(aes)-all, cbc(aes), and cbc(aes)-all  modules to be loaded.
++
++
++endmenu
 diff --git a/security/Kconfig.hardening b/security/Kconfig.hardening
 index af4c979b38ee..473e40bb8537 100644
 --- a/security/Kconfig.hardening
@@ -2818,3 +3870,18 @@ index a810304123ca..b809050b25d2 100644
  	help
  	  This selects Yama, which extends DAC support with additional
  	  system-wide security settings beyond regular Linux discretionary
+diff --git a/virt/kvm/kvm_main.c b/virt/kvm/kvm_main.c
+index 13efc291b1c7..3c79201de266 100644
+--- a/virt/kvm/kvm_main.c
++++ b/virt/kvm/kvm_main.c
+@@ -632,6 +632,10 @@ static int kvm_create_vm_debugfs(struct kvm *kvm, int fd)
+ 	struct kvm_stat_data *stat_data;
+ 	struct kvm_stats_debugfs_item *p;
+ 
++#ifdef CONFIG_HARDENED_SYSFS_RESTRICT
++	return 0;
++#endif
++
+ 	if (!debugfs_initialized())
+ 		return 0;
+ 
