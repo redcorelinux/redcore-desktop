@@ -41,7 +41,8 @@ DEPEND="${RDEPEND}
 
 src_prepare() {
 	default
-	eapply "${FILESDIR}"/nvidia-settings-linker.patch
+	eapply "${FILESDIR}"/"${PN}"-linker.patch
+	eapply "${FILESDIR}"/"${PN}"-fno-common.patch
 }
 
 
