@@ -20,7 +20,7 @@ IUSE=""
 DEPEND="sys-kernel/dkms"
 RDEPEND="${DEPEND}"
 
-PATCHES=( "${FILESDIR}"/2fcab8795c7c493845bfa277d44bc443802000b8.patch )
+PATCHES=( "${FILESDIR}"/kernel-5.5.patch )
 
 S="${WORKDIR}/${MY_P}"
 
