@@ -1,0 +1,35 @@
+diff --git a/module/zfs/vdev_disk.c b/module/zfs/vdev_disk.c
+index 4ffc41cca34..cbe9e18316e 100644
+--- a/module/zfs/vdev_disk.c
++++ b/module/zfs/vdev_disk.c
+@@ -473,6 +473,30 @@
+ 
+ #ifdef HAVE_BIO_SET_DEV
+ #if defined(CONFIG_BLK_CGROUP) && defined(HAVE_BIO_SET_DEV_GPL_ONLY)
++static inline bool vdev_percpu_ref_tryget(struct percpu_ref *ref)
++{
++	unsigned long __percpu *percpu_count;
++	bool ret;
++
++	rcu_read_lock_sched();
++
++	if (__ref_is_percpu(ref, &percpu_count)) {
++		this_cpu_inc(*percpu_count);
++		ret = true;
++	} else {
++		ret = atomic_long_inc_not_zero(&ref->count);
++	}
++
++	rcu_read_unlock_sched();
++
++	return ret;
++}
++#define percpu_ref_tryget vdev_percpu_ref_tryget
++static inline bool vdev_blkg_tryget(struct blkcg_gq *blkg)
++{
++	return blkg && vdev_percpu_ref_tryget(&blkg->refcnt);
++}
++#define blkg_tryget vdev_blkg_tryget
+ /*
+  * The Linux 5.0 kernel updated the bio_set_dev() macro so it calls the
+  * GPL-only bio_associate_blkg() symbol thus inadvertently converting
