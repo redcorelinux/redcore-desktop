@@ -5,7 +5,7 @@ EAPI=6
 
 inherit eutils
 
-EXTRAVERSION="redcore-lts-legacy-r1"
+EXTRAVERSION="redcore-lts-legacy-r2"
 KV_FULL="${PV}-${EXTRAVERSION}"
 KV_MAJOR="4.19"
 
@@ -34,6 +34,7 @@ PATCHES=(
 	"${FILESDIR}"/"${KV_MAJOR}"-mute-pps_state_mismatch.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-nouveau-pascal-backlight.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-radeon_dp_aux_transfer_native-no-ratelimited_debug.patch
+	"${FILESDIR}"/"${KV_MAJOR}"-revert_52918ed5fcf05d97d257f4131e19479da18f5d16.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-linux-hardened.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-uksm-linux-hardened.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-0001-MultiQueue-Skiplist-Scheduler-version-v0.180-linux-hardened.patch
