@@ -1,9 +1,9 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{6,7} )
+PYTHON_COMPAT=( python3_{6,7,8} )
 # this ebuild currently only supports installing ruby bindings for a single ruby version
 # so USE_RUBY must contain only a single value (the latest stable) as the ebuild calls
 # /usr/bin/${USE_RUBY} directly
@@ -16,7 +16,7 @@ SRC_URI="https://github.com/mltframework/${PN}/releases/download/v${PV}/${P}.tar
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="~amd64 ~arm64 ~x86 ~amd64-linux ~x86-linux"
+KEYWORDS="~amd64 ~arm64 ~ppc64 ~x86 ~amd64-linux ~x86-linux"
 IUSE="compressed-lumas cpu_flags_x86_mmx cpu_flags_x86_sse cpu_flags_x86_sse2 debug ffmpeg
 fftw frei0r gtk jack kdenlive kernel_linux libav libsamplerate lua melt opencv opengl python
 qt5 rtaudio ruby sdl vdpau vidstab xine xml"
@@ -89,14 +89,7 @@ RDEPEND="${DEPEND}"
 
 DOCS=( AUTHORS ChangeLog NEWS README docs/{framework,melt,mlt{++,-xml}}.txt )
 
-PATCHES=(
-	"${FILESDIR}"/${PN}-6.10.0-swig-underlinking.patch
-	"${FILESDIR}"/${P}-mlt_consumer-race-condition.patch
-	"${FILESDIR}"/${P}-rotoscoping-interpolation.patch
-	"${FILESDIR}"/${P}-crop-filter.patch
-	"${FILESDIR}"/${P}-consumer_multi-does-not-correctly-handle-in-point.patch
-	"${FILESDIR}"/${P}-bad-aspect-ratio-resulting-in-black.patch
-)
+PATCHES=( "${FILESDIR}"/${PN}-6.10.0-swig-underlinking.patch )
 
 pkg_setup() {
 	use python && python-single-r1_pkg_setup
@@ -107,13 +100,12 @@ src_prepare() {
 
 	# respect CFLAGS LDFLAGS when building shared libraries. Bug #308873
 	for x in python lua; do
-		sed -i "/mlt.so/s: -lmlt++ :& ${CFLAGS} ${LDFLAGS} :" src/swig/$x/build || die
+		sed -i "/mlt.so/s/ -lmlt++ /& ${CFLAGS} ${LDFLAGS} /" src/swig/$x/build || die
 	done
 
 	sed -i -e "s/env ruby/${USE_RUBY}/" src/swig/ruby/* || die
 
-	# fix python3 include dir
-	sed -i -e 's/python{}.{}/python{}.{}m/' src/swig/python/build || die
+	use python && python_fix_shebang src/swig/python
 }
 
 src_configure() {
@@ -205,26 +197,18 @@ src_install() {
 
 	if use python; then
 		cd "${S}"/src/swig/python || die
-		insinto $(python_get_sitedir)
-		doins mlt.py
-		exeinto $(python_get_sitedir)
-		doexe _mlt.so
+		python_domodule mlt.py _mlt.so
+		chmod +x "${D}$(python_get_sitedir)/_mlt.so" || die
 		dodoc play.py
 		python_optimize
 	fi
 
 	if use ruby; then
 		cd "${S}"/src/swig/ruby || die
-		exeinto $("${EPREFIX}"/usr/bin/${USE_RUBY} -r rbconfig -e 'print RbConfig::CONFIG["sitearchdir"]')
+		local rubydir=$("${EPREFIX}"/usr/bin/${USE_RUBY} -r rbconfig -e 'print RbConfig::CONFIG["sitearchdir"]')
+		exeinto "${rubydir#${EPREFIX}}"
 		doexe mlt.so
 		dodoc play.rb thumbs.rb
 	fi
-
-	# start : Redcore Linux Project tweaks
-	if use qt5 && use melt; then
-		dosym melt usr/bin/qmelt
-	fi
-	# stop : Redcore Linux Project tweaks
-
-	# TODO: java perl php tcl	
+	# TODO: java perl php tcl
 }
