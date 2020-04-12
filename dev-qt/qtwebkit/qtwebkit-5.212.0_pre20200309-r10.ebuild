@@ -3,18 +3,19 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python2_7 )
-MY_P="${PN}-${PV/_pre20190629/-alpha3}" # present as upgrade over previous snapshot
+MY_P="${PN}-${PV/_pre20200309/-alpha4}" # present as upgrade over previous snapshot
+SRC_URI="https://github.com/annulen/webkit/releases/download/${MY_P}/${MY_P}.tar.xz"
+KEYWORDS="amd64 arm arm64 ~ppc ppc64 x86"
+S="${WORKDIR}/${MY_P}"
+PYTHON_COMPAT=( python3_{6,7,8} )
 inherit check-reqs cmake flag-o-matic python-any-r1 qmake-utils toolchain-funcs
 
 DESCRIPTION="WebKit rendering library for the Qt5 framework (deprecated)"
 HOMEPAGE="https://www.qt.io/"
-SRC_URI="https://github.com/annulen/webkit/releases/download/${MY_P}/${MY_P}.tar.xz"
 
 LICENSE="BSD LGPL-2+"
 SLOT="5/5.212"
-KEYWORDS="amd64 arm arm64 ~ppc ppc64 x86"
-IUSE="geolocation gles2 +gstreamer +hyphen +jit multimedia nsplugin opengl orientation +printsupport qml webp X"
+IUSE="geolocation gles2-only +gstreamer +hyphen +jit multimedia nsplugin opengl orientation +printsupport qml webp X"
 
 REQUIRED_USE="
 	nsplugin? ( X )
@@ -23,10 +24,9 @@ REQUIRED_USE="
 "
 
 # Dependencies found at Source/cmake/OptionsQt.cmake
-QT_MIN_VER="5.9.1:5"
+QT_MIN_VER="5.12.3:5"
 BDEPEND="
 	${PYTHON_DEPS}
-	${RUBY_DEPS}
 	dev-lang/ruby:2.5
 	dev-lang/perl
 	dev-util/gperf
@@ -57,8 +57,8 @@ DEPEND="
 	hyphen? ( dev-libs/hyphen )
 	multimedia? ( >=dev-qt/qtmultimedia-${QT_MIN_VER}[widgets] )
 	opengl? (
-		>=dev-qt/qtgui-${QT_MIN_VER}[gles2=]
-		>=dev-qt/qtopengl-${QT_MIN_VER}[gles2=]
+		>=dev-qt/qtgui-${QT_MIN_VER}[gles2-only=]
+		>=dev-qt/qtopengl-${QT_MIN_VER}[gles2-only=]
 	)
 	orientation? ( >=dev-qt/qtsensors-${QT_MIN_VER} )
 	printsupport? ( >=dev-qt/qtprintsupport-${QT_MIN_VER} )
@@ -75,11 +75,7 @@ DEPEND="
 "
 RDEPEND="${DEPEND}"
 
-S="${WORKDIR}/${MY_P}"
-
 CHECKREQS_DISK_BUILD="16G" # bug 417307
-
-PATCHES=( "${FILESDIR}/${P}-icu-65.patch" )
 
 _check_reqs() {
 	if [[ ${MERGE_TYPE} != binary ]] && is-flagq "-g*" && ! is-flagq "-g*0"; then
