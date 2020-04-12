@@ -1,14 +1,15 @@
-# Copyright 1999-2018 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
-inherit eutils libtool flag-o-matic gnuconfig multilib versionator
+inherit eutils libtool flag-o-matic gnuconfig multilib toolchain-funcs
 
 DESCRIPTION="Tools necessary to build programs"
 HOMEPAGE="https://sourceware.org/binutils/"
 LICENSE="GPL-3+"
-IUSE="+cxx doc multitarget +nls static-libs test"
+IUSE="default-gold doc +gold multitarget +nls +plugins static-libs test"
+REQUIRED_USE="default-gold? ( gold )"
 
 # Variables that can be set here:
 # PATCH_VER          - the patchset version
@@ -17,10 +18,9 @@ IUSE="+cxx doc multitarget +nls static-libs test"
 #                    - Default: PV
 # PATCH_DEV          - Use download URI https://dev.gentoo.org/~{PATCH_DEV}/distfiles/...
 #                      for the patchsets
-#                      Default: dilfridge :)
 
-PATCH_VER=5
-PATCH_DEV=dilfridge
+PATCH_VER=1
+PATCH_DEV=slyfox
 
 case ${PV} in
 	9999)
@@ -35,14 +35,14 @@ case ${PV} in
 		inherit git-r3
 		S=${WORKDIR}/binutils
 		EGIT_CHECKOUT_DIR=${S}
-		EGIT_BRANCH=$(get_version_component_range 1-2)
+		EGIT_BRANCH=$(ver_cut 1-2)
 		EGIT_BRANCH="binutils-${EGIT_BRANCH/./_}-branch"
-		SLOT=$(get_version_component_range 1-2)
+		SLOT=$(ver_cut 1-2)
 		;;
 	*)
 		SRC_URI="mirror://gnu/binutils/binutils-${PV}.tar.xz"
-		SLOT=$(get_version_component_range 1-2)
-		KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~amd64-fbsd ~x86-fbsd"
+		SLOT=$(ver_cut 1-2)
+		KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~riscv ~s390 ~sparc ~x86"
 		;;
 esac
 
@@ -73,13 +73,20 @@ RDEPEND="
 	>=sys-devel/binutils-config-3
 	sys-libs/zlib
 "
-DEPEND="${RDEPEND}
+DEPEND="${RDEPEND}"
+BDEPEND="
 	doc? ( sys-apps/texinfo )
 	test? ( dev-util/dejagnu )
 	nls? ( sys-devel/gettext )
 	sys-devel/flex
 	virtual/yacc
 "
+
+RESTRICT="!test? ( test )"
+
+PATCHES=(
+	"${FILESDIR}"/${PN}-2.33-gcc-10.patch
+)
 
 MY_BUILDDIR=${WORKDIR}/build
 
@@ -97,6 +104,9 @@ src_unpack() {
 
 src_prepare() {
 	if [[ ! -z ${PATCH_VER} ]] ; then
+		# Use upstream patch to enable development mode
+		rm -v "${WORKDIR}/patch"/0000-Gentoo-Git-is-development.patch || die
+
 		einfo "Applying binutils-${PATCH_BINUTILS_VER} patchset ${PATCH_VER}"
 		eapply "${WORKDIR}/patch"/*.patch
 	fi
@@ -175,10 +185,15 @@ src_configure() {
 	cd "${MY_BUILDDIR}"
 	local myconf=()
 
-	# enable gold (installed as ld.gold) and ld's plugin architecture
-	if use cxx ; then
-		myconf+=( --enable-gold )
+	if use plugins ; then
 		myconf+=( --enable-plugins )
+	fi
+	# enable gold (installed as ld.gold) and ld's plugin architecture
+	if use gold ; then
+		myconf+=( --enable-gold )
+		if use default-gold; then
+			myconf+=( --enable-gold=default )
+		fi
 	fi
 
 	if use nls ; then
@@ -326,7 +341,7 @@ src_install() {
 		objalloc.h
 		splay-tree.h
 	)
-	doins "${libiberty_headers[@]/#/${S}/include/}" || die
+	doins "${libiberty_headers[@]/#/${S}/include/}"
 	if [[ -d ${ED}/${LIBPATH}/lib ]] ; then
 		mv "${ED}"/${LIBPATH}/lib/* "${ED}"/${LIBPATH}/
 		rm -r "${ED}"/${LIBPATH}/lib
