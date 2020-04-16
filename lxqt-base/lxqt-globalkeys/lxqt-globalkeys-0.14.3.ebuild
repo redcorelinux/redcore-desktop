@@ -38,3 +38,5 @@ DEPEND="
 RDEPEND="${DEPEND}
 	!lxqt-base/lxqt-l10n
 "
+
+PATCHES=( "${FILESDIR}/${PN}-0.14.1-qt-5.14-build.patch" )
