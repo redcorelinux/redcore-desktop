@@ -51,6 +51,8 @@ RDEPEND="${DEPEND}
 	!lxqt-base/lxqt-l10n
 "
 
+PATCHES=( ${FILESDIR}/${P}-qt-5.14-build.patch )
+
 src_prepare() {
 	if use gtk; then
 		# Redcore Linux patch : hide no longer working appearance settings when using qgtk2 platform plugin
