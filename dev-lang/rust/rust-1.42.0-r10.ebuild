@@ -14,14 +14,14 @@ if [[ ${PV} = *beta* ]]; then
 	SLOT="beta/${PV}"
 	SRC="${BETA_SNAPSHOT}/rustc-beta-src.tar.xz"
 else
-	ABI_VER="1.41"
+	ABI_VER="1.42"
 	SLOT="stable/${ABI_VER}"
 	MY_P="rustc-${PV}"
 	SRC="${MY_P}-src.tar.xz"
 	KEYWORDS="~amd64"
 fi
 
-RUST_STAGE0_VERSION="1.$(($(ver_cut 2) - 1)).0"
+RUST_STAGE0_VERSION="1.$(($(ver_cut 2) - 1)).1"
 
 DESCRIPTION="Systems programming language from Mozilla"
 HOMEPAGE="https://www.rust-lang.org/"
@@ -38,7 +38,7 @@ LLVM_TARGET_USEDEPS=${ALL_LLVM_TARGETS[@]/%/?}
 
 LICENSE="|| ( MIT Apache-2.0 ) BSD-1 BSD-2 BSD-4 UoI-NCSA"
 
-IUSE="clippy cpu_flags_x86_sse2 debug doc libressl nightly parallel-compiler rls rustfmt system-bootstrap system-llvm wasm ${ALL_LLVM_TARGETS[*]}"
+IUSE="clippy cpu_flags_x86_sse2 debug doc libressl miri nightly parallel-compiler rls rustfmt system-bootstrap system-llvm wasm ${ALL_LLVM_TARGETS[*]}"
 
 # Please keep the LLVM dependency block separate. Since LLVM is slotted,
 # we need to *really* make sure we're not pulling more than one slot
@@ -46,18 +46,19 @@ IUSE="clippy cpu_flags_x86_sse2 debug doc libressl nightly parallel-compiler rls
 
 # How to use it:
 # 1. List all the working slots (with min versions) in ||, newest first.
-# 2. Update the := to specify *max* version, e.g. < 10.
-# 3. Specify LLVM_MAX_SLOT, e.g. 9.
+# 2. Update the := to specify *max* version, e.g. < 11.
+# 3. Specify LLVM_MAX_SLOT, e.g. 10.
 LLVM_DEPEND="
 	|| (
-		sys-devel/llvm:9[llvm_targets_WebAssembly?]
-		wasm? ( =sys-devel/lld-9* )
+		sys-devel/llvm:10[${LLVM_TARGET_USEDEPS// /,}]
+		sys-devel/llvm:9[${LLVM_TARGET_USEDEPS// /,}]
 	)
-	<sys-devel/llvm-10:=
+	<sys-devel/llvm-11:=
+	wasm? ( sys-devel/lld )
 "
-LLVM_MAX_SLOT=9
+LLVM_MAX_SLOT=10
 
-BOOTSTRAP_DEPEND="|| ( >=dev-lang/rust-1.$(($(ver_cut 2) - 1)).0-r1 >=dev-lang/rust-bin-1.$(($(ver_cut 2) - 1)) )"
+BOOTSTRAP_DEPEND="|| ( >=dev-lang/rust-1.$(($(ver_cut 2) - 1)) >=dev-lang/rust-bin-1.$(($(ver_cut 2) - 1)) )"
 
 COMMON_DEPEND="
 	net-libs/libssh2:=
@@ -79,7 +80,7 @@ DEPEND="${COMMON_DEPEND}
 		>=sys-devel/clang-3.5
 	)
 	system-bootstrap? ( ${BOOTSTRAP_DEPEND}	)
-	system-llvm? (
+	!system-llvm? (
 		dev-util/cmake
 		dev-util/ninja
 	)
@@ -88,23 +89,25 @@ DEPEND="${COMMON_DEPEND}
 RDEPEND="${COMMON_DEPEND}"
 
 REQUIRED_USE="|| ( ${ALL_LLVM_TARGETS[*]} )
+	miri? ( nightly )
 	parallel-compiler? ( nightly )
 	wasm? ( llvm_targets_WebAssembly )
 	x86? ( cpu_flags_x86_sse2 )
 "
 
 QA_FLAGS_IGNORED="
-	usr/bin/*-${PV}
-	usr/lib*/lib*.so
-	usr/lib/rustlib/*/codegen-backends/librustc_codegen_llvm-llvm.so
-	usr/lib/rustlib/*/lib/lib*.so
+	usr/bin/.*-${PV}
+	usr/lib.*/lib.*.so
+	usr/lib/rustlib/.*/codegen-backends/librustc_codegen_llvm-llvm.so
+	usr/lib/rustlib/.*/lib/lib.*.so
 "
 
 QA_SONAME="usr/lib.*/librustc_macros.*.so"
 
 PATCHES=(
 	"${FILESDIR}"/1.40.0-add-soname.patch
-	"${FILESDIR}"/llvm-gcc10.patch
+	"${FILESDIR}"/1.42.0-fix-bootstrap.patch
+	"${FILESDIR}"/1.42.0-libressl.patch
 )
 
 S="${WORKDIR}/${MY_P}-src"
@@ -114,7 +117,7 @@ toml_usex() {
 }
 
 pre_build_checks() {
-	CHECKREQS_DISK_BUILD="10G"
+	CHECKREQS_DISK_BUILD="9G"
 	eshopts_push -s extglob
 	if is-flagq '-g?(gdb)?([1-9])'; then
 		CHECKREQS_DISK_BUILD="15G"
@@ -175,6 +178,9 @@ src_configure() {
 	if use clippy; then
 		tools="\"clippy\",$tools"
 	fi
+	if use miri; then
+		tools="\"miri\",$tools"
+	fi
 	if use rls; then
 		tools="\"rls\",\"analysis\",\"src\",$tools"
 	fi
@@ -220,7 +226,7 @@ src_configure() {
 		docdir = "share/doc/${PF}"
 		mandir = "share/man"
 		[rust]
-		optimize = $(toml_usex !debug)
+		optimize = true
 		debug = $(toml_usex debug)
 		debug-assertions = $(toml_usex debug)
 		default-linker = "$(tc-getCC)"
@@ -228,6 +234,7 @@ src_configure() {
 		channel = "$(usex nightly nightly stable)"
 		rpath = false
 		lld = $(usex system-llvm false $(toml_usex wasm))
+		backtrace-on-ice = true
 		[dist]
 		src-tarball = false
 	EOF
@@ -259,24 +266,25 @@ src_configure() {
 			EOF
 		fi
 	done
-
 	if use wasm; then
 		cat <<- EOF >> "${S}"/config.toml
 			[target.wasm32-unknown-unknown]
 			linker = "$(usex system-llvm lld rust-lld)"
 		EOF
 	fi
+
+	einfo "Rust configured with the following settings:"
+	cat "${S}"/config.toml || die
 }
 
 src_compile() {
 	env $(cat "${S}"/config.env)\
-		"${EPYTHON}" ./x.py build -vv --config="${S}"/config.toml -j$(makeopts_jobs) \
-		--exclude src/tools/miri || die # https://github.com/rust-lang/rust/issues/52305
+		"${EPYTHON}" ./x.py build -vv --config="${S}"/config.toml -j$(makeopts_jobs) || die
 }
 
 src_install() {
-	env DESTDIR="${D}" "${EPYTHON}" ./x.py install -vv --config="${S}"/config.toml \
-	--exclude src/tools/miri || die
+	env $(cat "${S}"/config.env) DESTDIR="${D}" \
+		"${EPYTHON}" ./x.py install -vv --config="${S}"/config.toml || die
 
 	# bug #689562, #689160
 	rm "${D}/etc/bash_completion.d/cargo" || die
