@@ -22,7 +22,7 @@ BDEPEND=">=dev-util/cmake-3.14.3"
 COMMON_DEPEND="
 	>=dev-qt/qtdbus-${QTMIN}:5
 	>=dev-qt/qtdeclarative-${QTMIN}:5
-	>=dev-qt/qtgui-${QTMIN}:5
+	>=dev-qt/qtgui-${QTMIN}:5[gles2-only=]
 	>=dev-qt/qtwidgets-${QTMIN}:5
 	>=kde-frameworks/kcmutils-${KFMIN}:5
 	>=kde-frameworks/kcompletion-${KFMIN}:5
@@ -43,7 +43,6 @@ COMMON_DEPEND="
 	x11-libs/libX11
 	ieee1394? ( sys-libs/libraw1394 )
 	opengl? (
-		>=dev-qt/qtgui-${QTMIN}:5[gles2=]
 		media-libs/mesa[gles2?,X(+)]
 		!gles2? ( media-libs/glu )
 	)
