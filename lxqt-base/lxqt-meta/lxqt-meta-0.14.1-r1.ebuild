@@ -19,8 +19,8 @@ RDEPEND="${DEPEND}
 	>=lxde-base/lxmenu-data-0.1.2
 	>=lxde-base/lxappearance-0.5.5
 	>=lxqt-base/lxqt-themes-0.14.0
+	>=lxqt-base/lxqt-globalkeys-${PV}
 	~lxqt-base/lxqt-config-${PV}
-	~lxqt-base/lxqt-globalkeys-${PV}
 	~lxqt-base/lxqt-notificationd-${PV}
 	~lxqt-base/lxqt-panel-${PV}
 	~lxqt-base/lxqt-runner-${PV}
