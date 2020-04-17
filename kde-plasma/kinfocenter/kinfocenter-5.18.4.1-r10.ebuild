@@ -14,9 +14,9 @@ HOMEPAGE="https://userbase.kde.org/KInfoCenter"
 LICENSE="GPL-2" # TODO: CHECK
 SLOT="5"
 KEYWORDS="~amd64"
-IUSE="gles2 ieee1394 +opengl +pci wayland"
+IUSE="gles2-only ieee1394 +opengl +pci wayland"
 
-REQUIRED_USE="wayland? ( || ( gles2 opengl ) )"
+REQUIRED_USE="wayland? ( || ( gles2-only opengl ) )"
 
 BDEPEND=">=dev-util/cmake-3.14.3"
 COMMON_DEPEND="
@@ -41,10 +41,11 @@ COMMON_DEPEND="
 	>=kde-frameworks/kxmlgui-${KFMIN}:5
 	>=kde-frameworks/solid-${KFMIN}:5
 	x11-libs/libX11
+	gles2-only? ( media-libs/mesa[gles2] )
 	ieee1394? ( sys-libs/libraw1394 )
 	opengl? (
 		media-libs/mesa[gles2?,X(+)]
-		!gles2? ( media-libs/glu )
+		!gles2-only? ( media-libs/glu )
 	)
 	pci? ( sys-apps/pciutils )
 	wayland? (
@@ -69,7 +70,7 @@ src_configure() {
 		$(cmake_use_find_package wayland KF5Wayland)
 	)
 
-	if has_version "dev-qt/qtgui[gles2]"; then
+	if has_version "dev-qt/qtgui[gles2-only]"; then
 		mycmakeargs+=( $(cmake_use_find_package gles2 OpenGLES) )
 	else
 		mycmakeargs+=( $(cmake_use_find_package opengl OpenGL) )
