@@ -44,7 +44,7 @@ COMMON_DEPEND="
 	gles2-only? ( media-libs/mesa[gles2] )
 	ieee1394? ( sys-libs/libraw1394 )
 	opengl? (
-		media-libs/mesa[gles2?,X(+)]
+		media-libs/mesa[X(+)]
 		!gles2-only? ( media-libs/glu )
 	)
 	pci? ( sys-apps/pciutils )
