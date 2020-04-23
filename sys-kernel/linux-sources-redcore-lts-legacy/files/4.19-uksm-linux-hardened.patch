@@ -86,14 +86,6 @@ diff -Nur a/fs/exec.c b/fs/exec.c
  
  #include <linux/uaccess.h>
  #include <asm/mmu_context.h>
-@@ -1382,6 +1383,7 @@
- 	/* An exec changes our domain. We are no longer part of the thread
- 	   group */
- 	current->self_exec_id++;
-+
- 	flush_signal_handlers(current, 0);
- }
- EXPORT_SYMBOL(setup_new_exec);
 diff -Nur a/fs/proc/meminfo.c b/fs/proc/meminfo.c
 --- a/fs/proc/meminfo.c	2019-06-11 11:20:57.000000000 +0100
 +++ b/fs/proc/meminfo.c	2019-06-19 19:34:58.729369555 +0100
