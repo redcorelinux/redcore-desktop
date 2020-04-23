@@ -5,11 +5,11 @@ EAPI=6
 
 inherit eutils
 
-EXTRAVERSION="redcore-r1"
+EXTRAVERSION="redcore"
 KV_FULL="${PV}-${EXTRAVERSION}"
 KV_MAJOR="5.5"
 
-DESCRIPTION="Official Redcore Linux Kernel Image"
+DESCRIPTION="Redcore Linux Kernel Image"
 HOMEPAGE="https://redcorelinux.org"
 SRC_URI="https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-${PV}.tar.xz"
 
