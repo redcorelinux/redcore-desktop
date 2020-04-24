@@ -32,7 +32,7 @@ pkg_preinst() {
 pkg_postinst() {
 	if [[ -f ""${ROOT}"etc/dracut.conf.d/redcore-dracut.conf.bak" ]]; then
 		mv ""${ROOT}"etc/dracut.conf.d/redcore-dracut.conf.bak" ""${ROOT}"etc/dracut.conf.d/redcore-dracut.conf"
-		sed -i "s/plymouth//g" ""${ROOT}"etc/dracut.conf.d/redcore-dracut.conf"
+		sed -i "s/drm\ plymouth\ /drm/g" ""${ROOT}"etc/dracut.conf.d/redcore-dracut.conf"
 		sed -i "s/dracut-systemd/dracut-systemd\ plymouth\ /g" ""${ROOT}"etc/dracut.conf.d/redcore-dracut.conf"
 	fi
 
