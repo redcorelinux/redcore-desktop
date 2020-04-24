@@ -23,3 +23,9 @@ src_install() {
 	doins redcore-dracut.conf || die
 	newins redcore-dracut.conf redcore-dracut.conf.example || die
 }
+
+pkg_preinst() {
+	if [[ -f ""${ROOT}"etc/dracut.conf.d/redcore-dracut.conf" ]]; then
+		rm -rf ""${ROOT}"etc/dracut.conf.d/redcore-dracut.conf"
+	fi
+}
