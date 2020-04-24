@@ -12,7 +12,7 @@ SRC_URI="https://www.kernel.org/pub/linux/utils/boot/${PN}/${P}.tar.xz"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="alpha amd64 ~arm ia64 ~mips ppc ~ppc64 sparc x86"
-IUSE="+cryptsetup debug +device-mapper +lvm +microcode +mdadm selinux +splash"
+IUSE="+cryptsetup debug +device-mapper +lvm +microcode +mdadm selinux"
 
 # Tests need root privileges, bug #298014
 RESTRICT="test"
@@ -35,9 +35,6 @@ COMMON_DEPEND=">=sys-apps/kmod-23[tools]
 	)
 	mdadm? (
 		sys-fs/mdadm
-	)
-	splash? (
-		sys-boot/plymouth
 	)
 	sys-kernel/dracut-config-redcore
 	"
@@ -139,37 +136,4 @@ pkg_postinst() {
 		ewarn "  CONFIG_DEVTMPFS"
 		ewarn ""
 	fi
-
-	elog "To get additional features, a number of optional runtime"
-	elog "dependencies may be installed:"
-	elog ""
-	optfeature "Networking support"  net-misc/curl "net-misc/dhcp[client]" \
-		sys-apps/iproute2 "net-misc/iputils[arping]"
-	optfeature \
-		"Measure performance of the boot process for later visualisation" \
-		app-benchmarks/bootchart2 app-admin/killproc sys-process/acct
-	optfeature "Scan for Btrfs on block devices"  sys-fs/btrfs-progs
-	optfeature "Load kernel modules and drop this privilege for real init" \
-		sys-libs/libcap
-	optfeature "Support CIFS" net-fs/cifs-utils
-	optfeature "Decrypt devices encrypted with cryptsetup/LUKS" \
-		"sys-fs/cryptsetup[-static-libs]"
-	optfeature "Support for GPG-encrypted keys for crypt module" \
-		app-crypt/gnupg
-	optfeature \
-		"Allows use of dash instead of default bash (on your own risk)" \
-		app-shells/dash
-	optfeature "Support iSCSI" sys-block/open-iscsi
-	optfeature "Support Logical Volume Manager" sys-fs/lvm2
-	optfeature "Support MD devices, also known as software RAID devices" \
-		sys-fs/mdadm
-	optfeature "Support Device Mapper multipathing" sys-fs/multipath-tools
-	optfeature "Plymouth boot splash"  '>=sys-boot/plymouth-0.8.5-r5'
-	optfeature "Support network block devices" sys-block/nbd
-	optfeature "Support NFS" net-fs/nfs-utils net-nds/rpcbind
-	optfeature \
-		"Install ssh and scp along with config files and specified keys" \
-		net-misc/openssh
-	optfeature "Enable logging with syslog-ng or rsyslog" app-admin/syslog-ng \
-		app-admin/rsyslog
 }
