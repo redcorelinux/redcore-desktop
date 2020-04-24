@@ -20,7 +20,6 @@ S="${FILESDIR}"
 src_install() {
 	dodir "etc/dracut.conf.d" || die
 	insinto "etc/dracut.conf.d" || die
-	doins redcore-dracut.conf || die
 	newins redcore-dracut.conf redcore-dracut.conf.example || die
 }
 
@@ -28,4 +27,8 @@ pkg_preinst() {
 	if [[ -f ""${ROOT}"etc/dracut.conf.d/redcore-dracut.conf" ]]; then
 		rm -rf ""${ROOT}"etc/dracut.conf.d/redcore-dracut.conf"
 	fi
+}
+
+pkg_postinst() {
+	cp -avx ""${ROOT}"etc/dracut.conf.d/redcore-dracut.conf.example" ""${ROOT}"etc/dracut.conf.d/redcore-dracut.conf"
 }
