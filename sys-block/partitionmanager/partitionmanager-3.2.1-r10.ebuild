@@ -3,7 +3,7 @@
 
 EAPI=7
 
-KDE_HANDBOOK="forceoptional"
+ECM_HANDBOOK="forceoptional"
 inherit ecm kde.org
 
 DESCRIPTION="KDE utility for management of partitions and file systems"
@@ -12,6 +12,7 @@ HOMEPAGE="https://www.kde.org/applications/system/kdepartitionmanager"
 
 LICENSE="GPL-3"
 KEYWORDS="amd64 ~arm x86"
+SLOT="5"
 IUSE=""
 
 DEPEND="
