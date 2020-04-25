@@ -20,7 +20,7 @@ RDEPEND="
 	kde-frameworks/kcoreaddons
 	kde-frameworks/ki18n
 	kde-frameworks/kservice
-	kde-frameworks/kwidgetaddons
+	kde-frameworks/kwidgetsaddons
 	dev-qt/qtdbus:5
 	dev-qt/qtgui:5
 	dev-qt/qtwidgets:5
