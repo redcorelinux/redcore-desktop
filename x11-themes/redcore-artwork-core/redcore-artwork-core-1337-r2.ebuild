@@ -13,6 +13,7 @@ SLOT="0"
 KEYWORDS="x86 amd64"
 IUSE=""
 RDEPEND="sys-apps/findutils
+	sys-boot/plymouth
 	>=x11-themes/hicolor-icon-theme-0.10"
 
 S="${WORKDIR}"/"${PN}"
