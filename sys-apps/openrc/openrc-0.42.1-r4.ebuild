@@ -18,7 +18,7 @@ fi
 
 LICENSE="BSD-2"
 SLOT="0"
-IUSE="+apparmor audit bash debug +dkms elogind +entropy ncurses pam newnet prefix +netifrc selinux +settingsd static-libs sysv-utils unicode"
+IUSE="+apparmor audit bash debug +dkms elogind +entropy ncurses pam newnet prefix +netifrc selinux +settingsd +splash static-libs sysv-utils unicode"
 
 COMMON_DEPEND="
 	apparmor? (
@@ -42,6 +42,7 @@ COMMON_DEPEND="
 		>=sys-libs/libselinux-2.6
 	)
 	settingsd? ( app-admin/openrc-settingsd )
+	splash? ( sys-boot/plymouth-openrc-plugin )
 	!<sys-apps/baselayout-2.1-r1
 	!<sys-fs/udev-init-scripts-27"
 DEPEND="${COMMON_DEPEND}
