@@ -33,6 +33,5 @@ DEPEND="
 	>=sys-libs/kpmcore-3.2.0:5=
 "
 RDEPEND="${DEPEND}
-	kde-plasma/kde-cli-tools
-	kde-plasma/kdesu
+	kde-plasma/kde-cli-tools[kdesu]
 "
