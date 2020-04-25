@@ -12,7 +12,7 @@ SRC_URI="https://www.kernel.org/pub/linux/utils/boot/${PN}/${P}.tar.xz"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="alpha amd64 ~arm ia64 ~mips ppc ~ppc64 sparc x86"
-IUSE="+cryptsetup debug +device-mapper +lvm +microcode +mdadm selinux"
+IUSE="+cryptsetup debug +device-mapper +lvm +microcode +splash +mdadm selinux"
 
 # Tests need root privileges, bug #298014
 RESTRICT="test"
@@ -32,6 +32,9 @@ COMMON_DEPEND=">=sys-apps/kmod-23[tools]
 	microcode? (
 		sys-firmware/intel-microcode
 		sys-kernel/linux-firmware
+	)
+	splash? (
+		sys-boot/plymouth
 	)
 	mdadm? (
 		sys-fs/mdadm
