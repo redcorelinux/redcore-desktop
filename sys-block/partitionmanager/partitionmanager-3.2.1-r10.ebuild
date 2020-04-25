@@ -25,7 +25,7 @@ DEPEND="
 	kde-frameworks/kio
 	kde-frameworks/kjobwidgets
 	kde-frameworks/kservice
-	kde-frameworks/kwidgetaddons
+	kde-frameworks/kwidgetsaddons
 	kde-frameworks/kxmlgui
 	dev-qt/qtgui:5
 	dev-qt/qtwidgets:5
