@@ -41,7 +41,6 @@ DEPEND="${CDEPEND}
 # Block due bug #383067
 RDEPEND="${CDEPEND}
 	udev? ( virtual/udev )
-	x11-themes/redcore-artwork-core
 	!<sys-kernel/dracut-0.37-r3
 "
 
