@@ -11,10 +11,13 @@ SRC_URI="http://mirror.math.princeton.edu/pub/redcorelinux/distfiles/${PN}.tar.x
 LICENSE="CCPL-Attribution-ShareAlike-3.0"
 SLOT="0"
 KEYWORDS="x86 amd64"
-IUSE=""
+IUSE="+splash"
 RDEPEND="sys-apps/findutils
 	sys-boot/plymouth
-	>=x11-themes/hicolor-icon-theme-0.10"
+	>=x11-themes/hicolor-icon-theme-0.10
+	splash? (
+		sys-kernel/dracut[splash]
+	)"
 
 S="${WORKDIR}"/"${PN}"
 
@@ -33,10 +36,12 @@ src_install() {
 	doins logo/*.png
 
 	# Plymouth theme
-	insinto usr/share/plymouth
-	doins plymouth/bizcom.png
-	insinto usr/share/plymouth/themes
-	doins -r plymouth/themes/redcore
+	if use splash; then
+		insinto usr/share/plymouth
+		doins plymouth/bizcom.png
+		insinto usr/share/plymouth/themes
+		doins -r plymouth/themes/redcore
+	fi
 }
 
 _dracut_initramfs_regen() {
