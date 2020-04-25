@@ -1,11 +1,11 @@
 diff -Nur a/src/plymouthd.defaults b/src/plymouthd.defaults
 --- a/src/plymouthd.defaults	2018-09-20 18:53:38.000000000 +0100
-+++ b/src/plymouthd.defaults	2020-04-25 02:14:12.014468210 +0100
-@@ -1,6 +1,4 @@
++++ b/src/plymouthd.defaults	2020-04-25 10:45:48.682069720 +0100
+@@ -1,6 +1,6 @@
  # Distribution defaults. Changes to this file will get overwritten during
  # upgrades.
  [Daemon]
 -Theme=spinner
--ShowDelay=5
--DeviceTimeout=5
 +Theme=redcore
+ ShowDelay=5
+ DeviceTimeout=5
