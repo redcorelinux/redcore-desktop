@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit kde5
+inherit ecm kde.org
 
 if [[ ${KDE_BUILD_TYPE} = release ]]; then
 	SRC_URI="mirror://kde/stable/${PN}/${PV}/src/${P}.tar.xz"
@@ -17,13 +17,13 @@ SLOT="5/6"
 IUSE=""
 
 RDEPEND="
-	$(add_frameworks_dep kcoreaddons)
-	$(add_frameworks_dep ki18n)
-	$(add_frameworks_dep kservice)
-	$(add_frameworks_dep kwidgetsaddons)
-	$(add_qt_dep qtdbus)
-	$(add_qt_dep qtgui)
-	$(add_qt_dep qtwidgets)
+	kde-frameworks/kcoreaddons
+	kde-frameworks/ki18n
+	kde-frameworks/kservice
+	kde-frameworks/kwidgetsaddons
+	dev-qt/qtdbus:5
+	dev-qt/qtgui:5
+	dev-qt/qtwidgets:5
 	dev-libs/libatasmart
 	>=sys-apps/util-linux-2.30
 	>=sys-block/parted-3

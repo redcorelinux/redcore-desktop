@@ -3,7 +3,7 @@
 
 EAPI=6
 
-PYTHON_COMPAT=( python3_6 )
+PYTHON_COMPAT=( python{3_6,3_7} )
 inherit eapi7-ver perl-module python-r1 toolchain-funcs
 
 MY_PV="$(ver_cut 1-2)"
@@ -28,7 +28,7 @@ DEPEND="${COMMON_DEPEND}
 	sys-devel/gettext
 "
 RDEPEND="${COMMON_DEPEND}
-	~sys-libs/libapparmor-${PV}[perl,python]
+	~sys-libs/libapparmor-${PV}[perl,python,${PYTHON_USEDEP}]
 	~sys-apps/apparmor-${PV}
 	dev-perl/Locale-gettext
 	dev-perl/RPC-XML
@@ -70,8 +70,9 @@ src_install() {
 		VIM_INSTALL_PATH="${D}/usr/share/vim/vimfiles/syntax" install
 
 	install_python() {
+		local -x PYTHONDONTWRITEBYTECODE=
 		"${PYTHON}" "${S}"/utils/python-tools-setup.py install --prefix=/usr \
-			--root="${D}" --version="${PV}"
+			--root="${D}" --optimize 2
 	}
 
 	python_foreach_impl install_python

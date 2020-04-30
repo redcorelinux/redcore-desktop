@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit kde5
+inherit cmake-utils
 
 DESCRIPTION="GUI configuration tool for compton X composite manager"
 HOMEPAGE="https://github.com/lxde/compton-conf"
@@ -15,10 +15,10 @@ KEYWORDS="amd64 x86"
 IUSE=""
 
 DEPEND="
-	$(add_qt_dep qtdbus)
-	$(add_qt_dep qtgui)
-	$(add_qt_dep linguist-tools)
-	$(add_qt_dep qtwidgets)
+	dev-qt/qtdbus:5
+	dev-qt/qtgui:5
+	dev-qt/linguist-tools:5
+	dev-qt/qtwidgets:5
 	>=lxqt-base/lxqt-build-tools-0.6.0"
 RDEPEND="${DEPEND}"
 

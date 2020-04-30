@@ -59,4 +59,9 @@ src_install() {
 		rm -rf ${ED}usr/share/pixmaps
 		rm -rf ${ED}usr/share/polkit-1
 	fi
+
+	# enforce best available python implementation
+	python_setup
+	python_fix_shebang "${ED}usr/share/${PN}/${PN}-cli.py"
+	python_fix_shebang "${ED}usr/share/${PN}/${PN}-gui.py"
 }

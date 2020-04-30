@@ -4,6 +4,7 @@
 EAPI=6
 CMAKE_MAKEFILE_GENERATOR="ninja"
 PYTHON_COMPAT=( python{3_6,3_7} )
+USE_RUBY="ruby24 ruby25 ruby26 ruby27"
 CMAKE_MIN_VERSION=3.10
 
 inherit check-reqs cmake-utils flag-o-matic gnome2 pax-utils python-any-r1 toolchain-funcs virtualx
@@ -15,7 +16,7 @@ SRC_URI="https://www.webkitgtk.org/releases/${MY_P}.tar.xz"
 
 LICENSE="LGPL-2+ BSD"
 SLOT="4/37" # soname version of libwebkit2gtk-4.0
-KEYWORDS="~amd64 ~ia64 ~ppc64 ~sparc ~x86"
+KEYWORDS="~amd64 ~arm64 ~ppc64 ~sparc ~x86"
 
 IUSE="aqua coverage +egl +geolocation gles2-only gnome-keyring +gstreamer gtk-doc +introspection +jpeg2k +jumbo-build libnotify +opengl seccomp spell wayland +X"
 
@@ -86,6 +87,8 @@ RDEPEND="
 	gles2-only? ( media-libs/mesa[gles2] )
 	opengl? ( virtual/opengl )
 	wayland? (
+		dev-libs/wayland
+		>=dev-libs/wayland-protocols-1.12
 		opengl? ( ${wpe_depend} )
 		gles2-only? ( ${wpe_depend} )
 	)
@@ -144,7 +147,7 @@ pkg_pretend() {
 
 	if ! use opengl && ! use gles2-only; then
 		ewarn
-		ewarn "You are disabling OpenGL usage (USE=opengl or USE=gles-only) completely."
+		ewarn "You are disabling OpenGL usage (USE=opengl or USE=gles2-only) completely."
 		ewarn "This is an unsupported configuration meant for very specific embedded"
 		ewarn "use cases, where there truly is no GL possible (and even that use case"
 		ewarn "is very unlikely to come by). If you have GL (even software-only), you"
@@ -163,7 +166,6 @@ pkg_setup() {
 
 src_prepare() {
 	eapply "${FILESDIR}/${PN}-2.24.4-eglmesaext-include.patch" # bug 699054 # https://bugs.webkit.org/show_bug.cgi?id=204108
-	eapply "${FILESDIR}"/2.26.2-fix-arm-non-unified-build.patch # bug 704194
 	eapply "${FILESDIR}"/2.26.3-fix-gtk-doc.patch # bug 704550 - retest without it once we can depend on >=gtk-doc-1.32
 	cmake-utils_src_prepare
 	gnome2_src_prepare

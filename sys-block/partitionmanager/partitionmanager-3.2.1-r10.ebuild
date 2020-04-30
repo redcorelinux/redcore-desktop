@@ -3,8 +3,8 @@
 
 EAPI=7
 
-KDE_HANDBOOK="forceoptional"
-inherit kde5
+ECM_HANDBOOK="forceoptional"
+inherit ecm kde.org
 
 DESCRIPTION="KDE utility for management of partitions and file systems"
 HOMEPAGE="https://www.kde.org/applications/system/kdepartitionmanager"
@@ -12,25 +12,26 @@ HOMEPAGE="https://www.kde.org/applications/system/kdepartitionmanager"
 
 LICENSE="GPL-3"
 KEYWORDS="amd64 ~arm x86"
+SLOT="5"
 IUSE=""
 
 DEPEND="
-	$(add_frameworks_dep kconfig)
-	$(add_frameworks_dep kconfigwidgets)
-	$(add_frameworks_dep kcoreaddons)
-	$(add_frameworks_dep kcrash)
-	$(add_frameworks_dep ki18n)
-	$(add_frameworks_dep kiconthemes)
-	$(add_frameworks_dep kio)
-	$(add_frameworks_dep kjobwidgets)
-	$(add_frameworks_dep kservice)
-	$(add_frameworks_dep kwidgetsaddons)
-	$(add_frameworks_dep kxmlgui)
-	$(add_qt_dep qtgui)
-	$(add_qt_dep qtwidgets)
+	kde-frameworks/kconfig
+	kde-frameworks/kconfigwidgets
+	kde-frameworks/kcoreaddons
+	kde-frameworks/kcrash
+	kde-frameworks/ki18n
+	kde-frameworks/kiconthemes
+	kde-frameworks/kio
+	kde-frameworks/kjobwidgets
+	kde-frameworks/kservice
+	kde-frameworks/kwidgetsaddons
+	kde-frameworks/kxmlgui
+	dev-qt/qtgui:5
+	dev-qt/qtwidgets:5
 	sys-apps/util-linux
 	>=sys-libs/kpmcore-3.2.0:5=
 "
 RDEPEND="${DEPEND}
-	$(add_plasma_dep kde-cli-tools kdesu)
+	kde-plasma/kde-cli-tools[kdesu]
 "
