@@ -1,19 +1,17 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
 
-PYTHON_COMPAT=( python3_{7,8} )
+PYTHON_COMPAT=( python{3_6.3_7} )
 
-inherit git-r3 check-reqs cmake-utils xdg-utils flag-o-matic gnome2-utils \
+inherit check-reqs cmake-utils xdg-utils flag-o-matic xdg-utils \
 	pax-utils python-single-r1 toolchain-funcs eapi7-ver
 
 DESCRIPTION="3D Creation/Animation/Publishing System"
-HOMEPAGE="http://www.blender.org"
+HOMEPAGE="https://www.blender.org"
 
-# SRC_URI="http://download.blender.org/source/${P}.tar.gz"
-EGIT_REPO_URI="https://git.blender.org/blender.git"
-EGIT_COMMIT="v2.81a"
+SRC_URI="https://download.blender.org/source/${P}.tar.gz"
 
 # Blender can have letters in the version string,
 # so strip off the letter if it exists.
@@ -21,11 +19,12 @@ MY_PV="$(ver_cut 1-2)"
 
 SLOT="0"
 LICENSE="|| ( GPL-2 BL )"
-KEYWORDS="~amd64 ~x86"
-IUSE="+bullet +dds +elbeem +game-engine +openexr collada colorio \
+KEYWORDS="amd64 ~x86"
+IUSE="+bullet +dds +elbeem +game-engine +openexr collada color-management \
 	cuda cycles debug doc ffmpeg fftw headless jack jemalloc jpeg2k libav \
 	llvm man ndof nls openal opencl openimageio openmp opensubdiv openvdb \
 	osl player sdl sndfile test tiff valgrind"
+RESTRICT="!test? ( test )"
 
 REQUIRED_USE="${PYTHON_REQUIRED_USE}
 	cuda? ( cycles )
@@ -51,7 +50,7 @@ RDEPEND="${PYTHON_DEPS}
 	virtual/libintl
 	virtual/opengl
 	collada? ( >=media-libs/opencollada-1.6.18:= )
-	colorio? ( media-libs/opencolorio )
+	color-management? ( media-libs/opencolorio )
 	cuda? ( dev-util/nvidia-cuda-toolkit:= )
 	ffmpeg? ( media-video/ffmpeg:=[x264,mp3,encode,theora,jpeg2k?] )
 	libav? ( >=media-video/libav-11.3:=[x264,mp3,encode,theora,jpeg2k?] )
@@ -93,16 +92,22 @@ DEPEND="${RDEPEND}
 	>=dev-cpp/eigen-3.2.8:3
 	virtual/pkgconfig
 	doc? (
-		app-doc/doxygen[-nodot(-),dot(+),latex]
+		app-doc/doxygen[dot]
 		dev-python/sphinx[latex]
+		dev-texlive/texlive-bibtexextra
+		dev-texlive/texlive-fontsextra
+		dev-texlive/texlive-fontutils
+		dev-texlive/texlive-latex
+		dev-texlive/texlive-latexextra
 	)
 	nls? ( sys-devel/gettext )"
 
 PATCHES=(
 	"${FILESDIR}/${PN}-fix-install-rules.patch"
+	"${FILESDIR}/${P}-gcc-8.patch"
+	"${FILESDIR}/${P}-ffmpeg-4-compat.patch"
+	"${FILESDIR}/${P}-fix-for-gcc9-new-openmp-data-sharing.patch"
 )
-#	"${FILESDIR}/${P}-gcc-8.patch"
-#	"${FILESDIR}/${P}-ffmpeg-4-compat.patch"
 
 blender_check_requirements() {
 	[[ ${MERGE_TYPE} != binary ]] && use openmp && tc-check-openmp
@@ -184,7 +189,7 @@ src_configure() {
 		-DWITH_MOD_OCEANSIM=$(usex fftw)
 		-DWITH_OPENAL=$(usex openal)
 		-DWITH_OPENCL=$(usex opencl)
-		-DWITH_OPENCOLORIO=$(usex colorio)
+		-DWITH_OPENCOLORIO=$(usex color-management)
 		-DWITH_OPENCOLLADA=$(usex collada)
 		-DWITH_OPENIMAGEIO=$(usex openimageio)
 		-DWITH_OPENMP=$(usex openmp)
@@ -260,10 +265,6 @@ src_install() {
 	python_optimize "${ED%/}/usr/share/blender/${MY_PV}/scripts"
 }
 
-pkg_preinst() {
-	gnome2_icon_savelist
-}
-
 pkg_postinst() {
 	elog
 	elog "Blender uses python integration. As such, may have some"
@@ -281,12 +282,12 @@ pkg_postinst() {
 	ewarn "If you are concerned about security, file a bug upstream:"
 	ewarn "  https://developer.blender.org/"
 	ewarn
-	gnome2_icon_cache_update
+	xdg_icon_cache_update
 	xdg_mimeinfo_database_update
 }
 
 pkg_postrm() {
-	gnome2_icon_cache_update
+	xdg_icon_cache_update
 	xdg_mimeinfo_database_update
 
 	ewarn ""
