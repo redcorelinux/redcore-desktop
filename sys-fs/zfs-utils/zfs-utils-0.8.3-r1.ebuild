@@ -61,7 +61,11 @@ RESTRICT="test"
 
 S="${WORKDIR}/${MY_P}"
 
-PATCHES=( "${FILESDIR}/bash-completion-sudo.patch" )
+PATCHES=(
+	"${FILESDIR}/bash-completion-sudo.patch"
+	"${FILESDIR}/${PV}-fno-common.patch"
+	"${FILESDIR}/${PV}-zfs-functions.patch"
+)
 
 src_prepare() {
 	default
