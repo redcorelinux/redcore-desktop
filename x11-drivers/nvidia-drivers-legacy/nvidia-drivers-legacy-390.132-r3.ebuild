@@ -20,7 +20,6 @@ EMULTILIB_PKG="true"
 IUSE="acpi compat +dkms libglvnd multilib +tools wayland +X"
 
 COMMON="
-	app-eselect/eselect-opencl
 	X? (
 		!libglvnd? ( >=app-eselect/eselect-opengl-1.0.9 )
 		libglvnd? (
@@ -31,7 +30,7 @@ COMMON="
 	)"
 DEPEND="${COMMON}"
 PDEPEND="
-	tools? ( ~x11-misc/nvidia-legacy-settings-${PV}:${SLOT} )"
+	tools? ( ~x11-misc/nvidia-settings-legacy-${PV}:${SLOT} )"
 RDEPEND="
 	${COMMON}
 	!!x11-drivers/nvidia-drivers
@@ -301,7 +300,6 @@ pkg_postinst() {
 	if ! use libglvnd; then
 		use X && "${ROOT}"/usr/bin/eselect opengl set --use-old nvidia
 	fi
-	"${ROOT}"/usr/bin/eselect opencl set --use-old nvidia
 	if ! use X; then
 		elog "You have selected to not install the X.org driver. Along with"
 		elog "this the OpenGL libraries and VDPAU libraries were not"

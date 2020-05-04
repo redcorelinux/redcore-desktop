@@ -34,7 +34,7 @@ COMMON_DEPEND="
 
 RDEPEND="${COMMON_DEPEND}
 	!!x11-misc/nvidia-settings
-	~x11-drivers/nvidia-legacy-drivers-${PV}:${SLOT}"
+	~x11-drivers/nvidia-drivers-legacy-${PV}:${SLOT}"
 DEPEND="${RDEPEND}
 	virtual/pkgconfig
 	x11-base/xorg-proto"
