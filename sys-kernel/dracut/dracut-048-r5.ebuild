@@ -113,7 +113,17 @@ src_install() {
 	dodoc dracut.html
 }
 
+_dracut_initramfs_regen() {
+	if [ -x $(which dracut) ]; then
+		dracut -N -f --no-hostonly-cmdline
+	fi
+}
+
 pkg_postinst() {
+	if [ $(stat -c %d:%i /) == $(stat -c %d:%i /proc/1/root/.) ]; then
+		_dracut_initramfs_regen
+	fi
+
 	if linux-info_get_any_version && linux_config_exists; then
 		ewarn ""
 		ewarn "If the following test report contains a missing kernel"
