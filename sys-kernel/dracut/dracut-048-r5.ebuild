@@ -75,6 +75,7 @@ PATCHES=(
 	"${FILESDIR}"/048-redcore-change-default-initramfs-name.patch
 	"${FILESDIR}"/048-remove_JobRunningTimeoutSec.patch
 	"${FILESDIR}"/048-sort-fixup-creating-early-microcode.patch
+	"${FILESDIR}"/fix-bash-5.patch
 )
 
 src_configure() {
