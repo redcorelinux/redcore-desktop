@@ -25,19 +25,7 @@ src_prepare() {
 	cp "${FILESDIR}"/dkms.conf "${S}" || die
 
 	epatch \
-		"${FILESDIR}/broadcom-sta-6.30.223.141-makefile.patch" \
-		"${FILESDIR}/broadcom-sta-6.30.223.141-eth-to-wlan.patch" \
-		"${FILESDIR}/broadcom-sta-6.30.223.141-gcc.patch" \
-		"${FILESDIR}/broadcom-sta-6.30.223.248-r3-Wno-date-time.patch" \
-		"${FILESDIR}/broadcom-sta-6.30.223.271-r1-linux-3.18.patch" \
-		"${FILESDIR}/broadcom-sta-6.30.223.271-r2-linux-4.3-v2.patch" \
-		"${FILESDIR}/broadcom-sta-6.30.223.271-r4-linux-4.7.patch" \
-		"${FILESDIR}/broadcom-sta-6.30.223.271-r4-linux-4.8.patch" \
-		"${FILESDIR}/broadcom-sta-6.30.223.271-r4-linux-4.11.patch" \
-		"${FILESDIR}/broadcom-sta-6.30.223.271-r4-linux-4.12.patch" \
-		"${FILESDIR}/broadcom-sta-6.30.223.271-r4-linux-4.15.patch" \
-		"${FILESDIR}/broadcom-sta-6.30.223.271-r4-linux-5.1.patch" \
-		"${FILESDIR}/broadcom-sta-6.30.223.271-r4-linux-5.6.patch"
+		"${FILESDIR}"/"${P}"-linux-3.18-to-5.6.patch
 
 	epatch_user
 }
