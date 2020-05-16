@@ -79,7 +79,7 @@ src_prepare() {
 
 	# prevent errors showing up on zfs-mount stop, #647688
 	# openrc will unmount all filesystems anyway.
-	sed -i "/^ZFS_UNMOUNT=/ s/yes/no/" etc/init.d/zfs.in || die
+	sed -i "/^ZFS_UNMOUNT=/ s/yes/no/" etc/default/zfs.in || die
 
 	# needed to get files regenerated
 	# https://github.com/zfsonlinux/zfs/issues/9443
