@@ -83,7 +83,7 @@ src_prepare() {
 
 	# needed to get files regenerated
 	# https://github.com/zfsonlinux/zfs/issues/9443
-	rm -v etc/init.d/zfs{,-functions} || die
+	rm -v etc/default/zfs{,-functions} || die
 }
 
 src_configure() {
