@@ -164,7 +164,7 @@ src_prepare() {
 	echo "LDPATH='${ldpaths#:}'" >> etc/env.d/50baselayout
 
 	# rc-scripts version for testing of features that *should* be present
-	echo "Redcore Linux Hardened 1908 - Mira" > etc/redcore-release
+	echo "Redcore Linux Hardened 2004 - Neptune" > etc/redcore-release
 }
 
 src_install() {
