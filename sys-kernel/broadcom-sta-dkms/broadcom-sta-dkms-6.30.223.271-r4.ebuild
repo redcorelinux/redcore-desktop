@@ -36,7 +36,8 @@ src_prepare() {
 		"${FILESDIR}/broadcom-sta-6.30.223.271-r4-linux-4.11.patch" \
 		"${FILESDIR}/broadcom-sta-6.30.223.271-r4-linux-4.12.patch" \
 		"${FILESDIR}/broadcom-sta-6.30.223.271-r4-linux-4.15.patch" \
-		"${FILESDIR}/broadcom-sta-6.30.223.271-r4-linux-5.1.patch"
+		"${FILESDIR}/broadcom-sta-6.30.223.271-r4-linux-5.1.patch" \
+		"${FILESDIR}/broadcom-sta-6.30.223.271-r4-linux-5.6.patch"
 
 	epatch_user
 }
