@@ -20,8 +20,6 @@ IUSE=""
 DEPEND="sys-kernel/dkms"
 RDEPEND="${DEPEND}"
 
-PATCHES=( "${FILESDIR}"/kernel-5.5.patch )
-
 S="${WORKDIR}/${MY_P}"
 
 src_configure() {

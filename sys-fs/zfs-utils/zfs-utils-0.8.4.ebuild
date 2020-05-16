@@ -4,7 +4,7 @@
 EAPI=7
 
 DISTUTILS_OPTIONAL=1
-PYTHON_COMPAT=( python{2_7,3_{6,7,8}} )
+PYTHON_COMPAT=( python3_{6,7,8} )
 
 inherit bash-completion-r1 flag-o-matic distutils-r1 toolchain-funcs udev
 
@@ -40,8 +40,6 @@ BDEPEND="${COMMON_DEPEND}
 "
 
 RDEPEND="${COMMON_DEPEND}
-	!=sys-apps/grep-2.13*
-	!sys-fs/zfs-fuse
 	!prefix? ( virtual/udev )
 	sys-fs/udev-init-scripts
 	test-suite? (
@@ -63,8 +61,6 @@ S="${WORKDIR}/${MY_P}"
 
 PATCHES=(
 	"${FILESDIR}/bash-completion-sudo.patch"
-	"${FILESDIR}/${PV}-fno-common.patch"
-	"${FILESDIR}/${PV}-zfs-functions.patch"
 )
 
 src_prepare() {
