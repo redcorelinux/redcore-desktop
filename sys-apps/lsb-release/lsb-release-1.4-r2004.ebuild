@@ -34,8 +34,8 @@ src_install() {
 	mkdir -p "${D}/etc"
 	cat > "${D}/etc/lsb-release" <<- EOF
 		DISTRIB_ID="Redcore"
-		DISTRIB_RELEASE="1908"
-		DISTRIB_CODENAME="Mira"
-		DISTRIB_DESCRIPTION="Redcore Linux Hardened 1908 Mira"
+		DISTRIB_RELEASE="2004"
+		DISTRIB_CODENAME="Neptune"
+		DISTRIB_DESCRIPTION="Redcore Linux Hardened 2004 Neptune"
 	EOF
 }
