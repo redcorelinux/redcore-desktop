@@ -4,10 +4,10 @@ componentName:  redcore_branding
 strings:
     productName:         Redcore Linux Hardened
     shortProductName:    Redcore
-    version:             1908
-    shortVersion:        1908
-    versionedName:       Redcore Linux Hardened 1908
-    shortVersionedName:  Redcore 1908
+    version:             2004
+    shortVersion:        2004
+    versionedName:       Redcore Linux Hardened 2004
+    shortVersionedName:  Redcore 2004
     bootloaderEntryName: Redcore
     productUrl:          https://redcorelinux.org/
     supportUrl:          https://wiki.redcorelinux.org/
