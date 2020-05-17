@@ -1,12 +1,15 @@
 # Copyright 2016 Redcore Linux
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=4
-inherit eutils
+EAPI=6
+inherit eutils git-r3
 
 DESCRIPTION="Offical Redcore Linux Core Artwork"
 HOMEPAGE="https://redcorelinux.org"
-SRC_URI="http://mirror.math.princeton.edu/pub/redcorelinux/distfiles/${PN}.tar.xz"
+
+EGIT_REPO_URI="https://gitlab.com/redcore/redcore-artwork-core.git"
+EGIT_BRANCH="master"
+EGIT_COMMIT="fc7014337a473ff0b8956ca0b2a37b3a3242eb66"
 
 LICENSE="CCPL-Attribution-ShareAlike-3.0"
 SLOT="0"
@@ -18,8 +21,6 @@ RDEPEND="sys-apps/findutils
 	splash? (
 		sys-kernel/dracut[splash]
 	)"
-
-S="${WORKDIR}"/"${PN}"
 
 src_install() {
 	# Cursors
