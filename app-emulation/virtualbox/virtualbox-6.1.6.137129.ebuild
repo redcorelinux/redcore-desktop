@@ -1,4 +1,4 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -47,8 +47,8 @@ fi
 DEPEND="app-arch/unzip
 	${PYTHON_DEPS}"
 
-RDEPEND="
-	!app-emulation/virtualbox-additions
+RDEPEND="!app-emulation/virtualbox-additions
+	acct-group/vboxusers
 	~app-emulation/virtualbox-modules-${MY_PV,,}
 	!headless? (
 		dev-libs/glib

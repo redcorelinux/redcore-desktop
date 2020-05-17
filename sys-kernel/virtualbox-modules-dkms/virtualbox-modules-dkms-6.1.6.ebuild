@@ -9,7 +9,7 @@ inherit eutils unpacker
 MY_PN=virtualbox-dkms
 DESCRIPTION="Kernel Modules source for Virtualbox"
 HOMEPAGE="http://www.virtualbox.org/"
-SRC_URI="http://ftp.de.debian.org/debian/pool/contrib/v/virtualbox/${MY_PN}_${PV}-dfsg-3_amd64.deb"
+SRC_URI="http://archive.ubuntu.com/ubuntu/pool/multiverse/v/virtualbox/${MY_PN}_${PV}-dfsg-1_amd64.deb"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -28,7 +28,7 @@ src_unpack() {
 src_prepare() {
 	grep -lR linux/autoconf.h *  | xargs sed -i -e 's:<linux/autoconf.h>:<generated/autoconf.h>:'
 	sed -i "s/virtualbox/${PN}/g" usr/src/virtualbox-${PV}/dkms.conf
-	sed -i "s/updates/extra\/dkms/g" usr/src/virtualbox-${PV}/dkms.conf 
+	sed -i "s/updates/extra\/dkms/g" usr/src/virtualbox-${PV}/dkms.conf
 }
 
 src_compile() {
