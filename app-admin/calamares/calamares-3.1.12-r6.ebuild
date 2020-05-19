@@ -57,7 +57,7 @@ src_prepare() {
 	# fix grubcfg breakage introduced by Manjaro, we don't rely on plymouthcfg to have splash
 	epatch -p1 "${FILESDIR}"/${PN}-dont-rely-on-plymouthcfg.patch
 	# replace calamares installer desktop icon
-	sed -i "s/Icon=calamares/Icon=start-here/g" "${S}/calamares.desktop"
+	sed -i "s/Icon=calamares/Icon=redcore-weblink/g" "${S}/calamares.desktop"
 	# fix installer doesn't start from desktop launcher (IMPROVE THIS UGLY THINGY)
 	sed -i "s/pkexec //g" "${S}/calamares.desktop"
 	sed -i "s/calamares/calamares-pkexec/g" "${S}/calamares.desktop"
