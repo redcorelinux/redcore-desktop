@@ -36,7 +36,7 @@ src_install () {
 	insinto usr/share/redcore
 	doins -r "${FILESDIR}"/menu/*
 
-	doicon "${FILESDIR}"/menu/img/redcore-weblink.png
+	doicon "${FILESDIR}"/menu/img/redcore-weblink.svg
 
 	dodir etc/xdg/autostart
 	insinto etc/xdg/autostart
