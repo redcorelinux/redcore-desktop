@@ -1,9 +1,0 @@
-[Desktop Entry]
-Encoding=UTF-8
-Type=Application
-
-Exec=xdg-open http://webchat.freenode.net/?channels=redcorelinux
-Icon=redcore-weblink
-
-Name=Get Live Help
-Name[ro]=Cere Ajutor Online

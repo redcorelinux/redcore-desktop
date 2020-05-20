@@ -30,15 +30,7 @@ src_install () {
 	doins -r skel/*
 	doins -r skel/.*
 
-	dodir usr/share/desktop-directories
-	insinto usr/share/desktop-directories
-	doins "${FILESDIR}"/menu/xdg/*.directory
-
-	dodir usr/share/redcore
-	insinto usr/share/redcore
-	doins -r "${FILESDIR}"/menu/*
-
-	doicon "${FILESDIR}"/menu/img/redcore-weblink.svg
+	doicon "${FILESDIR}"/redcore-weblink.svg
 
 	dodir etc/xdg/autostart
 	insinto etc/xdg/autostart
@@ -49,20 +41,4 @@ src_install () {
 	doins "${FILESDIR}"/redcore.ogg
 
 	rm -rf ${D}etc/.git
-}
-
-pkg_postinst() {
-	if [ -x "/usr/bin/xdg-desktop-menu" ]; then
-		xdg-desktop-menu install \
-			/usr/share/redcore/xdg/redcore-redcore.directory \
-			/usr/share/redcore/xdg/*.desktop
-	fi
-
-	fdo-mime_desktop_database_update
-}
-
-pkg_prerm() {
-	if [ -x "/usr/bin/xdg-desktop-menu" ]; then
-		xdg-desktop-menu uninstall /usr/share/redcore/xdg/redcore-redcore.directory /usr/share/redcore/xdg/*.desktop
-	fi
 }

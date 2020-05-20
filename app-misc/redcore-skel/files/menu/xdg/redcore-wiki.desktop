@@ -1,8 +1,0 @@
-[Desktop Entry]
-Encoding=UTF-8
-Type=Application
-
-Exec=xdg-open https://wiki.redcorelinux.org
-Icon=redcore-weblink
-
-Name=Redcore Linux Documentation

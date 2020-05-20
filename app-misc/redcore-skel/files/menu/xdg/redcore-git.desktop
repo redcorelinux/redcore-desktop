@@ -1,8 +1,0 @@
-[Desktop Entry]
-Encoding=UTF-8
-Type=Application
-
-Exec=xdg-open http://git.redcorelinux.org/cgit/
-Icon=redcore-weblink
-
-Name=Redcore Linux Git Repos
