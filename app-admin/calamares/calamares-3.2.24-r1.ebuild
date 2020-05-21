@@ -81,7 +81,7 @@ src_prepare() {
 
 src_configure() {
 	local mycmakeargs=(
-		-DINSTALL_CONFIG=OFF
+		-DINSTALL_CONFIG=ON
 		-DWEBVIEW_FORCE_WEBKIT=OFF
 		-DCMAKE_DISABLE_FIND_PACKAGE_LIBPARTED=ON
 	)
