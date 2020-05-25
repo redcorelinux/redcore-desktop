@@ -194,7 +194,7 @@ pkg_postinst() {
 		if [ "$(rc-config list boot | grep dkms)" != "" ]; then
 			einfo
 		else
-			"${ROOT}"/sbin/rc-update add dkms boot
+			"${ROOT}"/sbin/rc-update add dkms boot > /dev/null 2>&1
 		fi
 	fi
 
@@ -202,10 +202,10 @@ pkg_postinst() {
 		if [ "$(rc-config list boot | grep dbus)" != "" ]; then
 			einfo
 		elif [ "$(rc-config list default | grep dbus)" != "" ]; then
-			"${ROOT}"/sbin/rc-update del dbus default
-			"${ROOT}"/sbin/rc-update add dbus boot
+			"${ROOT}"/sbin/rc-update del dbus default > /dev/null 2>&1
+			"${ROOT}"/sbin/rc-update add dbus boot > /dev/null 2>&1
 		else
-			"${ROOT}"/sbin/rc-update add dbus boot
+			"${ROOT}"/sbin/rc-update add dbus boot > /dev/null 2>&1
 		fi
 	fi
 
@@ -213,15 +213,15 @@ pkg_postinst() {
 		if [ "$(rc-config list boot | grep elogind)" != "" ]; then
 			einfo
 		else
-			"${ROOT}"/sbin/rc-update add elogind boot
+			"${ROOT}"/sbin/rc-update add elogind boot > /dev/null 2>&1
 		fi
 
 		if [ "$(rc-config list default | grep consolekit)" != "" ]; then
-			"${ROOT}"/sbin/rc-update del consolekit default
+			"${ROOT}"/sbin/rc-update del consolekit default > /dev/null 2>&1
 		fi
 
 		if [ "$(rc-config list default | grep cgmanager)" != "" ]; then
-			"${ROOT}"/sbin/rc-update del cgmanager default
+			"${ROOT}"/sbin/rc-update del cgmanager default > /dev/null 2>&1
 		fi
 	fi
 
@@ -229,7 +229,7 @@ pkg_postinst() {
 		if [ "$(rc-config list boot | grep apparmor)" != "" ]; then
 			einfo
 		else
-			"${ROOT}"/sbin/rc-update add apparmor boot
+			"${ROOT}"/sbin/rc-update add apparmor boot > /dev/null 2>&1
 		fi
 	fi
 
@@ -237,15 +237,15 @@ pkg_postinst() {
 		if [ "$(rc-config list default | grep haveged)" != "" ]; then
 			einfo
 		else
-			"${ROOT}"/sbin/rc-update add haveged default
+			"${ROOT}"/sbin/rc-update add haveged default > /dev/null 2>&1
 		fi
 	fi
 
 	if [ -e "${ROOT}"/etc/init.d/openrc-settingsd ]; then
 		if [ "$(rc-config list default | grep openrc-settingsd)" != "" ]; then
-			einfo
+			"${ROOT}"/sbin/rc-update del openrc-settingsd default > /dev/null 2>&1
 		else
-			"${ROOT}"/sbin/rc-update del openrc-settingsd default
+			einfo
 		fi
 	fi
 }
