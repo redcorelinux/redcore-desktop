@@ -18,7 +18,7 @@ fi
 
 LICENSE="BSD-2"
 SLOT="0"
-IUSE="+apparmor audit bash debug +dkms elogind +entropy ncurses pam newnet prefix +netifrc selinux +settingsd +splash static-libs sysv-utils unicode"
+IUSE="+apparmor audit bash debug +dkms elogind +entropy ncurses pam newnet prefix +netifrc selinux +splash static-libs sysv-utils unicode"
 
 COMMON_DEPEND="
 	apparmor? (
@@ -41,7 +41,6 @@ COMMON_DEPEND="
 		sys-apps/policycoreutils
 		>=sys-libs/libselinux-2.6
 	)
-	settingsd? ( app-admin/openrc-settingsd )
 	splash? ( sys-boot/plymouth-openrc-plugin )
 	!<sys-apps/baselayout-2.1-r1
 	!<sys-fs/udev-init-scripts-27"
@@ -239,6 +238,14 @@ pkg_postinst() {
 			einfo
 		else
 			"${ROOT}"/sbin/rc-update add haveged default
+		fi
+	fi
+
+	if [ -e "${ROOT}"/etc/init.d/openrc-settingsd ]; then
+		if [ "$(rc-config list default | grep openrc-settingsd)" != "" ]; then
+			einfo
+		else
+			"${ROOT}"/sbin/rc-update del openrc-settingsd default
 		fi
 	fi
 }
