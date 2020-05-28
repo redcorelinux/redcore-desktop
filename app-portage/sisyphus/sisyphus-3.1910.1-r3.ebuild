@@ -63,5 +63,8 @@ src_install() {
 	# enforce best available python implementation
 	python_setup
 	python_fix_shebang "${ED}usr/share/${PN}/${PN}-cli.py"
-	python_fix_shebang "${ED}usr/share/${PN}/${PN}-gui.py"
+
+	if use gui; then
+		python_fix_shebang "${ED}usr/share/${PN}/${PN}-gui.py"
+	fi
 }
