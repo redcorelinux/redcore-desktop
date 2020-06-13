@@ -4,19 +4,20 @@
 EAPI=7
 
 ECM_HANDBOOK="forceoptional"
-KFMIN=5.66.0
+KFMIN=5.70.0
 PVCUT=$(ver_cut 1-3)
-QTMIN=5.12.3
+QTMIN=5.14.1
 inherit ecm kde.org
 
 DESCRIPTION="Utility providing information about the computer hardware"
 HOMEPAGE="https://userbase.kde.org/KInfoCenter"
+
 LICENSE="GPL-2" # TODO: CHECK
 SLOT="5"
-KEYWORDS="~amd64"
+KEYWORDS="~amd64 ~arm64 ~ppc64"
 IUSE="gles2-only ieee1394 +opengl +pci wayland"
 
-REQUIRED_USE="wayland? ( || ( gles2-only opengl ) )"
+REQUIRED_USE="wayland? ( || ( opengl gles2-only ) )"
 
 BDEPEND=">=dev-util/cmake-3.14.3"
 COMMON_DEPEND="
@@ -71,7 +72,7 @@ src_configure() {
 	)
 
 	if has_version "dev-qt/qtgui[gles2-only]"; then
-		mycmakeargs+=( $(cmake_use_find_package gles2 OpenGLES) )
+		mycmakeargs+=( $(cmake_use_find_package gles2-only OpenGLES) )
 	else
 		mycmakeargs+=( $(cmake_use_find_package opengl OpenGL) )
 	fi
