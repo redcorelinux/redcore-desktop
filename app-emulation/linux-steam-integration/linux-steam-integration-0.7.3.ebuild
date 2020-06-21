@@ -16,7 +16,7 @@ IUSE=""
 
 RDEPEND="app-emulation/steam"
 DEPEND="x11-libs/gtk+:3
-	virtual/pkgconfig[${MULTILIB_USEDEP}]"
+	virtual/pkgconfig"
 
 PATCHES=( "${FILESDIR}"/bzip2.patch )
 
