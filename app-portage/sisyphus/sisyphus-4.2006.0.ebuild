@@ -3,17 +3,16 @@
 
 EAPI=6
 
-PYTHON_COMPAT=( python3_{5,6,7} )
+PYTHON_COMPAT=( python3_{6,7,8} )
 
 inherit eutils python-r1 git-r3
 
 DESCRIPTION="A simple portage python wrapper which works like other package managers(apt-get/yum/dnf)"
 HOMEPAGE="http://redcorelinux.org"
 
-EGIT_REPO_URI="https://pagure.io/redcore/sisyphus.git"
 EGIT_REPO_URI="https://gitlab.com/redcore/sisyphus.git"
 EGIT_BRANCH="master"
-EGIT_COMMIT="3e315edde07f7392fa40b353445d0bddb721e73f"
+EGIT_COMMIT="94435dc8ad302c54448fdfe5b1add8d9a2b264f9"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -26,6 +25,8 @@ RDEPEND="${DEPEND}
 	app-portage/gentoolkit[${PYTHON_USEDEP}]
 	app-portage/portage-utils
 	dev-python/animation[${PYTHON_USEDEP}]
+	dev-python/GitPython[${PYTHON_USEDEP}]
+	dev-python/typer[${PYTHON_USEDEP}]
 	dev-python/urllib3[${PYTHON_USEDEP}]
 	dev-python/wget[${PYTHON_USEDEP}]
 	sys-apps/portage[${PYTHON_USEDEP}]
@@ -36,8 +37,8 @@ src_install() {
 	default
 
 	inject_libsisyphus() {
-		python_moduleinto "$(python_get_sitedir)"
-		python_domodule src/backend/libsisyphus.py
+		python_moduleinto "$(python_get_sitedir)"/"${PN}"
+		python_domodule src/backend/*.py
 	}
 
 	python_foreach_impl inject_libsisyphus
@@ -60,11 +61,13 @@ src_install() {
 		rm -rf ${ED}usr/share/polkit-1
 	fi
 
-	# enforce best available python implementation
+	# enforce the best available python implementation (CLI)
 	python_setup
 	python_fix_shebang "${ED}usr/share/${PN}/${PN}-cli.py"
 
+	# enforce the best available python implementation (GUI)
 	if use gui; then
+		python_setup
 		python_fix_shebang "${ED}usr/share/${PN}/${PN}-gui.py"
 	fi
 }
