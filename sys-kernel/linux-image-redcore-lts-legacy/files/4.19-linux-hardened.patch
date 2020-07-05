@@ -1,8 +1,8 @@
 diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
-index 8bf0c0532046..c81c652ecf44 100644
+index 30752db57587..77f250bbcba7 100644
 --- a/Documentation/admin-guide/kernel-parameters.txt
 +++ b/Documentation/admin-guide/kernel-parameters.txt
-@@ -496,16 +496,6 @@
+@@ -500,16 +500,6 @@
  			nosocket -- Disable socket memory accounting.
  			nokmem -- Disable kernel memory accounting.
  
@@ -19,7 +19,7 @@ index 8bf0c0532046..c81c652ecf44 100644
  	cio_ignore=	[S390]
  			See Documentation/s390/CommonIO for details.
  	clk_ignore_unused
-@@ -3207,6 +3197,11 @@
+@@ -3211,6 +3201,11 @@
  			the specified number of seconds.  This is to be used if
  			your oopses keep scrolling off the screen.
  
@@ -71,10 +71,10 @@ index 37a679501ddc..59b747920f4d 100644
  
  The value in this file affects behavior of handling NMI. When the
 diff --git a/Makefile b/Makefile
-index 313f0c8dd66f..8e66fca67fd0 100644
+index 605a6a2e03dc..2359c3d46cd4 100644
 --- a/Makefile
 +++ b/Makefile
-@@ -696,6 +696,9 @@ stackp-flags-$(CONFIG_STACKPROTECTOR_STRONG)      := -fstack-protector-strong
+@@ -686,6 +686,9 @@ stackp-flags-$(CONFIG_STACKPROTECTOR_STRONG)      := -fstack-protector-strong
  KBUILD_CFLAGS += $(stackp-flags-y)
  
  ifeq ($(cc-name),clang)
@@ -115,10 +115,10 @@ index a336548487e6..bbe821420e7a 100644
  	  Enabling this switches the refcounting infrastructure from a fast
  	  unchecked atomic_t implementation to a fully state checked
 diff --git a/arch/arm64/Kconfig b/arch/arm64/Kconfig
-index 51fe21f5d078..f345755446d9 100644
+index 1fe3e5cb2927..7683d9c7d0dc 100644
 --- a/arch/arm64/Kconfig
 +++ b/arch/arm64/Kconfig
-@@ -1033,6 +1033,7 @@ endif
+@@ -1049,6 +1049,7 @@ endif
  
  config ARM64_SW_TTBR0_PAN
  	bool "Emulate Privileged Access Never using TTBR0_EL1 switching"
@@ -126,7 +126,7 @@ index 51fe21f5d078..f345755446d9 100644
  	help
  	  Enabling this option prevents the kernel from accessing
  	  user-space memory directly by pointing TTBR0_EL1 to a reserved
-@@ -1208,6 +1209,7 @@ config RANDOMIZE_BASE
+@@ -1224,6 +1225,7 @@ config RANDOMIZE_BASE
  	bool "Randomize the address of the kernel image"
  	select ARM64_MODULE_PLTS if MODULES
  	select RELOCATABLE
@@ -403,10 +403,10 @@ index 79ec7add5f98..2950448e00ac 100644
  	native_write_cr4(cr4 ^ X86_CR4_PGE);
  	/* write old PGE again and flush TLBs */
 diff --git a/arch/x86/kernel/cpu/common.c b/arch/x86/kernel/cpu/common.c
-index a6458ab499c2..0be5291ec42e 100644
+index 2058e8c0e61d..820f8508aebb 100644
 --- a/arch/x86/kernel/cpu/common.c
 +++ b/arch/x86/kernel/cpu/common.c
-@@ -1790,7 +1790,6 @@ void cpu_init(void)
+@@ -1824,7 +1824,6 @@ void cpu_init(void)
  	wrmsrl(MSR_KERNEL_GS_BASE, 0);
  	barrier();
  
@@ -415,7 +415,7 @@ index a6458ab499c2..0be5291ec42e 100644
  
  	/*
 diff --git a/arch/x86/kernel/process.c b/arch/x86/kernel/process.c
-index b8b08e61ac73..42f763e0adf3 100644
+index cd138bfd926c..2a6d5617d55c 100644
 --- a/arch/x86/kernel/process.c
 +++ b/arch/x86/kernel/process.c
 @@ -39,6 +39,8 @@
@@ -427,7 +427,7 @@ index b8b08e61ac73..42f763e0adf3 100644
  
  #include "process.h"
  
-@@ -783,7 +785,10 @@ unsigned long arch_align_stack(unsigned long sp)
+@@ -775,7 +777,10 @@ unsigned long arch_align_stack(unsigned long sp)
  
  unsigned long arch_randomize_brk(struct mm_struct *mm)
  {
@@ -567,10 +567,10 @@ index 15c1f5e12eb8..ff72cccec5b8 100644
  	struct list_head *cpu_list, local_list;
  
 diff --git a/drivers/ata/libata-core.c b/drivers/ata/libata-core.c
-index 75d582ca917f..38ba030b8e27 100644
+index 6b372fa58382..68c4f17e027f 100644
 --- a/drivers/ata/libata-core.c
 +++ b/drivers/ata/libata-core.c
-@@ -5161,7 +5161,7 @@ void ata_qc_free(struct ata_queued_cmd *qc)
+@@ -5160,7 +5160,7 @@ void ata_qc_free(struct ata_queued_cmd *qc)
  	struct ata_port *ap;
  	unsigned int tag;
  
@@ -579,7 +579,7 @@ index 75d582ca917f..38ba030b8e27 100644
  	ap = qc->ap;
  
  	qc->flags = 0;
-@@ -5178,7 +5178,7 @@ void __ata_qc_complete(struct ata_queued_cmd *qc)
+@@ -5177,7 +5177,7 @@ void __ata_qc_complete(struct ata_queued_cmd *qc)
  	struct ata_port *ap;
  	struct ata_link *link;
  
@@ -609,7 +609,7 @@ index 1df9cb8e659e..eb71148a4a69 100644
  	  Say Y here if you want to support the /dev/port device. The /dev/port
  	  device is similar to /dev/mem, but for I/O ports.
 diff --git a/drivers/char/random.c b/drivers/char/random.c
-index 53e822793d46..c97b295338ce 100644
+index d5f970d039bb..38f184022af7 100644
 --- a/drivers/char/random.c
 +++ b/drivers/char/random.c
 @@ -281,11 +281,20 @@
@@ -961,10 +961,10 @@ index ac8025cd4a1f..a89e48f53fba 100644
  	return tty;
  }
 diff --git a/drivers/usb/core/hub.c b/drivers/usb/core/hub.c
-index 27486b0a027a..82689c97b660 100644
+index fa28f23a4a33..8a6c833ceefc 100644
 --- a/drivers/usb/core/hub.c
 +++ b/drivers/usb/core/hub.c
-@@ -43,6 +43,8 @@
+@@ -44,6 +44,8 @@
  #define USB_TP_TRANSMISSION_DELAY	40	/* ns */
  #define USB_TP_TRANSMISSION_DELAY_MAX	65535	/* ns */
  
@@ -973,7 +973,7 @@ index 27486b0a027a..82689c97b660 100644
  /* Protect struct usb_device->state and ->children members
   * Note: Both are also protected by ->dev.sem, except that ->state can
   * change to USB_STATE_NOTATTACHED even when the semaphore isn't held. */
-@@ -4961,6 +4963,12 @@ static void hub_port_connect(struct usb_hub *hub, int port1, u16 portstatus,
+@@ -4980,6 +4982,12 @@ static void hub_port_connect(struct usb_hub *hub, int port1, u16 portstatus,
  			goto done;
  		return;
  	}
@@ -1014,7 +1014,7 @@ index e5126fad57c5..2a59499ba24d 100644
  	inode->i_op = &simple_dir_inode_operations;
  	inode->i_fop = &simple_dir_operations;
 diff --git a/fs/exec.c b/fs/exec.c
-index 561ea64829ec..5d40794103eb 100644
+index cece8c14f377..6ba41b1f3a3f 100644
 --- a/fs/exec.c
 +++ b/fs/exec.c
 @@ -62,6 +62,7 @@
@@ -1279,10 +1279,10 @@ index f640dcbc880c..2b4f5d651f19 100644
  {
  	return true;
 diff --git a/include/linux/fs.h b/include/linux/fs.h
-index 92420009b9bc..9238f04686ce 100644
+index 8d568b51778b..d2ad90ecbf0c 100644
 --- a/include/linux/fs.h
 +++ b/include/linux/fs.h
-@@ -3468,4 +3468,15 @@ extern void inode_nohighmem(struct inode *inode);
+@@ -3469,4 +3469,15 @@ extern void inode_nohighmem(struct inode *inode);
  extern int vfs_fadvise(struct file *file, loff_t offset, loff_t len,
  		       int advice);
  
@@ -1392,7 +1392,7 @@ index 069aa2ebef90..cb9e3637a620 100644
  const struct kobj_ns_type_operations *kobj_child_ns_ops(struct kobject *parent);
  const struct kobj_ns_type_operations *kobj_ns_ops(struct kobject *kobj);
 diff --git a/include/linux/mm.h b/include/linux/mm.h
-index 45f10f5896b7..7f251a536293 100644
+index 05bc5f25ab85..dc590f056192 100644
 --- a/include/linux/mm.h
 +++ b/include/linux/mm.h
 @@ -571,7 +571,7 @@ static inline int is_vmalloc_or_module_addr(const void *x)
@@ -1512,10 +1512,10 @@ index 3a1a1dbc6f49..ff38fec9eb76 100644
  	/*
  	 * Defragmentation by allocating from a remote node.
 diff --git a/include/linux/string.h b/include/linux/string.h
-index f58e1ef76572..516caa40676e 100644
+index 4db285b83f44..a479f93d59a4 100644
 --- a/include/linux/string.h
 +++ b/include/linux/string.h
-@@ -238,10 +238,16 @@ void __read_overflow2(void) __compiletime_error("detected read beyond size of ob
+@@ -238,6 +238,12 @@ void __read_overflow2(void) __compiletime_error("detected read beyond size of ob
  void __read_overflow3(void) __compiletime_error("detected read beyond size of object passed as 3rd parameter");
  void __write_overflow(void) __compiletime_error("detected write beyond size of object passed as 1st parameter");
  
@@ -1526,6 +1526,10 @@ index f58e1ef76572..516caa40676e 100644
 +#endif
 +
  #if !defined(__NO_FORTIFY) && defined(__OPTIMIZE__) && defined(CONFIG_FORTIFY_SOURCE)
+ 
+ #ifdef CONFIG_KASAN
+@@ -266,7 +272,7 @@ extern char *__underlying_strncpy(char *p, const char *q, __kernel_size_t size)
+ 
  __FORTIFY_INLINE char *strncpy(char *p, const char *q, __kernel_size_t size)
  {
 -	size_t p_size = __builtin_object_size(p, 0);
@@ -1533,16 +1537,16 @@ index f58e1ef76572..516caa40676e 100644
  	if (__builtin_constant_p(size) && p_size < size)
  		__write_overflow();
  	if (p_size < size)
-@@ -251,7 +257,7 @@ __FORTIFY_INLINE char *strncpy(char *p, const char *q, __kernel_size_t size)
+@@ -276,7 +282,7 @@ __FORTIFY_INLINE char *strncpy(char *p, const char *q, __kernel_size_t size)
  
  __FORTIFY_INLINE char *strcat(char *p, const char *q)
  {
 -	size_t p_size = __builtin_object_size(p, 0);
 +	size_t p_size = __string_size(p);
  	if (p_size == (size_t)-1)
- 		return __builtin_strcat(p, q);
+ 		return __underlying_strcat(p, q);
  	if (strlcat(p, q, p_size) >= p_size)
-@@ -262,7 +268,7 @@ __FORTIFY_INLINE char *strcat(char *p, const char *q)
+@@ -287,7 +293,7 @@ __FORTIFY_INLINE char *strcat(char *p, const char *q)
  __FORTIFY_INLINE __kernel_size_t strlen(const char *p)
  {
  	__kernel_size_t ret;
@@ -1551,7 +1555,7 @@ index f58e1ef76572..516caa40676e 100644
  
  	/* Work around gcc excess stack consumption issue */
  	if (p_size == (size_t)-1 ||
-@@ -277,7 +283,7 @@ __FORTIFY_INLINE __kernel_size_t strlen(const char *p)
+@@ -302,7 +308,7 @@ __FORTIFY_INLINE __kernel_size_t strlen(const char *p)
  extern __kernel_size_t __real_strnlen(const char *, __kernel_size_t) __RENAME(strnlen);
  __FORTIFY_INLINE __kernel_size_t strnlen(const char *p, __kernel_size_t maxlen)
  {
@@ -1560,7 +1564,7 @@ index f58e1ef76572..516caa40676e 100644
  	__kernel_size_t ret = __real_strnlen(p, maxlen < p_size ? maxlen : p_size);
  	if (p_size <= ret && maxlen != ret)
  		fortify_panic(__func__);
-@@ -289,8 +295,8 @@ extern size_t __real_strlcpy(char *, const char *, size_t) __RENAME(strlcpy);
+@@ -314,8 +320,8 @@ extern size_t __real_strlcpy(char *, const char *, size_t) __RENAME(strlcpy);
  __FORTIFY_INLINE size_t strlcpy(char *p, const char *q, size_t size)
  {
  	size_t ret;
@@ -1571,7 +1575,7 @@ index f58e1ef76572..516caa40676e 100644
  	if (p_size == (size_t)-1 && q_size == (size_t)-1)
  		return __real_strlcpy(p, q, size);
  	ret = strlen(q);
-@@ -310,8 +316,8 @@ __FORTIFY_INLINE size_t strlcpy(char *p, const char *q, size_t size)
+@@ -335,8 +341,8 @@ __FORTIFY_INLINE size_t strlcpy(char *p, const char *q, size_t size)
  __FORTIFY_INLINE char *strncat(char *p, const char *q, __kernel_size_t count)
  {
  	size_t p_len, copy_len;
@@ -1580,9 +1584,9 @@ index f58e1ef76572..516caa40676e 100644
 +	size_t p_size = __string_size(p);
 +	size_t q_size = __string_size(q);
  	if (p_size == (size_t)-1 && q_size == (size_t)-1)
- 		return __builtin_strncat(p, q, count);
+ 		return __underlying_strncat(p, q, count);
  	p_len = strlen(p);
-@@ -424,8 +430,8 @@ __FORTIFY_INLINE void *kmemdup(const void *p, size_t size, gfp_t gfp)
+@@ -449,8 +455,8 @@ __FORTIFY_INLINE void *kmemdup(const void *p, size_t size, gfp_t gfp)
  /* defined after fortified strlen and memcpy to reuse them */
  __FORTIFY_INLINE char *strcpy(char *p, const char *q)
  {
@@ -1591,10 +1595,10 @@ index f58e1ef76572..516caa40676e 100644
 +	size_t p_size = __string_size(p);
 +	size_t q_size = __string_size(q);
  	if (p_size == (size_t)-1 && q_size == (size_t)-1)
- 		return __builtin_strcpy(p, q);
+ 		return __underlying_strcpy(p, q);
  	memcpy(p, q, strlen(q) + 1);
 diff --git a/include/linux/tty.h b/include/linux/tty.h
-index 248a137112e8..02a63bec41ca 100644
+index 74226a8f919c..a4280e6a318d 100644
 --- a/include/linux/tty.h
 +++ b/include/linux/tty.h
 @@ -14,6 +14,7 @@
@@ -1623,7 +1627,7 @@ index 248a137112e8..02a63bec41ca 100644
  #define TTY_MAGIC		0x5401
  
 diff --git a/include/linux/vmalloc.h b/include/linux/vmalloc.h
-index 398e9c95cd61..baab7195306a 100644
+index 206957b1b54d..17ec0860416b 100644
 --- a/include/linux/vmalloc.h
 +++ b/include/linux/vmalloc.h
 @@ -69,19 +69,19 @@ static inline void vmalloc_init(void)
@@ -1824,10 +1828,10 @@ index 47035b5a46f6..efbd3ac00d92 100644
  	default y
  	depends on SLUB && SMP
 diff --git a/kernel/audit.c b/kernel/audit.c
-index 1f08c38e604a..2c4f577a4317 100644
+index 45741c3c48a4..a2de0700ecd5 100644
 --- a/kernel/audit.c
 +++ b/kernel/audit.c
-@@ -1630,6 +1630,9 @@ static int __init audit_enable(char *str)
+@@ -1641,6 +1641,9 @@ static int __init audit_enable(char *str)
  
  	if (audit_default == AUDIT_OFF)
  		audit_initialized = AUDIT_DISABLED;
@@ -1851,7 +1855,7 @@ index 36be400c3e65..50fa38718408 100644
  long bpf_jit_limit   __read_mostly;
  
 diff --git a/kernel/bpf/syscall.c b/kernel/bpf/syscall.c
-index 596959288eb9..fb76f46d61ce 100644
+index b766265cf37d..5b6af308d584 100644
 --- a/kernel/bpf/syscall.c
 +++ b/kernel/bpf/syscall.c
 @@ -48,7 +48,7 @@ static DEFINE_SPINLOCK(prog_idr_lock);
@@ -1881,10 +1885,10 @@ index 7718d7dcadc7..8a4ce459da0a 100644
  
  /**
 diff --git a/kernel/events/core.c b/kernel/events/core.c
-index 8c70ee23fbe9..7c45b1e38bc0 100644
+index a17e6302ded5..df052b42d1f0 100644
 --- a/kernel/events/core.c
 +++ b/kernel/events/core.c
-@@ -397,8 +397,13 @@ static cpumask_var_t perf_online_mask;
+@@ -402,8 +402,13 @@ static cpumask_var_t perf_online_mask;
   *   0 - disallow raw tracepoint access for unpriv
   *   1 - disallow cpu events for unpriv
   *   2 - disallow kernel profiling for unpriv
@@ -1898,7 +1902,7 @@ index 8c70ee23fbe9..7c45b1e38bc0 100644
  
  /* Minimum for 512 kiB + 1 user control page */
  int sysctl_perf_event_mlock __read_mostly = 512 + (PAGE_SIZE / 1024); /* 'free' kiB per user */
-@@ -10529,6 +10534,9 @@ SYSCALL_DEFINE5(perf_event_open,
+@@ -10544,6 +10549,9 @@ SYSCALL_DEFINE5(perf_event_open,
  	if (flags & ~PERF_FLAG_ALL)
  		return -EINVAL;
  
@@ -1949,7 +1953,7 @@ index 1a2d18e98bf9..f3a8e3df2e12 100644
  	if (err)
  		goto bad_unshare_out;
 diff --git a/kernel/kmod.c b/kernel/kmod.c
-index bc6addd9152b..008be43f6cdd 100644
+index a2de58de6ab6..6dbfe38a1d7f 100644
 --- a/kernel/kmod.c
 +++ b/kernel/kmod.c
 @@ -149,6 +149,13 @@ int __request_module(bool wait, const char *fmt, ...)
@@ -2015,7 +2019,7 @@ index f7e89c989df7..527c170810fc 100644
  	struct rcu_state *rsp;
  
 diff --git a/kernel/sched/fair.c b/kernel/sched/fair.c
-index 86ccaaf0c1bf..f3103b3f1bb4 100644
+index 92b1e71f13c8..c385bc7b0cec 100644
 --- a/kernel/sched/fair.c
 +++ b/kernel/sched/fair.c
 @@ -9719,7 +9719,7 @@ static int idle_balance(struct rq *this_rq, struct rq_flags *rf)
@@ -2472,7 +2476,7 @@ index a98f09b83019..d1695e475b37 100644
  		goto set_brk;
  
 diff --git a/mm/page_alloc.c b/mm/page_alloc.c
-index e5c610d711f3..12f96ff5ef0e 100644
+index 7181dfe76440..12e186c11c9a 100644
 --- a/mm/page_alloc.c
 +++ b/mm/page_alloc.c
 @@ -66,6 +66,7 @@
@@ -2535,7 +2539,7 @@ index e5c610d711f3..12f96ff5ef0e 100644
  	page_zone(page)->managed_pages += nr_pages;
  	set_page_refcounted(page);
  	__free_pages(page, order);
-@@ -1884,8 +1916,8 @@ static inline int check_new_page(struct page *page)
+@@ -1880,8 +1912,8 @@ static inline int check_new_page(struct page *page)
  
  static inline bool free_pages_prezeroed(void)
  {
@@ -2546,7 +2550,7 @@ index e5c610d711f3..12f96ff5ef0e 100644
  }
  
  #ifdef CONFIG_DEBUG_VM
-@@ -1942,6 +1974,11 @@ static void prep_new_page(struct page *page, unsigned int order, gfp_t gfp_flags
+@@ -1938,6 +1970,11 @@ static void prep_new_page(struct page *page, unsigned int order, gfp_t gfp_flags
  
  	post_alloc_hook(page, order, gfp_flags);
  
@@ -2612,7 +2616,7 @@ index 9632772e14be..802ff9ee8172 100644
  	/*
  	 * Else we can use all the padding etc for the allocation
 diff --git a/mm/slab_common.c b/mm/slab_common.c
-index 39e382acb0b8..a87a9a2fdf4e 100644
+index b5776b1301f0..8461504d8346 100644
 --- a/mm/slab_common.c
 +++ b/mm/slab_common.c
 @@ -27,10 +27,10 @@
@@ -2638,7 +2642,7 @@ index 39e382acb0b8..a87a9a2fdf4e 100644
  static int __init setup_slab_nomerge(char *str)
  {
 diff --git a/mm/slub.c b/mm/slub.c
-index 9c3937c5ce38..6b063a76c419 100644
+index b94ba8d35a02..ca9d18891363 100644
 --- a/mm/slub.c
 +++ b/mm/slub.c
 @@ -124,6 +124,16 @@ static inline int kmem_cache_debug(struct kmem_cache *s)
@@ -2753,7 +2757,7 @@ index 9c3937c5ce38..6b063a76c419 100644
  		kasan_unpoison_object_data(s, object);
  		s->ctor(object);
  		kasan_poison_object_data(s, object);
-@@ -2700,9 +2749,21 @@ static __always_inline void *slab_alloc_node(struct kmem_cache *s,
+@@ -2708,9 +2757,21 @@ static __always_inline void *slab_alloc_node(struct kmem_cache *s,
  		stat(s, ALLOC_FASTPATH);
  	}
  
@@ -2776,7 +2780,7 @@ index 9c3937c5ce38..6b063a76c419 100644
  	slab_post_alloc_hook(s, gfpflags, 1, &object);
  
  	return object;
-@@ -2909,6 +2970,27 @@ static __always_inline void do_slab_free(struct kmem_cache *s,
+@@ -2917,6 +2978,27 @@ static __always_inline void do_slab_free(struct kmem_cache *s,
  	void *tail_obj = tail ? : head;
  	struct kmem_cache_cpu *c;
  	unsigned long tid;
@@ -2804,7 +2808,7 @@ index 9c3937c5ce38..6b063a76c419 100644
  redo:
  	/*
  	 * Determine the currently cpus per cpu slab.
-@@ -3085,7 +3167,7 @@ int kmem_cache_alloc_bulk(struct kmem_cache *s, gfp_t flags, size_t size,
+@@ -3095,7 +3177,7 @@ int kmem_cache_alloc_bulk(struct kmem_cache *s, gfp_t flags, size_t size,
  			  void **p)
  {
  	struct kmem_cache_cpu *c;
@@ -2813,7 +2817,7 @@ index 9c3937c5ce38..6b063a76c419 100644
  
  	/* memcg and kmem_cache debug support */
  	s = slab_pre_alloc_hook(s, flags);
-@@ -3122,13 +3204,29 @@ int kmem_cache_alloc_bulk(struct kmem_cache *s, gfp_t flags, size_t size,
+@@ -3141,13 +3223,29 @@ int kmem_cache_alloc_bulk(struct kmem_cache *s, gfp_t flags, size_t size,
  	local_irq_enable();
  
  	/* Clear memory outside IRQ disabled fastpath loop */
@@ -2844,7 +2848,7 @@ index 9c3937c5ce38..6b063a76c419 100644
  	/* memcg and kmem_cache debug support */
  	slab_post_alloc_hook(s, flags, size, p);
  	return i;
-@@ -3160,9 +3258,9 @@ EXPORT_SYMBOL(kmem_cache_alloc_bulk);
+@@ -3179,9 +3277,9 @@ EXPORT_SYMBOL(kmem_cache_alloc_bulk);
   * and increases the number of allocations possible without having to
   * take the list_lock.
   */
@@ -2857,7 +2861,7 @@ index 9c3937c5ce38..6b063a76c419 100644
  
  /*
   * Calculate the order of allocation given an slab object size.
-@@ -3334,6 +3432,7 @@ static void early_kmem_cache_node_alloc(int node)
+@@ -3353,6 +3451,7 @@ static void early_kmem_cache_node_alloc(int node)
  	init_object(kmem_cache_node, n, SLUB_RED_ACTIVE);
  	init_tracking(kmem_cache_node, n);
  #endif
@@ -2865,7 +2869,7 @@ index 9c3937c5ce38..6b063a76c419 100644
  	kasan_kmalloc(kmem_cache_node, n, sizeof(struct kmem_cache_node),
  		      GFP_KERNEL);
  	init_kmem_cache_node(n);
-@@ -3490,6 +3589,9 @@ static int calculate_sizes(struct kmem_cache *s, int forced_order)
+@@ -3509,6 +3608,9 @@ static int calculate_sizes(struct kmem_cache *s, int forced_order)
  		size += sizeof(void *);
  	}
  
@@ -2875,7 +2879,7 @@ index 9c3937c5ce38..6b063a76c419 100644
  #ifdef CONFIG_SLUB_DEBUG
  	if (flags & SLAB_STORE_USER)
  		/*
-@@ -3562,6 +3664,10 @@ static int kmem_cache_open(struct kmem_cache *s, slab_flags_t flags)
+@@ -3581,6 +3683,10 @@ static int kmem_cache_open(struct kmem_cache *s, slab_flags_t flags)
  #ifdef CONFIG_SLAB_FREELIST_HARDENED
  	s->random = get_random_long();
  #endif
@@ -2886,7 +2890,7 @@ index 9c3937c5ce38..6b063a76c419 100644
  
  	if (!calculate_sizes(s, -1))
  		goto error;
-@@ -3838,6 +3944,8 @@ void __check_heap_object(const void *ptr, unsigned long n, struct page *page,
+@@ -3857,6 +3963,8 @@ void __check_heap_object(const void *ptr, unsigned long n, struct page *page,
  		offset -= s->red_left_pad;
  	}
  
@@ -2895,7 +2899,7 @@ index 9c3937c5ce38..6b063a76c419 100644
  	/* Allow address range falling entirely within usercopy region. */
  	if (offset >= s->useroffset &&
  	    offset - s->useroffset <= s->usersize &&
-@@ -3871,7 +3979,11 @@ static size_t __ksize(const void *object)
+@@ -3890,7 +3998,11 @@ static size_t __ksize(const void *object)
  	page = virt_to_head_page(object);
  
  	if (unlikely(!PageSlab(page))) {
@@ -2907,7 +2911,7 @@ index 9c3937c5ce38..6b063a76c419 100644
  		return PAGE_SIZE << compound_order(page);
  	}
  
-@@ -4731,7 +4843,7 @@ enum slab_stat_type {
+@@ -4750,7 +4862,7 @@ enum slab_stat_type {
  #define SO_TOTAL	(1 << SL_TOTAL)
  
  #ifdef CONFIG_MEMCG
@@ -2935,10 +2939,10 @@ index 45fdbfb6b2a6..55ec851eb819 100644
  }
  
 diff --git a/net/core/dev.c b/net/core/dev.c
-index c1a3baf16957..a6b3bba36e8a 100644
+index 4b1053057ca6..c0efe00432c3 100644
 --- a/net/core/dev.c
 +++ b/net/core/dev.c
-@@ -4536,7 +4536,7 @@ int netif_rx_ni(struct sk_buff *skb)
+@@ -4533,7 +4533,7 @@ int netif_rx_ni(struct sk_buff *skb)
  }
  EXPORT_SYMBOL(netif_rx_ni);
  
@@ -2947,7 +2951,7 @@ index c1a3baf16957..a6b3bba36e8a 100644
  {
  	struct softnet_data *sd = this_cpu_ptr(&softnet_data);
  
-@@ -6304,7 +6304,7 @@ static int napi_poll(struct napi_struct *n, struct list_head *repoll)
+@@ -6311,7 +6311,7 @@ static int napi_poll(struct napi_struct *n, struct list_head *repoll)
  	return work;
  }
  
@@ -2990,7 +2994,7 @@ index 6cec08cd0bb9..ffc74355a94d 100644
  	{
  		.procname	= "netdev_budget",
 diff --git a/net/ipv4/Kconfig b/net/ipv4/Kconfig
-index 32cae39cdff6..9141d7ae99b2 100644
+index 2e12f848203a..4115419d5e35 100644
 --- a/net/ipv4/Kconfig
 +++ b/net/ipv4/Kconfig
 @@ -266,6 +266,7 @@ config IP_PIMSM_V2
@@ -3069,10 +3073,10 @@ index 523d26f5e22e..10070b040661 100644
  		return igmpv3_send_report(in_dev, pmc);
  
 diff --git a/net/ipv4/tcp_input.c b/net/ipv4/tcp_input.c
-index 38b6d8f90a44..9c67d386df71 100644
+index 7441ecfc8320..662e902f48a4 100644
 --- a/net/ipv4/tcp_input.c
 +++ b/net/ipv4/tcp_input.c
-@@ -307,11 +307,13 @@ static void tcp_ecn_rcv_synack(struct tcp_sock *tp, const struct tcphdr *th)
+@@ -308,11 +308,13 @@ static void tcp_ecn_rcv_synack(struct tcp_sock *tp, const struct tcphdr *th)
  		tp->ecn_flags &= ~TCP_ECN_OK;
  }
  
@@ -3086,7 +3090,7 @@ index 38b6d8f90a44..9c67d386df71 100644
  
  static bool tcp_ecn_rcv_ecn_echo(const struct tcp_sock *tp, const struct tcphdr *th)
  {
-@@ -5921,6 +5923,7 @@ static int tcp_rcv_synsent_state_process(struct sock *sk, struct sk_buff *skb,
+@@ -5938,6 +5940,7 @@ static int tcp_rcv_synsent_state_process(struct sock *sk, struct sk_buff *skb,
  	    tcp_paws_reject(&tp->rx_opt, 0))
  		goto discard_and_undo;
  
@@ -3094,7 +3098,7 @@ index 38b6d8f90a44..9c67d386df71 100644
  	if (th->syn) {
  		/* We see SYN without ACK. It is attempt of
  		 * simultaneous connect with crossed SYNs.
-@@ -5972,6 +5975,7 @@ static int tcp_rcv_synsent_state_process(struct sock *sk, struct sk_buff *skb,
+@@ -5989,6 +5992,7 @@ static int tcp_rcv_synsent_state_process(struct sock *sk, struct sk_buff *skb,
  		goto discard;
  #endif
  	}
@@ -3269,7 +3273,7 @@ index 6d14cbe443f8..4eeebbdc452e 100644
  			icmpv6_echo_reply(skb);
  		break;
 diff --git a/net/ipv6/tcp_ipv6.c b/net/ipv6/tcp_ipv6.c
-index c5f4e89b6ff3..86375c9966ef 100644
+index 2e76ebfdc907..5f98b9f4b57d 100644
 --- a/net/ipv6/tcp_ipv6.c
 +++ b/net/ipv6/tcp_ipv6.c
 @@ -71,6 +71,10 @@
@@ -3283,7 +3287,7 @@ index c5f4e89b6ff3..86375c9966ef 100644
  static void	tcp_v6_send_reset(const struct sock *sk, struct sk_buff *skb);
  static void	tcp_v6_reqsk_send_ack(const struct sock *sk, struct sk_buff *skb,
  				      struct request_sock *req);
-@@ -1356,6 +1360,10 @@ static int tcp_v6_do_rcv(struct sock *sk, struct sk_buff *skb)
+@@ -1355,6 +1359,10 @@ static int tcp_v6_do_rcv(struct sock *sk, struct sk_buff *skb)
  	return 0;
  
  reset:
@@ -3294,7 +3298,7 @@ index c5f4e89b6ff3..86375c9966ef 100644
  	tcp_v6_send_reset(sk, skb);
  discard:
  	if (opt_skb)
-@@ -1453,6 +1461,27 @@ static int tcp_v6_rcv(struct sk_buff *skb)
+@@ -1452,6 +1460,27 @@ static int tcp_v6_rcv(struct sk_buff *skb)
  	if (!pskb_may_pull(skb, th->doff*4))
  		goto discard_it;
  
@@ -3322,7 +3326,7 @@ index c5f4e89b6ff3..86375c9966ef 100644
  	if (skb_checksum_init(skb, IPPROTO_TCP, ip6_compute_pseudo))
  		goto csum_error;
  
-@@ -1463,12 +1492,22 @@ static int tcp_v6_rcv(struct sk_buff *skb)
+@@ -1462,12 +1491,22 @@ static int tcp_v6_rcv(struct sk_buff *skb)
  	sk = __inet6_lookup_skb(&tcp_hashinfo, skb, __tcp_hdrlen(th),
  				th->source, th->dest, inet6_iif(skb), sdif,
  				&refcounted);
@@ -3347,7 +3351,7 @@ index c5f4e89b6ff3..86375c9966ef 100644
  
  	if (sk->sk_state == TCP_NEW_SYN_RECV) {
  		struct request_sock *req = inet_reqsk(sk);
-@@ -1576,6 +1615,11 @@ static int tcp_v6_rcv(struct sk_buff *skb)
+@@ -1575,6 +1614,11 @@ static int tcp_v6_rcv(struct sk_buff *skb)
  bad_packet:
  		__TCP_INC_STATS(net, TCP_MIB_INERRS);
  	} else {
@@ -3765,7 +3769,7 @@ index 8af7a690eb40..6539694b0fd3 100644
 -
 -	  If you are unsure how to answer this question, answer 0.
 diff --git a/security/selinux/hooks.c b/security/selinux/hooks.c
-index c574285966f9..667cca9fcd78 100644
+index 452254fd89f8..1822fa3bc0b3 100644
 --- a/security/selinux/hooks.c
 +++ b/security/selinux/hooks.c
 @@ -135,18 +135,7 @@ __setup("selinux=", selinux_enabled_setup);
@@ -3826,10 +3830,10 @@ index 96b27405558a..485c1b85c325 100644
  	  This selects Yama, which extends DAC support with additional
  	  system-wide security settings beyond regular Linux discretionary
 diff --git a/virt/kvm/kvm_main.c b/virt/kvm/kvm_main.c
-index 4e499b78569b..55bba37f9517 100644
+index 1218ea663c6d..700f28148b4e 100644
 --- a/virt/kvm/kvm_main.c
 +++ b/virt/kvm/kvm_main.c
-@@ -618,6 +618,10 @@ static int kvm_create_vm_debugfs(struct kvm *kvm, int fd)
+@@ -626,6 +626,10 @@ static int kvm_create_vm_debugfs(struct kvm *kvm, int fd)
  	struct kvm_stat_data *stat_data;
  	struct kvm_stats_debugfs_item *p;
  
