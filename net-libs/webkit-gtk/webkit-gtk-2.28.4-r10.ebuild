@@ -4,10 +4,9 @@
 EAPI=6
 CMAKE_MAKEFILE_GENERATOR="ninja"
 PYTHON_COMPAT=( python{3_6,3_7} )
-USE_RUBY="ruby24 ruby25 ruby26 ruby27"
 CMAKE_MIN_VERSION=3.10
 
-inherit check-reqs cmake-utils flag-o-matic gnome2 pax-utils python-any-r1 ruby-single toolchain-funcs virtualx
+inherit check-reqs cmake-utils flag-o-matic gnome2 pax-utils python-any-r1 toolchain-funcs virtualx
 
 MY_P="webkitgtk-${PV}"
 DESCRIPTION="Open source web browser engine"
@@ -105,10 +104,10 @@ unset wpe_depend
 # Need real bison, not yacc
 DEPEND="${RDEPEND}
 	${PYTHON_DEPS}
-	${RUBY_DEPS}
 	>=app-accessibility/at-spi2-core-2.5.3
 	dev-util/glib-utils
 	>=dev-util/gperf-3.0.1
+	dev-lang/ruby:2.5
 	>=sys-devel/bison-2.4.3
 	|| ( >=sys-devel/gcc-7.3 >=sys-devel/clang-5 )
 	sys-devel/gettext
@@ -203,13 +202,7 @@ src_configure() {
 #	fi
 
 	# Ruby situation is a bit complicated. See bug 513888
-	local rubyimpl
-	local ruby_interpreter=""
-	for rubyimpl in ${USE_RUBY}; do
-		if has_version --host-root "virtual/rubygems[ruby_targets_${rubyimpl}]"; then
-			ruby_interpreter="-DRUBY_EXECUTABLE=$(type -P ${rubyimpl})"
-		fi
-	done
+	ruby_interpreter="-DRUBY_EXECUTABLE=$(type -P ruby25)"
 	# This will rarely occur. Only a couple of corner cases could lead us to
 	# that failure. See bug 513888
 	[[ -z $ruby_interpreter ]] && die "No suitable ruby interpreter found"
