@@ -4,9 +4,10 @@
 EAPI=6
 CMAKE_MAKEFILE_GENERATOR="ninja"
 PYTHON_COMPAT=( python{3_6,3_7} )
+USE_RUBY="ruby24 ruby25 ruby26 ruby27"
 CMAKE_MIN_VERSION=3.10
 
-inherit check-reqs cmake-utils flag-o-matic gnome2 pax-utils python-any-r1 toolchain-funcs virtualx
+inherit check-reqs cmake-utils flag-o-matic gnome2 pax-utils python-any-r1 ruby-single toolchain-funcs virtualx
 
 MY_P="webkitgtk-${PV}"
 DESCRIPTION="Open source web browser engine"
@@ -15,7 +16,7 @@ SRC_URI="https://www.webkitgtk.org/releases/${MY_P}.tar.xz"
 
 LICENSE="LGPL-2+ BSD"
 SLOT="4/37" # soname version of libwebkit2gtk-4.0
-KEYWORDS="~amd64 ~arm64 ~ppc64 ~sparc ~x86"
+KEYWORDS="amd64 ~arm arm64 ~ppc64 ~sparc x86"
 
 IUSE="aqua +egl +geolocation gles2-only gnome-keyring +gstreamer gtk-doc +introspection +jpeg2k +jumbo-build libnotify +opengl seccomp spell wayland +X"
 
@@ -67,7 +68,7 @@ RDEPEND="
 	spell? ( >=app-text/enchant-0.22:2 )
 	gstreamer? (
 		>=media-libs/gstreamer-1.14:1.0
-		>=media-libs/gst-plugins-base-1.14:1.0[egl?,opengl?,X]
+		>=media-libs/gst-plugins-base-1.14:1.0[egl?,opengl?,X?]
 		gles2-only? ( media-libs/gst-plugins-base:1.0[gles2] )
 		>=media-plugins/gst-plugins-opus-1.14.4-r1:1.0
 		>=media-libs/gst-plugins-bad-1.14:1.0 )
@@ -104,10 +105,10 @@ unset wpe_depend
 # Need real bison, not yacc
 DEPEND="${RDEPEND}
 	${PYTHON_DEPS}
+	${RUBY_DEPS}
 	>=app-accessibility/at-spi2-core-2.5.3
 	dev-util/glib-utils
 	>=dev-util/gperf-3.0.1
-	dev-lang/ruby:2.5
 	>=sys-devel/bison-2.4.3
 	|| ( >=sys-devel/gcc-7.3 >=sys-devel/clang-5 )
 	sys-devel/gettext
@@ -118,7 +119,7 @@ DEPEND="${RDEPEND}
 	virtual/perl-Carp
 	virtual/perl-JSON-PP
 
-	gtk-doc? ( >=dev-util/gtk-doc-1.10 )
+	gtk-doc? ( >=dev-util/gtk-doc-1.32 )
 	geolocation? ( dev-util/gdbus-codegen )
 "
 #	test? (
@@ -166,12 +167,9 @@ pkg_setup() {
 
 src_prepare() {
 	eapply "${FILESDIR}/${PN}-2.24.4-eglmesaext-include.patch" # bug 699054 # https://bugs.webkit.org/show_bug.cgi?id=204108
-	eapply "${FILESDIR}"/2.26.3-fix-gtk-doc.patch # bug 704550 - retest without it once we can depend on >=gtk-doc-1.32
-	eapply "${FILESDIR}"/${PV}-fix-yelp-desktopless-build.patch
-	eapply "${FILESDIR}"/${PV}-use-gst-audiointerleave.patch
-	eapply "${FILESDIR}"/${PV}-fix-ppc64-JSC.patch
-	eapply "${FILESDIR}"/${PV}-opengl-without-X-fixes.patch
-	eapply "${FILESDIR}"/${PV}-non-jumbo-fix.patch
+	eapply "${FILESDIR}"/2.28.2-opengl-without-X-fixes.patch
+	eapply "${FILESDIR}"/2.28.2-non-jumbo-fix.patch
+	eapply "${FILESDIR}"/2.28.4-non-jumbo-fix2.patch
 	cmake-utils_src_prepare
 	gnome2_src_prepare
 }
@@ -205,7 +203,13 @@ src_configure() {
 #	fi
 
 	# Ruby situation is a bit complicated. See bug 513888
-	ruby_interpreter="-DRUBY_EXECUTABLE=$(type -P ruby25)"
+	local rubyimpl
+	local ruby_interpreter=""
+	for rubyimpl in ${USE_RUBY}; do
+		if has_version --host-root "virtual/rubygems[ruby_targets_${rubyimpl}]"; then
+			ruby_interpreter="-DRUBY_EXECUTABLE=$(type -P ${rubyimpl})"
+		fi
+	done
 	# This will rarely occur. Only a couple of corner cases could lead us to
 	# that failure. See bug 513888
 	[[ -z $ruby_interpreter ]] && die "No suitable ruby interpreter found"
