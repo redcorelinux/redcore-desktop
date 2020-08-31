@@ -3,6 +3,8 @@
 
 EAPI=7
 
+inherit multilib-build
+
 DESCRIPTION="Virtual for Rust language compiler"
 HOMEPAGE=""
 SRC_URI=""
