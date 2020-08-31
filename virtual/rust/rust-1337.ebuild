@@ -12,4 +12,4 @@ SLOT="0"
 KEYWORDS="amd64"
 
 BDEPEND=""
-RDEPEND="dev-lang/rust"
+RDEPEND="dev-lang/rust[${MULTILIB_USEDEP}]"
