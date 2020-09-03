@@ -88,7 +88,6 @@ DEPEND="
 "
 
 RDEPEND="${DEPEND}
-	app-eselect/eselect-rust
 "
 
 REQUIRED_USE="|| ( ${ALL_LLVM_TARGETS[*]} )
@@ -126,24 +125,6 @@ S="${WORKDIR}/${MY_P}-src"
 
 toml_usex() {
 	usex "$1" true false
-}
-
-boostrap_rust_version_check() {
-	# never call from pkg_pretend. eselect-rust may be not installed yet.
-	local rustc_wanted="$(ver_cut 1).$(($(ver_cut 2) - 1))"
-	local rustc_version=( $(eselect --brief rust show 2>/dev/null) )
-	rustc_version=${rustc_version[0]#rust-bin-}
-	rustc_version=${rustc_version#rust-}
-
-	[[ -z "${rustc_version}" ]] && die "Failed to determine rustc version!"
-
-	if ver_test "${rustc_version}" -lt "${rustc_wanted}" ; then
-		eerror "Rust >=${rustc_wanted} is required"
-		eerror "please run \'eselect rust\' and set correct rust version"
-		die
-	else
-		einfo "Using rust ${rustc_version} to build"
-	fi
 }
 
 pre_build_checks() {
