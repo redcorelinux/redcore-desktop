@@ -438,6 +438,11 @@ src_install() {
 		cp "${ED}/usr/$(get_libdir)/${P}/rustlib/${rust_target}/lib"/*.so \
 		   "${ED}/usr/${abi_libdir}/${P}" || die
 	done
+
+	newenvd - "50${P}" <<-_EOF_
+		LDPATH="${EPREFIX}/usr/$(get_libdir)/${P}"
+		MANPATH="${EPREFIX}/usr/share/${P}/man"
+	_EOF_
 }
 
 pkg_postinst() {
