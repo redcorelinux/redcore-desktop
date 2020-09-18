@@ -1,4 +1,4 @@
-# Copyright 2016-2018 Redcore Linux Project
+# Copyright 2016-2020 Redcore Linux Project
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -12,7 +12,7 @@ HOMEPAGE="http://redcorelinux.org"
 
 EGIT_REPO_URI="https://gitlab.com/redcore/sisyphus.git"
 EGIT_BRANCH="master"
-EGIT_COMMIT="4fc5a53da38955b35b9b48e6ee24acf7b5cf3fdf"
+EGIT_COMMIT="02a67877e808bf2f3cf637bcc5694907ae6c2f00"
 
 LICENSE="GPL-2"
 SLOT="0"
