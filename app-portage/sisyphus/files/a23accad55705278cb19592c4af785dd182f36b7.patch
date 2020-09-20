@@ -1,0 +1,26 @@
+diff --git a/src/backend/autoremove.py b/src/backend/autoremove.py
+index b5b732f9a15b023bc288e2ed81615b0129e2a567..497d8e5c66a263e52acd7b92c2fa4c22aaa4ff92 100644
+--- a/src/backend/autoremove.py
++++ b/src/backend/autoremove.py
+@@ -6,7 +6,7 @@ import sisyphus.database
+ import sys
+ 
+ def start():
+-    if sisyphus.check.root() == 0:
++    if sisyphus.check.root():
+         portageExec = subprocess.Popen(['emerge', '--quiet', '--depclean', '--ask'])
+         portageExec.wait()
+         sisyphus.database.syncLocal()
+diff --git a/src/backend/branchsetup.py b/src/backend/branchsetup.py
+index e0d27a66ac56eccf93050388acdb0a962cf39028..0a54dd81e1e0f425604928d9c768c567573639a5 100644
+--- a/src/backend/branchsetup.py
++++ b/src/backend/branchsetup.py
+@@ -82,7 +82,7 @@ def warnAboutBinaryRepository(branch,remote):
+ 
+ 
+ def start(branch,remote):
+-    if sisyphus.check.root() == 0:
++    if sisyphus.check.root():
+         sisyphus.branchreset.start()
+         injectGentooPortageTree(branch,remote)
+         injectRedcoreEbuildOverlay(branch,remote)

@@ -33,6 +33,8 @@ RDEPEND="${DEPEND}
 	sys-apps/gentoo-functions
 	gui? ( dev-python/PyQt5[designer,gui,widgets,${PYTHON_USEDEP}] )"
 
+PATCHES=( "${FILESDIR}/a23accad55705278cb19592c4af785dd182f36b7.patch" )
+
 src_install() {
 	default
 
