@@ -42,11 +42,11 @@ COMMON_DEPEND="
 	virtual/libudev:=
 	cdda? ( media-sound/cdparanoia )
 	cddb? ( media-libs/libcddb )
-	cdio? ( dev-libs/libcdio-paranoia )
-	mtp? ( media-libs/libmtp )
+	cdio? ( dev-libs/libcdio-paranoia:= )
+	mtp? ( media-libs/libmtp:= )
 	musicbrainz? ( media-libs/musicbrainz:5= )
 	replaygain? (
-		media-libs/libebur128
+		media-libs/libebur128:=
 		media-sound/mpg123
 		libav? ( media-video/libav:= )
 		!libav? ( media-video/ffmpeg:0= )
