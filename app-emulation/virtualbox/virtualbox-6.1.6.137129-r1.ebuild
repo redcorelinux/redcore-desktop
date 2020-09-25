@@ -3,9 +3,7 @@
 
 EAPI=6
 
-PYTHON_COMPAT=( python2_7 )
-
-inherit xdg-utils gnome2 pax-utils python-r1 udev unpacker eapi7-ver
+inherit xdg-utils gnome2 pax-utils udev unpacker eapi7-ver
 
 MAIN_PV="$(ver_cut 1-3)"
 if [[ ${PV} = *_beta* ]] || [[ ${PV} = *_rc* ]] ; then
@@ -35,7 +33,7 @@ SRC_URI="amd64? ( https://download.virtualbox.org/virtualbox/${MY_PV}/${MY_P}_am
 
 LICENSE="GPL-2 PUEL"
 SLOT="0"
-IUSE="+additions +chm headless python vboxwebsrv rdesktop-vrdp"
+IUSE="+additions +chm headless vboxwebsrv rdesktop-vrdp"
 RESTRICT="bindist mirror"
 
 if [[ "${PV}" != *beta* ]] ; then
@@ -177,11 +175,6 @@ src_install() {
 		fowners root:vboxusers /opt/VirtualBox/kchmviewer
 		fperms 0750 /opt/VirtualBox/kchmviewer
 	fi
-
-	# This ebuild / package supports only py2.7.  When py3 comes is unknown.
-	# The compile phase makes VBoxPython2_7.so.
-	# py3 support would presumably require a binary pre-compiled by py3.
-	use python && doins VBoxPython.so
 
 	rm -rf src rdesktop* deffiles install* routines.sh runlevel.sh \
 		vboxdrv.sh VBox.sh VBox.png vboxnet.sh additions VirtualBox.desktop \
