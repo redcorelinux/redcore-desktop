@@ -7,12 +7,10 @@ EAPI=6
 inherit eutils
 
 MY_PN="Wavebox"
-MY_PV="4_11_4"
-MY_P="${MY_PN}_${MY_PV}"
 
 DESCRIPTION="The next generation of web-desktop communication"
 HOMEPAGE="https://wavebox.io"
-SRC_URI="https://github.com/${PN}/waveboxapp/releases/download/v${PV}/${MY_P}_linux_x86_64.tar.gz"
+SRC_URI="https://download.wavebox.app/stable/linux/tar/${MY_PN}_${PV}-2.tar.gz"
 
 LICENSE="MPL-2.0"
 SLOT="0"
@@ -30,13 +28,13 @@ RDEPEND="${DEPEND}"
 
 RESTRICT="mirror strip"
 
-S="${WORKDIR}/${MY_PN}-linux-x64"
+S="${WORKDIR}/${PN}_${PV}-2"
 
 src_install() {
 	dodir /opt/${PN}
 	insinto /opt/${PN}
 	doins -r ${S}/*
-	fperms 0755 /opt/${PN}/${MY_PN}
+	fperms 0755 /opt/${PN}/${PN}
 
 	dodir /usr/share/applications
 	insinto /usr/share/applications
