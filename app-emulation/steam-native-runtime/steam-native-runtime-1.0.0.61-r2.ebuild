@@ -38,7 +38,7 @@ RDEPEND="
 	media-libs/sdl2-ttf[abi_x86_32]
 	media-libs/mesa[abi_x86_32]
 	media-libs/openal[abi_x86_32]
-	media-libs/libnm-glib[abi_x86_32]
+	net-libs/libnm-glib[abi_x86_32]
 	net-misc/curl[abi_x86_32]
 	net-print/cups[abi_x86_32]
 	sys-apps/dbus[abi_x86_32,X]
