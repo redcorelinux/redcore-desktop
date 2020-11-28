@@ -13,8 +13,6 @@ SLOT="0"
 KEYWORDS="amd64 x86"
 IUSE=""
 
-RDEPEND="sys-kernel/dracut"
-
 S="${FILESDIR}"
 
 src_install() {

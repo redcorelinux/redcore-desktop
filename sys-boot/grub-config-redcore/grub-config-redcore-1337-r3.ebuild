@@ -13,8 +13,6 @@ SLOT="0"
 KEYWORDS="amd64 x86"
 IUSE=""
 
-RDEPEND="sys-boot/grub"
-
 S="${FILESDIR}"
 
 src_install() {
