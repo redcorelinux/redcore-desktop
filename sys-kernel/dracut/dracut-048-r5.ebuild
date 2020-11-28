@@ -39,7 +39,7 @@ COMMON_DEPEND=">=sys-apps/kmod-23[tools]
 	mdadm? (
 		sys-fs/mdadm
 	)
-	sys-kernel/dracut-config-redcore
+	sys-kernel/dracutcfg
 	"
 RDEPEND="${COMMON_DEPEND}
 	app-arch/cpio
