@@ -110,7 +110,7 @@ RDEPEND="${CDEPEND}
 	python? ( ${PYTHON_DEPS} )
 	client? ( net-fs/cifs-utils[ads?] )
 	selinux? ( sec-policy/selinux-samba )
-	net-fs/samba-config-redcore
+	net-fs/sambacfg
 "
 
 REQUIRED_USE="
