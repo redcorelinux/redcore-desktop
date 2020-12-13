@@ -1,18 +1,23 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
 
-inherit eutils multilib versionator prefix
+inherit multilib versionator prefix
 
 DESCRIPTION="Filesystem baselayout and init scripts"
-HOMEPAGE="https://www.gentoo.org/"
-SRC_URI="https://gitweb.gentoo.org/proj/baselayout.git/snapshot/${P}.tar.bz2"
+HOMEPAGE="https://wiki.gentoo.org/wiki/No_homepage"
+if [[ ${PV} = 9999 ]]; then
+	EGIT_REPO_URI="https://anongit.gentoo.org/git/proj/${PN}.git"
+	inherit git-r3
+else
+	SRC_URI="https://gitweb.gentoo.org/proj/${PN}.git/snapshot/${P}.tar.bz2"
+	KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~riscv ~s390 ~sparc ~x86"
+fi
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="amd64"
-IUSE="build kernel_linux"
+IUSE="build kernel_FreeBSD kernel_linux +split-usr"
 
 pkg_setup() {
 	multilib_layout
@@ -20,15 +25,47 @@ pkg_setup() {
 
 # Create our multilib dirs - the Makefile has no knowledge of this
 multilib_layout() {
-	local libdir libdirs=$(get_all_libdirs) def_libdir=$(get_abi_LIBDIR $DEFAULT_ABI)
+	local dir def_libdir libdir libdirs
+	local prefix prefix_lst
+	def_libdir=$(get_abi_LIBDIR $DEFAULT_ABI)
+	libdirs=$(get_all_libdirs)
 	: ${libdirs:=lib}	# it isn't that we don't trust multilib.eclass...
 
-	[ -z "${def_libdir}" ] && die "your DEFAULT_ABI=$DEFAULT_ABI appears to be invalid"
+	if [[ -z "${SYMLINK_LIB}" || ${SYMLINK_LIB} = no ]] ; then
+		prefix_lst=( "${EROOT}"{,usr/,usr/local/} )
+		for prefix in "${prefix_lst[@]}"; do
+			for libdir in ${libdirs}; do
+				dir="${prefix}${libdir}"
+				if [[ -e "${dir}" ]]; then
+					[[ ! -d "${dir}" ]] &&
+						die "${dir} exists but is not a directory"
+					continue
+				fi
+				if ! use split-usr && [[ ${prefix} = ${EROOT} ]]; then
+					einfo "symlinking ${dir} to usr/${libdir}"
+					ln -s usr/${libdir} ${dir} ||
+						die " Unable to make ${dir} symlink"
+				else
+					einfo "creating directory ${dir}"
+					mkdir -p "${dir}" ||
+						die "Unable to create ${dir} directory"
+				fi
+			done
+		done
+		return 0
+	fi
+
+	[ -z "${def_libdir}" ] &&
+		die "your DEFAULT_ABI=$DEFAULT_ABI appears to be invalid"
 
 	# figure out which paths should be symlinks and which should be directories
 	local dirs syms exp d
 	for libdir in ${libdirs} ; do
-		exp=( {,usr/,usr/local/}${libdir} )
+		if use split-usr ; then
+			exp=( {,usr/,usr/local/}${libdir} )
+		else
+			exp=( {usr/,usr/local/}${libdir} )
+		fi
 		for d in "${exp[@]}" ; do
 			# most things should be dirs
 			if [ "${SYMLINK_LIB}" = "yes" ] && [ "${libdir}" = "lib" ] ; then
@@ -50,8 +87,12 @@ multilib_layout() {
 
 	# setup symlinks and dirs where we expect them to be; do not migrate
 	# data ... just fall over in that case.
-	local prefix
-	for prefix in "${EROOT}"{,usr/,usr/local/} ; do
+	if use split-usr ; then
+		prefix_lst=( "${EROOT}"{,usr/,usr/local/} )
+	else
+		prefix_lst=( "${EROOT}"{usr/,usr/local/} )
+	fi
+	for prefix in "${prefix_lst[@]}"; do
 		if [ "${SYMLINK_LIB}" = yes ] ; then
 			# we need to make sure "lib" points to the native libdir
 			if [ -h "${prefix}lib" ] ; then
@@ -60,7 +101,7 @@ multilib_layout() {
 			elif [ -d "${prefix}lib" ] ; then
 				# "lib" is a dir, so need to convert to a symlink
 				ewarn "Converting ${prefix}lib from a dir to a symlink"
-				rm -f "${prefix}lib"/.keep
+				rm -f "${prefix}lib"/.keep || die
 				if rmdir "${prefix}lib" 2>/dev/null ; then
 					ln -s ${def_libdir} "${prefix}lib" || die
 				else
@@ -72,7 +113,7 @@ multilib_layout() {
 				mkdir -p "${prefix}" || die
 				rm -f "${prefix}lib" || die
 				ln -s ${def_libdir} "${prefix}lib" || die
-				mkdir -p "${prefix}${def_libdir}" #423571
+				mkdir -p "${prefix}${def_libdir}" || die #423571
 			fi
 		else
 			# we need to make sure "lib" is a dir
@@ -94,7 +135,7 @@ multilib_layout() {
 				*-gentoo-freebsd*) ;; # We want it the other way on fbsd.
 				i?86*|x86_64*|powerpc*|sparc*|s390*)
 					if [[ -d ${prefix}lib32 && ! -h ${prefix}lib32 ]] ; then
-						rm -f "${prefix}lib32"/.keep
+						rm -f "${prefix}lib32"/.keep || die
 						if ! rmdir "${prefix}lib32" 2>/dev/null ; then
 							ewarn "You need to merge ${prefix}lib32 into ${prefix}lib"
 							die "non-empty dir found where there should be none: ${prefix}lib32"
@@ -109,35 +150,34 @@ multilib_layout() {
 			fi
 		fi
 	done
+	if ! use split-usr ; then
+		for libdir in ${libdirs}; do
+			if [[ ! -e "${EROOT}${libdir}" ]]; then
+				ln -s usr/"${libdir}" "${EROOT}${libdir}" ||
+					die " Unable to make ${EROOT}${libdir} symlink"
+			fi
+		done
+	fi
 }
 
 pkg_preinst() {
-	# Bug #217848 - Since the remap_dns_vars() called by pkg_preinst() of
-	# the baselayout-1.x ebuild copies all the real configs from the user's
-	# /etc/conf.d into ${D}, it makes them all appear to be the default
-	# versions. In order to protect them from being unmerged after this
-	# upgrade, modify their timestamps.
-	touch "${EROOT}"/etc/conf.d/* 2>/dev/null
-
 	# This is written in src_install (so it's in CONTENTS), but punt all
 	# pending updates to avoid user having to do etc-update (and make the
 	# pkg_postinst logic simpler).
-	rm -f "${EROOT}"/etc/._cfg????_gentoo-release
+	rm -f "${EROOT}"/etc/._cfg????_gentoo-release || die
 
 	# We need to install directories and maybe some dev nodes when building
 	# stages, but they cannot be in CONTENTS.
 	# Also, we cannot reference $S as binpkg will break so we do this.
 	multilib_layout
 	if use build ; then
-		emake -C "${ED}/usr/share/${PN}" DESTDIR="${EROOT}" layout || die
+		if use split-usr ; then
+			emake -C "${ED}/usr/share/${PN}" DESTDIR="${EROOT}" layout
+		else
+			emake -C "${ED}/usr/share/${PN}" DESTDIR="${EROOT}" layout-usrmerge
+		fi
 	fi
-	rm -f "${ED}"/usr/share/${PN}/Makefile
-
-	# Redcore Linux customization, protect /etc/hosts from removal (from older ebuilds)
-	local etc_hosts="${ROOT}/etc/hosts"
-	if [ -e "${etc_hosts}" ]; then
-		cp -p "${etc_hosts}" "${etc_hosts}.backup" # don't die
-	fi
+	rm -f "${ED}"/usr/share/${PN}/Makefile || die
 }
 
 src_prepare() {
@@ -150,6 +190,16 @@ src_prepare() {
 		echo ROOTPATH=/usr/sbin:/sbin:/usr/bin:/bin >> etc/env.d/99host
 	fi
 
+	# don't want symlinked directories in PATH on systems with usr-merge
+	if ! use split-usr; then
+		sed \
+			-e 's|/usr/local/sbin:||g' \
+			-e 's|:/usr/sbin:|:|g' \
+			-e 's|:/sbin:|:|g' \
+			-e 's|:/bin:|:|g' \
+			-i etc/env.d/50baselayout || die
+	fi
+
 	# handle multilib paths.  do it here because we want this behavior
 	# regardless of the C library that you're using.  we do explicitly
 	# list paths which the native ldconfig searches, but this isn't
@@ -158,13 +208,14 @@ src_prepare() {
 	# path and the symlinked path doesn't change the resulting cache.
 	local libdir ldpaths
 	for libdir in $(get_all_libdirs) ; do
-		ldpaths+=":${EPREFIX}/${libdir}:${EPREFIX}/usr/${libdir}"
+		use split-usr && ldpaths+=":${EPREFIX}/${libdir}"
+		ldpaths+=":${EPREFIX}/usr/${libdir}"
 		ldpaths+=":${EPREFIX}/usr/local/${libdir}"
 	done
 	echo "LDPATH='${ldpaths#:}'" >> etc/env.d/50baselayout
 
 	# rc-scripts version for testing of features that *should* be present
-	echo "Redcore Linux Hardened 2004 - Neptune" > etc/redcore-release
+	echo "Redcore Linux Hardened - rolling" > etc/redcore-release
 }
 
 src_install() {
@@ -173,13 +224,16 @@ src_install() {
 		DESTDIR="${ED}" \
 		install
 	dodoc ChangeLog
+	rm "${ED}"/etc/sysctl.d/README || die
 
 	# need the makefile in pkg_preinst
 	insinto /usr/share/${PN}
 	doins Makefile
 
-	# Redcore Linux customization, install /etc/hosts separately (to .example)
-	mv "${D}"/etc/hosts "${D}"/etc/hosts.example || die "cannot move /etc/hosts"
+	# This is needed for https://bugs.gentoo.org/732142
+	dodir /usr/lib
+	mv "${ED}"/etc/os-release "${ED}"/usr/lib || die
+	dosym ../usr/lib/os-release /etc/os-release
 }
 
 pkg_postinst() {
@@ -193,17 +247,19 @@ pkg_postinst() {
 	for x in master.passwd passwd shadow group fstab ; do
 		[ -e "${EROOT}etc/${x}" ] && continue
 		[ -e "${EROOT}usr/share/baselayout/${x}" ] || continue
-		cp -p "${EROOT}usr/share/baselayout/${x}" "${EROOT}"etc
+		cp -p "${EROOT}usr/share/baselayout/${x}" "${EROOT}"etc || die
 	done
 
 	# Force shadow permissions to not be world-readable #260993
 	for x in shadow ; do
-		[ -e "${EROOT}etc/${x}" ] && chmod o-rwx "${EROOT}etc/${x}"
+		if [ -e "${EROOT}etc/${x}" ] ; then
+			chmod o-rwx "${EROOT}etc/${x}" || die
+		fi
 	done
 
 	# Take care of the etc-update for the user
-	if [ -e "${EROOT}"etc/._cfg0000_gentoo-release ] ; then
-		mv "${EROOT}"etc/._cfg0000_gentoo-release "${EROOT}"etc/gentoo-release
+	if [ -e "${EROOT}"etc/._cfg0000_redcore-release ] ; then
+		mv "${EROOT}"etc/._cfg0000_redcore-release "${EROOT}"etc/redcore-release || die
 	fi
 
 	# whine about users that lack passwords #193541
@@ -216,10 +272,6 @@ pkg_postinst() {
 		fi
 	fi
 
-	# baselayout leaves behind a lot of .keep files, so let's clean them up
-	find "${EROOT}"lib*/rcscripts/ -name .keep -exec rm -f {} + 2>/dev/null
-	find "${EROOT}"lib*/rcscripts/ -depth -type d -exec rmdir {} + 2>/dev/null
-
 	# whine about users with invalid shells #215698
 	if [[ -e "${EROOT}"etc/passwd ]] ; then
 		local bad_shells=$(awk -F: 'system("test -e " $7) { print $1 " - " $7}' "${EROOT}"etc/passwd | sort)
@@ -230,18 +282,9 @@ pkg_postinst() {
 		fi
 	fi
 
-	# Redcore Linux customization, copy /etc/hosts back in place if it doesn't exist
-	local etc_hosts="${ROOT}/etc/hosts"
-	if [ -e "${etc_hosts}.backup" ]; then
-		cp -p "${etc_hosts}.backup" "${etc_hosts}" # don't die
-	elif [ ! -e "${etc_hosts}" ]; then
-		cp -p "${etc_hosts}.example" "${etc_hosts}" # don't die
-	fi
-	chown root:root "${etc_hosts}" # don't die
-
 	# https://bugs.gentoo.org/361349
 	if use kernel_linux; then
-		mkdir -p "${EROOT}"run
+		mkdir -p "${EROOT}"run || die
 
 		local found fstype mountpoint
 		while read -r _ mountpoint fstype _; do
@@ -252,10 +295,19 @@ pkg_postinst() {
 	fi
 
 	for x in ${REPLACING_VERSIONS}; do
-		if ! version_is_at_least 2.4 ${v}; then
+		if ! version_is_at_least 2.4 ${x}; then
 			ewarn "After updating ${EROOT}etc/profile, please run"
-			ewarn "env-update and . /etc/profile"
-			break
+			ewarn "env-update && . /etc/profile"
+		fi
+
+		if ! version_is_at_least 2.6 ${x}; then
+			ewarn "Please run env-update then log out and back in to"
+			ewarn "update your path."
+		fi
+		# clean up after 2.5 typos
+		# https://bugs.gentoo.org/show_bug.cgi?id=656380
+		if [[ ${x} == 2.5 ]]; then
+			rm -fr "${EROOT}{,usr" || die
 		fi
 	done
 
