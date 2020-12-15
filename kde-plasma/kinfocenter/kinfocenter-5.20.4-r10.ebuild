@@ -4,23 +4,23 @@
 EAPI=7
 
 ECM_HANDBOOK="forceoptional"
-KFMIN=5.70.0
+KFMIN=5.74.0
 PVCUT=$(ver_cut 1-3)
-QTMIN=5.14.2
-inherit ecm kde.org
+QTMIN=5.15.1
+inherit ecm kde.org optfeature
 
 DESCRIPTION="Utility providing information about the computer hardware"
 HOMEPAGE="https://userbase.kde.org/KInfoCenter"
 
 LICENSE="GPL-2" # TODO: CHECK
 SLOT="5"
-KEYWORDS="~amd64 ~arm64 ~ppc64"
+KEYWORDS="~amd64 ~arm ~arm64 ~ppc64 ~x86"
 IUSE="gles2-only ieee1394 +opengl +pci wayland"
 
 REQUIRED_USE="wayland? ( || ( opengl gles2-only ) )"
 
 BDEPEND=">=dev-util/cmake-3.14.3"
-COMMON_DEPEND="
+DEPEND="
 	>=dev-qt/qtdbus-${QTMIN}:5
 	>=dev-qt/qtdeclarative-${QTMIN}:5
 	>=dev-qt/qtgui-${QTMIN}:5[gles2-only=]
@@ -54,13 +54,11 @@ COMMON_DEPEND="
 		media-libs/mesa[egl]
 	)
 "
-DEPEND="${COMMON_DEPEND}
-	>=kde-frameworks/plasma-${KFMIN}:5
-"
-RDEPEND="${COMMON_DEPEND}
+RDEPEND="${DEPEND}
 	>=dev-qt/qtquickcontrols2-${QTMIN}:5
 	>=kde-frameworks/kirigami-${KFMIN}:5
 	>=kde-plasma/kde-cli-tools-${PVCUT}:5
+	>=kde-plasma/systemsettings-${PVCUT}:5
 "
 
 src_configure() {
@@ -92,13 +90,10 @@ src_install() {
 }
 
 pkg_postinst() {
-	ecm_pkg_postinst
-
 	if [[ -z "${REPLACING_VERSIONS}" ]]; then
-		has_version "net-fs/nfs-utils" || \
-			elog "Installing net-fs/nfs-utils will enable the NFS information module."
-
-		has_version "net-fs/samba" || \
-			elog "Installing net-fs/samba will enable the Samba status information module."
+		elog "Optional dependencies:"
+		optfeature "NFS information module" net-fs/nfs-utils
+		optfeature "Samba status information module" net-fs/samba
 	fi
+	ecm_pkg_postinst
 }
