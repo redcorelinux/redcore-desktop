@@ -20,7 +20,8 @@ RDEPEND="
 	x11-themes/numix-icon-theme-circle
 	x11-themes/redcore-theme
 	x11-themes/redcore-artwork-community
-	x11-themes/redcore-artwork-core"
+	x11-themes/redcore-artwork-core
+	x11-themes/redcore-artwork-grub"
 
 S="${WORKDIR}/${P}"
 
