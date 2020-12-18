@@ -4,7 +4,7 @@
 EAPI=6
 EGIT_REPO_URI="https://pagure.io/redcore/redcore-skel.git"
 
-inherit eutils git-r3 fdo-mime
+inherit eutils git-r3
 
 DESCRIPTION="Redcore Linux skel tree"
 HOMEPAGE="https://redcorelinux.org"
