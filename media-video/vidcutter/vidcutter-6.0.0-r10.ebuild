@@ -29,7 +29,7 @@ DEPEND="dev-python/pyopengl[${PYTHON_USEDEP}]
 RDEPEND="${DEPEND}
 	>=dev-python/PyQt5-5.7[dbus,multimedia,${PYTHON_USEDEP}]
 	media-video/mediainfo
-	virtual/ffmpeg[X,encode]"
+	media-video/ffmpeg[X,encode]"
 BDEPEND="
 	${PYTHON_DEPS}
 	dev-python/setuptools[${PYTHON_USEDEP}]"
