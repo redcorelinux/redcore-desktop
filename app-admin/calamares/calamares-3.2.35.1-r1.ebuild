@@ -35,6 +35,7 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	dev-qt/qtwebengine:5[widgets]
 	dev-qt/qtwidgets:5
 	dev-qt/qtxml:5
+	dev-libs/appstream
 	kde-frameworks/kconfig:5
 	kde-frameworks/kcoreaddons:5
 	kde-frameworks/kcrash:5
@@ -43,6 +44,7 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	kde-frameworks/kservice:5
 	sys-apps/dbus
 	sys-apps/dmidecode
+	sys-apps/gptfdisk
 	sys-auth/polkit-qt
 	>=sys-libs/kpmcore-4.0.0:5=
 "
