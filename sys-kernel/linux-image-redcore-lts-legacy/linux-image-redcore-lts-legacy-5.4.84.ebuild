@@ -9,7 +9,7 @@ EXTRAVERSION="redcore-lts-legacy"
 KV_FULL="${PV}-${EXTRAVERSION}"
 KV_MAJOR="5.4"
 
-DESCRIPTION="Redcore Linux Kernel Image (LTS)"
+DESCRIPTION="Redcore Linux Kernel Image (LTS Legacy 5.4)"
 HOMEPAGE="https://redcorelinux.org"
 SRC_URI="https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-${PV}.tar.xz"
 
