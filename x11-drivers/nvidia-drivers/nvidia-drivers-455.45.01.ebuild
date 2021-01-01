@@ -1,38 +1,38 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
-inherit eutils flag-o-matic multilib-minimal portability toolchain-funcs unpacker
+inherit flag-o-matic multilib-minimal portability toolchain-funcs unpacker
 
 NV_URI="https://us.download.nvidia.com/XFree86/"
 AMD64_NV_PACKAGE="NVIDIA-Linux-x86_64-${PV}"
 
-DESCRIPTION="NVIDIA Accelerated Graphics Driver"
-HOMEPAGE="https://www.nvidia.com/ http://www.nvidia.com/Download/Find.aspx"
 SRC_URI="amd64? ( ${NV_URI}Linux-x86_64/${PV}/${AMD64_NV_PACKAGE}.run )"
 
-LICENSE="GPL-2 NVIDIA-r2"
-SLOT="0"
-KEYWORDS="-* ~amd64"
-RESTRICT="bindist mirror"
 EMULTILIB_PKG="true"
+KEYWORDS="-* ~amd64"
+LICENSE="GPL-2 NVIDIA-r2"
+SLOT="0/455"
 
-IUSE="acpi compat +dkms libglvnd multilib +tools wayland +X"
+IUSE="acpi compat +dkms +libglvnd multilib +tools wayland +X"
+REQUIRED_USE="tools? ( X )"
 
 COMMON="
+	acct-group/video
+	>=sys-libs/glibc-2.6.1
+	tools? ( ~x11-misc/nvidia-settings-${PV}:${SLOT} )
 	X? (
-		!libglvnd? ( >=app-eselect/eselect-opengl-1.0.9 )
-		libglvnd? (
-			media-libs/libglvnd[${MULTILIB_USEDEP}]
-			!app-eselect/eselect-opengl
-		)
+		>=x11-libs/libvdpau-1.0[${MULTILIB_USEDEP}]
 		app-misc/pax-utils
-	)"
+		libglvnd? ( media-libs/libglvnd[X,${MULTILIB_USEDEP}] )
+	)
+"
+
 DEPEND="${COMMON}"
-PDEPEND="
-	tools? ( ~x11-misc/nvidia-settings-${PV}:${SLOT} )"
+
 RDEPEND="
 	${COMMON}
+	>=virtual/opencl-3
 	!!x11-drivers/nvidia-drivers-legacy
 	acpi? ( sys-power/acpid )
 	dkms? ( ~sys-kernel/${PN}-dkms-${PV}:${SLOT} )
@@ -41,21 +41,21 @@ RDEPEND="
 		<x11-base/xorg-server-1.20.99:=
 		>=x11-libs/libX11-1.6.2[${MULTILIB_USEDEP}]
 		>=x11-libs/libXext-1.3.2[${MULTILIB_USEDEP}]
-		>=x11-libs/libvdpau-1.0[${MULTILIB_USEDEP}]
 		sys-libs/zlib[${MULTILIB_USEDEP}]
 	)
+	net-libs/libtirpc
 "
 
 QA_PREBUILT="opt/* usr/lib*"
-
+S=${WORKDIR}/
 PATCHES=(
-	"${FILESDIR}"/"${P}"-conf.patch
-	"${FILESDIR}"/"${PN}"-440.26-locale.patch
+	"${FILESDIR}"/${P}-dkms-kmalloc.patch
+	"${FILESDIR}"/${PN}-440.26-locale.patch
 )
 
-S=${WORKDIR}/
-
 pkg_setup() {
+
+	# try to turn off distcc and ccache for people that have a problem with it
 	export DISTCC_DISABLE=1
 	export CCACHE_DISABLE=1
 
@@ -118,6 +118,11 @@ donvidia() {
 }
 
 src_install() {
+	# NVIDIA kernel aliases && blacklist nouveau
+	insinto /etc/modprobe.d
+	doins "${FILESDIR}"/nvidia.conf
+	doins "${FILESDIR}"/nouveau.conf
+
 	# NVIDIA kernel <-> userspace driver config lib
 	donvidia ${NV_OBJ}/libnvidia-cfg.so.${NV_SOVER}
 
@@ -140,14 +145,11 @@ src_install() {
 		# Xorg nvidia.conf
 		if has_version '>=x11-base/xorg-server-1.16'; then
 			insinto /usr/share/X11/xorg.conf.d
-			newins "${FILESDIR}"/nvidia-drm-outputclass.conf 50-nvidia-drm-outputclass.conf
+			newins ${FILESDIR}/nvidia-drm-outputclass.conf 50-nvidia-drm-outputclass.conf
 		fi
 
 		insinto /usr/share/glvnd/egl_vendor.d
 		doins ${NV_X11}/10_nvidia.json
-
-		insinto /etc/vulkan/icd.d
-		doins ${NV_X11}/nvidia_icd.json
 	fi
 
 	if use wayland; then
@@ -155,8 +157,11 @@ src_install() {
 		doins ${NV_X11}/10_nvidia_wayland.json
 	fi
 
-	insinto /lib/modprobe.d
-	doins "${FILESDIR}"/nvidia.conf
+	insinto /etc/vulkan/icd.d
+	doins nvidia_icd.json
+
+	insinto /etc/vulkan/implicit_layer.d
+	doins nvidia_layers.json
 
 	# OpenCL ICD for NVIDIA
 	insinto /etc/OpenCL/vendors
@@ -184,15 +189,15 @@ src_install() {
 	doman nvidia-cuda-mps-control.1
 	doman nvidia-modprobe.1
 	doman nvidia-persistenced.1
-
-	#init
 	newinitd "${FILESDIR}/nvidia-smi.init" nvidia-smi
 	newconfd "${FILESDIR}/nvidia-persistenced.conf" nvidia-persistenced
 	newinitd "${FILESDIR}/nvidia-persistenced.init" nvidia-persistenced
 
+	dobin ${NV_OBJ}/nvidia-bug-report.sh
+
 	if has_multilib_profile && use multilib; then
 		local OABI=${ABI}
-		for ABI in $(get_install_abis); do
+		for ABI in $(multilib_get_enabled_abis); do
 			src_install-libs
 		done
 		ABI=${OABI}
@@ -202,6 +207,20 @@ src_install() {
 	fi
 
 	is_final_abi || die "failed to iterate through all ABIs"
+
+	# Docs
+	newdoc "${NV_DOC}/README.txt" README
+	dodoc "${NV_DOC}/NVIDIA_Changelog"
+	doman "${NV_MAN}"/nvidia-smi.1
+	use X && doman "${NV_MAN}"/nvidia-xconfig.1
+	doman "${NV_MAN}"/nvidia-cuda-mps-control.1
+
+	readme.gentoo_create_doc
+
+	dodoc supported-gpus.json
+
+	docinto html
+	dodoc -r ${NV_DOC}/html/*
 }
 
 src_install-libs() {
@@ -230,7 +249,6 @@ src_install-libs() {
 			"libnvidia-compiler.so.${NV_SOVER}"
 			"libnvidia-eglcore.so.${NV_SOVER}"
 			"libnvidia-encode.so.${NV_SOVER}"
-			"libnvidia-fatbinaryloader.so.${NV_SOVER}"
 			"libnvidia-fbc.so.${NV_SOVER}"
 			"libnvidia-glcore.so.${NV_SOVER}"
 			"libnvidia-glsi.so.${NV_SOVER}"
@@ -242,30 +260,28 @@ src_install-libs() {
 			"libnvidia-ml.so.${NV_SOVER}"
 			"libnvidia-tls.so.${NV_SOVER}"
 		)
-
 		if ! use libglvnd; then
-				NV_GLX_LIBRARIES+=(
-					"libEGL.so.$( [[ ${ABI} == "amd64" ]] && usex compat ${NV_SOVER} 1.1.0 || echo 1.1.0) ${GL_ROOT}"
-					"libGL.so.1.7.0 ${GL_ROOT}"
-					"libGLESv1_CM.so.1.2.0 ${GL_ROOT}"
-					"libGLESv2.so.2.1.0 ${GL_ROOT}"
-					"libGLX.so.0 ${GL_ROOT}"
-					"libGLdispatch.so.0 ${GL_ROOT}"
-					"libOpenGL.so.0 ${GL_ROOT}"
-				)
-		fi
-
-		if use wayland && has_multilib_profile && [[ ${ABI} == "amd64" ]];
-		then
 			NV_GLX_LIBRARIES+=(
-				"libnvidia-egl-wayland.so.1.1.4"
+				"libEGL.so.$( [[ ${ABI} == "amd64" ]] && usex compat ${NV_SOVER} 1.1.0 || echo 1.1.0) ${GL_ROOT}"
+				"libGL.so.1.7.0 ${GL_ROOT}"
+				"libGLESv1_CM.so.1.2.0 ${GL_ROOT}"
+				"libGLESv2.so.2.1.0 ${GL_ROOT}"
+				"libGLX.so.0 ${GL_ROOT}"
+				"libGLdispatch.so.0 ${GL_ROOT}"
+				"libOpenGL.so.0 ${GL_ROOT}"
 			)
 		fi
 
-		if has_multilib_profile && [[ ${ABI} == "amd64" ]];
-		then
+		if use wayland && [[ ${ABI} == "amd64" ]]; then
+			NV_GLX_LIBRARIES+=(
+				"libnvidia-egl-wayland.so.1.1.5"
+			)
+		fi
+
+		if has_multilib_profile && [[ ${ABI} == "amd64" ]]; then
 			NV_GLX_LIBRARIES+=(
 				"libnvidia-cbl.so.${NV_SOVER}"
+				"libnvidia-ngx.so.${NV_SOVER}"
 				"libnvidia-rtcore.so.${NV_SOVER}"
 				"libnvoptix.so.${NV_SOVER}"
 			)
@@ -294,33 +310,12 @@ pkg_preinst() {
 }
 
 pkg_postinst() {
-	if ! use libglvnd; then
-		use X && "${ROOT}"/usr/bin/eselect opengl set --use-old nvidia
-	fi
-	if ! use X; then
-		elog "You have elected to not install the X.org driver. Along with"
-		elog "this the OpenGL libraries and VDPAU libraries were not"
-		elog "installed. Additionally, once the driver is loaded your card"
-		elog "and fan will run at max speed which may not be desirable."
-		elog "Use the 'nvidia-smi' init script to have your card and fan"
-		elog "speed scale appropriately."
-		elog
-	fi
 	if [ $(stat -c %d:%i /) == $(stat -c %d:%i /proc/1/root/.) ]; then
 		_dracut_initramfs_regen
 	fi
 }
 
-pkg_prerm() {
-	if ! use libglvnd; then
-		use X && "${ROOT}"/usr/bin/eselect opengl set --use-old xorg-x11
-	fi
-}
-
 pkg_postrm() {
-	if ! use libglvnd; then
-		use X && "${ROOT}"/usr/bin/eselect opengl set --use-old xorg-x11
-	fi
 	if [ $(stat -c %d:%i /) == $(stat -c %d:%i /proc/1/root/.) ]; then
 		_dracut_initramfs_regen
 	fi
