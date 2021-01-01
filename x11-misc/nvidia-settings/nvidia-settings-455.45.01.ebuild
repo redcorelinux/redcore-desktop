@@ -33,8 +33,7 @@ COMMON_DEPEND="
 	>=x11-libs/libvdpau-1.0"
 
 RDEPEND="${COMMON_DEPEND}
-	!!x11-misc/nvidia-settings-legacy
-	~x11-drivers/nvidia-drivers-${PV}:${SLOT}"
+	!!x11-misc/nvidia-settings-legacy"
 DEPEND="${RDEPEND}
 	virtual/pkgconfig
 	x11-base/xorg-proto"
