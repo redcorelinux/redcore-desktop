@@ -20,7 +20,6 @@ REQUIRED_USE="tools? ( X )"
 COMMON="
 	acct-group/video
 	>=sys-libs/glibc-2.6.1
-	tools? ( ~x11-misc/nvidia-settings-${PV}:${SLOT} )
 	X? (
 		>=x11-libs/libvdpau-1.0[${MULTILIB_USEDEP}]
 		app-misc/pax-utils
@@ -36,6 +35,7 @@ RDEPEND="
 	!!x11-drivers/nvidia-drivers-legacy
 	acpi? ( sys-power/acpid )
 	dkms? ( ~sys-kernel/${PN}-dkms-${PV}:${SLOT} )
+	tools? ( ~x11-misc/nvidia-settings-${PV}:${SLOT} )
 	wayland? ( dev-libs/wayland[${MULTILIB_USEDEP}] )
 	X? (
 		<x11-base/xorg-server-1.20.99:=
