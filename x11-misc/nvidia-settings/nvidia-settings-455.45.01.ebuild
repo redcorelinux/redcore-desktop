@@ -12,7 +12,7 @@ SRC_URI="https://github.com/NVIDIA/nvidia-settings/archive/${PV}.tar.gz -> nvidi
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="-* amd64"
-IUSE="gtk3"
+IUSE="+gtk3"
 
 QA_PREBUILT=
 
