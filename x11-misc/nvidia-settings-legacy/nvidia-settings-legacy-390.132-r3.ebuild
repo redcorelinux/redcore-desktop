@@ -22,7 +22,7 @@ COMMON_DEPEND="
 	x11-libs/libX11
 	x11-libs/libXext
 	x11-libs/libXxf86vm
-	x11-libs/gdk-pixbuf[X]
+	x11-libs/gdk-pixbuf-xlib
 	media-libs/mesa
 	x11-libs/pango[X]
 	x11-libs/libXv
