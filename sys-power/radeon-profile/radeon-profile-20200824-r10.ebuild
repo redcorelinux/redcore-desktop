@@ -54,7 +54,7 @@ src_configure() {
 
 src_install() {
 	emake INSTALL_ROOT="${D}" install
-	#dobin ${FILESDIR}/${PN}-pkexec
+	dobin ${FILESDIR}/${PN}-pkexec
 	dodir usr/share/polkit-1/actions
 	insinto usr/share/polkit-1/actions
 	doins ${FILESDIR}/org.redcorelinux.radeon-profile.policy
