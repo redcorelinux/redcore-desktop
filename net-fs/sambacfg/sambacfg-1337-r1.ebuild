@@ -13,7 +13,7 @@ SLOT="0"
 KEYWORDS="amd64"
 IUSE=""
 
-DEPEND=""
+DEPEND="acct-group/smbshare"
 RDEPEND="${DEPEND}"
 
 S=${FILESDIR}
@@ -23,10 +23,6 @@ src_install() {
 	insinto etc/samba
 	newins redcore-smb.conf smb.conf
 	keepdir var/lib/samba/usershare
-}
-
-pkg_preinst() {
-	enewgroup smbshare
 }
 
 pkg_postinst() {
