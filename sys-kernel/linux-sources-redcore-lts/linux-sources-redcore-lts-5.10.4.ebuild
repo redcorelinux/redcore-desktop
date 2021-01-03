@@ -7,7 +7,7 @@ inherit eutils
 
 EXTRAVERSION="redcore-lts"
 KV_FULL="${PV}-${EXTRAVERSION}"
-KV_MAJOR="5.4"
+KV_MAJOR="5.10"
 
 DESCRIPTION="Redcore Linux Kernel Sources (LTS)"
 HOMEPAGE="https://redcorelinux.org"
@@ -28,20 +28,31 @@ DEPEND="
 RDEPEND="${DEPEND}"
 
 PATCHES=(
+	"${FILESDIR}"/"${KV_MAJOR}"-ath10k-be-quiet.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-enable_alx_wol.patch
-	"${FILESDIR}"/"${KV_MAJOR}"-drop_ancient-and-wrong-msg.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-ata-fix-NCQ-LOG-strings-and-move-to-debug.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-radeon_dp_aux_transfer_native-no-ratelimited_debug.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-acpi-use-kern_warning_even_when_error.patch
-	"${FILESDIR}"/"${KV_MAJOR}"-ath10k-be-quiet.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-Unknow-SSD-HFM128GDHTNG-8310B-QUIRK_NO_APST.patch
-	"${FILESDIR}"/"${KV_MAJOR}"-nvme-suspend-resume-workaround.patch
-	"${FILESDIR}"/"${KV_MAJOR}"-nvme-pci-more-info.patch
+	"${FILESDIR}"/"${KV_MAJOR}"-nvme-Patriot_Viper_VPN100-QUIRK_IGNORE_DEV_SUBNQN.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-acer-wmi-silence-unknow-functions-messages.patch
-	"${FILESDIR}"/"${KV_MAJOR}"-amdgpu-dc_link-drop-some-asserts.patch
-	"${FILESDIR}"/"${KV_MAJOR}"-nvme-hwmon.patch
+	"${FILESDIR}"/"${KV_MAJOR}"-do_not_bug_the_next_18-years.patch
+	"${FILESDIR}"/"${KV_MAJOR}"-iwlwifi-use-debug-for-debug-infos.patch
+	"${FILESDIR}"/"${KV_MAJOR}"-compress-modules-zstd-support.patch
+	"${FILESDIR}"/"${KV_MAJOR}"-fix-bootconfig-makefile.patch
+	"${FILESDIR}"/"${KV_MAJOR}"-apic_vector-spam-in-debug-mode-only.patch
+	"${FILESDIR}"/"${KV_MAJOR}"-iwlwifi-fix-5e003982b07ae.patch
+	"${FILESDIR}"/"${KV_MAJOR}"-enable-new-amd-energy-driver-for-all-ryzen.patch
+	"${FILESDIR}"/"${KV_MAJOR}"-amd_iommu_init_info.patch
+	"${FILESDIR}"/"${KV_MAJOR}"-0001-Revert-hwmon-k10temp-Remove-support-for-displaying-v.patch
+	"${FILESDIR}"/"${KV_MAJOR}"-k10temp-fix-ZEN2-desktop-add-ZEN3-desktop.patch
+	"${FILESDIR}"/"${KV_MAJOR}"-8353d30e747f-drm-amd-display-disable-stream-if-pixel-clock-changed-with-link-active.patch
+	"${FILESDIR}"/"${KV_MAJOR}"-add-amd-sfh-hid_driver.patch
+	"${FILESDIR}"/"${KV_MAJOR}"-add-sbtsi_driver.patch
+	"${FILESDIR}"/"${KV_MAJOR}"-0001-Revert-cpufreq-Avoid-configuring-old-governors-as-de.patch
+	"${FILESDIR}"/"${KV_MAJOR}"-revert-parts-of-a00ec3874e7d326ab2dffbed92faddf6a77a84e9-no-Intel-NO.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-linux-hardened.patch
-	"${FILESDIR}"/"${KV_MAJOR}"-uksm-linux-hardened.patch
+	"${FILESDIR}"/"${KV_MAJOR}"-uksm-linux-hardened.patch	
 )
 
 S="${WORKDIR}"/linux-"${PV}"
