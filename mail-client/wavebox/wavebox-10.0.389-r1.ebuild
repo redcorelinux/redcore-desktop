@@ -39,4 +39,6 @@ src_install() {
 	dodir /usr/share/applications
 	insinto /usr/share/applications
 	doins ${FILESDIR}/${PN}.desktop
+
+	fperms 4711 /opt/${PN}/chrome-sandbox
 }
