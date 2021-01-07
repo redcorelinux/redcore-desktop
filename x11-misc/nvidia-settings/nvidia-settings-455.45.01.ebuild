@@ -17,7 +17,6 @@ IUSE="+gtk3"
 QA_PREBUILT=
 
 COMMON_DEPEND="
-	x11-libs/gtk+:2
 	gtk3? ( x11-libs/gtk+:3 )
 	x11-libs/libX11
 	x11-libs/libXext

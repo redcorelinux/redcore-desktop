@@ -12,12 +12,11 @@ SRC_URI="https://github.com/NVIDIA/nvidia-settings/archive/${PV}.tar.gz -> ${P}.
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="-* amd64"
-IUSE="gtk3"
+IUSE="+gtk3"
 
 QA_PREBUILT=
 
 COMMON_DEPEND="
-	x11-libs/gtk+:2
 	gtk3? ( x11-libs/gtk+:3 )
 	x11-libs/libX11
 	x11-libs/libXext

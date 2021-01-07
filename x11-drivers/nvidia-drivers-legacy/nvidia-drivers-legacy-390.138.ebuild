@@ -17,11 +17,10 @@ KEYWORDS="-* ~amd64"
 RESTRICT="bindist mirror"
 EMULTILIB_PKG="true"
 
-IUSE="acpi compat +dkms libglvnd multilib +tools wayland +X"
+IUSE="acpi compat +dkms +libglvnd multilib +tools wayland +X"
 
 COMMON="
 	X? (
-		!libglvnd? ( >=app-eselect/eselect-opengl-1.0.9 )
 		libglvnd? (
 				media-libs/libglvnd[${MULTILIB_USEDEP}]
 				!app-eselect/eselect-opengl
@@ -49,9 +48,9 @@ RDEPEND="
 QA_PREBUILT="opt/* usr/lib*"
 
 PATCHES=( 
-	"${FILESDIR}"/kernel-4.16.patch
-	"${FILESDIR}"/kernel-5.5.patch
-	"${FILESDIR}"/kernel-5.6.patch
+	"${FILESDIR}"/kernel-5.8.patch
+	"${FILESDIR}"/kernel-5.9.patch
+	"${FILESDIR}"/kernel-5.10.patch
 	"${FILESDIR}"/"${P}"-conf.patch
 )
 
@@ -146,8 +145,9 @@ src_install() {
 		doins ${NV_X11}/10_nvidia_wayland.json
 	fi
 
-	insinto /lib/modprobe.d
+	insinto /etc/modprobe.d
 	doins "${FILESDIR}"/nvidia.conf
+	doins "${FILESDIR}"/nouveau.conf
 
 	# NVIDIA kernel <-> userspace driver config lib
 	donvidia ${NV_OBJ}/libnvidia-cfg.so.${NV_SOVER}
@@ -298,9 +298,6 @@ pkg_preinst() {
 }
 
 pkg_postinst() {
-	if ! use libglvnd; then
-		use X && "${ROOT}"/usr/bin/eselect opengl set --use-old nvidia
-	fi
 	if ! use X; then
 		elog "You have selected to not install the X.org driver. Along with"
 		elog "this the OpenGL libraries and VDPAU libraries were not"
@@ -315,16 +312,7 @@ pkg_postinst() {
 	fi
 }
 
-pkg_prerm() {
-	if ! use libglvnd; then
-		use X && "${ROOT}"/usr/bin/eselect opengl set --use-old xorg-x11
-	fi
-}
-
 pkg_postrm() {
-	if ! use libglvnd; then
-		use X && "${ROOT}"/usr/bin/eselect opengl set --use-old xorg-x11
-	fi
 	if [ $(stat -c %d:%i /) == $(stat -c %d:%i /proc/1/root/.) ]; then
 		_dracut_initramfs_regen
 	fi

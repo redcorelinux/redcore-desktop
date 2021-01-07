@@ -23,9 +23,9 @@ RDEPEND="${DEPEND}
 	!!sys-kernel/nvidia-drivers-dkms"
 
 PATCHES=( 
-	"${FILESDIR}"/kernel-4.16.patch
-	"${FILESDIR}"/kernel-5.5.patch
-	"${FILESDIR}"/kernel-5.6.patch
+	"${FILESDIR}"/kernel-5.8.patch
+	"${FILESDIR}"/kernel-5.9.patch
+	"${FILESDIR}"/kernel-5.10.patch
 	"${FILESDIR}"/"${P}"-conf.patch
 )
 
