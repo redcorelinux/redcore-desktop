@@ -21,3 +21,9 @@ RDEPEND=""
 src_install() {
 	default
 }
+
+pkg_prerm() {
+	if [ "$(rc-config list boot | grep redcorelive)" != "" ]; then
+		"${ROOT}"/sbin/rc-update del redcorelive boot > /dev/null 2>&1
+	fi
+}
