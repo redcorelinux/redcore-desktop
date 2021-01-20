@@ -19,6 +19,7 @@ DEPEND="sys-kernel/dkms"
 RDEPEND="${DEPEND}"
 
 PATCHES=(
+	"${FILESDIR}"/broadcom-sta-6.30.223.141-makefile.patch
 	"${FILESDIR}"/broadcom-sta-6.30.223.141-eth-to-wlan.patch
 	"${FILESDIR}"/broadcom-sta-6.30.223.141-gcc.patch
 	"${FILESDIR}"/broadcom-sta-6.30.223.248-r3-Wno-date-time.patch
