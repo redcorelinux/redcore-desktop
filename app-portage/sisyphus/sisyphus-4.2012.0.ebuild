@@ -37,12 +37,8 @@ PDEPEND="qt5? ( ~app-portage/sisyphus-qt-${PV} )"
 src_install() {
 	emake DESTDIR=${D} install-cli
 
-	inject_backend() {
-		python_moduleinto "$(python_get_sitedir)"/"${PN}"
-		python_domodule src/backend/*.py
-	}
-
-	python_foreach_impl inject_backend
+	python_moduleinto "$(python_get_sitedir)"/"${PN}"
+	python_domodule src/backend/*.py
 
 	dosym /usr/share/${PN}/${PN}-cli.py /usr/bin/${PN}
 	keepdir var/lib/${PN}/{csv,db}
