@@ -5,7 +5,7 @@ EAPI=6
 
 PYTHON_COMPAT=( python3_{6,7,8} )
 
-inherit eutils python-r1 git-r3
+inherit eutils python-single-r1 git-r3
 
 DESCRIPTION="A simple portage python wrapper which works like other package managers(apt-get/yum/dnf)"
 HOMEPAGE="http://redcorelinux.org"
@@ -21,16 +21,18 @@ IUSE="qt5"
 
 DEPEND="dev-lang/python[sqlite]"
 RDEPEND="${DEPEND}
-	app-portage/gentoolkit[${PYTHON_USEDEP}]
 	app-portage/portage-utils
-	dev-python/animation[${PYTHON_USEDEP}]
-	dev-python/GitPython[${PYTHON_USEDEP}]
-	dev-python/typer[${PYTHON_USEDEP}]
-	dev-python/urllib3[${PYTHON_USEDEP}]
-	dev-python/wget[${PYTHON_USEDEP}]
-	sys-apps/portage[${PYTHON_USEDEP}]
+	$(python_gen_cond_dep '
+		app-portage/gentoolkit[${PYTHON_USEDEP}]
+		dev-python/animation[${PYTHON_USEDEP}]
+		dev-python/GitPython[${PYTHON_USEDEP}]
+		dev-python/typer[${PYTHON_USEDEP}]
+		dev-python/urllib3[${PYTHON_USEDEP}]
+		dev-python/wget[${PYTHON_USEDEP}]
+		sys-apps/portage[${PYTHON_USEDEP}]
+	')
 	sys-apps/gentoo-functions"
-PDEPEND="qt5? ( app-portage/sisyphus-qt[${PYTHON_USEDEP}] )"
+PDEPEND="qt5? ( ~app-portage/sisyphus-qt-${PV} )"
 
 src_install() {
 	emake DESTDIR=${D} install-cli

@@ -7,7 +7,7 @@ MY_PN="${PN/-qt/}"
 
 PYTHON_COMPAT=( python3_{6,7,8} )
 
-inherit eutils python-r1 git-r3
+inherit eutils python-single-r1 git-r3
 
 DESCRIPTION="A simple portage python wrapper which works like other package managers(apt-get/yum/dnf)"
 HOMEPAGE="http://redcorelinux.org"
@@ -22,10 +22,12 @@ KEYWORDS="amd64 x86"
 IUSE=""
 
 DEPEND="dev-lang/python[sqlite]
-	~app-portage/sisyphus-${PV}[${PYTHON_USEDEP}]"
+	~app-portage/sisyphus-${PV}"
 RDEPEND="${DEPEND}
 	app-misc/tmux
-	dev-python/PyQt5[designer,gui,widgets,${PYTHON_USEDEP}]"
+	$(python_gen_cond_dep '
+		dev-python/PyQt5[designer,gui,widgets,${PYTHON_USEDEP}]
+	')"
 
 src_install() {
 	emake DESTDIR=${D} install-gui
