@@ -19,9 +19,8 @@ SLOT="0"
 KEYWORDS="amd64 x86"
 IUSE="qt5"
 
-DEPEND="dev-lang/python[sqlite]
-	qt5? ( app-portage/sisyphus-qt )"
-RDEPEND="dev-lang/python[sqlite]
+DEPEND="dev-lang/python[sqlite]"
+RDEPEND="${DEPEND}
 	app-portage/gentoolkit[${PYTHON_USEDEP}]
 	app-portage/portage-utils
 	dev-python/animation[${PYTHON_USEDEP}]
@@ -30,7 +29,8 @@ RDEPEND="dev-lang/python[sqlite]
 	dev-python/urllib3[${PYTHON_USEDEP}]
 	dev-python/wget[${PYTHON_USEDEP}]
 	sys-apps/portage[${PYTHON_USEDEP}]
-	sys-apps/gentoo-functions"
+	sys-apps/gentoo-functions
+	qt5? ( app-portage/sisyphus-qt )"
 
 src_install() {
 	emake DESTDIR=${D} install-cli
