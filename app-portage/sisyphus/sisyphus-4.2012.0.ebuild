@@ -29,8 +29,8 @@ RDEPEND="${DEPEND}
 	dev-python/urllib3[${PYTHON_USEDEP}]
 	dev-python/wget[${PYTHON_USEDEP}]
 	sys-apps/portage[${PYTHON_USEDEP}]
-	sys-apps/gentoo-functions
-	qt5? ( app-portage/sisyphus-qt )"
+	sys-apps/gentoo-functions"
+PDEPEND="qt5? ( app-portage/sisyphus-qt[${PYTHON_USEDEP}] )"
 
 src_install() {
 	emake DESTDIR=${D} install-cli
