@@ -12,7 +12,7 @@ HOMEPAGE="http://redcorelinux.org"
 
 EGIT_REPO_URI="https://gitlab.com/redcore/sisyphus.git"
 EGIT_BRANCH="master"
-EGIT_COMMIT="9163df2c61b1b79cb14a4358e304b31756384077"
+EGIT_COMMIT="44184ce97d0dbbdafe16d0db32325ba0b2b318bd"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -35,19 +35,41 @@ RDEPEND="${DEPEND}
 PDEPEND="qt5? ( ~app-portage/sisyphus-qt-${PV} )"
 
 src_install() {
-	emake DESTDIR=${D} install-cli
+	emake DESTDIR="${D}" install-cli
 
 	python_moduleinto "$(python_get_sitedir)"/"${PN}"
 	python_domodule src/backend/*.py
 
-	dosym /usr/share/${PN}/${PN}-cli.py /usr/bin/${PN}
-	keepdir var/lib/${PN}/{csv,db}
+	dosym /usr/share/"${PN}"/"${PN}"-cli.py /usr/bin/"${PN}"
+	keepdir var/lib/"${PN}"/{csv,db}
 
-	dodir etc/${PN}
-	insinto etc/${PN}
-	doins ${FILESDIR}/mirrors.conf
+	dodir etc/"${PN}"
+	insinto etc/"${PN}"
+	doins "${FILESDIR}"/mirrors.conf
+
+	doins "${FILESDIR}"/sisyphus-custom.env
+	doins "${FILESDIR}"/sisyphus-custom.make.conf
+	doins "${FILESDIR}"/sisyphus-custom.package.accept_keywords
+	doins "${FILESDIR}"/sisyphus-custom.package.env
+	doins "${FILESDIR}"/sisyphus-custom.package.license
+	doins "${FILESDIR}"/sisyphus-custom.package.mask
+	doins "${FILESDIR}"/sisyphus-custom.package.unmask
+	doins "${FILESDIR}"/sisyphus-custom.package.use
 
 	# enforce the best available python implementation (CLI)
 	python_setup
-	python_fix_shebang "${ED}usr/share/${PN}/${PN}-cli.py"
+	python_fix_shebang "${ED}"usr/share/"${PN}"/"${PN}"-cli.py
+}
+
+pkg_postinst() {
+	# Take care of the etc-update for the user
+	if [ -e "${EROOT}"etc/"${PN}"/._cfg0000_mirrors.conf ] ; then
+		rm -rf "${EROOT}"etc/._cfg0000_mirros.conf
+	fi
+
+	for i in sisyphus-custom.{env,make.conf,package.{accept_keywords,env,license,mask,unmask,use}}; do
+		if [ -e "${EROOT}"etc/"${PN}"/._cfg000_"$i" ] ; then
+			rm -rf "${EROOT}"etc/"${PN}"/._cfg000_"$i"
+		fi
+	done
 }
