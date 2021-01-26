@@ -76,7 +76,6 @@ src_prepare() {
 	fi
 
 	eapply "${FILESDIR}"/${PN}-enable-rclogger.patch
-	eapply "${FILESDIR}"/${PN}-disable-cgroupsv2.patch
 	eapply "${FILESDIR}"/${PN}-gcc10.patch
 }
 
