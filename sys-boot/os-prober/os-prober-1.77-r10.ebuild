@@ -21,9 +21,32 @@ DEPEND=""
 QA_MULTILIB_PATHS="usr/lib/os-prober/.*"
 
 # start : Redcore Linux Project tweaks
-PATCHES=( 
-	"${FILESDIR}"/${PN}-1.76-exherbo.patch
-	"${FILESDIR}"/os-prober-redcore.patch 
+PATCHES=(
+	${FILESDIR}/${PN}-newnsdirfix.patch
+	${FILESDIR}/${PN}-SUSE.patch
+	${FILESDIR}/${PN}-1.49-fix-grub2.cfg-parsing.patch
+	${FILESDIR}/${PN}-1.49-grub2-mount.patch
+	${FILESDIR}/${PN}-probe-MD-devices.patch
+	${FILESDIR}/${PN}-linux-secure-boot.patch
+	${FILESDIR}/${PN}-btrfsfix.patch
+	${FILESDIR}/${PN}-EFI-openSUSEfy.patch
+	${FILESDIR}/${PN}-accept-ESP-on-IMSM.patch
+	${FILESDIR}/${PN}-dont-load-all-fs-module-and-dont-test-mount.patch
+	${FILESDIR}/${PN}-fix-btrfs-subvol-mounted-tests.patch
+	${FILESDIR}/${PN}-skip-part-on-multipath.patch
+	${FILESDIR}/Improve-btrfs-handling-on-os-probing-for-grub2.patch
+	${FILESDIR}/${PN}-btrfs-absolute-subvol.patch
+	${FILESDIR}/${PN}-40grub-check-grub2.patch
+	${FILESDIR}/${PN}-btrfs-snapshot-detection.patch
+	${FILESDIR}/${PN}-btrfs-always-detect-default.patch
+	${FILESDIR}/${PN}-linux-distro-avoid-expensive-ld-file-test.patch
+	${FILESDIR}/${PN}-linux-distro-parse-os-release.patch
+	${FILESDIR}/${PN}-05efi-blkid.patch
+	${FILESDIR}/${PN}-multiple-initrd.patch
+	${FILESDIR}/${PN}-make-btrfsprogs-optional.patch
+	${FILESDIR}/${PN}-use-tmp-over-var-lib-for-transient-files.patch
+	${FILESDIR}/${PN}-btrfs-multiple-device.patch
+	${FILESDIR}/${PN}-redcore.patch
 )
 # stop : Redcore Linux Project tweaks
 
@@ -48,7 +71,7 @@ src_install() {
 	dobin os-prober linux-boot-prober
 
 	# Note: as no shared libraries are installed, /usr/lib is correct
-	exeinto /usr/lib/os-prober
+	exeinto /usr/lib
 	doexe newns
 
 	insinto /usr/share/os-prober
