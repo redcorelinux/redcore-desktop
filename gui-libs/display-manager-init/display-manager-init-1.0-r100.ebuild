@@ -22,7 +22,6 @@ RDEPEND="
 src_install() {
 	newinitd "${FILESDIR}"/display-manager-setup.initd display-manager-setup
 	newinitd "${FILESDIR}"/display-manager.initd display-manager
-	newinitd "${FILESDIR}"/xdm.initd xdm
 	newconfd "${FILESDIR}"/display-manager.confd display-manager
 	exeinto /usr/bin
 	doexe "${FILESDIR}"/startDM
