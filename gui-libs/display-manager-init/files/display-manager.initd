@@ -1,5 +1,5 @@
 #!/sbin/openrc-run
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License, v2
 
 # This is here to serve as a note to myself, and future developers.
@@ -12,22 +12,22 @@
 #
 # Resolution: add the following line to /etc/inittab
 #
-#  x:a:once:/etc/X11/startDM.sh
+#  x:a:once:/usr/bin/startDM
 #
-# and have /etc/X11/startDM.sh start the DM in daemon mode if
+# and have /usr/bin/startDM start the DM in daemon mode if
 # a lock is present (with the info of what DM should be started),
 # else just fall through.
 #
 # How this basically works, is the "a" runlevel is a additional
 # runlevel that you can use to fork processes with init, but the
-# runlevel never gets changed to this runlevel.  Along with the "a"
-# runlevel, the "once" key word means that startDM.sh will only be
+# runlevel never gets changed to this runlevel. Along with the "a"
+# runlevel, the "once" key word means that startDM will only be
 # run when we specify it to run, thus eliminating respawning
-# startDM.sh when "xdm" is not added to the default runlevel, as was
-# done previously.
+# startDM when "display-manager" is not added to the default 
+# runlevel, as was done previously.
 #
 # This script then just calls "telinit a", and init will run
-# /etc/X11/startDM.sh after the current runlevel completes (this
+# /usr/bin/startDM after the current runlevel completes (this
 # script should only be added to the actual runlevel the user is
 # using).
 #
@@ -36,7 +36,7 @@
 # 04 March 2002
 
 depend() {
-	need localmount xdm-setup
+	need localmount display-manager-setup
 
 	# this should start as early as possible
 	# we can't do 'before *' as that breaks it
@@ -51,22 +51,21 @@ depend() {
 	after quota keymaps
 	before alsasound
 
-	# Start before X
-	use consolekit dbus elogind xfs
+	# Start before GUI
+	use dbus xfs
 }
 
 setup_dm() {
 	local MY_XDM
-	
-	MY_XDM=$(echo "${DISPLAYMANAGER}" | tr '[:upper:]' '[:lower:]')
 
-	# Load our root path from profile.env
-	# Needed for kdm
-	PATH=${PATH}:$(. /etc/profile.env; echo "${ROOTPATH}")
+	MY_XDM=$(echo "${DISPLAYMANAGER}" | tr '[:upper:]' '[:lower:]')
 
 	NAME=
 	case "${MY_XDM}" in
 		kdm|kde)
+			# Load our root path from profile.env
+			# Needed for kdm
+			PATH=${PATH}:$(. /etc/profile.env; echo "${ROOTPATH}")
 			EXE=/usr/bin/kdm
 			PIDFILE=/run/kdm.pid
 			;;
@@ -86,6 +85,11 @@ setup_dm() {
 				PIDFILE=/run/gdm.pid
 			fi
 			[ "${RC_UNAME}" != "Linux" ] && NAME=gdm-binary
+			;;
+		greetd)
+			EXE=/usr/bin/greetd
+			PIDFILE=/run/greetd.pid
+			START_STOP_ARGS="-m --background"
 			;;
 		wdm)
 			EXE=/usr/bin/wdm
@@ -115,7 +119,7 @@ setup_dm() {
 			EXE="$(command -v ${MY_XDM} 2>/dev/null)"
 			PIDFILE="/run/${MY_XDM}.pid"
 
-			# warn user that he is doing sick things if the exe was not found
+			# warn user that they are doing sick things if the exe was not found
 			if [ -z "${EXE}" ]; then
 				echo "ERROR: Your XDM value is invalid."
 				echo "  No ${MY_XDM} executable could be found on your system."
@@ -149,9 +153,9 @@ start() {
 	local EXE NAME PIDFILE AUTOCLEAN_CGROUP
 	setup_dm
 
-	if [ -f /etc/.noxdm ]; then
-		einfo "Skipping ${EXE##*/}, /etc/.noxdm found or \"nox\" bootparam passed."
-		rm /etc/.noxdm
+	if [ -f /run/.nogui ]; then
+		einfo "Skipping ${EXE##*/}, /run/.nogui found or 'nogui' bootparam passed."
+		rm /run/.nogui
 		return 0
 	fi
 
@@ -177,7 +181,7 @@ start() {
 		fi
 	fi
 
-	/etc/X11/startDM.sh
+	/usr/bin/startDM
 	eend 0
 }
 
@@ -209,8 +213,8 @@ stop() {
 
 	if start-stop-daemon --quiet --test --stop --exec "${myexe}" 2>/dev/null; then
 		start-stop-daemon --stop --exec "${myexe}" --retry TERM/5/TERM/5 \
-			${mypidfile:+--pidfile} ${mypidfile} \
-			${myname:+--name} ${myname}
+			"${mypidfile:+--pidfile}" "${mypidfile}" \
+			"${myname:+--name}" "${myname}"
 		retval=${?}
 	fi
 
