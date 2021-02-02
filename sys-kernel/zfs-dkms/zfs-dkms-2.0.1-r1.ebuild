@@ -39,6 +39,7 @@ src_install() {
 	fperms 0755 /usr/src/${P}/scripts/dkms.mkconf
 	fperms 0755 /usr/src/${P}/scripts/dkms.postbuild
 	fperms 0755 /usr/src/${P}/scripts/enum-extract.pl
+	fperms 0755 /usr/src/${P}/scripts/make_gitrev.sh
 }
 
 pkg_postinst() {
