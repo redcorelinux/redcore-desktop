@@ -173,10 +173,10 @@ src_install() {
 	doexe ${NV_OBJ}/nvidia-smi
 
 	# install nvidia-modprobe setuid and symlink in /usr/bin (bug #505092)
-	#doexe ${NV_OBJ}/nvidia-modprobe
-	#fowners root:video /opt/bin/nvidia-modprobe
-	#fperms 4710 /opt/bin/nvidia-modprobe
-	#dosym /{opt,usr}/bin/nvidia-modprobe
+	doexe ${NV_OBJ}/nvidia-modprobe
+	fowners root:video /opt/bin/nvidia-modprobe
+	fperms 4710 /opt/bin/nvidia-modprobe
+	dosym /{opt,usr}/bin/nvidia-modprobe
 
 	# init
 	newinitd "${FILESDIR}/nvidia-smi.init" nvidia-smi

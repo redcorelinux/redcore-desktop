@@ -49,8 +49,8 @@ RDEPEND="
 QA_PREBUILT="opt/* usr/lib*"
 S=${WORKDIR}/
 PATCHES=(
-	"${FILESDIR}"/${P}-dkms-kmalloc.patch
-	"${FILESDIR}"/${PN}-440.26-locale.patch
+	"${FILESDIR}"/dkms.patch
+	"${FILESDIR}"/locale.patch
 )
 
 pkg_setup() {
@@ -192,8 +192,6 @@ src_install() {
 	newconfd "${FILESDIR}/nvidia-persistenced.conf" nvidia-persistenced
 	newinitd "${FILESDIR}/nvidia-persistenced.init" nvidia-persistenced
 
-	dobin ${NV_OBJ}/nvidia-bug-report.sh
-
 	if has_multilib_profile && use multilib; then
 		local OABI=${ABI}
 		for ABI in $(multilib_get_enabled_abis); do
@@ -213,10 +211,6 @@ src_install() {
 	doman "${NV_MAN}"/nvidia-smi.1
 	use X && doman "${NV_MAN}"/nvidia-xconfig.1
 	doman "${NV_MAN}"/nvidia-cuda-mps-control.1
-
-	readme.gentoo_create_doc
-
-	dodoc supported-gpus.json
 
 	docinto html
 	dodoc -r ${NV_DOC}/html/*

@@ -12,12 +12,13 @@ SRC_URI="https://github.com/NVIDIA/nvidia-settings/archive/${PV}.tar.gz -> nvidi
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="-* amd64"
-IUSE="+gtk3"
+IUSE=""
 
 QA_PREBUILT=
 
 COMMON_DEPEND="
-	gtk3? ( x11-libs/gtk+:3 )
+	x11-libs/gtk+:2
+	x11-libs/gtk+:3
 	x11-libs/libX11
 	x11-libs/libXext
 	x11-libs/libXxf86vm
@@ -56,7 +57,7 @@ src_compile() {
 	einfo "Building nvidia-settings..."
 	emake -C src/ \
 		DO_STRIP= \
-		GTK3_AVAILABLE=$(usex gtk3 1 0) \
+		GTK3_AVAILABLE=1 \
 		LIBDIR="$(get_libdir)" \
 		NVLD="$(tc-getLD)" \
 		NVML_ENABLED=0 \
@@ -69,7 +70,7 @@ src_install() {
 	emake -C src/ \
 		DESTDIR="${D}" \
 		DO_STRIP= \
-		GTK3_AVAILABLE=$(usex gtk3 1 0) \
+		GTK3_AVAILABLE=1 \
 		LIBDIR="${D}/usr/$(get_libdir)" \
 		NV_USE_BUNDLED_LIBJANSSON=0 \
 		NV_VERBOSE=1 \
@@ -87,4 +88,6 @@ src_install() {
 	domenu ${FILESDIR}/${PN}.desktop
 
 	dodoc doc/*.txt
+
+	rm -rvf ${D}usr/$(get_libdir)/libnvidia-gtk2.so.${PV}
 }

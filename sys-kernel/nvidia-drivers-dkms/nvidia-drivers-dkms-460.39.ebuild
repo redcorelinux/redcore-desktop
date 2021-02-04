@@ -24,7 +24,7 @@ RDEPEND="${DEPEND}
 
 PATCHES=(
 	"${FILESDIR}"/fs62142.patch 
-	"${FILESDIR}"/${P}-dkms-kmalloc.patch
+	"${FILESDIR}"/dkms.patch
 )
 
 S="${WORKDIR}/${AMD64_NV_PACKAGE}"
