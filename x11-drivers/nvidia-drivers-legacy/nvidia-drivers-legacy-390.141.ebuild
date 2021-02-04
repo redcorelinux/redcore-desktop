@@ -48,10 +48,7 @@ RDEPEND="
 QA_PREBUILT="opt/* usr/lib*"
 
 PATCHES=( 
-	"${FILESDIR}"/kernel-5.8.patch
-	"${FILESDIR}"/kernel-5.9.patch
-	"${FILESDIR}"/kernel-5.10.patch
-	"${FILESDIR}"/"${P}"-conf.patch
+	"${FILESDIR}"/dkms.patch
 )
 
 S=${WORKDIR}/
@@ -176,10 +173,10 @@ src_install() {
 	doexe ${NV_OBJ}/nvidia-smi
 
 	# install nvidia-modprobe setuid and symlink in /usr/bin (bug #505092)
-	doexe ${NV_OBJ}/nvidia-modprobe
-	fowners root:video /opt/bin/nvidia-modprobe
-	fperms 4710 /opt/bin/nvidia-modprobe
-	dosym /{opt,usr}/bin/nvidia-modprobe
+	#doexe ${NV_OBJ}/nvidia-modprobe
+	#fowners root:video /opt/bin/nvidia-modprobe
+	#fperms 4710 /opt/bin/nvidia-modprobe
+	#dosym /{opt,usr}/bin/nvidia-modprobe
 
 	# init
 	newinitd "${FILESDIR}/nvidia-smi.init" nvidia-smi

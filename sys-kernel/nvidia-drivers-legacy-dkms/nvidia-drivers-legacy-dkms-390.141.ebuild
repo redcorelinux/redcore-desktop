@@ -23,10 +23,7 @@ RDEPEND="${DEPEND}
 	!!sys-kernel/nvidia-drivers-dkms"
 
 PATCHES=( 
-	"${FILESDIR}"/kernel-5.8.patch
-	"${FILESDIR}"/kernel-5.9.patch
-	"${FILESDIR}"/kernel-5.10.patch
-	"${FILESDIR}"/"${P}"-conf.patch
+	"${FILESDIR}"/dkms.patch
 )
 
 S="${WORKDIR}/${AMD64_NV_PACKAGE}"
