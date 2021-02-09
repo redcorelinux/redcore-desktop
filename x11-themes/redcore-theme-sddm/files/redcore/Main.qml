@@ -1,275 +1,481 @@
-/***************************************************************************
-* Copyright (c) 2013 Abdurrahman AVCI <abdurrahmanavci@gmail.com>
-*
-* Permission is hereby granted, free of charge, to any person
-* obtaining a copy of this software and associated documentation
-* files (the "Software"), to deal in the Software without restriction,
-* including without limitation the rights to use, copy, modify, merge,
-* publish, distribute, sublicense, and/or sell copies of the Software,
-* and to permit persons to whom the Software is furnished to do so,
-* subject to the following conditions:
-*
-* The above copyright notice and this permission notice shall be included
-* in all copies or substantial portions of the Software.
-*
-* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
-* OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
-* THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR
-* OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
-* ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
-* OR OTHER DEALINGS IN THE SOFTWARE.
-*
-***************************************************************************/
+/*
+ *   Copyright 2016 David Edmundson <davidedmundson@kde.org>
+ *
+ *   This program is free software; you can redistribute it and/or modify
+ *   it under the terms of the GNU Library General Public License as
+ *   published by the Free Software Foundation; either version 2 or
+ *   (at your option) any later version.
+ *
+ *   This program is distributed in the hope that it will be useful,
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *   GNU General Public License for more details
+ *
+ *   You should have received a copy of the GNU Library General Public
+ *   License along with this program; if not, write to the
+ *   Free Software Foundation, Inc.,
+ *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ */
 
-import QtQuick 2.0
-import SddmComponents 2.0
+import QtQuick 2.8
 
-Rectangle {
-    id: container
-    width: 640
-    height: 480
+import QtQuick.Layouts 1.1
+import QtQuick.Controls 1.1
+import QtGraphicalEffects 1.0
 
-    LayoutMirroring.enabled: Qt.locale().textDirection == Qt.RightToLeft
+import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.plasma.extras 2.0 as PlasmaExtras
+
+import "components"
+
+PlasmaCore.ColorScope {
+    id: root
+
+    // If we're using software rendering, draw outlines instead of shadows
+    // See https://bugs.kde.org/show_bug.cgi?id=398317
+    readonly property bool softwareRendering: GraphicsInfo.api === GraphicsInfo.Software
+
+    colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
+
+    width: 1600
+    height: 900
+
+    property string notificationMessage
+
+    LayoutMirroring.enabled: Qt.application.layoutDirection === Qt.RightToLeft
     LayoutMirroring.childrenInherit: true
 
-    TextConstants { id: textConstants }
-
-    Connections {
-        target: sddm
-
-        onLoginSucceeded: {
-            errorMessage.color = "steelblue"
-            errorMessage.text = textConstants.loginSucceeded
-        }
-
-        onLoginFailed: {
-            password.text = ""
-            errorMessage.color = "red"
-            errorMessage.text = textConstants.loginFailed
-        }
+    PlasmaCore.DataSource {
+        id: keystateSource
+        engine: "keystate"
+        connectedSources: "Caps Lock"
     }
 
-    Background {
+    Item {
+        id: wallpaper
         anchors.fill: parent
-        source: config.background
-        fillMode: Image.PreserveAspectCrop
-        onStatusChanged: {
-            if (status == Image.Error && source != config.defaultBackground) {
-                source = config.defaultBackground
+        Repeater {
+            model: screenModel
+
+            Background {
+                x: geometry.x; y: geometry.y; width: geometry.width; height: geometry.height
+                sceneBackgroundType: config.type
+                sceneBackgroundColor: config.color
+                sceneBackgroundImage: config.background
             }
         }
     }
 
-    Rectangle {
+    MouseArea {
+        id: loginScreenRoot
         anchors.fill: parent
-        color: "transparent"
-        //visible: primaryScreen
+
+        property bool uiVisible: true
+        property bool blockUI: mainStack.depth > 1 || userListComponent.mainPasswordBox.text.length > 0 || inputPanel.keyboardActive || config.type !== "image"
+
+        hoverEnabled: true
+        drag.filterChildren: true
+        onPressed: uiVisible = true;
+        onPositionChanged: uiVisible = true;
+        onUiVisibleChanged: {
+            if (blockUI) {
+                fadeoutTimer.running = false;
+            } else if (uiVisible) {
+                fadeoutTimer.restart();
+            }
+        }
+        onBlockUIChanged: {
+            if (blockUI) {
+                fadeoutTimer.running = false;
+                uiVisible = true;
+            } else {
+                fadeoutTimer.restart();
+            }
+        }
+
+        Keys.onPressed: {
+            uiVisible = true;
+            event.accepted = false;
+        }
+
+        //takes one full minute for the ui to disappear
+        Timer {
+            id: fadeoutTimer
+            running: true
+            interval: 60000
+            onTriggered: {
+                if (!loginScreenRoot.blockUI) {
+                    loginScreenRoot.uiVisible = false;
+                }
+            }
+        }
+        WallpaperFader {
+            visible: config.type === "image"
+            anchors.fill: parent
+            state: loginScreenRoot.uiVisible ? "on" : "off"
+            source: wallpaper
+            mainStack: mainStack
+            footer: footer
+            clock: clock
+        }
+
+        DropShadow {
+            id: clockShadow
+            anchors.fill: clock
+            source: clock
+            visible: !softwareRendering
+            horizontalOffset: 1
+            verticalOffset: 1
+            radius: 6
+            samples: 14
+            spread: 0.3
+            color: "black" // matches Breeze window decoration and desktopcontainment
+            Behavior on opacity {
+                OpacityAnimator {
+                    duration: 1000
+                    easing.type: Easing.InOutQuad
+                }
+            }
+        }
 
         Clock {
             id: clock
-            anchors.margins: 5
-            anchors.top: parent.top; anchors.right: parent.right
-
-            color: "white"
-            timeFont.family: "Oxygen"
+            visible: y > 0
+            property Item shadow: clockShadow
+            y: (userListComponent.userList.y + mainStack.y)/2 - height/2
+            anchors.horizontalCenter: parent.horizontalCenter
         }
 
-        Image {
-            id: rectangle
-            anchors.centerIn: parent
-            width: Math.max(320, mainColumn.implicitWidth + 50)
-            height: Math.max(320, mainColumn.implicitHeight + 50)
 
-            source: "rectangle.png"
+        StackView {
+            id: mainStack
+            anchors {
+                left: parent.left
+                right: parent.right
+            }
+            height: root.height + units.gridUnit * 3
 
-            Column {
-                id: mainColumn
-                anchors.centerIn: parent
-                spacing: 12
-                Text {
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    color: "black"
-                    verticalAlignment: Text.AlignVCenter
-                    height: text.implicitHeight
-                    width: parent.width
-                    text: textConstants.welcomeText.arg(sddm.hostName)
-                    wrapMode: Text.WordWrap
-                    font.pixelSize: 24
-                    elide: Text.ElideRight
-                    horizontalAlignment: Text.AlignHCenter
-                }
+            focus: true //StackView is an implicit focus scope, so we need to give this focus so the item inside will have it
 
-                Column {
-                    width: parent.width
-                    spacing: 4
-                    Text {
-                        id: lblName
-                        width: parent.width
-                        text: textConstants.userName
-                        font.bold: true
-                        font.pixelSize: 12
-                    }
+            Timer {
+                //SDDM has a bug in 0.13 where even though we set the focus on the right item within the window, the window doesn't have focus
+                //it is fixed in 6d5b36b28907b16280ff78995fef764bb0c573db which will be 0.14
+                //we need to call "window->activate()" *After* it's been shown. We can't control that in QML so we use a shoddy timer
+                //it's been this way for all Plasma 5.x without a huge problem
+                running: true
+                repeat: false
+                interval: 200
+                onTriggered: mainStack.forceActiveFocus()
+            }
 
-                    TextBox {
-                        id: name
-                        width: parent.width; height: 30
-                        text: userModel.lastUser
-                        font.pixelSize: 14
+            initialItem: Login {
+            id: userListComponent
+            userListModel: userModel
+            userListCurrentIndex: userModel.lastIndex >= 0 ? userModel.lastIndex : 0
+            lastUserName: userModel.lastUser
+            
+            usernameFontSize: root.generalFontSize
+            usernameFontColor: root.generalFontColor
 
-                        KeyNavigation.backtab: rebootButton; KeyNavigation.tab: password
+            showUserList: {
+                if ( !userListModel.hasOwnProperty("count")
+                || !userListModel.hasOwnProperty("disableAvatarsThreshold"))
+                    return (userList.y + mainStack.y) > 0
 
-                        Keys.onPressed: {
-                            if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
-                                sddm.login(name.text, password.text, session.index)
-                                event.accepted = true
-                            }
-                        }
+                if ( userListModel.count == 0 ) return false
+
+                return userListModel.count <= userListModel.disableAvatarsThreshold && (userList.y + mainStack.y) > 0
+            }
+
+            notificationMessage: {
+                var text = ""
+                if (keystateSource.data["Caps Lock"]["Locked"]) {
+                    text += i18nd("plasma_lookandfeel_org.kde.lookandfeel","Caps Lock is on")
+                    if (root.notificationMessage) {
+                        text += " • "
                     }
                 }
+                text += root.notificationMessage
+                return text
+            }
 
-                Column {
-                    width: parent.width
-                    spacing : 4
-                    Text {
-                        id: lblPassword
-                        width: parent.width
-                        text: textConstants.password
-                        font.bold: true
-                        font.pixelSize: 12
-                    }
-
-                    PasswordBox {
-                        id: password
-                        width: parent.width; height: 30
-                        font.pixelSize: 14
-
-                        KeyNavigation.backtab: name; KeyNavigation.tab: session
-
-                        Keys.onPressed: {
-                            if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
-                                sddm.login(name.text, password.text, session.index)
-                                event.accepted = true
-                            }
-                        }
-                    }
-                }
-
-                Row {
-                    spacing: 4
-                    width: parent.width / 2
-                    z: 100
-
-                    Column {
-                        z: 100
-                        width: parent.width * 1.3
-                        spacing : 4
-                        anchors.bottom: parent.bottom
-
-                        Text {
-                            id: lblSession
-                            width: parent.width
-                            text: textConstants.session
-                            wrapMode: TextEdit.WordWrap
-                            font.bold: true
-                            font.pixelSize: 12
-                        }
-
-                        ComboBox {
-                            id: session
-                            width: parent.width; height: 30
-                            font.pixelSize: 14
-
-                            arrowIcon: "angle-down.png"
-
-                            model: sessionModel
-                            index: sessionModel.lastIndex
-
-                            KeyNavigation.backtab: password; KeyNavigation.tab: layoutBox
-                        }
-                    }
-
-                    Column {
-                        z: 101
-                        width: parent.width * 0.7
-                        spacing : 4
-                        anchors.bottom: parent.bottom
-
-                        Text {
-                            id: lblLayout
-                            width: parent.width
-                            text: textConstants.layout
-                            wrapMode: TextEdit.WordWrap
-                            font.bold: true
-                            font.pixelSize: 12
-                        }
-
-                        LayoutBox {
-                            id: layoutBox
-                            width: parent.width; height: 30
-                            font.pixelSize: 14
-
-                            arrowIcon: "angle-down.png"
-
-                            KeyNavigation.backtab: session; KeyNavigation.tab: loginButton
-                        }
-                    }
-                }
-
-                Column {
-                    width: parent.width
-                    Text {
-                        id: errorMessage
-                        anchors.horizontalCenter: parent.horizontalCenter
-                        text: textConstants.prompt
-                        font.pixelSize: 10
-                    }
-                }
-
-                Row {
-                    spacing: 4
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    property int btnWidth: Math.max(loginButton.implicitWidth,
-                                                    shutdownButton.implicitWidth,
-                                                    rebootButton.implicitWidth, 80) + 8
-                    Button {
-                        id: loginButton
-                        text: textConstants.login
-                        width: parent.btnWidth
-
-                        onClicked: sddm.login(name.text, password.text, session.index)
-
-                        KeyNavigation.backtab: layoutBox; KeyNavigation.tab: shutdownButton
-                    }
-
-                    Button {
-                        id: shutdownButton
-                        text: textConstants.shutdown
-                        width: parent.btnWidth
-
-                        onClicked: sddm.powerOff()
-
-                        KeyNavigation.backtab: loginButton; KeyNavigation.tab: rebootButton
-                    }
-
-                    Button {
-                        id: rebootButton
-                        text: textConstants.reboot
-                        width: parent.btnWidth
-
+                actionItems: [
+                    ActionButton {
+                        iconSource: "/usr/share/sddm/themes/Orchis/assets/suspend_primary.svgz"
+                        text: i18ndc("plasma_lookandfeel_org.kde.lookandfeel","Suspend to RAM","Sleep")
+                        onClicked: sddm.suspend()
+                        enabled: sddm.canSuspend
+                        visible: !inputPanel.keyboardActive
+                    },
+                    ActionButton {
+                        iconSource: "/usr/share/sddm/themes/Orchis/assets/restart_primary.svgz"
+                        text: i18nd("plasma_lookandfeel_org.kde.lookandfeel","Restart")
                         onClicked: sddm.reboot()
+                        enabled: sddm.canReboot
+                        visible: !inputPanel.keyboardActive
+                    },
+                    ActionButton {
+                        iconSource: "/usr/share/sddm/themes/Orchis/assets/shutdown_primary.svgz"
+                        text: i18nd("plasma_lookandfeel_org.kde.lookandfeel","Shut Down")
+                        onClicked: sddm.powerOff()
+                        enabled: sddm.canPowerOff
+                        visible: !inputPanel.keyboardActive
+                    },
+                    ActionButton {
+                        iconSource: "/usr/share/sddm/themes/Orchis/assets/switch_primary.svgz"
+                        text: i18ndc("plasma_lookandfeel_org.kde.lookandfeel", "For switching to a username and password prompt", "Other...")
+                        onClicked: mainStack.push(userPromptComponent)
+                        enabled: true
+                        visible: !userListComponent.showUsernamePrompt && !inputPanel.keyboardActive
+                    }]
 
-                        KeyNavigation.backtab: shutdownButton; KeyNavigation.tab: name
-                    }
+                onLoginRequest: {
+                    root.notificationMessage = ""
+                    sddm.login(username, password, sessionButton.currentIndex)
+                }
+            }
+
+            Behavior on opacity {
+                OpacityAnimator {
+                    duration: units.longDuration
                 }
             }
         }
+
+        Loader {
+            id: inputPanel
+            state: "hidden"
+            property bool keyboardActive: item ? item.active : false
+            onKeyboardActiveChanged: {
+                if (keyboardActive) {
+                    state = "visible"
+                } else {
+                    state = "hidden";
+                }
+            }
+            source: "components/VirtualKeyboard.qml"
+            anchors {
+                left: parent.left
+                right: parent.right
+            }
+
+            function showHide() {
+                state = state == "hidden" ? "visible" : "hidden";
+            }
+
+            states: [
+                State {
+                    name: "visible"
+                    PropertyChanges {
+                        target: mainStack
+                        y: Math.min(0, root.height - inputPanel.height - userListComponent.visibleBoundary)
+                    }
+                    PropertyChanges {
+                        target: inputPanel
+                        y: root.height - inputPanel.height
+                        opacity: 1
+                    }
+                },
+                State {
+                    name: "hidden"
+                    PropertyChanges {
+                        target: mainStack
+                        y: 0
+                    }
+                    PropertyChanges {
+                        target: inputPanel
+                        y: root.height - root.height/4
+                        opacity: 0
+                    }
+                }
+            ]
+            transitions: [
+                Transition {
+                    from: "hidden"
+                    to: "visible"
+                    SequentialAnimation {
+                        ScriptAction {
+                            script: {
+                                inputPanel.item.activated = true;
+                                Qt.inputMethod.show();
+                            }
+                        }
+                        ParallelAnimation {
+                            NumberAnimation {
+                                target: mainStack
+                                property: "y"
+                                duration: units.longDuration
+                                easing.type: Easing.InOutQuad
+                            }
+                            NumberAnimation {
+                                target: inputPanel
+                                property: "y"
+                                duration: units.longDuration
+                                easing.type: Easing.OutQuad
+                            }
+                            OpacityAnimator {
+                                target: inputPanel
+                                duration: units.longDuration
+                                easing.type: Easing.OutQuad
+                            }
+                        }
+                    }
+                },
+                Transition {
+                    from: "visible"
+                    to: "hidden"
+                    SequentialAnimation {
+                        ParallelAnimation {
+                            NumberAnimation {
+                                target: mainStack
+                                property: "y"
+                                duration: units.longDuration
+                                easing.type: Easing.InOutQuad
+                            }
+                            NumberAnimation {
+                                target: inputPanel
+                                property: "y"
+                                duration: units.longDuration
+                                easing.type: Easing.InQuad
+                            }
+                            OpacityAnimator {
+                                target: inputPanel
+                                duration: units.longDuration
+                                easing.type: Easing.InQuad
+                            }
+                        }
+                        ScriptAction {
+                            script: {
+                                Qt.inputMethod.hide();
+                            }
+                        }
+                    }
+                }
+            ]
+        }
+
+
+        Component {
+            id: userPromptComponent
+            Login {
+                showUsernamePrompt: true
+                notificationMessage: root.notificationMessage
+
+                // using a model rather than a QObject list to avoid QTBUG-75900
+                userListModel: ListModel {
+                    ListElement {
+                        name: ""
+                        iconSource: ""
+                    }
+                    Component.onCompleted: {
+                        // as we can't bind inside ListElement
+                        setProperty(0, "name", i18nd("plasma_lookandfeel_org.kde.lookandfeel", "Type in Username and Password"));
+                    }
+                }
+
+                onLoginRequest: {
+                    root.notificationMessage = ""
+                    sddm.login(username, password, sessionButton.currentIndex)
+                }
+
+                actionItems: [
+                    ActionButton {
+                        iconSource: "/usr/share/sddm/themes/Orchis/assets/suspend_primary.svgz"
+                        text: i18ndc("plasma_lookandfeel_org.kde.lookandfeel","Suspend to RAM","Sleep")
+                        onClicked: sddm.suspend()
+                        enabled: sddm.canSuspend
+                        visible: !inputPanel.keyboardActive
+                    },
+                    ActionButton {
+                        iconSource: "/usr/share/sddm/themes/Orchis/assets/restart_primary.svgz"
+                        text: i18nd("plasma_lookandfeel_org.kde.lookandfeel","Restart")
+                        onClicked: sddm.reboot()
+                        enabled: sddm.canReboot
+                        visible: !inputPanel.keyboardActive
+                    },
+                    ActionButton {
+                        iconSource: "/usr/share/sddm/themes/Orchis/assets/shutdown_primary.svgz"
+                        text: i18nd("plasma_lookandfeel_org.kde.lookandfeel","Shut Down")
+                        onClicked: sddm.powerOff()
+                        enabled: sddm.canPowerOff
+                        visible: !inputPanel.keyboardActive
+                    },
+                    ActionButton {
+                        iconSource: "/usr/share/sddm/themes/Orchis/assets/switch_primary.svgz"
+                        text: i18nd("plasma_lookandfeel_org.kde.lookandfeel","List Users")
+                        onClicked: mainStack.pop()
+                        visible: !inputPanel.keyboardActive
+                    }
+                ]
+            }
+        }
+
+        //Footer
+        RowLayout {
+            id: footer
+            anchors {
+                bottom: parent.bottom
+                left: parent.left
+                right: parent.right
+                margins: units.smallSpacing
+            }
+
+            Behavior on opacity {
+                OpacityAnimator {
+                    duration: units.longDuration
+                }
+            }
+
+            PlasmaComponents.ToolButton {
+                text: i18ndc("plasma_lookandfeel_org.kde.lookandfeel", "Button to show/hide virtual keyboard", "Virtual Keyboard")
+                font.pointSize: config.fontSize
+                iconName: inputPanel.keyboardActive ? "input-keyboard-virtual-on" : "input-keyboard-virtual-off"
+                onClicked: inputPanel.showHide()
+                visible: inputPanel.status == Loader.Ready
+            }
+
+            KeyboardButton {
+            }
+
+            SessionButton {
+                id: sessionButton
+            }
+
+            Item {
+                Layout.fillWidth: true
+            }
+
+            Battery { }
+        }
     }
 
-    Component.onCompleted: {
-        if (name.text == "")
-            name.focus = true
-        else
-            password.focus = true
+    Connections {
+        target: sddm
+        onLoginFailed: {
+            notificationMessage = i18nd("plasma_lookandfeel_org.kde.lookandfeel", "Login Failed")
+            footer.enabled = true
+            mainStack.enabled = true
+            userListComponent.userList.opacity = 1
+        }
+        onLoginSucceeded: {
+            //note SDDM will kill the greeter at some random point after this
+            //there is no certainty any transition will finish, it depends on the time it
+            //takes to complete the init
+            mainStack.opacity = 0
+            footer.opacity = 0
+        }
+    }
+
+    onNotificationMessageChanged: {
+        if (notificationMessage) {
+            notificationResetTimer.start();
+        }
+    }
+
+    Timer {
+        id: notificationResetTimer
+        interval: 3000
+        onTriggered: notificationMessage = ""
     }
 }
