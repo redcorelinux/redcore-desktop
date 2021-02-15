@@ -22,7 +22,7 @@ DEPEND="dev-libs/nss
 	x11-libs/libnotify"
 RDEPEND="${DEPEND}"
 
-RESTRICT="mirror"
+RESTRICT="mirror strip"
 
 S="${WORKDIR}"
 
@@ -31,5 +31,7 @@ src_unpack() {
 }
 
 src_install() {
-	mv * "${D}" || die
+	rm -rf ${S}/usr/share/doc || die
+	cp -R ${S}/* "${D}" || die
+	fperms 4711 /opt/Simplenote/chrome-sandbox || die
 }
