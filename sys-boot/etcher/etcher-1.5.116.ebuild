@@ -38,4 +38,5 @@ src_install() {
 	sed -i "s/Icon\=balena\-etcher\-electron/Icon\=etcher\-electron/g" "${D}"usr/share/applications/balena-"${PN}"-electron.desktop
 	rm -rf "${D}"usr/share/doc
 	fperms 0755 /opt/balenaEtcher/balena-"${PN}"-electron || die
+	fperms 4711 /opt/balenaEtcher/chrome-sandbox
 }
