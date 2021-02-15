@@ -45,7 +45,7 @@ RDEPEND="
 
 S=${WORKDIR}
 
-RESTRICT="mirror bindist"
+RESTRICT="mirror bindist strip"
 
 QA_PREBUILT="
 	opt/discord/share/discord/Discord
@@ -75,6 +75,8 @@ src_install() {
 		/usr/share/applications/${PN}.desktop
 	dosym /opt/${PN}/share/pixmaps/${PN}.png \
 		/usr/share/pixmaps/${PN}.png
+
+	fperms 4711 /opt/${PN}/share/${PN}/chrome-sandbox
 }
 
 pkg_preinst() {
