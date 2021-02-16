@@ -133,19 +133,24 @@ src_install() {
 		VirtualBox.tar.bz2 LICENSE VBoxSysInfo.sh rdesktop* vboxwebsrv \
 		webtest kchmviewer sdk VirtualBox.chm vbox-create-usb-node.sh \
 		90-vbox-usb.fdi uninstall.sh vboxshell.py vboxdrv-pardus.py \
-		VBoxPython*.so
+		VBoxPython*.so virtualbox.desktop
 
 	doins -r * || die
 
 	# create symlinks for working around unsupported $ORIGIN/.. in VBoxC.so (setuid)
 	dosym ../VBoxVMM.so /opt/VirtualBox/components/VBoxVMM.so
-	dosym ../VBoxREM.so /opt/VirtualBox/components/VBoxREM.so
 	dosym ../VBoxRT.so /opt/VirtualBox/components/VBoxRT.so
 	dosym ../VBoxDDU.so /opt/VirtualBox/components/VBoxDDU.so
 	dosym ../VBoxXPCOM.so /opt/VirtualBox/components/VBoxXPCOM.so
 
 	local each
-	for each in VBox{Manage,SVC,XPCOMIPCD,Tunctl,TestOGL,ExtPackHelperApp} ; do
+	for each in VirtualBox{,VM} ; do
+		fowners root:vboxusers /opt/VirtualBox/${each}
+		fperms 0750 /opt/VirtualBox/${each}
+		pax-mark -m "${ED%/}"/opt/VirtualBox/${each}
+	done
+
+	for each in VBox{Autostart,BalloonCtrl,BugReport,DTrace,VolInfo,Manage,SVC,XPCOMIPCD,Tunctl,TestOGL,ExtPackHelperApp} ; do
 		fowners root:vboxusers /opt/VirtualBox/${each}
 		fperms 0750 /opt/VirtualBox/${each}
 		pax-mark -m "${ED%/}"/opt/VirtualBox/${each}
