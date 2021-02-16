@@ -31,12 +31,10 @@ RESTRICT="mirror"
 DEPEND="app-arch/unzip"
 
 RDEPEND="
-	# ebegin : conflict with ebuilds from ::gentoo
 	!!app-emulation/virtualbox
 	!!app-emulation/virtualbox-additions
 	!!app-emulation/virtualbox-extpack-oracle
 	!!app-emulation/virtualbox-guest-additions
-	# eend
 	acct-group/vboxusers
 	~app-emulation/virtualbox-modules-${MAIN_PV}
 	dev-libs/expat
