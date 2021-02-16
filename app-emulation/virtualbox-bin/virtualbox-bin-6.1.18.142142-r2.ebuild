@@ -146,7 +146,8 @@ src_install() {
 	local each
 	for each in VirtualBox{,VM} ; do
 		fowners root:vboxusers /opt/VirtualBox/${each}
-		fperms 0750 /opt/VirtualBox/${each}
+		fperms 0750 /opt/VirtualBox/VirtualBox
+		fperms 4750 /opt/VirtualBox/VirtualBoxVM
 		pax-mark -m "${ED%/}"/opt/VirtualBox/${each}
 	done
 
