@@ -27,6 +27,7 @@ src_compile() {
 }
 
 src_install() {
-	insinto usr/$(get_libdir)/modules-load.d/
-	doins "${FILESDIR}"/virtualbox.conf
+	insinto /etc/modules-load.d/
+	insinto /etc/modules-load.d/
+	newins "${FILESDIR}"/virtualbox-kmod virtualbox.conf
 }
