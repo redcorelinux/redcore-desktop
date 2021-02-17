@@ -22,7 +22,7 @@ DEPEND="
 	dev-libs/nss
 	dev-libs/openssl-compat:1.0.0
 	media-libs/alsa-lib
-	net-libs/c-ares
+	net-dns/c-ares
 	sys-libs/db:5.3
 	x11-libs/gtk+:3
 	x11-libs/libxkbfile
