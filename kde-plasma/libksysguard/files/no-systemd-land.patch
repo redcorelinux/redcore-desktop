@@ -1,0 +1,75 @@
+diff --git a/processcore/cgroup_data_model.cpp b/processcore/cgroup_data_model.cpp
+index 46a36c3915c7b2b3fc15d3a707b7318be68b68cb..4278a2c59714511765a6db7258815ff72865e8ab 100644
+--- a/processcore/cgroup_data_model.cpp
++++ b/processcore/cgroup_data_model.cpp
+@@ -48,6 +48,7 @@ public:
+     QHash<QString, KSysGuard::ProcessAttribute* > m_availableAttributes;
+     QVector<KSysGuard::ProcessAttribute* > m_enabledAttributes;
+ 
++    bool m_available = false;
+     QString m_root;
+     QScopedPointer<CGroup> m_rootGroup;
+ 
+@@ -367,9 +368,22 @@ void CGroupDataModel::setRoot(const QString &root)
+         return;
+     }
+     d->m_root = root;
+-    d->m_rootGroup.reset(new CGroup(root));
+     emit rootChanged();
+     QMetaObject::invokeMethod(this, [this] {update();}, Qt::QueuedConnection);
++
++    const QString path = CGroup::cgroupSysBasePath() + root;
++    bool available = QFile::exists(path);
++
++    if (available) {
++        d->m_rootGroup.reset(new CGroup(root));
++    } else {
++        d->m_rootGroup.reset();
++    }
++
++    if (available != d->m_available) {
++        d->m_available = available;
++        emit availableChanged();
++    }
+ }
+ 
+ void CGroupDataModel::update()
+@@ -443,6 +457,11 @@ void CGroupDataModel::update(CGroup *node)
+     }
+ }
+ 
++bool CGroupDataModel::isAvailable() const
++{
++    return d->m_available;
++}
++
+ QVector<Process*> CGroupDataModelPrivate::processesFor(CGroup *app)
+ {
+     if (m_processMap.contains(app)) {
+diff --git a/processcore/cgroup_data_model.h b/processcore/cgroup_data_model.h
+index 5ce58aada3e9a1750914fbe9a2c455dc236ec588..1f7d28d12226f30968a4d9b61ac117c1863a4901 100644
+--- a/processcore/cgroup_data_model.h
++++ b/processcore/cgroup_data_model.h
+@@ -59,6 +59,8 @@ class Q_DECL_EXPORT CGroupDataModel : public QAbstractItemModel
+      */
+     Q_PROPERTY(QString setRoot READ root WRITE setRoot NOTIFY rootChanged)
+ 
++    Q_PROPERTY(bool available READ isAvailable NOTIFY availableChanged)
++
+ public:
+     CGroupDataModel(QObject *parent = nullptr);
+     CGroupDataModel(const QString &root, QObject *parent = nullptr);
+@@ -114,10 +116,13 @@ public:
+      */
+     void update();
+ 
++    bool isAvailable() const;
++
+ Q_SIGNALS:
+     void enabledAttributesChanged();
+     void enabledChanged();
+     void rootChanged();
++    void availableChanged();
+ 
+ protected:
+     virtual bool filterAcceptsCGroup(const QString &id);
