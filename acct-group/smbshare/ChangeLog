@@ -1,9 +1,0 @@
-# ChangeLog for acct-group/smbshare
-# Copyright 1999-2021 Gentoo Foundation; Distributed under the GPL v2
-# (auto-generated from git log)
-
-*smbshare-0 (02 Jan 2021)
-
-  02 Jan 2021; V3n3RiX <venerix@redcorelinux.org> +smbshare-0.ebuild:
-  net-fs/sambacfg : migrate from enewgroup to acct-group
-
