@@ -1,0 +1,84 @@
+# ChangeLog for sys-fs/vhba
+# Copyright 1999-2021 Gentoo Foundation; Distributed under the GPL v2
+# (auto-generated from git log)
+
+*vhba-20190831-r2 (06 Jan 2021)
+
+  06 Jan 2021; V3n3RiX <venerix@redcorelinux.org> +files/vhba-kmod,
+  +files/vhba-udev, -vhba-20190831-r1.ebuild, +vhba-20190831-r2.ebuild:
+  autoload the required kernel module at boot
+
+*vhba-20190831-r1 (01 Jan 2021)
+
+  01 Jan 2021; V3n3RiX <venerix@redcorelinux.org> -vhba-20190831.ebuild,
+  +vhba-20190831-r1.ebuild:
+  since eudev doesn't really like uaccess tag, let's use a old school rule
+
+*vhba-20190831 (31 Dec 2019)
+
+  31 Dec 2019; V3n3RiX <venerix@redcorelinux.org> -vhba-20190410.ebuild,
+  +vhba-20190831.ebuild:
+  sys-kernel/vhba-dkms : version bump
+
+  07 Jul 2019; V3n3RiX <venerix@redcorelinux.org> vhba-20190410.ebuild:
+  call default in src_prepare, otherways EAPI complains
+
+*vhba-20190410 (07 Jul 2019)
+
+  07 Jul 2019; V3n3RiX <venerix@redcorelinux.org> -vhba-20170610-r1.ebuild,
+  +vhba-20190410.ebuild:
+  sys-kernel/vhba-dkms : version bump
+
+*vhba-20170610-r1 (18 Dec 2017)
+
+  18 Dec 2017; V3n3RiX <venerix@redcorelinux.org> +vhba-20170610-r1.ebuild,
+  -vhba-20170610-r1710.ebuild:
+  trigger rebuilds
+
+*vhba-20170610-r1710 (08 Oct 2017)
+
+  08 Oct 2017; V3n3RiX <venerix@redcorelinux.org> -vhba-20170610-r1708.ebuild,
+  +vhba-20170610-r1710.ebuild:
+  r1710 revision bump
+
+*vhba-20170610-r1708 (13 Aug 2017)
+
+  13 Aug 2017; V3n3RiX <venerix@redcorelinux.org> -vhba-20170610-r1706.ebuild,
+  +vhba-20170610-r1708.ebuild:
+  redcore 1708 gamma crucis : bump ebuilds
+
+*vhba-20170610-r1706 (24 Jul 2017)
+
+  24 Jul 2017; V3n3RiX <venerix@redcorelinux.org> -vhba-20140928-r1706.ebuild,
+  +vhba-20170610-r1706.ebuild:
+  dkms : version bump
+
+*vhba-20140928-r1706 (22 Jul 2017)
+
+  22 Jul 2017; V3n3RiX <venerix@redcorelinux.org> -vhba-20140928.ebuild,
+  +vhba-20140928-r1706.ebuild:
+  fix possible circular deps
+
+  26 Mar 2017; V3n3RiX <venerix@redcorelinux.org> vhba-20140928.ebuild:
+  again, try to fix deps
+
+*vhba-20140928 (26 Mar 2017)
+
+  26 Mar 2017; V3n3RiX <venerix@redcorelinux.org> +vhba-20140928.ebuild,
+  -vhba-20140928-r10000.ebuild:
+  no idea what's wrong with that
+
+*vhba-20140928-r10000 (26 Mar 2017)
+
+  26 Mar 2017; V3n3RiX <venerix@redcorelinux.org> -vhba-20140928-r1000.ebuild,
+  +vhba-20140928-r10000.ebuild:
+  fix deps
+
+  26 Mar 2017; V3n3RiX <venerix@redcorelinux.org> vhba-20140928-r1000.ebuild:
+  fix typo
+
+*vhba-20140928-r1000 (26 Mar 2017)
+
+  26 Mar 2017; V3n3RiX <venerix@redcorelinux.org> +vhba-20140928-r1000.ebuild:
+  port vhba to dkms framework
+

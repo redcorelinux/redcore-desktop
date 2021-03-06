@@ -1,0 +1,231 @@
+# ChangeLog for sys-kernel/zfs-dkms
+# Copyright 1999-2021 Gentoo Foundation; Distributed under the GPL v2
+# (auto-generated from git log)
+
+*zfs-dkms-2.0.3 (15 Feb 2021)
+
+  15 Feb 2021; V3n3RiX <venerix@redcorelinux.org> files/dkms.conf,
+  -zfs-dkms-2.0.1-r1.ebuild, +zfs-dkms-2.0.3.ebuild:
+  sys-fs/zfs : version bump (v2.0.3)
+
+*zfs-dkms-2.0.1-r1 (02 Feb 2021)
+
+  02 Feb 2021; V3n3RiX <venerix@redcorelinux.org> -zfs-dkms-2.0.1.ebuild,
+  +zfs-dkms-2.0.1-r1.ebuild:
+  revision bump (fix lacking +x permissions on make_gitrev.sh)
+
+*zfs-dkms-2.0.1 (30 Jan 2021)
+
+  30 Jan 2021; V3n3RiX <venerix@redcorelinux.org> files/dkms.conf,
+  -zfs-dkms-0.8.4.ebuild, +zfs-dkms-2.0.1.ebuild:
+  sys-fs/zfs : version bump
+
+*zfs-dkms-0.8.4 (16 May 2020)
+
+  16 May 2020; V3n3RiX <venerix@redcorelinux.org> files/dkms.conf,
+  -files/kernel-5.5.patch, -zfs-dkms-0.8.3-r1.ebuild, +zfs-dkms-0.8.4.ebuild:
+  sys-fs/zfs : version bump
+
+  08 Mar 2020; V3n3RiX <venerix@redcorelinux.org> zfs-dkms-0.8.3-r1.ebuild:
+  ..
+
+  08 Mar 2020; V3n3RiX <venerix@redcorelinux.org>
+  -files/2fcab8795c7c493845bfa277d44bc443802000b8.patch,
+  +files/kernel-5.5.patch:
+  fix kernel 5.5 compat
+
+*zfs-dkms-0.8.3-r1 (08 Mar 2020)
+
+  08 Mar 2020; V3n3RiX <venerix@redcorelinux.org>
+  +files/2fcab8795c7c493845bfa277d44bc443802000b8.patch,
+  -zfs-dkms-0.8.3.ebuild, +zfs-dkms-0.8.3-r1.ebuild:
+  add kernel 5.5 compat
+
+*zfs-dkms-0.8.3 (25 Jan 2020)
+
+  25 Jan 2020; V3n3RiX <venerix@redcorelinux.org>
+  -files/Use_NMH_WAIT_EXEC_with_call.patch, files/dkms.conf,
+  -zfs-dkms-0.8.2-r1.ebuild, +zfs-dkms-0.8.3.ebuild:
+  sys-fs/zfs-{,utils} && sys-kernel/zfs-dkms : version bump (v0.8.3)
+
+*zfs-dkms-0.8.2-r1 (02 Jan 2020)
+
+  02 Jan 2020; V3n3RiX <venerix@redcorelinux.org>
+  +files/Use_NMH_WAIT_EXEC_with_call.patch, -zfs-dkms-0.8.2.ebuild,
+  +zfs-dkms-0.8.2-r1.ebuild:
+  backport fix for https://github.com/zfsonlinux/zfs/issues/9417
+
+*zfs-dkms-0.8.2 (31 Dec 2019)
+
+  31 Dec 2019; V3n3RiX <venerix@redcorelinux.org> files/dkms.conf,
+  -zfs-dkms-0.8.1.ebuild, +zfs-dkms-0.8.2.ebuild:
+  sys-fs/zfs-utils && sys-kernel/zfs-dkms : version bump
+
+*zfs-dkms-0.8.1 (04 Jul 2019)
+
+  04 Jul 2019; V3n3RiX <venerix@redcorelinux.org> files/dkms.conf,
+  -zfs-dkms-0.7.13.ebuild, +zfs-dkms-0.8.1.ebuild:
+  sys-fs/zfs : version bump
+
+*zfs-dkms-0.7.13 (19 Jun 2019)
+
+  19 Jun 2019; V3n3RiX <venerix@redcorelinux.org> files/dkms.conf,
+  -zfs-dkms-0.7.12.ebuild, +zfs-dkms-0.7.13.ebuild:
+  sys-fs/{spl,zfs} : version bump
+
+*zfs-dkms-0.7.12 (31 Dec 2018)
+
+  31 Dec 2018; V3n3RiX <venerix@redcorelinux.org> files/dkms.conf,
+  -zfs-dkms-0.7.10.ebuild, +zfs-dkms-0.7.12.ebuild:
+  sys-fs/{spl,zfs} : version bump
+
+*zfs-dkms-0.7.10 (08 Sep 2018)
+
+  08 Sep 2018; V3n3RiX <venerix@redcorelinux.org> files/dkms.conf,
+  -zfs-dkms-0.7.9-r2.ebuild, +zfs-dkms-0.7.10.ebuild:
+  sys-kernel/{spl,zfs} : version bump
+
+*zfs-dkms-0.7.9-r2 (27 Aug 2018)
+
+  27 Aug 2018; V3n3RiX <venerix@redcorelinux.org> -files/kernel-4.18.patch,
+  -zfs-dkms-0.7.9-r1.ebuild, +zfs-dkms-0.7.9-r2.ebuild:
+  drop not working patches
+
+*zfs-dkms-0.7.9-r1 (27 Aug 2018)
+
+  27 Aug 2018; V3n3RiX <venerix@redcorelinux.org> +files/kernel-4.18.patch,
+  -zfs-dkms-0.7.9.ebuild, +zfs-dkms-0.7.9-r1.ebuild:
+  sys-fs/{spl,zfs} : kernel 4.18 compat
+
+*zfs-dkms-0.7.9 (26 Aug 2018)
+
+  26 Aug 2018; V3n3RiX <venerix@redcorelinux.org> files/dkms.conf,
+  -zfs-dkms-0.7.8-r1.ebuild, +zfs-dkms-0.7.9.ebuild:
+  sys-fs/{spl,zfs} : version bump
+
+*zfs-dkms-0.7.8-r1 (10 Apr 2018)
+
+  10 Apr 2018; V3n3RiX <venerix@redcorelinux.org> +zfs-dkms-0.7.8-r1.ebuild:
+  wth
+
+  10 Apr 2018; V3n3RiX <venerix@redcorelinux.org> -zfs-dkms-0.7.8.ebuild:
+  fix dkms failures
+
+*zfs-dkms-0.7.8 (10 Apr 2018)
+
+  10 Apr 2018; V3n3RiX <venerix@redcorelinux.org> files/dkms.conf,
+  -zfs-dkms-0.7.6.ebuild, +zfs-dkms-0.7.8.ebuild:
+  sys-fs/{zfs,spl} : version bump
+
+*zfs-dkms-0.7.6 (02 Apr 2018)
+
+  02 Apr 2018; V3n3RiX <venerix@redcorelinux.org> files/dkms.conf,
+  +zfs-dkms-0.7.6.ebuild, -zfs-dkms-0.7.7.ebuild:
+  Revert "sys-fs/{spl,zfs} : version bump"
+
+  This reverts commit d031d102728856e6bbaeaa55ec22e9ae95e4785b.
+
+*zfs-dkms-0.7.7 (02 Apr 2018)
+
+  02 Apr 2018; V3n3RiX <venerix@redcorelinux.org> files/dkms.conf,
+  -zfs-dkms-0.7.6.ebuild, +zfs-dkms-0.7.7.ebuild:
+  sys-fs/{spl,zfs} : version bump
+
+*zfs-dkms-0.7.6 (11 Mar 2018)
+
+  11 Mar 2018; V3n3RiX <venerix@redcorelinux.org> files/dkms.conf,
+  -zfs-dkms-0.7.5.ebuild, +zfs-dkms-0.7.6.ebuild:
+  sys-fs/{spl,zfs} : version bump
+
+*zfs-dkms-0.7.5 (07 Jan 2018)
+
+  07 Jan 2018; V3n3RiX <venerix@redcorelinux.org> files/dkms.conf,
+  -zfs-dkms-0.7.4.ebuild, +zfs-dkms-0.7.5.ebuild:
+  sys-fs/{spl,zfs} : version bump
+
+*zfs-dkms-0.7.4 (18 Dec 2017)
+
+  18 Dec 2017; V3n3RiX <venerix@redcorelinux.org> files/dkms.conf,
+  -zfs-dkms-0.7.2-r1710.ebuild, +zfs-dkms-0.7.4.ebuild:
+  sys-fs/{spl,zfs} : version bump
+
+  29 Oct 2017; V3n3RiX <venerix@redcorelinux.org> files/dkms.conf:
+  bugfix -> https://github.com/zfsonlinux/zfs/issues/5232
+
+*zfs-dkms-0.7.2-r1710 (29 Oct 2017)
+
+  29 Oct 2017; V3n3RiX <venerix@redcorelinux.org> files/dkms.conf,
+  -zfs-dkms-0.6.5.11-r1708.ebuild, +zfs-dkms-0.7.2-r1710.ebuild:
+  sys-fs/zfs && sys-fs/spl : version bump
+
+*zfs-dkms-0.6.5.11-r1708 (06 Oct 2017)
+
+  06 Oct 2017; V3n3RiX <venerix@redcorelinux.org>
+  +zfs-dkms-0.6.5.11-r1708.ebuild, -zfs-dkms-0.6.5.11-r1710.ebuild:
+  Revert "sys-kernel : trigger dkms build for the running kernel right away,
+  so one can load the modules without reboot"
+
+  This reverts commit c70485933fba5f01511a1f600174096ab2125693.
+
+  06 Oct 2017; V3n3RiX <venerix@redcorelinux.org>
+  zfs-dkms-0.6.5.11-r1710.ebuild:
+  Revert "sys-kernel/zfs-dkms : spl-dkms must be installed before zfs-dkms, or
+  build will fail"
+
+  This reverts commit 9c77fa14296d78441a578a9a46e38ea43227d9e0.
+
+  06 Oct 2017; V3n3RiX <venerix@redcorelinux.org>
+  zfs-dkms-0.6.5.11-r1710.ebuild:
+  spl-dkms must be installed before zfs-dkms, or build will fail
+
+*zfs-dkms-0.6.5.11-r1710 (06 Oct 2017)
+
+  06 Oct 2017; V3n3RiX <venerix@redcorelinux.org>
+  -zfs-dkms-0.6.5.11-r1708.ebuild, +zfs-dkms-0.6.5.11-r1710.ebuild:
+  sys-kernel : trigger dkms build for the running kernel right away, so one
+  can load the modules without reboot
+
+*zfs-dkms-0.6.5.11-r1708 (13 Aug 2017)
+
+  13 Aug 2017; V3n3RiX <venerix@redcorelinux.org>
+  -zfs-dkms-0.6.5.11-r1706.ebuild, +zfs-dkms-0.6.5.11-r1708.ebuild:
+  redcore 1708 gamma crucis : bump ebuilds
+
+*zfs-dkms-0.6.5.11-r1706 (30 Jul 2017)
+
+  30 Jul 2017; V3n3RiX <venerix@redcorelinux.org> files/dkms.conf,
+  +zfs-dkms-0.6.5.11-r1706.ebuild, -zfs-dkms-0.7.0-r1706.ebuild:
+  Revert "ZFS : bump to v0.7.0"
+
+  This reverts commit 1c3637dd3b054c149f818aa6eed47c849ca8d0a6.
+
+*zfs-dkms-0.7.0-r1706 (30 Jul 2017)
+
+  30 Jul 2017; V3n3RiX <venerix@redcorelinux.org> files/dkms.conf,
+  -zfs-dkms-0.6.5.11-r1706.ebuild, +zfs-dkms-0.7.0-r1706.ebuild:
+  ZFS : bump to v0.7.0
+
+  24 Jul 2017; V3n3RiX <venerix@redcorelinux.org> files/dkms.conf:
+  stupid mistake
+
+*zfs-dkms-0.6.5.11-r1706 (24 Jul 2017)
+
+  24 Jul 2017; V3n3RiX <venerix@redcorelinux.org>
+  -zfs-dkms-0.6.5.9-r1706.ebuild, +zfs-dkms-0.6.5.11-r1706.ebuild:
+  sys-fs/spl + sys-fs/zfs : version bumpt
+
+*zfs-dkms-0.6.5.9-r1706 (23 Jul 2017)
+
+  23 Jul 2017; V3n3RiX <venerix@redcorelinux.org> files/dkms.conf,
+  -zfs-dkms-0.6.5.9.ebuild, +zfs-dkms-0.6.5.9-r1706.ebuild:
+  install all dkms modules under /lib/modules/4.9.39-redcore/extra/dkms
+
+  05 Jun 2017; V3n3RiX <venerix@redcorelinux.org> zfs-dkms-0.6.5.9.ebuild:
+  fix permissions of dkms scripts
+
+*zfs-dkms-0.6.5.9 (05 Jun 2017)
+
+  05 Jun 2017; V3n3RiX <venerix@redcorelinux.org> +files/dkms.conf,
+  +zfs-dkms-0.6.5.9.ebuild:
+  add zfs && spl dkms packages
+

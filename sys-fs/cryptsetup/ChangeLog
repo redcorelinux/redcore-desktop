@@ -1,0 +1,49 @@
+# ChangeLog for sys-fs/cryptsetup
+# Copyright 1999-2021 Gentoo Foundation; Distributed under the GPL v2
+# (auto-generated from git log)
+
+*cryptsetup-2.3.4-r10 (25 Sep 2020)
+
+  25 Sep 2020; V3n3RiX <venerix@redcorelinux.org> -cryptsetup-1.7.5-r3.ebuild,
+  +cryptsetup-2.3.4-r10.ebuild, files/1.6.7-dmcrypt.confd,
+  +files/cryptsetup-2.0.4-fix-static-pwquality-build.patch,
+  -files/setup-1.7.0.py:
+  version bump
+
+*cryptsetup-1.7.5-r3 (30 Dec 2018)
+
+  30 Dec 2018; V3n3RiX <venerix@redcorelinux.org> -cryptsetup-1.7.5-r2.ebuild,
+  +cryptsetup-1.7.5-r3.ebuild:
+  revision bump
+
+*cryptsetup-1.7.5-r2 (15 Jul 2018)
+
+  15 Jul 2018; V3n3RiX <venerix@redcorelinux.org> -cryptsetup-1.7.5-r1.ebuild,
+  +cryptsetup-1.7.5-r2.ebuild:
+  revision bump, mark as stable
+
+*cryptsetup-1.7.5-r1 (04 Dec 2017)
+
+  04 Dec 2017; V3n3RiX <venerix@redcorelinux.org> +cryptsetup-1.7.5-r1.ebuild,
+  -cryptsetup-1.7.5-r1710.ebuild:
+  lower revisions
+
+*cryptsetup-1.7.5-r1710 (08 Oct 2017)
+
+  08 Oct 2017; V3n3RiX <venerix@redcorelinux.org>
+  -cryptsetup-1.7.5-r1708.ebuild, +cryptsetup-1.7.5-r1710.ebuild:
+  r1710 revision bump
+
+*cryptsetup-1.7.5-r1708 (13 Aug 2017)
+
+  13 Aug 2017; V3n3RiX <venerix@redcorelinux.org>
+  -cryptsetup-1.7.5-r1706.ebuild, +cryptsetup-1.7.5-r1708.ebuild:
+  redcore 1708 gamma crucis : bump ebuilds
+
+*cryptsetup-1.7.5-r1706 (02 Jun 2017)
+
+  02 Jun 2017; V3n3RiX <venerix@redcorelinux.org>
+  +cryptsetup-1.7.5-r1706.ebuild, +files/1.6.7-dmcrypt.confd,
+  +files/1.6.7-dmcrypt.rc, +files/setup-1.7.0.py:
+  import from portage tree
+

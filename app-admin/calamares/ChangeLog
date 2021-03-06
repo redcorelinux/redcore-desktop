@@ -1,0 +1,554 @@
+# ChangeLog for app-admin/calamares
+# Copyright 1999-2021 Gentoo Foundation; Distributed under the GPL v2
+# (auto-generated from git log)
+
+  22 Jan 2021; V3n3RiX <venerix@redcorelinux.org>
+  calamares-3.2.35.1-r1.ebuild:
+  adjust PYTHON_COMPAT
+
+*calamares-3.2.35.1-r1 (19 Dec 2020)
+
+  19 Dec 2020; V3n3RiX <venerix@redcorelinux.org> -calamares-3.2.35.1.ebuild,
+  +calamares-3.2.35.1-r1.ebuild:
+  fix deps, revison bump
+
+*calamares-3.2.35.1 (18 Dec 2020)
+
+  18 Dec 2020; V3n3RiX <venerix@redcorelinux.org> -calamares-3.2.24-r1.ebuild,
+  +calamares-3.2.35.1.ebuild:
+  version bump
+
+*calamares-3.2.24-r1 (21 May 2020)
+
+  21 May 2020; V3n3RiX <venerix@redcorelinux.org> -calamares-3.2.24.ebuild,
+  +calamares-3.2.24-r1.ebuild:
+  install sample config files
+
+*calamares-3.2.24 (21 May 2020)
+
+  21 May 2020; V3n3RiX <venerix@redcorelinux.org> -calamares-3.1.12-r6.ebuild,
+  +calamares-3.2.24.ebuild, -files/calamares-dont-rely-on-plymouthcfg.patch,
+  files/calamares-dont-run-locale-gen.patch,
+  -files/calamares-kpmcore-3.2.patch,
+  -files/calamares-openrc-dmcrypt-cfg-r1.patch:
+  version bump
+
+*calamares-3.1.12-r6 (19 May 2020)
+
+  19 May 2020; V3n3RiX <venerix@redcorelinux.org> -calamares-3.1.12-r5.ebuild,
+  +calamares-3.1.12-r6.ebuild:
+  update installer icon
+
+*calamares-3.1.12-r5 (16 May 2020)
+
+  16 May 2020; V3n3RiX <venerix@redcorelinux.org> -calamares-3.1.12-r4.ebuild,
+  +calamares-3.1.12-r5.ebuild:
+  rebuild against new dev-libs/boost
+
+*calamares-3.1.12-r4 (29 Apr 2020)
+
+  29 Apr 2020; V3n3RiX <venerix@redcorelinux.org> -calamares-3.1.12-r3.ebuild,
+  +calamares-3.1.12-r4.ebuild:
+  add python3.7 compat
+
+  29 Apr 2020; V3n3RiX <venerix@redcorelinux.org> calamares-3.1.12-r3.ebuild,
+  files/calamares-dont-rely-on-plymouthcfg.patch,
+  files/calamares-dont-run-locale-gen.patch,
+  files/calamares-kpmcore-3.2.patch,
+  files/calamares-openrc-dmcrypt-cfg-r1.patch, files/calamares-pkexec:
+  restore file permissions, changed everything to 755 by mistake
+
+  29 Apr 2020; V3n3RiX <venerix@redcorelinux.org> calamares-3.1.12-r3.ebuild,
+  files/calamares-dont-rely-on-plymouthcfg.patch,
+  files/calamares-dont-run-locale-gen.patch,
+  files/calamares-kpmcore-3.2.patch,
+  files/calamares-openrc-dmcrypt-cfg-r1.patch:
+  sys-apps/apparmor-utils : add python3.7 compat
+
+*calamares-3.1.12-r3 (26 Jan 2019)
+
+  26 Jan 2019; V3n3RiX <venerix@redcorelinux.org> -calamares-3.1.12-r2.ebuild,
+  +calamares-3.1.12-r3.ebuild,
+  +files/calamares-dont-rely-on-plymouthcfg.patch:
+  revision bump, we don't rely on plymouthcfg for splash
+
+*calamares-3.1.12-r2 (17 Jun 2018)
+
+  17 Jun 2018; V3n3RiX <venerix@redcorelinux.org> -calamares-3.1.12-r1.ebuild,
+  +calamares-3.1.12-r2.ebuild:
+  bump minimal qt dep to 5.9
+
+*calamares-3.1.12-r1 (27 Jan 2018)
+
+  27 Jan 2018; V3n3RiX <venerix@redcorelinux.org> -calamares-3.1.12.ebuild,
+  +calamares-3.1.12-r1.ebuild:
+  revision bump
+
+*calamares-3.1.12 (12 Jan 2018)
+
+  12 Jan 2018; V3n3RiX <venerix@redcorelinux.org> -calamares-3.1.9-r1.ebuild,
+  +calamares-3.1.12.ebuild:
+  version bump
+
+*calamares-3.1.9-r1 (18 Dec 2017)
+
+  18 Dec 2017; V3n3RiX <venerix@redcorelinux.org> -calamares-3.1.9.ebuild,
+  +calamares-3.1.9-r1.ebuild:
+  future proof PYTHON_COMPAT
+
+*calamares-3.1.9 (03 Dec 2017)
+
+  03 Dec 2017; V3n3RiX <venerix@redcorelinux.org> -calamares-3.1.8-r3.ebuild,
+  +calamares-3.1.9.ebuild, -files/calamares-3.1.8-dont-run-locale-gen.patch,
+  -files/calamares-3.1.8-kpmcore-3.2.patch,
+  -files/calamares-3.1.8-openrc-dmcrypt-cfg.patch,
+  +files/calamares-dont-run-locale-gen.patch,
+  +files/calamares-kpmcore-3.2.patch,
+  +files/calamares-openrc-dmcrypt-cfg-r1.patch:
+  version bump (3.1.8 -> 3.1.9)
+
+*calamares-3.1.8-r3 (01 Dec 2017)
+
+  01 Dec 2017; V3n3RiX <venerix@redcorelinux.org> -calamares-3.1.8-r2.ebuild,
+  +calamares-3.1.8-r3.ebuild:
+  PYTHON_COMPAT : 3.5
+
+*calamares-3.1.8-r2 (20 Nov 2017)
+
+  20 Nov 2017; V3n3RiX <venerix@redcorelinux.org> -calamares-3.1.8-r1.ebuild,
+  +calamares-3.1.8-r2.ebuild,
+  +files/calamares-3.1.8-dont-run-locale-gen.patch:
+  revision bump
+
+*calamares-3.1.8-r1 (18 Nov 2017)
+
+  18 Nov 2017; V3n3RiX <venerix@redcorelinux.org>
+  -calamares-3.1.1-r1710.ebuild, +calamares-3.1.8-r1.ebuild,
+  -files/calamares-3.1.1-luks-fstab-write-devmapper.patch,
+  -files/calamares-3.1.1-openrc-dmcrypt-cfg.patch,
+  +files/calamares-3.1.8-kpmcore-3.2.patch,
+  +files/calamares-3.1.8-openrc-dmcrypt-cfg.patch:
+  version bump
+
+*calamares-3.1.1-r1710 (29 Oct 2017)
+
+  29 Oct 2017; V3n3RiX <venerix@redcorelinux.org>
+  -calamares-3.1.1-r1708.ebuild, +calamares-3.1.1-r1710.ebuild:
+  revision bump , no time to deal with new versions and breakages they bring,
+  so for this release ship with 3.1.1
+
+  22 Aug 2017; V3n3RiX <venerix@redcorelinux.org>
+  files/calamares-3.1.1-openrc-dmcrypt-cfg.patch:
+  improve out-of-tree openrcdmcryptcfg module
+
+*calamares-3.1.1-r1708 (13 Aug 2017)
+
+  13 Aug 2017; V3n3RiX <venerix@redcorelinux.org> -calamares-3.1.1.ebuild,
+  +calamares-3.1.1-r1708.ebuild:
+  redcore 1708 gamma crucis : bump ebuilds
+
+*calamares-3.1.1 (15 Jul 2017)
+
+  15 Jul 2017; V3n3RiX <venerix@redcorelinux.org> -calamares-3.1.0-r3.ebuild,
+  +calamares-3.1.1.ebuild,
+  -files/calamares-3.1.0-luks-fstab-write-devmapper.patch,
+  -files/calamares-3.1.0-openrc-dmcrypt-cfg.patch,
+  +files/calamares-3.1.1-luks-fstab-write-devmapper.patch,
+  +files/calamares-3.1.1-openrc-dmcrypt-cfg.patch:
+  version bump
+
+  03 Jun 2017; V3n3RiX <venerix@redcorelinux.org> calamares-3.1.0-r3.ebuild:
+  fix patchlevel
+
+*calamares-3.1.0-r3 (03 Jun 2017)
+
+  03 Jun 2017; V3n3RiX <venerix@redcorelinux.org> -calamares-3.1.0-r2.ebuild,
+  +calamares-3.1.0-r3.ebuild, +files/calamares-3.1.0-openrc-dmcrypt-cfg.patch:
+  auto-unlock encrypted /home with OpenRC dmcrypt service
+
+*calamares-3.1.0-r2 (02 Jun 2017)
+
+  02 Jun 2017; V3n3RiX <venerix@redcorelinux.org> -calamares-3.1.0-r1.ebuild,
+  +calamares-3.1.0-r2.ebuild,
+  +files/calamares-3.1.0-luks-fstab-write-devmapper.patch,
+  -files/calamares-3.1.0-luksfix.patch:
+  fix broken luks fstab writes
+
+*calamares-3.1.0-r1 (02 Jun 2017)
+
+  02 Jun 2017; V3n3RiX <venerix@redcorelinux.org> -calamares-3.1.0.ebuild,
+  +calamares-3.1.0-r1.ebuild:
+  disable luksfix, it brokes the things for us
+
+  02 Jun 2017; V3n3RiX <venerix@redcorelinux.org> calamares-3.1.0.ebuild,
+  +files/calamares-3.1.0-luksfix.patch:
+  fix broken luks, patch by frugalware
+
+*calamares-3.1.0 (02 Jun 2017)
+
+  02 Jun 2017; V3n3RiX <venerix@redcorelinux.org> -calamares-2.4.5-r2.ebuild,
+  -calamares-2.4.6.ebuild, +calamares-3.1.0.ebuild:
+  bump calamares to v3.1.0
+
+*calamares-2.4.6 (22 Jan 2017)
+
+  22 Jan 2017; V3n3RiX <venerix@redcorelinux.org> +calamares-2.4.6.ebuild:
+  calamares : bump version to 2.4.6
+
+*calamares-2.4.5-r2 (30 Nov 2016)
+
+  30 Nov 2016; V3n3RiX <venerix@redcorelinux.org> -calamares-2.4.5-r1.ebuild,
+  +calamares-2.4.5-r2.ebuild:
+  adjust calamares icon
+
+*calamares-2.4.5-r1 (27 Nov 2016)
+
+  27 Nov 2016; V3n3RiX <venerix@redcorelinux.org> -calamares-2.4.5.ebuild,
+  +calamares-2.4.5-r1.ebuild:
+  revbump calamares
+
+  27 Nov 2016; V3n3RiX <venerix@redcorelinux.org> -calamares-2.4.3-r4.ebuild:
+  drop calamares 2.4.3
+
+*calamares-2.4.5 (25 Nov 2016)
+
+  25 Nov 2016; V3n3RiX <venerix@rogentos.ro> +calamares-2.4.5.ebuild:
+  update calamares to 2.4.5
+
+*calamares-2.4.3-r4 (24 Nov 2016)
+
+  24 Nov 2016; V3n3RiX <venerix@rogentos.ro> -calamares-2.4.3-r3.ebuild,
+  +calamares-2.4.3-r4.ebuild, -files/calamares-2.4.3-dracut-redcore.patch:
+  we no longer need to patch calamares dracut module, hurray
+
+*calamares-2.4.3-r3 (07 Nov 2016)
+
+  07 Nov 2016; V3n3RiX <venerix@rogentos.ro> -calamares-2.4.3-r2.ebuild,
+  +calamares-2.4.3-r3.ebuild:
+  reset artwork versions to 1.0...rebranding in progress
+
+  06 Nov 2016; V3n3RiX <venerix@rogentos.ro> calamares-2.4.3-r2.ebuild:
+  adjust calamares deps
+
+  06 Nov 2016; V3n3RiX <venerix@rogentos.ro>
+  files/calamares-2.4.3-dracut-redcore.patch:
+  drop kupertino and elementary icons, adjust steam and calamares patches
+
+*calamares-2.4.3-r2 (06 Nov 2016)
+
+  06 Nov 2016; V3n3RiX <venerix@rogentos.ro> -calamares-2.4.3-r1.ebuild,
+  +calamares-2.4.3-r2.ebuild, -files/calamares-2.4.3-dracut-kogaion.patch,
+  +files/calamares-2.4.3-dracut-redcore.patch:
+  rebranding
+
+*calamares-2.4.3-r1 (30 Oct 2016)
+
+  30 Oct 2016; V3n3RiX <venerix@rogentos.ro> -calamares-2.4.3.ebuild,
+  +calamares-2.4.3-r1.ebuild, files/calamares-2.4.3-dracut-kogaion.patch:
+  adjustments for new kernel
+
+*calamares-2.4.3 (28 Oct 2016)
+
+  28 Oct 2016; V3n3RiX <venerix@rogentos.ro> -calamares-2.4.2-r20.ebuild,
+  +calamares-2.4.3.ebuild, -files/calamares-2.4.2-dracut-kogaion.patch,
+  -files/calamares-2.4.2-dracut-luks-fde.patch,
+  -files/calamares-2.4.2-grubcfg-luks-unlock.patch,
+  +files/calamares-2.4.3-dracut-kogaion.patch:
+  bump calamares to 2.4.3
+
+*calamares-2.4.2-r20 (22 Oct 2016)
+
+  22 Oct 2016; V3n3RiX <venerix@rogentos.ro> -calamares-2.4.2-r15.ebuild,
+  +calamares-2.4.2-r20.ebuild, files/calamares-2.4.2-dracut-kogaion.patch:
+  adjust calamares dracut kogaion patch for new kernel
+
+  22 Oct 2016; V3n3RiX <venerix@rogentos.ro>
+  files/calamares-2.4.2-dracut-kogaion.patch:
+  adjust dracut patch for the current kernel
+
+*calamares-2.4.2-r15 (21 Oct 2016)
+
+  21 Oct 2016; V3n3RiX <venerix@rogentos.ro> -calamares-2.4.2-r10.ebuild,
+  +calamares-2.4.2-r15.ebuild,
+  files/calamares-2.4.2-grubcfg-luks-unlock.patch:
+  with systemd-cryptsetup we don't really need home rd.luks.uuid, systemd
+  should handle it in userspace
+
+*calamares-2.4.2-r10 (20 Oct 2016)
+
+  20 Oct 2016; V3n3RiX <venerix@rogentos.ro> -calamares-2.4.2-r5.ebuild,
+  +calamares-2.4.2-r10.ebuild,
+  files/calamares-2.4.2-grubcfg-luks-unlock.patch:
+  ok, this is final fix...ready for deployment
+
+  20 Oct 2016; V3n3RiX <venerix@rogentos.ro>
+  files/calamares-2.4.2-grubcfg-luks-unlock.patch:
+  ...
+
+*calamares-2.4.2-r5 (20 Oct 2016)
+
+  20 Oct 2016; V3n3RiX <venerix@rogentos.ro> -calamares-2.4.2-r4.ebuild,
+  +calamares-2.4.2-r5.ebuild, files/calamares-2.4.2-grubcfg-luks-unlock.patch:
+  minor fix in kernel_params ordering
+
+*calamares-2.4.2-r4 (20 Oct 2016)
+
+  20 Oct 2016; V3n3RiX <venerix@rogentos.ro> -calamares-2.4.2-r3.ebuild,
+  +calamares-2.4.2-r4.ebuild,
+  +files/calamares-2.4.2-grubcfg-luks-unlock.patch:
+  enable luks unlocking of /root, swap and home
+
+*calamares-2.4.2-r3 (18 Oct 2016)
+
+  18 Oct 2016; V3n3RiX <venerix@rogentos.ro> -calamares-2.4.2-r2.ebuild,
+  +calamares-2.4.2-r3.ebuild, +files/calamares-2.4.2-dracut-kogaion.patch,
+  -files/calamares-kogaion-dracut-call.patch:
+  adjust calamares a bit
+
+*calamares-2.4.2-r2 (18 Oct 2016)
+
+  18 Oct 2016; V3n3RiX <venerix@rogentos.ro> -calamares-2.4.2-r1.ebuild,
+  +calamares-2.4.2-r2.ebuild, files/calamares-kogaion-dracut-call.patch:
+  build a hostonly initramfs by default
+
+*calamares-2.4.2-r1 (17 Oct 2016)
+
+  17 Oct 2016; V3n3RiX <venerix@rogentos.ro> -calamares-2.4.2.ebuild,
+  +calamares-2.4.2-r1.ebuild:
+  trigger rebuild for calamares, with fixed dracut patch
+
+  17 Oct 2016; V3n3RiX <venerix@rogentos.ro> -calamares-2.3-r6.ebuild,
+  -files/calamares-portage-backend-properly-remove-revdeps.patch:
+  drop calamares 2.3, focus on 2.4.2
+
+  16 Oct 2016; V3n3RiX <venerix@rogentos.ro> -calamares-1.1.ebuild,
+  -calamares-999.ebuild:
+  drop calamares 1.1
+
+  16 Oct 2016; V3n3RiX <venerix@rogentos.ro>
+  files/calamares-kogaion-dracut-call.patch:
+  update dracut call patch to match the current kernel
+
+*calamares-2.4.2 (16 Oct 2016)
+
+  16 Oct 2016; V3n3RiX <venerix@rogentos.ro> +calamares-2.4.2.ebuild,
+  +files/calamares-2.4.2-dracut-luks-fde.patch:
+  prepare calamares 2.4.2 with dracut luks support
+
+*calamares-2.3-r6 (12 Aug 2016)
+
+  12 Aug 2016; V3n3RiX <venerix@rogentos.ro> -calamares-2.3-r5.ebuild,
+  +calamares-2.3-r6.ebuild,
+  +files/calamares-portage-backend-properly-remove-revdeps.patch:
+  improve calamares portage backend to properly remove reverse deps, submitted
+  by Kogaion, merged upstream in 9dfaca175dfdc8bc5d64a258af26a142c184b29e
+
+*calamares-2.3-r5 (08 Aug 2016)
+
+  08 Aug 2016; V3n3RiX <venerix@rogentos.ro> -calamares-2.3-r4.ebuild,
+  +calamares-2.3-r5.ebuild, +files/calamares-pkexec:
+  fix installer doesn't start from desktop launcher
+
+*calamares-2.3-r4 (07 Aug 2016)
+
+  07 Aug 2016; V3n3RiX <venerix@rogentos.ro> -calamares-2.3-r3.ebuild,
+  +calamares-2.3-r4.ebuild, files/calamares-kogaion-dracut-call.patch:
+  disable --no-hostonly-cmdline, it will break boot
+
+*calamares-2.3-r3 (07 Aug 2016)
+
+  07 Aug 2016; V3n3RiX <venerix@rogentos.ro> -calamares-2.3-r2.ebuild,
+  +calamares-2.3-r3.ebuild, +files/calamares-kogaion-dracut-call.patch:
+  patch calamares dracut module with kogaion specific call, hope this works
+
+  01 Aug 2016; V3n3RiX <venerix@rogentos.ro> calamares-2.3-r2.ebuild:
+  add webchannel as a dep as well
+
+*calamares-2.3-r2 (01 Aug 2016)
+
+  01 Aug 2016; V3n3RiX <venerix@rogentos.ro> -calamares-2.3-r1.ebuild,
+  +calamares-2.3-r2.ebuild:
+  link calamares to qtwebengine instead of qtwebkit, so at least qt 5.6 is
+  needed
+
+*calamares-2.3-r1 (10 Jul 2016)
+
+  10 Jul 2016; V3n3RiX <venerix@rogentos.ro> -calamares-2.3.ebuild,
+  +calamares-2.3-r1.ebuild:
+  trigger rebuild against new kpmcore
+
+  02 Jul 2016; V3n3RiX <venerix@rogentos.ro> -calamares-2.2.3.ebuild:
+  drop calamares 2.2.3
+
+*calamares-2.3 (02 Jul 2016)
+
+  02 Jul 2016; V3n3RiX <venerix@rogentos.ro> +calamares-2.3.ebuild:
+  add calamares-2.3, released today
+
+  26 Jun 2016; V3n3RiX <venerix@rogentos.ro> calamares-2.2.3.ebuild:
+  fix deps for new calamares
+
+  26 Jun 2016; V3n3RiX <venerix@rogentos.ro> calamares-2.2.3.ebuild:
+  avoid keywording, working on testing repo anyway
+
+*calamares-2.2.3 (26 Jun 2016)
+
+  26 Jun 2016; V3n3RiX <venerix@rogentos.ro> -calamares-2.1.ebuild,
+  +calamares-2.2.3.ebuild:
+  it's time to prepare our new installer
+
+  15 Mar 2016; V3n3RiX <venerix@rogentos.ro> calamares-1.1.ebuild:
+  Revert "prevent old calamares ebuild to fetch new runtime"
+
+  This reverts commit 86054822e6e1dd911a2b149568bfc523a084287d.
+
+  15 Mar 2016; V3n3RiX <venerix@rogentos.ro> calamares-1.1.ebuild:
+  prevent old calamares ebuild to fetch new runtime
+
+  15 Mar 2016; V3n3RiX <venerix@rogentos.ro> calamares-2.1.ebuild:
+  depend on new runtime
+
+*calamares-2.1 (15 Mar 2016)
+
+  15 Mar 2016; V3n3RiX <venerix@rogentos.ro> +calamares-2.1.ebuild:
+  bump calamares to latest version , mark as unstable till we do our tests
+
+  06 Mar 2016; V3n3RiX <venerix@rogentos.ro> calamares-1.1.ebuild:
+  fix calamares rdeps
+
+  06 Mar 2016; V3n3RiX <venerix@rogentos.ro> calamares-1.1.ebuild:
+  build calamares against python 3.4, change default backend to portage
+
+  26 Jul 2015; V3n3RiX <venerix@rogentos.ro> calamares-1.1.ebuild,
+  -files/calamares-disable-kogaionlive-services-module.patch:
+  revert liveservices
+
+  26 Jul 2015; V3n3RiX <venerix@rogentos.ro> calamares-1.1.ebuild,
+  +files/calamares-disable-kogaionlive-services-module.patch:
+  insert disable kogaionlive services into calamares src tree, disable
+  kogaionlive services during installation, enable lightdm service
+
+  18 Jul 2015; BlackNoxis <steven.darklight@gmail.com> calamares-1.1.ebuild:
+  [calamares] adaugat keyword stabil
+
+*calamares-1.1 (27 Jun 2015)
+
+  27 Jun 2015; V3n3RiX <venerix@rogentos.ro> +calamares-1.1.ebuild,
+  calamares-999.ebuild:
+  calamares stable ebuild...let's celebrate
+
+  13 Jun 2015; V3n3RiX <venerix@rogentos.ro> calamares-999.ebuild:
+  move calamares-config-kogaion dep to calamares-runtime
+
+  13 Jun 2015; V3n3RiX <venerix@rogentos.ro> calamares-999.ebuild,
+  -files/calamares-disable-debug-window.patch,
+  -files/calamares-find-gentoo-python3-boost-libs.patch,
+  -files/calamares-kogaion-system-defaults.patch:
+  less patching is good patching, disable patching of calamares modules
+  configuration && create a sepparate package instead
+
+  11 Jun 2015; V3n3RiX <venerix@rogentos.ro> calamares-999.ebuild:
+  upstream fixed building with gcc 4.8, so no longer need to patch debug
+  window out
+
+  11 Jun 2015; V3n3RiX <venerix@rogentos.ro> calamares-999.ebuild,
+  +files/calamares-disable-debug-window.patch,
+  +files/calamares-kogaion-system-defaults.patch:
+  massive overhaul of calamares ebuild, ready to be upstreamed to gentoo
+
+  10 Jun 2015; V3n3RiX <venerix@rogentos.ro> calamares-999.ebuild:
+  force dev-libs/boost to build against python3.3 even if we have it in
+  make.conf, disable our hackish way to find required libs as it's fixed
+  upstream
+
+  10 Jun 2015; V3n3RiX <venerix@rogentos.ro> calamares-999.ebuild:
+  bump calamares ebuild to 1.1-rc2
+
+  10 Jun 2015; V3n3RiX <venerix@rogentos.ro> calamares-999.ebuild,
+  +files/calamares-find-gentoo-python3-boost-libs.patch,
+  -files/cmake-find-gentoo-python3-boost-libs.patch:
+  force enable python in our calamares build
+
+  10 Jun 2015; V3n3RiX <venerix@rogentos.ro> calamares-999.ebuild:
+  calamares 1.1-rc1
+
+  09 Jun 2015; V3n3RiX <venerix@rogentos.ro> calamares-999.ebuild:
+  update calamares ebuild to our new rebased branch
+
+  09 Jun 2015; V3n3RiX <venerix@rogentos.ro> calamares-999.ebuild:
+  update calamares ebuild to our new rebased branch
+
+  01 Jun 2015; V3n3RiX <venerix@rogentos.ro> calamares-999.ebuild:
+  bump calamares ebuild && make sure we have squashfs-tools and rsync with
+  proper useflags enabled
+
+  01 Jun 2015; V3n3RiX <venerix@rogentos.ro> calamares-999.ebuild:
+  bump calamares ebuild
+
+  01 Jun 2015; V3n3RiX <venerix@rogentos.ro> calamares-999.ebuild:
+  bump calamares ebuild to our latest git tree
+
+  31 May 2015; V3n3RiX <venerix@rogentos.ro> calamares-999.ebuild:
+  bump calamares ebuild to latest git revision
+
+  31 May 2015; V3n3RiX <venerix@rogentos.ro> calamares-999.ebuild:
+  our new installer is pretty much ready...it builds, it starts, our branding
+  is in place...from now on, only fine tuning
+
+  31 May 2015; V3n3RiX <venerix@rogentos.ro> calamares-999.ebuild,
+  +files/cmake-find-gentoo-python3-boost-libs.patch:
+  patch CMakeLists.txt for cmake to find python3 boost libs, dep fixes
+
+  31 May 2015; V3n3RiX <venerix@rogentos.ro> calamares-999.ebuild:
+  final round of dep fixes...i hope
+
+  31 May 2015; V3n3RiX <venerix@rogentos.ro> calamares-999.ebuild:
+  more dep fixes for calamares
+
+  31 May 2015; V3n3RiX <venerix@rogentos.ro> calamares-999.ebuild:
+  use python-r1 eclass to pull required python deps for calamares
+
+  31 May 2015; V3n3RiX <venerix@rogentos.ro> calamares-999.ebuild:
+  do not rely on qtchooser, and make sure calamares builds against qt5, fix
+  from vlc ebuild
+
+  30 May 2015; V3n3RiX <venerix@rogentos.ro> calamares-999.ebuild:
+  it seems udisks:2 really want's udev...so force it to use systemd-udevd
+  instead
+
+  29 May 2015; V3n3RiX <venerix@rogentos.ro> calamares-999.ebuild:
+  drop qt5-build eclass, it makes our work so much hard, use cmake-utils
+  only...finish src_prepare phase
+
+  29 May 2015; V3n3RiX <venerix@rogentos.ro> calamares-999.ebuild:
+  more precise deps for calamares...add proper eclasses to build it
+
+  29 May 2015; V3n3RiX <venerix@rogentos.ro> calamares-999.ebuild:
+  ok...we know deps of calamares, so show them in the ebuild...one more step
+  closer to build it
+
+  29 May 2015; V3n3RiX <venerix@rogentos.ro> calamares-999.ebuild:
+  it seems portage really hates empty functions
+
+  29 May 2015; V3n3RiX <venerix@rogentos.ro> calamares-999.ebuild:
+  how did I miss that?
+
+  29 May 2015; V3n3RiX <venerix@rogentos.ro> calamares-999.ebuild:
+  Blacknoxis's vimrc sux :D
+
+  29 May 2015; BlackNoxis <steven.darklight@gmail.com> calamares-999.ebuild:
+  added both official sources
+
+  29 May 2015; BlackNoxis <steven.darklight@gmail.com> calamares-999.ebuild:
+  Revert "Added two sources of calamares. Both official"
+
+  This reverts commit 159abdab2ab3009bcd0a6dfc8b299a62808d3828.
+
+  29 May 2015; BlackNoxis <steven.darklight@gmail.com> calamares-999.ebuild:
+  Added two sources of calamares. Both official
+
+*calamares-999 (29 May 2015)
+
+  29 May 2015; V3n3RiX <venerix@rogentos.ro> +calamares-999.ebuild:
+  preparing our next generation installer, work in progress
+

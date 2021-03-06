@@ -1,0 +1,94 @@
+# ChangeLog for x11-misc/sddm
+# Copyright 1999-2021 Gentoo Foundation; Distributed under the GPL v2
+# (auto-generated from git log)
+
+  05 Jul 2020; V3n3RiX <venerix@redcorelinux.org> sddm-0.18.1-r10.ebuild:
+  pull our sddm theme as dep
+
+*sddm-0.18.1-r10 (05 Jul 2020)
+
+  05 Jul 2020; V3n3RiX <venerix@redcorelinux.org>
+  +files/pam-1.4-substack.patch, -files/sddm-0.13.0-pam_kwallet.patch,
+  -files/sddm-0.14.0-avatars.patch, files/sddm-0.14.0-consolekit.patch,
+  +files/sddm-0.16.0-ck2-revert.patch, +files/sddm-0.18.0-Xsession.patch,
+  +files/sddm-0.18.0-sddmconfdir.patch,
+  +files/sddm-0.18.1-honor-PAM-supplemental-groups-v2.patch,
+  +files/sddm-0.18.1-only-reuse-online-sessions.patch,
+  +files/sddm-0.18.1-revert-honor-PAM-supplemental-groups.patch,
+  -files/sddm-dont-source-files-in-home.patch,
+  -files/sddm-enable-elogind.patch, -files/sddm-redcore-consolekit.conf,
+  -files/sddm-redcore-elogind.conf, +files/sddm.conf, -sddm-0.14.0-r5.ebuild,
+  +sddm-0.18.1-r10.ebuild:
+  version bump (bugfix: https://bugs.redcorelinux.org/show_bug.cgi?id=117)
+
+*sddm-0.14.0-r5 (04 May 2018)
+
+  04 May 2018; V3n3RiX <venerix@redcorelinux.org>
+  +files/sddm-dont-source-files-in-home.patch, -sddm-0.14.0-r4.ebuild,
+  +sddm-0.14.0-r5.ebuild:
+  revision bump (do not source files in home)
+
+*sddm-0.14.0-r4 (09 Jan 2018)
+
+  09 Jan 2018; V3n3RiX <venerix@redcorelinux.org>
+  +files/sddm-enable-elogind.patch, +files/sddm-redcore-consolekit.conf,
+  +files/sddm-redcore-elogind.conf, -files/sddm-redcore.conf,
+  -sddm-0.14.0-r3.ebuild, +sddm-0.14.0-r4.ebuild:
+  add sys-auth/elogind support
+
+*sddm-0.14.0-r3 (04 Dec 2017)
+
+  04 Dec 2017; V3n3RiX <venerix@redcorelinux.org> +sddm-0.14.0-r3.ebuild,
+  -sddm-0.14.0-r1710.ebuild:
+  lower revisions
+
+  30 Nov 2017; bionel <ionel.busuioc@gmail.com> files/sddm-redcore.conf:
+  set sddm cursor theme
+
+*sddm-0.14.0-r1710 (29 Oct 2017)
+
+  29 Oct 2017; V3n3RiX <venerix@redcorelinux.org> -sddm-0.14.0-r1708.ebuild,
+  +sddm-0.14.0-r1710.ebuild:
+  revision bump
+
+  31 Aug 2017; V3n3RiX <venerix@redcorelinux.org> files/sddm-redcore.conf:
+  turn numlock off by default
+  (https://bugs.redcorelinux.org/show_bug.cgi?id=47)
+
+*sddm-0.14.0-r1708 (13 Aug 2017)
+
+  13 Aug 2017; V3n3RiX <venerix@redcorelinux.org> -sddm-0.14.0-r1706.ebuild,
+  +sddm-0.14.0-r1708.ebuild:
+  redcore 1708 gamma crucis : bump ebuilds
+
+  26 Jun 2017; V3n3RiX <venerix@redcorelinux.org>
+  files/sddm-0.14.0-consolekit.patch:
+  launch consolekit session properly please, or mounting of external devices
+  will not be authorized
+
+  25 Jun 2017; V3n3RiX <venerix@redcorelinux.org> sddm-0.14.0-r1706.ebuild:
+  new package : redcore-theme-sddm
+
+*sddm-0.14.0-r1706 (25 Jun 2017)
+
+  25 Jun 2017; V3n3RiX <venerix@redcorelinux.org>
+  +files/sddm-0.12.0-respect-user-flags.patch,
+  +files/sddm-0.13.0-pam_kwallet.patch, +files/sddm-0.14.0-avatars.patch,
+  +files/sddm-0.14.0-consolekit.patch, +files/sddm-redcore.conf,
+  +sddm-0.14.0-r1706.ebuild:
+  import sddm, and tweak it to our needs
+
+  10 Aug 2016; V3n3RiX <venerix@rogentos.ro>
+  -files/sddm-0.10.0-consolekit.patch, -files/sddm-0.10.0-upower.patch,
+  -files/sddm-0.11.0-consolekit.patch, -files/sddm-0.11.0-dbus-config.patch,
+  -files/systemd_service.patch, -sddm-0.11.0-r1.ebuild:
+  cleanup
+
+*sddm-0.11.0-r1 (07 Sep 2015)
+
+  07 Sep 2015; BlackNoxis <steven.darklight@gmail.com>
+  +files/sddm-0.10.0-consolekit.patch, +files/sddm-0.10.0-upower.patch,
+  +files/sddm-0.11.0-consolekit.patch, +files/sddm-0.11.0-dbus-config.patch,
+  +files/systemd_service.patch, +sddm-0.11.0-r1.ebuild:
+  [sddm] adaugat sddm, poate o sa-l folosim
+

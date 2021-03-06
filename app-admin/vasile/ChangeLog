@@ -1,0 +1,349 @@
+# ChangeLog for app-admin/vasile
+# Copyright 1999-2021 Gentoo Foundation; Distributed under the GPL v2
+# (auto-generated from git log)
+
+*vasile-2.1812.2 (27 Jan 2019)
+
+  27 Jan 2019; V3n3RiX <venerix@redcorelinux.org> -vasile-2.1812.1.ebuild,
+  +vasile-2.1812.2.ebuild:
+  version bump
+
+*vasile-2.1812.1 (24 Dec 2018)
+
+  24 Dec 2018; V3n3RiX <venerix@redcorelinux.org> -vasile-2.1812-r1.ebuild,
+  +vasile-2.1812.1.ebuild:
+  version bump
+
+*vasile-2.1812-r1 (27 Nov 2018)
+
+  27 Nov 2018; V3n3RiX <venerix@redcorelinux.org> -vasile-2.1812.ebuild,
+  +vasile-2.1812-r1.ebuild:
+  revision bump
+
+*vasile-2.1812 (26 Nov 2018)
+
+  26 Nov 2018; V3n3RiX <venerix@redcorelinux.org>
+  -files/nuke-gitlab-switch-to-cgit.patch, -files/switch-to-pagure.patch,
+  -vasile-1.1806-r3.ebuild, +vasile-2.1812.ebuild:
+  version bump
+
+*vasile-1.1806-r3 (29 Jul 2018)
+
+  29 Jul 2018; V3n3RiX <venerix@redcorelinux.org> -vasile-1.1806-r2.ebuild,
+  +vasile-1.1806-r3.ebuild:
+  use elog for a more persistent view
+
+*vasile-1.1806-r2 (21 Jul 2018)
+
+  21 Jul 2018; V3n3RiX <venerix@redcorelinux.org>
+  +files/switch-to-pagure.patch, -vasile-1.1806-r1.ebuild,
+  +vasile-1.1806-r2.ebuild:
+  revision bump (use pagure.io for now, our cgit instance won't play nice with
+  shallow clones)
+
+  21 Jul 2018; V3n3RiX <venerix@redcorelinux.org> vasile-1.1806-r1.ebuild:
+  close func
+
+*vasile-1.1806-r1 (21 Jul 2018)
+
+  21 Jul 2018; V3n3RiX <venerix@redcorelinux.org>
+  +files/nuke-gitlab-switch-to-cgit.patch, -vasile-1.1806.ebuild,
+  +vasile-1.1806-r1.ebuild:
+  revision bump (switch to cgit)
+
+*vasile-1.1806 (23 Jun 2018)
+
+  23 Jun 2018; V3n3RiX <venerix@redcorelinux.org> -files/master-branch.patch,
+  -vasile-1.1803-r9.ebuild, +vasile-1.1806.ebuild:
+  version bump
+
+*vasile-1.1803-r9 (16 May 2018)
+
+  16 May 2018; V3n3RiX <venerix@redcorelinux.org> +files/master-branch.patch,
+  -vasile-1.1803-r1.ebuild, +vasile-1.1803-r9.ebuild:
+  revision bump
+
+*vasile-1.1803-r1 (18 Apr 2018)
+
+  18 Apr 2018; V3n3RiX <venerix@redcorelinux.org> -vasile-1.1803.ebuild,
+  +vasile-1.1803-r1.ebuild:
+  fix rdeps
+
+*vasile-1.1803 (24 Mar 2018)
+
+  24 Mar 2018; V3n3RiX <venerix@redcorelinux.org>
+  -files/vasile-use-hardened-profile.patch, -vasile-1.1801-r3.ebuild,
+  +vasile-1.1803.ebuild:
+  version bump
+
+*vasile-1.1801-r3 (09 Mar 2018)
+
+  09 Mar 2018; V3n3RiX <venerix@redcorelinux.org>
+  +files/vasile-use-hardened-profile.patch, -vasile-1.1801-r2.ebuild,
+  +vasile-1.1801-r3.ebuild:
+  revision bump
+
+  app-admin/vasile : revision bump
+
+*vasile-1.1801-r2 (12 Jan 2018)
+
+  12 Jan 2018; V3n3RiX <venerix@redcorelinux.org>
+  -files/vasile-1.1801-r1.patch, -vasile-1.1801-r1.ebuild,
+  +vasile-1.1801-r2.ebuild:
+  revision bump
+
+  06 Jan 2018; V3n3RiX <venerix@redcorelinux.org>
+  files/vasile-1.1801-r1.patch:
+  minor tweaks
+
+  06 Jan 2018; V3n3RiX <venerix@redcorelinux.org> vasile-1.1801-r1.ebuild:
+  don't complain, just switch to our profile please
+
+  06 Jan 2018; V3n3RiX <venerix@redcorelinux.org> vasile-1.1801-r1.ebuild:
+  typo
+
+*vasile-1.1801-r1 (06 Jan 2018)
+
+  06 Jan 2018; V3n3RiX <venerix@redcorelinux.org>
+  +files/vasile-1.1801-r1.patch, -vasile-1.1801.ebuild,
+  +vasile-1.1801-r1.ebuild:
+  revision bump
+
+*vasile-1.1801 (05 Jan 2018)
+
+  05 Jan 2018; V3n3RiX <venerix@redcorelinux.org>
+  -files/vasile-1.1710-r1.patch, -vasile-1.1710-r1.ebuild,
+  +vasile-1.1801.ebuild:
+  version bump
+
+*vasile-1.1710-r1 (12 Nov 2017)
+
+  12 Nov 2017; V3n3RiX <venerix@redcorelinux.org>
+  +files/vasile-1.1710-r1.patch, -vasile-1.1710.ebuild,
+  +vasile-1.1710-r1.ebuild:
+  revision bump
+
+*vasile-1.1710 (04 Nov 2017)
+
+  04 Nov 2017; V3n3RiX <venerix@redcorelinux.org> +vasile-1.1710.ebuild,
+  -vasile-1710-r2.ebuild:
+  switch to tarball build
+
+*vasile-1710-r2 (09 Oct 2017)
+
+  09 Oct 2017; V3n3RiX <venerix@redcorelinux.org> -vasile-1710-r1.ebuild,
+  +vasile-1710-r2.ebuild:
+  revision bump
+
+*vasile-1710-r1 (09 Oct 2017)
+
+  09 Oct 2017; V3n3RiX <venerix@redcorelinux.org> -vasile-1710.ebuild,
+  +vasile-1710-r1.ebuild:
+  revision bump
+
+  08 Oct 2017; V3n3RiX <venerix@redcorelinux.org> vasile-1710.ebuild:
+  app-portage/vasile : version bump
+
+*vasile-1710 (08 Oct 2017)
+
+  08 Oct 2017; V3n3RiX <venerix@redcorelinux.org> -vasile-1708-r1.ebuild,
+  +vasile-1710.ebuild:
+  version bump
+
+  27 Aug 2017; V3n3RiX <venerix@redcorelinux.org> vasile-1708-r1.ebuild:
+  change used git hash
+
+*vasile-1708-r1 (27 Aug 2017)
+
+  27 Aug 2017; V3n3RiX <venerix@redcorelinux.org> -vasile-1708.ebuild,
+  +vasile-1708-r1.ebuild:
+  revision bump
+
+*vasile-1708 (13 Aug 2017)
+
+  13 Aug 2017; V3n3RiX <venerix@redcorelinux.org> -vasile-1706-r1.ebuild,
+  +vasile-1708.ebuild:
+  redcore 1708 gamma crucis : bump ebuilds
+
+*vasile-1706-r1 (15 Jul 2017)
+
+  15 Jul 2017; V3n3RiX <venerix@redcorelinux.org> -vasile-1706.ebuild,
+  +vasile-1706-r1.ebuild:
+  revision bump
+
+*vasile-1706 (30 Jun 2017)
+
+  30 Jun 2017; V3n3RiX <venerix@redcorelinux.org> -vasile-4.5-r1706.ebuild,
+  +vasile-1706.ebuild:
+  change vasile's versioning, bump kernel to v4.9.35
+
+*vasile-4.5-r1706 (04 Jun 2017)
+
+  04 Jun 2017; V3n3RiX <venerix@redcorelinux.org> -vasile-4.5-r1704.ebuild,
+  +vasile-4.5-r1706.ebuild:
+  reenable virtualbox integration
+
+  14 May 2017; V3n3RiX <venerix@redcorelinux.org> vasile-4.5-r1704.ebuild:
+  revert vasile to use gitlab
+
+  25 Apr 2017; V3n3RiX <venerix@redcorelinux.org> vasile-4.5-r1704.ebuild:
+  stupid mistake
+
+  25 Apr 2017; V3n3RiX <venerix@redcorelinux.org> vasile-4.5-r1704.ebuild:
+  autoreload binmode postinstall
+
+  17 Apr 2017; V3n3RiX <venerix@redcorelinux.org> vasile-4.5-r1704.ebuild:
+  trigger rebuild
+
+*vasile-4.5-r1704 (28 Mar 2017)
+
+  28 Mar 2017; V3n3RiX <venerix@redcorelinux.org> -vasile-4.5-r1703.ebuild,
+  +vasile-4.5-r1704.ebuild:
+  prepare vasile for Redcore 1704 Epsilon Eridani
+
+  12 Mar 2017; V3n3RiX <venerix@redcorelinux.org> vasile-4.5-r1703.ebuild:
+  revbump vasile
+
+*vasile-4.5-r1703 (11 Mar 2017)
+
+  11 Mar 2017; V3n3RiX <venerix@redcorelinux.org> -vasile-4.5-r6.ebuild,
+  +vasile-4.5-r1703.ebuild:
+  bump livescripts, vasile
+
+*vasile-4.5-r6 (05 Mar 2017)
+
+  05 Mar 2017; V3n3RiX <venerix@redcorelinux.org> -vasile-4.5-r5.ebuild,
+  +vasile-4.5-r6.ebuild:
+  revbump vasile
+
+*vasile-4.5-r5 (12 Feb 2017)
+
+  12 Feb 2017; V3n3RiX <venerix@redcorelinux.org> -vasile-4.5-r4.ebuild,
+  +vasile-4.5-r5.ebuild:
+  revbump vasile
+
+*vasile-4.5-r4 (08 Jan 2017)
+
+  08 Jan 2017; V3n3RiX <venerix@redcorelinux.org> -vasile-4.5-r3.ebuild,
+  +vasile-4.5-r4.ebuild, -vasile-9999.ebuild:
+  bump vasile
+
+*vasile-4.5-r3 (04 Jan 2017)
+
+  04 Jan 2017; V3n3RiX <venerix@redcorelinux.org> -vasile-4.5-r2.ebuild,
+  +vasile-4.5-r3.ebuild:
+  revbump vasile
+
+*vasile-4.5-r2 (18 Dec 2016)
+
+  18 Dec 2016; V3n3RiX <venerix@redcorelinux.org> -vasile-4.5-r1.ebuild,
+  +vasile-4.5-r2.ebuild:
+  bump vasile
+
+*vasile-4.5-r1 (30 Nov 2016)
+
+  30 Nov 2016; V3n3RiX <venerix@redcorelinux.org> -vasile-4.5.ebuild,
+  +vasile-4.5-r1.ebuild:
+  trigger rebuild
+
+  30 Nov 2016; V3n3RiX <venerix@redcorelinux.org> vasile-4.5.ebuild:
+  only run dkms if root
+
+  30 Nov 2016; V3n3RiX <venerix@redcorelinux.org> vasile-4.5.ebuild:
+  proper fix for dkms autobuild
+
+*vasile-4.5 (30 Nov 2016)
+
+  30 Nov 2016; V3n3RiX <venerix@redcorelinux.org> -vasile-4.4.ebuild,
+  +vasile-4.5.ebuild:
+  bump vasile
+
+*vasile-4.4 (29 Nov 2016)
+
+  29 Nov 2016; V3n3RiX <venerix@redcorelinux.org> -vasile-4.3.ebuild,
+  +vasile-4.4.ebuild:
+  vasile 4.4
+
+  29 Nov 2016; V3n3RiX <venerix@redcorelinux.org> vasile-4.3.ebuild:
+  how this happened?
+
+*vasile-4.3 (26 Nov 2016)
+
+  26 Nov 2016; V3n3RiX <venerix@redcorelinux.org> -vasile-4.2.ebuild,
+  +vasile-4.3.ebuild:
+  vasile 4.3 - fix live initramfs generation
+
+  26 Nov 2016; V3n3RiX <venerix@redcorelinux.org> vasile-4.2.ebuild:
+  fix vasile 4.2 commit hash
+
+*vasile-4.2 (25 Nov 2016)
+
+  25 Nov 2016; V3n3RiX <venerix@rogentos.ro> -vasile-4.1-r1.ebuild,
+  +vasile-4.2.ebuild:
+  bump vasile to 4.2
+
+*vasile-4.1-r1 (20 Nov 2016)
+
+  20 Nov 2016; V3n3RiX <venerix@rogentos.ro> -vasile-4.1.ebuild,
+  +vasile-4.1-r1.ebuild:
+  fix mixedmode function call, nice catch by StefanCristian
+
+*vasile-9999 (20 Nov 2016)
+*vasile-4.1 (20 Nov 2016)
+
+  20 Nov 2016; V3n3RiX <venerix@rogentos.ro> -vasile-4.0.ebuild,
+  +vasile-4.1.ebuild, +vasile-9999.ebuild:
+  bump vasile to 4.1, change EAPI to 6, use git-r3 eclass
+
+  18 Nov 2016; V3n3RiX <venerix@rogentos.ro> vasile-4.0.ebuild:
+  vasile 4.0
+
+*vasile-4.0 (18 Nov 2016)
+
+  18 Nov 2016; V3n3RiX <venerix@rogentos.ro> -vasile-3.0.ebuild,
+  +vasile-4.0.ebuild:
+  vasile 4.0
+
+*vasile-3.0 (12 Nov 2016)
+
+  12 Nov 2016; V3n3RiX <venerix@rogentos.ro> -vasile-2.2.ebuild,
+  +vasile-3.0.ebuild:
+  bump vasile to v3.0
+
+*vasile-2.2 (06 Nov 2016)
+
+  06 Nov 2016; V3n3RiX <venerix@rogentos.ro> +vasile-2.2.ebuild:
+  rebranding
+
+  17 Apr 2016; V3n3RiX <venerix@rogentos.ro> -vasile-1.1.ebuild,
+  -vasile-1.2.ebuild:
+  vasile-kogaion ebuild, drop all-in-one vasile
+
+*vasile-1.2 (20 Mar 2016)
+
+  20 Mar 2016; V3n3RiX <venerix@rogentos.ro> +vasile-1.2.ebuild:
+  vasile 1.2, the version that breaks argent
+
+*vasile-1.1 (19 Mar 2016)
+
+  19 Mar 2016; V3n3RiX <venerix@rogentos.ro> -vasile-1.0.ebuild,
+  +vasile-1.1.ebuild:
+  keep argent compatible vasile around
+
+*vasile-1.0 (03 Jan 2016)
+
+  03 Jan 2016; V3n3RiX <venerix@rogentos.ro> -vasile-0.2.ebuild,
+  +vasile-1.0.ebuild:
+  bump vasile to version 1.0
+
+*vasile-0.2 (15 Dec 2015)
+
+  15 Dec 2015; V3n3RiX <venerix@rogentos.ro> -vasile-0.1.ebuild,
+  +vasile-0.2.ebuild:
+  bump vasile to v0.2
+
+*vasile-0.1 (31 Aug 2015)
+
+  31 Aug 2015; V3n3RiX <venerix@rogentos.ro> +vasile-0.1.ebuild:
+  first ebuild for vasile
+

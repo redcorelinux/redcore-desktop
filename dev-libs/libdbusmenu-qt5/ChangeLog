@@ -1,0 +1,46 @@
+# ChangeLog for dev-libs/libdbusmenu-qt5
+# Copyright 1999-2021 Gentoo Foundation; Distributed under the GPL v2
+# (auto-generated from git log)
+
+*libdbusmenu-qt5-0.9.3_pre20160218-r2 (26 Oct 2018)
+
+  26 Oct 2018; V3n3RiX <venerix@redcorelinux.org>
+  -libdbusmenu-qt5-0.9.3_pre20160218-r1.ebuild,
+  +libdbusmenu-qt5-0.9.3_pre20160218-r2.ebuild, -metadata.xml:
+  dev-libs/libdbusmenu-{qt,qt5} : revision bump, port to EAPI=6
+
+  16 Dec 2017; V3n3RiX <venerix@redcorelinux.org>
+  libdbusmenu-qt5-0.9.3_pre20160218-r1.ebuild:
+  this patch is no longer required
+
+*libdbusmenu-qt5-0.9.3_pre20160218-r1 (16 Dec 2017)
+
+  16 Dec 2017; V3n3RiX <venerix@redcorelinux.org>
+  -files/libdbusmenu-qt5-0.9.3_pre20140619-optionaltests.patch,
+  -libdbusmenu-qt5-0.9.3_pre20140619-r1.ebuild,
+  +libdbusmenu-qt5-0.9.3_pre20160218-r1.ebuild:
+  dev-libs/libdbusmenu-qt : version bump
+
+  15 Jul 2016; V3n3RiX <venerix@rogentos.ro>
+  libdbusmenu-qt5-0.9.3_pre20140619-r1.ebuild:
+  this is actually unneeded, it pulls back qt4
+
+  10 Apr 2016; V3n3RiX <venerix@rogentos.ro>
+  +files/libdbusmenu-qt5-0.9.3_pre20140619-optionaltests.patch:
+  fix qt5 build
+
+  10 Apr 2016; V3n3RiX <venerix@rogentos.ro>
+  -files/libdbusmenu-qt-0.9.3_pre20140619-optionaltests.patch:
+  fix patch names
+
+  10 Apr 2016; V3n3RiX <venerix@rogentos.ro>
+  libdbusmenu-qt5-0.9.3_pre20140619-r1.ebuild:
+  fix keywords
+
+*libdbusmenu-qt5-0.9.3_pre20140619-r1 (10 Apr 2016)
+
+  10 Apr 2016; V3n3RiX <venerix@rogentos.ro>
+  +files/libdbusmenu-qt-0.9.3_pre20140619-optionaltests.patch,
+  +libdbusmenu-qt5-0.9.3_pre20140619-r1.ebuild, +metadata.xml:
+  split libdbusmenu-qt into libdbusmenu-qt4 and libdbusmenu-qt5
+

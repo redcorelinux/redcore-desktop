@@ -1,0 +1,49 @@
+# ChangeLog for sys-devel/libtool
+# Copyright 1999-2021 Gentoo Foundation; Distributed under the GPL v2
+# (auto-generated from git log)
+
+*libtool-2.4.6-r10 (30 Nov 2020)
+
+  30 Nov 2020; V3n3RiX <venerix@redcorelinux.org> +libtool-2.4.6-r10.ebuild,
+  -libtool-2.4.6-r314.ebuild:
+  toolchain bump
+
+  12 Apr 2020; V3n3RiX <venerix@redcorelinux.org>
+  files/libtool-2.2.6a-darwin-module-bundle.patch,
+  files/libtool-2.4.3-use-linux-version-in-fbsd.patch,
+  files/libtool-2.4.6-darwin-use-linux-version.patch,
+  files/libtool-2.4.6-link-fsanitize.patch,
+  files/libtool-2.4.6-link-fuse-ld.patch,
+  files/libtool-2.4.6-link-specs.patch, files/libtool-2.4.6-mint.patch,
+  files/libtool-2.4.6-pthread_bootstrapped.patch,
+  files/libtool-2.4.6-sed-quote-speedup.patch, libtool-2.4.6-r314.ebuild:
+  sys-libs/libtool : EAPI bump (tc)
+
+*libtool-2.4.6-r314 (07 Mar 2020)
+
+  07 Mar 2020; V3n3RiX <venerix@redcorelinux.org> -libtool-2.4.6-r314,
+  +libtool-2.4.6-r314.ebuild:
+  I must be drunk
+
+  07 Mar 2020; V3n3RiX <venerix@redcorelinux.org> -libtool-2.4.6-r1337.ebuild,
+  +libtool-2.4.6-r314:
+  adjust to no longer existing eclasses
+
+*libtool-2.4.6-r1337 (24 Dec 2018)
+
+  24 Dec 2018; V3n3RiX <venerix@redcorelinux.org>
+  +files/libtool-2.2.10-eprefix.patch,
+  +files/libtool-2.2.6a-darwin-module-bundle.patch,
+  +files/libtool-2.4.3-use-linux-version-in-fbsd.patch,
+  +files/libtool-2.4.6-darwin-use-linux-version.patch,
+  +files/libtool-2.4.6-libtoolize-delay-help.patch,
+  +files/libtool-2.4.6-libtoolize-slow.patch,
+  +files/libtool-2.4.6-link-fsanitize.patch,
+  +files/libtool-2.4.6-link-fuse-ld.patch,
+  +files/libtool-2.4.6-link-specs.patch, +files/libtool-2.4.6-mint.patch,
+  +files/libtool-2.4.6-ppc64le.patch, +files/libtool-2.4.6-pthread.patch,
+  +files/libtool-2.4.6-pthread_bootstrapped.patch,
+  +files/libtool-2.4.6-sed-quote-speedup.patch, +libtool-2.4.6-r1337.ebuild:
+  import the toolchain from gentoo tree, increase revisions so they cannot
+  beat us
+

@@ -1,0 +1,194 @@
+# ChangeLog for app-misc/calamares-runtime
+# Copyright 1999-2021 Gentoo Foundation; Distributed under the GPL v2
+# (auto-generated from git log)
+
+*calamares-runtime-314-r1 (29 Apr 2020)
+
+  29 Apr 2020; V3n3RiX <venerix@redcorelinux.org>
+  -calamares-runtime-314.ebuild, +calamares-runtime-314-r1.ebuild:
+  add python3.7 compat
+
+  29 Apr 2020; V3n3RiX <venerix@redcorelinux.org>
+  calamares-runtime-314.ebuild:
+  restore file permissions, changed everything to 755 by mistake
+
+  29 Apr 2020; V3n3RiX <venerix@redcorelinux.org>
+  calamares-runtime-314.ebuild:
+  sys-apps/apparmor-utils : add python3.7 compat
+
+*calamares-runtime-314 (27 Jul 2019)
+
+  27 Jul 2019; V3n3RiX <venerix@redcorelinux.org>
+  +calamares-runtime-314.ebuild, -calamares-runtime-1337.ebuild:
+  app-misc : trigger rebuilds in preparation for release
+
+*calamares-runtime-1337 (30 Jun 2018)
+
+  30 Jun 2018; V3n3RiX <venerix@redcorelinux.org>
+  +calamares-runtime-1337.ebuild, -calamares-runtime-1803-r1.ebuild:
+  lower fake versions of packages that rarely change
+
+*calamares-runtime-1803-r1 (17 Jun 2018)
+
+  17 Jun 2018; V3n3RiX <venerix@redcorelinux.org>
+  -calamares-runtime-1803.ebuild, +calamares-runtime-1803-r1.ebuild:
+  app-admin/calamares : bump minimal qt dep to 5.9
+
+*calamares-runtime-1803 (24 Mar 2018)
+
+  24 Mar 2018; V3n3RiX <venerix@redcorelinux.org>
+  -calamares-runtime-1801.ebuild, +calamares-runtime-1803.ebuild:
+  version bump
+
+*calamares-runtime-1801 (12 Jan 2018)
+
+  12 Jan 2018; V3n3RiX <venerix@redcorelinux.org>
+  -calamares-runtime-1710-r3.ebuild, +calamares-runtime-1801.ebuild:
+  version bump
+
+*calamares-runtime-1710-r3 (18 Dec 2017)
+
+  18 Dec 2017; V3n3RiX <venerix@redcorelinux.org>
+  -calamares-runtime-1710-r2.ebuild, +calamares-runtime-1710-r3.ebuild:
+  fix broken ebuild
+
+*calamares-runtime-1710-r2 (18 Dec 2017)
+
+  18 Dec 2017; V3n3RiX <venerix@redcorelinux.org>
+  -calamares-runtime-1710-r1.ebuild, +calamares-runtime-1710-r2.ebuild:
+  app-admin/calamares : future proof PYTHON_COMPAT
+
+*calamares-runtime-1710-r1 (01 Dec 2017)
+
+  01 Dec 2017; V3n3RiX <venerix@redcorelinux.org>
+  -calamares-runtime-1710.ebuild, +calamares-runtime-1710-r1.ebuild:
+  PYTHON_COMPAT : 3_5
+
+*calamares-runtime-1710 (08 Oct 2017)
+
+  08 Oct 2017; V3n3RiX <venerix@redcorelinux.org>
+  -calamares-runtime-1708.ebuild, +calamares-runtime-1710.ebuild:
+  r1710 revision bump
+
+*calamares-runtime-1708 (13 Aug 2017)
+
+  13 Aug 2017; V3n3RiX <venerix@redcorelinux.org>
+  -calamares-runtime-1706.ebuild, +calamares-runtime-1708.ebuild:
+  redcore 1708 gamma crucis : bump ebuilds
+
+*calamares-runtime-1706 (02 Jun 2017)
+
+  02 Jun 2017; V3n3RiX <venerix@redcorelinux.org>
+  +calamares-runtime-1706.ebuild:
+  adjust calamares-config-redcore && calamares-runtime packages to v3.1.0 of
+  calamares
+
+  02 Jun 2017; V3n3RiX <venerix@redcorelinux.org>
+  -calamares-runtime-1704.ebuild:
+  bump calamares to v3.1.0
+
+  28 Apr 2017; V3n3RiX <venerix@redcorelinux.org>
+  calamares-runtime-1704.ebuild:
+  drop systemd dependency
+
+*calamares-runtime-1704 (01 Apr 2017)
+
+  01 Apr 2017; V3n3RiX <venerix@redcorelinux.org>
+  -calamares-runtime-1703.ebuild, +calamares-runtime-1704.ebuild:
+  prepare calamares-runtime for Redcore 1704 Epsilon Eridani
+
+*calamares-runtime-1703 (05 Mar 2017)
+
+  05 Mar 2017; V3n3RiX <venerix@redcorelinux.org>
+  -calamares-runtime-1702.ebuild, +calamares-runtime-1703.ebuild:
+  1703
+
+*calamares-runtime-1702 (12 Feb 2017)
+
+  12 Feb 2017; V3n3RiX <venerix@redcorelinux.org>
+  -calamares-runtime-1701.ebuild, +calamares-runtime-1702.ebuild:
+  bump to 1702
+
+*calamares-runtime-1701 (04 Jan 2017)
+
+  04 Jan 2017; V3n3RiX <venerix@redcorelinux.org>
+  -calamares-runtime-1.0.ebuild, +calamares-runtime-1701.ebuild:
+  1701
+
+*calamares-runtime-1.0 (07 Nov 2016)
+
+  07 Nov 2016; V3n3RiX <venerix@rogentos.ro> -calamares-runtime-1.ebuild,
+  +calamares-runtime-1.0.ebuild:
+  reset artwork versions to 1.0...rebranding in progress
+
+*calamares-runtime-1 (06 Nov 2016)
+
+  06 Nov 2016; V3n3RiX <venerix@rogentos.ro> +calamares-runtime-1.ebuild,
+  -calamares-runtime-2.0-r1.ebuild, -calamares-runtime-3.1-r1.ebuild:
+  calamares config && runtime done
+
+*calamares-runtime-3.1-r1 (01 Aug 2016)
+
+  01 Aug 2016; V3n3RiX <venerix@rogentos.ro> +calamares-runtime-3.1-r1.ebuild:
+  add webchannel as a dep as well
+
+  01 Aug 2016; V3n3RiX <venerix@rogentos.ro> -calamares-runtime-3.1.ebuild:
+  link calamares to qtwebengine instead of qtwebkit, so at least qt 5.6 is
+  needed
+
+  02 Jul 2016; V3n3RiX <venerix@rogentos.ro> calamares-runtime-3.1.ebuild:
+  fix typo
+
+  02 Jul 2016; V3n3RiX <venerix@rogentos.ro> -calamares-runtime-3.0-r1.ebuild:
+  drop calamares 2.2.3
+
+*calamares-runtime-3.1 (02 Jul 2016)
+
+  02 Jul 2016; V3n3RiX <venerix@rogentos.ro> calamares-runtime-3.0-r1.ebuild,
+  +calamares-runtime-3.1.ebuild:
+  add calamares-2.3, released today
+
+*calamares-runtime-3.0-r1 (26 Jun 2016)
+
+  26 Jun 2016; V3n3RiX <venerix@rogentos.ro> -calamares-runtime-3.0.ebuild,
+  +calamares-runtime-3.0-r1.ebuild:
+  fix deps for new calamares
+
+  26 Jun 2016; V3n3RiX <venerix@rogentos.ro> calamares-runtime-3.0.ebuild:
+  avoid keywording, working on testing repo anyway
+
+*calamares-runtime-3.0 (15 Mar 2016)
+
+  15 Mar 2016; V3n3RiX <venerix@rogentos.ro> +calamares-runtime-3.0.ebuild:
+  bump calamares to latest version , mark as unstable till we do our tests
+
+  06 Mar 2016; V3n3RiX <venerix@rogentos.ro> calamares-runtime-2.0-r1.ebuild:
+  fix calamares rdeps
+
+  06 Mar 2016; V3n3RiX <venerix@rogentos.ro> calamares-runtime-2.0-r1.ebuild:
+  bump calamares branding.desc for kogaion 3
+
+  06 Mar 2016; V3n3RiX <venerix@rogentos.ro> calamares-runtime-2.0-r1.ebuild:
+  build calamares against python 3.4, change default backend to portage
+
+*calamares-runtime-2.0-r1 (09 Aug 2015)
+
+  09 Aug 2015; V3n3RiX <venerix@rogentos.ro> -calamares-runtime-2.0.ebuild,
+  +calamares-runtime-2.0-r1.ebuild:
+  add os prober as a runtime dep for calamares
+
+  20 Jul 2015; BlackNoxis <steven.darklight@gmail.com>
+  calamares-runtime-2.0.ebuild:
+  [calamares-runtime] adaugat keyword pentru calamares-runtime pe 32biti
+
+  13 Jun 2015; V3n3RiX <venerix@rogentos.ro> calamares-runtime-2.0.ebuild:
+  since we have splitted polkit-qt5, use it in calamares
+
+  13 Jun 2015; V3n3RiX <venerix@rogentos.ro> calamares-runtime-2.0.ebuild:
+  move calamares-config-kogaion dep to calamares-runtime
+
+*calamares-runtime-2.0 (11 Jun 2015)
+
+  11 Jun 2015; V3n3RiX <venerix@rogentos.ro> +calamares-runtime-2.0.ebuild:
+  massive overhaul of calamares ebuild, ready to be upstreamed to gentoo
+

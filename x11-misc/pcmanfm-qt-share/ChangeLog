@@ -1,0 +1,31 @@
+# ChangeLog for x11-misc/pcmanfm-qt-share
+# Copyright 1999-2021 Gentoo Foundation; Distributed under the GPL v2
+# (auto-generated from git log)
+
+*pcmanfm-qt-share-1337 (30 Jun 2018)
+
+  30 Jun 2018; V3n3RiX <venerix@redcorelinux.org>
+  +pcmanfm-qt-share-1337.ebuild, -pcmanfm-qt-share-1803.ebuild:
+  lower fake versions of packages that rarely change
+
+*pcmanfm-qt-share-1803 (24 Mar 2018)
+
+  24 Mar 2018; V3n3RiX <venerix@redcorelinux.org>
+  -pcmanfm-qt-share-1801.ebuild, +pcmanfm-qt-share-1803.ebuild:
+  dummy version bump
+
+*pcmanfm-qt-share-1801 (08 Jan 2018)
+
+  08 Jan 2018; V3n3RiX <venerix@redcorelinux.org> files/ShareReadOnly.desktop,
+  files/ShareReadWrite.desktop, +files/Unshare.desktop,
+  -pcmanfm-qt-share-1710.ebuild, +pcmanfm-qt-share-1801.ebuild:
+  net-fs/samba-config-redcore && x11-misc/pcmanfm-qt-share : prepare samba
+  usershares
+
+*pcmanfm-qt-share-1710 (21 Dec 2017)
+
+  21 Dec 2017; V3n3RiX <venerix@redcorelinux.org>
+  +files/ShareReadOnly.desktop, +files/ShareReadWrite.desktop,
+  +pcmanfm-qt-share-1710.ebuild:
+  sys-kernel/linux-redcore-lts : drop old
+

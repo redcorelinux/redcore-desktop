@@ -1,0 +1,16 @@
+# ChangeLog for sys-kernel/rtl8821cu-dkms
+# Copyright 1999-2021 Gentoo Foundation; Distributed under the GPL v2
+# (auto-generated from git log)
+
+*rtl8821cu-dkms-5.8.1 (20 Feb 2020)
+
+  20 Feb 2020; V3n3RiX <venerix@redcorelinux.org> files/dkms.conf,
+  -rtl8821cu-dkms-5.4.1.ebuild, +rtl8821cu-dkms-5.8.1.ebuild:
+  net-wireless/rtl8821cu && sys-kernel/rtl8821cu-dkms : version bump (v5.8.1)
+
+*rtl8821cu-dkms-5.4.1 (20 Feb 2020)
+
+  20 Feb 2020; V3n3RiX <venerix@redcorelinux.org> +files/dkms.conf,
+  +rtl8821cu-dkms-5.4.1.ebuild:
+  net-wireless/rtl8821cu && sys-kernel/rtl8821cu-dkms : new packages
+

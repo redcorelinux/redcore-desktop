@@ -1,0 +1,69 @@
+# ChangeLog for sys-kernel/linux-headers
+# Copyright 1999-2021 Gentoo Foundation; Distributed under the GPL v2
+# (auto-generated from git log)
+
+*linux-headers-5.9-r10 (30 Nov 2020)
+
+  30 Nov 2020; V3n3RiX <venerix@redcorelinux.org>
+  -linux-headers-4.19-r314.ebuild, +linux-headers-5.9-r10.ebuild:
+  toolchain bump
+
+*linux-headers-4.19-r314 (12 Apr 2020)
+
+  12 Apr 2020; V3n3RiX <venerix@redcorelinux.org>
+  -linux-headers-4.14-r1337.ebuild, +linux-headers-4.19-r314.ebuild:
+  version bump (tc)
+
+*linux-headers-4.14-r1337 (24 Dec 2018)
+
+  24 Dec 2018; V3n3RiX <venerix@redcorelinux.org>
+  +linux-headers-4.14-r1337.ebuild:
+  import the toolchain from gentoo tree, increase revisions so they cannot
+  beat us
+
+  12 Apr 2018; V3n3RiX <venerix@redcorelinux.org>
+  -files/0001-Revert-ath10k-activate-user-space-firmware-loading-a.patch,
+  -files/0001-Revert-swiotlb-remove-various-exports.patch,
+  -files/0001-Revert-x86-ACPI-cstate-Allow-ACPI-C1-FFH-MWAIT-use-o.patch,
+  -files/drop_ancient-and-wrong-msg.patch, -files/enable_alx_wol.patch,
+  -files/linux-hardened.patch, -files/mute-pps_state_mismatch.patch,
+  -files/nouveau-pascal-backlight.patch, -files/redcore-amd64.config,
+  -files/uksm-for-linux-hardened.patch, -linux-headers-4.16.1.ebuild:
+  - Workaround amdgpu and radeon issues by adding a new swiotlb option.
+     defaults to disabled ( old way ) while still possible to enable and test
+  the new way / code.
+     The newer code does not work good or does not work at all on some HW (
+  mine as example )
+     see:
+      https://lkml.org/lkml/2018/4/5/737
+      https://bugzilla.kernel.org/show_bug.cgi?id=198511
+      https://bugs.freedesktop.org/show_bug.cgi?id=105038
+
+  11 Apr 2018; V3n3RiX <venerix@redcorelinux.org>
+  +files/nouveau-pascal-backlight.patch, linux-headers-4.16.1.ebuild:
+  fix PASCAL cards with nouveau
+
+  11 Apr 2018; V3n3RiX <venerix@redcorelinux.org> +files/linux-hardened.patch,
+  -files/redcore-4.16-amd64.config, +files/redcore-amd64.config,
+  -files/uksm-4.16.patch, +files/uksm-for-linux-hardened.patch,
+  linux-headers-4.16.1.ebuild:
+  sys-kernel/linux-{image,headers} : apply linux-hardened patchset, adjust
+  uksm for linux-hardened, adjust kernel config
+
+  11 Apr 2018; V3n3RiX <venerix@redcorelinux.org>
+  +files/0001-Revert-x86-ACPI-cstate-Allow-ACPI-C1-FFH-MWAIT-use-o.patch,
+  linux-headers-4.16.1.ebuild:
+  sys-kernel/linux-{image,headers} : add revert for https://github.com/torvald
+  s/linux/commit/5209654a46ee71137ad9b06da99d4ef2794475af (See :
+  https://community.amd.com/thread/224000)
+
+*linux-headers-4.16.1 (09 Apr 2018)
+
+  09 Apr 2018; V3n3RiX <venerix@redcorelinux.org>
+  +files/0001-Revert-ath10k-activate-user-space-firmware-loading-a.patch,
+  +files/0001-Revert-swiotlb-remove-various-exports.patch,
+  +files/drop_ancient-and-wrong-msg.patch, +files/enable_alx_wol.patch,
+  +files/mute-pps_state_mismatch.patch, +files/redcore-4.16-amd64.config,
+  +files/uksm-4.16.patch, +linux-headers-4.16.1.ebuild:
+  sys-kernel/linux-{image,headers} : version bump
+

@@ -1,0 +1,37 @@
+# ChangeLog for sys-power/radeon-profile
+# Copyright 1999-2021 Gentoo Foundation; Distributed under the GPL v2
+# (auto-generated from git log)
+
+  02 Jan 2021; V3n3RiX <venerix@redcorelinux.org>
+  radeon-profile-20200824-r10.ebuild:
+  fix launcher
+
+*radeon-profile-20200824-r10 (01 Jan 2021)
+
+  01 Jan 2021; V3n3RiX <venerix@redcorelinux.org>
+  +files/radeon-profile-20200504-run_subdir.patch,
+  -radeon-profile-20170714-r2.ebuild, +radeon-profile-20200824-r10.ebuild:
+  EAPI && version bump
+
+  30 Apr 2020; V3n3RiX <venerix@redcorelinux.org> files/radeon-profile-pkexec:
+  fix leftovers
+
+*radeon-profile-20170714-r2 (31 Mar 2018)
+
+  31 Mar 2018; V3n3RiX <venerix@redcorelinux.org>
+  -radeon-profile-20170714-r1.ebuild, +radeon-profile-20170714-r2.ebuild:
+  revision bump
+
+*radeon-profile-20170714-r1 (24 Mar 2018)
+
+  24 Mar 2018; V3n3RiX <venerix@redcorelinux.org>
+  +files/org.redcorelinux.radeon-profile.policy, +files/radeon-profile-pkexec,
+  -radeon-profile-20170714.ebuild, +radeon-profile-20170714-r1.ebuild:
+  add policykit rule, and run make use of it
+
+*radeon-profile-20170714 (18 Mar 2018)
+
+  18 Mar 2018; V3n3RiX <venerix@redcorelinux.org>
+  +radeon-profile-20170714.ebuild:
+  new package
+

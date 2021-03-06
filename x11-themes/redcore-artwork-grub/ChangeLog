@@ -1,0 +1,130 @@
+# ChangeLog for x11-themes/redcore-artwork-grub
+# Copyright 1999-2021 Gentoo Foundation; Distributed under the GPL v2
+# (auto-generated from git log)
+
+*redcore-artwork-grub-1337-r3 (17 May 2020)
+
+  17 May 2020; V3n3RiX <venerix@redcorelinux.org>
+  -redcore-artwork-grub-1337-r2.ebuild, +redcore-artwork-grub-1337-r3.ebuild:
+  revision bump
+
+*redcore-artwork-grub-1337-r2 (26 Jan 2019)
+
+  26 Jan 2019; V3n3RiX <venerix@redcorelinux.org>
+  -redcore-artwork-grub-1337-r1.ebuild, +redcore-artwork-grub-1337-r2.ebuild:
+  revision bump
+
+*redcore-artwork-grub-1337-r1 (30 Dec 2018)
+
+  30 Dec 2018; V3n3RiX <venerix@redcorelinux.org>
+  -redcore-artwork-grub-1337.ebuild, +redcore-artwork-grub-1337-r1.ebuild:
+  remove deprecated gitlab references in some of our ebuilds
+
+*redcore-artwork-grub-1337 (30 Jun 2018)
+
+  30 Jun 2018; V3n3RiX <venerix@redcorelinux.org>
+  +redcore-artwork-grub-1337.ebuild, -redcore-artwork-grub-1803.ebuild:
+  and again
+
+*redcore-artwork-grub-1803 (30 Mar 2018)
+
+  30 Mar 2018; V3n3RiX <venerix@redcorelinux.org>
+  -redcore-artwork-grub-1801.ebuild, +redcore-artwork-grub-1803.ebuild:
+  x11-themes : dummy bumps
+
+*redcore-artwork-grub-1801 (13 Jan 2018)
+
+  13 Jan 2018; V3n3RiX <venerix@redcorelinux.org>
+  -redcore-artwork-grub-1710.ebuild, +redcore-artwork-grub-1801.ebuild:
+  version bump
+
+*redcore-artwork-grub-1710 (29 Oct 2017)
+
+  29 Oct 2017; V3n3RiX <venerix@redcorelinux.org>
+  -redcore-artwork-grub-1708.ebuild, +redcore-artwork-grub-1710.ebuild:
+  revbump artwork for redcore 1710
+
+*redcore-artwork-grub-1708 (19 Aug 2017)
+
+  19 Aug 2017; V3n3RiX <venerix@redcorelinux.org>
+  -redcore-artwork-grub-1706-r1.ebuild, +redcore-artwork-grub-1708.ebuild:
+  bump some remaining artwork to v1708
+
+*redcore-artwork-grub-1706-r1 (15 Jul 2017)
+
+  15 Jul 2017; V3n3RiX <venerix@redcorelinux.org>
+  -redcore-artwork-grub-1706.ebuild, +redcore-artwork-grub-1706-r1.ebuild:
+  revision bump
+
+*redcore-artwork-grub-1706 (26 Jun 2017)
+
+  26 Jun 2017; V3n3RiX <venerix@redcorelinux.org>
+  -redcore-artwork-grub-1704.ebuild, +redcore-artwork-grub-1706.ebuild:
+  bump to v1706
+
+*redcore-artwork-grub-1704 (08 Apr 2017)
+
+  08 Apr 2017; V3n3RiX <venerix@redcorelinux.org>
+  -redcore-artwork-grub-1703.ebuild, +redcore-artwork-grub-1704.ebuild:
+  bump artwork to 1704 Epsilon Eridani
+
+*redcore-artwork-grub-1703 (05 Mar 2017)
+
+  05 Mar 2017; V3n3RiX <venerix@redcorelinux.org>
+  -redcore-artwork-grub-1702.ebuild, +redcore-artwork-grub-1703.ebuild:
+  bump grub artwork to 1703
+
+*redcore-artwork-grub-1702 (12 Feb 2017)
+
+  12 Feb 2017; V3n3RiX <venerix@redcorelinux.org>
+  -redcore-artwork-grub-1701.ebuild, +redcore-artwork-grub-1702.ebuild:
+  bump grub artwork
+
+*redcore-artwork-grub-1701 (04 Jan 2017)
+
+  04 Jan 2017; V3n3RiX <venerix@redcorelinux.org>
+  -redcore-artwork-grub-1.0-r2.ebuild, +redcore-artwork-grub-1701.ebuild:
+  more preparations for 1701 release
+
+*redcore-artwork-grub-1.0-r2 (09 Dec 2016)
+
+  09 Dec 2016; V3n3RiX <venerix@redcorelinux.org>
+  -redcore-artwork-grub-1.0-r1.ebuild, +redcore-artwork-grub-1.0-r2.ebuild:
+  new logo
+
+  26 Nov 2016; V3n3RiX <venerix@redcorelinux.org>
+  redcore-artwork-grub-1.0-r1.ebuild:
+  fix S, EAPI 6 seems to reveal flaws in our ebuilds, lovely
+
+  26 Nov 2016; V3n3RiX <venerix@redcorelinux.org>
+  redcore-artwork-grub-1.0-r1.ebuild:
+  base.eclass is banned in EAPI 6 so drop it
+
+*redcore-artwork-grub-1.0-r1 (26 Nov 2016)
+
+  26 Nov 2016; V3n3RiX <venerix@redcorelinux.org>
+  -redcore-artwork-grub-1.0.ebuild, +redcore-artwork-grub-1.0-r1.ebuild:
+  port artwork-grub to EAPI 6 and bump it
+
+*redcore-artwork-grub-1.0 (07 Nov 2016)
+
+  07 Nov 2016; V3n3RiX <venerix@rogentos.ro> +redcore-artwork-grub-1.0.ebuild,
+  -redcore-artwork-grub-3.0-r3.ebuild:
+  reset artwork versions to 1.0...rebranding in progress
+
+*redcore-artwork-grub-3.0-r3 (07 Nov 2016)
+
+  07 Nov 2016; V3n3RiX <venerix@rogentos.ro>
+  -redcore-artwork-grub-3.0-r2.ebuild, +redcore-artwork-grub-3.0-r3.ebuild:
+  trigger grub artwork rebuild
+
+  06 Nov 2016; V3n3RiX <venerix@rogentos.ro>
+  redcore-artwork-grub-3.0-r2.ebuild:
+  artwork done, only calamares left, but that will be easy
+
+*redcore-artwork-grub-3.0-r2 (06 Nov 2016)
+
+  06 Nov 2016; V3n3RiX <venerix@rogentos.ro>
+  +redcore-artwork-grub-3.0-r2.ebuild:
+  trim repo size by dumping shitloads of kogaion wallpapers out, only keep one
+

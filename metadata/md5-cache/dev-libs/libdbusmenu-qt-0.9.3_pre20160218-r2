@@ -1,0 +1,11 @@
+DEFINED_PHASES=-
+DESCRIPTION=A library providing Qt implementation of DBusMenu specification (meta mackage)
+EAPI=6
+HOMEPAGE=https://launchpad.net/libdbusmenu-qt/
+IUSE=debug
+KEYWORDS=amd64 x86
+LICENSE=LGPL-2
+RDEPEND=~dev-libs/libdbusmenu-qt5-0.9.3_pre20160218
+RESTRICT=test
+SLOT=0
+_md5_=cb39e4c053a0f370751b51633d5b8606

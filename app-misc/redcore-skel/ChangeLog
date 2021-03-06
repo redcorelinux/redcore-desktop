@@ -1,0 +1,279 @@
+# ChangeLog for app-misc/redcore-skel
+# Copyright 1999-2021 Gentoo Foundation; Distributed under the GPL v2
+# (auto-generated from git log)
+
+*redcore-skel-314-r4 (18 Dec 2020)
+
+  18 Dec 2020; V3n3RiX <venerix@redcorelinux.org> -redcore-skel-314-r3.ebuild,
+  +redcore-skel-314-r4.ebuild:
+  drop unused eclass
+
+*redcore-skel-314-r3 (17 Dec 2020)
+
+  17 Dec 2020; V3n3RiX <venerix@redcorelinux.org> -redcore-skel-314-r2.ebuild,
+  +redcore-skel-314-r3.ebuild:
+  vbump
+
+*redcore-skel-314-r2 (20 May 2020)
+
+  20 May 2020; V3n3RiX <venerix@redcorelinux.org>
+  -files/menu/img/redcore-weblink.svg,
+  -files/menu/xdg/redcore-bugtracker.desktop,
+  -files/menu/xdg/redcore-gentoo.desktop,
+  -files/menu/xdg/redcore-getlivehelp.desktop,
+  -files/menu/xdg/redcore-git.desktop,
+  -files/menu/xdg/redcore-redcore.directory,
+  -files/menu/xdg/redcore-website.desktop,
+  -files/menu/xdg/redcore-wiki.desktop, +files/redcore-weblink.svg,
+  -redcore-skel-314-r1.ebuild, +redcore-skel-314-r2.ebuild:
+  drop some menu entries
+
+*redcore-skel-314-r1 (20 May 2020)
+
+  20 May 2020; V3n3RiX <venerix@redcorelinux.org> -redcore-skel-314.ebuild,
+  +redcore-skel-314-r1.ebuild:
+  revision bump
+
+  19 May 2020; V3n3RiX <venerix@redcorelinux.org> redcore-skel-314.ebuild:
+  adjust deps for the new default icon theme
+
+  19 May 2020; V3n3RiX <venerix@redcorelinux.org>
+  -files/menu/img/redcore-weblink.png, +files/menu/img/redcore-weblink.svg,
+  redcore-skel-314.ebuild:
+  update redcore-weblink icon
+
+*redcore-skel-314 (27 Jul 2019)
+
+  27 Jul 2019; V3n3RiX <venerix@redcorelinux.org> +redcore-skel-314.ebuild,
+  -redcore-skel-1337-r3.ebuild:
+  app-misc : trigger rebuilds in preparation for release
+
+*redcore-skel-1337-r3 (27 Jan 2019)
+
+  27 Jan 2019; V3n3RiX <venerix@redcorelinux.org>
+  -redcore-skel-1337-r2.ebuild, +redcore-skel-1337-r3.ebuild:
+  revision bump
+
+*redcore-skel-1337-r2 (12 Jan 2019)
+
+  12 Jan 2019; V3n3RiX <venerix@redcorelinux.org>
+  -redcore-skel-1337-r1.ebuild, +redcore-skel-1337-r2.ebuild:
+  trigger rebuild
+
+*redcore-skel-1337-r1 (30 Dec 2018)
+
+  30 Dec 2018; V3n3RiX <venerix@redcorelinux.org>
+  +files/menu/xdg/redcore-bugtracker.desktop,
+  files/menu/xdg/redcore-gentoo.desktop, files/menu/xdg/redcore-git.desktop,
+  -files/menu/xdg/redcore-homepage.desktop,
+  -files/menu/xdg/redcore-mirrors.desktop,
+  +files/menu/xdg/redcore-website.desktop,
+  files/menu/xdg/redcore-wiki.desktop, -redcore-skel-1337.ebuild,
+  +redcore-skel-1337-r1.ebuild:
+  revision bump
+
+*redcore-skel-1337 (30 Jun 2018)
+
+  30 Jun 2018; V3n3RiX <venerix@redcorelinux.org> +redcore-skel-1337.ebuild,
+  -redcore-skel-1803-r1.ebuild:
+  and once again
+
+*redcore-skel-1803-r1 (01 Apr 2018)
+
+  01 Apr 2018; V3n3RiX <venerix@redcorelinux.org> -redcore-skel-1803.ebuild,
+  +redcore-skel-1803-r1.ebuild:
+  revision bump
+
+*redcore-skel-1803 (24 Mar 2018)
+
+  24 Mar 2018; V3n3RiX <venerix@redcorelinux.org>
+  -redcore-skel-1801-r2.ebuild, +redcore-skel-1803.ebuild:
+  version bump
+
+  27 Jan 2018; V3n3RiX <venerix@redcorelinux.org> redcore-skel-1801-r2.ebuild:
+  dont install scm folder
+
+*redcore-skel-1801-r2 (27 Jan 2018)
+
+  27 Jan 2018; V3n3RiX <venerix@redcorelinux.org>
+  -redcore-skel-1801-r1.ebuild, +redcore-skel-1801-r2.ebuild:
+  revision bump
+
+*redcore-skel-1801-r1 (14 Jan 2018)
+
+  14 Jan 2018; V3n3RiX <venerix@redcorelinux.org> -redcore-skel-1801.ebuild,
+  +redcore-skel-1801-r1.ebuild:
+  revision bump
+
+*redcore-skel-1801 (14 Jan 2018)
+
+  14 Jan 2018; V3n3RiX <venerix@redcorelinux.org> -redcore-skel-1710.ebuild,
+  +redcore-skel-1801.ebuild:
+  version bump
+
+  14 Jan 2018; V3n3RiX <venerix@redcorelinux.org>
+  -files/3.0/img/redcore-weblink.png, -files/3.0/xdg/redcore-gentoo.desktop,
+  -files/3.0/xdg/redcore-getlivehelp.desktop,
+  -files/3.0/xdg/redcore-git.desktop, -files/3.0/xdg/redcore-homepage.desktop,
+  -files/3.0/xdg/redcore-mirrors.desktop,
+  -files/3.0/xdg/redcore-redcore.directory,
+  -files/3.0/xdg/redcore-wiki.desktop, +files/menu/img/redcore-weblink.png,
+  +files/menu/xdg/redcore-gentoo.desktop,
+  +files/menu/xdg/redcore-getlivehelp.desktop,
+  +files/menu/xdg/redcore-git.desktop,
+  +files/menu/xdg/redcore-homepage.desktop,
+  +files/menu/xdg/redcore-mirrors.desktop,
+  +files/menu/xdg/redcore-redcore.directory,
+  +files/menu/xdg/redcore-wiki.desktop, redcore-skel-1710.ebuild:
+  make use of insinto && doins (gentoo way)
+
+  01 Jan 2018; V3n3RiX <venerix@redcorelinux.org>
+  files/3.0/xdg/redcore-gentoo.desktop,
+  files/3.0/xdg/redcore-getlivehelp.desktop,
+  files/3.0/xdg/redcore-git.desktop, files/3.0/xdg/redcore-homepage.desktop,
+  files/3.0/xdg/redcore-mirrors.desktop,
+  files/3.0/xdg/redcore-redcore.directory, files/3.0/xdg/redcore-wiki.desktop:
+  media-video/qtlmovie : please limit yourself to only 2 categories
+
+*redcore-skel-1710 (08 Oct 2017)
+
+  08 Oct 2017; V3n3RiX <venerix@redcorelinux.org>
+  -redcore-skel-1708-r1.ebuild, +redcore-skel-1710.ebuild:
+  r1710 revision bump
+
+*redcore-skel-1708-r1 (21 Aug 2017)
+
+  21 Aug 2017; V3n3RiX <venerix@redcorelinux.org> -redcore-skel-1708.ebuild,
+  +redcore-skel-1708-r1.ebuild:
+  revision bump
+
+*redcore-skel-1708 (13 Aug 2017)
+
+  13 Aug 2017; V3n3RiX <venerix@redcorelinux.org>
+  -redcore-skel-1706-r1.ebuild, +redcore-skel-1708.ebuild:
+  redcore 1708 gamma crucis : bump ebuilds
+
+*redcore-skel-1706-r1 (15 Jul 2017)
+
+  15 Jul 2017; V3n3RiX <venerix@redcorelinux.org> -redcore-skel-1706.ebuild,
+  +redcore-skel-1706-r1.ebuild:
+  revision bump
+
+*redcore-skel-1706 (25 Jun 2017)
+
+  25 Jun 2017; V3n3RiX <venerix@redcorelinux.org> +files/loginsound.desktop,
+  +files/redcore.ogg, -redcore-skel-1704.ebuild, +redcore-skel-1706.ebuild:
+  bump skel, add login sound ;)
+
+  08 Apr 2017; V3n3RiX <venerix@redcorelinux.org>
+  files/3.0/img/redcore-weblink.png, files/3.0/xdg/redcore-mirrors.desktop:
+  redcore-skel : adjust menu logo, fix download link
+
+*redcore-skel-1704 (08 Apr 2017)
+
+  08 Apr 2017; V3n3RiX <venerix@redcorelinux.org> -redcore-skel-1703.ebuild,
+  +redcore-skel-1704.ebuild:
+  bump redcore skel to 1704 Epsilon Eridani
+
+*redcore-skel-1703 (05 Mar 2017)
+
+  05 Mar 2017; V3n3RiX <venerix@redcorelinux.org>
+  -redcore-skel-1702-r1.ebuild, +redcore-skel-1703.ebuild:
+  1703
+
+*redcore-skel-1702-r1 (26 Feb 2017)
+
+  26 Feb 2017; V3n3RiX <venerix@redcorelinux.org> -redcore-skel-1702.ebuild,
+  +redcore-skel-1702-r1.ebuild:
+  revbump skel
+
+*redcore-skel-1702 (12 Feb 2017)
+
+  12 Feb 2017; V3n3RiX <venerix@redcorelinux.org>
+  files/3.0/img/redcore-weblink.png, -redcore-skel-1701.ebuild,
+  +redcore-skel-1702.ebuild:
+  bump to 1702
+
+*redcore-skel-1701 (04 Jan 2017)
+
+  04 Jan 2017; V3n3RiX <venerix@redcorelinux.org> -redcore-skel-1.0-r9.ebuild,
+  +redcore-skel-1701.ebuild:
+  1701
+
+*redcore-skel-1.0-r9 (01 Jan 2017)
+
+  01 Jan 2017; V3n3RiX <venerix@redcorelinux.org> -redcore-skel-1.0-r8.ebuild,
+  +redcore-skel-1.0-r9.ebuild:
+  bump skel
+
+*redcore-skel-1.0-r8 (01 Jan 2017)
+
+  01 Jan 2017; V3n3RiX <venerix@redcorelinux.org> -redcore-skel-1.0-r7.ebuild,
+  +redcore-skel-1.0-r8.ebuild:
+  trigger rebuild
+
+*redcore-skel-1.0-r7 (10 Dec 2016)
+
+  10 Dec 2016; V3n3RiX <venerix@redcorelinux.org> -redcore-skel-1.0-r6.ebuild,
+  +redcore-skel-1.0-r7.ebuild:
+  bump skel
+
+*redcore-skel-1.0-r6 (09 Dec 2016)
+
+  09 Dec 2016; V3n3RiX <venerix@redcorelinux.org>
+  files/3.0/img/redcore-weblink.png, -redcore-skel-1.0-r5.ebuild,
+  +redcore-skel-1.0-r6.ebuild:
+  weblink update
+
+*redcore-skel-1.0-r5 (30 Nov 2016)
+
+  30 Nov 2016; V3n3RiX <venerix@redcorelinux.org>
+  files/3.0/img/redcore-weblink.png, -redcore-skel-1.0-r4.ebuild,
+  +redcore-skel-1.0-r5.ebuild:
+  revbump skel
+
+*redcore-skel-1.0-r4 (27 Nov 2016)
+
+  27 Nov 2016; V3n3RiX <venerix@redcorelinux.org>
+  files/3.0/img/redcore-weblink.png, -redcore-skel-1.0-r3.ebuild,
+  +redcore-skel-1.0-r4.ebuild:
+  bump skel
+
+*redcore-skel-1.0-r3 (26 Nov 2016)
+
+  26 Nov 2016; V3n3RiX <venerix@redcorelinux.org>
+  files/3.0/xdg/redcore-redcore.directory, -redcore-skel-1.0-r2.ebuild,
+  +redcore-skel-1.0-r3.ebuild:
+  change redcore menu entry icon
+
+*redcore-skel-1.0-r2 (26 Nov 2016)
+
+  26 Nov 2016; V3n3RiX <venerix@redcorelinux.org>
+  files/3.0/img/redcore-weblink.png, -redcore-skel-1.0-r1.ebuild,
+  +redcore-skel-1.0-r2.ebuild:
+  bump skel
+
+*redcore-skel-1.0-r1 (25 Nov 2016)
+
+  25 Nov 2016; V3n3RiX <venerix@rogentos.ro> -redcore-skel-1.0.ebuild,
+  +redcore-skel-1.0-r1.ebuild:
+  port redcore-skel to EAPI 6
+
+*redcore-skel-1.0 (07 Nov 2016)
+
+  07 Nov 2016; V3n3RiX <venerix@rogentos.ro>
+  files/3.0/img/redcore-weblink.png, -redcore-skel-1.ebuild,
+  +redcore-skel-1.0.ebuild:
+  bump skel
+
+*redcore-skel-1 (06 Nov 2016)
+
+  06 Nov 2016; V3n3RiX <venerix@rogentos.ro>
+  +files/3.0/img/redcore-weblink.png, +files/3.0/xdg/redcore-gentoo.desktop,
+  +files/3.0/xdg/redcore-getlivehelp.desktop,
+  +files/3.0/xdg/redcore-git.desktop, +files/3.0/xdg/redcore-homepage.desktop,
+  +files/3.0/xdg/redcore-mirrors.desktop,
+  +files/3.0/xdg/redcore-redcore.directory,
+  +files/3.0/xdg/redcore-wiki.desktop, +redcore-skel-1.ebuild:
+  skel done
+

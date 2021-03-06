@@ -1,0 +1,68 @@
+# ChangeLog for sys-kernel/dkms
+# Copyright 1999-2021 Gentoo Foundation; Distributed under the GPL v2
+# (auto-generated from git log)
+
+*dkms-2.3-r1 (21 May 2017)
+
+  21 May 2017; V3n3RiX <venerix@redcorelinux.org> -dkms-2.2.0.3-r3.ebuild,
+  -dkms-2.3.ebuild, +dkms-2.3-r1.ebuild,
+  -files/dkms-2.2.0.3-dont-touch-configs.patch,
+  -files/dkms-2.2.0.3-gentoo-functions.patch,
+  -files/dkms-2.2.0.3-systemd.patch:
+  drop old version
+
+  21 May 2017; V3n3RiX <venerix@redcorelinux.org> files/dkms.initd:
+  fix openrc initscript
+
+*dkms-2.3 (21 May 2017)
+
+  21 May 2017; V3n3RiX <venerix@redcorelinux.org> +dkms-2.3.ebuild,
+  +files/dkms-2.3-dont-touch-configs.patch,
+  +files/dkms-2.3-gentoo-functions.patch,
+  +files/dkms-2.3-redcore-makefile.patch,
+  +files/dkms-2.3-systemd-service-fix.patch, +files/dkms.initd:
+  new version v2.3, fix upstream provided systemd.service, add openrc support,
+  don't mess with config files
+
+*dkms-2.2.0.3-r3 (06 Nov 2016)
+
+  06 Nov 2016; V3n3RiX <venerix@rogentos.ro> -dkms-2.2.0.3-r2.ebuild,
+  +dkms-2.2.0.3-r3.ebuild, -files/dkms-2.2.0.3-kogaion-systemd.patch,
+  +files/dkms-2.2.0.3-systemd.patch:
+  dkms done
+
+*dkms-2.2.0.3-r2 (23 Oct 2016)
+
+  23 Oct 2016; V3n3RiX <venerix@rogentos.ro> -dkms-2.2.0.3-r1.ebuild,
+  +dkms-2.2.0.3-r2.ebuild:
+  revbump dkms
+
+  23 Oct 2016; V3n3RiX <venerix@rogentos.ro>
+  files/dkms-2.2.0.3-gentoo-functions.patch,
+  files/dkms-2.2.0.3-kogaion-systemd.patch:
+  fix systemd unit file
+
+  23 Oct 2016; V3n3RiX <venerix@rogentos.ro>
+  files/dkms-2.2.0.3-gentoo-functions.patch:
+  force rebuilding of modules to avoid missmatches
+
+  23 Oct 2016; V3n3RiX <venerix@rogentos.ro> dkms-2.2.0.3-r1.ebuild:
+  drop unneeded rpm dep, add gentoo-functions
+
+  23 Oct 2016; V3n3RiX <venerix@rogentos.ro> dkms-2.2.0.3-r1.ebuild,
+  files/dkms-2.2.0.3-kogaion-systemd.patch:
+  fix makefile sandbox violations
+
+*dkms-2.2.0.3-r1 (23 Oct 2016)
+
+  23 Oct 2016; V3n3RiX <venerix@rogentos.ro> -dkms-2.2.0.3.ebuild,
+  +dkms-2.2.0.3-r1.ebuild, +files/dkms-2.2.0.3-dont-touch-configs.patch,
+  +files/dkms-2.2.0.3-gentoo-functions.patch,
+  +files/dkms-2.2.0.3-kogaion-systemd.patch:
+  dkms : don't touch config files, use gentoo-functions, add systemd service
+
+*dkms-2.2.0.3 (23 Oct 2016)
+
+  23 Oct 2016; V3n3RiX <venerix@rogentos.ro> +dkms-2.2.0.3.ebuild:
+  dkms
+

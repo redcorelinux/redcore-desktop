@@ -1,0 +1,134 @@
+# ChangeLog for sys-boot/plymouth
+# Copyright 1999-2021 Gentoo Foundation; Distributed under the GPL v2
+# (auto-generated from git log)
+
+  25 Apr 2020; V3n3RiX <venerix@redcorelinux.org>
+  files/plymouth-default-theme.patch:
+  add delay
+
+  25 Apr 2020; V3n3RiX <venerix@redcorelinux.org> plymouth-0.9.4-r10.ebuild:
+  fix deps
+
+*plymouth-0.9.4-r10 (25 Apr 2020)
+
+  25 Apr 2020; V3n3RiX <venerix@redcorelinux.org>
+  +files/0.9.3-glibc-sysmacros.patch, +files/plymouth-default-theme.patch,
+  -files/plymouth-fix-window-size-with-multiple-heads.patch,
+  -files/plymouth-include-sysmacros.patch,
+  -files/plymouth-redcore-defaults.patch,
+  -files/plymouth-text-redcore-colors.patch, -plymouth-0.8.8-r4.ebuild,
+  +plymouth-0.9.4-r10.ebuild:
+  version bump (v0.9.4) -> this one works
+
+*plymouth-0.8.8-r4 (26 Jan 2019)
+
+  26 Jan 2019; V3n3RiX <venerix@redcorelinux.org>
+  -files/lightdm-plymouth.service, files/plymouth-redcore-defaults.patch,
+  +files/plymouth-text-redcore-colors.patch, -plymouth-0.8.8-r3.ebuild,
+  +plymouth-0.8.8-r4.ebuild:
+  revision bump
+
+  12 Apr 2018; V3n3RiX <venerix@redcorelinux.org> -plymouth-0.8.8-r2.ebuild:
+  ...
+
+*plymouth-0.8.8-r3 (12 Apr 2018)
+
+  12 Apr 2018; V3n3RiX <venerix@redcorelinux.org>
+  -files/0.8.8-include-sysmacros.patch,
+  +files/plymouth-fix-window-size-with-multiple-heads.patch,
+  +files/plymouth-include-sysmacros.patch, +plymouth-0.8.8-r3.ebuild:
+  Plymouth "zooms" in on smaller displays when multiple displays are used,
+  but the script splash plugin defines the window size as the smallest
+  of the displays. When using a sprite as a background image, the wrong
+  size is used which leaves large chunks of the screen unused.
+
+  This patch uses the largest display as the window size, which allows
+  it to be appopriately cropped on smaller displays.
+
+  See : https://lists.freedesktop.org/archives/plymouth/2013-April/000724.html
+
+*plymouth-0.8.8-r2 (21 Feb 2018)
+
+  21 Feb 2018; V3n3RiX <venerix@redcorelinux.org>
+  -files/0.8.3-drm-reduce-minimum-build-requirements.patch,
+  -files/0.8.3-gentoo-fb-path.patch,
+  -files/0.8.3-image-replace-deprecated-libpng-function.patch,
+  +files/0.8.8-include-sysmacros.patch,
+  -files/0.9_pre20111013-gentoo-fb-path.patch,
+  -files/plymouth-redcore-defaults-2.patch, -plymouth-0.8.8-r1.ebuild,
+  +plymouth-0.8.8-r2.ebuild:
+  backport fix for https://bugs.gentoo.org/627690
+
+*plymouth-0.8.8-r1 (04 Dec 2017)
+
+  04 Dec 2017; V3n3RiX <venerix@redcorelinux.org> +plymouth-0.8.8-r1.ebuild,
+  -plymouth-0.8.8-r1710.ebuild:
+  lower revisions
+
+*plymouth-0.8.8-r1710 (08 Oct 2017)
+
+  08 Oct 2017; V3n3RiX <venerix@redcorelinux.org>
+  -plymouth-0.8.8-r1708.ebuild, +plymouth-0.8.8-r1710.ebuild:
+  r1710 revision bump
+
+*plymouth-0.8.8-r1708 (20 Aug 2017)
+
+  20 Aug 2017; V3n3RiX <venerix@redcorelinux.org> -plymouth-0.8.8-r4.ebuild,
+  +plymouth-0.8.8-r1708.ebuild:
+  read plymouth
+
+  06 Nov 2016; V3n3RiX <venerix@rogentos.ro>
+  files/plymouth-redcore-defaults-2.patch,
+  files/plymouth-redcore-defaults.patch:
+  adjust default plymouth theme
+
+  06 Nov 2016; V3n3RiX <venerix@rogentos.ro>
+  -files/plymouth-kogaion-defaults-2.patch,
+  -files/plymouth-kogaion-defaults.patch,
+  +files/plymouth-redcore-defaults-2.patch,
+  +files/plymouth-redcore-defaults.patch, -metadata.xml,
+  -plymouth-0.8.8-r2.ebuild, plymouth-0.8.8-r4.ebuild,
+  -plymouth-0.8.9_pre2.ebuild, -plymouth-0.8.9_pre2-r2.ebuild,
+  -plymouth-0.9.0.ebuild:
+  drop unused plymouth ebuilds, adjust default theme
+
+  15 Aug 2015; BlackNoxis <steven.darklight@gmail.com>
+  plymouth-0.8.8-r4.ebuild:
+  [plymouth] reparat 0.8.8 cu patch-ul nostru
+
+*plymouth-0.8.9_pre2-r2 (22 May 2015)
+
+  22 May 2015; BlackNoxis <steven.darklight@gmail.com>
+  +files/lightdm-plymouth.service, +plymouth-0.8.9_pre2-r2.ebuild:
+  [plymouth] adding the test machine new plymouth
+
+  25 Apr 2015; BlackNoxis <steven.darklight@gmail.com>
+  plymouth-0.8.9_pre2.ebuild:
+  [os-prober][plymouth] upgrade ebuilds
+
+*plymouth-0.9.0 (12 Mar 2015)
+
+  12 Mar 2015; BlackNoxis <steven.darklight@gmail.com>
+  +files/0.8.3-drm-reduce-minimum-build-requirements.patch,
+  +files/0.8.3-gentoo-fb-path.patch,
+  +files/0.8.3-image-replace-deprecated-libpng-function.patch,
+  +files/0.9_pre20111013-gentoo-fb-path.patch,
+  +files/plymouth-kogaion-defaults-2.patch, +plymouth-0.9.0.ebuild:
+  Corrected plymouth 0.9.0
+
+  08 Dec 2014; BlackNoxis <steven.darklight@gmail.com>
+  +files/plymouth-kogaion-defaults.patch,
+  -files/plymouth-rogentos-defaults.patch, plymouth-0.8.8-r2.ebuild,
+  plymouth-0.8.8-r4.ebuild, plymouth-0.8.9_pre2.ebuild:
+  Refreshing last modifications and moving to Kogaion fully
+
+*plymouth-0.8.9_pre2 (15 Feb 2014)
+*plymouth-0.8.8-r4 (15 Feb 2014)
+*plymouth-0.8.8-r2 (15 Feb 2014)
+
+  15 Feb 2014; BlackNoxis <steven.darklight@gmail.com>
+  +files/plymouth-rogentos-defaults.patch, +metadata.xml,
+  +plymouth-0.8.8-r2.ebuild, +plymouth-0.8.8-r4.ebuild,
+  +plymouth-0.8.9_pre2.ebuild:
+  Added ebuilds for kogaion desktop
+

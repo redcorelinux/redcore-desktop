@@ -1,0 +1,77 @@
+# ChangeLog for net-wireless/broadcom-sta
+# Copyright 1999-2021 Gentoo Foundation; Distributed under the GPL v2
+# (auto-generated from git log)
+
+*broadcom-sta-6.30.223.271-r2 (04 Apr 2018)
+
+  04 Apr 2018; V3n3RiX <venerix@redcorelinux.org>
+  -broadcom-sta-6.30.223.271-r1.ebuild, +broadcom-sta-6.30.223.271-r2.ebuild:
+  add compatibility with recent kernels
+
+*broadcom-sta-6.30.223.271-r1 (18 Dec 2017)
+
+  18 Dec 2017; V3n3RiX <venerix@redcorelinux.org>
+  +broadcom-sta-6.30.223.271-r1.ebuild,
+  -broadcom-sta-6.30.223.271-r1710.ebuild:
+  trigger rebuilds
+
+*broadcom-sta-6.30.223.271-r1710 (08 Oct 2017)
+
+  08 Oct 2017; V3n3RiX <venerix@redcorelinux.org>
+  -broadcom-sta-6.30.223.271-r1708.ebuild,
+  +broadcom-sta-6.30.223.271-r1710.ebuild:
+  r1710 revision bump
+
+*broadcom-sta-6.30.223.271-r1708 (13 Aug 2017)
+
+  13 Aug 2017; V3n3RiX <venerix@redcorelinux.org>
+  -broadcom-sta-6.30.223.271-r1706.ebuild,
+  +broadcom-sta-6.30.223.271-r1708.ebuild:
+  redcore 1708 gamma crucis : bump ebuilds
+
+*broadcom-sta-6.30.223.271-r1706 (22 Jul 2017)
+
+  22 Jul 2017; V3n3RiX <venerix@redcorelinux.org>
+  -broadcom-sta-6.30.223.271-r1000.ebuild,
+  +broadcom-sta-6.30.223.271-r1706.ebuild:
+  fix possible circular deps
+
+*broadcom-sta-6.30.223.271-r1000 (24 Oct 2016)
+
+  24 Oct 2016; V3n3RiX <venerix@rogentos.ro>
+  -broadcom-sta-6.30.223.271-r100.ebuild,
+  +broadcom-sta-6.30.223.271-r1000.ebuild:
+  fix deps
+
+  24 Oct 2016; V3n3RiX <venerix@rogentos.ro>
+  broadcom-sta-6.30.223.271-r100.ebuild:
+  add slot, or portage will mask this ebuild...are you sure you tested this
+  StefanCristian ?
+
+  24 Oct 2016; V3n3RiX <venerix@rogentos.ro>
+  broadcom-sta-6.30.223.271-r100.ebuild:
+  sometimes I think I have to draw things for StefanCristian
+
+*broadcom-sta-6.30.223.271-r100 (24 Oct 2016)
+
+  24 Oct 2016; StefanCristian <steven.darklight@gmail.com>
+  +broadcom-sta-6.30.223.271-r100.ebuild:
+  Adding broadcom-sta-dkms for collection and usage ( of dkms ) :P
+
+  10 Aug 2016; V3n3RiX <venerix@rogentos.ro>
+  -broadcom-sta-6.30.223.30-r1.ebuild, -broadcom-sta-6.30.223.30-r2.ebuild,
+  -files/broadcom-sta-6.30.223.30-linux-3.10.0.patch,
+  -files/broadcom-sta-6.30.223.30-linux-3.9.0.patch,
+  -files/broadcom-sta-6.30.223.30-makefile.patch, -metadata.xml:
+  cleanup
+
+*broadcom-sta-6.30.223.30-r2 (27 Oct 2014)
+*broadcom-sta-6.30.223.30-r1 (27 Oct 2014)
+
+  27 Oct 2014; BlackNoxis <steven.darklight@gmail.com>
+  +broadcom-sta-6.30.223.30-r1.ebuild, +broadcom-sta-6.30.223.30-r2.ebuild,
+  +files/broadcom-sta-6.30.223.30-linux-3.10.0.patch,
+  +files/broadcom-sta-6.30.223.30-linux-3.9.0.patch,
+  +files/broadcom-sta-6.30.223.30-makefile.patch, +metadata.xml:
+  Incoming! Moving Rogento.git to kogaion-desktop. Finally
+

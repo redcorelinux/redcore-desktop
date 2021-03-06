@@ -1,0 +1,281 @@
+# ChangeLog for sys-boot/grub
+# Copyright 1999-2021 Gentoo Foundation; Distributed under the GPL v2
+# (auto-generated from git log)
+
+  28 Nov 2020; V3n3RiX <venerix@redcorelinux.org> grub-2.04-r314.ebuild:
+  move : sys-boot/grub-config-redcore => sys-boot/grubcfg
+
+  17 Nov 2019; V3n3RiX <venerix@redcorelinux.org> grub-2.04-r314.ebuild:
+  drop libzfs USE
+
+*grub-2.04-r314 (17 Nov 2019)
+
+  17 Nov 2019; V3n3RiX <venerix@redcorelinux.org> +files/01-gfxpayload.patch,
+  -files/01-xfs-accept-filesystem-with-sparse-inodes.patch,
+  +files/02-KERNEL_GLOBS.patch,
+  -files/02-support-multiple-early-initrd-images.patch,
+  -files/03-relocation.patch, +files/03-sparc64-bios-boot.patch,
+  -files/04-Fix-packed-not-aligned-error-on-GCC-8.patch,
+  -files/05-gfxpayload.patch, -files/06-KERNEL_GLOBS.patch, -files/07-Allow_GR
+  UB_to_mount_ext234_filesystems_that_have_the_encryption_feature.patch,
+  -files/08-find-freetype.patch, -grub-2.02-r1337.ebuild,
+  +grub-2.04-r314.ebuild:
+  version bump
+
+  17 Nov 2019; V3n3RiX <venerix@redcorelinux.org> grub-2.02-r1337.ebuild:
+  fix deps
+
+  17 Nov 2019; V3n3RiX <venerix@redcorelinux.org>
+  +files/08-find-freetype.patch, grub-2.02-r1337.ebuild:
+  backport 7e23437df3ad7572756102f3ab1063f284b57983 build Use pkg-config to
+  find FreeType
+
+*grub-2.02-r1337 (06 Jan 2019)
+
+  06 Jan 2019; V3n3RiX <venerix@redcorelinux.org>
+  +files/01-xfs-accept-filesystem-with-sparse-inodes.patch,
+  +files/02-support-multiple-early-initrd-images.patch,
+  +files/03-relocation.patch,
+  +files/04-Fix-packed-not-aligned-error-on-GCC-8.patch,
+  +files/05-gfxpayload.patch, +files/06-KERNEL_GLOBS.patch, +files/07-Allow_GR
+  UB_to_mount_ext234_filesystems_that_have_the_encryption_feature.patch,
+  -files/gfxpayload.patch, -files/grub-2.02_beta2-KERNEL_GLOBS.patch,
+  -grub-2.02-r1.ebuild, +grub-2.02-r1337.ebuild:
+  various bugfixes, revision bump
+
+*grub-2.02-r1 (18 Dec 2017)
+
+  18 Dec 2017; V3n3RiX <venerix@redcorelinux.org> +grub-2.02-r1.ebuild,
+  -grub-2.02-r1710.ebuild:
+  trigger rebuilds
+
+*grub-2.02-r1710 (29 Oct 2017)
+
+  29 Oct 2017; V3n3RiX <venerix@redcorelinux.org> -grub-2.02-r1708.ebuild,
+  +grub-2.02-r1710.ebuild:
+  more revbumps for redcore 1710
+
+  13 Aug 2017; V3n3RiX <venerix@redcorelinux.org> -files/grub.default-3,
+  grub-2.02-r1708.ebuild:
+  config-redcore : split /etc/default/grub out of main grub package
+
+*grub-2.02-r1708 (13 Aug 2017)
+
+  13 Aug 2017; V3n3RiX <venerix@redcorelinux.org> files/grub.default-3,
+  -grub-2.02-r1706.ebuild, +grub-2.02-r1708.ebuild:
+  redcore 1708 gamma crucis : bump ebuilds
+
+*grub-2.02-r1706 (26 Jun 2017)
+
+  26 Jun 2017; V3n3RiX <venerix@redcorelinux.org>
+  -files/2.02_beta3-10_linux-UUID.patch, -files/CVE-2015-8370.patch,
+  -files/grub-2.00-freetype-2.5.1.patch, -files/grub-2.02_beta2-libzfs.patch,
+  -files/grub-2.02_beta2-lvm2-raid1.patch, -grub-2.02_beta2-r1704.ebuild,
+  +grub-2.02-r1706.ebuild:
+  import grub stable from gentoo tree, drop our beta one
+
+*grub-2.02_beta2-r1704 (31 May 2017)
+
+  31 May 2017; V3n3RiX <venerix@redcorelinux.org> files/grub.default-3,
+  +grub-2.02_beta2-r1704.ebuild, -grub-2.02_beta2-r100000.ebuild:
+  no longer need this systemd line
+
+  21 Apr 2017; V3n3RiX <venerix@redcorelinux.org> files/grub.default-3:
+  make room for sysvinit
+
+*grub-2.02_beta2-r100000 (06 Nov 2016)
+
+  06 Nov 2016; V3n3RiX <venerix@rogentos.ro> files/grub.default-3,
+  -grub-2.02_beta2-r10000.ebuild, +grub-2.02_beta2-r100000.ebuild:
+  adjust grub
+
+*grub-2.02_beta2-r10000 (18 Oct 2016)
+
+  18 Oct 2016; V3n3RiX <venerix@rogentos.ro> files/grub.default-3,
+  -grub-2.02_beta2-r1000.ebuild, +grub-2.02_beta2-r10000.ebuild:
+  don't force encryption support by default, and let calamares to adjust
+  /etc/default/grub if needed
+
+*grub-2.02_beta2-r1000 (17 Oct 2016)
+
+  17 Oct 2016; V3n3RiX <venerix@rogentos.ro> files/grub.default-3,
+  -grub-2.02_beta2-r100.ebuild, +grub-2.02_beta2-r1000.ebuild:
+  enable grub encryption support
+
+*grub-2.02_beta2-r100 (09 Aug 2016)
+
+  09 Aug 2016; V3n3RiX <venerix@rogentos.ro> files/grub.default-3,
+  -grub-2.02_beta2-r10.ebuild, +grub-2.02_beta2-r100.ebuild:
+  blacklist vboxvideo driver, it only causes headaches
+
+*grub-2.02_beta2-r10 (24 Mar 2016)
+
+  24 Mar 2016; V3n3RiX <venerix@rogentos.ro> -grub-2.02_beta2-r9.ebuild,
+  +grub-2.02_beta2-r10.ebuild:
+  increment grub revision
+
+  24 Mar 2016; V3n3RiX <venerix@rogentos.ro> files/grub.default-3:
+  set grub timeout to 5 seconds, bump artwork-grub to match with bootcore
+
+  24 Mar 2016; V3n3RiX <venerix@rogentos.ro> files/grub.default-3:
+  tune grub default behaviour
+
+*grub-2.02_beta2-r9 (24 Mar 2016)
+
+  24 Mar 2016; V3n3RiX <venerix@rogentos.ro>
+  +files/2.02_beta3-10_linux-UUID.patch, +files/CVE-2015-8370.patch,
+  +files/gfxpayload.patch, +files/grub-2.00-freetype-2.5.1.patch,
+  +files/grub-2.02_beta2-KERNEL_GLOBS.patch,
+  +files/grub-2.02_beta2-libzfs.patch,
+  +files/grub-2.02_beta2-lvm2-raid1.patch, +files/grub.default-3,
+  +grub-2.02_beta2-r9.ebuild:
+  import grub from gentoo
+
+  29 Nov 2015; V3n3RiX <venerix@rogentos.ro> -files/00_fonts,
+  -files/05_distro_theme, -files/101-freetype2_fix_mkfont.patch,
+  -files/grub-0.97-gfxmenu-v8.patch, -files/grub-0.97-uuid.patch,
+  -files/grub-0.97-uuid_doc.patch, -files/grub-1.96-genkernel.patch,
+  -files/grub-1.97-genkernel.patch, -files/grub-1.97-hostdisk.patch,
+  -files/grub-1.97-vga-deprecated.patch,
+  -files/grub-1.97-wallpaper-settings-support.patch,
+  -files/grub-1.98-add-legacy-rootfs-detection.patch,
+  -files/grub-1.98-follow-dev-mapper-symlinks.patch,
+  -files/grub-1.98-genkernel-initramfs-single.patch,
+  -files/grub-1.98-genkernel.patch,
+  -files/grub-1.98-wallpaper-settings-support.patch,
+  -files/grub-1.99-disable-floppies.patch, -files/grub-1.99-genkernel.patch,
+  -files/grub-1.99-vga-deprecated-not-yet.patch,
+  -files/grub-1.99-vga-deprecated.patch,
+  -files/grub-1.99-wallpaper-settings-support.patch,
+  -files/grub-1.99-workaround-raid-bios-bug.patch,
+  -files/grub-2.00-20_linux_xen.patch, -files/grub-2.00-compression.patch,
+  -files/grub-2.00-config-quoting.patch, -files/grub-2.00-dmraid.patch,
+  -files/grub-2.00-fix-locale-en.mo.gz-not-found-error-message.patch,
+  -files/grub-2.00-freebsd.patch,
+  -files/grub-2.00-genkernel-initramfs-single.patch,
+  -files/grub-2.00-hardcoded-awk.patch, -files/grub-2.00-no-gets.patch,
+  -files/grub-2.00-os-prober-efi-system.patch,
+  -files/grub-2.00-parallel-make.patch, -files/grub-2.00-rogentos-patch.patch,
+  -files/grub-2.00-secureboot-user-sign-2.patch,
+  -files/grub-2.00-secureboot-user-sign.patch, -files/grub-2.00-texinfo.patch,
+  -files/grub-2.00-tftp-endian.patch,
+  -files/grub-2.00-vga-deprecated-not-yet.patch,
+  -files/grub-2.00-wallpaper-settings-support.patch,
+  -files/grub-2.00-zfs-feature-flag-support-r1.patch,
+  -files/grub-2.00-zfs-feature-flag-support.patch, -files/grub.conf.gentoo,
+  -files/grub.default-2, -files/grub2-default, -files/grub2-default-1.99,
+  -files/splash.xpm.gz,
+  -files/ubuntu-upstream-1.98/01_uuids_and_lvm_dont_play_along_nicely.diff,
+  -files/ubuntu-upstream-1.98/902_boot_blocklist_hack.diff,
+  -files/ubuntu-upstream-1.98/904_disable_floppies.diff,
+  -files/ubuntu-upstream-1.98/956_loopback_root.diff,
+  -files/ubuntu-upstream-1.98/957_handle_loopback.diff,
+  -files/ubuntu-upstream-1.98/958_linux_no_loopmount.diff,
+  -files/ubuntu-upstream-1.98/960_raid_virtio.diff,
+  -files/ubuntu-upstream-1.98/961_dmraid_probe.diff,
+  -files/ubuntu-upstream-1.98/962_no_device_map.diff,
+  -files/ubuntu-upstream-1.98/968_hostdisk_speedup.diff,
+  -files/ubuntu-upstream-1.98/969_lvm_raid_probe.diff,
+  -files/ubuntu-upstream-1.98/970_fix_locale_installation.diff,
+  -files/ubuntu-upstream-1.98/971_langpacks.diff,
+  -files/ubuntu-upstream-1.98/974_drive_probe.diff,
+  -files/ubuntu-upstream-1.98/975_hostdisk_hd.diff,
+  -files/ubuntu-upstream/01_uuids_and_lvm_dont_play_along_nicely.diff,
+  -files/ubuntu-upstream/904_disable_floppies.diff, -grub-0.97-r22.ebuild,
+  -grub-1.99-r2.ebuild, -grub-2.00.ebuild, -grub-2.00-r2.ebuild,
+  -grub-2.00-r3.ebuild, -grub-2.00-r4.ebuild, -grub-2.00-r5.ebuild,
+  -grub-2.00-r7.ebuild, -grub-2.02_beta2-r3.ebuild:
+  drop our grub, use gentoo one
+
+  25 Apr 2015; BlackNoxis <steven.darklight@gmail.com>
+  files/grub-2.00-secureboot-user-sign-2.patch,
+  files/grub-2.00-secureboot-user-sign.patch, files/grub.default-2,
+  files/grub2-default, grub-2.00.ebuild, grub-2.00-r4.ebuild,
+  grub-2.00-r5.ebuild:
+  upgrade
+
+*grub-2.02_beta2-r3 (12 Mar 2015)
+
+  12 Mar 2015; BlackNoxis <steven.darklight@gmail.com>
+  +grub-2.02_beta2-r3.ebuild:
+  Added stable beta build 2.02
+
+  08 Dec 2014; BlackNoxis <steven.darklight@gmail.com> grub-2.00-r7.ebuild:
+  Refreshing last modifications and moving to Kogaion fully
+
+  27 Nov 2014; BlackNoxis <steven.darklight@gmail.com>
+  files/grub-2.00-rogentos-patch.patch, files/grub.default-2,
+  files/grub2-default, files/grub2-default-1.99, grub-1.99-r2.ebuild,
+  grub-2.00.ebuild, grub-2.00-r2.ebuild, grub-2.00-r3.ebuild,
+  grub-2.00-r4.ebuild, grub-2.00-r5.ebuild, grub-2.00-r7.ebuild:
+  Rebranding to Kogaion and remanifest
+
+*grub-2.00-r7 (27 Oct 2014)
+
+  27 Oct 2014; BlackNoxis <steven.darklight@gmail.com>
+  +files/101-freetype2_fix_mkfont.patch,
+  +files/grub-2.00-fix-locale-en.mo.gz-not-found-error-message.patch,
+  +grub-2.00-r7.ebuild:
+  Incoming! Moving Rogento.git to kogaion-desktop. Finally
+
+*grub-2.00-r5 (15 Feb 2014)
+*grub-2.00-r4 (15 Feb 2014)
+*grub-2.00-r3 (15 Feb 2014)
+*grub-2.00-r2 (15 Feb 2014)
+*grub-2.00 (15 Feb 2014)
+*grub-1.99-r2 (15 Feb 2014)
+*grub-0.97-r22 (15 Feb 2014)
+
+  15 Feb 2014; BlackNoxis <steven.darklight@gmail.com> +files/00_fonts,
+  +files/05_distro_theme, +files/grub-0.97-gfxmenu-v8.patch,
+  +files/grub-0.97-uuid.patch, +files/grub-0.97-uuid_doc.patch,
+  +files/grub-1.96-genkernel.patch, +files/grub-1.97-genkernel.patch,
+  +files/grub-1.97-hostdisk.patch, +files/grub-1.97-vga-deprecated.patch,
+  +files/grub-1.97-wallpaper-settings-support.patch,
+  +files/grub-1.98-add-legacy-rootfs-detection.patch,
+  +files/grub-1.98-follow-dev-mapper-symlinks.patch,
+  +files/grub-1.98-genkernel-initramfs-single.patch,
+  +files/grub-1.98-genkernel.patch,
+  +files/grub-1.98-wallpaper-settings-support.patch,
+  +files/grub-1.99-disable-floppies.patch, +files/grub-1.99-genkernel.patch,
+  +files/grub-1.99-vga-deprecated-not-yet.patch,
+  +files/grub-1.99-vga-deprecated.patch,
+  +files/grub-1.99-wallpaper-settings-support.patch,
+  +files/grub-1.99-workaround-raid-bios-bug.patch,
+  +files/grub-2.00-20_linux_xen.patch, +files/grub-2.00-compression.patch,
+  +files/grub-2.00-config-quoting.patch, +files/grub-2.00-dmraid.patch,
+  +files/grub-2.00-freebsd.patch,
+  +files/grub-2.00-genkernel-initramfs-single.patch,
+  +files/grub-2.00-hardcoded-awk.patch, +files/grub-2.00-no-gets.patch,
+  +files/grub-2.00-os-prober-efi-system.patch,
+  +files/grub-2.00-parallel-make.patch, +files/grub-2.00-rogentos-patch.patch,
+  +files/grub-2.00-secureboot-user-sign-2.patch,
+  +files/grub-2.00-secureboot-user-sign.patch, +files/grub-2.00-texinfo.patch,
+  +files/grub-2.00-tftp-endian.patch,
+  +files/grub-2.00-vga-deprecated-not-yet.patch,
+  +files/grub-2.00-wallpaper-settings-support.patch,
+  +files/grub-2.00-zfs-feature-flag-support-r1.patch,
+  +files/grub-2.00-zfs-feature-flag-support.patch, +files/grub.conf.gentoo,
+  +files/grub.default-2, +files/grub2-default, +files/grub2-default-1.99,
+  +files/splash.xpm.gz,
+  +files/ubuntu-upstream-1.98/01_uuids_and_lvm_dont_play_along_nicely.diff,
+  +files/ubuntu-upstream-1.98/902_boot_blocklist_hack.diff,
+  +files/ubuntu-upstream-1.98/904_disable_floppies.diff,
+  +files/ubuntu-upstream-1.98/956_loopback_root.diff,
+  +files/ubuntu-upstream-1.98/957_handle_loopback.diff,
+  +files/ubuntu-upstream-1.98/958_linux_no_loopmount.diff,
+  +files/ubuntu-upstream-1.98/960_raid_virtio.diff,
+  +files/ubuntu-upstream-1.98/961_dmraid_probe.diff,
+  +files/ubuntu-upstream-1.98/962_no_device_map.diff,
+  +files/ubuntu-upstream-1.98/968_hostdisk_speedup.diff,
+  +files/ubuntu-upstream-1.98/969_lvm_raid_probe.diff,
+  +files/ubuntu-upstream-1.98/970_fix_locale_installation.diff,
+  +files/ubuntu-upstream-1.98/971_langpacks.diff,
+  +files/ubuntu-upstream-1.98/974_drive_probe.diff,
+  +files/ubuntu-upstream-1.98/975_hostdisk_hd.diff,
+  +files/ubuntu-upstream/01_uuids_and_lvm_dont_play_along_nicely.diff,
+  +files/ubuntu-upstream/904_disable_floppies.diff, +grub-0.97-r22.ebuild,
+  +grub-1.99-r2.ebuild, +grub-2.00.ebuild, +grub-2.00-r2.ebuild,
+  +grub-2.00-r3.ebuild, +grub-2.00-r4.ebuild, +grub-2.00-r5.ebuild:
+  Added ebuilds for kogaion desktop
+

@@ -1,0 +1,30 @@
+# ChangeLog for dev-libs/ocl-icd
+# Copyright 1999-2021 Gentoo Foundation; Distributed under the GPL v2
+# (auto-generated from git log)
+
+  29 Apr 2020; V3n3RiX <venerix@redcorelinux.org>
+  files/ocl-icd-2.2.12-gcc-10.patch, ocl-icd-2.2.12-r10.ebuild:
+  restore file permissions, changed everything to 755 by mistake
+
+  29 Apr 2020; V3n3RiX <venerix@redcorelinux.org>
+  files/ocl-icd-2.2.12-gcc-10.patch, ocl-icd-2.2.12-r10.ebuild:
+  sys-apps/apparmor-utils : add python3.7 compat
+
+*ocl-icd-2.2.12-r10 (25 Apr 2020)
+
+  25 Apr 2020; V3n3RiX <venerix@redcorelinux.org> -ocl-icd-2.2.12-r2.ebuild,
+  +ocl-icd-2.2.12-r10.ebuild:
+  revision bump
+
+*ocl-icd-2.2.12-r2 (12 Apr 2020)
+
+  12 Apr 2020; V3n3RiX <venerix@redcorelinux.org>
+  +files/ocl-icd-2.2.12-gcc-10.patch, +ocl-icd-2.2.12-r2.ebuild,
+  -ocl-icd-2.2.12-r10.ebuild:
+  add gcc10 patch
+
+*ocl-icd-2.2.12-r10 (19 Jan 2020)
+
+  19 Jan 2020; V3n3RiX <venerix@redcorelinux.org> +ocl-icd-2.2.12-r10.ebuild:
+  import from gentoo, don't use ruby-single.eclass
+

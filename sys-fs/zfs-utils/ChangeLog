@@ -1,0 +1,176 @@
+# ChangeLog for sys-fs/zfs-utils
+# Copyright 1999-2021 Gentoo Foundation; Distributed under the GPL v2
+# (auto-generated from git log)
+
+*zfs-utils-2.0.3 (15 Feb 2021)
+
+  15 Feb 2021; V3n3RiX <venerix@redcorelinux.org> -zfs-utils-2.0.1.ebuild,
+  +zfs-utils-2.0.3.ebuild:
+  sys-fs/zfs : version bump (v2.0.3)
+
+*zfs-utils-2.0.1 (30 Jan 2021)
+
+  30 Jan 2021; V3n3RiX <venerix@redcorelinux.org> -zfs-utils-0.8.4.ebuild,
+  +zfs-utils-2.0.1.ebuild:
+  sys-fs/zfs : version bump
+
+  16 May 2020; V3n3RiX <venerix@redcorelinux.org> zfs-utils-0.8.4.ebuild:
+  ...
+
+  16 May 2020; V3n3RiX <venerix@redcorelinux.org> zfs-utils-0.8.4.ebuild:
+  seems zfs source code changed a bit
+
+  16 May 2020; V3n3RiX <venerix@redcorelinux.org> zfs-utils-0.8.4.ebuild:
+  fix sed
+
+*zfs-utils-0.8.4 (16 May 2020)
+
+  16 May 2020; V3n3RiX <venerix@redcorelinux.org>
+  -files/0.8.3-fno-common.patch, -files/0.8.3-zfs-functions.patch,
+  -zfs-utils-0.8.3-r1.ebuild, +zfs-utils-0.8.4.ebuild:
+  sys-fs/zfs : version bump
+
+  03 May 2020; V3n3RiX <venerix@redcorelinux.org> zfs-utils-0.8.3-r1.ebuild:
+  pick more fixes from gentoo's ebuild
+
+*zfs-utils-0.8.3-r1 (03 May 2020)
+
+  03 May 2020; V3n3RiX <venerix@redcorelinux.org>
+  +files/0.8.3-fno-common.patch, +files/0.8.3-zfs-functions.patch,
+  -zfs-utils-0.8.3.ebuild, +zfs-utils-0.8.3-r1.ebuild:
+  revision bump, fix zfs-import service, fix zfs-functions
+
+*zfs-utils-0.8.3 (25 Jan 2020)
+
+  25 Jan 2020; V3n3RiX <venerix@redcorelinux.org>
+  -files/Use_NMH_WAIT_EXEC_with_call.patch, -zfs-utils-0.8.2-r1.ebuild,
+  +zfs-utils-0.8.3.ebuild:
+  sys-fs/zfs-{,utils} && sys-kernel/zfs-dkms : version bump (v0.8.3)
+
+*zfs-utils-0.8.2-r1 (02 Jan 2020)
+
+  02 Jan 2020; V3n3RiX <venerix@redcorelinux.org>
+  +files/Use_NMH_WAIT_EXEC_with_call.patch, -zfs-utils-0.8.2.ebuild,
+  +zfs-utils-0.8.2-r1.ebuild:
+  backport fix for https://github.com/zfsonlinux/zfs/issues/9417
+
+*zfs-utils-0.8.2 (31 Dec 2019)
+
+  31 Dec 2019; V3n3RiX <venerix@redcorelinux.org> -zfs-utils-0.8.1.ebuild,
+  +zfs-utils-0.8.2.ebuild:
+  sys-kernel/zfs-dkms : version bump
+
+*zfs-utils-0.8.1 (04 Jul 2019)
+
+  04 Jul 2019; V3n3RiX <venerix@redcorelinux.org> -files/bash-completion,
+  +files/bash-completion-sudo.patch, -files/zed, files/zfs.service.in,
+  -zfs-utils-0.7.13.ebuild, +zfs-utils-0.8.1.ebuild:
+  sys-fs/zfs : version bump
+
+*zfs-utils-0.7.13 (19 Jun 2019)
+
+  19 Jun 2019; V3n3RiX <venerix@redcorelinux.org> -zfs-utils-0.7.12.ebuild,
+  +zfs-utils-0.7.13.ebuild:
+  sys-fs/{spl,zfs} : version bump
+
+*zfs-utils-0.7.12 (31 Dec 2018)
+
+  31 Dec 2018; V3n3RiX <venerix@redcorelinux.org> -zfs-utils-0.7.10.ebuild,
+  +zfs-utils-0.7.12.ebuild:
+  sys-fs/{spl,zfs} : version bump
+
+*zfs-utils-0.7.10 (08 Sep 2018)
+
+  08 Sep 2018; V3n3RiX <venerix@redcorelinux.org> -zfs-utils-0.7.9-r2.ebuild,
+  +zfs-utils-0.7.10.ebuild:
+  sys-kernel/{spl,zfs} : version bump
+
+*zfs-utils-0.7.9-r2 (27 Aug 2018)
+
+  27 Aug 2018; V3n3RiX <venerix@redcorelinux.org> -files/kernel-4.18.patch,
+  -zfs-utils-0.7.9-r1.ebuild, +zfs-utils-0.7.9-r2.ebuild:
+  sys-fs/{spl,zfs} : kernel patch not needed for userland
+
+*zfs-utils-0.7.9-r1 (27 Aug 2018)
+
+  27 Aug 2018; V3n3RiX <venerix@redcorelinux.org> +files/kernel-4.18.patch,
+  -zfs-utils-0.7.9.ebuild, +zfs-utils-0.7.9-r1.ebuild:
+  sys-fs/{spl,zfs} : kernel 4.18 compat
+
+*zfs-utils-0.7.9 (26 Aug 2018)
+
+  26 Aug 2018; V3n3RiX <venerix@redcorelinux.org> -zfs-utils-0.7.8.ebuild,
+  +zfs-utils-0.7.9.ebuild:
+  sys-fs/{spl,zfs} : version bump
+
+*zfs-utils-0.7.8 (10 Apr 2018)
+
+  10 Apr 2018; V3n3RiX <venerix@redcorelinux.org> -zfs-utils-0.7.6.ebuild,
+  +zfs-utils-0.7.8.ebuild:
+  sys-fs/{zfs,spl} : version bump
+
+*zfs-utils-0.7.6 (02 Apr 2018)
+
+  02 Apr 2018; V3n3RiX <venerix@redcorelinux.org> +zfs-utils-0.7.6.ebuild,
+  -zfs-utils-0.7.7.ebuild:
+  Revert "sys-fs/{spl,zfs} : version bump"
+
+  This reverts commit d031d102728856e6bbaeaa55ec22e9ae95e4785b.
+
+*zfs-utils-0.7.7 (02 Apr 2018)
+
+  02 Apr 2018; V3n3RiX <venerix@redcorelinux.org> -zfs-utils-0.7.6.ebuild,
+  +zfs-utils-0.7.7.ebuild:
+  sys-fs/{spl,zfs} : version bump
+
+*zfs-utils-0.7.6 (11 Mar 2018)
+
+  11 Mar 2018; V3n3RiX <venerix@redcorelinux.org> -zfs-utils-0.7.5.ebuild,
+  +zfs-utils-0.7.6.ebuild:
+  sys-fs/{spl,zfs} : version bump
+
+*zfs-utils-0.7.5 (07 Jan 2018)
+
+  07 Jan 2018; V3n3RiX <venerix@redcorelinux.org> -zfs-utils-0.7.4.ebuild,
+  +zfs-utils-0.7.5.ebuild:
+  sys-fs/{spl,zfs} : version bump
+
+*zfs-utils-0.7.4 (18 Dec 2017)
+
+  18 Dec 2017; V3n3RiX <venerix@redcorelinux.org> -zfs-utils-0.7.2.ebuild,
+  +zfs-utils-0.7.4.ebuild:
+  sys-fs/{spl,zfs} : version bump
+
+*zfs-utils-0.7.2 (29 Oct 2017)
+
+  29 Oct 2017; V3n3RiX <venerix@redcorelinux.org> -zfs-utils-0.6.5.11.ebuild,
+  +zfs-utils-0.7.2.ebuild:
+  sys-fs/zfs && sys-fs/spl : version bump
+
+*zfs-utils-0.6.5.11 (30 Jul 2017)
+
+  30 Jul 2017; V3n3RiX <venerix@redcorelinux.org> +zfs-utils-0.6.5.11.ebuild,
+  -zfs-utils-0.7.0.ebuild:
+  Revert "ZFS : bump to v0.7.0"
+
+  This reverts commit 1c3637dd3b054c149f818aa6eed47c849ca8d0a6.
+
+*zfs-utils-0.7.0 (30 Jul 2017)
+
+  30 Jul 2017; V3n3RiX <venerix@redcorelinux.org> -zfs-utils-0.6.5.11.ebuild,
+  +zfs-utils-0.7.0.ebuild:
+  ZFS : bump to v0.7.0
+
+*zfs-utils-0.6.5.11 (24 Jul 2017)
+
+  24 Jul 2017; V3n3RiX <venerix@redcorelinux.org> -zfs-utils-0.6.5.9.ebuild,
+  +zfs-utils-0.6.5.11.ebuild:
+  sys-fs/spl + sys-fs/zfs : version bumpt
+
+*zfs-utils-0.6.5.9 (05 Jun 2017)
+
+  05 Jun 2017; V3n3RiX <venerix@redcorelinux.org> +files/bash-completion,
+  +files/bash-completion-r1, +files/zed, +files/zfs-init.sh.in,
+  +files/zfs.service.in, +zfs-utils-0.6.5.9.ebuild:
+  give userspace packages a more, userspace name
+

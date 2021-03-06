@@ -1,0 +1,146 @@
+# ChangeLog for app-emulation/steam
+# Copyright 1999-2021 Gentoo Foundation; Distributed under the GPL v2
+# (auto-generated from git log)
+
+  30 Apr 2020; V3n3RiX <venerix@redcorelinux.org> files/redcore-steam:
+  fix leftovers
+
+*steam-1.0.0.61-r1 (20 Apr 2020)
+
+  20 Apr 2020; V3n3RiX <venerix@redcorelinux.org> files/redcore-steam,
+  -steam-1.0.0.61.ebuild, +steam-1.0.0.61-r1.ebuild:
+  use new gcc libs
+
+  07 Jan 2020; V3n3RiX <venerix@redcorelinux.org> files/redcore-steam:
+  try to avoid some coredumps
+
+  07 Jan 2020; V3n3RiX <venerix@redcorelinux.org> steam-1.0.0.61.ebuild:
+  adjust deps
+
+*steam-1.0.0.61 (06 Jan 2020)
+
+  06 Jan 2020; V3n3RiX <venerix@redcorelinux.org> files/redcore-steam,
+  files/redcore-steam.patch, -steam-1.0.0.45-r5.ebuild,
+  +steam-1.0.0.61.ebuild:
+  version bump
+
+*steam-1.0.0.45-r5 (17 Dec 2019)
+
+  17 Dec 2019; V3n3RiX <venerix@redcorelinux.org> files/redcore-steam,
+  -steam-1.0.0.45-r4.ebuild, +steam-1.0.0.45-r5.ebuild:
+  fix LD_PRELOAD
+
+*steam-1.0.0.45-r4 (14 Oct 2019)
+
+  14 Oct 2019; V3n3RiX <venerix@redcorelinux.org> -steam-1.0.0.45-r3.ebuild,
+  +steam-1.0.0.45-r4.ebuild:
+  drop media-libs/libtxc_dxtn dependency
+
+*steam-1.0.0.45-r3 (26 Jun 2019)
+
+  26 Jun 2019; V3n3RiX <venerix@redcorelinux.org> files/redcore-steam,
+  -steam-1.0.0.45-r2.ebuild, +steam-1.0.0.45-r3.ebuild:
+  simplify preloads, port to EAPI=6
+
+*steam-1.0.0.45-r2 (18 Mar 2018)
+
+  18 Mar 2018; V3n3RiX <venerix@redcorelinux.org> files/redcore-steam,
+  -steam-1.0.0.45-r1.ebuild, +steam-1.0.0.45-r2.ebuild:
+  adjust preloads for GCC 7.3.0
+
+*steam-1.0.0.45-r1 (26 Nov 2017)
+
+  26 Nov 2017; V3n3RiX <venerix@redcorelinux.org> files/redcore-steam,
+  +steam-1.0.0.45-r1.ebuild, -steam-1.0.0.45-r1710.ebuild:
+  preload GCC 6 libs
+
+*steam-1.0.0.45-r1710 (08 Oct 2017)
+
+  08 Oct 2017; V3n3RiX <venerix@redcorelinux.org>
+  -steam-1.0.0.45-r1708.ebuild, +steam-1.0.0.45-r1710.ebuild:
+  r1710 revision bump
+
+*steam-1.0.0.45-r1708 (13 Aug 2017)
+
+  13 Aug 2017; V3n3RiX <venerix@redcorelinux.org> -steam-1.0.0.45-r9.ebuild,
+  +steam-1.0.0.45-r1708.ebuild:
+  redcore 1708 gamma crucis : bump ebuilds
+
+*steam-1.0.0.45-r9 (07 Mar 2017)
+
+  07 Mar 2017; V3n3RiX <venerix@redcorelinux.org> -steam-1.0.0.45-r8.ebuild,
+  +steam-1.0.0.45-r9.ebuild:
+  enable full s3tc texture (de)compression by default in steam
+
+*steam-1.0.0.45-r8 (16 Nov 2016)
+
+  16 Nov 2016; V3n3RiX <venerix@rogentos.ro> files/redcore-steam,
+  -steam-1.0.0.45-r7.ebuild, +steam-1.0.0.45-r8.ebuild:
+  adjust steam to work nice with gcc 5.4.0
+
+  06 Nov 2016; V3n3RiX <venerix@rogentos.ro> -files/kogaion-steam,
+  -files/kogaion-steam.patch, +files/redcore-steam,
+  +files/redcore-steam.patch, steam-1.0.0.45-r7.ebuild:
+  drop kupertino and elementary icons, adjust steam and calamares patches
+
+*steam-1.0.0.45-r7 (20 Sep 2016)
+
+  20 Sep 2016; V3n3RiX <venerix@rogentos.ro> files/kogaion-steam,
+  -steam-1.0.0.45-r6.ebuild, +steam-1.0.0.45-r7.ebuild:
+  actually, we only need bbswitch loaded to detect optimus, because nvidia may
+  not be loaded yet, or someone may use nouveau
+
+*steam-1.0.0.45-r6 (18 Sep 2016)
+
+  18 Sep 2016; V3n3RiX <venerix@rogentos.ro> files/kogaion-steam,
+  -steam-1.0.0.45-r5.ebuild, +steam-1.0.0.45-r6.ebuild:
+  minor fix for steam on optimus laptops
+
+  16 Aug 2016; V3n3RiX <venerix@rogentos.ro> files/kogaion-steam:
+  make optimus detection more robust
+
+*steam-1.0.0.45-r5 (16 Aug 2016)
+
+  16 Aug 2016; V3n3RiX <venerix@rogentos.ro> files/kogaion-steam,
+  -steam-1.0.0.45-r4.ebuild, +steam-1.0.0.45-r5.ebuild:
+  basic optimus detection
+
+*steam-1.0.0.45-r4 (13 Aug 2016)
+
+  13 Aug 2016; V3n3RiX <venerix@rogentos.ro> files/kogaion-steam,
+  -steam-1.0.0.45-r3.ebuild, +steam-1.0.0.45-r4.ebuild:
+  force steam to use native gcclibs, or in some situations, oss drivers will
+  fail to load
+
+*steam-1.0.0.45-r3 (01 May 2016)
+
+  01 May 2016; V3n3RiX <venerix@rogentos.ro> files/kogaion-steam,
+  -steam-1.0.0.45-r2.ebuild, +steam-1.0.0.45-r3.ebuild:
+  workaround to fix a regression in nvidia drivers that will not allow any
+  source engine games to start (CS:GO), details :
+  https://github.com/ValveSoftware/Counter-Strike-Global-Offensive/issues/610
+
+*steam-1.0.0.45-r2 (10 Apr 2016)
+
+  10 Apr 2016; V3n3RiX <venerix@rogentos.ro> +files/kogaion-steam,
+  +files/kogaion-steam.patch, -steam-1.0.0.45.ebuild,
+  -steam-1.0.0.45-r1.ebuild, +steam-1.0.0.45-r2.ebuild:
+  make steam run as if it's running in ubuntu
+
+  10 Apr 2016; V3n3RiX <venerix@rogentos.ro> steam-1.0.0.45-r1.ebuild:
+  fix steam ebuild
+
+  15 Nov 2014; BlackNoxis <steven.darklight@gmail.com>
+  steam-1.0.0.45-r1.ebuild:
+  A little clean in the steam ebuild
+
+*steam-1.0.0.45-r1 (14 Nov 2014)
+
+  14 Nov 2014; V3n3RiX <venerix@gmail.com> +steam-1.0.0.45-r1.ebuild:
+  convert steam client to multilib
+
+*steam-1.0.0.45 (15 Feb 2014)
+
+  15 Feb 2014; BlackNoxis <steven.darklight@gmail.com> +steam-1.0.0.45.ebuild:
+  Added ebuilds for kogaion desktop
+

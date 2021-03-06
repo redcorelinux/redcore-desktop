@@ -1,0 +1,232 @@
+# ChangeLog for x11-base/xorg-server
+# Copyright 1999-2021 Gentoo Foundation; Distributed under the GPL v2
+# (auto-generated from git log)
+
+*xorg-server-1.20.10-r100 (31 Jan 2021)
+
+  31 Jan 2021; V3n3RiX <venerix@redcorelinux.org> -files/xdm-setup.initd-1,
+  -files/xdm.confd-4, -files/xdm.initd-11, -xorg-server-1.20.10-r10.ebuild,
+  +xorg-server-1.20.10-r100.ebuild:
+  act on gentoo news 2021-01-30-display-manager-init, but do it automatically,
+  without user intervention
+
+*xorg-server-1.20.10-r10 (15 Dec 2020)
+
+  15 Dec 2020; V3n3RiX <venerix@redcorelinux.org> files/xdm.confd-4,
+  files/xdm.initd-11, -xorg-server-1.20.8-r10.ebuild,
+  +xorg-server-1.20.10-r10.ebuild:
+  version bump
+
+*xorg-server-1.20.8-r10 (17 Apr 2020)
+
+  17 Apr 2020; V3n3RiX <venerix@redcorelinux.org>
+  -xorg-server-1.20.7-r10.ebuild, +xorg-server-1.20.8-r10.ebuild:
+  version bump
+
+*xorg-server-1.20.7-r10 (16 Jan 2020)
+
+  16 Jan 2020; V3n3RiX <venerix@redcorelinux.org>
+  -xorg-server-1.20.6-r314.ebuild, +xorg-server-1.20.7-r10.ebuild:
+  version bump
+
+  04 Jan 2020; V3n3RiX <venerix@redcorelinux.org>
+  +files/xserver-autobind-hotplug.patch, xorg-server-1.20.6-r314.ebuild:
+  import autobind-hotplug patch from Fedora (make PRIME work with nvidia
+  proprietary drivers)
+
+*xorg-server-1.20.6-r314 (16 Dec 2019)
+
+  16 Dec 2019; V3n3RiX <venerix@redcorelinux.org> -files/xorg-server-1.20.4-sh
+  m-Pick-the-shm-dir-at-run-time-not-build-time.patch,
+  -files/xorg-server-1.20.4-shm-Use-memfd_create-when-possible.patch, -files/x
+  org-server-1.20.4-shm-reindent-shm_tmpfile-to-follow-our-standards.patch,
+  -xorg-server-1.20.5-r1337.ebuild, +xorg-server-1.20.6-r314.ebuild:
+  version bump
+
+*xorg-server-1.20.5-r1337 (02 Jun 2019)
+
+  02 Jun 2019; V3n3RiX <venerix@redcorelinux.org>
+  -xorg-server-1.20.4-r1337.ebuild, +xorg-server-1.20.5-r1337.ebuild:
+  version bump
+
+*xorg-server-1.20.4-r1337 (28 Apr 2019)
+
+  28 Apr 2019; V3n3RiX <venerix@redcorelinux.org> +files/xorg-server-1.20.4-sh
+  m-Pick-the-shm-dir-at-run-time-not-build-time.patch,
+  +files/xorg-server-1.20.4-shm-Use-memfd_create-when-possible.patch, +files/x
+  org-server-1.20.4-shm-reindent-shm_tmpfile-to-follow-our-standards.patch,
+  -xorg-server-1.20.3-r1337.ebuild, +xorg-server-1.20.4-r1337.ebuild:
+  version bump
+
+  27 Oct 2018; V3n3RiX <venerix@redcorelinux.org>
+  xorg-server-1.20.3-r1337.ebuild:
+  x11-base/xorg-drivers : version bump
+
+*xorg-server-1.20.3-r1337 (27 Oct 2018)
+
+  27 Oct 2018; V3n3RiX <venerix@redcorelinux.org>
+  files/99-synaptics-overrides.conf,
+  -files/xorg-server-1.19.4-sysmacros.patch, -files/xorg-server-1.19.5-glx-do-
+  not-pick-sRGB-config-for-32-bit-RGBA-visual.patch,
+  -xorg-server-1.19.5-r3.ebuild, +xorg-server-1.20.3-r1337.ebuild:
+  version bump
+
+*xorg-server-1.19.5-r3 (16 Jun 2018)
+
+  16 Jun 2018; V3n3RiX <venerix@redcorelinux.org> +files/xorg-server-1.19.5-gl
+  x-do-not-pick-sRGB-config-for-32-bit-RGBA-visual.patch,
+  -xorg-server-1.19.5-r2.ebuild, +xorg-server-1.19.5-r3.ebuild:
+  revision bump
+
+*xorg-server-1.19.5-r2 (11 Feb 2018)
+
+  11 Feb 2018; V3n3RiX <venerix@redcorelinux.org>
+  -xorg-server-1.19.5-r1.ebuild, +xorg-server-1.19.5-r2.ebuild:
+  adjust for xf86rushproto deprecation
+
+*xorg-server-1.19.5-r1 (09 Jan 2018)
+
+  09 Jan 2018; V3n3RiX <venerix@redcorelinux.org> files/xdm.initd-11,
+  +xorg-server-1.19.5-r1.ebuild, -xorg-server-1.19.5-r10.ebuild:
+  net-misc/networkmanager && x11-base/xorg-server : make use of elogind
+  service if started
+
+  01 Dec 2017; V3n3RiX <venerix@redcorelinux.org>
+  xorg-server-1.19.5-r10.ebuild:
+  use correct eutils function
+
+  01 Dec 2017; V3n3RiX <venerix@redcorelinux.org>
+  files/99-synaptics-overrides.conf:
+  indentation
+
+*xorg-server-1.19.5-r10 (01 Dec 2017)
+
+  01 Dec 2017; V3n3RiX <venerix@redcorelinux.org>
+  +files/99-synaptics-overrides.conf, +xorg-server-1.19.5-r10.ebuild,
+  -xorg-server-1.19.5-r1710.ebuild:
+  bugfix (https://bugs.redcorelinux.org/show_bug.cgi?id=48)
+
+  29 Oct 2017; V3n3RiX <venerix@redcorelinux.org>
+  xorg-server-1.19.5-r1710.ebuild:
+  app-admin/keepasxc : version bump, x11-base/xorg-server : adjust to gentoo
+  changes
+
+  21 Oct 2017; V3n3RiX <venerix@redcorelinux.org>
+  xorg-server-1.19.5-r1710.ebuild:
+  keyword stable
+
+  21 Oct 2017; V3n3RiX <venerix@redcorelinux.org>
+  +files/xorg-server-1.19.4-sysmacros.patch,
+  -files/xorg-server-1.19.5-sysmacros.patch, xorg-server-1.19.5-r1710.ebuild:
+  resync with gentoo changes
+
+*xorg-server-1.19.5-r1710 (20 Oct 2017)
+
+  20 Oct 2017; V3n3RiX <venerix@redcorelinux.org>
+  -files/xorg-server-1.19.4-sysmacros.patch,
+  +files/xorg-server-1.19.5-sysmacros.patch, -xorg-server-1.19.4-r1710.ebuild,
+  +xorg-server-1.19.5-r1710.ebuild:
+  version bump
+
+*xorg-server-1.19.4-r1710 (15 Oct 2017)
+
+  15 Oct 2017; V3n3RiX <venerix@redcorelinux.org>
+  -files/xorg-server-1.18-sysmacros.patch,
+  +files/xorg-server-1.19.4-sysmacros.patch, -xorg-server-1.19.3-r1708.ebuild,
+  +xorg-server-1.19.4-r1710.ebuild:
+  version bump
+
+*xorg-server-1.19.3-r1708 (13 Aug 2017)
+
+  13 Aug 2017; V3n3RiX <venerix@redcorelinux.org>
+  -xorg-server-1.19.3-r1706.ebuild, +xorg-server-1.19.3-r1708.ebuild:
+  redcore 1708 gamma crucis : bump ebuilds
+
+*xorg-server-1.19.3-r1706 (25 Jun 2017)
+
+  25 Jun 2017; V3n3RiX <venerix@redcorelinux.org> files/xdm.confd-4,
+  -xorg-server-1.19.3-r1704.ebuild, +xorg-server-1.19.3-r1706.ebuild:
+  make sddm defauld dm
+
+*xorg-server-1.19.3-r1704 (31 May 2017)
+
+  31 May 2017; V3n3RiX <venerix@redcorelinux.org>
+  -xorg-server-1.19.2-r1704.ebuild, +xorg-server-1.19.3-r1704.ebuild:
+  xorg-server : bump to v1.19.3
+
+*xorg-server-1.19.2-r1704 (29 May 2017)
+
+  29 May 2017; V3n3RiX <venerix@redcorelinux.org> +files/xdm-setup.initd-1,
+  +files/xdm.confd-4, +files/xdm.initd-11,
+  +files/xorg-server-1.12-unloadsubmodule.patch,
+  +files/xorg-server-1.18-support-multiple-Files-sections.patch,
+  +files/xorg-server-1.18-sysmacros.patch, +files/xorg-sets.conf,
+  +xorg-server-1.19.2-r1704.ebuild:
+  import xorg-server from gentoo tree && make lightdm default DM
+
+  20 Apr 2015; BlackNoxis <steven.darklight@gmail.com>
+  -files/xdm-setup.initd-1, -files/xdm.confd-4, -files/xdm.initd-10,
+  -files/xdm.initd-11, -files/xdm.initd-9,
+  -files/xorg-server-1.12-ia64-fix_inx_outx.patch,
+  -files/xorg-server-1.12-unloadsubmodule.patch, -files/xorg-sets.conf,
+  -xorg-server-1.15.0.ebuild:
+  Removing xorg-server::kogaion-desktop
+
+  11 Apr 2015; BlackNoxis <steven.darklight@gmail.com>
+  xorg-server-1.15.0.ebuild:
+  moving to app-eselect
+
+*xorg-server-1.15.0 (04 Nov 2014)
+
+  04 Nov 2014; V3n3RiX <venerix@gmail.com> -files/xdm.confd-3,
+  files/xdm.confd-4, -files/xdm.initd, +files/xdm.initd-10,
+  +files/xdm.initd-11, -files/xdm.initd-3, -files/xdm.initd-4,
+  -files/xdm.initd-5, -files/xdm.initd-7, -files/xdm.initd-8,
+  +files/xdm.initd-9, -files/xorg-cve-2011-4028+4029.patch,
+  -files/xorg-server-1.11-disable-tests-without-ddx.patch,
+  -files/xorg-server-1.11-dix-pointerrootwin-send-focusin.patch,
+  -files/xorg-server-1.11-dix-send-focus-events.patch,
+  -files/xorg-server-1.11-log-format-fix.patch,
+  -files/xorg-server-1.11-pointer-to-int-cast.patch,
+  -files/xorg-server-1.12-disable-acpi.patch,
+  +files/xorg-server-1.12-ia64-fix_inx_outx.patch,
+  +files/xorg-server-1.12-unloadsubmodule.patch,
+  -files/xorg-server-1.12-xf86edidmodes-array-bounds.patch,
+  -files/xorg-server-1.9-nouveau-default.patch,
+  -files/xorg-server-die-ugly-background.patch,
+  -files/xorg-server-disable-acpi.patch, -files/xorg-server-glapi_c.patch,
+  -metadata.xml, -xorg-server-1.10.4.ebuild, -xorg-server-1.11.3.ebuild,
+  -xorg-server-1.11.4-r1.ebuild, -xorg-server-1.12.0-r1.ebuild,
+  -xorg-server-1.12.2.ebuild, -xorg-server-1.12.3.ebuild,
+  -xorg-server-1.12.4.ebuild, +xorg-server-1.15.0.ebuild:
+  just a little cleanup
+
+*xorg-server-1.12.4 (15 Feb 2014)
+*xorg-server-1.12.3 (15 Feb 2014)
+*xorg-server-1.12.2 (15 Feb 2014)
+*xorg-server-1.12.0-r1 (15 Feb 2014)
+*xorg-server-1.11.4-r1 (15 Feb 2014)
+*xorg-server-1.11.3 (15 Feb 2014)
+*xorg-server-1.10.4 (15 Feb 2014)
+
+  15 Feb 2014; BlackNoxis <steven.darklight@gmail.com>
+  +files/xdm-setup.initd-1, +files/xdm.confd-3, +files/xdm.confd-4,
+  +files/xdm.initd, +files/xdm.initd-3, +files/xdm.initd-4,
+  +files/xdm.initd-5, +files/xdm.initd-7, +files/xdm.initd-8,
+  +files/xorg-cve-2011-4028+4029.patch,
+  +files/xorg-server-1.11-disable-tests-without-ddx.patch,
+  +files/xorg-server-1.11-dix-pointerrootwin-send-focusin.patch,
+  +files/xorg-server-1.11-dix-send-focus-events.patch,
+  +files/xorg-server-1.11-log-format-fix.patch,
+  +files/xorg-server-1.11-pointer-to-int-cast.patch,
+  +files/xorg-server-1.12-disable-acpi.patch,
+  +files/xorg-server-1.12-xf86edidmodes-array-bounds.patch,
+  +files/xorg-server-1.9-nouveau-default.patch,
+  +files/xorg-server-die-ugly-background.patch,
+  +files/xorg-server-disable-acpi.patch, +files/xorg-server-glapi_c.patch,
+  +files/xorg-sets.conf, +metadata.xml, +xorg-server-1.10.4.ebuild,
+  +xorg-server-1.11.3.ebuild, +xorg-server-1.11.4-r1.ebuild,
+  +xorg-server-1.12.0-r1.ebuild, +xorg-server-1.12.2.ebuild,
+  +xorg-server-1.12.3.ebuild, +xorg-server-1.12.4.ebuild:
+  Added ebuilds for kogaion desktop
+

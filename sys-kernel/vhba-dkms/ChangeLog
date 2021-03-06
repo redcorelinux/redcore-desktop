@@ -1,0 +1,74 @@
+# ChangeLog for sys-kernel/vhba-dkms
+# Copyright 1999-2021 Gentoo Foundation; Distributed under the GPL v2
+# (auto-generated from git log)
+
+*vhba-dkms-20190831 (31 Dec 2019)
+
+  31 Dec 2019; V3n3RiX <venerix@redcorelinux.org> files/dkms.conf,
+  -vhba-dkms-20190410.ebuild, +vhba-dkms-20190831.ebuild:
+  sys-fs/vhba && sys-kernel/vhba-dkms : version bump
+
+*vhba-dkms-20190410 (07 Jul 2019)
+
+  07 Jul 2019; V3n3RiX <venerix@redcorelinux.org> files/dkms.conf,
+  -vhba-dkms-20170610-r1.ebuild, +vhba-dkms-20190410.ebuild:
+  sys-fs/vhba && sys-kernel/vhba-dkms : version bump
+
+*vhba-dkms-20170610-r1 (18 Dec 2017)
+
+  18 Dec 2017; V3n3RiX <venerix@redcorelinux.org>
+  +vhba-dkms-20170610-r1.ebuild, -vhba-dkms-20170610-r1710.ebuild:
+  sys-fs/{spl,zfs} : version bump
+
+*vhba-dkms-20170610-r1710 (29 Oct 2017)
+
+  29 Oct 2017; V3n3RiX <venerix@redcorelinux.org> files/dkms.conf,
+  -vhba-dkms-20170610-r1708.ebuild, +vhba-dkms-20170610-r1710.ebuild:
+  more revbumps for redcore 1710
+
+*vhba-dkms-20170610-r1708 (06 Oct 2017)
+
+  06 Oct 2017; V3n3RiX <venerix@redcorelinux.org>
+  +vhba-dkms-20170610-r1708.ebuild, -vhba-dkms-20170610-r1710.ebuild:
+  Revert "sys-kernel : trigger dkms build for the running kernel right away,
+  so one can load the modules without reboot"
+
+  This reverts commit c70485933fba5f01511a1f600174096ab2125693.
+
+*vhba-dkms-20170610-r1710 (06 Oct 2017)
+
+  06 Oct 2017; V3n3RiX <venerix@redcorelinux.org>
+  -vhba-dkms-20170610-r1708.ebuild, +vhba-dkms-20170610-r1710.ebuild:
+  sys-kernel : trigger dkms build for the running kernel right away, so one
+  can load the modules without reboot
+
+*vhba-dkms-20170610-r1708 (13 Aug 2017)
+
+  13 Aug 2017; V3n3RiX <venerix@redcorelinux.org>
+  -vhba-dkms-20170610-r1706.ebuild, +vhba-dkms-20170610-r1708.ebuild:
+  redcore 1708 gamma crucis : bump ebuilds
+
+*vhba-dkms-20170610-r1706 (24 Jul 2017)
+
+  24 Jul 2017; V3n3RiX <venerix@redcorelinux.org>
+  -vhba-dkms-20140928-r1706.ebuild, +vhba-dkms-20170610-r1706.ebuild:
+  sys-fs/vhba + dkms : version bump
+
+*vhba-dkms-20140928-r1706 (23 Jul 2017)
+
+  23 Jul 2017; V3n3RiX <venerix@redcorelinux.org> files/dkms.conf,
+  -vhba-dkms-20140928.ebuild, +vhba-dkms-20140928-r1706.ebuild:
+  install all dkms modules under /lib/modules/4.9.39-redcore/extra/dkms
+
+  26 Mar 2017; V3n3RiX <venerix@redcorelinux.org> vhba-dkms-20140928.ebuild:
+  remove module from dkms tree BEFORE removing the package itself
+
+  26 Mar 2017; V3n3RiX <venerix@redcorelinux.org> files/dkms.conf:
+  fix module install path
+
+*vhba-dkms-20140928 (26 Mar 2017)
+
+  26 Mar 2017; V3n3RiX <venerix@redcorelinux.org> +files/dkms.conf,
+  +vhba-dkms-20140928.ebuild:
+  port vhba to dkms framework
+

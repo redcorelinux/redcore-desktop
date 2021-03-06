@@ -1,0 +1,16 @@
+# ChangeLog for net-fs/sambacfg
+# Copyright 1999-2021 Gentoo Foundation; Distributed under the GPL v2
+# (auto-generated from git log)
+
+*sambacfg-1337-r1 (02 Jan 2021)
+
+  02 Jan 2021; V3n3RiX <venerix@redcorelinux.org> -sambacfg-1337.ebuild,
+  +sambacfg-1337-r1.ebuild:
+  migrate from enewgroup to acct-group
+
+*sambacfg-1337 (28 Nov 2020)
+
+  28 Nov 2020; V3n3RiX <venerix@redcorelinux.org> +files/redcore-smb.conf,
+  +sambacfg-1337.ebuild:
+  move : net-fs/samba-config-redcore => net-fs/sambacfg
+

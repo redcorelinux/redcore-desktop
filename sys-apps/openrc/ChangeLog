@@ -1,0 +1,278 @@
+# ChangeLog for sys-apps/openrc
+# Copyright 1999-2021 Gentoo Foundation; Distributed under the GPL v2
+# (auto-generated from git log)
+
+*openrc-0.42.1-r6 (26 Jan 2021)
+
+  26 Jan 2021; V3n3RiX <venerix@redcorelinux.org>
+  -files/openrc-disable-cgroupsv2.patch, -openrc-0.42.1-r5.ebuild,
+  +openrc-0.42.1-r6.ebuild:
+  revision bump
+
+  02 Dec 2020; V3n3RiX <venerix@redcorelinux.org> +files/openrc-gcc10.patch,
+  openrc-0.42.1-r5.ebuild:
+  add gcc10 patch
+
+  25 May 2020; V3n3RiX <venerix@redcorelinux.org> openrc-0.42.1-r5.ebuild:
+  invert the logic, silence some messages
+
+*openrc-0.42.1-r5 (25 May 2020)
+
+  25 May 2020; V3n3RiX <venerix@redcorelinux.org> -openrc-0.42.1-r4.ebuild,
+  +openrc-0.42.1-r5.ebuild:
+  drop openrc-settingsd, as it breaks timezone setup
+
+*openrc-0.42.1-r4 (25 Apr 2020)
+
+  25 Apr 2020; V3n3RiX <venerix@redcorelinux.org> -openrc-0.42.1-r3.ebuild,
+  +openrc-0.42.1-r4.ebuild:
+  add splash IUSE
+
+*openrc-0.42.1-r3 (24 Apr 2020)
+
+  24 Apr 2020; V3n3RiX <venerix@redcorelinux.org> -openrc-0.42.1-r2.ebuild,
+  +openrc-0.42.1-r3.ebuild:
+  sys-kernel/dracut : revision bump, drop sys-boot/plymouth dependency
+
+  24 Nov 2019; V3n3RiX <venerix@redcorelinux.org> openrc-0.42.1-r2.ebuild:
+  it seems we don't need our tweak after all
+
+*openrc-0.42.1-r2 (24 Nov 2019)
+
+  24 Nov 2019; V3n3RiX <venerix@redcorelinux.org> -openrc-0.42.1-r1.ebuild,
+  +openrc-0.42.1-r2.ebuild:
+  make transition to openrc-init seamless
+
+  24 Nov 2019; V3n3RiX <venerix@redcorelinux.org> openrc-0.42.1-r1.ebuild:
+  EAPI 7 fix
+
+*openrc-0.42.1-r1 (24 Nov 2019)
+
+  24 Nov 2019; V3n3RiX <venerix@redcorelinux.org> files/openrc-dkms.patch,
+  -openrc-0.34.11-r10.ebuild, +openrc-0.42.1-r1.ebuild:
+  version bump
+
+*openrc-0.34.11-r10 (14 Oct 2019)
+
+  14 Oct 2019; V3n3RiX <venerix@redcorelinux.org> -openrc-0.34.11-r9.ebuild,
+  +openrc-0.34.11-r10.ebuild:
+  migrate to sys-libs/pam
+
+*openrc-0.34.11-r9 (18 Jul 2019)
+
+  18 Jul 2019; V3n3RiX <venerix@redcorelinux.org> -openrc-0.34.11-r8.ebuild,
+  +openrc-0.34.11-r9.ebuild:
+  revision bump
+
+*openrc-0.34.11-r8 (26 Dec 2018)
+
+  26 Dec 2018; V3n3RiX <venerix@redcorelinux.org> -openrc-0.34.11-r7.ebuild,
+  +openrc-0.34.11-r8.ebuild:
+  revision bump, drop banned path_exists
+
+*openrc-0.34.11-r7 (18 Aug 2018)
+
+  18 Aug 2018; V3n3RiX <venerix@redcorelinux.org> -openrc-0.34.11-r6.ebuild,
+  +openrc-0.34.11-r7.ebuild:
+  auto-enable apparmor in boot runlevel
+
+  05 Apr 2018; V3n3RiX <venerix@redcorelinux.org> openrc-0.34.11-r6.ebuild:
+  plymouth useflag is masked, so change the name
+
+*openrc-0.34.11-r6 (05 Apr 2018)
+
+  05 Apr 2018; V3n3RiX <venerix@redcorelinux.org> -openrc-0.34.11-r5.ebuild,
+  +openrc-0.34.11-r6.ebuild:
+  revision bump (make it play nice with plymouth)
+
+*openrc-0.34.11-r5 (09 Jan 2018)
+
+  09 Jan 2018; V3n3RiX <venerix@redcorelinux.org> -openrc-0.34.11-r4.ebuild,
+  +openrc-0.34.11-r5.ebuild:
+  revision bump
+
+  09 Jan 2018; V3n3RiX <venerix@redcorelinux.org> openrc-0.34.11-r4.ebuild:
+  final adjustments
+
+*openrc-0.34.11-r4 (09 Jan 2018)
+
+  09 Jan 2018; V3n3RiX <venerix@redcorelinux.org> -openrc-0.34.11-r3.ebuild,
+  +openrc-0.34.11-r4.ebuild:
+  make sure we integrate elogind properly into our boot process
+
+*openrc-0.34.11-r3 (09 Jan 2018)
+
+  09 Jan 2018; V3n3RiX <venerix@redcorelinux.org> -openrc-0.34.11-r2.ebuild,
+  +openrc-0.34.11-r3.ebuild:
+  revision bump
+
+*openrc-0.34.11-r2 (09 Jan 2018)
+
+  09 Jan 2018; V3n3RiX <venerix@redcorelinux.org> -openrc-0.34.11-r1.ebuild,
+  +openrc-0.34.11-r2.ebuild:
+  revision bump
+
+*openrc-0.34.11-r1 (01 Dec 2017)
+
+  01 Dec 2017; V3n3RiX <venerix@redcorelinux.org> -openrc-0.34.9-r1.ebuild,
+  +openrc-0.34.11-r1.ebuild:
+  version bump (0.34.9 -> 0.34.11)
+
+*openrc-0.34.9-r1 (26 Nov 2017)
+
+  26 Nov 2017; V3n3RiX <venerix@redcorelinux.org> -openrc-0.34.8-r1.ebuild,
+  +openrc-0.34.9-r1.ebuild:
+  version bump 0.34.8 -> 0.34.9
+
+*openrc-0.34.8-r1 (19 Nov 2017)
+
+  19 Nov 2017; V3n3RiX <venerix@redcorelinux.org> -openrc-0.34.7-r1.ebuild,
+  +openrc-0.34.8-r1.ebuild:
+  version bump
+
+*openrc-0.34.7-r1 (16 Nov 2017)
+
+  16 Nov 2017; V3n3RiX <venerix@redcorelinux.org> -openrc-0.32.1-r1710.ebuild,
+  +openrc-0.34.7-r1.ebuild:
+  version bump
+
+  22 Oct 2017; V3n3RiX <venerix@redcorelinux.org>
+  +files/openrc-disable-cgroupsv2.patch, openrc-0.32.1-r1710.ebuild:
+  disable cgroups version 2 for now, untill app-admin/cgmanager properly
+  supports it
+
+*openrc-0.32.1-r1710 (15 Oct 2017)
+
+  15 Oct 2017; V3n3RiX <venerix@redcorelinux.org> -openrc-0.28-r1708.ebuild,
+  +openrc-0.32.1-r1710.ebuild:
+  version bump
+
+*openrc-0.28-r1708 (13 Aug 2017)
+
+  13 Aug 2017; V3n3RiX <venerix@redcorelinux.org> -openrc-0.28-r1706.ebuild,
+  +openrc-0.28-r1708.ebuild:
+  redcore 1708 gamma crucis : bump ebuilds
+
+*openrc-0.28-r1706 (03 Aug 2017)
+
+  03 Aug 2017; V3n3RiX <venerix@redcorelinux.org> -openrc-0.26.3-r1706.ebuild,
+  +openrc-0.28-r1706.ebuild:
+  version bump
+
+  04 Jul 2017; V3n3RiX <venerix@redcorelinux.org> openrc-0.26.3-r1706.ebuild:
+  pull openrc-settingsd as dep (Implementation of systemd's settings interface
+  (hostnamed, localed, timedated) for OpenRC)
+
+*openrc-0.26.3-r1706 (04 Jun 2017)
+
+  04 Jun 2017; V3n3RiX <venerix@redcorelinux.org>
+  +files/openrc-enable-rclogger.patch, -openrc-0.26.3-r1704.ebuild,
+  +openrc-0.26.3-r1706.ebuild:
+  enable rc_logger by default && bump sys-apps/baselayout for 1706
+
+*openrc-0.26.3-r1704 (31 May 2017)
+
+  31 May 2017; V3n3RiX <venerix@redcorelinux.org> -openrc-0.26.2-r1704.ebuild,
+  +openrc-0.26.3-r1704.ebuild:
+  openrc : bump to v0.26.3
+
+  21 May 2017; V3n3RiX <venerix@redcorelinux.org> openrc-0.26.2-r1704.ebuild:
+  make this elog pop out
+
+  21 May 2017; V3n3RiX <venerix@redcorelinux.org> +files/openrc-dkms.patch,
+  openrc-0.26.2-r1704.ebuild:
+  integrate dkms
+
+*openrc-0.26.2-r1704 (20 May 2017)
+
+  20 May 2017; V3n3RiX <venerix@redcorelinux.org> -openrc-0.24.2-r1704.ebuild,
+  +openrc-0.26.2-r1704.ebuild:
+  version bump -> 0.26.2
+
+*openrc-0.24.2-r1704 (24 Apr 2017)
+
+  24 Apr 2017; V3n3RiX <venerix@redcorelinux.org> +files/openrc.logrotate,
+  +files/start-stop-daemon.pam, +openrc-0.24.2-r1704.ebuild:
+  brand openrc
+
+  21 Apr 2017; V3n3RiX <venerix@redcorelinux.org> -openrc-99999.ebuild:
+  no longer needed
+
+*openrc-99999 (06 Mar 2016)
+
+  06 Mar 2016; V3n3RiX <venerix@rogentos.ro> +openrc-99999.ebuild:
+  suppres portage warning about missing openrc
+
+  26 Feb 2016; V3n3RiX <venerix@rogentos.ro> -Reasons,
+  -files/0001-Filter-the-systemd-cgroup-from-the-current-process.patch,
+  -files/0001-efivarfs-Support-EFI-variable-access-in-3.10-kernels.patch,
+  -files/openrc-0.5.3-disable_warns_until_migrated.patch,
+  -files/openrc-0.6.1-fix-clockskew-error-handling.patch,
+  -files/openrc-0.6.1-network-syntax.patch,
+  -files/openrc-0.8.3-ccwgroup.patch,
+  -files/openrc-0.8.3-deprecation_warning.patch,
+  -files/openrc-0.9.9.3-do-not-print-error-if-tmplog-cannot-be-read.patch,
+  -files/openrc-9999-pause.patch, -files/openrc-enable-interactive-2.patch,
+  -files/openrc-enable-interactive.patch,
+  -files/openrc-kogaion-config-2.patch, -files/openrc-kogaion-config.patch,
+  -files/openrc-netmount-fix.patch,
+  -files/openrc-protect-rcsvcdir-for-symlink.patch, -files/openrc.logrotate,
+  -files/start-stop-daemon.pam, -metadata.xml, -openrc-0.8.2-r1.ebuild,
+  -openrc-0.8.3-r1.ebuild, -openrc-0.9.8.1.ebuild, -openrc-0.9.9.3.ebuild,
+  -openrc-0.10.5.ebuild, -openrc-0.11.8.ebuild, -openrc-0.12_pre1.ebuild,
+  -openrc-0.12_pre1-r1.ebuild, -openrc-0.12_pre1-r2.ebuild,
+  -openrc-0.12.4.ebuild, -openrc-0.13.11.ebuild:
+  repo cleanup...drop old ebuilds, drop ebuilds already in portage tree
+
+  14 Apr 2015; BlackNoxis <steven.darklight@gmail.com>
+  openrc-0.12_pre1.ebuild, openrc-0.12_pre1-r1.ebuild,
+  openrc-0.12_pre1-r2.ebuild, openrc-0.12.4.ebuild, openrc-0.13.11.ebuild:
+  update to Kogaion
+
+  14 Apr 2015; BlackNoxis <steven.darklight@gmail.com> openrc-0.8.2-r1.ebuild,
+  openrc-0.8.3-r1.ebuild, openrc-0.9.8.1.ebuild, openrc-0.9.9.3.ebuild,
+  openrc-0.10.5.ebuild, openrc-0.11.8.ebuild, openrc-0.12_pre1.ebuild:
+  update ebuilds
+
+*openrc-0.13.11 (14 Apr 2015)
+
+  14 Apr 2015; BlackNoxis <steven.darklight@gmail.com>
+  +files/openrc-kogaion-config-2.patch, +files/openrc-kogaion-config.patch,
+  -files/openrc-sabayon-config-2.patch, -files/openrc-sabayon-config.patch,
+  openrc-0.8.2-r1.ebuild, openrc-0.8.3-r1.ebuild, openrc-0.9.8.1.ebuild,
+  openrc-0.9.9.3.ebuild, openrc-0.10.5.ebuild, openrc-0.11.8.ebuild,
+  openrc-0.12_pre1.ebuild, openrc-0.12_pre1-r1.ebuild,
+  openrc-0.12_pre1-r2.ebuild, openrc-0.12.4.ebuild, +openrc-0.13.11.ebuild:
+  new version
+
+*openrc-0.12.4 (15 Feb 2014)
+*openrc-0.12_pre1-r2 (15 Feb 2014)
+*openrc-0.12_pre1-r1 (15 Feb 2014)
+*openrc-0.12_pre1 (15 Feb 2014)
+*openrc-0.11.8 (15 Feb 2014)
+*openrc-0.10.5 (15 Feb 2014)
+*openrc-0.9.9.3 (15 Feb 2014)
+*openrc-0.9.8.1 (15 Feb 2014)
+*openrc-0.8.3-r1 (15 Feb 2014)
+*openrc-0.8.2-r1 (15 Feb 2014)
+
+  15 Feb 2014; BlackNoxis <steven.darklight@gmail.com> +Reasons,
+  +files/0001-Filter-the-systemd-cgroup-from-the-current-process.patch,
+  +files/0001-efivarfs-Support-EFI-variable-access-in-3.10-kernels.patch,
+  +files/openrc-0.5.3-disable_warns_until_migrated.patch,
+  +files/openrc-0.6.1-fix-clockskew-error-handling.patch,
+  +files/openrc-0.6.1-network-syntax.patch,
+  +files/openrc-0.8.3-ccwgroup.patch,
+  +files/openrc-0.8.3-deprecation_warning.patch,
+  +files/openrc-0.9.9.3-do-not-print-error-if-tmplog-cannot-be-read.patch,
+  +files/openrc-9999-pause.patch, +files/openrc-enable-interactive-2.patch,
+  +files/openrc-enable-interactive.patch, +files/openrc-netmount-fix.patch,
+  +files/openrc-protect-rcsvcdir-for-symlink.patch,
+  +files/openrc-sabayon-config-2.patch, +files/openrc-sabayon-config.patch,
+  +files/openrc.logrotate, +files/start-stop-daemon.pam, +metadata.xml,
+  +openrc-0.8.2-r1.ebuild, +openrc-0.8.3-r1.ebuild, +openrc-0.9.8.1.ebuild,
+  +openrc-0.9.9.3.ebuild, +openrc-0.10.5.ebuild, +openrc-0.11.8.ebuild,
+  +openrc-0.12_pre1.ebuild, +openrc-0.12_pre1-r1.ebuild,
+  +openrc-0.12_pre1-r2.ebuild, +openrc-0.12.4.ebuild:
+  Added ebuilds for kogaion desktop
+

@@ -1,0 +1,540 @@
+# ChangeLog for x11-drivers/nvidia-drivers
+# Copyright 1999-2021 Gentoo Foundation; Distributed under the GPL v2
+# (auto-generated from git log)
+
+*nvidia-drivers-460.39 (04 Feb 2021)
+
+  04 Feb 2021; V3n3RiX <venerix@redcorelinux.org> +files/dkms.patch,
+  +files/locale.patch, -files/nvidia-drivers-440.26-locale.patch,
+  -files/nvidia-drivers-455.45.01-dkms-kmalloc.patch,
+  files/nvidia-drm-outputclass.conf, -nvidia-drivers-455.45.01-r1.ebuild,
+  +nvidia-drivers-460.39.ebuild:
+  version bump (v460.39)
+
+*nvidia-drivers-455.45.01-r1 (04 Feb 2021)
+
+  04 Feb 2021; V3n3RiX <venerix@redcorelinux.org> -files/nvidia.conf,
+  -nvidia-drivers-455.45.01.ebuild, +nvidia-drivers-455.45.01-r1.ebuild:
+  legacy} : unbreak
+
+  01 Jan 2021; V3n3RiX <venerix@redcorelinux.org>
+  nvidia-drivers-455.45.01.ebuild:
+  fix circular dependency
+
+  01 Jan 2021; V3n3RiX <venerix@redcorelinux.org>
+  nvidia-drivers-455.45.01.ebuild:
+  fix SLOT
+
+*nvidia-drivers-455.45.01 (01 Jan 2021)
+
+  01 Jan 2021; V3n3RiX <venerix@redcorelinux.org> +files/nouveau.conf,
+  -files/nvidia-drivers-440.82-conf.patch,
+  +files/nvidia-drivers-455.45.01-dkms-kmalloc.patch, files/nvidia.conf,
+  -nvidia-drivers-440.82.ebuild, +nvidia-drivers-455.45.01.ebuild:
+  sys-kernel/nvidia-drivers-dkms && x11-drivers/nvidia-drivers &&
+  x11-misc/nvidia-settings : version bump
+
+*nvidia-drivers-440.82 (17 May 2020)
+
+  17 May 2020; V3n3RiX <venerix@redcorelinux.org>
+  -files/nvidia-drivers-440.64-conf.patch,
+  +files/nvidia-drivers-440.82-conf.patch, -nvidia-drivers-440.64-r1.ebuild,
+  +nvidia-drivers-440.82.ebuild:
+  version bump (v440.82)
+
+*nvidia-drivers-440.64-r1 (04 May 2020)
+
+  04 May 2020; V3n3RiX <venerix@redcorelinux.org>
+  +nvidia-drivers-440.64-r1.ebuild:
+  fix eselect-opencl conflict
+
+  04 May 2020; V3n3RiX <venerix@redcorelinux.org>
+  -nvidia-drivers-440.64.ebuild:
+  remanifest
+
+*nvidia-drivers-440.64 (07 Mar 2020)
+
+  07 Mar 2020; V3n3RiX <venerix@redcorelinux.org>
+  -files/nvidia-drivers-440.44-conf.patch,
+  +files/nvidia-drivers-440.64-conf.patch, -nvidia-drivers-440.44-r1.ebuild,
+  +nvidia-drivers-440.64.ebuild:
+  nvidia drivers 440xx : version bump (v440.64)
+
+*nvidia-drivers-440.44-r1 (19 Jan 2020)
+
+  19 Jan 2020; V3n3RiX <venerix@redcorelinux.org>
+  -nvidia-drivers-440.44.ebuild, +nvidia-drivers-440.44-r1.ebuild:
+  x11-drivers/nvidia-{legacy,}-drivers : remove SUBSLOT
+
+  15 Jan 2020; V3n3RiX <venerix@redcorelinux.org>
+  nvidia-drivers-440.44.ebuild:
+  don't allow nvidia && nvidia-legacy to coexist
+
+  15 Jan 2020; V3n3RiX <venerix@redcorelinux.org> -files/kernel-4.16.patch,
+  -files/nvidia-drivers-390.132-conf.patch, -nvidia-drivers-390.132.ebuild:
+  move : x11-drivers/nvidia-drivers:0/390132 -> x11-drivers/nvidia-legacy-
+  drivers
+
+  05 Jan 2020; V3n3RiX <venerix@redcorelinux.org>
+  nvidia-drivers-440.44.ebuild:
+  ooops
+
+  05 Jan 2020; V3n3RiX <venerix@redcorelinux.org>
+  nvidia-drivers-390.132.ebuild, nvidia-drivers-440.44.ebuild:
+  trigger initramfs rebuild, prevent nouveau from loading early
+
+  05 Jan 2020; V3n3RiX <venerix@redcorelinux.org> files/nvidia.conf,
+  nvidia-drivers-390.132.ebuild, nvidia-drivers-440.44.ebuild:
+  make sure we nuke nouveau
+
+  04 Jan 2020; V3n3RiX <venerix@redcorelinux.org> +files/nvidia.conf,
+  nvidia-drivers-390.132.ebuild, nvidia-drivers-440.44.ebuild:
+  blacklist nouveau on installation
+
+  04 Jan 2020; V3n3RiX <venerix@redcorelinux.org>
+  -files/nvidia-drivers-390.116-conf.patch,
+  -files/nvidia-drivers-430.34-conf.patch, -nvidia-drivers-390.116.ebuild,
+  -nvidia-drivers-430.34.ebuild:
+  x11-misc/nvidia-settings && sys-kernel/nvidia-drivers-dkms : drop old
+
+*nvidia-drivers-390.132 (04 Jan 2020)
+
+  04 Jan 2020; V3n3RiX <venerix@redcorelinux.org>
+  +files/nvidia-drivers-390.132-conf.patch,
+  +files/nvidia-drm-outputclass.conf, +nvidia-drivers-390.132.ebuild,
+  nvidia-drivers-440.44.ebuild:
+  x11-misc/nvidia-settings && sys-kernel/nvidia-drivers-dkms : version bump,
+  enable libglvnd (legacy 390)
+
+*nvidia-drivers-440.44 (04 Jan 2020)
+
+  04 Jan 2020; V3n3RiX <venerix@redcorelinux.org>
+  +files/nvidia-drivers-440.26-locale.patch,
+  +files/nvidia-drivers-440.44-conf.patch, +nvidia-drivers-440.44.ebuild:
+  x11-misc/nvidia-settings && sys-kernel/nvidia-drivers-dkms : version bump,
+  enable libglvnd
+
+  30 Jul 2019; V3n3RiX <venerix@redcorelinux.org>
+  -files/nvidia-drivers-430.26-conf.patch,
+  +files/nvidia-drivers-430.34-conf.patch:
+  fix patch name
+
+*nvidia-drivers-430.34 (20 Jul 2019)
+
+  20 Jul 2019; V3n3RiX <venerix@redcorelinux.org>
+  -nvidia-drivers-430.26.ebuild, +nvidia-drivers-430.34.ebuild:
+  version bump
+
+*nvidia-drivers-430.26 (22 Jun 2019)
+
+  22 Jun 2019; V3n3RiX <venerix@redcorelinux.org>
+  +files/nvidia-drivers-430.26-conf.patch, +nvidia-drivers-430.26.ebuild:
+  add new slotted ebuild
+
+*nvidia-drivers-390.116 (22 Jun 2019)
+
+  22 Jun 2019; V3n3RiX <venerix@redcorelinux.org>
+  -files/390.87-ipmi_user.patch, -files/390.87-vmf_insert_pfn.patch,
+  -files/kernel-4.19.patch, +files/nvidia-drivers-390.116-conf.patch,
+  -files/nvidia-drivers-390.87-conf.patch, -nvidia-drivers-390.87-r1.ebuild,
+  +nvidia-drivers-390.116.ebuild:
+  version bump
+
+  10 Feb 2019; V3n3RiX <venerix@redcorelinux.org>
+  files/390.87-ipmi_user.patch, files/390.87-vmf_insert_pfn.patch,
+  files/kernel-4.19.patch:
+  x11-drivers/nvidia && sys-kernel/nvidia-drivers-dkms : unbreak older kernels
+
+*nvidia-drivers-390.87-r1 (10 Feb 2019)
+
+  10 Feb 2019; V3n3RiX <venerix@redcorelinux.org>
+  +files/390.87-ipmi_user.patch, +files/390.87-vmf_insert_pfn.patch,
+  +files/kernel-4.16.patch, +files/kernel-4.19.patch,
+  +files/nvidia-drivers-390.87-conf.patch, -nvidia-drivers-390.87.ebuild,
+  +nvidia-drivers-390.87-r1.ebuild:
+  apply the same patches as dkms package; sys-kernel/nvidia-drivers-dkms :
+  upgrade to EAPI=6
+
+*nvidia-drivers-390.87 (10 Feb 2019)
+
+  10 Feb 2019; V3n3RiX <venerix@redcorelinux.org>
+  -nvidia-drivers-390.77-r1.ebuild, +nvidia-drivers-390.87.ebuild:
+  version bump
+
+*nvidia-drivers-390.77-r1 (27 Oct 2018)
+
+  27 Oct 2018; V3n3RiX <venerix@redcorelinux.org>
+  -nvidia-drivers-390.77.ebuild, +nvidia-drivers-390.77-r1.ebuild:
+  revision bump
+
+*nvidia-drivers-390.77 (26 Aug 2018)
+
+  26 Aug 2018; V3n3RiX <venerix@redcorelinux.org>
+  -nvidia-drivers-390.59.ebuild, +nvidia-drivers-390.77.ebuild:
+  version bump
+
+*nvidia-drivers-390.59 (23 May 2018)
+
+  23 May 2018; V3n3RiX <venerix@redcorelinux.org>
+  -nvidia-drivers-390.48-r1.ebuild, +nvidia-drivers-390.59.ebuild:
+  version bump
+
+*nvidia-drivers-390.48-r1 (12 Apr 2018)
+
+  12 Apr 2018; V3n3RiX <venerix@redcorelinux.org>
+  -nvidia-drivers-390.48.ebuild, +nvidia-drivers-390.48-r1.ebuild:
+  drop virtual/linux-sources dep
+
+*nvidia-drivers-390.48 (09 Apr 2018)
+
+  09 Apr 2018; V3n3RiX <venerix@redcorelinux.org>
+  -nvidia-drivers-384.111-r2.ebuild, +nvidia-drivers-390.48.ebuild:
+  version bump
+
+  06 Jan 2018; V3n3RiX <venerix@redcorelinux.org>
+  nvidia-drivers-384.111-r2.ebuild:
+  prepare ebuild for future splitouts (nvidia-xconfig, nvidia-persistenced,
+  nvidia-modprobe)
+
+  06 Jan 2018; V3n3RiX <venerix@redcorelinux.org>
+  nvidia-drivers-384.111-r2.ebuild:
+  avoid collisions, merge nvidia-settings after nvidia-drivers
+
+*nvidia-drivers-384.111-r2 (06 Jan 2018)
+
+  06 Jan 2018; V3n3RiX <venerix@redcorelinux.org>
+  -files/95-nvidia-settings-r1, -files/nvidia-settings.desktop,
+  -nvidia-drivers-384.111-r1.ebuild, +nvidia-drivers-384.111-r2.ebuild:
+  revision bump
+
+  06 Jan 2018; V3n3RiX <venerix@redcorelinux.org>
+  nvidia-drivers-384.111-r1.ebuild:
+  sometimes I hate EAPI 6
+
+  06 Jan 2018; V3n3RiX <venerix@redcorelinux.org>
+  nvidia-drivers-384.111-r1.ebuild:
+  some more cleanup
+
+*nvidia-drivers-384.111-r1 (06 Jan 2018)
+
+  06 Jan 2018; V3n3RiX <venerix@redcorelinux.org>
+  -nvidia-drivers-384.111.ebuild, +nvidia-drivers-384.111-r1.ebuild:
+  cleanup
+
+  06 Jan 2018; V3n3RiX <venerix@redcorelinux.org>
+  nvidia-drivers-384.111.ebuild:
+  fix ebuild
+
+*nvidia-drivers-384.111 (06 Jan 2018)
+
+  06 Jan 2018; V3n3RiX <venerix@redcorelinux.org>
+  -nvidia-drivers-304.137-r1.ebuild, -nvidia-drivers-384.98-r1.ebuild,
+  +nvidia-drivers-384.111.ebuild:
+  version bump
+
+*nvidia-drivers-384.98-r1 (22 Dec 2017)
+*nvidia-drivers-304.137-r1 (22 Dec 2017)
+
+  22 Dec 2017; V3n3RiX <venerix@redcorelinux.org>
+  +nvidia-drivers-304.137-r1.ebuild, -nvidia-drivers-304.137-r2.ebuild,
+  +nvidia-drivers-384.98-r1.ebuild, -nvidia-drivers-384.98-r2.ebuild:
+  Revert "x11-drivers/nvidia-drivers : drop SUBSLOT operator"
+
+  This reverts commit c9c3ad771270d61da929097f50918c8fecbe6927.
+
+*nvidia-drivers-384.98-r2 (22 Dec 2017)
+*nvidia-drivers-304.137-r2 (22 Dec 2017)
+
+  22 Dec 2017; V3n3RiX <venerix@redcorelinux.org>
+  -nvidia-drivers-304.137-r1.ebuild, +nvidia-drivers-304.137-r2.ebuild,
+  -nvidia-drivers-384.98-r1.ebuild, +nvidia-drivers-384.98-r2.ebuild:
+  drop SUBSLOT operator
+
+*nvidia-drivers-304.137-r1 (22 Dec 2017)
+
+  22 Dec 2017; V3n3RiX <venerix@redcorelinux.org>
+  -nvidia-drivers-304.137.ebuild, +nvidia-drivers-304.137-r1.ebuild:
+  convert v304.137 legacy to dkms
+
+*nvidia-drivers-304.137 (22 Dec 2017)
+
+  22 Dec 2017; V3n3RiX <venerix@redcorelinux.org>
+  +nvidia-drivers-304.137.ebuild:
+  import v304.137 from portage tree
+
+*nvidia-drivers-384.98-r1 (21 Dec 2017)
+
+  21 Dec 2017; V3n3RiX <venerix@redcorelinux.org>
+  -nvidia-drivers-384.90-r1710.ebuild, +nvidia-drivers-384.98-r1.ebuild:
+  version bump
+
+*nvidia-drivers-384.90-r1710 (15 Oct 2017)
+
+  15 Oct 2017; V3n3RiX <venerix@redcorelinux.org>
+  -nvidia-drivers-381.22-r1708.ebuild, +nvidia-drivers-384.90-r1710.ebuild:
+  version bump
+
+*nvidia-drivers-381.22-r1708 (13 Aug 2017)
+
+  13 Aug 2017; V3n3RiX <venerix@redcorelinux.org>
+  -nvidia-drivers-381.22-r1706.ebuild, +nvidia-drivers-381.22-r1708.ebuild:
+  redcore 1708 gamma crucis : bump ebuilds
+
+*nvidia-drivers-381.22-r1706 (22 Jul 2017)
+
+  22 Jul 2017; V3n3RiX <venerix@redcorelinux.org>
+  -nvidia-drivers-381.22-r4.ebuild, +nvidia-drivers-381.22-r1706.ebuild:
+  fix possible circulare dep
+
+*nvidia-drivers-381.22-r4 (01 Jul 2017)
+
+  01 Jul 2017; V3n3RiX <venerix@redcorelinux.org>
+  +files/nvidia-settings.desktop, -nvidia-drivers-381.22-r3.ebuild,
+  +nvidia-drivers-381.22-r4.ebuild:
+  create nvidia-settings menu item
+
+*nvidia-drivers-381.22-r3 (01 Jul 2017)
+
+  01 Jul 2017; V3n3RiX <venerix@redcorelinux.org>
+  -nvidia-drivers-381.22-r1.ebuild, +nvidia-drivers-381.22-r3.ebuild:
+  trigger rebuild
+
+*nvidia-drivers-381.22-r1 (01 Jul 2017)
+
+  01 Jul 2017; V3n3RiX <venerix@redcorelinux.org> -files/nvidia-169.07,
+  -files/nvidia-rmmod.conf, -files/nvidia-udev.sh-r1, -files/nvidia.udev-rule,
+  +nvidia-drivers-381.22-r1.ebuild, -nvidia-drivers-381.22-r2.ebuild:
+  Revert "x11-drivers/nvidia-drivers : insert modprobe && udev rules when
+  using dkms"
+
+  This reverts commit b6cfe8d79d9d9b75fef613e47e7ebfbeb3ea0575.
+
+*nvidia-drivers-381.22-r2 (01 Jul 2017)
+
+  01 Jul 2017; V3n3RiX <venerix@redcorelinux.org> +files/nvidia-169.07,
+  +files/nvidia-rmmod.conf, +files/nvidia-udev.sh-r1, +files/nvidia.udev-rule,
+  -nvidia-drivers-381.22-r1.ebuild, +nvidia-drivers-381.22-r2.ebuild:
+  insert modprobe && udev rules when using dkms
+
+*nvidia-drivers-381.22-r1 (01 Jul 2017)
+
+  01 Jul 2017; V3n3RiX <venerix@redcorelinux.org> -files/95-nvidia-settings,
+  -files/nvidia-169.07, -files/nvidia-drivers-375.26-profiles-rc.patch,
+  files/nvidia-persistenced.init, -files/nvidia-rmmod.conf,
+  -files/nvidia-settings.desktop, files/nvidia-smi.init,
+  -files/nvidia-udev.sh, -files/nvidia-udev.sh-r1, -files/nvidia.udev-rule,
+  -nvidia-drivers-375.26.ebuild, +nvidia-drivers-381.22-r1.ebuild:
+  bump nvidia drivers to 381.22
+
+  27 Dec 2016; V3n3RiX <venerix@redcorelinux.org>
+  -files/nvidia-drivers-370.28-profiles-rc.patch,
+  -nvidia-drivers-370.28-r1.ebuild:
+  remove old nvidia driver
+
+  26 Dec 2016; V3n3RiX <venerix@redcorelinux.org>
+  +files/nvidia-settings.desktop:
+  fix nvidia-settings not showing in the menu
+
+  26 Dec 2016; V3n3RiX <venerix@redcorelinux.org>
+  nvidia-drivers-375.26.ebuild:
+  fix slot
+
+*nvidia-drivers-375.26 (26 Dec 2016)
+
+  26 Dec 2016; V3n3RiX <venerix@redcorelinux.org>
+  +files/nvidia-drivers-375.26-profiles-rc.patch,
+  +nvidia-drivers-375.26.ebuild:
+  bump nvidia-drivers && nvidia-drivers-dkms
+
+  23 Oct 2016; V3n3RiX <venerix@rogentos.ro> nvidia-drivers-370.28-r1.ebuild:
+  fix ebuild
+
+*nvidia-drivers-370.28-r1 (23 Oct 2016)
+
+  23 Oct 2016; V3n3RiX <venerix@rogentos.ro> +files/95-nvidia-settings,
+  +files/95-nvidia-settings-r1, +files/nvidia-169.07,
+  +files/nvidia-drivers-370.28-profiles-rc.patch,
+  +files/nvidia-persistenced.conf, +files/nvidia-persistenced.init,
+  +files/nvidia-rmmod.conf, +files/nvidia-smi.init, +files/nvidia-udev.sh,
+  +files/nvidia-udev.sh-r1, +files/nvidia.udev-rule,
+  +nvidia-drivers-370.28-r1.ebuild:
+  nvidia-drivers-dkms :)
+
+  04 Oct 2015; V3n3RiX <venerix@rogentos.ro> -files/10nvidia,
+  -files/256.35-unified-arch.patch, -files/eblits/donvidia.eblit,
+  -files/eblits/mtrr_check.eblit, -files/eblits/src_install-libs.eblit,
+  -files/eblits/want_tls.eblit, -files/libGL.la-r2,
+  -files/make-use-of-the-new-uapi-framework.patch, -files/nvidia,
+  -files/nvidia-169.07, -files/nvidia-drivers-173-3.10.patch,
+  -files/nvidia-drivers-173-3.13.patch, -files/nvidia-drivers-173-3.14.patch,
+  -files/nvidia-drivers-260.19.44-2.6.39.patch,
+  -files/nvidia-drivers-290.10-3.2.8+.patch, -files/nvidia-drivers-3.13.patch,
+  -files/nvidia-drivers-3.14.patch, -files/nvidia-drivers-3.19.patch,
+  -files/nvidia-drivers-304-3.10.patch, -files/nvidia-drivers-304-3.13.patch,
+  -files/nvidia-drivers-313.18-3.8.patch,
+  -files/nvidia-drivers-319.23-3.10.patch,
+  -files/nvidia-drivers-331.13-pax-usercopy.patch,
+  -files/nvidia-drivers-346.16-pax-constify.patch,
+  -files/nvidia-drivers-346.16-pax-usercopy.patch,
+  -files/nvidia-drivers-96.43.19-2.6.39.patch,
+  -files/nvidia-drivers-pax-const.patch,
+  -files/nvidia-drivers-pax-usercopy.patch,
+  -files/replace-VM_RESERVED-with-VM_DONTEXPAND-and-VM_DONTDU.patch,
+  -metadata.xml, -nvidia-drivers-173.14.39.ebuild,
+  -nvidia-drivers-304.125.ebuild, -nvidia-drivers-331.67.ebuild,
+  -nvidia-drivers-337.25.ebuild, -nvidia-drivers-340.32.ebuild,
+  -nvidia-drivers-340.46.ebuild, -nvidia-drivers-340.58.ebuild,
+  -nvidia-drivers-340.76.ebuild, -nvidia-drivers-343.36.ebuild,
+  -nvidia-drivers-346.35.ebuild, -nvidia-drivers-346.59.ebuild:
+  drop splitted x11 drivers, we go gentoo way
+
+  24 Apr 2015; BlackNoxis <steven.darklight@gmail.com>
+  nvidia-drivers-346.35.ebuild:
+  upgrade drivers with a patch
+
+*nvidia-drivers-346.59 (24 Apr 2015)
+
+  24 Apr 2015; BlackNoxis <steven.darklight@gmail.com>
+  +nvidia-drivers-346.59.ebuild:
+  version bump
+
+  22 Feb 2015; BlackNoxis <steven.darklight@gmail.com>
+  +files/nvidia-drivers-3.19.patch, nvidia-drivers-304.125.ebuild:
+  Added x11-drivers/*
+
+  28 Jan 2015; BlackNoxis <steven.darklight@gmail.com>
+  -nvidia-drivers-304.123.ebuild:
+  Cleaning up after mehself
+
+*nvidia-drivers-346.35 (28 Jan 2015)
+*nvidia-drivers-340.76 (28 Jan 2015)
+*nvidia-drivers-304.125 (28 Jan 2015)
+
+  28 Jan 2015; BlackNoxis <steven.darklight@gmail.com>
+  +files/nvidia-drivers-346.16-pax-constify.patch,
+  +files/nvidia-drivers-346.16-pax-usercopy.patch,
+  +nvidia-drivers-304.125.ebuild, +nvidia-drivers-340.76.ebuild,
+  +nvidia-drivers-346.35.ebuild:
+  Added new nvidia drivers, changed old
+
+*nvidia-drivers-343.36 (19 Jan 2015)
+
+  19 Jan 2015; BlackNoxis <steven.darklight@gmail.com>
+  +nvidia-drivers-343.36.ebuild:
+  Added new nvidia-drivers
+
+*nvidia-drivers-340.58 (16 Jan 2015)
+
+  16 Jan 2015; BlackNoxis <steven.darklight@gmail.com>
+  +nvidia-drivers-340.58.ebuild:
+  Added 340.58 nvidia-drivers
+
+*nvidia-drivers-340.46 (25 Nov 2014)
+*nvidia-drivers-340.32 (25 Nov 2014)
+*nvidia-drivers-337.25 (25 Nov 2014)
+*nvidia-drivers-331.67 (25 Nov 2014)
+*nvidia-drivers-304.123 (25 Nov 2014)
+*nvidia-drivers-173.14.39 (25 Nov 2014)
+
+  25 Nov 2014; BlackNoxis <steven.darklight@gmail.com>
+  +nvidia-drivers-173.14.39.ebuild, +nvidia-drivers-304.123.ebuild,
+  +nvidia-drivers-331.67.ebuild, +nvidia-drivers-337.25.ebuild,
+  +nvidia-drivers-340.32.ebuild, +nvidia-drivers-340.46.ebuild:
+  Upgraded nvidia drivers
+
+  30 Oct 2014; BlackNoxis <steven.darklight@gmail.com>
+  -nvidia-drivers-96.43.20.ebuild, -nvidia-drivers-173.14.31.ebuild,
+  -nvidia-drivers-173.14.34.ebuild, -nvidia-drivers-173.14.35.ebuild,
+  -nvidia-drivers-173.14.39.ebuild, -nvidia-drivers-275.09.07.ebuild,
+  -nvidia-drivers-280.13.ebuild, -nvidia-drivers-285.05.09.ebuild,
+  -nvidia-drivers-290.10.ebuild, -nvidia-drivers-295.20.ebuild,
+  -nvidia-drivers-295.33.ebuild, -nvidia-drivers-295.40.ebuild,
+  -nvidia-drivers-295.49.ebuild, -nvidia-drivers-295.53.ebuild,
+  -nvidia-drivers-295.59.ebuild, -nvidia-drivers-302.17.ebuild,
+  -nvidia-drivers-304.22.ebuild, -nvidia-drivers-304.37.ebuild,
+  -nvidia-drivers-304.64.ebuild, -nvidia-drivers-304.88.ebuild,
+  -nvidia-drivers-304.119.ebuild, -nvidia-drivers-304.121.ebuild,
+  -nvidia-drivers-304.123.ebuild, -nvidia-drivers-310.19.ebuild,
+  -nvidia-drivers-313.18.ebuild, -nvidia-drivers-313.30.ebuild,
+  -nvidia-drivers-325.15.ebuild, -nvidia-drivers-331.49.ebuild,
+  -nvidia-drivers-331.67.ebuild, -nvidia-drivers-337.19.ebuild,
+  -nvidia-drivers-337.25.ebuild, -nvidia-drivers-340.24.ebuild,
+  -nvidia-drivers-340.32.ebuild:
+  Deleted all nvidia-drivers until further refresh of ebuilds
+
+*nvidia-drivers-340.32 (27 Oct 2014)
+*nvidia-drivers-340.24 (27 Oct 2014)
+*nvidia-drivers-337.25 (27 Oct 2014)
+*nvidia-drivers-337.19 (27 Oct 2014)
+*nvidia-drivers-331.67 (27 Oct 2014)
+*nvidia-drivers-331.49 (27 Oct 2014)
+*nvidia-drivers-304.123 (27 Oct 2014)
+*nvidia-drivers-304.121 (27 Oct 2014)
+*nvidia-drivers-304.119 (27 Oct 2014)
+*nvidia-drivers-173.14.39 (27 Oct 2014)
+
+  27 Oct 2014; BlackNoxis <steven.darklight@gmail.com>
+  +files/nvidia-drivers-173-3.13.patch, +files/nvidia-drivers-173-3.14.patch,
+  +files/nvidia-drivers-3.13.patch, +files/nvidia-drivers-3.14.patch,
+  +files/nvidia-drivers-304-3.13.patch,
+  +files/nvidia-drivers-331.13-pax-usercopy.patch,
+  +nvidia-drivers-173.14.39.ebuild, +nvidia-drivers-304.119.ebuild,
+  +nvidia-drivers-304.121.ebuild, +nvidia-drivers-304.123.ebuild,
+  +nvidia-drivers-331.49.ebuild, +nvidia-drivers-331.67.ebuild,
+  +nvidia-drivers-337.19.ebuild, +nvidia-drivers-337.25.ebuild,
+  +nvidia-drivers-340.24.ebuild, +nvidia-drivers-340.32.ebuild:
+  Incoming! Moving Rogento.git to kogaion-desktop. Finally
+
+*nvidia-drivers-325.15 (15 Feb 2014)
+*nvidia-drivers-313.30 (15 Feb 2014)
+*nvidia-drivers-313.18 (15 Feb 2014)
+*nvidia-drivers-310.19 (15 Feb 2014)
+*nvidia-drivers-304.88 (15 Feb 2014)
+*nvidia-drivers-304.64 (15 Feb 2014)
+*nvidia-drivers-304.37 (15 Feb 2014)
+*nvidia-drivers-304.22 (15 Feb 2014)
+*nvidia-drivers-302.17 (15 Feb 2014)
+*nvidia-drivers-295.59 (15 Feb 2014)
+*nvidia-drivers-295.53 (15 Feb 2014)
+*nvidia-drivers-295.49 (15 Feb 2014)
+*nvidia-drivers-295.40 (15 Feb 2014)
+*nvidia-drivers-295.33 (15 Feb 2014)
+*nvidia-drivers-295.20 (15 Feb 2014)
+*nvidia-drivers-290.10 (15 Feb 2014)
+*nvidia-drivers-285.05.09 (15 Feb 2014)
+*nvidia-drivers-280.13 (15 Feb 2014)
+*nvidia-drivers-275.09.07 (15 Feb 2014)
+*nvidia-drivers-173.14.35 (15 Feb 2014)
+*nvidia-drivers-173.14.34 (15 Feb 2014)
+*nvidia-drivers-173.14.31 (15 Feb 2014)
+*nvidia-drivers-96.43.20 (15 Feb 2014)
+
+  15 Feb 2014; BlackNoxis <steven.darklight@gmail.com> +files/10nvidia,
+  +files/256.35-unified-arch.patch, +files/eblits/donvidia.eblit,
+  +files/eblits/mtrr_check.eblit, +files/eblits/src_install-libs.eblit,
+  +files/eblits/want_tls.eblit, +files/libGL.la-r2,
+  +files/make-use-of-the-new-uapi-framework.patch, +files/nvidia,
+  +files/nvidia-169.07, +files/nvidia-drivers-173-3.10.patch,
+  +files/nvidia-drivers-260.19.44-2.6.39.patch,
+  +files/nvidia-drivers-290.10-3.2.8+.patch,
+  +files/nvidia-drivers-304-3.10.patch,
+  +files/nvidia-drivers-313.18-3.8.patch,
+  +files/nvidia-drivers-319.23-3.10.patch,
+  +files/nvidia-drivers-96.43.19-2.6.39.patch,
+  +files/nvidia-drivers-pax-const.patch,
+  +files/nvidia-drivers-pax-usercopy.patch,
+  +files/replace-VM_RESERVED-with-VM_DONTEXPAND-and-VM_DONTDU.patch,
+  +metadata.xml, +nvidia-drivers-96.43.20.ebuild,
+  +nvidia-drivers-173.14.31.ebuild, +nvidia-drivers-173.14.34.ebuild,
+  +nvidia-drivers-173.14.35.ebuild, +nvidia-drivers-275.09.07.ebuild,
+  +nvidia-drivers-280.13.ebuild, +nvidia-drivers-285.05.09.ebuild,
+  +nvidia-drivers-290.10.ebuild, +nvidia-drivers-295.20.ebuild,
+  +nvidia-drivers-295.33.ebuild, +nvidia-drivers-295.40.ebuild,
+  +nvidia-drivers-295.49.ebuild, +nvidia-drivers-295.53.ebuild,
+  +nvidia-drivers-295.59.ebuild, +nvidia-drivers-302.17.ebuild,
+  +nvidia-drivers-304.22.ebuild, +nvidia-drivers-304.37.ebuild,
+  +nvidia-drivers-304.64.ebuild, +nvidia-drivers-304.88.ebuild,
+  +nvidia-drivers-310.19.ebuild, +nvidia-drivers-313.18.ebuild,
+  +nvidia-drivers-313.30.ebuild, +nvidia-drivers-325.15.ebuild:
+  Added ebuilds for kogaion desktop
+

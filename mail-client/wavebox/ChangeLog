@@ -1,0 +1,102 @@
+# ChangeLog for mail-client/wavebox
+# Copyright 1999-2021 Gentoo Foundation; Distributed under the GPL v2
+# (auto-generated from git log)
+
+*wavebox-10.0.389-r1 (03 Jan 2021)
+
+  03 Jan 2021; V3n3RiX <venerix@redcorelinux.org> -wavebox-10.0.389.ebuild,
+  +wavebox-10.0.389-r1.ebuild:
+  mail-client/wavemox : enable suid sandbox if requested
+
+*wavebox-10.0.389 (15 Dec 2020)
+
+  15 Dec 2020; V3n3RiX <venerix@redcorelinux.org> -wavebox-10.0.283.ebuild,
+  +wavebox-10.0.389.ebuild:
+  version bump
+
+*wavebox-10.0.283 (07 Oct 2020)
+
+  07 Oct 2020; V3n3RiX <venerix@redcorelinux.org> files/wavebox.desktop,
+  -wavebox-4.11.4.ebuild, +wavebox-10.0.283.ebuild:
+  version bump
+
+*wavebox-4.11.4 (22 Nov 2019)
+
+  22 Nov 2019; V3n3RiX <venerix@redcorelinux.org> -wavebox-4.10.1.ebuild,
+  +wavebox-4.11.4.ebuild:
+  version bump
+
+*wavebox-4.10.1 (22 Jun 2019)
+
+  22 Jun 2019; V3n3RiX <venerix@redcorelinux.org> -wavebox-4.9.3.ebuild,
+  +wavebox-4.10.1.ebuild:
+  version bump
+
+*wavebox-4.9.3 (07 Apr 2019)
+
+  07 Apr 2019; V3n3RiX <venerix@redcorelinux.org> -wavebox-4.8.4.ebuild,
+  +wavebox-4.9.3.ebuild:
+  version bump
+
+*wavebox-4.8.4 (25 Mar 2019)
+
+  25 Mar 2019; V3n3RiX <venerix@redcorelinux.org> -wavebox-4.7.3.ebuild,
+  +wavebox-4.8.4.ebuild:
+  version bump
+
+*wavebox-4.7.3 (20 Feb 2019)
+
+  20 Feb 2019; V3n3RiX <venerix@redcorelinux.org> -wavebox-4.5.10.ebuild,
+  +wavebox-4.7.3.ebuild:
+  version bump
+
+*wavebox-4.5.10 (08 Feb 2019)
+
+  08 Feb 2019; V3n3RiX <venerix@redcorelinux.org> -wavebox-4.5.9.ebuild,
+  +wavebox-4.5.10.ebuild:
+  version bump
+
+*wavebox-4.5.9 (31 Dec 2018)
+
+  31 Dec 2018; V3n3RiX <venerix@redcorelinux.org> -wavebox-4.4.0.ebuild,
+  +wavebox-4.5.9.ebuild:
+  version bump
+
+*wavebox-4.4.0 (27 Oct 2018)
+
+  27 Oct 2018; V3n3RiX <venerix@redcorelinux.org> -wavebox-4.3.0.ebuild,
+  +wavebox-4.4.0.ebuild:
+  version bump
+
+*wavebox-4.3.0 (08 Oct 2018)
+
+  08 Oct 2018; V3n3RiX <venerix@redcorelinux.org> -wavebox-4.0.0.ebuild,
+  +wavebox-4.3.0.ebuild:
+  version bump
+
+*wavebox-4.0.0 (14 Sep 2018)
+
+  14 Sep 2018; V3n3RiX <venerix@redcorelinux.org> -wavebox-3.14.6-r1.ebuild,
+  +wavebox-4.0.0.ebuild:
+  version bump
+
+*wavebox-3.14.6-r1 (16 Aug 2018)
+
+  16 Aug 2018; V3n3RiX <venerix@redcorelinux.org> files/wavebox.desktop,
+  -wavebox-3.14.6.ebuild, +wavebox-3.14.6-r1.ebuild:
+  use proper icon
+
+*wavebox-3.14.6 (16 Aug 2018)
+
+  16 Aug 2018; V3n3RiX <venerix@redcorelinux.org> +files/wavebox.desktop,
+  +wavebox-3.14.6.ebuild:
+  mail-client/wmail : drop && mail-client/wavebox : new package
+
+  17 Sep 2017; V3n3RiX <venerix@redcorelinux.org> -wavebox-3.1.12.ebuild:
+  make mrproper
+
+*wavebox-3.1.12 (23 Jul 2017)
+
+  23 Jul 2017; V3n3RiX <venerix@redcorelinux.org> +wavebox-3.1.12.ebuild:
+  new package
+

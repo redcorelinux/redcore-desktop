@@ -1,0 +1,10 @@
+# ChangeLog for sys-kernel/dracutcfg
+# Copyright 1999-2021 Gentoo Foundation; Distributed under the GPL v2
+# (auto-generated from git log)
+
+*dracutcfg-1337 (28 Nov 2020)
+
+  28 Nov 2020; V3n3RiX <venerix@redcorelinux.org> +dracutcfg-1337.ebuild,
+  +files/redcore-dracut.conf:
+  move : sys-kernel/dracut-config-redcore => sys-kernel/dracutcfg
+

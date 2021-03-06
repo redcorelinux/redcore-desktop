@@ -1,0 +1,96 @@
+# ChangeLog for sys-boot/os-prober
+# Copyright 1999-2021 Gentoo Foundation; Distributed under the GPL v2
+# (auto-generated from git log)
+
+*os-prober-1.77-r10 (28 Jan 2021)
+
+  28 Jan 2021; V3n3RiX <venerix@redcorelinux.org>
+  +files/Improve-btrfs-handling-on-os-probing-for-grub2.patch,
+  +files/os-prober-05efi-blkid.patch,
+  +files/os-prober-1.49-fix-grub2.cfg-parsing.patch,
+  +files/os-prober-1.49-grub2-mount.patch,
+  -files/os-prober-1.76-exherbo.patch,
+  +files/os-prober-40grub-check-grub2.patch,
+  +files/os-prober-EFI-openSUSEfy.patch, +files/os-prober-SUSE.patch,
+  +files/os-prober-accept-ESP-on-IMSM.patch,
+  +files/os-prober-btrfs-absolute-subvol.patch,
+  +files/os-prober-btrfs-always-detect-default.patch,
+  +files/os-prober-btrfs-multiple-device.patch,
+  +files/os-prober-btrfs-snapshot-detection.patch,
+  +files/os-prober-btrfsfix.patch,
+  +files/os-prober-dont-load-all-fs-module-and-dont-test-mount.patch,
+  +files/os-prober-fix-btrfs-subvol-mounted-tests.patch,
+  +files/os-prober-linux-distro-avoid-expensive-ld-file-test.patch,
+  +files/os-prober-linux-distro-parse-os-release.patch,
+  +files/os-prober-linux-secure-boot.patch,
+  +files/os-prober-make-btrfsprogs-optional.patch,
+  +files/os-prober-multiple-initrd.patch, +files/os-prober-newnsdirfix.patch,
+  +files/os-prober-probe-MD-devices.patch, files/os-prober-redcore.patch,
+  +files/os-prober-skip-part-on-multipath.patch,
+  +files/os-prober-use-tmp-over-var-lib-for-transient-files.patch,
+  +os-prober-1.77-r10.ebuild, -os-prober-1.77-r314.ebuild:
+  shamelessly take all the patches from openSUSE Factory to make it work
+
+*os-prober-1.77-r314 (30 Jun 2019)
+
+  30 Jun 2019; V3n3RiX <venerix@redcorelinux.org> -os-prober-1.76-r2.ebuild,
+  +os-prober-1.77-r314.ebuild:
+  version bump
+
+*os-prober-1.76-r2 (15 May 2018)
+
+  15 May 2018; V3n3RiX <venerix@redcorelinux.org>
+  +files/os-prober-1.76-exherbo.patch, -os-prober-1.71-r1.ebuild,
+  +os-prober-1.76-r2.ebuild:
+  version bump
+
+*os-prober-1.71-r1 (18 Dec 2017)
+
+  18 Dec 2017; V3n3RiX <venerix@redcorelinux.org> +os-prober-1.71-r1.ebuild,
+  -os-prober-1.71-r1710.ebuild:
+  trigger rebuilds
+
+*os-prober-1.71-r1710 (08 Oct 2017)
+
+  08 Oct 2017; V3n3RiX <venerix@redcorelinux.org>
+  -os-prober-1.71-r1708.ebuild, +os-prober-1.71-r1710.ebuild:
+  r1710 revision bump
+
+*os-prober-1.71-r1708 (13 Aug 2017)
+
+  13 Aug 2017; V3n3RiX <venerix@redcorelinux.org> -os-prober-1.65.ebuild,
+  -os-prober-1.71-r100.ebuild, +os-prober-1.71-r1708.ebuild:
+  redcore 1708 gamma crucis : bump ebuilds
+
+*os-prober-1.71-r100 (31 Dec 2016)
+
+  31 Dec 2016; V3n3RiX <venerix@redcorelinux.org> -os-prober-1.71.ebuild,
+  +os-prober-1.71-r100.ebuild:
+  increase revision to beat gentoo's os-prober
+
+*os-prober-1.71 (31 Dec 2016)
+
+  31 Dec 2016; V3n3RiX <venerix@redcorelinux.org> +os-prober-1.71.ebuild:
+  windows 10 support , yawza
+
+  06 Nov 2016; V3n3RiX <venerix@rogentos.ro> -files/os-prober-kogaion.patch,
+  +files/os-prober-redcore.patch, -metadata.xml, -os-prober-1.53.ebuild,
+  -os-prober-1.57-r1.ebuild, -os-prober-1.62.ebuild, os-prober-1.65.ebuild:
+  os-prober done
+
+  22 Nov 2015; BlackNoxis <steven.darklight@gmail.com> os-prober-1.65.ebuild:
+  [os-prober] unveil the right version of os-prober-1.65
+
+  25 Apr 2015; BlackNoxis <steven.darklight@gmail.com> os-prober-1.65.ebuild:
+  [os-prober][plymouth] upgrade ebuilds
+
+*os-prober-1.65 (21 Apr 2015)
+*os-prober-1.62 (21 Apr 2015)
+*os-prober-1.57-r1 (21 Apr 2015)
+*os-prober-1.53 (21 Apr 2015)
+
+  21 Apr 2015; BlackNoxis <steven.darklight@gmail.com>
+  +files/os-prober-kogaion.patch, +metadata.xml, +os-prober-1.53.ebuild,
+  +os-prober-1.57-r1.ebuild, +os-prober-1.62.ebuild, +os-prober-1.65.ebuild:
+  os-prober recognition patch
+

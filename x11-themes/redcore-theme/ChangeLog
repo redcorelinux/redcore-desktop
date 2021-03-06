@@ -1,0 +1,136 @@
+# ChangeLog for x11-themes/redcore-theme
+# Copyright 1999-2021 Gentoo Foundation; Distributed under the GPL v2
+# (auto-generated from git log)
+
+*redcore-theme-1337-r1 (30 Dec 2018)
+
+  30 Dec 2018; V3n3RiX <venerix@redcorelinux.org> -redcore-theme-1337.ebuild,
+  +redcore-theme-1337-r1.ebuild:
+  x11-misc/redcore-theme : revision bump
+
+*redcore-theme-1337 (30 Jun 2018)
+
+  30 Jun 2018; V3n3RiX <venerix@redcorelinux.org> +redcore-theme-1337.ebuild,
+  -redcore-theme-1806.ebuild:
+  and again
+
+*redcore-theme-1806 (10 Jun 2018)
+
+  10 Jun 2018; V3n3RiX <venerix@redcorelinux.org> -redcore-theme-1803.ebuild,
+  +redcore-theme-1806.ebuild:
+  version bump
+
+*redcore-theme-1803 (30 Mar 2018)
+
+  30 Mar 2018; V3n3RiX <venerix@redcorelinux.org> -redcore-theme-1801.ebuild,
+  +redcore-theme-1803.ebuild:
+  x11-themes : dummy bumps
+
+*redcore-theme-1801 (13 Jan 2018)
+
+  13 Jan 2018; V3n3RiX <venerix@redcorelinux.org> -redcore-theme-1710.ebuild,
+  +redcore-theme-1801.ebuild:
+  version bump
+
+*redcore-theme-1710 (29 Oct 2017)
+
+  29 Oct 2017; V3n3RiX <venerix@redcorelinux.org> -redcore-theme-1708.ebuild,
+  +redcore-theme-1710.ebuild:
+  revbump artwork for redcore 1710
+
+*redcore-theme-1708 (13 Aug 2017)
+
+  13 Aug 2017; V3n3RiX <venerix@redcorelinux.org>
+  -redcore-theme-1706-r1.ebuild, +redcore-theme-1708.ebuild:
+  lxqt,sddm} : bump to r1708
+
+*redcore-theme-1706-r1 (18 Jul 2017)
+
+  18 Jul 2017; V3n3RiX <venerix@redcorelinux.org> -redcore-theme-1706.ebuild,
+  +redcore-theme-1706-r1.ebuild:
+  revision bump
+
+*redcore-theme-1706 (26 Jun 2017)
+
+  26 Jun 2017; V3n3RiX <venerix@redcorelinux.org> -redcore-theme-1704.ebuild,
+  +redcore-theme-1706.ebuild:
+  bump to v1706
+
+*redcore-theme-1704 (08 Apr 2017)
+
+  08 Apr 2017; V3n3RiX <venerix@redcorelinux.org> -redcore-theme-1703.ebuild,
+  +redcore-theme-1704.ebuild:
+  bump artwork to 1704 Epsilon Eridani
+
+*redcore-theme-1703 (05 Mar 2017)
+
+  05 Mar 2017; V3n3RiX <venerix@redcorelinux.org> -redcore-theme-1702.ebuild,
+  +redcore-theme-1703.ebuild:
+  1703
+
+*redcore-theme-1702 (12 Feb 2017)
+
+  12 Feb 2017; V3n3RiX <venerix@redcorelinux.org> -redcore-theme-1701.ebuild,
+  +redcore-theme-1702.ebuild:
+  bump redcore-theme
+
+*redcore-theme-1701 (04 Jan 2017)
+
+  04 Jan 2017; V3n3RiX <venerix@redcorelinux.org>
+  -redcore-theme-1.0-r6.ebuild, +redcore-theme-1701.ebuild:
+  more preparations for 1701 release
+
+*redcore-theme-1.0-r6 (01 Jan 2017)
+
+  01 Jan 2017; V3n3RiX <venerix@redcorelinux.org>
+  -redcore-theme-1.0-r5.ebuild, +redcore-theme-1.0-r6.ebuild:
+  bump theme, adjust default mate look
+
+*redcore-theme-1.0-r5 (29 Dec 2016)
+
+  29 Dec 2016; V3n3RiX <venerix@redcorelinux.org>
+  -redcore-theme-1.0-r4.ebuild, +redcore-theme-1.0-r5.ebuild:
+  bump theme
+
+*redcore-theme-1.0-r4 (29 Nov 2016)
+
+  29 Nov 2016; V3n3RiX <venerix@redcorelinux.org>
+  -redcore-theme-1.0-r3.ebuild, +redcore-theme-1.0-r4.ebuild:
+  fix runtime deps for our theme, dropping OLD themes, will drop these
+  engines, and it will look, awfull
+
+*redcore-theme-1.0-r3 (26 Nov 2016)
+
+  26 Nov 2016; V3n3RiX <venerix@redcorelinux.org>
+  -redcore-theme-1.0-r2.ebuild, +redcore-theme-1.0-r3.ebuild:
+  port gtk-theme to EAPI 6
+
+*redcore-theme-1.0-r2 (07 Nov 2016)
+
+  07 Nov 2016; V3n3RiX <venerix@rogentos.ro> -redcore-theme-1.0-r1.ebuild,
+  +redcore-theme-1.0-r2.ebuild:
+  bump theme
+
+*redcore-theme-1.0-r1 (07 Nov 2016)
+
+  07 Nov 2016; V3n3RiX <venerix@rogentos.ro> -redcore-theme-1.0.ebuild,
+  +redcore-theme-1.0-r1.ebuild:
+  bump theme
+
+*redcore-theme-1.0 (07 Nov 2016)
+
+  07 Nov 2016; V3n3RiX <venerix@rogentos.ro> +redcore-theme-1.0.ebuild,
+  -redcore-theme-3.0-r1.ebuild:
+  reset artwork versions to 1.0...rebranding in progress
+
+*redcore-theme-3.0-r1 (06 Nov 2016)
+
+  06 Nov 2016; V3n3RiX <venerix@rogentos.ro> -redcore-theme-3.0.ebuild,
+  +redcore-theme-3.0-r1.ebuild:
+  trigger rebuild
+
+*redcore-theme-3.0 (06 Nov 2016)
+
+  06 Nov 2016; V3n3RiX <venerix@rogentos.ro> +redcore-theme-3.0.ebuild:
+  trim repo size by dumping shitloads of kogaion wallpapers out, only keep one
+

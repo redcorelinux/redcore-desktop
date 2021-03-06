@@ -1,0 +1,75 @@
+# ChangeLog for sys-boot/unetbootin-static
+# Copyright 1999-2021 Gentoo Foundation; Distributed under the GPL v2
+# (auto-generated from git log)
+
+  30 Apr 2020; V3n3RiX <venerix@redcorelinux.org>
+  files/unetbootin-static-pkexec, files/unetbootin-static.desktop:
+  fix leftovers
+
+*unetbootin-static-625-r2 (15 Nov 2019)
+
+  15 Nov 2019; V3n3RiX <venerix@redcorelinux.org>
+  -unetbootin-static-625-r1.ebuild, +unetbootin-static-625-r2.ebuild:
+  DEPENDS : media-libs/libpng -> media-libs/libpng-compat
+
+*unetbootin-static-625-r1 (04 Dec 2017)
+
+  04 Dec 2017; V3n3RiX <venerix@redcorelinux.org>
+  +unetbootin-static-625-r1.ebuild, -unetbootin-static-625-r1710.ebuild:
+  lower revisions
+
+*unetbootin-static-625-r1710 (08 Oct 2017)
+
+  08 Oct 2017; V3n3RiX <venerix@redcorelinux.org>
+  -unetbootin-static-625-r1708.ebuild, +unetbootin-static-625-r1710.ebuild:
+  r1710 revision bump
+
+*unetbootin-static-625-r1708 (13 Aug 2017)
+
+  13 Aug 2017; V3n3RiX <venerix@redcorelinux.org>
+  -unetbootin-static-625-r2.ebuild, +unetbootin-static-625-r1708.ebuild:
+  redcore 1708 gamma crucis : bump ebuilds
+
+*unetbootin-static-625-r2 (08 Jul 2017)
+
+  08 Jul 2017; V3n3RiX <venerix@redcorelinux.org>
+  -unetbootin-static-625-r1.ebuild, +unetbootin-static-625-r2.ebuild:
+  update distfiles location
+
+  06 Nov 2016; V3n3RiX <venerix@rogentos.ro>
+  -files/ro.kogaion.unetbootin-static.policy,
+  +files/ro.redcore.unetbootin-static.policy, unetbootin-static-625-r1.ebuild:
+  unetbootin done
+
+*unetbootin-static-625-r1 (15 Oct 2016)
+
+  15 Oct 2016; V3n3RiX <venerix@rogentos.ro> -unetbootin-static-625.ebuild,
+  +unetbootin-static-625-r1.ebuild:
+  fix deps and trigger rebuild
+
+  15 Oct 2016; V3n3RiX <venerix@rogentos.ro> unetbootin-static-625.ebuild:
+  fix runtime deps and mark unetbootin-static as stable
+
+  15 Oct 2016; V3n3RiX <venerix@rogentos.ro> unetbootin-static-625.ebuild:
+  yeah, I'm drunk, place policykit rule where it should be
+
+  15 Oct 2016; V3n3RiX <venerix@rogentos.ro>
+  files/ro.kogaion.unetbootin-static.policy:
+  fix policykit rule
+
+  15 Oct 2016; V3n3RiX <venerix@rogentos.ro>
+  +files/ro.kogaion.unetbootin-static.policy, unetbootin-static-625.ebuild:
+  add policykit rule
+
+  15 Oct 2016; V3n3RiX <venerix@rogentos.ro> +files/unetbootin-static-pkexec,
+  +files/unetbootin-static.desktop, unetbootin-static-625.ebuild:
+  one more step to have a functional unetbootin-static ebuild
+
+  15 Oct 2016; V3n3RiX <venerix@rogentos.ro> unetbootin-static-625.ebuild:
+  manifest and slowly populate ebuild
+
+*unetbootin-static-625 (15 Oct 2016)
+
+  15 Oct 2016; V3n3RiX <venerix@rogentos.ro> +unetbootin-static-625.ebuild:
+  skeleton ebuild for unetbootin-static
+

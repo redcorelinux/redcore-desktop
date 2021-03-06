@@ -1,0 +1,9 @@
+# ChangeLog for sys-apps/firetools
+# Copyright 1999-2021 Gentoo Foundation; Distributed under the GPL v2
+# (auto-generated from git log)
+
+*firetools-0.9.46 (19 Jul 2017)
+
+  19 Jul 2017; V3n3RiX <venerix@redcorelinux.org> +firetools-0.9.46.ebuild:
+  new package
+

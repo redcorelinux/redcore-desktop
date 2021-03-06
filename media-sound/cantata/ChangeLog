@@ -1,0 +1,77 @@
+# ChangeLog for media-sound/cantata
+# Copyright 1999-2021 Gentoo Foundation; Distributed under the GPL v2
+# (auto-generated from git log)
+
+*cantata-2.4.2-r314 (23 Sep 2020)
+
+  23 Sep 2020; V3n3RiX <venerix@redcorelinux.org> -cantata-2.4.1-r314.ebuild,
+  +cantata-2.4.2-r314.ebuild:
+  version bump
+
+*cantata-2.4.1-r314 (08 Mar 2020)
+
+  08 Mar 2020; V3n3RiX <venerix@redcorelinux.org> -cantata-2.3.3-r1337.ebuild,
+  +cantata-2.4.1-r314.ebuild:
+  version bump (v2.4.1)
+
+*cantata-2.3.3-r1337 (13 Jan 2019)
+
+  13 Jan 2019; V3n3RiX <venerix@redcorelinux.org> -cantata-2.3.2-r1.ebuild,
+  +cantata-2.3.3-r1337.ebuild, -files/cantata-2.3.2-opusfile.patch:
+  version bump
+
+*cantata-2.3.2-r1 (08 Sep 2018)
+
+  08 Sep 2018; V3n3RiX <venerix@redcorelinux.org> -cantata-2.3.1-r1.ebuild,
+  +cantata-2.3.2-r1.ebuild, +files/cantata-2.3.2-opusfile.patch:
+  version bump
+
+*cantata-2.3.1-r1 (30 Jun 2018)
+
+  30 Jun 2018; V3n3RiX <venerix@redcorelinux.org> -cantata-2.2.0-r3.ebuild,
+  +cantata-2.3.1-r1.ebuild, -files/cantata-2.2.0-qtsql-5.10.patch:
+  version bump
+
+*cantata-2.2.0-r3 (28 Apr 2018)
+
+  28 Apr 2018; V3n3RiX <venerix@redcorelinux.org> -cantata-2.2.0-r1.ebuild,
+  +cantata-2.2.0-r3.ebuild, +files/cantata-2.2.0-qtsql-5.10.patch:
+  revision bump
+
+*cantata-2.2.0-r1 (04 Dec 2017)
+
+  04 Dec 2017; V3n3RiX <venerix@redcorelinux.org> +cantata-2.2.0-r1.ebuild,
+  -cantata-2.2.0-r1710.ebuild:
+  lower revisions
+
+  09 Oct 2017; V3n3RiX <venerix@redcorelinux.org>
+  +files/cantata-2.2.0-headers.patch:
+  import replaygain patch
+
+*cantata-2.2.0-r1710 (09 Oct 2017)
+
+  09 Oct 2017; V3n3RiX <venerix@redcorelinux.org> -cantata-2.1.0-r1710.ebuild,
+  +cantata-2.2.0-r1710.ebuild:
+  version bump
+
+*cantata-2.1.0-r1710 (08 Oct 2017)
+
+  08 Oct 2017; V3n3RiX <venerix@redcorelinux.org> -cantata-2.1.0-r1708.ebuild,
+  +cantata-2.1.0-r1710.ebuild:
+  r1710 revision bump
+
+*cantata-2.1.0-r1708 (13 Aug 2017)
+
+  13 Aug 2017; V3n3RiX <venerix@redcorelinux.org> -cantata-2.1.0-r1706.ebuild,
+  +cantata-2.1.0-r1708.ebuild:
+  redcore 1708 gamma crucis : bump ebuilds
+
+  03 Aug 2017; V3n3RiX <venerix@redcorelinux.org> cantata-2.1.0-r1706.ebuild:
+  this should rdepend on MPD since it is a frontend to it ... why Gentoo
+  ebuild doesn't have this?
+
+*cantata-2.1.0-r1706 (03 Aug 2017)
+
+  03 Aug 2017; V3n3RiX <venerix@redcorelinux.org> +cantata-2.1.0-r1706.ebuild:
+  import from portage tree
+

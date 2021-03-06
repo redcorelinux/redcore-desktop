@@ -1,0 +1,151 @@
+# ChangeLog for sys-fs/zfs
+# Copyright 1999-2021 Gentoo Foundation; Distributed under the GPL v2
+# (auto-generated from git log)
+
+*zfs-2.0.3 (15 Feb 2021)
+
+  15 Feb 2021; V3n3RiX <venerix@redcorelinux.org> -zfs-2.0.1.ebuild,
+  +zfs-2.0.3.ebuild:
+  version bump (v2.0.3)
+
+*zfs-2.0.1 (30 Jan 2021)
+
+  30 Jan 2021; V3n3RiX <venerix@redcorelinux.org> -zfs-0.8.4.ebuild,
+  +zfs-2.0.1.ebuild:
+  version bump
+
+*zfs-0.8.4 (16 May 2020)
+
+  16 May 2020; V3n3RiX <venerix@redcorelinux.org> -zfs-0.8.3.ebuild,
+  +zfs-0.8.4.ebuild:
+  version bump
+
+*zfs-0.8.3 (25 Jan 2020)
+
+  25 Jan 2020; V3n3RiX <venerix@redcorelinux.org> -zfs-0.8.2.ebuild,
+  +zfs-0.8.3.ebuild:
+  utils} && sys-kernel/zfs-dkms : version bump (v0.8.3)
+
+*zfs-0.8.2 (31 Dec 2019)
+
+  31 Dec 2019; V3n3RiX <venerix@redcorelinux.org> -zfs-0.8.1.ebuild,
+  +zfs-0.8.2.ebuild:
+  utils && sys-kernel/zfs-dkms : version bump
+
+*zfs-0.8.1 (04 Jul 2019)
+
+  04 Jul 2019; V3n3RiX <venerix@redcorelinux.org> -zfs-0.7.13.ebuild,
+  +zfs-0.8.1.ebuild:
+  version bump
+
+*zfs-0.7.13 (19 Jun 2019)
+
+  19 Jun 2019; V3n3RiX <venerix@redcorelinux.org> -zfs-0.7.12.ebuild,
+  +zfs-0.7.13.ebuild:
+  sys-fs/{spl,zfs} : version bump
+
+*zfs-0.7.12 (31 Dec 2018)
+
+  31 Dec 2018; V3n3RiX <venerix@redcorelinux.org> -zfs-0.7.10.ebuild,
+  +zfs-0.7.12.ebuild:
+  sys-fs/{spl,zfs} : version bump
+
+*zfs-0.7.10 (08 Sep 2018)
+
+  08 Sep 2018; V3n3RiX <venerix@redcorelinux.org> -zfs-0.7.9.ebuild,
+  +zfs-0.7.10.ebuild:
+  sys-kernel/{spl,zfs} : version bump
+
+*zfs-0.7.9 (26 Aug 2018)
+
+  26 Aug 2018; V3n3RiX <venerix@redcorelinux.org> -zfs-0.7.8.ebuild,
+  +zfs-0.7.9.ebuild:
+  sys-fs/{spl,zfs} : version bump
+
+*zfs-0.7.8 (10 Apr 2018)
+
+  10 Apr 2018; V3n3RiX <venerix@redcorelinux.org> -zfs-0.7.6.ebuild,
+  +zfs-0.7.8.ebuild:
+  sys-fs/{zfs,spl} : version bump
+
+*zfs-0.7.6 (02 Apr 2018)
+
+  02 Apr 2018; V3n3RiX <venerix@redcorelinux.org> +zfs-0.7.6.ebuild,
+  -zfs-0.7.7.ebuild:
+  Revert "sys-fs/{spl,zfs} : version bump"
+
+  This reverts commit d031d102728856e6bbaeaa55ec22e9ae95e4785b.
+
+*zfs-0.7.7 (02 Apr 2018)
+
+  02 Apr 2018; V3n3RiX <venerix@redcorelinux.org> -zfs-0.7.6.ebuild,
+  +zfs-0.7.7.ebuild:
+  sys-fs/{spl,zfs} : version bump
+
+*zfs-0.7.6 (11 Mar 2018)
+
+  11 Mar 2018; V3n3RiX <venerix@redcorelinux.org> -zfs-0.7.5.ebuild,
+  +zfs-0.7.6.ebuild:
+  sys-fs/{spl,zfs} : version bump
+
+*zfs-0.7.5 (07 Jan 2018)
+
+  07 Jan 2018; V3n3RiX <venerix@redcorelinux.org> -zfs-0.7.4.ebuild,
+  +zfs-0.7.5.ebuild:
+  sys-fs/{spl,zfs} : version bump
+
+*zfs-0.7.4 (18 Dec 2017)
+
+  18 Dec 2017; V3n3RiX <venerix@redcorelinux.org> -zfs-0.7.2.ebuild,
+  +zfs-0.7.4.ebuild:
+  sys-fs/{spl,zfs} : version bump
+
+*zfs-0.7.2 (29 Oct 2017)
+
+  29 Oct 2017; V3n3RiX <venerix@redcorelinux.org> -zfs-0.6.5.11.ebuild,
+  +zfs-0.7.2.ebuild:
+  sys-fs/spl : version bump
+
+*zfs-0.6.5.11 (30 Jul 2017)
+
+  30 Jul 2017; V3n3RiX <venerix@redcorelinux.org> +zfs-0.6.5.11.ebuild,
+  -zfs-0.7.0.ebuild:
+  Revert "ZFS : bump to v0.7.0"
+
+  This reverts commit 1c3637dd3b054c149f818aa6eed47c849ca8d0a6.
+
+*zfs-0.7.0 (30 Jul 2017)
+
+  30 Jul 2017; V3n3RiX <venerix@redcorelinux.org> -zfs-0.6.5.11.ebuild,
+  +zfs-0.7.0.ebuild:
+  ZFS : bump to v0.7.0
+
+*zfs-0.6.5.11 (24 Jul 2017)
+
+  24 Jul 2017; V3n3RiX <venerix@redcorelinux.org> -zfs-0.6.5.9.ebuild,
+  +zfs-0.6.5.11.ebuild:
+  sys-fs/spl + sys-fs/zfs : version bumpt
+
+  05 Jun 2017; V3n3RiX <venerix@redcorelinux.org> zfs-0.6.5.9.ebuild:
+  fix depends
+
+*zfs-0.6.5.9 (05 Jun 2017)
+
+  05 Jun 2017; V3n3RiX <venerix@redcorelinux.org> +zfs-0.6.5.9.ebuild:
+  place our meta packages in same category as gentoo does
+
+  05 Jun 2017; V3n3RiX <venerix@redcorelinux.org> -files/bash-completion,
+  -files/bash-completion-r1, -files/zed, -files/zfs-init.sh.in,
+  -files/zfs.service.in, -zfs-0.6.5.9.ebuild:
+  give userspace packages a more, userspace name
+
+  05 Jun 2017; V3n3RiX <venerix@redcorelinux.org> zfs-0.6.5.9.ebuild:
+  add sys-kernel/spl as depend
+
+*zfs-0.6.5.9 (05 Jun 2017)
+
+  05 Jun 2017; V3n3RiX <venerix@redcorelinux.org> +files/bash-completion,
+  +files/bash-completion-r1, +files/zed, +files/zfs-init.sh.in,
+  +files/zfs.service.in, +zfs-0.6.5.9.ebuild:
+  zfs && spl userland utilities, dkms kernel sources will follow soon
+

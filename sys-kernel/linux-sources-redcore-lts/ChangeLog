@@ -1,0 +1,506 @@
+# ChangeLog for sys-kernel/linux-sources-redcore-lts
+# Copyright 1999-2021 Gentoo Foundation; Distributed under the GPL v2
+# (auto-generated from git log)
+
+*linux-sources-redcore-lts-5.10.16 (15 Feb 2021)
+
+  15 Feb 2021; V3n3RiX <venerix@redcorelinux.org>
+  -linux-sources-redcore-lts-5.10.11.ebuild,
+  +linux-sources-redcore-lts-5.10.16.ebuild:
+  sys-kernel/linux-{image,sources}-redcore-lts : version bump (v5.10.16)
+
+*linux-sources-redcore-lts-5.10.11 (30 Jan 2021)
+
+  30 Jan 2021; V3n3RiX <venerix@redcorelinux.org>
+  -files/5.10-revert-a135a1b4c4db1f3b8cbed9676a40ede39feb3362.patch,
+  -linux-sources-redcore-lts-5.10.5.ebuild,
+  +linux-sources-redcore-lts-5.10.11.ebuild:
+  sys-kernel/linux-{image,sources}-redcore-lts : version bump (v5.10.11)
+
+*linux-sources-redcore-lts-5.10.5 (06 Jan 2021)
+
+  06 Jan 2021; V3n3RiX <venerix@redcorelinux.org> -files/5.10-8353d30e747f-drm
+  -amd-display-disable-stream-if-pixel-clock-changed-with-link-active.patch,
+  files/5.10-amd64.config,
+  +files/5.10-revert-a135a1b4c4db1f3b8cbed9676a40ede39feb3362.patch,
+  -linux-sources-redcore-lts-5.10.4.ebuild,
+  +linux-sources-redcore-lts-5.10.5.ebuild:
+  sys-kernel/linux-{image,sources}-redcore-lts : version bump (v5.10.5), allow
+  unpriviledged users to create namespaces, fix
+  https://bugzilla.kernel.org/show_bug.cgi?id=211033 (patch queued for 5.10.6,
+  but why wait)
+
+*linux-sources-redcore-lts-5.10.4 (03 Jan 2021)
+
+  03 Jan 2021; V3n3RiX <venerix@redcorelinux.org>
+  +files/5.10-0001-Revert-cpufreq-Avoid-configuring-old-governors-as-de.patch,
+  +files/5.10-0001-Revert-hwmon-k10temp-Remove-support-for-displaying-v.patch,
+  +files/5.10-8353d30e747f-drm-amd-display-disable-stream-if-pixel-clock-chang
+  ed-with-link-active.patch,
+  +files/5.10-Unknow-SSD-HFM128GDHTNG-8310B-QUIRK_NO_APST.patch,
+  +files/5.10-acer-wmi-silence-unknow-functions-messages.patch,
+  +files/5.10-acpi-use-kern_warning_even_when_error.patch,
+  +files/5.10-add-amd-sfh-hid_driver.patch,
+  +files/5.10-add-sbtsi_driver.patch, +files/5.10-amd64.config,
+  +files/5.10-amd_iommu_init_info.patch,
+  +files/5.10-apic_vector-spam-in-debug-mode-only.patch,
+  +files/5.10-ata-fix-NCQ-LOG-strings-and-move-to-debug.patch,
+  +files/5.10-ath10k-be-quiet.patch,
+  +files/5.10-compress-modules-zstd-support.patch,
+  +files/5.10-do_not_bug_the_next_18-years.patch,
+  +files/5.10-enable-new-amd-energy-driver-for-all-ryzen.patch,
+  +files/5.10-enable_alx_wol.patch, +files/5.10-fix-bootconfig-makefile.patch,
+  +files/5.10-iwlwifi-fix-5e003982b07ae.patch,
+  +files/5.10-iwlwifi-use-debug-for-debug-infos.patch,
+  +files/5.10-k10temp-fix-ZEN2-desktop-add-ZEN3-desktop.patch,
+  +files/5.10-linux-hardened.patch,
+  +files/5.10-nvme-Patriot_Viper_VPN100-QUIRK_IGNORE_DEV_SUBNQN.patch,
+  +files/5.10-radeon_dp_aux_transfer_native-no-ratelimited_debug.patch, +files
+  /5.10-revert-parts-of-a00ec3874e7d326ab2dffbed92faddf6a77a84e9-no-Intel-NO.p
+  atch, +files/5.10-uksm-linux-hardened.patch,
+  -files/5.4-Unknow-SSD-HFM128GDHTNG-8310B-QUIRK_NO_APST.patch,
+  -files/5.4-acer-wmi-silence-unknow-functions-messages.patch,
+  -files/5.4-acpi-use-kern_warning_even_when_error.patch,
+  -files/5.4-amd64.config, -files/5.4-amdgpu-dc_link-drop-some-asserts.patch,
+  -files/5.4-ata-fix-NCQ-LOG-strings-and-move-to-debug.patch,
+  -files/5.4-ath10k-be-quiet.patch,
+  -files/5.4-drop_ancient-and-wrong-msg.patch,
+  -files/5.4-enable_alx_wol.patch, -files/5.4-linux-hardened.patch,
+  -files/5.4-nvme-hwmon.patch, -files/5.4-nvme-pci-more-info.patch,
+  -files/5.4-nvme-suspend-resume-workaround.patch,
+  -files/5.4-radeon_dp_aux_transfer_native-no-ratelimited_debug.patch,
+  -files/5.4-uksm-linux-hardened.patch,
+  -linux-sources-redcore-lts-5.4.35.ebuild,
+  -linux-sources-redcore-lts-5.4.41.ebuild,
+  +linux-sources-redcore-lts-5.10.4.ebuild:
+  sys-kernel/linux-{image,sources}-redcore-lts : version bump (5.10.4)
+
+*linux-sources-redcore-lts-5.4.41 (16 May 2020)
+
+  16 May 2020; V3n3RiX <venerix@redcorelinux.org>
+  +linux-sources-redcore-lts-5.4.41.ebuild:
+  sys-kernel/linux-{image,sources}-redcore-lts : version bump (v5.4.41)
+
+*linux-sources-redcore-lts-5.4.35 (23 Apr 2020)
+
+  23 Apr 2020; V3n3RiX <venerix@redcorelinux.org>
+  files/5.4-uksm-linux-hardened.patch,
+  -linux-sources-redcore-lts-5.4.24-r1.ebuild,
+  +linux-sources-redcore-lts-5.4.35.ebuild:
+  sys-kernel/linux-{image,sources}-redcore-lts : version bump (v5.4.35)
+
+*linux-sources-redcore-lts-5.4.24-r1 (08 Mar 2020)
+
+  08 Mar 2020; V3n3RiX <venerix@redcorelinux.org> files/5.4-amd64.config,
+  -linux-sources-redcore-lts-5.4.24.ebuild,
+  +linux-sources-redcore-lts-5.4.24-r1.ebuild:
+  sys-kernel/linux-{image,sources}-redcore-lts : relax some options
+
+  07 Mar 2020; V3n3RiX <venerix@redcorelinux.org> files/5.4-amd64.config:
+  sys-kernel/linux-{image,sources}-redcore-lts : relax hardening a bit
+
+*linux-sources-redcore-lts-5.4.24 (07 Mar 2020)
+
+  07 Mar 2020; V3n3RiX <venerix@redcorelinux.org> files/5.4-amd64.config,
+  files/5.4-linux-hardened.patch, -linux-sources-redcore-lts-5.4.20.ebuild,
+  +linux-sources-redcore-lts-5.4.24.ebuild:
+  sys-kernel/linux-{image,redcore}-sources-lts : version bump, increase
+  hardening (v5.4.24)
+
+*linux-sources-redcore-lts-5.4.20 (16 Feb 2020)
+
+  16 Feb 2020; V3n3RiX <venerix@redcorelinux.org>
+  -linux-sources-redcore-lts-5.4.18.ebuild,
+  +linux-sources-redcore-lts-5.4.20.ebuild:
+  sys-kernel/linux-{image,sources}-redcore-lts : version bump (v5.4.20)
+
+*linux-sources-redcore-lts-5.4.18 (11 Feb 2020)
+
+  11 Feb 2020; V3n3RiX <venerix@redcorelinux.org>
+  files/5.4-linux-hardened.patch, -linux-sources-redcore-5.4.15.ebuild,
+  +linux-sources-redcore-lts-5.4.18.ebuild:
+  sys-kernel/linux-{image,sources}-redcore-lts : version bump (v5.4.18)
+
+*linux-sources-redcore-5.4.15 (11 Feb 2020)
+
+  11 Feb 2020; V3n3RiX <venerix@redcorelinux.org>
+  +files/5.4-Unknow-SSD-HFM128GDHTNG-8310B-QUIRK_NO_APST.patch,
+  +files/5.4-acer-wmi-silence-unknow-functions-messages.patch,
+  +files/5.4-acpi-use-kern_warning_even_when_error.patch,
+  +files/5.4-amd64.config, +files/5.4-amdgpu-dc_link-drop-some-asserts.patch,
+  +files/5.4-ata-fix-NCQ-LOG-strings-and-move-to-debug.patch,
+  +files/5.4-ath10k-be-quiet.patch,
+  +files/5.4-drop_ancient-and-wrong-msg.patch,
+  +files/5.4-enable_alx_wol.patch, +files/5.4-linux-hardened.patch,
+  +files/5.4-nvme-hwmon.patch, +files/5.4-nvme-pci-more-info.patch,
+  +files/5.4-nvme-suspend-resume-workaround.patch,
+  +files/5.4-radeon_dp_aux_transfer_native-no-ratelimited_debug.patch,
+  +files/5.4-uksm-linux-hardened.patch, +linux-sources-redcore-5.4.15.ebuild:
+  sys-kernel : move kernel 5.14.xx to sys-
+  kernel/linux-{image,sources}-redcore-lts
+
+  11 Feb 2020; V3n3RiX <venerix@redcorelinux.org> -files/4.19-0001-MultiQueue-
+  Skiplist-Scheduler-version-v0.180-linux-hardened.patch,
+  -files/4.19-0002-Fix-Werror-build-failure-in-tools.patch,
+  -files/4.19-0003-Make-preemptible-kernel-default.patch,
+  -files/4.19-0004-Expose-vmsplit-for-our-poor-32-bit-users.patch,
+  -files/4.19-0005-Create-highres-timeout-variants-of-schedule_timeout-.patch,
+  -files/4.19-0006-Special-case-calls-of-schedule_timeout-1-to-use-the-.patch,
+  -files/4.19-0007-Convert-msleep-to-use-hrtimers-when-active.patch,
+  -files/4.19-0008-Replace-all-schedule-timeout-1-with-schedule_min_hrt.patch,
+  -files/4.19-0009-Replace-all-calls-to-schedule_timeout_interruptible-.patch,
+  -files/4.19-0010-Replace-all-calls-to-schedule_timeout_uninterruptibl.patch,
+  -files/4.19-0011-Don-t-use-hrtimer-overlay-when-pm_freezing-since-som.patch,
+  -files/4.19-0012-Make-threaded-IRQs-optionally-the-default-which-can-.patch,
+  -files/4.19-0013-Reinstate-default-Hz-of-100-in-combination-with-MuQS.patch,
+  -files/4.19-0014-Swap-sucks.patch,
+  -files/4.19-0015-unfuck-MuQSS-on-linux-4_19_10+.patch,
+  -files/4.19-0016-unfuck-MuQSS-on-linux-4_19_20+.patch,
+  -files/4.19-amd64.config,
+  -files/4.19-ata-fix-NCQ-LOG-strings-and-move-to-debug.patch,
+  -files/4.19-drop_ancient-and-wrong-msg.patch,
+  -files/4.19-enable_alx_wol.patch, -files/4.19-linux-hardened.patch,
+  -files/4.19-mute-pps_state_mismatch.patch,
+  -files/4.19-nouveau-pascal-backlight.patch,
+  -files/4.19-radeon_dp_aux_transfer_native-no-ratelimited_debug.patch,
+  -files/4.19-uksm-linux-hardened.patch,
+  -linux-sources-redcore-lts-4.19.98.ebuild:
+  sys-kernel : move kernel 4.19.xx to sys-
+  kernel/linux-{image,sources}-redcore-lts-legacy
+
+  07 Feb 2020; V3n3RiX <venerix@redcorelinux.org>
+  -linux-sources-redcore-lts-4.19.97.ebuild:
+  sys-kernel/linux-{image,sources}-redcore-lts : drop old
+
+*linux-sources-redcore-lts-4.19.98 (25 Jan 2020)
+
+  25 Jan 2020; V3n3RiX <venerix@redcorelinux.org>
+  +linux-sources-redcore-lts-4.19.98.ebuild:
+  sys-kernel/linux-{image,sources}-redcore-lts : version bump (v4.19.98)
+
+  19 Jan 2020; V3n3RiX <venerix@redcorelinux.org>
+  -linux-sources-redcore-lts-4.19.95.ebuild:
+  sys-kernel/linux-{image,sources}-redcore-lts : drop old
+
+  18 Jan 2020; V3n3RiX <venerix@redcorelinux.org>
+  linux-sources-redcore-lts-4.19.97.ebuild:
+  sys-kernel/linux-{image,sources}-redcore{,-lts} : unmask new versions
+
+*linux-sources-redcore-lts-4.19.97 (18 Jan 2020)
+
+  18 Jan 2020; V3n3RiX <venerix@redcorelinux.org>
+  +linux-sources-redcore-lts-4.19.97.ebuild:
+  sys-kernel/linux-{image,sources}-redcore-lts : version bump
+
+*linux-sources-redcore-lts-4.19.95 (12 Jan 2020)
+
+  12 Jan 2020; V3n3RiX <venerix@redcorelinux.org> files/4.19-amd64.config,
+  -linux-sources-redcore-lts-4.19.90.ebuild,
+  +linux-sources-redcore-lts-4.19.95.ebuild:
+  sys-kernel/linux-{image,sources}-redcore-lts : version bump, adjust dkms
+  modules removal
+
+*linux-sources-redcore-lts-4.19.90 (27 Dec 2019)
+
+  27 Dec 2019; V3n3RiX <venerix@redcorelinux.org>
+  files/4.19-0002-Fix-Werror-build-failure-in-tools.patch,
+  files/4.19-amd64.config, -linux-sources-redcore-lts-4.19.60.ebuild,
+  -linux-sources-redcore-lts-4.19.75.ebuild,
+  +linux-sources-redcore-lts-4.19.90.ebuild:
+  sys-kernel/linux-{image,sources}-lts : version bump
+
+*linux-sources-redcore-lts-4.19.75 (30 Sep 2019)
+
+  30 Sep 2019; V3n3RiX <venerix@redcorelinux.org>
+  +linux-sources-redcore-lts-4.19.75.ebuild:
+  sys-kernel/linux-{image,sources}-redcore-lts : version bump
+
+  27 Jul 2019; V3n3RiX <venerix@redcorelinux.org> files/4.19-amd64.config,
+  -linux-sources-redcore-lts-4.19.55.ebuild:
+  sys-kernel/linux-{image,sources}-redcore-lts : drop old
+
+*linux-sources-redcore-lts-4.19.60 (27 Jul 2019)
+
+  27 Jul 2019; V3n3RiX <venerix@redcorelinux.org>
+  +linux-sources-redcore-lts-4.19.60.ebuild:
+  sys-kernel/linux-{image,sources}-redcore-lts : version bump
+
+  07 Jul 2019; V3n3RiX <venerix@redcorelinux.org>
+  -linux-sources-redcore-lts-4.19.50.ebuild:
+  sys-kernel/linux-{image,sources}-redcore-lts : drop old
+
+*linux-sources-redcore-lts-4.19.55 (22 Jun 2019)
+
+  22 Jun 2019; V3n3RiX <venerix@redcorelinux.org>
+  +linux-sources-redcore-lts-4.19.55.ebuild:
+  sys-kernel/linux-{image,sources}-lts : version bump
+
+*linux-sources-redcore-lts-4.19.50 (19 Jun 2019)
+
+  19 Jun 2019; V3n3RiX <venerix@redcorelinux.org>
+  files/4.19-0002-Fix-Werror-build-failure-in-tools.patch,
+  +files/4.19-0016-unfuck-MuQSS-on-linux-4_19_20+.patch, -files/4.19-ath10k-dr
+  op-WARN_ON-added-in-cd93b83ad927b2c7979e0add0343ace59328b461.patch,
+  files/4.19-linux-hardened.patch,
+  -files/4.19-revert-patches-causing-instant-reboot.patch,
+  files/4.19-uksm-linux-hardened.patch,
+  -linux-sources-redcore-lts-4.19.20-r2.ebuild,
+  +linux-sources-redcore-lts-4.19.50.ebuild:
+  sys-kernel/linux-{image,sources}-redcore-lts : version bump
+
+*linux-sources-redcore-lts-4.19.20-r2 (17 May 2019)
+
+  17 May 2019; V3n3RiX <venerix@redcorelinux.org>
+  -files/4.14-0001-MuQSS-version-0.162-CPU-scheduler-linux-hardened.patch,
+  -files/4.14-0002-Make-preemptible-kernel-default.patch,
+  -files/4.14-0003-Expose-vmsplit-for-our-poor-32-bit-users.patch,
+  -files/4.14-0004-Create-highres-timeout-variants-of-schedule_timeout-.patch,
+  -files/4.14-0005-Special-case-calls-of-schedule_timeout-1-to-use-the-.patch,
+  -files/4.14-0006-Convert-msleep-to-use-hrtimers-when-active.patch,
+  -files/4.14-0007-Replace-all-schedule-timeout-1-with-schedule_min_hrt.patch,
+  -files/4.14-0008-Replace-all-calls-to-schedule_timeout_interruptible-.patch,
+  -files/4.14-0009-Replace-all-calls-to-schedule_timeout_uninterruptibl.patch,
+  -files/4.14-0010-Don-t-use-hrtimer-overlay-when-pm_freezing-since-som.patch,
+  -files/4.14-0011-Make-hrtimer-granularity-and-minimum-hrtimeout-confi.patch,
+  -files/4.14-0012-Reinstate-default-Hz-of-100-in-combination-with-MuQS.patch,
+  -files/4.14-0013-Make-threaded-IRQs-optionally-the-default-which-can-.patch,
+  -files/4.14-0014-Swap-sucks.patch,
+  -files/4.14-0015-MuQSS.c-needs-irq_regs.h-to-use-get_irq_regs.patch,
+  -files/4.14-0016-unfuck-MuQSS-on-linux-4_14_15+.patch,
+  -files/4.14-0017-unfuck-MuQSS-on-linux-4_14_75+.patch,
+  -files/4.14-Revert-ath10k-activate-user-space-firmware-loading.patch,
+  -files/4.14-amd64.config,
+  -files/4.14-introduce-NUMA-identity-node-sched-domain.patch,
+  -files/4.14-k10temp-add-ZEN-support.patch, -files/4.14-linux-hardened.patch,
+  -files/4.14-mute-pps_state_mismatch.patch,
+  -files/4.14-restore-SD_PREFER_SIBLING-on-MC-domains.patch,
+  -files/4.14-uksm-linux-hardened.patch,
+  -linux-sources-redcore-lts-4.14.95-r1.ebuild,
+  -linux-sources-redcore-lts-4.19.20-r1.ebuild,
+  +linux-sources-redcore-lts-4.19.20-r2.ebuild:
+  sys-kernel/linux-{image,sources}-redcore-lts : drop 4.14
+
+*linux-sources-redcore-lts-4.19.20-r1 (24 Feb 2019)
+*linux-sources-redcore-lts-4.14.95-r1 (24 Feb 2019)
+
+  24 Feb 2019; V3n3RiX <venerix@redcorelinux.org>
+  files/4.14-linux-hardened.patch, files/4.19-linux-hardened.patch,
+  +linux-sources-redcore-lts-4.14.95-r1.ebuild,
+  -linux-sources-redcore-lts-4.14.100.ebuild,
+  +linux-sources-redcore-lts-4.19.20-r1.ebuild,
+  -linux-sources-redcore-lts-4.19.25.ebuild:
+  Revert "sys-kernel/linux-{image,sources}-redcore-lts : version bump 4.14.95
+  -> 4.4.100 && 4.19.20 -> 4.19.25"
+
+  This reverts commit 4f6b92301376fba7352d95a861c956753ba6810b.
+
+  24 Feb 2019; V3n3RiX <venerix@redcorelinux.org> files/4.14-amd64.config:
+  Revert "sys-kernel/linux-{image,sources}-redcore-lts : adjust 4.14 config"
+
+  This reverts commit 1d8c7e0a8e78d8f1c274891025583be97f7fc095.
+
+  24 Feb 2019; V3n3RiX <venerix@redcorelinux.org> files/4.14-amd64.config:
+  sys-kernel/linux-{image,sources}-redcore-lts : adjust 4.14 config
+
+*linux-sources-redcore-lts-4.19.25 (24 Feb 2019)
+*linux-sources-redcore-lts-4.14.100 (24 Feb 2019)
+
+  24 Feb 2019; V3n3RiX <venerix@redcorelinux.org>
+  files/4.14-linux-hardened.patch, files/4.19-linux-hardened.patch,
+  -linux-sources-redcore-lts-4.14.95-r1.ebuild,
+  +linux-sources-redcore-lts-4.14.100.ebuild,
+  -linux-sources-redcore-lts-4.19.20-r1.ebuild,
+  +linux-sources-redcore-lts-4.19.25.ebuild:
+  sys-kernel/linux-{image,sources}-redcore-lts : version bump 4.14.95 ->
+  4.4.100 && 4.19.20 -> 4.19.25
+
+*linux-sources-redcore-lts-4.19.20-r1 (10 Feb 2019)
+*linux-sources-redcore-lts-4.14.95-r1 (10 Feb 2019)
+
+  10 Feb 2019; V3n3RiX <venerix@redcorelinux.org>
+  -files/4.14-0001-BFQ-v8r12-20171108.patch,
+  -files/4.14-0002-BFQ-v8r12-20180404.patch, +files/4.14-amd64.config,
+  -files/4.14-redcore-lts-amd64.config, +files/4.19-amd64.config,
+  -files/4.19-bfq-sq-mq-v9r1-2K190204-rc1.patch,
+  -files/4.19-redcore-lts-amd64.config,
+  -linux-sources-redcore-lts-4.14.95.ebuild,
+  +linux-sources-redcore-lts-4.14.95-r1.ebuild,
+  -linux-sources-redcore-lts-4.19.20.ebuild,
+  +linux-sources-redcore-lts-4.19.20-r1.ebuild:
+  sys-kernel/linux-{image,sources}-redcore-lts : revision bump, drop and
+  disable BFQ-SQ
+
+*linux-sources-redcore-lts-4.19.20 (09 Feb 2019)
+*linux-sources-redcore-lts-4.14.95 (09 Feb 2019)
+
+  09 Feb 2019; V3n3RiX <venerix@redcorelinux.org>
+  -files/0001-BFQ-v8r12-20171108.patch,
+  -files/0001-MuQSS-version-0.162-CPU-scheduler-linux-hardened.patch,
+  -files/0002-BFQ-v8r12-20180404.patch,
+  -files/0002-Make-preemptible-kernel-default.patch,
+  -files/0003-Expose-vmsplit-for-our-poor-32-bit-users.patch,
+  -files/0004-Create-highres-timeout-variants-of-schedule_timeout-.patch,
+  -files/0005-Special-case-calls-of-schedule_timeout-1-to-use-the-.patch,
+  -files/0006-Convert-msleep-to-use-hrtimers-when-active.patch,
+  -files/0007-Replace-all-schedule-timeout-1-with-schedule_min_hrt.patch,
+  -files/0008-Replace-all-calls-to-schedule_timeout_interruptible-.patch,
+  -files/0009-Replace-all-calls-to-schedule_timeout_uninterruptibl.patch,
+  -files/0010-Don-t-use-hrtimer-overlay-when-pm_freezing-since-som.patch,
+  -files/0011-Make-hrtimer-granularity-and-minimum-hrtimeout-confi.patch,
+  -files/0012-Reinstate-default-Hz-of-100-in-combination-with-MuQS.patch,
+  -files/0013-Make-threaded-IRQs-optionally-the-default-which-can-.patch,
+  -files/0014-Swap-sucks.patch,
+  -files/0015-MuQSS.c-needs-irq_regs.h-to-use-get_irq_regs.patch,
+  -files/0016-unfuck-MuQSS-on-linux-4_14_15+.patch,
+  -files/0017-unfuck-MuQSS-on-linux-4_14_75+.patch,
+  +files/4.14-0001-BFQ-v8r12-20171108.patch,
+  +files/4.14-0001-MuQSS-version-0.162-CPU-scheduler-linux-hardened.patch,
+  +files/4.14-0002-BFQ-v8r12-20180404.patch,
+  +files/4.14-0002-Make-preemptible-kernel-default.patch,
+  +files/4.14-0003-Expose-vmsplit-for-our-poor-32-bit-users.patch,
+  +files/4.14-0004-Create-highres-timeout-variants-of-schedule_timeout-.patch,
+  +files/4.14-0005-Special-case-calls-of-schedule_timeout-1-to-use-the-.patch,
+  +files/4.14-0006-Convert-msleep-to-use-hrtimers-when-active.patch,
+  +files/4.14-0007-Replace-all-schedule-timeout-1-with-schedule_min_hrt.patch,
+  +files/4.14-0008-Replace-all-calls-to-schedule_timeout_interruptible-.patch,
+  +files/4.14-0009-Replace-all-calls-to-schedule_timeout_uninterruptibl.patch,
+  +files/4.14-0010-Don-t-use-hrtimer-overlay-when-pm_freezing-since-som.patch,
+  +files/4.14-0011-Make-hrtimer-granularity-and-minimum-hrtimeout-confi.patch,
+  +files/4.14-0012-Reinstate-default-Hz-of-100-in-combination-with-MuQS.patch,
+  +files/4.14-0013-Make-threaded-IRQs-optionally-the-default-which-can-.patch,
+  +files/4.14-0014-Swap-sucks.patch,
+  +files/4.14-0015-MuQSS.c-needs-irq_regs.h-to-use-get_irq_regs.patch,
+  +files/4.14-0016-unfuck-MuQSS-on-linux-4_14_15+.patch,
+  +files/4.14-0017-unfuck-MuQSS-on-linux-4_14_75+.patch,
+  +files/4.14-Revert-ath10k-activate-user-space-firmware-loading.patch,
+  +files/4.14-introduce-NUMA-identity-node-sched-domain.patch,
+  +files/4.14-k10temp-add-ZEN-support.patch, +files/4.14-linux-hardened.patch,
+  +files/4.14-mute-pps_state_mismatch.patch,
+  +files/4.14-redcore-lts-amd64.config,
+  +files/4.14-restore-SD_PREFER_SIBLING-on-MC-domains.patch,
+  +files/4.14-uksm-linux-hardened.patch, +files/4.19-0001-MultiQueue-Skiplist-
+  Scheduler-version-v0.180-linux-hardened.patch,
+  +files/4.19-0002-Fix-Werror-build-failure-in-tools.patch,
+  +files/4.19-0003-Make-preemptible-kernel-default.patch,
+  +files/4.19-0004-Expose-vmsplit-for-our-poor-32-bit-users.patch,
+  +files/4.19-0005-Create-highres-timeout-variants-of-schedule_timeout-.patch,
+  +files/4.19-0006-Special-case-calls-of-schedule_timeout-1-to-use-the-.patch,
+  +files/4.19-0007-Convert-msleep-to-use-hrtimers-when-active.patch,
+  +files/4.19-0008-Replace-all-schedule-timeout-1-with-schedule_min_hrt.patch,
+  +files/4.19-0009-Replace-all-calls-to-schedule_timeout_interruptible-.patch,
+  +files/4.19-0010-Replace-all-calls-to-schedule_timeout_uninterruptibl.patch,
+  +files/4.19-0011-Don-t-use-hrtimer-overlay-when-pm_freezing-since-som.patch,
+  +files/4.19-0012-Make-threaded-IRQs-optionally-the-default-which-can-.patch,
+  +files/4.19-0013-Reinstate-default-Hz-of-100-in-combination-with-MuQS.patch,
+  +files/4.19-0014-Swap-sucks.patch,
+  +files/4.19-0015-unfuck-MuQSS-on-linux-4_19_10+.patch,
+  +files/4.19-ata-fix-NCQ-LOG-strings-and-move-to-debug.patch, +files/4.19-ath
+  10k-drop-WARN_ON-added-in-cd93b83ad927b2c7979e0add0343ace59328b461.patch,
+  +files/4.19-bfq-sq-mq-v9r1-2K190204-rc1.patch,
+  +files/4.19-drop_ancient-and-wrong-msg.patch,
+  +files/4.19-enable_alx_wol.patch, +files/4.19-linux-hardened.patch,
+  +files/4.19-mute-pps_state_mismatch.patch,
+  +files/4.19-nouveau-pascal-backlight.patch,
+  +files/4.19-radeon_dp_aux_transfer_native-no-ratelimited_debug.patch,
+  +files/4.19-redcore-lts-amd64.config,
+  +files/4.19-revert-patches-causing-instant-reboot.patch,
+  +files/4.19-uksm-linux-hardened.patch,
+  -files/Revert-ath10k-activate-user-space-firmware-loading.patch,
+  -files/introduce-NUMA-identity-node-sched-domain.patch,
+  -files/k10temp-add-ZEN-support.patch, -files/linux-hardened.patch,
+  -files/mute-pps_state_mismatch.patch, -files/redcore-lts-amd64.config,
+  -files/restore-SD_PREFER_SIBLING-on-MC-domains.patch,
+  -files/uksm-linux-hardened.patch, -linux-sources-redcore-lts-4.14.90.ebuild,
+  +linux-sources-redcore-lts-4.14.95.ebuild,
+  +linux-sources-redcore-lts-4.19.20.ebuild:
+  sys-kernel/linux-{image,sources}-redcore-lts : version bump to v4.14.95 &&
+  v4.19.20
+
+  05 Jan 2019; V3n3RiX <venerix@redcorelinux.org>
+  +files/0017-unfuck-MuQSS-on-linux-4_14_75+.patch,
+  linux-sources-redcore-lts-4.14.90.ebuild:
+  sys-kernel/linux-{image,sources}-redcore-lts : fix MuQSS build failure
+  caused by upstream SMT changes
+
+*linux-sources-redcore-lts-4.14.90 (05 Jan 2019)
+
+  05 Jan 2019; V3n3RiX <venerix@redcorelinux.org>
+  files/0001-MuQSS-version-0.162-CPU-scheduler-linux-hardened.patch,
+  files/linux-hardened.patch, files/redcore-lts-amd64.config,
+  -linux-sources-redcore-lts-4.14.75.ebuild,
+  +linux-sources-redcore-lts-4.14.90.ebuild:
+  sys-kernel/linux-{image,sources}-redcore-lts : version bump to 4.14.90
+
+*linux-sources-redcore-lts-4.14.75 (04 Nov 2018)
+
+  04 Nov 2018; V3n3RiX <venerix@redcorelinux.org>
+  +files/0001-BFQ-v8r12-20171108.patch,
+  +files/0001-MuQSS-version-0.162-CPU-scheduler-linux-hardened.patch,
+  +files/0002-BFQ-v8r12-20180404.patch,
+  +files/0002-Make-preemptible-kernel-default.patch,
+  +files/0003-Expose-vmsplit-for-our-poor-32-bit-users.patch,
+  +files/0004-Create-highres-timeout-variants-of-schedule_timeout-.patch,
+  +files/0005-Special-case-calls-of-schedule_timeout-1-to-use-the-.patch,
+  +files/0006-Convert-msleep-to-use-hrtimers-when-active.patch,
+  +files/0007-Replace-all-schedule-timeout-1-with-schedule_min_hrt.patch,
+  +files/0008-Replace-all-calls-to-schedule_timeout_interruptible-.patch,
+  +files/0009-Replace-all-calls-to-schedule_timeout_uninterruptibl.patch,
+  +files/0010-Don-t-use-hrtimer-overlay-when-pm_freezing-since-som.patch,
+  +files/0011-Make-hrtimer-granularity-and-minimum-hrtimeout-confi.patch,
+  +files/0012-Reinstate-default-Hz-of-100-in-combination-with-MuQS.patch,
+  +files/0013-Make-threaded-IRQs-optionally-the-default-which-can-.patch,
+  +files/0014-Swap-sucks.patch,
+  -files/0015-Enable-BFQ-io-scheduler-by-default.patch,
+  +files/0015-MuQSS.c-needs-irq_regs.h-to-use-get_irq_regs.patch,
+  +files/0016-unfuck-MuQSS-on-linux-4_14_15+.patch,
+  files/redcore-lts-amd64.config, -files/uksm-for-linux-hardened.patch,
+  +files/uksm-linux-hardened.patch, -linux-sources-redcore-lts-4.14.65.ebuild,
+  +linux-sources-redcore-lts-4.14.75.ebuild:
+  sys-kernel/linux-{image,sources}-redcore-lts :
+  * version bump to v4.14.75
+  * adjust MuQSS v0.162 CPU scheduler to linux-hardened and enable it by
+  default
+  * add BFQ-SQ v8r12 I/O scheduler and enable it by default
+  * lower HZ to 100 (recommended value for MuQSS enabled kernels)
+  * disable dynamic ticks (MuQSS itself is a tickless scheduler, so no longer
+  required)
+
+  18 Aug 2018; V3n3RiX <venerix@redcorelinux.org>
+  files/redcore-lts-amd64.config:
+  sys-kernel/linux-{image,sources}-redcore-lts : enable apparmor by default
+
+  18 Aug 2018; V3n3RiX <venerix@redcorelinux.org>
+  files/redcore-lts-amd64.config:
+  sys-kernel/linux-{image,sources}-redcore-lts : fix config
+
+*linux-sources-redcore-lts-4.14.65 (18 Aug 2018)
+
+  18 Aug 2018; V3n3RiX <venerix@redcorelinux.org>
+  +files/0015-Enable-BFQ-io-scheduler-by-default.patch,
+  -files/enable_alx_wol.patch, files/linux-hardened.patch,
+  files/redcore-lts-amd64.config, -linux-sources-redcore-lts-4.14.50.ebuild,
+  +linux-sources-redcore-lts-4.14.65.ebuild:
+  sys-kernel/linux-image-redcore-lts : version bump, enable more hardening
+  options
+
+*linux-sources-redcore-lts-4.14.50 (17 Jun 2018)
+
+  17 Jun 2018; V3n3RiX <venerix@redcorelinux.org> files/linux-hardened.patch,
+  -linux-sources-redcore-lts-4.14.44.ebuild,
+  +linux-sources-redcore-lts-4.14.50.ebuild:
+  sys-kernel/linux-{image,sources}-redcore-lts : version bump
+
+*linux-sources-redcore-lts-4.14.44 (26 May 2018)
+
+  26 May 2018; V3n3RiX <venerix@redcorelinux.org>
+  +files/Revert-ath10k-activate-user-space-firmware-loading.patch,
+  +files/enable_alx_wol.patch,
+  +files/introduce-NUMA-identity-node-sched-domain.patch,
+  +files/k10temp-add-ZEN-support.patch, +files/linux-hardened.patch,
+  +files/mute-pps_state_mismatch.patch, +files/redcore-lts-amd64.config,
+  +files/restore-SD_PREFER_SIBLING-on-MC-domains.patch,
+  +files/uksm-for-linux-hardened.patch,
+  +linux-sources-redcore-lts-4.14.44.ebuild:
+  rename : sys-kernel/linux-{image,headers}-lts -> sys-
+  kernel/linux-{image,sources}-redcore-lts, version bump
+

@@ -1,0 +1,20 @@
+# ChangeLog for gui-libs/display-manager-init
+# Copyright 1999-2021 Gentoo Foundation; Distributed under the GPL v2
+# (auto-generated from git log)
+
+*display-manager-init-1.0-r100 (31 Jan 2021)
+
+  31 Jan 2021; V3n3RiX <venerix@redcorelinux.org>
+  -display-manager-init-1.0-r10.ebuild, +display-manager-init-1.0-r100.ebuild,
+  -files/xdm.initd:
+  drop xdm compatibility unit
+
+*display-manager-init-1.0-r10 (31 Jan 2021)
+
+  31 Jan 2021; V3n3RiX <venerix@redcorelinux.org>
+  +display-manager-init-1.0-r10.ebuild, +files/display-manager-setup.initd,
+  +files/display-manager.confd, +files/display-manager.initd, +files/startDM,
+  +files/xdm.initd, +metadata.xml:
+  x11-base/xorg-server : act on gentoo news 2021-01-30-display-manager-init,
+  but do it automatically, without user intervention
+

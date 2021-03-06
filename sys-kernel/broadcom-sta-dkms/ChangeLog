@@ -1,0 +1,231 @@
+# ChangeLog for sys-kernel/broadcom-sta-dkms
+# Copyright 1999-2021 Gentoo Foundation; Distributed under the GPL v2
+# (auto-generated from git log)
+
+  20 Jan 2021; V3n3RiX <venerix@redcorelinux.org>
+  broadcom-sta-dkms-6.30.223.271-r5.ebuild,
+  +files/broadcom-sta-6.30.223.141-makefile.patch:
+  fix build
+
+*broadcom-sta-dkms-6.30.223.271-r5 (20 Jan 2021)
+
+  20 Jan 2021; V3n3RiX <venerix@redcorelinux.org>
+  -broadcom-sta-dkms-6.30.223.271-r4.ebuild,
+  +broadcom-sta-dkms-6.30.223.271-r5.ebuild,
+  -files/broadcom-sta-6.30.223.141-makefile.patch,
+  -files/broadcom-sta-6.30.223.271-r1-linux-3.18.patch,
+  -files/broadcom-sta-6.30.223.271-r2-linux-4.3-v2.patch,
+  -files/broadcom-sta-6.30.223.271-r4-linux-4.11.patch,
+  -files/broadcom-sta-6.30.223.271-r4-linux-4.12.patch,
+  -files/broadcom-sta-6.30.223.271-r4-linux-4.15.patch,
+  -files/broadcom-sta-6.30.223.271-r4-linux-4.7.patch,
+  -files/broadcom-sta-6.30.223.271-r4-linux-4.8.patch,
+  -files/broadcom-sta-6.30.223.271-r4-linux-5.1.patch,
+  -files/broadcom-sta-6.30.223.271-r4-linux-5.6.patch,
+  +files/kernel-4.7-to-kernel-5.10.patch:
+  EAPI bump, add linux 5.10 compatibility
+
+  16 May 2020; V3n3RiX <venerix@redcorelinux.org>
+  files/broadcom-sta-6.30.223.271-r4-linux-5.6.patch:
+  add a more complete 5.6 patch
+
+*broadcom-sta-dkms-6.30.223.271-r4 (16 May 2020)
+
+  16 May 2020; V3n3RiX <venerix@redcorelinux.org>
+  +broadcom-sta-dkms-6.30.223.271-r4.ebuild,
+  -broadcom-sta-dkms-6.30.223.271-r5.ebuild,
+  +files/broadcom-sta-6.30.223.141-eth-to-wlan.patch,
+  +files/broadcom-sta-6.30.223.141-gcc.patch,
+  +files/broadcom-sta-6.30.223.141-makefile.patch,
+  +files/broadcom-sta-6.30.223.248-r3-Wno-date-time.patch,
+  +files/broadcom-sta-6.30.223.271-r1-linux-3.18.patch,
+  +files/broadcom-sta-6.30.223.271-r2-linux-4.3-v2.patch,
+  +files/broadcom-sta-6.30.223.271-r4-linux-4.11.patch,
+  +files/broadcom-sta-6.30.223.271-r4-linux-4.12.patch,
+  +files/broadcom-sta-6.30.223.271-r4-linux-4.15.patch,
+  +files/broadcom-sta-6.30.223.271-r4-linux-4.7.patch,
+  +files/broadcom-sta-6.30.223.271-r4-linux-4.8.patch,
+  +files/broadcom-sta-6.30.223.271-r4-linux-5.1.patch,
+  +files/broadcom-sta-6.30.223.271-r4-linux-5.6.patch,
+  -files/broadcom-sta-dkms-6.30.223.271-linux-3.18-to-5.6.patch:
+  Revert "sys-kernel/broadcom-sta-dkms : rediff and merge all patches from
+  3.18 to 5.6"
+
+  This reverts commit ac8e95fce9e65d8b24d50ecc33b4340bf9a90027.
+
+*broadcom-sta-dkms-6.30.223.271-r5 (16 May 2020)
+
+  16 May 2020; V3n3RiX <venerix@redcorelinux.org>
+  -broadcom-sta-dkms-6.30.223.271-r4.ebuild,
+  +broadcom-sta-dkms-6.30.223.271-r5.ebuild,
+  -files/broadcom-sta-6.30.223.141-eth-to-wlan.patch,
+  -files/broadcom-sta-6.30.223.141-gcc.patch,
+  -files/broadcom-sta-6.30.223.141-makefile.patch,
+  -files/broadcom-sta-6.30.223.248-r3-Wno-date-time.patch,
+  -files/broadcom-sta-6.30.223.271-r1-linux-3.18.patch,
+  -files/broadcom-sta-6.30.223.271-r2-linux-4.3-v2.patch,
+  -files/broadcom-sta-6.30.223.271-r4-linux-4.11.patch,
+  -files/broadcom-sta-6.30.223.271-r4-linux-4.12.patch,
+  -files/broadcom-sta-6.30.223.271-r4-linux-4.15.patch,
+  -files/broadcom-sta-6.30.223.271-r4-linux-4.7.patch,
+  -files/broadcom-sta-6.30.223.271-r4-linux-4.8.patch,
+  -files/broadcom-sta-6.30.223.271-r4-linux-5.1.patch,
+  -files/broadcom-sta-6.30.223.271-r4-linux-5.6.patch,
+  +files/broadcom-sta-dkms-6.30.223.271-linux-3.18-to-5.6.patch:
+  rediff and merge all patches from 3.18 to 5.6
+
+*broadcom-sta-dkms-6.30.223.271-r4 (16 May 2020)
+
+  16 May 2020; V3n3RiX <venerix@redcorelinux.org>
+  -broadcom-sta-dkms-6.30.223.271-r3.ebuild,
+  +broadcom-sta-dkms-6.30.223.271-r4.ebuild,
+  +files/broadcom-sta-6.30.223.271-r4-linux-5.6.patch:
+  add kernel 5.6 patch
+
+*broadcom-sta-dkms-6.30.223.271-r3 (07 Jul 2019)
+
+  07 Jul 2019; V3n3RiX <venerix@redcorelinux.org>
+  -broadcom-sta-dkms-6.30.223.271-r2.ebuild,
+  +broadcom-sta-dkms-6.30.223.271-r3.ebuild,
+  +files/broadcom-sta-6.30.223.271-r4-linux-5.1.patch,
+  +files/broadcom-sta-dkms.conf:
+  add kernel 5.1 compat patch
+
+*broadcom-sta-dkms-6.30.223.271-r2 (04 Apr 2018)
+
+  04 Apr 2018; V3n3RiX <venerix@redcorelinux.org>
+  -broadcom-sta-dkms-6.30.223.271-r1.ebuild,
+  +broadcom-sta-dkms-6.30.223.271-r2.ebuild,
+  -files/broadcom-sta-6.30.223.141-license.patch,
+  -files/broadcom-sta-6.30.223.141-linux-3.10.0.patch,
+  -files/broadcom-sta-6.30.223.141-linux-3.15.patch,
+  -files/broadcom-sta-6.30.223.141-linux-recent.patch,
+  -files/broadcom-sta-6.30.223.248-linux-3.17.patch,
+  -files/broadcom-sta-6.30.223.248-linux-3.18.patch,
+  -files/broadcom-sta-6.30.223.248-r3-linux-3.15-3.18.patch,
+  -files/broadcom-sta-6.30.223.248-r3-linux-4.0.patch,
+  -files/broadcom-sta-6.30.223.248-r4-linux-4.2.patch,
+  -files/broadcom-sta-6.30.223.271-r2-linux-4.3.patch,
+  +files/broadcom-sta-6.30.223.271-r4-linux-4.15.patch,
+  -files/broadcom-sta-6.30.223.30-linux-3.10.0.patch,
+  -files/broadcom-sta-6.30.223.30-linux-3.9.0.patch,
+  -files/broadcom-sta-6.30.223.30-makefile.patch,
+  -files/broadcom-sta-dkms-6.30.223.30-conf.patch,
+  -files/broadcom-sta-dkms-6.30.223.30.patch:
+  net-wireless/broadcom-sta : add compatibility with recent kernels
+
+*broadcom-sta-dkms-6.30.223.271-r1 (18 Dec 2017)
+
+  18 Dec 2017; V3n3RiX <venerix@redcorelinux.org>
+  +broadcom-sta-dkms-6.30.223.271-r1.ebuild,
+  -broadcom-sta-dkms-6.30.223.271-r1710.ebuild:
+  sys-fs/{spl,zfs} : version bump
+
+*broadcom-sta-dkms-6.30.223.271-r1710 (29 Oct 2017)
+
+  29 Oct 2017; V3n3RiX <venerix@redcorelinux.org>
+  -broadcom-sta-dkms-6.30.223.271-r1708.ebuild,
+  +broadcom-sta-dkms-6.30.223.271-r1710.ebuild:
+  more revbumps for redcore 1710
+
+*broadcom-sta-dkms-6.30.223.271-r1708 (06 Oct 2017)
+
+  06 Oct 2017; V3n3RiX <venerix@redcorelinux.org>
+  +broadcom-sta-dkms-6.30.223.271-r1708.ebuild,
+  -broadcom-sta-dkms-6.30.223.271-r1710.ebuild:
+  Revert "sys-kernel : trigger dkms build for the running kernel right away,
+  so one can load the modules without reboot"
+
+  This reverts commit c70485933fba5f01511a1f600174096ab2125693.
+
+*broadcom-sta-dkms-6.30.223.271-r1710 (06 Oct 2017)
+
+  06 Oct 2017; V3n3RiX <venerix@redcorelinux.org>
+  -broadcom-sta-dkms-6.30.223.271-r1708.ebuild,
+  +broadcom-sta-dkms-6.30.223.271-r1710.ebuild:
+  sys-kernel : trigger dkms build for the running kernel right away, so one
+  can load the modules without reboot
+
+*broadcom-sta-dkms-6.30.223.271-r1708 (13 Aug 2017)
+
+  13 Aug 2017; V3n3RiX <venerix@redcorelinux.org>
+  -broadcom-sta-dkms-6.30.223.271-r1706.ebuild,
+  +broadcom-sta-dkms-6.30.223.271-r1708.ebuild:
+  redcore 1708 gamma crucis : bump ebuilds
+
+  24 Jul 2017; V3n3RiX <venerix@redcorelinux.org>
+  broadcom-sta-dkms-6.30.223.271-r1706.ebuild:
+  sources no longer available upstream...no biggie...we have a backup in zpool
+  mirror, so restore it
+
+  24 Jul 2017; V3n3RiX <venerix@redcorelinux.org>
+  broadcom-sta-dkms-6.30.223.271-r1706.ebuild,
+  -files/broadcom-sta-6.30.223.271-r3-linux-4.7.patch,
+  +files/broadcom-sta-6.30.223.271-r4-linux-4.11.patch,
+  +files/broadcom-sta-6.30.223.271-r4-linux-4.12.patch,
+  +files/broadcom-sta-6.30.223.271-r4-linux-4.7.patch,
+  +files/broadcom-sta-6.30.223.271-r4-linux-4.8.patch:
+  broadcom-sta-dkms : patch for Linux 4.12 changes
+
+*broadcom-sta-dkms-6.30.223.271-r1706 (23 Jul 2017)
+
+  23 Jul 2017; V3n3RiX <venerix@redcorelinux.org>
+  -broadcom-sta-dkms-6.30.223.271.ebuild,
+  +broadcom-sta-dkms-6.30.223.271-r1706.ebuild, files/dkms.conf:
+  install all dkms modules under /lib/modules/4.9.39-redcore/extra/dkms
+
+  24 Oct 2016; V3n3RiX <venerix@rogentos.ro>
+  broadcom-sta-dkms-6.30.223.271.ebuild:
+  fix race conditions
+
+  24 Oct 2016; StefanCristian <steven.darklight@gmail.com>
+  broadcom-sta-dkms-6.30.223.271.ebuild:
+  Fixed the dkms.conf installation issue
+
+  24 Oct 2016; V3n3RiX <venerix@rogentos.ro>
+  broadcom-sta-dkms-6.30.223.271.ebuild:
+  fix deps
+
+*broadcom-sta-dkms-6.30.223.271 (24 Oct 2016)
+
+  24 Oct 2016; V3n3RiX <venerix@rogentos.ro>
+  +broadcom-sta-dkms-6.30.223.271.ebuild,
+  -broadcom-sta-dkms-6.30.223.271-r3.ebuild:
+  no revision in here
+
+  24 Oct 2016; V3n3RiX <venerix@rogentos.ro>
+  broadcom-sta-dkms-6.30.223.271-r3.ebuild:
+  sometimes I think I have to draw things for StefanCristian
+
+  24 Oct 2016; StefanCristian <steven.darklight@gmail.com>
+  broadcom-sta-dkms-6.30.223.271-r3.ebuild:
+  Fixed ebuild unneded stuff.
+
+*broadcom-sta-dkms-6.30.223.271-r3 (24 Oct 2016)
+
+  24 Oct 2016; StefanCristian <steven.darklight@gmail.com>
+  +broadcom-sta-dkms-6.30.223.271-r3.ebuild,
+  +files/broadcom-sta-6.30.223.141-eth-to-wlan.patch,
+  +files/broadcom-sta-6.30.223.141-gcc.patch,
+  +files/broadcom-sta-6.30.223.141-license.patch,
+  +files/broadcom-sta-6.30.223.141-linux-3.10.0.patch,
+  +files/broadcom-sta-6.30.223.141-linux-3.15.patch,
+  +files/broadcom-sta-6.30.223.141-linux-recent.patch,
+  +files/broadcom-sta-6.30.223.141-makefile.patch,
+  +files/broadcom-sta-6.30.223.248-linux-3.17.patch,
+  +files/broadcom-sta-6.30.223.248-linux-3.18.patch,
+  +files/broadcom-sta-6.30.223.248-r3-Wno-date-time.patch,
+  +files/broadcom-sta-6.30.223.248-r3-linux-3.15-3.18.patch,
+  +files/broadcom-sta-6.30.223.248-r3-linux-4.0.patch,
+  +files/broadcom-sta-6.30.223.248-r4-linux-4.2.patch,
+  +files/broadcom-sta-6.30.223.271-r1-linux-3.18.patch,
+  +files/broadcom-sta-6.30.223.271-r2-linux-4.3-v2.patch,
+  +files/broadcom-sta-6.30.223.271-r2-linux-4.3.patch,
+  +files/broadcom-sta-6.30.223.271-r3-linux-4.7.patch,
+  +files/broadcom-sta-6.30.223.30-linux-3.10.0.patch,
+  +files/broadcom-sta-6.30.223.30-linux-3.9.0.patch,
+  +files/broadcom-sta-6.30.223.30-makefile.patch,
+  +files/broadcom-sta-dkms-6.30.223.30-conf.patch,
+  +files/broadcom-sta-dkms-6.30.223.30.patch, +files/dkms.conf:
+  Adding broadcom-sta-dkms for collection and usage ( of dkms ) :P
+

@@ -1,0 +1,40 @@
+# ChangeLog for sys-kernel/nvidia-drivers-legacy-dkms
+# Copyright 1999-2021 Gentoo Foundation; Distributed under the GPL v2
+# (auto-generated from git log)
+
+*nvidia-drivers-legacy-dkms-390.141 (04 Feb 2021)
+
+  04 Feb 2021; V3n3RiX <venerix@redcorelinux.org> +files/dkms.patch,
+  -files/kernel-5.10.patch, -files/kernel-5.8.patch, -files/kernel-5.9.patch,
+  -files/nvidia-drivers-legacy-dkms-390.138-conf.patch,
+  -nvidia-drivers-legacy-dkms-390.138.ebuild,
+  +nvidia-drivers-legacy-dkms-390.141.ebuild:
+  x11-drivers/nvidia-drivers-legacy : version bump (v390.141)
+
+*nvidia-drivers-legacy-dkms-390.138 (07 Jan 2021)
+
+  07 Jan 2021; V3n3RiX <venerix@redcorelinux.org> -files/kernel-4.16.patch,
+  +files/kernel-5.10.patch, -files/kernel-5.5.patch, -files/kernel-5.6.patch,
+  +files/kernel-5.8.patch, +files/kernel-5.9.patch,
+  -files/nvidia-drivers-legacy-dkms-390.132-conf.patch,
+  +files/nvidia-drivers-legacy-dkms-390.138-conf.patch,
+  -nvidia-drivers-legacy-dkms-390.132-r4.ebuild,
+  +nvidia-drivers-legacy-dkms-390.138.ebuild:
+  x11-drivers/nvidia-drivers-legacy : version bump (v390.138)
+
+*nvidia-drivers-legacy-dkms-390.132-r4 (17 May 2020)
+
+  17 May 2020; V3n3RiX <venerix@redcorelinux.org> +files/kernel-5.6.patch,
+  -nvidia-drivers-legacy-dkms-390.132-r3.ebuild,
+  +nvidia-drivers-legacy-dkms-390.132-r4.ebuild:
+  x11-drivers/nvidia-drivers-legacy : add kernel 5.6 patch
+
+*nvidia-drivers-legacy-dkms-390.132-r3 (04 May 2020)
+
+  04 May 2020; V3n3RiX <venerix@redcorelinux.org> +files/kernel-4.16.patch,
+  +files/kernel-5.5.patch,
+  +files/nvidia-drivers-legacy-dkms-390.132-conf.patch,
+  +nvidia-drivers-legacy-dkms-390.132-r3.ebuild:
+  move : x11-drivers/nvidia-legacy-drivers -> x11-drivers/nvidia-drivers-
+  legacy, fix eselect-opencl (now deprecated) conflict
+

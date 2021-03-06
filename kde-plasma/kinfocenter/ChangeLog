@@ -1,0 +1,235 @@
+# ChangeLog for kde-plasma/kinfocenter
+# Copyright 1999-2021 Gentoo Foundation; Distributed under the GPL v2
+# (auto-generated from git log)
+
+*kinfocenter-5.21.2-r10 (03 Mar 2021)
+
+  03 Mar 2021; V3n3RiX <venerix@redcorelinux.org>
+  -kinfocenter-5.21.0-r10.ebuild, +kinfocenter-5.21.2-r10.ebuild:
+  version bump
+
+*kinfocenter-5.21.0-r10 (17 Feb 2021)
+
+  17 Feb 2021; V3n3RiX <venerix@redcorelinux.org>
+  -kinfocenter-5.20.5-r10.ebuild, +kinfocenter-5.21.0-r10.ebuild:
+  version bump
+
+*kinfocenter-5.20.5-r10 (08 Jan 2021)
+
+  08 Jan 2021; V3n3RiX <venerix@redcorelinux.org>
+  -kinfocenter-5.20.4-r10.ebuild, +kinfocenter-5.20.5-r10.ebuild:
+  version bump
+
+*kinfocenter-5.20.4-r10 (15 Dec 2020)
+
+  15 Dec 2020; V3n3RiX <venerix@redcorelinux.org>
+  -kinfocenter-5.19.5-r10.ebuild, +kinfocenter-5.20.4-r10.ebuild:
+  version bump
+
+*kinfocenter-5.19.5-r10 (02 Sep 2020)
+
+  02 Sep 2020; V3n3RiX <venerix@redcorelinux.org>
+  -kinfocenter-5.19.4-r10.ebuild, +kinfocenter-5.19.5-r10.ebuild:
+  version bump
+
+*kinfocenter-5.19.4-r10 (25 Aug 2020)
+
+  25 Aug 2020; V3n3RiX <venerix@redcorelinux.org>
+  -kinfocenter-5.19.2-r10.ebuild, +kinfocenter-5.19.4-r10.ebuild:
+  version bump
+
+*kinfocenter-5.19.2-r10 (04 Jul 2020)
+
+  04 Jul 2020; V3n3RiX <venerix@redcorelinux.org>
+  -kinfocenter-5.19.1-r10.ebuild, +kinfocenter-5.19.2-r10.ebuild:
+  version bump
+
+*kinfocenter-5.19.1-r10 (21 Jun 2020)
+
+  21 Jun 2020; V3n3RiX <venerix@redcorelinux.org>
+  -kinfocenter-5.19.0-r10.ebuild, +kinfocenter-5.19.1-r10.ebuild:
+  version bump
+
+*kinfocenter-5.19.0-r10 (13 Jun 2020)
+
+  13 Jun 2020; V3n3RiX <venerix@redcorelinux.org>
+  -kinfocenter-5.18.5-r10.ebuild, +kinfocenter-5.19.0-r10.ebuild:
+  version bump
+
+*kinfocenter-5.18.5-r10 (15 May 2020)
+
+  15 May 2020; V3n3RiX <venerix@redcorelinux.org>
+  -kinfocenter-5.18.4.1-r10.ebuild, +kinfocenter-5.18.5-r10.ebuild:
+  version bump
+
+  17 Apr 2020; V3n3RiX <venerix@redcorelinux.org>
+  kinfocenter-5.18.4.1-r10.ebuild:
+  fix IUSE errors
+
+  17 Apr 2020; V3n3RiX <venerix@redcorelinux.org>
+  kinfocenter-5.18.4.1-r10.ebuild:
+  adjust USE flags
+
+  17 Apr 2020; V3n3RiX <venerix@redcorelinux.org>
+  kinfocenter-5.18.4.1-r10.ebuild:
+  fix deps
+
+*kinfocenter-5.18.4.1-r10 (17 Apr 2020)
+
+  17 Apr 2020; V3n3RiX <venerix@redcorelinux.org>
+  -kinfocenter-5.18.2-r10.ebuild, +kinfocenter-5.18.4.1-r10.ebuild:
+  version bump
+
+*kinfocenter-5.18.2-r10 (29 Feb 2020)
+
+  29 Feb 2020; V3n3RiX <venerix@redcorelinux.org>
+  -kinfocenter-5.18.0-r10.ebuild, +kinfocenter-5.18.2-r10.ebuild:
+  version bump
+
+*kinfocenter-5.18.0-r10 (17 Feb 2020)
+
+  17 Feb 2020; V3n3RiX <venerix@redcorelinux.org>
+  -kinfocenter-5.17.5-r10.ebuild, +kinfocenter-5.18.0-r10.ebuild:
+  version bump
+
+*kinfocenter-5.17.5-r10 (15 Jan 2020)
+
+  15 Jan 2020; V3n3RiX <venerix@redcorelinux.org>
+  -kinfocenter-5.17.4-r314.ebuild, +kinfocenter-5.17.5-r10.ebuild:
+  version bump
+
+*kinfocenter-5.17.4-r314 (16 Dec 2019)
+
+  16 Dec 2019; V3n3RiX <venerix@redcorelinux.org>
+  -kinfocenter-5.17.3-r314.ebuild, +kinfocenter-5.17.4-r314.ebuild:
+  version bump
+
+*kinfocenter-5.17.3-r314 (18 Nov 2019)
+
+  18 Nov 2019; V3n3RiX <venerix@redcorelinux.org>
+  -kinfocenter-5.17.2-r314.ebuild, +kinfocenter-5.17.3-r314.ebuild:
+  version bump
+
+*kinfocenter-5.17.2-r314 (03 Nov 2019)
+
+  03 Nov 2019; V3n3RiX <venerix@redcorelinux.org>
+  -kinfocenter-5.16.5-r314.ebuild, +kinfocenter-5.17.2-r314.ebuild:
+  version bump
+
+*kinfocenter-5.16.5-r314 (06 Sep 2019)
+
+  06 Sep 2019; V3n3RiX <venerix@redcorelinux.org>
+  -kinfocenter-5.16.4-r314.ebuild, +kinfocenter-5.16.5-r314.ebuild:
+  version bump
+
+*kinfocenter-5.16.4-r314 (02 Aug 2019)
+
+  02 Aug 2019; V3n3RiX <venerix@redcorelinux.org>
+  -kinfocenter-5.16.3-r314.ebuild, +kinfocenter-5.16.4-r314.ebuild:
+  version bump
+
+*kinfocenter-5.16.3-r314 (10 Jul 2019)
+
+  10 Jul 2019; V3n3RiX <venerix@redcorelinux.org>
+  -kinfocenter-5.16.2-r314.ebuild, +kinfocenter-5.16.3-r314.ebuild:
+  version bump
+
+*kinfocenter-5.16.2-r314 (30 Jun 2019)
+
+  30 Jun 2019; V3n3RiX <venerix@redcorelinux.org>
+  -kinfocenter-5.16.1-r1337.ebuild, +kinfocenter-5.16.2-r314.ebuild:
+  kde-apps/kinfocenter : version bump
+
+*kinfocenter-5.16.1-r1337 (22 Jun 2019)
+
+  22 Jun 2019; V3n3RiX <venerix@redcorelinux.org>
+  -kinfocenter-5.16.0-r1337.ebuild, +kinfocenter-5.16.1-r1337.ebuild:
+  version bump
+
+*kinfocenter-5.16.0-r1337 (16 Jun 2019)
+
+  16 Jun 2019; V3n3RiX <venerix@redcorelinux.org>
+  -kinfocenter-5.15.5-r1337.ebuild, +kinfocenter-5.16.0-r1337.ebuild:
+  version bump
+
+*kinfocenter-5.15.5-r1337 (17 May 2019)
+
+  17 May 2019; V3n3RiX <venerix@redcorelinux.org>
+  -kinfocenter-5.15.4-r1337.ebuild, +kinfocenter-5.15.5-r1337.ebuild:
+  version bump
+
+*kinfocenter-5.15.4-r1337 (05 Apr 2019)
+
+  05 Apr 2019; V3n3RiX <venerix@redcorelinux.org>
+  -kinfocenter-5.15.3-r1337.ebuild, +kinfocenter-5.15.4-r1337.ebuild:
+  version bump
+
+*kinfocenter-5.15.3-r1337 (19 Mar 2019)
+
+  19 Mar 2019; V3n3RiX <venerix@redcorelinux.org>
+  -kinfocenter-5.15.2-r1337.ebuild, +kinfocenter-5.15.3-r1337.ebuild:
+  version bump
+
+*kinfocenter-5.15.2-r1337 (03 Mar 2019)
+
+  03 Mar 2019; V3n3RiX <venerix@redcorelinux.org>
+  -kinfocenter-5.15.1-r1337.ebuild, +kinfocenter-5.15.2-r1337.ebuild:
+  version bump
+
+*kinfocenter-5.15.1-r1337 (20 Feb 2019)
+
+  20 Feb 2019; V3n3RiX <venerix@redcorelinux.org>
+  -kinfocenter-5.15.0-r1337.ebuild, +kinfocenter-5.15.1-r1337.ebuild:
+  version bump
+
+*kinfocenter-5.15.0-r1337 (16 Feb 2019)
+
+  16 Feb 2019; V3n3RiX <venerix@redcorelinux.org>
+  -kinfocenter-5.14.5-r1337.ebuild, +kinfocenter-5.15.0-r1337.ebuild:
+  version bump
+
+*kinfocenter-5.14.5-r1337 (12 Jan 2019)
+
+  12 Jan 2019; V3n3RiX <venerix@redcorelinux.org>
+  -kinfocenter-5.14.4-r1337.ebuild, +kinfocenter-5.14.5-r1337.ebuild:
+  version bump
+
+*kinfocenter-5.14.4-r1337 (25 Dec 2018)
+
+  25 Dec 2018; V3n3RiX <venerix@redcorelinux.org>
+  -kinfocenter-5.14.3-r1337.ebuild, +kinfocenter-5.14.4-r1337.ebuild:
+  version bump
+
+*kinfocenter-5.14.3-r1337 (18 Nov 2018)
+
+  18 Nov 2018; V3n3RiX <venerix@redcorelinux.org>
+  -kinfocenter-5.14.2-r1337.ebuild, +kinfocenter-5.14.3-r1337.ebuild:
+  kde-apps/kdecore-meta : version bump && kde-frameworks/{kde-gtk-
+  config,kinfocenter,libkworkspace} : version bump
+
+  27 Oct 2018; V3n3RiX <venerix@redcorelinux.org>
+  kinfocenter-5.14.2-r1337.ebuild:
+  kde-plasma/{kde-gtk-config,kinfocenter} : keyword testing
+
+*kinfocenter-5.14.2-r1337 (27 Oct 2018)
+
+  27 Oct 2018; V3n3RiX <venerix@redcorelinux.org>
+  -kinfocenter-5.13.5-r1337.ebuild, +kinfocenter-5.14.2-r1337.ebuild:
+  kde-plasma/{kde-gtk-config,kinfocenter} : version bump
+
+*kinfocenter-5.13.5-r1337 (22 Oct 2018)
+
+  22 Oct 2018; V3n3RiX <venerix@redcorelinux.org>
+  -kinfocenter-5.12.5-r1.ebuild, +kinfocenter-5.13.5-r1337.ebuild:
+  version bump
+
+  22 May 2018; V3n3RiX <venerix@redcorelinux.org>
+  kinfocenter-5.12.5-r1.ebuild:
+  kde-plasma/{kde-gtk-config,kinfocenter,plasma-pa} : mark as stable
+
+*kinfocenter-5.12.5-r1 (19 May 2018)
+
+  19 May 2018; V3n3RiX <venerix@redcorelinux.org> +files/glogo-small.png,
+  +files/kcm-about-distrorc, +kinfocenter-5.12.5-r1.ebuild:
+  replace Gentoo's branding with our own
+

@@ -1,0 +1,176 @@
+# ChangeLog for app-emulation/virtualbox-modules
+# Copyright 1999-2021 Gentoo Foundation; Distributed under the GPL v2
+# (auto-generated from git log)
+
+*virtualbox-modules-6.1.18 (16 Feb 2021)
+
+  16 Feb 2021; V3n3RiX <venerix@redcorelinux.org> +files/virtualbox-kmod,
+  -files/virtualbox.conf, -virtualbox-modules-6.1.6.ebuild,
+  +virtualbox-modules-6.1.18.ebuild:
+  version bump
+
+*virtualbox-modules-6.1.6 (17 May 2020)
+
+  17 May 2020; V3n3RiX <venerix@redcorelinux.org>
+  -virtualbox-modules-6.1.0-r2.ebuild, +virtualbox-modules-6.1.6.ebuild:
+  app-emulation/virtualbox : version bump (v6.1.6)
+
+*virtualbox-modules-6.1.0-r2 (29 Feb 2020)
+
+  29 Feb 2020; V3n3RiX <venerix@redcorelinux.org>
+  -virtualbox-modules-6.1.0-r1.ebuild, +virtualbox-modules-6.1.0-r2.ebuild:
+  depend on acct-group/vboxusers
+
+*virtualbox-modules-6.1.0-r1 (10 Feb 2020)
+
+  10 Feb 2020; V3n3RiX <venerix@redcorelinux.org> files/virtualbox.conf,
+  -virtualbox-modules-6.1.0.ebuild, +virtualbox-modules-6.1.0-r1.ebuild:
+  reorder modules
+
+*virtualbox-modules-6.1.0 (31 Dec 2019)
+
+  31 Dec 2019; V3n3RiX <venerix@redcorelinux.org>
+  -virtualbox-modules-6.0.8.ebuild, +virtualbox-modules-6.1.0.ebuild:
+  app-emulation/virtualbox && sys-kernel/virtualbox-modules-dkms : version
+  bump
+
+*virtualbox-modules-6.0.8 (07 Jul 2019)
+
+  07 Jul 2019; V3n3RiX <venerix@redcorelinux.org>
+  -virtualbox-modules-5.2.26.ebuild, +virtualbox-modules-6.0.8.ebuild:
+  app-emulation/virtualbox : version bump
+
+*virtualbox-modules-5.2.26 (10 Feb 2019)
+
+  10 Feb 2019; V3n3RiX <venerix@redcorelinux.org>
+  -virtualbox-modules-5.2.18.ebuild, +virtualbox-modules-5.2.26.ebuild:
+  app-emulation/virtualbox : version bump
+
+*virtualbox-modules-5.2.18 (26 Aug 2018)
+
+  26 Aug 2018; V3n3RiX <venerix@redcorelinux.org>
+  -virtualbox-modules-5.2.10.ebuild, +virtualbox-modules-5.2.18.ebuild:
+  app-emulation/virtualbox : version bump
+
+*virtualbox-modules-5.2.10 (03 May 2018)
+
+  03 May 2018; V3n3RiX <venerix@redcorelinux.org>
+  -virtualbox-modules-5.2.8.ebuild, +virtualbox-modules-5.2.10.ebuild:
+  app-emulation/virtualbox-{modules,modules-dkms,guest-dkms} : version bump
+
+*virtualbox-modules-5.2.8 (12 Apr 2018)
+
+  12 Apr 2018; V3n3RiX <venerix@redcorelinux.org>
+  -virtualbox-modules-5.2.4.ebuild, +virtualbox-modules-5.2.8.ebuild:
+  "app-emulation/virtualbox : version bump...second attempt"
+
+*virtualbox-modules-5.2.4 (12 Apr 2018)
+
+  12 Apr 2018; V3n3RiX <venerix@redcorelinux.org>
+  +virtualbox-modules-5.2.4.ebuild, -virtualbox-modules-5.2.8.ebuild:
+  Revert "app-emulation/virtualbox : version bump...second attempt"
+
+  This reverts commit bc98eb4936a16ad14a291bccd8f67cfbee92a114.
+
+*virtualbox-modules-5.2.8 (12 Apr 2018)
+
+  12 Apr 2018; V3n3RiX <venerix@redcorelinux.org>
+  -virtualbox-modules-5.2.4.ebuild, +virtualbox-modules-5.2.8.ebuild:
+  app-emulation/virtualbox : version bump...second attempt
+
+*virtualbox-modules-5.2.4 (11 Apr 2018)
+
+  11 Apr 2018; V3n3RiX <venerix@redcorelinux.org>
+  +virtualbox-modules-5.2.4.ebuild, -virtualbox-modules-5.2.8.ebuild:
+  Revert "app-emulation/virtualbox : version bump"
+
+  This reverts commit 9962d0ecc0c1a275828ddce9a071d3c2337babbb.
+
+*virtualbox-modules-5.2.8 (11 Apr 2018)
+
+  11 Apr 2018; V3n3RiX <venerix@redcorelinux.org>
+  -virtualbox-modules-5.2.4.ebuild, +virtualbox-modules-5.2.8.ebuild:
+  app-emulation/virtualbox : version bump
+
+*virtualbox-modules-5.2.4 (22 Dec 2017)
+
+  22 Dec 2017; V3n3RiX <venerix@redcorelinux.org>
+  -files/create_vbox_modules_tarball.sh,
+  -virtualbox-modules-5.1.28-r1710.ebuild, +virtualbox-modules-5.2.4.ebuild:
+  app-emulation/virtualbox : version bump
+
+*virtualbox-modules-5.1.28-r1710 (07 Oct 2017)
+
+  07 Oct 2017; V3n3RiX <venerix@redcorelinux.org>
+  -virtualbox-modules-5.1.24-r1708.ebuild,
+  +virtualbox-modules-5.1.28-r1710.ebuild:
+  virtualbox ebuilds : version bump
+
+*virtualbox-modules-5.1.24-r1708 (13 Aug 2017)
+
+  13 Aug 2017; V3n3RiX <venerix@redcorelinux.org>
+  -virtualbox-modules-5.1.24-r1706.ebuild,
+  +virtualbox-modules-5.1.24-r1708.ebuild:
+  redcore 1708 gamma crucis : bump ebuilds
+
+  22 Jul 2017; V3n3RiX <venerix@redcorelinux.org>
+  -virtualbox-modules-5.1.22.ebuild:
+  virtualbox 5.1.22 : remove all components
+
+  22 Jul 2017; V3n3RiX <venerix@redcorelinux.org>
+  virtualbox-modules-5.1.24-r1706.ebuild:
+  fix deps
+
+*virtualbox-modules-5.1.24-r1706 (22 Jul 2017)
+
+  22 Jul 2017; V3n3RiX <venerix@redcorelinux.org>
+  +virtualbox-modules-5.1.24-r1706.ebuild:
+  app-emulation/virtualbox{extpack-oracle,guest-additions,modules} && sys-
+  kernel/virtualbox{guest-dkms,modules-dkms} && x11-drivers/xf86-video-
+  virtualbox : version bump
+
+*virtualbox-modules-5.1.22 (04 Jun 2017)
+
+  04 Jun 2017; V3n3RiX <venerix@redcorelinux.org>
+  -files/virtualbox-modules-4.1.4-pax-const.patch,
+  -files/virtualbox-modules-5.1.10-ALIGN-backport.patch,
+  -virtualbox-modules-5.1.14.ebuild, +virtualbox-modules-5.1.22.ebuild:
+  bump all virtualbox packages to v5.1.22
+
+*virtualbox-modules-5.1.14 (23 Jan 2017)
+
+  23 Jan 2017; V3n3RiX <venerix@redcorelinux.org>
+  +files/create_vbox_modules_tarball.sh,
+  +files/virtualbox-modules-4.1.4-pax-const.patch,
+  +files/virtualbox-modules-5.1.10-ALIGN-backport.patch,
+  -virtualbox-modules-5.1.8.ebuild, +virtualbox-modules-5.1.14.ebuild:
+  update all virtualbox packages to 5.1.14
+
+  24 Oct 2016; V3n3RiX <venerix@rogentos.ro>
+  -files/create_vbox_modules_tarball.sh,
+  -files/virtualbox-modules-4.1.4-pax-const.patch,
+  virtualbox-modules-5.1.8.ebuild:
+  virtualbox-modules-dkms
+
+*virtualbox-modules-5.1.8 (22 Oct 2016)
+
+  22 Oct 2016; V3n3RiX <venerix@rogentos.ro>
+  +files/create_vbox_modules_tarball.sh,
+  +files/virtualbox-modules-4.1.4-pax-const.patch, +files/virtualbox.conf,
+  +virtualbox-modules-5.1.8.ebuild:
+  sync vbox
+
+  15 Apr 2016; V3n3RiX <venerix@rogentos.ro>
+  -files/create_vbox_modules_tarball.sh, -files/virtualbox-modules-3.17.patch,
+  -files/virtualbox-modules-4.1.4-pax-const.patch, -files/virtualbox.conf,
+  -virtualbox-modules-5.0.0.ebuild:
+  drop virtualbox, we use the one from gentoo tree
+
+*virtualbox-modules-5.0.0 (12 Jul 2015)
+
+  12 Jul 2015; V3n3RiX <venerix@rogentos.ro>
+  +files/create_vbox_modules_tarball.sh, +files/virtualbox-modules-3.17.patch,
+  +files/virtualbox-modules-4.1.4-pax-const.patch, +files/virtualbox.conf,
+  +virtualbox-modules-5.0.0.ebuild:
+  here we go...virtualbox-bin 5.0.0 && virtualbox-modules 5.0.0
+

@@ -1,0 +1,104 @@
+# ChangeLog for net-libs/webkit-gtk
+# Copyright 1999-2021 Gentoo Foundation; Distributed under the GPL v2
+# (auto-generated from git log)
+
+*webkit-gtk-2.30.3-r10 (26 Dec 2020)
+
+  26 Dec 2020; V3n3RiX <venerix@redcorelinux.org>
+  +webkit-gtk-2.30.3-r10.ebuild, -webkit-gtk-2.30.4-r10.ebuild:
+  Revert "net-libs/webkit-gtk : version bump"
+
+  This reverts commit e8cd6f0a12a4cf86f0d6bd394471a504f690e8e9.
+
+  26 Dec 2020; V3n3RiX <venerix@redcorelinux.org>
+  webkit-gtk-2.30.4-r10.ebuild:
+  Revert "net-libs/webkit-gtk : fix eclass call"
+
+  This reverts commit 49a893722b374f1edf8a1ae45f8356004eaeb3d4.
+
+  26 Dec 2020; V3n3RiX <venerix@redcorelinux.org>
+  webkit-gtk-2.30.4-r10.ebuild:
+  fix eclass call
+
+*webkit-gtk-2.30.4-r10 (25 Dec 2020)
+
+  25 Dec 2020; V3n3RiX <venerix@redcorelinux.org>
+  -webkit-gtk-2.30.3-r10.ebuild, +webkit-gtk-2.30.4-r10.ebuild:
+  version bump
+
+*webkit-gtk-2.30.3-r10 (16 Dec 2020)
+
+  16 Dec 2020; V3n3RiX <venerix@redcorelinux.org>
+  +files/2.30.3-fix-noGL-build.patch, +files/2.30.3-icu68.patch,
+  -webkit-gtk-2.28.4-r10.ebuild, +webkit-gtk-2.30.3-r10.ebuild:
+  version bump
+
+  25 Aug 2020; V3n3RiX <venerix@redcorelinux.org>
+  webkit-gtk-2.28.4-r10.ebuild:
+  drop the use of ruby-single eclass
+
+*webkit-gtk-2.28.4-r10 (25 Aug 2020)
+
+  25 Aug 2020; V3n3RiX <venerix@redcorelinux.org>
+  -files/2.26.3-fix-gtk-doc.patch, -files/2.28.2-fix-ppc64-JSC.patch,
+  -files/2.28.2-fix-yelp-desktopless-build.patch,
+  -files/2.28.2-use-gst-audiointerleave.patch,
+  +files/2.28.4-non-jumbo-fix2.patch, -webkit-gtk-2.28.2-r10.ebuild,
+  +webkit-gtk-2.28.4-r10.ebuild:
+  version bump
+
+*webkit-gtk-2.28.2-r10 (15 May 2020)
+
+  15 May 2020; V3n3RiX <venerix@redcorelinux.org>
+  +files/2.28.2-fix-ppc64-JSC.patch,
+  +files/2.28.2-fix-yelp-desktopless-build.patch,
+  +files/2.28.2-non-jumbo-fix.patch,
+  +files/2.28.2-opengl-without-X-fixes.patch,
+  +files/2.28.2-use-gst-audiointerleave.patch, -webkit-gtk-2.28.1-r10.ebuild,
+  +webkit-gtk-2.28.2-r10.ebuild:
+  version bump
+
+  29 Apr 2020; V3n3RiX <venerix@redcorelinux.org>
+  files/2.26.3-fix-gtk-doc.patch,
+  files/webkit-gtk-2.24.4-eglmesaext-include.patch,
+  webkit-gtk-2.28.1-r10.ebuild:
+  restore file permissions, changed everything to 755 by mistake
+
+  29 Apr 2020; V3n3RiX <venerix@redcorelinux.org>
+  files/2.26.3-fix-gtk-doc.patch,
+  files/webkit-gtk-2.24.4-eglmesaext-include.patch,
+  webkit-gtk-2.28.1-r10.ebuild:
+  sys-apps/apparmor-utils : add python3.7 compat
+
+*webkit-gtk-2.28.1-r10 (25 Apr 2020)
+
+  25 Apr 2020; V3n3RiX <venerix@redcorelinux.org>
+  -files/2.26.2-fix-arm-non-unified-build.patch,
+  -webkit-gtk-2.26.4-r10.ebuild, +webkit-gtk-2.28.1-r10.ebuild:
+  version bump
+
+*webkit-gtk-2.26.4-r10 (17 Feb 2020)
+
+  17 Feb 2020; V3n3RiX <venerix@redcorelinux.org>
+  -files/2.26.3-fix-noGL-wayland-build.patch, -webkit-gtk-2.26.3-r10.ebuild,
+  +webkit-gtk-2.26.4-r10.ebuild:
+  version bump
+
+*webkit-gtk-2.26.3-r10 (07 Feb 2020)
+
+  07 Feb 2020; V3n3RiX <venerix@redcorelinux.org>
+  +files/2.26.2-fix-arm-non-unified-build.patch,
+  -files/2.26.2-fix-noGL-build.patch, +files/2.26.3-fix-gtk-doc.patch,
+  +files/2.26.3-fix-noGL-wayland-build.patch,
+  -files/webkit-gtk-2.24.4-icu-65.patch, -webkit-gtk-2.26.2-r10.ebuild,
+  +webkit-gtk-2.26.3-r10.ebuild:
+  version bump
+
+*webkit-gtk-2.26.2-r10 (19 Jan 2020)
+
+  19 Jan 2020; V3n3RiX <venerix@redcorelinux.org>
+  +files/2.26.2-fix-noGL-build.patch,
+  +files/webkit-gtk-2.24.4-eglmesaext-include.patch,
+  +files/webkit-gtk-2.24.4-icu-65.patch, +webkit-gtk-2.26.2-r10.ebuild:
+  import from gentoo, don't use ruby-single.eclass
+

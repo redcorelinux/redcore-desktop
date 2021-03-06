@@ -1,0 +1,52 @@
+# ChangeLog for app-emulation/steam-native-runtime
+# Copyright 1999-2021 Gentoo Foundation; Distributed under the GPL v2
+# (auto-generated from git log)
+
+  21 Nov 2020; V3n3RiX <venerix@redcorelinux.org>
+  steam-native-runtime-1.0.0.61-r2.ebuild:
+  fix typo
+
+*steam-native-runtime-1.0.0.61-r2 (21 Nov 2020)
+
+  21 Nov 2020; V3n3RiX <venerix@redcorelinux.org>
+  +steam-native-runtime-1.0.0.61-r2.ebuild:
+  hmmm, wtf happened in here
+
+  21 Nov 2020; V3n3RiX <venerix@redcorelinux.org> files/redcore-steam-native,
+  -steam-native-runtime-1.0.0.61-r1.ebuild:
+  app-emulation/{linux-steam-integration,steam-native-runtime} : unbreak with
+  >=net-misc/networkmanager-1.18
+
+  30 Apr 2020; V3n3RiX <venerix@redcorelinux.org> files/redcore-steam-native:
+  fix leftovers
+
+*steam-native-runtime-1.0.0.61-r1 (10 Feb 2020)
+
+  10 Feb 2020; V3n3RiX <venerix@redcorelinux.org>
+  -steam-native-runtime-1.0.0.61.ebuild,
+  +steam-native-runtime-1.0.0.61-r1.ebuild:
+  dev-libs/libappindicator SLOT 2 is set for removal from gentoo in 30 days,
+  so drop the dependency
+
+  07 Jan 2020; V3n3RiX <venerix@redcorelinux.org>
+  steam-native-runtime-1.0.0.61.ebuild:
+  fix variable
+
+  07 Jan 2020; V3n3RiX <venerix@redcorelinux.org>
+  steam-native-runtime-1.0.0.61.ebuild:
+  add S
+
+  07 Jan 2020; V3n3RiX <venerix@redcorelinux.org>
+  steam-native-runtime-1.0.0.61.ebuild:
+  rdepend on app-emulation/steam
+
+  07 Jan 2020; V3n3RiX <venerix@redcorelinux.org>
+  steam-native-runtime-1.0.0.61.ebuild:
+  fix deps
+
+*steam-native-runtime-1.0.0.61 (07 Jan 2020)
+
+  07 Jan 2020; V3n3RiX <venerix@redcorelinux.org> +files/redcore-steam-native,
+  +files/steam-native-runtime.desktop, +steam-native-runtime-1.0.0.61.ebuild:
+  new package
+

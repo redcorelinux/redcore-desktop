@@ -1,0 +1,30 @@
+# ChangeLog for dev-python/wget
+# Copyright 1999-2021 Gentoo Foundation; Distributed under the GPL v2
+# (auto-generated from git log)
+
+  22 Jan 2021; V3n3RiX <venerix@redcorelinux.org> wget-2.2-r1.ebuild:
+  dev-python/{animation,wget} : adjust PYTHON_COMPAT
+
+  29 Apr 2020; V3n3RiX <venerix@redcorelinux.org> wget-2.2-r1.ebuild:
+  restore file permissions, changed everything to 755 by mistake
+
+  29 Apr 2020; V3n3RiX <venerix@redcorelinux.org> wget-2.2-r1.ebuild:
+  sys-apps/apparmor-utils : add python3.7 compat
+
+*wget-2.2-r1 (25 Apr 2020)
+
+  25 Apr 2020; V3n3RiX <venerix@redcorelinux.org> -wget-2.2.ebuild,
+  +wget-2.2-r1.ebuild:
+  revision bump, add python3.7 COMPAT
+
+*wget-2.2 (04 Aug 2018)
+
+  04 Aug 2018; V3n3RiX <venerix@redcorelinux.org> +wget-2.2.ebuild,
+  -wget-9999.ebuild:
+  changelog says v2.2, so rename ebuild
+
+*wget-9999 (04 Aug 2018)
+
+  04 Aug 2018; V3n3RiX <venerix@redcorelinux.org> +wget-9999.ebuild:
+  new package
+

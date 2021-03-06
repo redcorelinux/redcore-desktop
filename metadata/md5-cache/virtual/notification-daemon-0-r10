@@ -1,0 +1,6 @@
+DEFINED_PHASES=-
+DESCRIPTION=Virtual (dummy package) for notification daemon dbus service
+EAPI=7
+KEYWORDS=amd64
+SLOT=0
+_md5_=ccd31d778b8ba698280f4ecdaf5a3608
