@@ -37,7 +37,6 @@ PATCHES=(
 	"${FILESDIR}"/"${KV_MAJOR}"-Unknow-SSD-HFM128GDHTNG-8310B-QUIRK_NO_APST.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-nvme-suspend-resume-workaround.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-nvme-pci-more-info.patch
-	"${FILESDIR}"/"${KV_MAJOR}"-acer-wmi-silence-unknow-functions-messages.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-nvme-hwmon.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-linux-hardened.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-uksm-linux-hardened.patch
