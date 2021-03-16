@@ -49,6 +49,7 @@ QA_PREBUILT="opt/* usr/lib*"
 
 PATCHES=( 
 	"${FILESDIR}"/dkms.patch
+	"${FILESDIR}"/kernel-5.11.patch
 )
 
 S=${WORKDIR}/
