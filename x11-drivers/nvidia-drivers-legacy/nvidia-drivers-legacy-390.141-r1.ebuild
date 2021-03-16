@@ -17,7 +17,7 @@ KEYWORDS="-* ~amd64"
 RESTRICT="bindist mirror"
 EMULTILIB_PKG="true"
 
-IUSE="acpi compat +dkms +libglvnd multilib +tools wayland +X"
+IUSE="+acpi compat +dkms +libglvnd multilib +tools wayland +X"
 
 COMMON="
 	X? (
