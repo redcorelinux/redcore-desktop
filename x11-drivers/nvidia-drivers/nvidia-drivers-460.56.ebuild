@@ -6,6 +6,7 @@ inherit flag-o-matic multilib-minimal portability toolchain-funcs unpacker
 
 NV_URI="https://us.download.nvidia.com/XFree86/"
 AMD64_NV_PACKAGE="NVIDIA-Linux-x86_64-${PV}"
+DESCRIPTION="NVIDIA Accelerated Graphics Driver"
 
 SRC_URI="amd64? ( ${NV_URI}Linux-x86_64/${PV}/${AMD64_NV_PACKAGE}.run )"
 
