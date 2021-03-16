@@ -16,7 +16,10 @@ SLOT="0"
 KEYWORDS="amd64"
 IUSE=""
 
-DEPEND="sys-kernel/dkms"
+DEPEND="
+	sys-apps/ethtool
+	sys-kernel/dkms
+"
 RDEPEND="${DEPEND}"
 
 S=${WORKDIR}
@@ -29,6 +32,7 @@ src_prepare() {
 	grep -lR linux/autoconf.h *  | xargs sed -i -e 's:<linux/autoconf.h>:<generated/autoconf.h>:'
 	sed -i "s/virtualbox/${PN}/g" usr/src/virtualbox-${PV}/dkms.conf
 	sed -i "s/updates/extra\/dkms/g" usr/src/virtualbox-${PV}/dkms.conf
+	epatch "${FILESDIR}"/kernel-5.11.patch
 }
 
 src_compile() {
