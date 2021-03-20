@@ -15,7 +15,7 @@ app-portage/sisyphus-qt 4.2103.0: A simple portage python wrapper which works li
 app-text/simplenote 2.6.0: The simplest way to keep notes
 dev-libs/libdbusmenu-qt 0.9.3_pre20160218-r2: A library providing Qt implementation of DBusMenu specification (meta mackage)
 dev-libs/libdbusmenu-qt5 0.9.3_pre20160218-r2: Library providing Qt implementation of DBusMenu specification
-dev-libs/ocl-icd 2.2.12-r10: Alternative to vendor specific OpenCL ICD loaders
+dev-libs/ocl-icd 2.2.14-r10: Alternative to vendor specific OpenCL ICD loaders
 dev-python/animation 0.0.5-r1: Tools for terminal-based wait animations
 dev-python/sh 1.12.14-r3: Python process launching
 dev-python/typer 0.2.1: Build great CLIs. Easy to code. Based on Python type hints

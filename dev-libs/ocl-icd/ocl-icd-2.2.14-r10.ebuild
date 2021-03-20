@@ -1,4 +1,4 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -18,12 +18,10 @@ IUSE="+khronos-headers"
 
 BDEPEND="dev-lang/ruby:2.5
 	virtual/rubygems"
-DEPEND="dev-util/opencl-headers"
+DEPEND=">=dev-util/opencl-headers-2020.12.18"
 RDEPEND="${DEPEND}
 	!app-eselect/eselect-opencl
 	!dev-libs/opencl-icd-loader"
-
-PATCHES=("${FILESDIR}"/${P}-gcc-10.patch)
 
 src_prepare() {
 	replace-flags -Os -O2 # bug 646122
