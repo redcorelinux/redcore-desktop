@@ -110,7 +110,7 @@ DEPEND="${RDEPEND}
 	>=app-accessibility/at-spi2-core-2.5.3
 	dev-util/glib-utils
 	>=dev-util/gperf-3.0.1
-	dev-lang/ruby:2.7
+	dev-lang/ruby:2.5
 	>=sys-devel/bison-2.4.3
 	|| ( >=sys-devel/gcc-7.3 >=sys-devel/clang-5 )
 	sys-devel/gettext
@@ -207,7 +207,7 @@ src_configure() {
 #	fi
 
 	# Ruby situation is a bit complicated. See bug 513888
-	ruby_interpreter="-DRUBY_EXECUTABLE=$(type -P ruby27)"
+	ruby_interpreter="-DRUBY_EXECUTABLE=$(type -P ruby25)"
 	# This will rarely occur. Only a couple of corner cases could lead us to
 	# that failure. See bug 513888
 	[[ -z $ruby_interpreter ]] && die "No suitable ruby interpreter found"

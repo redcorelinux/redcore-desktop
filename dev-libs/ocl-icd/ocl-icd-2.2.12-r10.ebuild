@@ -16,7 +16,7 @@ KEYWORDS="~amd64 ~x86"
 # handle ebuilds both with and without this flag.
 IUSE="+khronos-headers"
 
-BDEPEND="dev-lang/ruby:2.7
+BDEPEND="dev-lang/ruby:2.5
 	virtual/rubygems"
 DEPEND="dev-util/opencl-headers"
 RDEPEND="${DEPEND}
