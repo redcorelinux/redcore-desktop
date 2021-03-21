@@ -102,13 +102,13 @@ index 1b7f8debada6..05f722d7d065 100644
  	If set, provide RFC2861 behavior and time out the congestion
  	window after an idle period.  An idle period is defined at
 diff --git a/Makefile b/Makefile
-index 472136a7881e..019982f76148 100644
+index d8a39ece170d..a1023be11847 100644
 --- a/Makefile
 +++ b/Makefile
 @@ -2,7 +2,7 @@
  VERSION = 5
  PATCHLEVEL = 11
- SUBLEVEL = 6
+ SUBLEVEL = 8
 -EXTRAVERSION =
 +EXTRAVERSION = -hardened1
  NAME = 💕 Valentine's Day Edition 💕
@@ -667,7 +667,7 @@ index 000000000000..3fa188ac8f67
 +	unregister_sysctl_table(usb_table_header);
 +}
 diff --git a/drivers/usb/core/usb.c b/drivers/usb/core/usb.c
-index 8f07b0516100..2c9db43d2a7b 100644
+index a566bb494e24..b305e25d94f8 100644
 --- a/drivers/usb/core/usb.c
 +++ b/drivers/usb/core/usb.c
 @@ -71,6 +71,9 @@ MODULE_PARM_DESC(autosuspend, "default autosuspend delay");
@@ -680,7 +680,7 @@ index 8f07b0516100..2c9db43d2a7b 100644
  static bool match_endpoint(struct usb_endpoint_descriptor *epd,
  		struct usb_endpoint_descriptor **bulk_in,
  		struct usb_endpoint_descriptor **bulk_out,
-@@ -978,6 +981,9 @@ static int __init usb_init(void)
+@@ -1010,6 +1013,9 @@ static int __init usb_init(void)
  	usb_debugfs_init();
  
  	usb_acpi_register();
@@ -690,7 +690,7 @@ index 8f07b0516100..2c9db43d2a7b 100644
  	retval = bus_register(&usb_bus_type);
  	if (retval)
  		goto bus_register_failed;
-@@ -1012,6 +1018,8 @@ static int __init usb_init(void)
+@@ -1044,6 +1050,8 @@ static int __init usb_init(void)
  bus_notifier_failed:
  	bus_unregister(&usb_bus_type);
  bus_register_failed:
@@ -699,7 +699,7 @@ index 8f07b0516100..2c9db43d2a7b 100644
  	usb_acpi_unregister();
  	usb_debugfs_cleanup();
  out:
-@@ -1035,6 +1043,7 @@ static void __exit usb_exit(void)
+@@ -1067,6 +1075,7 @@ static void __exit usb_exit(void)
  	usb_hub_cleanup();
  	bus_unregister_notifier(&usb_bus_type, &usb_bus_nb);
  	bus_unregister(&usb_bus_type);
@@ -1090,10 +1090,10 @@ index 5e76af742c80..9a6c682ec127 100644
  extern phys_addr_t per_cpu_ptr_to_phys(void *addr);
  
 diff --git a/include/linux/perf_event.h b/include/linux/perf_event.h
-index 9a38f579bc76..8f92d4c8b90f 100644
+index 419a4d77de00..886b8a9b554e 100644
 --- a/include/linux/perf_event.h
 +++ b/include/linux/perf_event.h
-@@ -1314,6 +1314,14 @@ static inline int perf_is_paranoid(void)
+@@ -1316,6 +1316,14 @@ static inline int perf_is_paranoid(void)
  	return sysctl_perf_event_paranoid > -1;
  }
  
@@ -1216,10 +1216,10 @@ index 37803f3e6d49..35cf6f806b3f 100644
  #define TTY_MAGIC		0x5401
  
 diff --git a/include/linux/usb.h b/include/linux/usb.h
-index 7d72c4e0713c..653265115e56 100644
+index d6a41841b93e..f7f3d138b4e6 100644
 --- a/include/linux/usb.h
 +++ b/include/linux/usb.h
-@@ -2035,6 +2035,17 @@ extern void usb_led_activity(enum usb_led_event ev);
+@@ -2037,6 +2037,17 @@ extern void usb_led_activity(enum usb_led_event ev);
  static inline void usb_led_activity(enum usb_led_event ev) {}
  #endif
  
@@ -1499,10 +1499,10 @@ index de7eac903a2a..5602178f3d21 100644
  
  /**
 diff --git a/kernel/events/core.c b/kernel/events/core.c
-index 55d18791a72d..4a3afd654462 100644
+index 8425dbc1d239..7ce0ad5cead5 100644
 --- a/kernel/events/core.c
 +++ b/kernel/events/core.c
-@@ -409,8 +409,13 @@ static cpumask_var_t perf_online_mask;
+@@ -410,8 +410,13 @@ static cpumask_var_t perf_online_mask;
   *   0 - disallow raw tracepoint access for unpriv
   *   1 - disallow cpu events for unpriv
   *   2 - disallow kernel profiling for unpriv
@@ -1516,7 +1516,7 @@ index 55d18791a72d..4a3afd654462 100644
  
  /* Minimum for 512 kiB + 1 user control page */
  int sysctl_perf_event_mlock __read_mostly = 512 + (PAGE_SIZE / 1024); /* 'free' kiB per user */
-@@ -11750,7 +11755,7 @@ SYSCALL_DEFINE5(perf_event_open,
+@@ -11783,7 +11788,7 @@ SYSCALL_DEFINE5(perf_event_open,
  		return -EINVAL;
  
  	/* Do we allow access to perf_event_open(2) ? */
@@ -1661,7 +1661,7 @@ index 9d71046ea247..dac925e8ea9a 100644
  
  void tasklet_setup(struct tasklet_struct *t,
 diff --git a/kernel/sysctl.c b/kernel/sysctl.c
-index c9fbdd848138..f0e54f792dd5 100644
+index 62fbd09b5dc1..36470990b2e6 100644
 --- a/kernel/sysctl.c
 +++ b/kernel/sysctl.c
 @@ -103,38 +103,44 @@
@@ -1867,10 +1867,10 @@ index c9fbdd848138..f0e54f792dd5 100644
  EXPORT_SYMBOL(proc_dointvec_ms_jiffies);
  EXPORT_SYMBOL(proc_dostring);
 diff --git a/kernel/time/hrtimer.c b/kernel/time/hrtimer.c
-index 743c852e10f2..08f52988d806 100644
+index 788b9d137de4..371d160251fb 100644
 --- a/kernel/time/hrtimer.c
 +++ b/kernel/time/hrtimer.c
-@@ -1587,7 +1587,7 @@ static void __hrtimer_run_queues(struct hrtimer_cpu_base *cpu_base, ktime_t now,
+@@ -1605,7 +1605,7 @@ static void __hrtimer_run_queues(struct hrtimer_cpu_base *cpu_base, ktime_t now,
  	}
  }
  
@@ -2074,7 +2074,7 @@ index dc7206032387..62fcbf1515bd 100644
  		mm->brk = brk;
  		goto success;
 diff --git a/mm/page_alloc.c b/mm/page_alloc.c
-index 519a60d5b6f7..afc305dda700 100644
+index a723e81a5da2..5a9f4333c597 100644
 --- a/mm/page_alloc.c
 +++ b/mm/page_alloc.c
 @@ -72,6 +72,7 @@
@@ -2101,7 +2101,7 @@ index 519a60d5b6f7..afc305dda700 100644
  #ifdef CONFIG_GCC_PLUGIN_LATENT_ENTROPY
  volatile unsigned long latent_entropy __latent_entropy;
  EXPORT_SYMBOL(latent_entropy);
-@@ -1544,6 +1554,25 @@ static void __free_pages_ok(struct page *page, unsigned int order,
+@@ -1548,6 +1558,25 @@ static void __free_pages_ok(struct page *page, unsigned int order,
  	local_irq_restore(flags);
  }
  
@@ -2127,7 +2127,7 @@ index 519a60d5b6f7..afc305dda700 100644
  void __free_pages_core(struct page *page, unsigned int order)
  {
  	unsigned int nr_pages = 1 << order;
-@@ -1563,7 +1592,6 @@ void __free_pages_core(struct page *page, unsigned int order)
+@@ -1567,7 +1596,6 @@ void __free_pages_core(struct page *page, unsigned int order)
  	}
  	__ClearPageReserved(p);
  	set_page_count(p, 0);
@@ -2135,7 +2135,7 @@ index 519a60d5b6f7..afc305dda700 100644
  	atomic_long_add(nr_pages, &page_zone(page)->managed_pages);
  
  	/*
-@@ -1630,6 +1658,7 @@ void __init memblock_free_pages(struct page *page, unsigned long pfn,
+@@ -1634,6 +1662,7 @@ void __init memblock_free_pages(struct page *page, unsigned long pfn,
  {
  	if (early_page_uninitialised(pfn))
  		return;
@@ -2143,7 +2143,7 @@ index 519a60d5b6f7..afc305dda700 100644
  	__free_pages_core(page, order);
  }
  
-@@ -1721,6 +1750,7 @@ static void __init deferred_free_range(unsigned long pfn,
+@@ -1725,6 +1754,7 @@ static void __init deferred_free_range(unsigned long pfn,
  	if (nr_pages == pageblock_nr_pages &&
  	    (pfn & (pageblock_nr_pages - 1)) == 0) {
  		set_pageblock_migratetype(page, MIGRATE_MOVABLE);
@@ -2151,7 +2151,7 @@ index 519a60d5b6f7..afc305dda700 100644
  		__free_pages_core(page, pageblock_order);
  		return;
  	}
-@@ -1728,6 +1758,7 @@ static void __init deferred_free_range(unsigned long pfn,
+@@ -1732,6 +1762,7 @@ static void __init deferred_free_range(unsigned long pfn,
  	for (i = 0; i < nr_pages; i++, page++, pfn++) {
  		if ((pfn & (pageblock_nr_pages - 1)) == 0)
  			set_pageblock_migratetype(page, MIGRATE_MOVABLE);
@@ -2159,7 +2159,7 @@ index 519a60d5b6f7..afc305dda700 100644
  		__free_pages_core(page, 0);
  	}
  }
-@@ -2296,6 +2327,12 @@ inline void post_alloc_hook(struct page *page, unsigned int order,
+@@ -2300,6 +2331,12 @@ inline void post_alloc_hook(struct page *page, unsigned int order,
  	kernel_unpoison_pages(page, 1 << order);
  	set_page_owner(page, order, gfp_flags);
  
@@ -2275,7 +2275,7 @@ index 0b775cb5c108..fa125646c8b4 100644
  static int __init setup_slab_nomerge(char *str)
  {
 diff --git a/mm/slub.c b/mm/slub.c
-index 69dacc61b843..2bb05afe7adf 100644
+index c86037b38253..67c6f3c930e3 100644
 --- a/mm/slub.c
 +++ b/mm/slub.c
 @@ -127,6 +127,12 @@ static inline bool kmem_cache_debug(struct kmem_cache *s)

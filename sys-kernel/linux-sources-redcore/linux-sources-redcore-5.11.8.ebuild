@@ -29,7 +29,6 @@ RDEPEND="${DEPEND}"
 
 PATCHES=(
 	"${FILESDIR}"/"${KV_MAJOR}"-ath10k-be-quiet.patch
-	"${FILESDIR}"/"${KV_MAJOR}"-enable_alx_wol.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-ata-fix-NCQ-LOG-strings-and-move-to-debug.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-radeon_dp_aux_transfer_native-no-ratelimited_debug.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-acpi-use-kern_warning_even_when_error.patch
@@ -48,7 +47,6 @@ PATCHES=(
 	"${FILESDIR}"/"${KV_MAJOR}"-k10temp-add-Renoir-support.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-0001-Revert-cpufreq-Avoid-configuring-old-governors-as-de.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-revert-parts-of-a00ec3874e7d326ab2dffbed92faddf6a77a84e9-no-Intel-NO.patch
-	"${FILESDIR}"/"${KV_MAJOR}"-amdgpu-drop-weird-assert.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-amdgpu-FDO-bug1488.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-linux-hardened.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-uksm-linux-hardened.patch
