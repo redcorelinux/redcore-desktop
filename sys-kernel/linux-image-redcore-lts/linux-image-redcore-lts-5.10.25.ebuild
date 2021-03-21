@@ -35,7 +35,6 @@ RDEPEND="${DEPEND}"
 
 PATCHES=(
 	"${FILESDIR}"/"${KV_MAJOR}"-ath10k-be-quiet.patch
-	"${FILESDIR}"/"${KV_MAJOR}"-enable_alx_wol.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-ata-fix-NCQ-LOG-strings-and-move-to-debug.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-radeon_dp_aux_transfer_native-no-ratelimited_debug.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-acpi-use-kern_warning_even_when_error.patch
