@@ -1,7 +1,7 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 inherit multilib-minimal
 
@@ -12,10 +12,6 @@ SRC_URI="https://github.com/FFmpeg/nv-codec-headers/releases/download/n${PV}/${P
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64"
-IUSE=""
-
-DEPEND=""
-RDEPEND="${DEPEND}"
 
 src_prepare() {
 	multilib_copy_sources

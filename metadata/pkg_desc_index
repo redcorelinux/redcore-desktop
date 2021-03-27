@@ -24,7 +24,7 @@ gui-libs/display-manager-init 1.0-r100: RC init files for starting display and l
 kde-plasma/kinfocenter 5.21.3-r10: Utility providing information about the computer hardware
 mail-client/mailspring 1.8.0: A beautiful fast and maintained fork of Nylas Mail
 mail-client/wavebox 10.0.389-r1: The next generation of web-desktop communication
-media-libs/nv-codec-headers 10.0.26.1-r10: FFmpeg version of headers required to interface with Nvidias codec APIs
+media-libs/nv-codec-headers 11.0.10.0-r10: FFmpeg version of headers required to interface with Nvidias codec APIs
 media-sound/cantata 2.4.2-r314: Featureful and configurable Qt client for the music player daemon (MPD)
 media-tv/sopcast 3.2.6-r2: SopCast free P2P Internet TV binary
 media-video/guvcview 2.0.6-r10: Simple Qt5 or GTK+3 interface for capturing and viewing video from v4l2 devices
