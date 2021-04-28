@@ -1,4 +1,4 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -10,11 +10,12 @@ EGIT_REPO_URI="https://gitlab.freedesktop.org/xorg/xserver.git"
 DESCRIPTION="X.Org X servers"
 SLOT="0/${PV}"
 if [[ ${PV} != 9999* ]]; then
-	KEYWORDS="~alpha amd64 arm arm64 ~hppa ~ia64 ~mips ppc ppc64 ~s390 sparc x86 ~amd64-linux ~x86-linux"
+	KEYWORDS="~alpha amd64 arm arm64 ~hppa ~ia64 ~mips ppc ppc64 ~riscv ~s390 sparc x86 ~amd64-linux ~x86-linux"
 fi
 
 IUSE_SERVERS="dmx kdrive wayland xephyr xnest xorg xvfb"
-IUSE="${IUSE_SERVERS} debug +elogind ipv6 libressl minimal selinux suid systemd +udev unwind xcsecurity"
+IUSE="${IUSE_SERVERS} debug +elogind ipv6 libressl minimal selinux suid systemd test +udev unwind xcsecurity"
+RESTRICT="!test? ( test )"
 
 CDEPEND="
 	media-libs/libglvnd[X]
@@ -32,7 +33,6 @@ CDEPEND="
 	>=x11-libs/libxkbfile-1.0.4
 	>=x11-libs/libxshmfence-1.1
 	>=x11-libs/pixman-0.27.2
-	>=x11-libs/xtrans-1.3.5
 	>=x11-misc/xbitmaps-1.0.1
 	>=x11-misc/xkeyboard-config-2.4.1-r3
 	dmx? (
@@ -83,12 +83,11 @@ CDEPEND="
 		sys-auth/elogind[pam]
 		sys-auth/pambase[elogind]
 	)
-	!!x11-drivers/nvidia-drivers[-libglvnd(-)]
+	!!x11-drivers/nvidia-drivers[-libglvnd(+)]
 "
-
 DEPEND="${CDEPEND}
-	sys-devel/flex
 	>=x11-base/xorg-proto-2018.4
+	>=x11-libs/xtrans-1.3.5
 	dmx? (
 		doc? (
 			|| (
@@ -97,13 +96,16 @@ DEPEND="${CDEPEND}
 				www-client/w3m
 			)
 		)
-	)"
-
+	)
+"
 RDEPEND="${CDEPEND}
-	gui-libs/display-manager-init
+	!systemd? ( gui-libs/display-manager-init )
 	selinux? ( sec-policy/selinux-xserver )
 "
-
+BDEPEND="
+	sys-devel/flex
+	wayland? ( dev-util/wayland-scanner )
+"
 PDEPEND="
 	xorg? ( >=x11-base/xorg-drivers-$(ver_cut 1-2) )"
 
@@ -143,6 +145,7 @@ pkg_setup() {
 		$(use_enable debug)
 		$(use_enable dmx)
 		$(use_enable kdrive)
+		$(use_enable test unit-tests)
 		$(use_enable unwind libunwind)
 		$(use_enable wayland xwayland)
 		$(use_enable !minimal record)
