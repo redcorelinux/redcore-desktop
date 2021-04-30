@@ -4,14 +4,15 @@
 EAPI=7
 
 DESCRIPTION="Merge this to pull in all Plasma 5 packages"
-HOMEPAGE="https://kde.org/plasma-desktop"
+HOMEPAGE="https://kde.org/plasma-desktop/"
 
 LICENSE="metapackage"
 SLOT="5"
-KEYWORDS="amd64 ~arm arm64 ~ppc64 x86"
-IUSE="bluetooth +browser-integration crypt +desktop-portal discover +display-manager
-+elogind grub gtk +handbook +kwallet +legacy-systray +networkmanager
-plymouth pulseaudio qrcode +sddm sdk +smart systemd thunderbolt +wallpapers"
+KEYWORDS="~amd64 ~arm ~arm64 ~ppc64 ~x86"
+IUSE="bluetooth +browser-integration colord crypt +desktop-portal discover
++display-manager +elogind +firewall grub gtk +handbook +kwallet +legacy-systray
++networkmanager plymouth pulseaudio qrcode +sddm sdk +smart systemd thunderbolt
++wallpapers"
 
 REQUIRED_USE="^^ ( elogind systemd )"
 
@@ -40,6 +41,7 @@ RDEPEND="
 	>=kde-plasma/oxygen-${PV}:${SLOT}
 	>=kde-plasma/plasma-desktop-${PV}:${SLOT}
 	>=kde-plasma/plasma-integration-${PV}:${SLOT}
+	>=kde-plasma/plasma-systemmonitor-${PV}:${SLOT}
 	>=kde-plasma/plasma-workspace-${PV}:${SLOT}
 	>=kde-plasma/polkit-kde-agent-${PV}:${SLOT}
 	>=kde-plasma/powerdevil-${PV}:${SLOT}
@@ -49,6 +51,7 @@ RDEPEND="
 	sys-fs/udisks:2[elogind?,systemd?]
 	bluetooth? ( >=kde-plasma/bluedevil-${PV}:${SLOT} )
 	browser-integration? ( >=kde-plasma/plasma-browser-integration-${PV}:${SLOT} )
+	colord? ( x11-misc/colord )
 	crypt? ( >=kde-plasma/plasma-vault-${PV}:${SLOT} )
 	desktop-portal? ( >=kde-plasma/xdg-desktop-portal-kde-${PV}:${SLOT} )
 	discover? ( >=kde-plasma/discover-${PV}:${SLOT} )
@@ -59,6 +62,7 @@ RDEPEND="
 		)
 		!sddm? ( x11-misc/lightdm )
 	)
+	firewall? ( >=kde-plasma/plasma-firewall-${PV}:${SLOT} )
 	grub? ( >=kde-plasma/breeze-grub-${PV}:${SLOT} )
 	gtk? (
 		>=kde-plasma/breeze-gtk-${PV}:${SLOT}
