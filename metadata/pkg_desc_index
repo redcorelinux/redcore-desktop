@@ -22,6 +22,8 @@ dev-python/typer 0.2.1: Build great CLIs. Easy to code. Based on Python type hin
 dev-python/wget 2.2-r1: Python library for downloading from http URLs
 gui-libs/display-manager-init 1.0-r100: RC init files for starting display and login managers
 kde-plasma/kinfocenter 5.21.4-r10: Utility providing information about the computer hardware
+kde-plasma/plasma-firewall 5.21.4-r10: Plasma frontend for Firewalld or UFW
+kde-plasma/plasma-meta 5.21.4-r10: Merge this to pull in all Plasma 5 packages
 mail-client/mailspring 1.9.1: A beautiful fast and maintained fork of Nylas Mail
 mail-client/wavebox 10.0.389-r1: The next generation of web-desktop communication
 media-libs/nv-codec-headers 11.0.10.0-r10: FFmpeg version of headers required to interface with Nvidias codec APIs
