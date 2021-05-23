@@ -18,12 +18,10 @@ dev-libs/libdbusmenu-qt5 0.9.3_pre20160218-r2: Library providing Qt implementati
 dev-libs/ocl-icd 2.2.14-r10: Alternative to vendor specific OpenCL ICD loaders
 dev-python/animation 0.0.5-r1: Tools for terminal-based wait animations
 dev-python/sh 1.12.14-r3: Python process launching
-dev-python/typer 0.2.1: Build great CLIs. Easy to code. Based on Python type hints
+dev-python/typer 0.2.1-r1: Build great CLIs. Easy to code. Based on Python type hints
 dev-python/wget 2.2-r1: Python library for downloading from http URLs
 gui-libs/display-manager-init 1.0-r100: RC init files for starting display and login managers
 kde-plasma/kinfocenter 5.21.5-r10: Utility providing information about the computer hardware
-kde-plasma/plasma-firewall 5.21.5-r10: Plasma frontend for Firewalld or UFW
-kde-plasma/plasma-meta 5.21.5-r10: Merge this to pull in all Plasma 5 packages
 mail-client/mailspring 1.9.1: A beautiful fast and maintained fork of Nylas Mail
 mail-client/wavebox 10.0.389-r1: The next generation of web-desktop communication
 media-libs/nv-codec-headers 11.0.10.0-r10: FFmpeg version of headers required to interface with Nvidias codec APIs
@@ -52,7 +50,7 @@ sys-boot/grubcfg 1337: Redcore Linux GRUB configuration files
 sys-boot/os-prober 1.77-r10: Utility to detect other OSs on a set of drives
 sys-boot/plymouth 0.9.4-r10: Graphical boot animation (splash) and logger
 sys-boot/unetbootin-static 625-r2: Universal Netboot Installer creates Live USB systems for various OS distributions
-sys-devel/binutils 2.35.1-r10: Tools necessary to build programs
+sys-devel/binutils 2.35.2-r10: Tools necessary to build programs
 sys-devel/gcc 10.2.0-r10: The GNU Compiler Collection
 sys-devel/libtool 2.4.6-r10: A shared library tool for developers
 sys-fs/cryptsetup 2.3.4-r10: Tool to setup encrypted devices with dm-crypt
@@ -77,7 +75,7 @@ sys-kernel/rtl8821cu-dkms 5.8.1: Realtek RTL8811CU/RTL8821CU USB Wi-Fi adapter d
 sys-kernel/vhba-dkms 20190831: Virtual (SCSI) Host Bus Adapter kernel module for the CDEmu suite sources
 sys-kernel/virtualbox-modules-dkms 6.1.18-r1: Kernel Modules source for Virtualbox
 sys-kernel/zfs-dkms 2.0.4: ZFS sources for linux
-sys-libs/binutils-libs 2.35.1-r10: Core binutils libraries (libbfd, libopcodes, libiberty) for external packages
+sys-libs/binutils-libs 2.35.2-r10: Core binutils libraries (libbfd, libopcodes, libiberty) for external packages
 sys-libs/glibc 2.32-r10: GNU libc C library
 sys-power/radeon-profile 20200824-r10: Read current clocks of ATi/AMD Radeon cards
 virtual/jdk 1.8.0-r10: Virtual for Java Development Kit (JDK)
