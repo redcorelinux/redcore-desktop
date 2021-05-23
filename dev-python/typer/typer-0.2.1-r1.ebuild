@@ -19,7 +19,7 @@ DEPEND="
 	dev-python/setuptools[${PYTHON_USEDEP}]
 "
 RDEPEND="
-	dev-python/click[${PYTHON_USEDEP}]
+	<dev-python/click-8[${PYTHON_USEDEP}]
 "
 
 PATCHES=( "${FILESDIR}"/"${PN}"-avoid-python-dephell-dependency.patch )
