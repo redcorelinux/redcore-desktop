@@ -18,10 +18,14 @@ IUSE="+khronos-headers"
 
 BDEPEND="dev-lang/ruby:2.5
 	virtual/rubygems"
-DEPEND=">=dev-util/opencl-headers-2020.12.18"
+DEPEND=">=dev-util/opencl-headers-2021.04.29"
 RDEPEND="${DEPEND}
 	!app-eselect/eselect-opencl
 	!dev-libs/opencl-icd-loader"
+
+PATCHES=(
+	"${FILESDIR}"/${P}-new-headers.patch
+)
 
 src_prepare() {
 	replace-flags -Os -O2 # bug 646122
@@ -34,6 +38,10 @@ multilib_src_configure() {
 	# dev-util/opencl-headers ARE official Khronos Group headers, what this option
 	# does is disable the use of the bundled ones
 	ECONF_SOURCE="${S}" econf --enable-pthread-once --disable-official-khronos-headers
+}
+
+multilib_src_compile() {
+	emake RUBY="$(type -P ruby25)"
 }
 
 multilib_src_install() {
