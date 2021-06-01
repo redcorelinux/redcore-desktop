@@ -277,6 +277,10 @@ multilib_src_install() {
 			dosym ../../../bin/smbspool /usr/libexec/cups/backend/smb
 		fi
 
+		# install example config file
+		insinto /etc/samba
+		doins examples/smb.conf.default
+
 		# Fix paths in example file (#603964)
 		sed \
 			-e '/log file =/s@/usr/local/samba/var/@/var/log/samba/@' \
