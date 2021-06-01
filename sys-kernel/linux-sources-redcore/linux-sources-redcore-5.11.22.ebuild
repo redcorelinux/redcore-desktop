@@ -41,7 +41,6 @@ PATCHES=(
 	"${FILESDIR}"/"${KV_MAJOR}"-bootconfig-fallthrough.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-apic_vector-spam-in-debug-mode-only.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-iwlwifi-fix-5e003982b07ae.patch
-	"${FILESDIR}"/"${KV_MAJOR}"-amd_iommu_init_info.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-0001-Revert-hwmon-k10temp-Remove-support-for-displaying-v.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-k10temp-fix-ZEN2-desktop-add-ZEN3-desktop.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-k10temp-add-Renoir-support.patch
