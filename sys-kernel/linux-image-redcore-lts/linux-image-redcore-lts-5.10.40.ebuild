@@ -9,22 +9,28 @@ EXTRAVERSION="redcore-lts"
 KV_FULL="${PV}-${EXTRAVERSION}"
 KV_MAJOR="5.10"
 
-DESCRIPTION="Redcore Linux Kernel Sources (LTS)"
+DESCRIPTION="Redcore Linux Kernel Image (LTS)"
 HOMEPAGE="https://redcorelinux.org"
 SRC_URI="https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-${PV}.tar.xz"
 
 KEYWORDS="~amd64"
 LICENSE="GPL-2"
 SLOT="${PVR}"
-IUSE=""
+IUSE="+cryptsetup +dmraid +dracut +dkms +mdadm"
 
-RESTRICT="strip mirror"
+RESTRICT="binchecks strip mirror"
 DEPEND="
 	app-arch/lz4
 	app-arch/xz-utils
 	sys-devel/autoconf
 	sys-devel/bc
-	sys-devel/make"
+	sys-devel/make
+	cryptsetup? ( sys-fs/cryptsetup )
+	dmraid? ( sys-fs/dmraid )
+	dracut? ( >=sys-kernel/dracut-0.44-r8 )
+	dkms? ( sys-kernel/dkms sys-kernel/linux-sources-redcore-lts:${SLOT} )
+	mdadm? ( sys-fs/mdadm )
+	>=sys-kernel/linux-firmware-20180314"
 RDEPEND="${DEPEND}"
 
 PATCHES=(
@@ -41,7 +47,6 @@ PATCHES=(
 	"${FILESDIR}"/"${KV_MAJOR}"-apic_vector-spam-in-debug-mode-only.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-iwlwifi-fix-5e003982b07ae.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-enable-new-amd-energy-driver-for-all-ryzen.patch
-	"${FILESDIR}"/"${KV_MAJOR}"-amd_iommu_init_info.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-0001-Revert-hwmon-k10temp-Remove-support-for-displaying-v.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-k10temp-fix-ZEN2-desktop-add-ZEN3-desktop.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-add-amd-sfh-hid_driver.patch
@@ -49,7 +54,7 @@ PATCHES=(
 	"${FILESDIR}"/"${KV_MAJOR}"-0001-Revert-cpufreq-Avoid-configuring-old-governors-as-de.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-revert-parts-of-a00ec3874e7d326ab2dffbed92faddf6a77a84e9-no-Intel-NO.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-linux-hardened.patch
-	"${FILESDIR}"/"${KV_MAJOR}"-uksm-linux-hardened.patch	
+	"${FILESDIR}"/"${KV_MAJOR}"-uksm-linux-hardened.patch
 )
 
 S="${WORKDIR}"/linux-"${PV}"
@@ -71,18 +76,87 @@ src_prepare() {
 }
 
 src_compile() {
-	emake prepare modules_prepare
+	emake prepare modules_prepare bzImage modules
 }
 
 src_install() {
+	dodir boot
+	insinto boot
+	newins .config config-"${KV_FULL}"
+	newins System.map System.map-"${KV_FULL}"
+	newins arch/x86/boot/bzImage vmlinuz-"${KV_FULL}"
+
 	dodir usr/src/linux-"${KV_FULL}"
-	cp -ax "${S}"/* "${D}"usr/src/linux-"${KV_FULL}"
+	insinto usr/src/linux-"${KV_FULL}"
+	doins Module.symvers
+	doins System.map
+	exeinto usr/src/linux-"${KV_FULL}"
+	doexe vmlinux
+
+	emake INSTALL_MOD_PATH="${D}" modules_install
+
+	rm -f "${D}"lib/modules/"${KV_FULL}"/build
+	rm -f "${D}"lib/modules/"${KV_FULL}"/source
+	export local KSYMS
+	for KSYMS in build source ; do
+		dosym ../../../usr/src/linux-"${KV_FULL}" lib/modules/"${KV_FULL}"/"${KSYMS}"
+	done
 }
 
-_kernel_sources_delete() {
-	rm -rf "${ROOT}"usr/src/linux-"${KV_FULL}"
+_grub2_update_grubcfg() {
+	if [[ -x $(which grub2-mkconfig) ]]; then
+		elog "Updating GRUB-2 bootloader configuration, please wait"
+		grub2-mkconfig -o "${ROOT}"boot/grub/grub.cfg
+	else
+		elog "It looks like you're not using GRUB-2, you must update bootloader configuration by hand"
+	fi
+}
+
+_dracut_initrd_create() {
+	if [[ -x $(which dracut) ]]; then
+		elog "Generating initrd for "${KV_FULL}", please wait"
+		addpredict /etc/ld.so.cache~
+		dracut -N -f --kver="${KV_FULL}" "${ROOT}"boot/initrd-"${KV_FULL}"
+	else
+		elog "It looks like you're not using dracut, you must generate an initrd by hand"
+	fi
+}
+
+_dracut_initrd_delete() {
+	rm -rf "${ROOT}"boot/initrd-"${KV_FULL}"
+}
+
+_dkms_modules_delete() {
+	if [[ -x $(which dkms) ]] ; then
+		export local DKMSMOD
+		for DKMSMOD in $(dkms status | cut -d " " -f1,2 | sed -e 's/,//g' | sed -e 's/ /\//g' | sed -e 's/://g' | uniq) ; do
+			dkms remove "${DKMSMOD}" -k "${KV_FULL}"
+		done
+	fi
+}
+
+_kernel_modules_delete() {
+	rm -rf "${ROOT}"lib/modules/"${KV_FULL}"
+}
+
+pkg_postinst() {
+	if [ $(stat -c %d:%i /) == $(stat -c %d:%i /proc/1/root/.) ]; then
+		if use dracut; then
+			_dracut_initrd_create
+		fi
+		_grub2_update_grubcfg
+	fi
 }
 
 pkg_postrm() {
-	_kernel_sources_delete
+	if [ $(stat -c %d:%i /) == $(stat -c %d:%i /proc/1/root/.) ]; then
+		if use dracut; then
+			_dracut_initrd_delete
+		fi
+		_grub2_update_grubcfg
+	fi
+	if use dkms; then
+		_dkms_modules_delete
+	fi
+	_kernel_modules_delete
 }
