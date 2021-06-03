@@ -1,4 +1,4 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -9,7 +9,7 @@ if [[ ${PV} = *9999* ]]; then
 	inherit git-r3
 else
 	SRC_URI="https://github.com/${PN}/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
-	KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sparc ~x86"
+	KEYWORDS="~alpha amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~riscv ~s390 sparc x86"
 fi
 
 inherit linux-info meson pam udev xdg-utils
@@ -49,8 +49,9 @@ PDEPEND="
 DOCS=( README.md src/libelogind/sd-bus/GVARIANT-SERIALIZATION )
 
 PATCHES=(
-	"${FILESDIR}/${P}-nodocs.patch"
+	"${FILESDIR}/${PN}-243.7-nodocs.patch"
 	"${FILESDIR}/${PN}-241.4-broken-test.patch" # bug 699116
+	"${FILESDIR}/${P}-revert-polkit-automagic.patch"
 )
 
 pkg_setup() {
@@ -106,10 +107,45 @@ src_install() {
 
 	meson_src_install
 
-	newinitd "${FILESDIR}"/${PN}.init ${PN}
+	newinitd "${FILESDIR}"/${PN}.init-r1 ${PN}
 
 	sed -e "s/@libdir@/$(get_libdir)/" "${FILESDIR}"/${PN}.conf.in > ${PN}.conf || die
 	newconfd ${PN}.conf ${PN}
 
 	rm -rf ${ED}/lib/udev/rules.d/73-seat-late.rules
+}
+
+pkg_postinst() {
+	if ! use pam; then
+		ewarn "${PN} will not be managing user logins/seats without USE=\"pam\"!"
+		ewarn "In other words, it will be useless for most applications."
+		ewarn
+	fi
+	if ! use policykit; then
+		ewarn "loginctl will not be able to perform privileged operations without"
+		ewarn "USE=\"policykit\"! That means e.g. no suspend or hibernate."
+		ewarn
+	fi
+	if [[ "$(rc-config list boot | grep elogind)" != "" ]]; then
+		elog "elogind is currently started from boot runlevel."
+	elif [[ "$(rc-config list default | grep elogind)" != "" ]]; then
+		ewarn "elogind is currently started from default runlevel."
+		ewarn "Please remove elogind from the default runlevel and"
+		ewarn "add it to the boot runlevel by:"
+		ewarn "# rc-update del elogind default"
+		ewarn "# rc-update add elogind boot"
+	else
+		elog "elogind is currently not started from any runlevel."
+		elog "You may add it to the boot runlevel by:"
+		elog "# rc-update add elogind boot"
+		elog
+		elog "Alternatively, you can leave elogind out of any"
+		elog "runlevel. It will then be started automatically"
+		if use pam; then
+			elog "when the first service calls it via dbus, or"
+			elog "the first user logs into the system."
+		else
+			elog "when the first service calls it via dbus."
+		fi
+	fi
 }
