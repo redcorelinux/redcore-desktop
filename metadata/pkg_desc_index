@@ -9,7 +9,7 @@ app-emulation/virtualbox-modules 6.1.18: Kernel Modules for Virtualbox
 app-misc/calamares-config-redcore 314-r5: Redcore Linux Calamares modules config
 app-misc/calamares-runtime 314-r1: Calamares distribution-independent installer framework runtime meta-package (containing all the runtime dependencies)
 app-misc/redcore-live 314-r3: Redcore Linux live scripts
-app-misc/redcore-skel 314-r4: Redcore Linux skel tree
+app-misc/redcore-skel 314-r5: Redcore Linux skel tree
 app-portage/sisyphus 4.2103.0: A simple portage python wrapper which works like other package managers(apt-get/yum/dnf)
 app-portage/sisyphus-qt 4.2103.0: A simple portage python wrapper which works like other package managers(apt-get/yum/dnf)
 app-text/simplenote 2.6.0: The simplest way to keep notes
@@ -95,7 +95,7 @@ x11-misc/pcmanfm-qt-share 1337: PCManFM-QT custom action to share folder using S
 x11-misc/sddm 0.18.1-r10: Simple Desktop Display Manager
 x11-themes/material-icon-theme 1337-r2: Icon theme following the Google's material design specifications
 x11-themes/redcore-artwork-calamares 314-r2: Redcore Linux branding component for Calamares
-x11-themes/redcore-artwork-community 314-r1: Redcore Linux Community Wallpapers
+x11-themes/redcore-artwork-community 314-r2: Redcore Linux Community Wallpapers
 x11-themes/redcore-artwork-core 314: Offical Redcore Linux Core Artwork
 x11-themes/redcore-artwork-grub 1337-r3: Redcore Linux GRUB2 Images
 x11-themes/redcore-theme 1337-r1: Official Redcore Linux GTK theme
