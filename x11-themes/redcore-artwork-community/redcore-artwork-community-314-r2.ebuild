@@ -11,7 +11,6 @@ HOMEPAGE="https://redcorelinux.org"
 
 EGIT_REPO_URI="https://gitlab.com/redcore/redcore-wallpapers.git"
 EGIT_BRANCH="master"
-EGIT_COMMIT="7a5bd8f9b10dbb859c9b69b36690e9b5276e085b"
 
 LICENSE=""
 SLOT="0"
