@@ -47,7 +47,7 @@ src_install() {
 	insinto etc/"${PN}"
 	doins "${FILESDIR}"/mirrors.conf
 
-	doins "${FILESDIR}"/sisyphus-custom.conf
+	doins "${FILESDIR}"/sisyphus-custom.env.conf
 	doins "${FILESDIR}"/sisyphus-custom.make.conf
 	doins "${FILESDIR}"/sisyphus-custom.package.accept_keywords
 	doins "${FILESDIR}"/sisyphus-custom.package.env
@@ -67,7 +67,7 @@ pkg_postinst() {
 		rm -rf "${EROOT}"etc/._cfg0000_mirros.conf
 	fi
 
-	for i in sisyphus-custom.{conf,make.conf,package.{accept_keywords,env,license,mask,unmask,use}}; do
+	for i in sisyphus-custom.{env.conf,make.conf,package.{accept_keywords,env,license,mask,unmask,use}}; do
 		if [ -e "${EROOT}"etc/"${PN}"/._cfg000_"$i" ] ; then
 			rm -rf "${EROOT}"etc/"${PN}"/._cfg000_"$i"
 		fi
