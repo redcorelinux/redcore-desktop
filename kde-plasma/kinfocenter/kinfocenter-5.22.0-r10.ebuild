@@ -4,7 +4,7 @@
 EAPI=7
 
 ECM_HANDBOOK="forceoptional"
-KFMIN=5.78.0
+KFMIN=5.82.0
 PVCUT=$(ver_cut 1-3)
 QTMIN=5.15.2
 inherit ecm kde.org optfeature
@@ -15,7 +15,7 @@ HOMEPAGE="https://userbase.kde.org/KInfoCenter"
 LICENSE="GPL-2" # TODO: CHECK
 SLOT="5"
 KEYWORDS="~amd64 ~arm ~arm64 ~ppc64 ~x86"
-IUSE="gles2-only ieee1394 +opengl +pci wayland"
+IUSE="gles2-only ieee1394 +opengl +pci usb wayland"
 
 REQUIRED_USE="wayland? ( || ( opengl gles2-only ) )"
 
@@ -45,6 +45,7 @@ DEPEND="
 		!gles2-only? ( media-libs/glu )
 	)
 	pci? ( sys-apps/pciutils )
+	usb? ( virtual/libusb:1 )
 	wayland? (
 		>=kde-frameworks/kwayland-${KFMIN}:5
 		media-libs/mesa[egl]
@@ -61,6 +62,7 @@ src_configure() {
 	local mycmakeargs=(
 		$(cmake_use_find_package ieee1394 RAW1394)
 		$(cmake_use_find_package pci PCIUTILS)
+		$(cmake_use_find_package usb USB1)
 		$(cmake_use_find_package wayland EGL)
 		$(cmake_use_find_package wayland KF5Wayland)
 	)
@@ -87,7 +89,6 @@ src_install() {
 
 pkg_postinst() {
 	if [[ -z "${REPLACING_VERSIONS}" ]]; then
-		elog "Optional dependencies:"
 		optfeature "NFS information module" net-fs/nfs-utils
 		optfeature "Samba status information module" net-fs/samba
 	fi
