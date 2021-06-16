@@ -9,7 +9,7 @@ if [[ ${PV} == 9999  ]]; then
 fi
 
 if [[ -n ${GRUB_AUTOGEN} || -n ${GRUB_BOOTSTRAP} ]]; then
-	PYTHON_COMPAT=( python{2_7,3_{5,6,7}} )
+	PYTHON_COMPAT=( python{2_7,3_{8,9,10}} )
 	inherit python-any-r1
 fi
 
