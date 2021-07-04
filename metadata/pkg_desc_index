@@ -68,10 +68,10 @@ sys-kernel/dracut 048-r5: Generic initramfs generation tool
 sys-kernel/dracutcfg 1337: Redcore Linux Dracut configuration files
 sys-kernel/linux-headers 5.9-r10: Linux system headers
 sys-kernel/linux-image-redcore 5.11.22: Redcore Linux Kernel Image
-sys-kernel/linux-image-redcore-lts 5.10.40: Redcore Linux Kernel Image (LTS)
+sys-kernel/linux-image-redcore-lts 5.10.47: Redcore Linux Kernel Image (LTS)
 sys-kernel/linux-image-redcore-lts-legacy 5.4.129: Redcore Linux Kernel Image (LTS Legacy 5.4)
 sys-kernel/linux-sources-redcore 5.11.22: Redcore Linux Kernel Sources
-sys-kernel/linux-sources-redcore-lts 5.10.40: Redcore Linux Kernel Sources (LTS)
+sys-kernel/linux-sources-redcore-lts 5.10.47: Redcore Linux Kernel Sources (LTS)
 sys-kernel/linux-sources-redcore-lts-legacy 5.4.129: Redcore Linux Kernel Sources (LTS Legacy 5.4)
 sys-kernel/nvidia-drivers-dkms 460.67: NVIDIA driver sources for linux
 sys-kernel/nvidia-drivers-legacy-dkms 390.141-r1: NVIDIA driver sources for linux

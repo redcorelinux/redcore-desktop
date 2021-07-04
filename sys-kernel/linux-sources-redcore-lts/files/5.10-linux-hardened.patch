@@ -102,13 +102,13 @@ index 4abcfff15e38..fa2d0a9709f2 100644
  	If set, provide RFC2861 behavior and time out the congestion
  	window after an idle period.  An idle period is defined at
 diff --git a/Makefile b/Makefile
-index 42c915ccc5b8..7bd6aed86f87 100644
+index fb2937bca41b..711389d443ab 100644
 --- a/Makefile
 +++ b/Makefile
 @@ -2,7 +2,7 @@
  VERSION = 5
  PATCHLEVEL = 10
- SUBLEVEL = 40
+ SUBLEVEL = 47
 -EXTRAVERSION =
 +EXTRAVERSION = -hardened1
  NAME = Dare mighty things
@@ -600,10 +600,10 @@ index 18e874b0441e..fc7a3a9aa72a 100644
  obj-$(CONFIG_USB)		+= usbcore.o
  
 diff --git a/drivers/usb/core/hub.c b/drivers/usb/core/hub.c
-index 228e3d4e1a9f..4d4afa81d7f2 100644
+index 357730e8f52f..3884416d9029 100644
 --- a/drivers/usb/core/hub.c
 +++ b/drivers/usb/core/hub.c
-@@ -5114,6 +5114,12 @@ static void hub_port_connect(struct usb_hub *hub, int port1, u16 portstatus,
+@@ -5116,6 +5116,12 @@ static void hub_port_connect(struct usb_hub *hub, int port1, u16 portstatus,
  			goto done;
  		return;
  	}
@@ -1013,7 +1013,7 @@ index 2b5b64256cf4..8cdce21dce0f 100644
  const struct kobj_ns_type_operations *kobj_child_ns_ops(struct kobject *parent);
  const struct kobj_ns_type_operations *kobj_ns_ops(struct kobject *kobj);
 diff --git a/include/linux/mm.h b/include/linux/mm.h
-index 5106db3ad1ce..d8644f4bc544 100644
+index 289c26f055cd..0a691a57044d 100644
 --- a/include/linux/mm.h
 +++ b/include/linux/mm.h
 @@ -759,7 +759,7 @@ static inline int is_vmalloc_or_module_addr(const void *x)
@@ -1587,7 +1587,7 @@ index de7eac903a2a..5602178f3d21 100644
  
  /**
 diff --git a/kernel/events/core.c b/kernel/events/core.c
-index 45fa7167cee2..3710b7c7ed5d 100644
+index 7e0fdc19043e..42636279e201 100644
 --- a/kernel/events/core.c
 +++ b/kernel/events/core.c
 @@ -408,8 +408,13 @@ static cpumask_var_t perf_online_mask;
@@ -1604,7 +1604,7 @@ index 45fa7167cee2..3710b7c7ed5d 100644
  
  /* Minimum for 512 kiB + 1 user control page */
  int sysctl_perf_event_mlock __read_mostly = 512 + (PAGE_SIZE / 1024); /* 'free' kiB per user */
-@@ -11690,7 +11695,7 @@ SYSCALL_DEFINE5(perf_event_open,
+@@ -11692,7 +11697,7 @@ SYSCALL_DEFINE5(perf_event_open,
  		return -EINVAL;
  
  	/* Do we allow access to perf_event_open(2) ? */
@@ -1676,10 +1676,10 @@ index 61e250cdd7c9..9ef3aa84f3c9 100644
  	rcu_core();
  }
 diff --git a/kernel/sched/fair.c b/kernel/sched/fair.c
-index 1ad0e52487f6..2c20745f2597 100644
+index d6e1c90de570..03ea833c66a5 100644
 --- a/kernel/sched/fair.c
 +++ b/kernel/sched/fair.c
-@@ -10663,7 +10663,7 @@ static int newidle_balance(struct rq *this_rq, struct rq_flags *rf)
+@@ -10669,7 +10669,7 @@ static int newidle_balance(struct rq *this_rq, struct rq_flags *rf)
   * run_rebalance_domains is triggered when needed from the scheduler tick.
   * Also triggered for nohz idle balancing (with nohz_balancing_kick set).
   */
@@ -2162,7 +2162,7 @@ index 5c8b4485860d..0e26c225bb53 100644
  		mm->brk = brk;
  		goto success;
 diff --git a/mm/page_alloc.c b/mm/page_alloc.c
-index 7ffa706e5c30..fcdc61e5014f 100644
+index 81cc7fdc9c8f..254def6fa5b3 100644
 --- a/mm/page_alloc.c
 +++ b/mm/page_alloc.c
 @@ -70,6 +70,7 @@
@@ -2337,7 +2337,7 @@ index e258ffcfb0ef..6208d0d5ef15 100644
  }
  
 diff --git a/mm/slab_common.c b/mm/slab_common.c
-index 8f27ccf9f7f3..f7832da1a63a 100644
+index ec832904f408..c24e2f33c9fb 100644
 --- a/mm/slab_common.c
 +++ b/mm/slab_common.c
 @@ -30,10 +30,10 @@
@@ -2363,10 +2363,10 @@ index 8f27ccf9f7f3..f7832da1a63a 100644
  static int __init setup_slab_nomerge(char *str)
  {
 diff --git a/mm/slub.c b/mm/slub.c
-index 05a501b67cd5..e671c743f076 100644
+index f5fc44208bdc..d1021b7544a6 100644
 --- a/mm/slub.c
 +++ b/mm/slub.c
-@@ -127,6 +127,12 @@ static inline bool kmem_cache_debug(struct kmem_cache *s)
+@@ -128,6 +128,12 @@ static inline bool kmem_cache_debug(struct kmem_cache *s)
  	return kmem_cache_debug_flags(s, SLAB_DEBUG_FLAGS);
  }
  
@@ -2379,7 +2379,7 @@ index 05a501b67cd5..e671c743f076 100644
  void *fixup_red_left(struct kmem_cache *s, void *p)
  {
  	if (kmem_cache_debug_flags(s, SLAB_RED_ZONE))
-@@ -432,6 +438,55 @@ static inline bool cmpxchg_double_slab(struct kmem_cache *s, struct page *page,
+@@ -433,6 +439,55 @@ static inline bool cmpxchg_double_slab(struct kmem_cache *s, struct page *page,
  	return false;
  }
  
@@ -2435,7 +2435,7 @@ index 05a501b67cd5..e671c743f076 100644
  #ifdef CONFIG_SLUB_DEBUG
  static unsigned long object_map[BITS_TO_LONGS(MAX_OBJS_PER_PAGE)];
  static DEFINE_SPINLOCK(object_map_lock);
-@@ -486,13 +541,13 @@ static inline void *restore_red_left(struct kmem_cache *s, void *p)
+@@ -487,13 +542,13 @@ static inline void *restore_red_left(struct kmem_cache *s, void *p)
   * Debug settings:
   */
  #if defined(CONFIG_SLUB_DEBUG_ON)
@@ -2453,7 +2453,7 @@ index 05a501b67cd5..e671c743f076 100644
  
  /*
   * slub is about to manipulate internal object metadata.  This memory lies
-@@ -543,26 +598,6 @@ static void print_section(char *level, char *text, u8 *addr,
+@@ -544,26 +599,6 @@ static void print_section(char *level, char *text, u8 *addr,
  	metadata_access_disable();
  }
  
@@ -2480,7 +2480,7 @@ index 05a501b67cd5..e671c743f076 100644
  static struct track *get_track(struct kmem_cache *s, void *object,
  	enum track_item alloc)
  {
-@@ -570,6 +605,9 @@ static struct track *get_track(struct kmem_cache *s, void *object,
+@@ -571,6 +606,9 @@ static struct track *get_track(struct kmem_cache *s, void *object,
  
  	p = object + get_info_end(s);
  
@@ -2490,7 +2490,7 @@ index 05a501b67cd5..e671c743f076 100644
  	return p + alloc;
  }
  
-@@ -711,6 +749,9 @@ static void print_trailer(struct kmem_cache *s, struct page *page, u8 *p)
+@@ -712,6 +750,9 @@ static void print_trailer(struct kmem_cache *s, struct page *page, u8 *p)
  
  	off = get_info_end(s);
  
@@ -2500,7 +2500,7 @@ index 05a501b67cd5..e671c743f076 100644
  	if (s->flags & SLAB_STORE_USER)
  		off += 2 * sizeof(struct track);
  
-@@ -819,8 +860,9 @@ static int check_bytes_and_report(struct kmem_cache *s, struct page *page,
+@@ -820,8 +861,9 @@ static int check_bytes_and_report(struct kmem_cache *s, struct page *page,
   * 	Meta data starts here.
   *
   * 	A. Free pointer (if we cannot overwrite object on free)
@@ -2512,7 +2512,7 @@ index 05a501b67cd5..e671c743f076 100644
   * 		one word if debugging is on to be able to detect writes
   * 		before the word boundary.
   *
-@@ -838,6 +880,9 @@ static int check_pad_bytes(struct kmem_cache *s, struct page *page, u8 *p)
+@@ -839,6 +881,9 @@ static int check_pad_bytes(struct kmem_cache *s, struct page *page, u8 *p)
  {
  	unsigned long off = get_info_end(s);	/* The end of info */
  
@@ -2522,7 +2522,7 @@ index 05a501b67cd5..e671c743f076 100644
  	if (s->flags & SLAB_STORE_USER)
  		/* We also have user information there */
  		off += 2 * sizeof(struct track);
-@@ -1558,6 +1603,8 @@ static inline bool slab_free_freelist_hook(struct kmem_cache *s,
+@@ -1559,6 +1604,8 @@ static inline bool slab_free_freelist_hook(struct kmem_cache *s,
  		object = next;
  		next = get_freepointer(s, object);
  
@@ -2531,7 +2531,7 @@ index 05a501b67cd5..e671c743f076 100644
  		if (slab_want_init_on_free(s)) {
  			/*
  			 * Clear the object and the metadata, but don't touch
-@@ -1568,8 +1615,12 @@ static inline bool slab_free_freelist_hook(struct kmem_cache *s,
+@@ -1569,8 +1616,12 @@ static inline bool slab_free_freelist_hook(struct kmem_cache *s,
  							   : 0;
  			memset((char *)object + s->inuse, 0,
  			       s->size - s->inuse - rsize);
@@ -2545,7 +2545,7 @@ index 05a501b67cd5..e671c743f076 100644
  		/* If object's reuse doesn't have to be delayed */
  		if (!slab_free_hook(s, object)) {
  			/* Move object to the new freelist */
-@@ -1577,6 +1628,18 @@ static inline bool slab_free_freelist_hook(struct kmem_cache *s,
+@@ -1578,6 +1629,18 @@ static inline bool slab_free_freelist_hook(struct kmem_cache *s,
  			*head = object;
  			if (!*tail)
  				*tail = object;
@@ -2564,7 +2564,7 @@ index 05a501b67cd5..e671c743f076 100644
  		}
  	} while (object != old_tail);
  
-@@ -1590,8 +1653,9 @@ static void *setup_object(struct kmem_cache *s, struct page *page,
+@@ -1591,8 +1654,9 @@ static void *setup_object(struct kmem_cache *s, struct page *page,
  				void *object)
  {
  	setup_object_debug(s, page, object);
@@ -2575,7 +2575,7 @@ index 05a501b67cd5..e671c743f076 100644
  		kasan_unpoison_object_data(s, object);
  		s->ctor(object);
  		kasan_poison_object_data(s, object);
-@@ -2882,8 +2946,28 @@ static __always_inline void *slab_alloc_node(struct kmem_cache *s,
+@@ -2883,8 +2947,28 @@ static __always_inline void *slab_alloc_node(struct kmem_cache *s,
  
  	maybe_wipe_obj_freeptr(s, object);
  
@@ -2605,7 +2605,7 @@ index 05a501b67cd5..e671c743f076 100644
  
  	slab_post_alloc_hook(s, objcg, gfpflags, 1, &object);
  
-@@ -3272,7 +3356,7 @@ int kmem_cache_alloc_bulk(struct kmem_cache *s, gfp_t flags, size_t size,
+@@ -3273,7 +3357,7 @@ int kmem_cache_alloc_bulk(struct kmem_cache *s, gfp_t flags, size_t size,
  			  void **p)
  {
  	struct kmem_cache_cpu *c;
@@ -2614,7 +2614,7 @@ index 05a501b67cd5..e671c743f076 100644
  	struct obj_cgroup *objcg = NULL;
  
  	/* memcg and kmem_cache debug support */
-@@ -3322,11 +3406,35 @@ int kmem_cache_alloc_bulk(struct kmem_cache *s, gfp_t flags, size_t size,
+@@ -3323,11 +3407,35 @@ int kmem_cache_alloc_bulk(struct kmem_cache *s, gfp_t flags, size_t size,
  	local_irq_enable();
  
  	/* Clear memory outside IRQ disabled fastpath loop */
@@ -2652,7 +2652,7 @@ index 05a501b67cd5..e671c743f076 100644
  	}
  
  	/* memcg and kmem_cache debug support */
-@@ -3360,9 +3468,9 @@ EXPORT_SYMBOL(kmem_cache_alloc_bulk);
+@@ -3361,9 +3469,9 @@ EXPORT_SYMBOL(kmem_cache_alloc_bulk);
   * and increases the number of allocations possible without having to
   * take the list_lock.
   */
@@ -2665,7 +2665,7 @@ index 05a501b67cd5..e671c743f076 100644
  
  /*
   * Calculate the order of allocation given an slab object size.
-@@ -3530,6 +3638,7 @@ static void early_kmem_cache_node_alloc(int node)
+@@ -3531,6 +3639,7 @@ static void early_kmem_cache_node_alloc(int node)
  	init_object(kmem_cache_node, n, SLUB_RED_ACTIVE);
  	init_tracking(kmem_cache_node, n);
  #endif
@@ -2673,8 +2673,8 @@ index 05a501b67cd5..e671c743f076 100644
  	n = kasan_kmalloc(kmem_cache_node, n, sizeof(struct kmem_cache_node),
  		      GFP_KERNEL);
  	page->freelist = get_freepointer(kmem_cache_node, n);
-@@ -3710,6 +3819,9 @@ static int calculate_sizes(struct kmem_cache *s, int forced_order)
- 		s->offset = ALIGN(freepointer_area / 2, sizeof(void *));
+@@ -3705,6 +3814,9 @@ static int calculate_sizes(struct kmem_cache *s, int forced_order)
+ 		s->offset = ALIGN_DOWN(s->object_size / 2, sizeof(void *));
  	}
  
 +	if (IS_ENABLED(CONFIG_SLAB_CANARY))
@@ -2683,7 +2683,7 @@ index 05a501b67cd5..e671c743f076 100644
  #ifdef CONFIG_SLUB_DEBUG
  	if (flags & SLAB_STORE_USER)
  		/*
-@@ -3783,6 +3895,10 @@ static int kmem_cache_open(struct kmem_cache *s, slab_flags_t flags)
+@@ -3778,6 +3890,10 @@ static int kmem_cache_open(struct kmem_cache *s, slab_flags_t flags)
  #ifdef CONFIG_SLAB_FREELIST_HARDENED
  	s->random = get_random_long();
  #endif
@@ -2694,7 +2694,7 @@ index 05a501b67cd5..e671c743f076 100644
  
  	if (!calculate_sizes(s, -1))
  		goto error;
-@@ -4056,6 +4172,8 @@ void __check_heap_object(const void *ptr, unsigned long n, struct page *page,
+@@ -4051,6 +4167,8 @@ void __check_heap_object(const void *ptr, unsigned long n, struct page *page,
  		offset -= s->red_left_pad;
  	}
  
@@ -2703,7 +2703,7 @@ index 05a501b67cd5..e671c743f076 100644
  	/* Allow address range falling entirely within usercopy region. */
  	if (offset >= s->useroffset &&
  	    offset - s->useroffset <= s->usersize &&
-@@ -4089,7 +4207,11 @@ size_t __ksize(const void *object)
+@@ -4084,7 +4202,11 @@ size_t __ksize(const void *object)
  	page = virt_to_head_page(object);
  
  	if (unlikely(!PageSlab(page))) {
@@ -2715,7 +2715,7 @@ index 05a501b67cd5..e671c743f076 100644
  		return page_size(page);
  	}
  
-@@ -4880,7 +5002,7 @@ enum slab_stat_type {
+@@ -4875,7 +4997,7 @@ enum slab_stat_type {
  #define SO_TOTAL	(1 << SL_TOTAL)
  
  #ifdef CONFIG_MEMCG
@@ -2771,10 +2771,10 @@ index 4ddb6e186dd5..62ed34dfceb7 100644
  
  unsigned long arch_mmap_rnd(void)
 diff --git a/net/core/dev.c b/net/core/dev.c
-index 2f17a4ac82f0..223c111f31ab 100644
+index 0c9ce36afc8c..c77d2c765b03 100644
 --- a/net/core/dev.c
 +++ b/net/core/dev.c
-@@ -4869,7 +4869,7 @@ int netif_rx_any_context(struct sk_buff *skb)
+@@ -4870,7 +4870,7 @@ int netif_rx_any_context(struct sk_buff *skb)
  }
  EXPORT_SYMBOL(netif_rx_any_context);
  
@@ -2783,7 +2783,7 @@ index 2f17a4ac82f0..223c111f31ab 100644
  {
  	struct softnet_data *sd = this_cpu_ptr(&softnet_data);
  
-@@ -6819,7 +6819,7 @@ static int napi_poll(struct napi_struct *n, struct list_head *repoll)
+@@ -6838,7 +6838,7 @@ static int napi_poll(struct napi_struct *n, struct list_head *repoll)
  	return work;
  }
  
