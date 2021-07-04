@@ -4,7 +4,7 @@
 -PACKAGE_NAME="nvidia"
 -PACKAGE_VERSION="__VERSION_STRING"
 +PACKAGE_NAME="nvidia-drivers-dkms"
-+PACKAGE_VERSION="460.67"
++PACKAGE_VERSION="460.84"
  AUTOINSTALL="yes"
  
  # By default, DKMS will add KERNELRELEASE to the make command line; however,
