@@ -16,7 +16,6 @@ app-text/simplenote 2.6.0: The simplest way to keep notes
 dev-libs/libdbusmenu-qt 0.9.3_pre20160218-r2: A library providing Qt implementation of DBusMenu specification (meta mackage)
 dev-libs/libdbusmenu-qt5 0.9.3_pre20160218-r2: Library providing Qt implementation of DBusMenu specification
 dev-libs/ocl-icd 2.3.0-r10: Alternative to vendor specific OpenCL ICD loaders
-dev-libs/spdlog 1.8.5-r10: Very fast, header only, C++ logging library
 dev-python/animation 0.0.5-r1: Tools for terminal-based wait animations
 dev-python/click 7.1.2-r10: A Python package for creating beautiful command line interfaces
 dev-python/sh 1.12.14-r3: Python process launching
@@ -29,7 +28,6 @@ mail-client/mailspring 1.9.1: A beautiful fast and maintained fork of Nylas Mail
 mail-client/wavebox 10.0.389-r1: The next generation of web-desktop communication
 media-libs/nv-codec-headers 11.0.10.0-r10: FFmpeg version of headers required to interface with Nvidias codec APIs
 media-sound/cantata 2.4.2-r314: Featureful and configurable Qt client for the music player daemon (MPD)
-media-tv/kodi 19.1-r10: A free and open source media-player and entertainment hub
 media-tv/sopcast 3.2.6-r2: SopCast free P2P Internet TV binary
 media-video/guvcview 2.0.6-r10: Simple Qt5 or GTK+3 interface for capturing and viewing video from v4l2 devices
 media-video/nvidia_video_sdk 6.0.1-r10: NVIDIA Video Codec SDK
