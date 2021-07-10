@@ -41,7 +41,7 @@ COMMON_DEPEND="
 		sys-apps/policycoreutils
 		>=sys-libs/libselinux-2.6
 	)
-	splash? ( sys-boot/plymouth-openrc-plugin )
+	amd64? ( splash? ( sys-boot/plymouth-openrc-plugin ) )
 	!<sys-apps/baselayout-2.1-r1
 	!<sys-fs/udev-init-scripts-27"
 DEPEND="${COMMON_DEPEND}
