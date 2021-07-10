@@ -12,11 +12,11 @@ HOMEPAGE="http://redcorelinux.org"
 
 EGIT_REPO_URI="https://gitlab.com/redcore/sisyphus.git"
 EGIT_BRANCH="master"
-EGIT_COMMIT="5ef298d50edc3c2d7f90150afd3a711a8c3cae68"
+EGIT_COMMIT="687968f9375def610d8730610dc48291346061a6"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="amd64 x86"
+KEYWORDS="amd64 arm64"
 IUSE="qt5"
 
 DEPEND="dev-lang/python[sqlite]"
@@ -32,7 +32,7 @@ RDEPEND="${DEPEND}
 		sys-apps/portage[${PYTHON_MULTI_USEDEP}]
 	')
 	sys-apps/gentoo-functions"
-PDEPEND="qt5? ( ~app-portage/sisyphus-qt-${PV} )"
+PDEPEND="qt5? ( ~app-portage/${PN}-qt-${PV} )"
 
 src_install() {
 	emake DESTDIR="${D}" install-cli
@@ -45,16 +45,17 @@ src_install() {
 
 	dodir etc/"${PN}"
 	insinto etc/"${PN}"
-	doins "${FILESDIR}"/mirrors.conf
+	doins "${FILESDIR}"/"${PN}"-mirrors-amd64.conf
+	doins "${FILESDIR}"/"${PN}"-mirrors-arm64.conf
 
-	doins "${FILESDIR}"/sisyphus-custom.env.conf
-	doins "${FILESDIR}"/sisyphus-custom.make.conf
-	doins "${FILESDIR}"/sisyphus-custom.package.accept_keywords
-	doins "${FILESDIR}"/sisyphus-custom.package.env
-	doins "${FILESDIR}"/sisyphus-custom.package.license
-	doins "${FILESDIR}"/sisyphus-custom.package.mask
-	doins "${FILESDIR}"/sisyphus-custom.package.unmask
-	doins "${FILESDIR}"/sisyphus-custom.package.use
+	doins "${FILESDIR}"/"${PN}"-custom.env.conf
+	doins "${FILESDIR}"/"${PN}"-custom.make.conf
+	doins "${FILESDIR}"/"${PN}"-custom.package.accept_keywords
+	doins "${FILESDIR}"/"${PN}"-custom.package.env
+	doins "${FILESDIR}"/"${PN}"-custom.package.license
+	doins "${FILESDIR}"/"${PN}"-custom.package.mask
+	doins "${FILESDIR}"/"${PN}"-custom.package.unmask
+	doins "${FILESDIR}"/"${PN}"-custom.package.use
 
 	# enforce the best available python implementation (CLI)
 	python_setup
@@ -63,13 +64,12 @@ src_install() {
 
 pkg_postinst() {
 	# Take care of the etc-update for the user
-	if [ -e "${EROOT}"etc/"${PN}"/._cfg0000_mirrors.conf ] ; then
-		rm -rf "${EROOT}"etc/._cfg0000_mirros.conf
-	fi
+	rm -rf "${EROOT}"etc/"${PN}"/._cfg*
 
-	for i in sisyphus-custom.{env.conf,make.conf,package.{accept_keywords,env,license,mask,unmask,use}}; do
-		if [ -e "${EROOT}"etc/"${PN}"/._cfg000_"$i" ] ; then
-			rm -rf "${EROOT}"etc/"${PN}"/._cfg000_"$i"
-		fi
-	done
+	# Maintain backward compat with old mirrors file
+	rm -rf "{EROOT}"etc/"${PN}"/mirrors.conf
+
+	if ARCH='amd64'; then
+		ln -sf "${EROOT}"etc/"${PN}"/"${PN}"-mirrors-amd64.conf "${EROOT}"etc/"${PN}"/mirrors.conf
+	fi
 }
