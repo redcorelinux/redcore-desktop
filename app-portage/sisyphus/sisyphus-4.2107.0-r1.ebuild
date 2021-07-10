@@ -66,10 +66,14 @@ pkg_postinst() {
 	# Take care of the etc-update for the user
 	rm -rf "${EROOT}"etc/"${PN}"/._cfg*
 
-	# Maintain backward compat with old mirrors file
+	# Make sure portage sees the new mirror configuration file
 	rm -rf "{EROOT}"etc/"${PN}"/mirrors.conf
 
-	if ARCH='amd64'; then
+	if ARCH="amd64"; then
 		ln -sf "${EROOT}"etc/"${PN}"/"${PN}"-mirrors-amd64.conf "${EROOT}"etc/"${PN}"/mirrors.conf
+	fi
+
+	if ARCH="arm64"; then
+		ln -sf "${EROOT}"etc/"${PN}"/"${PN}"-mirrors-arm64.conf "${EROOT}"etc/"${PN}"/mirrors.conf
 	fi
 }
