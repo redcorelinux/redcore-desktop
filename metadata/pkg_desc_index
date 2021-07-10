@@ -10,8 +10,8 @@ app-misc/calamares-config-redcore 314-r5: Redcore Linux Calamares modules config
 app-misc/calamares-runtime 314-r1: Calamares distribution-independent installer framework runtime meta-package (containing all the runtime dependencies)
 app-misc/redcore-live 314-r3: Redcore Linux live scripts
 app-misc/redcore-skel 314-r5: Redcore Linux skel tree
-app-portage/sisyphus 4.2103.0-r2: A simple portage python wrapper which works like other package managers(apt-get/yum/dnf)
-app-portage/sisyphus-qt 4.2103.0-r2: A simple portage python wrapper which works like other package managers(apt-get/yum/dnf)
+app-portage/sisyphus 4.2107.0-r1: A simple portage python wrapper which works like other package managers(apt-get/yum/dnf)
+app-portage/sisyphus-qt 4.2107.0: A simple portage python wrapper which works like other package managers(apt-get/yum/dnf)
 app-text/simplenote 2.6.0: The simplest way to keep notes
 dev-libs/libdbusmenu-qt 0.9.3_pre20160218-r2: A library providing Qt implementation of DBusMenu specification (meta mackage)
 dev-libs/libdbusmenu-qt5 0.9.3_pre20160218-r2: Library providing Qt implementation of DBusMenu specification
@@ -42,7 +42,7 @@ net-wireless/rtl8821cu 5.8.1: Realtek RTL8821CU USB Wi-Fi adapter driver for Lin
 sys-apps/baselayout 2.7-r10: Filesystem baselayout and init scripts
 sys-apps/firetools 0.9.46: Graphical user interface of app-emulation/firejail
 sys-apps/lsb-release 1.4-r10: LSB version query program
-sys-apps/openrc 0.42.1-r6: OpenRC manages the services, startup and shutdown of a host
+sys-apps/openrc 0.42.1-r7: OpenRC manages the services, startup and shutdown of a host
 sys-auth/elogind 246.10-r10: The systemd project's logind, extracted to a standalone package
 sys-auth/polkit-qt 0.113.0-r10: PolicyKit Qt API wrapper library (meta package)
 sys-auth/polkit-qt5 0.113.0-r10: Qt wrapper around polkit-1 client libraries

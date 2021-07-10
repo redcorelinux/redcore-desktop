@@ -69,11 +69,9 @@ pkg_postinst() {
 	# Make sure portage sees the new mirror configuration file
 	rm -rf "{EROOT}"etc/"${PN}"/mirrors.conf
 
-	if ARCH="amd64"; then
+	if [[ $(uname -m) == "x86_64" ]] ; then
 		ln -sf "${EROOT}"etc/"${PN}"/"${PN}"-mirrors-amd64.conf "${EROOT}"etc/"${PN}"/mirrors.conf
-	fi
-
-	if ARCH="arm64"; then
+	elif [[ $(uname -m) == "aarch64" ]] ; then
 		ln -sf "${EROOT}"etc/"${PN}"/"${PN}"-mirrors-arm64.conf "${EROOT}"etc/"${PN}"/mirrors.conf
 	fi
 }
