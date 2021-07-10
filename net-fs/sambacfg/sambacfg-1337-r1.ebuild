@@ -10,7 +10,7 @@ HOMEPAGE="https://redcorelinux.org"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="amd64"
+KEYWORDS="amd64 arm64"
 IUSE=""
 
 DEPEND="acct-group/smbshare"
