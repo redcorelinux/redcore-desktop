@@ -10,7 +10,7 @@ HOMEPAGE="https://github.com/dell/dkms"
 LICENSE="GPL-2"
 DEPEND=""
 RDEPEND="sys-apps/gentoo-functions"
-KEYWORDS="amd64"
+KEYWORDS="amd64 arm64"
 SLOT="0"
 
 src_prepare() {
