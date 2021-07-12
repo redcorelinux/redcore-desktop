@@ -15,7 +15,7 @@ app-portage/sisyphus-qt 4.2107.0-r1: A simple portage python wrapper which works
 app-text/simplenote 2.6.0: The simplest way to keep notes
 dev-libs/libdbusmenu-qt 0.9.3_pre20160218-r2: A library providing Qt implementation of DBusMenu specification (meta mackage)
 dev-libs/libdbusmenu-qt5 0.9.3_pre20160218-r2: Library providing Qt implementation of DBusMenu specification
-dev-libs/ocl-icd 2.3.0-r10: Alternative to vendor specific OpenCL ICD loaders
+dev-libs/ocl-icd 2.3.0-r100: Alternative to vendor specific OpenCL ICD loaders
 dev-python/animation 0.0.5-r1: Tools for terminal-based wait animations
 dev-python/click 7.1.2-r10: A Python package for creating beautiful command line interfaces
 dev-python/sh 1.12.14-r3: Python process launching
@@ -35,7 +35,7 @@ net-fs/samba 4.14.4-r10: Samba Suite Version 4
 net-fs/sambacfg 1337-r1: Redcore Linux Samba configuration files
 net-im/discord 0.0.13: All-in-one voice and text chat for gamers
 net-libs/libnm-glib 1.18.8-r1: NetworkManager client library (legacy)
-net-libs/webkit-gtk 2.30.3-r10: Open source web browser engine
+net-libs/webkit-gtk 2.30.3-r100: Open source web browser engine
 net-print/cnijfilter 4.10-r2: Canon InkJet Printer Driver for Linux (Pixus/Pixma-Series)
 net-wireless/broadcom-sta 6.30.223.271-r2: Broadcom's IEEE 802.11a/b/g/n hybrid Linux device driver
 net-wireless/rtl8821cu 5.8.1: Realtek RTL8821CU USB Wi-Fi adapter driver for Linux
@@ -87,6 +87,7 @@ virtual/rust 10: Virtual for Rust language compiler
 virtual/tmpfiles 0-r10: Virtual to select between different tmpfiles.d handlers
 x11-base/xorg-drivers 1.20-r10: Meta package containing deps on all xorg drivers (dummy package)
 x11-base/xorg-server 1.20.12-r100: X.Org X servers
+x11-base/xwayland 21.1.1-r100: Standalone X server running under Wayland
 x11-drivers/nvidia-drivers 460.84: NVIDIA Accelerated Graphics Driver
 x11-drivers/nvidia-drivers-legacy 390.143: NVIDIA Accelerated Graphics Driver
 x11-libs/gtk+ 2.24.32-r314 3.24.20-r314: Gimp ToolKit +
