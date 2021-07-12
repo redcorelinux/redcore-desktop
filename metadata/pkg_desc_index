@@ -10,8 +10,8 @@ app-misc/calamares-config-redcore 314-r5: Redcore Linux Calamares modules config
 app-misc/calamares-runtime 314-r1: Calamares distribution-independent installer framework runtime meta-package (containing all the runtime dependencies)
 app-misc/redcore-live 314-r3: Redcore Linux live scripts
 app-misc/redcore-skel 314-r5: Redcore Linux skel tree
-app-portage/sisyphus 4.2107.0-r1: A simple portage python wrapper which works like other package managers(apt-get/yum/dnf)
-app-portage/sisyphus-qt 4.2107.0: A simple portage python wrapper which works like other package managers(apt-get/yum/dnf)
+app-portage/sisyphus 4.2107.0-r2: A simple portage python wrapper which works like other package managers(apt-get/yum/dnf)
+app-portage/sisyphus-qt 4.2107.0-r1: A simple portage python wrapper which works like other package managers(apt-get/yum/dnf)
 app-text/simplenote 2.6.0: The simplest way to keep notes
 dev-libs/libdbusmenu-qt 0.9.3_pre20160218-r2: A library providing Qt implementation of DBusMenu specification (meta mackage)
 dev-libs/libdbusmenu-qt5 0.9.3_pre20160218-r2: Library providing Qt implementation of DBusMenu specification
@@ -53,7 +53,7 @@ sys-boot/os-prober 1.77-r10: Utility to detect other OSs on a set of drives
 sys-boot/plymouth 0.9.4-r10: Graphical boot animation (splash) and logger
 sys-boot/unetbootin-static 625-r2: Universal Netboot Installer creates Live USB systems for various OS distributions
 sys-devel/binutils 2.35.2-r10: Tools necessary to build programs
-sys-devel/gcc 10.2.0-r10: The GNU Compiler Collection
+sys-devel/gcc 10.3.0-r10: The GNU Compiler Collection
 sys-devel/libtool 2.4.6-r10: A shared library tool for developers
 sys-fs/cryptsetup 2.3.4-r10: Tool to setup encrypted devices with dm-crypt
 sys-fs/vhba 20190831-r2: Virtual (SCSI) Host Bus Adapter kernel module for the CDEmu suite
@@ -64,13 +64,13 @@ sys-kernel/broadcom-sta-dkms 6.30.223.271-r5: Broadcom's IEEE 802.11a/b/g/n hybr
 sys-kernel/dkms 2.3-r1: Dynamic Kernel Module Support
 sys-kernel/dracut 048-r5: Generic initramfs generation tool
 sys-kernel/dracutcfg 1337: Redcore Linux Dracut configuration files
-sys-kernel/linux-headers 5.9-r10: Linux system headers
-sys-kernel/linux-image-redcore 5.11.22: Redcore Linux Kernel Image
-sys-kernel/linux-image-redcore-lts 5.10.47: Redcore Linux Kernel Image (LTS)
-sys-kernel/linux-image-redcore-lts-legacy 5.4.129: Redcore Linux Kernel Image (LTS Legacy 5.4)
-sys-kernel/linux-sources-redcore 5.11.22: Redcore Linux Kernel Sources
-sys-kernel/linux-sources-redcore-lts 5.10.47: Redcore Linux Kernel Sources (LTS)
-sys-kernel/linux-sources-redcore-lts-legacy 5.4.129: Redcore Linux Kernel Sources (LTS Legacy 5.4)
+sys-kernel/linux-headers 5.10-r10: Linux system headers
+sys-kernel/linux-image-redcore 5.11.22-r1: Redcore Linux Kernel Image
+sys-kernel/linux-image-redcore-lts 5.10.47-r1: Redcore Linux Kernel Image (LTS)
+sys-kernel/linux-image-redcore-lts-legacy 5.4.129-r1: Redcore Linux Kernel Image (LTS Legacy 5.4)
+sys-kernel/linux-sources-redcore 5.11.22-r1: Redcore Linux Kernel Sources
+sys-kernel/linux-sources-redcore-lts 5.10.47-r1: Redcore Linux Kernel Sources (LTS)
+sys-kernel/linux-sources-redcore-lts-legacy 5.4.129-r1: Redcore Linux Kernel Sources (LTS Legacy 5.4)
 sys-kernel/nvidia-drivers-dkms 460.84: NVIDIA driver sources for linux
 sys-kernel/nvidia-drivers-legacy-dkms 390.143: NVIDIA driver sources for linux
 sys-kernel/rtl8821cu-dkms 5.8.1: Realtek RTL8811CU/RTL8821CU USB Wi-Fi adapter driver for Linux
@@ -78,7 +78,7 @@ sys-kernel/vhba-dkms 20190831: Virtual (SCSI) Host Bus Adapter kernel module for
 sys-kernel/virtualbox-modules-dkms 6.1.18-r1: Kernel Modules source for Virtualbox
 sys-kernel/zfs-dkms 2.0.4: ZFS sources for linux
 sys-libs/binutils-libs 2.35.2-r10: Core binutils libraries (libbfd, libopcodes, libiberty) for external packages
-sys-libs/glibc 2.32-r10: GNU libc C library
+sys-libs/glibc 2.33-r10: GNU libc C library
 sys-power/radeon-profile 20200824-r10: Read current clocks of ATi/AMD Radeon cards
 virtual/jdk 1.8.0-r10: Virtual for Java Development Kit (JDK)
 virtual/jre 1.8.0-r10: Virtual for Java Runtime Environment (JRE)
@@ -86,7 +86,7 @@ virtual/notification-daemon 0-r10: Virtual (dummy package) for notification daem
 virtual/rust 10: Virtual for Rust language compiler
 virtual/tmpfiles 0-r10: Virtual to select between different tmpfiles.d handlers
 x11-base/xorg-drivers 1.20-r10: Meta package containing deps on all xorg drivers (dummy package)
-x11-base/xorg-server 1.20.11-r100: X.Org X servers
+x11-base/xorg-server 1.20.12-r100: X.Org X servers
 x11-drivers/nvidia-drivers 460.84: NVIDIA Accelerated Graphics Driver
 x11-drivers/nvidia-drivers-legacy 390.143: NVIDIA Accelerated Graphics Driver
 x11-libs/gtk+ 2.24.32-r314 3.24.20-r314: Gimp ToolKit +
