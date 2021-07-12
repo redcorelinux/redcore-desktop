@@ -16,7 +16,7 @@ KEYWORDS="~amd64 ~x86"
 # handle ebuilds both with and without this flag.
 IUSE="+khronos-headers"
 
-BDEPEND="dev-lang/ruby:2.5
+BDEPEND="dev-lang/ruby:2.7
 	virtual/rubygems"
 DEPEND=">=dev-util/opencl-headers-2021.04.29"
 RDEPEND="${DEPEND}
@@ -41,7 +41,7 @@ multilib_src_configure() {
 }
 
 multilib_src_compile() {
-	emake RUBY="$(type -P ruby25)"
+	emake RUBY="$(type -P ruby27)"
 }
 
 multilib_src_install() {
