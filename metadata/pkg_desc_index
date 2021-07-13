@@ -7,7 +7,6 @@ app-emulation/steam-native-runtime 1.0.0.61-r2: Native replacement for the Steam
 app-emulation/virtualbox-bin 6.1.18.142142-r2: Family of powerful x86 virtualization products for enterprise and home use
 app-emulation/virtualbox-modules 6.1.18: Kernel Modules for Virtualbox
 app-misc/calamares-config-redcore 314-r5: Redcore Linux Calamares modules config
-app-misc/calamares-runtime 314-r1: Calamares distribution-independent installer framework runtime meta-package (containing all the runtime dependencies)
 app-misc/redcore-live 314-r3: Redcore Linux live scripts
 app-misc/redcore-skel 314-r5: Redcore Linux skel tree
 app-portage/sisyphus 4.2107.0-r2: A simple portage python wrapper which works like other package managers(apt-get/yum/dnf)
@@ -22,7 +21,6 @@ dev-python/sh 1.12.14-r3: Python process launching
 dev-python/typer 0.2.1-r1: Build great CLIs. Easy to code. Based on Python type hints
 dev-python/wget 2.2-r1: Python library for downloading from http URLs
 gui-libs/display-manager-init 1.0-r100: RC init files for starting display and login managers
-kde-frameworks/knewstuff 5.83.0-r10: Framework for downloading and sharing additional application data
 kde-plasma/kinfocenter 5.22.3-r10: Utility providing information about the computer hardware
 mail-client/mailspring 1.9.1: A beautiful fast and maintained fork of Nylas Mail
 mail-client/wavebox 10.0.389-r1: The next generation of web-desktop communication
