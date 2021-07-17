@@ -15,11 +15,11 @@ app-text/simplenote 2.6.0: The simplest way to keep notes
 dev-libs/libdbusmenu-qt 0.9.3_pre20160218-r2: A library providing Qt implementation of DBusMenu specification (meta mackage)
 dev-libs/libdbusmenu-qt5 0.9.3_pre20160218-r2: Library providing Qt implementation of DBusMenu specification
 dev-libs/ocl-icd 2.3.0-r100: Alternative to vendor specific OpenCL ICD loaders
-dev-python/animation 0.0.5-r1: Tools for terminal-based wait animations
-dev-python/click 7.1.2-r10: A Python package for creating beautiful command line interfaces
-dev-python/sh 1.12.14-r3: Python process launching
-dev-python/typer 0.2.1-r1: Build great CLIs. Easy to code. Based on Python type hints
-dev-python/wget 2.2-r1: Python library for downloading from http URLs
+dev-python/animation 0.0.5-r2: Tools for terminal-based wait animations
+dev-python/click 7.1.2-r100: A Python package for creating beautiful command line interfaces
+dev-python/sh 1.12.14-r4: Python process launching
+dev-python/typer 0.2.1-r2: Build great CLIs. Easy to code. Based on Python type hints
+dev-python/wget 2.2-r2: Python library for downloading from http URLs
 gui-libs/display-manager-init 1.0-r100: RC init files for starting display and login managers
 kde-plasma/kinfocenter 5.22.3-r10: Utility providing information about the computer hardware
 mail-client/mailspring 1.9.1: A beautiful fast and maintained fork of Nylas Mail
@@ -63,10 +63,10 @@ sys-kernel/dkms 2.3-r1: Dynamic Kernel Module Support
 sys-kernel/dracut 048-r5: Generic initramfs generation tool
 sys-kernel/dracutcfg 1337: Redcore Linux Dracut configuration files
 sys-kernel/linux-headers 5.10-r10: Linux system headers
-sys-kernel/linux-image-redcore 5.11.22-r1: Redcore Linux Kernel Image
+sys-kernel/linux-image-redcore 5.11.22-r1 5.13.2: Redcore Linux Kernel Image
 sys-kernel/linux-image-redcore-lts 5.10.47-r1: Redcore Linux Kernel Image (LTS)
 sys-kernel/linux-image-redcore-lts-legacy 5.4.129-r1: Redcore Linux Kernel Image (LTS Legacy 5.4)
-sys-kernel/linux-sources-redcore 5.11.22-r1: Redcore Linux Kernel Sources
+sys-kernel/linux-sources-redcore 5.11.22-r1 5.13.2: Redcore Linux Kernel Sources
 sys-kernel/linux-sources-redcore-lts 5.10.47-r1: Redcore Linux Kernel Sources (LTS)
 sys-kernel/linux-sources-redcore-lts-legacy 5.4.129-r1: Redcore Linux Kernel Sources (LTS Legacy 5.4)
 sys-kernel/nvidia-drivers-dkms 460.84: NVIDIA driver sources for linux
