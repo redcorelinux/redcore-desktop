@@ -5,6 +5,6 @@ EAPI="6"
 
 DESCRIPTION="Virtual for Java Development Kit (JDK)"
 SLOT="1.8"
-KEYWORDS="amd64"
+KEYWORDS="amd64 arm64"
 
 RDEPEND="dev-java/openjdk-bin:8[gentoo-vm(+)]"

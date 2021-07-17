@@ -1,7 +1,7 @@
 DEFINED_PHASES=-
 DESCRIPTION=Virtual to select between different tmpfiles.d handlers
 EAPI=7
-KEYWORDS=amd64
+KEYWORDS=amd64 arm64
 RDEPEND=sys-apps/systemd-tmpfiles
 SLOT=0
-_md5_=c558def435202506f1eb7e3a541020d8
+_md5_=3d1cedf05da23e21a9c1d4963c44afaf

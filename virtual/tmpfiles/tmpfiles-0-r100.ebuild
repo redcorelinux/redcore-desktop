@@ -5,6 +5,6 @@ EAPI=7
 
 DESCRIPTION="Virtual to select between different tmpfiles.d handlers"
 SLOT="0"
-KEYWORDS="amd64"
+KEYWORDS="amd64 arm64"
 
 RDEPEND="sys-apps/systemd-tmpfiles"
