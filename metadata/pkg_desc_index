@@ -83,7 +83,7 @@ virtual/jre 1.8.0-r100: Virtual for Java Runtime Environment (JRE)
 virtual/notification-daemon 0-r100: Virtual (dummy package) for notification daemon dbus service
 virtual/rust 100: Virtual for Rust language compiler
 virtual/tmpfiles 0-r100: Virtual to select between different tmpfiles.d handlers
-x11-base/xorg-drivers 1.20-r10: Meta package containing deps on all xorg drivers (dummy package)
+x11-base/xorg-drivers 1.20-r100: Meta package containing deps on all xorg drivers (dummy package)
 x11-base/xorg-server 1.20.12-r100: X.Org X servers
 x11-base/xwayland 21.1.1-r100: Standalone X server running under Wayland
 x11-drivers/nvidia-drivers 460.84: NVIDIA Accelerated Graphics Driver
