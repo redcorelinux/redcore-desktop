@@ -2,8 +2,8 @@ acct-group/smbshare 0: System group: smbshare
 app-admin/calamares 3.2.35.1-r1: Distribution-independent installer framework
 app-admin/vasile 2.1812.2: Versatile Advanced Script for ISO and Latest Enchantments
 app-emulation/linux-steam-integration 0.7.3-r1: Helper for enabling better Steam integration on Linux
-app-emulation/steam 1.0.0.61-r1: Digital distribution client bootstrap package
-app-emulation/steam-native-runtime 1.0.0.61-r2: Native replacement for the Steam runtime using system libraries
+app-emulation/steam 1.0.0.61-r2: Digital distribution client bootstrap package
+app-emulation/steam-native-runtime 1.0.0.61-r3: Native replacement for the Steam runtime using system libraries
 app-emulation/virtualbox-bin 6.1.18.142142-r2: Family of powerful x86 virtualization products for enterprise and home use
 app-emulation/virtualbox-modules 6.1.18: Kernel Modules for Virtualbox
 app-misc/calamares-config-redcore 314-r5: Redcore Linux Calamares modules config
