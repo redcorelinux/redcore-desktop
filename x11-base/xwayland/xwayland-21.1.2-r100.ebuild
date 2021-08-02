@@ -59,7 +59,6 @@ src_configure() {
 		$(meson_use ipv6)
 		$(meson_use xcsecurity)
 		$(meson_use selinux xselinux)
-		$(meson_use video_cards_nvidia xwayland_eglstream)
 		-Dsha1=libcrypto
 		-Ddpms=true
 		-Ddri3=true
@@ -71,6 +70,7 @@ src_configure() {
 		-Dxinerama=true
 		-Dxv=true
 		-Dxvfb=true
+		-Dxwayland_eglstream=false
 		-Dxwayland-path="${EPREFIX}"/usr/libexec
 		-Ddtrace=false
 	)
