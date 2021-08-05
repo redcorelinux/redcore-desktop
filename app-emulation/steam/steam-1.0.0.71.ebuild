@@ -48,7 +48,7 @@ src_install() {
 	emake DESTDIR="${D}" install
 
 	# inject our wrapper binary
-	#dobin "${FILESDIR}"/redcore-steam
+	dobin "${FILESDIR}"/redcore-steam
 
 	# blank steamdeps because apt-get
 	rm -rf "${D}"/usr/bin/steamdeps
