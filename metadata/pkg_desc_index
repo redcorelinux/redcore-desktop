@@ -2,8 +2,8 @@ acct-group/smbshare 0: System group: smbshare
 app-admin/calamares 3.2.35.1-r1: Distribution-independent installer framework
 app-admin/vasile 2.1812.2: Versatile Advanced Script for ISO and Latest Enchantments
 app-emulation/linux-steam-integration 0.7.3-r1: Helper for enabling better Steam integration on Linux
-app-emulation/steam 1.0.0.61-r2: Digital distribution client bootstrap package
-app-emulation/steam-native-runtime 1.0.0.61-r3: Native replacement for the Steam runtime using system libraries
+app-emulation/steam 1.0.0.71: Digital distribution client bootstrap package
+app-emulation/steam-native-runtime 1.0.0.71: Native replacement for the Steam runtime using system libraries
 app-emulation/virtualbox-bin 6.1.18.142142-r2: Family of powerful x86 virtualization products for enterprise and home use
 app-emulation/virtualbox-modules 6.1.18: Kernel Modules for Virtualbox
 app-misc/calamares-config-redcore 314-r5: Redcore Linux Calamares modules config
@@ -24,6 +24,7 @@ gui-libs/display-manager-init 1.0-r100: RC init files for starting display and l
 kde-plasma/kinfocenter 5.22.4-r10: Utility providing information about the computer hardware
 mail-client/mailspring 1.9.1: A beautiful fast and maintained fork of Nylas Mail
 mail-client/wavebox 10.0.389-r1: The next generation of web-desktop communication
+media-libs/libpipewire 0.3.32: Pipewire client libraries
 media-libs/nv-codec-headers 11.0.10.0-r10: FFmpeg version of headers required to interface with Nvidias codec APIs
 media-sound/cantata 2.4.2-r314: Featureful and configurable Qt client for the music player daemon (MPD)
 media-tv/sopcast 3.2.6-r2: SopCast free P2P Internet TV binary

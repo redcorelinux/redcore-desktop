@@ -28,6 +28,7 @@ RDEPEND="
 	media-libs/libcaca[abi_x86_32]
 	media-libs/libcanberra[abi_x86_32]
 	media-libs/libpng-compat:1.2[abi_x86_32]
+	media-libs/libpipewire[abi_x86_32]
 	media-libs/libsdl[abi_x86_32]
 	media-libs/sdl-image[abi_x86_32]
 	media-libs/sdl-mixer[abi_x86_32]

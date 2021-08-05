@@ -29,15 +29,18 @@ RDEPEND="
 	x11-libs/libxcb[abi_x86_32(-)]
 	x11-themes/hicolor-icon-theme"
 
-S="${WORKDIR}"/"${PN}"
+S="${WORKDIR}"/"${PN}-launcher"
 
 PATCHES=( "${FILESDIR}/redcore-${PN}.patch" )
 
 src_prepare() {
 	default
-	sed -r 's|("0666")|"0660", TAG+="uaccess"|g' -i lib/udev/rules.d/60-steam-input.rules
-	sed -r 's|("misc")|\1, OPTIONS+="static_node=uinput"|g' -i lib/udev/rules.d/60-steam-input.rules
-	sed -r 's|(, TAG\+="uaccess")|, MODE="0660"\1|g' -i lib/udev/rules.d/60-steam-vr.rules
+	sed -r 's|("0666")|"0660", TAG+="uaccess"|g' -i subprojects/steam-devices/60-steam-input.rules
+	sed -r 's|("misc")|\1, OPTIONS+="static_node=uinput"|g' -i subprojects/steam-devices/60-steam-input.rules
+	sed -r 's|(, TAG\+="uaccess")|, MODE="0660"\1|g' -i subprojects/steam-devices/60-steam-vr.rules
+
+	sed -i 's|PrefersNonDefaultGPU=true||g' ${PN}.desktop
+	sed -i 's|X-KDE-RunOnDiscreteGpu=true||g' ${PN}.desktop
 }
 
 src_install() {
@@ -45,7 +48,7 @@ src_install() {
 	emake DESTDIR="${D}" install
 
 	# inject our wrapper binary
-	dobin "${FILESDIR}"/redcore-steam
+	#dobin "${FILESDIR}"/redcore-steam
 
 	# blank steamdeps because apt-get
 	rm -rf "${D}"/usr/bin/steamdeps
@@ -57,6 +60,6 @@ src_install() {
 
 	# udev rules
 	insinto usr/lib/udev/rules.d
-	newins lib/udev/rules.d/60-steam-input.rules 70-steam-input.rules
-	newins lib/udev/rules.d/60-steam-vr.rules 70-steam-vr.rules
+	newins subprojects/steam-devices/60-steam-input.rules 70-steam-input.rules
+	newins subprojects/steam-devices/60-steam-vr.rules 70-steam-vr.rules
 }
