@@ -5,7 +5,7 @@ EAPI=6
 
 inherit eutils
 
-EXTRAVERSION="redcore-lts-r1"
+EXTRAVERSION="redcore-lts"
 KV_FULL="${PV}-${EXTRAVERSION}"
 KV_MAJOR="5.10"
 
@@ -53,8 +53,8 @@ PATCHES=(
 	"${FILESDIR}"/"${KV_MAJOR}"-add-sbtsi_driver.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-0001-Revert-cpufreq-Avoid-configuring-old-governors-as-de.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-revert-parts-of-a00ec3874e7d326ab2dffbed92faddf6a77a84e9-no-Intel-NO.patch
-	"${FILESDIR}"/"${KV_MAJOR}"-linux-hardened.patch
-	"${FILESDIR}"/"${KV_MAJOR}"-uksm-linux-hardened.patch
+	"${FILESDIR}"/"${KV_MAJOR}"-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-C.patch
+	"${FILESDIR}"/"${KV_MAJOR}"-uksm.patch
 )
 
 S="${WORKDIR}"/linux-"${PV}"
