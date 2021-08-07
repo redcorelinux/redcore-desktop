@@ -13,7 +13,7 @@ DESCRIPTION="Redcore Linux Kernel Sources"
 HOMEPAGE="https://redcorelinux.org"
 SRC_URI="https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-${PV}.tar.xz"
 
-KEYWORDS=""
+KEYWORDS="~amd64"
 LICENSE="GPL-2"
 SLOT="${PVR}"
 IUSE=""
