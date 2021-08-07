@@ -1,6 +1,7 @@
---- a/kernel/dkms.conf	2020-11-05 22:50:01.000000000 +0000
-+++ b/kernel/dkms.conf	2020-12-31 22:26:00.878993419 +0000
-@@ -1,12 +1,20 @@
+diff -Nur a/kernel/dkms.conf b/kernel/dkms.conf
+--- a/kernel/dkms.conf	2021-07-07 23:03:22.000000000 +0100
++++ b/kernel/dkms.conf	2021-08-07 22:05:52.634341135 +0100
+@@ -1,12 +1,21 @@
 -PACKAGE_NAME="nvidia"
 -PACKAGE_VERSION="__VERSION_STRING"
 +PACKAGE_NAME="nvidia-drivers-dkms"
@@ -26,4 +27,3 @@
 +DEST_MODULE_LOCATION[3]="/extra/dkms"
 +BUILT_MODULE_NAME[4]="nvidia-peermem"
 +DEST_MODULE_LOCATION[4]="/extra/dkms"
-+
