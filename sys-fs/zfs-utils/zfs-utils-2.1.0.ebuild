@@ -26,7 +26,6 @@ DEPEND="
 	net-libs/libtirpc[static-libs?]
 	sys-apps/util-linux[static-libs?]
 	sys-libs/zlib[static-libs(+)?]
-	virtual/awk
 	virtual/libudev[static-libs(-)?]
 	dev-libs/openssl:0=[static-libs?]
 	pam? ( sys-libs/pam )
@@ -59,8 +58,6 @@ RDEPEND="${DEPEND}
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 RESTRICT="test"
-
-PATCHES=( "${FILESDIR}/bash-completion-sudo.patch" )
 
 src_prepare() {
 	default
