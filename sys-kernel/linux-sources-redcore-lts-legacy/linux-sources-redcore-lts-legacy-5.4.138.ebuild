@@ -1,11 +1,11 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 2016-2021 Redcore Linux Project
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
 
 inherit eutils
 
-EXTRAVERSION="redcore-lts-legacy-r1"
+EXTRAVERSION="redcore-lts-legacy"
 KV_FULL="${PV}-${EXTRAVERSION}"
 KV_MAJOR="5.4"
 
@@ -37,8 +37,8 @@ PATCHES=(
 	"${FILESDIR}"/"${KV_MAJOR}"-nvme-suspend-resume-workaround.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-nvme-pci-more-info.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-nvme-hwmon.patch
-	"${FILESDIR}"/"${KV_MAJOR}"-linux-hardened.patch
-	"${FILESDIR}"/"${KV_MAJOR}"-uksm-linux-hardened.patch
+	"${FILESDIR}"/"${KV_MAJOR}"-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-C.patch
+	"${FILESDIR}"/"${KV_MAJOR}"-uksm.patch
 )
 
 S="${WORKDIR}"/linux-"${PV}"
