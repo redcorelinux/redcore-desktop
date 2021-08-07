@@ -4,7 +4,7 @@
 -PACKAGE_NAME="nvidia"
 -PACKAGE_VERSION="__VERSION_STRING"
 +PACKAGE_NAME="nvidia-drivers-dkms"
-+PACKAGE_VERSION="460.84"
++PACKAGE_VERSION="470.57.02"
  AUTOINSTALL="yes"
  
  # By default, DKMS will add KERNELRELEASE to the make command line; however,
@@ -24,4 +24,6 @@
 +DEST_MODULE_LOCATION[2]="/extra/dkms"
 +BUILT_MODULE_NAME[3]="nvidia-drm"
 +DEST_MODULE_LOCATION[3]="/extra/dkms"
++BUILT_MODULE_NAME[4]="nvidia-peermem"
++DEST_MODULE_LOCATION[4]="/extra/dkms"
 +

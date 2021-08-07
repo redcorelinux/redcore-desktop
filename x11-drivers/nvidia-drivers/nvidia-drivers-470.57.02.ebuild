@@ -20,6 +20,8 @@ REQUIRED_USE="tools? ( X )"
 
 COMMON="
 	acct-group/video
+	acct-user/nvpd
+	net-libs/libtirpc
 	>=sys-libs/glibc-2.6.1
 	X? (
 		>=x11-libs/libvdpau-1.0[${MULTILIB_USEDEP}]
@@ -37,14 +39,16 @@ RDEPEND="
 	acpi? ( sys-power/acpid )
 	dkms? ( ~sys-kernel/${PN}-dkms-${PV}:${SLOT} )
 	tools? ( ~x11-misc/nvidia-settings-${PV}:${SLOT} )
-	wayland? ( dev-libs/wayland[${MULTILIB_USEDEP}] )
+	wayland? (
+		dev-libs/wayland[${MULTILIB_USEDEP}]
+		>=gui-libs/egl-wayland-1.1.7-r1
+	)
 	X? (
 		<x11-base/xorg-server-1.20.99:=
 		>=x11-libs/libX11-1.6.2[${MULTILIB_USEDEP}]
 		>=x11-libs/libXext-1.3.2[${MULTILIB_USEDEP}]
 		sys-libs/zlib[${MULTILIB_USEDEP}]
 	)
-	net-libs/libtirpc
 "
 
 QA_PREBUILT="opt/* usr/lib*"
@@ -152,11 +156,6 @@ src_install() {
 		doins ${NV_X11}/10_nvidia.json
 	fi
 
-	if use wayland; then
-		insinto /usr/share/egl/egl_external_platform.d
-		doins ${NV_X11}/10_nvidia_wayland.json
-	fi
-
 	insinto /etc/vulkan/icd.d
 	doins nvidia_icd.json
 
@@ -182,8 +181,8 @@ src_install() {
 
 	# install nvidia-modprobe setuid and symlink in /usr/bin (bug #505092)
 	doexe ${NV_OBJ}/nvidia-modprobe
-	fowners root:video /opt/bin/nvidia-modprobe
-	fperms 4710 /opt/bin/nvidia-modprobe
+#	fowners root:video /opt/bin/nvidia-modprobe
+#	fperms 4710 /opt/bin/nvidia-modprobe
 	dosym /{opt,usr}/bin/nvidia-modprobe
 
 	doman nvidia-cuda-mps-control.1
@@ -241,6 +240,7 @@ src_install-libs() {
 			"libcuda.so.${NV_SOVER}"
 			"libnvcuvid.so.${NV_SOVER}"
 			"libnvidia-compiler.so.${NV_SOVER}"
+			"libnvidia-allocator.so.${NV_SOVER}"
 			"libnvidia-eglcore.so.${NV_SOVER}"
 			"libnvidia-encode.so.${NV_SOVER}"
 			"libnvidia-fbc.so.${NV_SOVER}"
@@ -250,6 +250,7 @@ src_install-libs() {
 			"libnvidia-ifr.so.${NV_SOVER}"
 			"libnvidia-opencl.so.${NV_SOVER}"
 			"libnvidia-ptxjitcompiler.so.${NV_SOVER}"
+			"libnvidia-opticalflow.so.${NV_SOVER}"
 			"libvdpau_nvidia.so.${NV_SOVER}"
 			"libnvidia-ml.so.${NV_SOVER}"
 			"libnvidia-tls.so.${NV_SOVER}"
@@ -266,15 +267,10 @@ src_install-libs() {
 			)
 		fi
 
-		if use wayland && [[ ${ABI} == "amd64" ]]; then
-			NV_GLX_LIBRARIES+=(
-				"libnvidia-egl-wayland.so.1.1.5"
-			)
-		fi
-
 		if has_multilib_profile && [[ ${ABI} == "amd64" ]]; then
 			NV_GLX_LIBRARIES+=(
 				"libnvidia-cbl.so.${NV_SOVER}"
+				"libnvidia-cfg.so.${NV_SOVER}"
 				"libnvidia-ngx.so.${NV_SOVER}"
 				"libnvidia-rtcore.so.${NV_SOVER}"
 				"libnvoptix.so.${NV_SOVER}"
