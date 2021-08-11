@@ -72,7 +72,7 @@ sys-kernel/linux-image-redcore-lts-legacy 5.4.138: Redcore Linux Kernel Image (L
 sys-kernel/linux-sources-redcore 5.11.22-r1 5.13.8: Redcore Linux Kernel Sources
 sys-kernel/linux-sources-redcore-lts 5.10.56: Redcore Linux Kernel Sources (LTS)
 sys-kernel/linux-sources-redcore-lts-legacy 5.4.138: Redcore Linux Kernel Sources (LTS Legacy 5.4)
-sys-kernel/nvidia-drivers-dkms 470.57.02: NVIDIA driver sources for linux
+sys-kernel/nvidia-drivers-dkms 470.63.01: NVIDIA driver sources for linux
 sys-kernel/nvidia-drivers-legacy-dkms 390.144: NVIDIA driver sources for linux
 sys-kernel/rtl8821cu-dkms 5.8.1: Realtek RTL8811CU/RTL8821CU USB Wi-Fi adapter driver for Linux
 sys-kernel/vhba-dkms 20190831: Virtual (SCSI) Host Bus Adapter kernel module for the CDEmu suite sources
@@ -89,11 +89,11 @@ virtual/tmpfiles 0-r100: Virtual to select between different tmpfiles.d handlers
 x11-base/xorg-drivers 1.20-r100: Meta package containing deps on all xorg drivers (dummy package)
 x11-base/xorg-server 1.20.13-r100: X.Org X servers
 x11-base/xwayland 21.1.2-r100: Standalone X server running under Wayland
-x11-drivers/nvidia-drivers 470.57.02: NVIDIA Accelerated Graphics Driver
+x11-drivers/nvidia-drivers 470.63.01: NVIDIA Accelerated Graphics Driver
 x11-drivers/nvidia-drivers-legacy 390.144: NVIDIA Accelerated Graphics Driver
 x11-libs/gtk+ 2.24.32-r314 3.24.20-r314: Gimp ToolKit +
 x11-misc/nvidia-prime 314: NVIDIA Prime Render Offload configuration and utilities
-x11-misc/nvidia-settings 470.57.02: NVIDIA Linux X11 Settings Utility
+x11-misc/nvidia-settings 470.63.01: NVIDIA Linux X11 Settings Utility
 x11-misc/nvidia-settings-legacy 390.144: NVIDIA Linux X11 Settings Utility
 x11-misc/pcmanfm-qt-share 1337: PCManFM-QT custom action to share folder using Samba
 x11-misc/sddm 0.18.1-r10: Simple Desktop Display Manager
