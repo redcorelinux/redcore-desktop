@@ -4,7 +4,7 @@
 EAPI=7
 
 PLOCALES="cs da de en_GB es fr hu it ja ko pl pt_BR ru zh_CN"
-inherit cmake l10n qmake-utils xdg
+inherit cmake plocale qmake-utils xdg
 
 DESCRIPTION="Featureful and configurable Qt client for the music player daemon (MPD)"
 HOMEPAGE="https://github.com/CDrummond/cantata"
@@ -81,8 +81,8 @@ src_prepare() {
 	# Unbundle 3rd party libs
 	rm -r 3rdparty/{ebur128,qtsingleapplication} || die
 
-	l10n_find_plocales_changes "translations" "${PN}_" ".ts"
-	l10n_for_each_disabled_locale_do remove_locale
+	plocale_find_changes "translations" "${PN}_" ".ts"
+	plocale_for_each_disabled_locale remove_locale
 }
 
 src_configure() {
