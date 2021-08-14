@@ -21,7 +21,7 @@ IUSE="acpi +dkms multilib +tools wayland +X"
 
 COMMON="
 	acct-group/video
-	acct-group/nvpd
+	acct-user/nvpd
 	net-libs/libtirpc
 	X? (
 			>=x11-libs/libvdpau-1.0[${MULTILIB_USEDEP}]
