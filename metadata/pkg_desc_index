@@ -67,10 +67,10 @@ sys-kernel/dracutcfg 1337: Redcore Linux Dracut configuration files
 sys-kernel/linux-headers 5.10-r10: Linux system headers
 sys-kernel/linux-image-redcore 5.13.11: Redcore Linux Kernel Image
 sys-kernel/linux-image-redcore-lts 5.10.59: Redcore Linux Kernel Image (LTS)
-sys-kernel/linux-image-redcore-lts-legacy 5.4.140: Redcore Linux Kernel Image (LTS Legacy 5.4)
+sys-kernel/linux-image-redcore-lts-legacy 5.4.141: Redcore Linux Kernel Image (LTS Legacy 5.4)
 sys-kernel/linux-sources-redcore 5.13.11: Redcore Linux Kernel Sources
 sys-kernel/linux-sources-redcore-lts 5.10.59: Redcore Linux Kernel Sources (LTS)
-sys-kernel/linux-sources-redcore-lts-legacy 5.4.140: Redcore Linux Kernel Sources (LTS Legacy 5.4)
+sys-kernel/linux-sources-redcore-lts-legacy 5.4.141: Redcore Linux Kernel Sources (LTS Legacy 5.4)
 sys-kernel/nvidia-drivers-dkms 470.63.01: NVIDIA driver sources for linux
 sys-kernel/nvidia-drivers-legacy-dkms 390.144: NVIDIA driver sources for linux
 sys-kernel/rtl8821cu-dkms 5.8.1: Realtek RTL8811CU/RTL8821CU USB Wi-Fi adapter driver for Linux
