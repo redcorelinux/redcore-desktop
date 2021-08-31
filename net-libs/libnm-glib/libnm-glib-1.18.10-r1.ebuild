@@ -93,13 +93,7 @@ multilib_src_configure() {
 }
 
 multilib_src_compile() {
-	local targets=(
-		libnm-util/libnm-util.so.2.7.0
-		libnm-glib/libnm-glib.so.4.9.0
-		libnm-glib/libnm-glib-vpn.so.1.2.0
-	)
-
-	meson_src_compile "${targets[@]}"
+	meson_src_compile
 }
 
 multilib_src_install() {
