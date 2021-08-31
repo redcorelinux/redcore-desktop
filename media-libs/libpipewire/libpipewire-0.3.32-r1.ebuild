@@ -148,13 +148,9 @@ multilib_src_install() {
 	rm -rvf ${D}/lib
 	rm -rvf ${D}/usr/bin
 	rm -rvf ${D}/usr/include
-	rm -rvf ${D}/usr/lib/alsa-lib
-	rm -rvf ${D}/usr/lib64/alsa-lib
-	rm -rvf ${D}/usr/lib/gstreamer-1.0
-	rm -rvf ${D}/usr/lib64/gstreamer-1.0
-	rm -rvf ${D}/usr/lib/pipewire-0.3/jack
-	rm -rvf ${D}/usr/lib64/pipewire-0.3/jack
-	rm -rvf ${D}/usr/lib/pkgconfig
-	rm -rvf ${D}/usr/lib64/pkgconfig
+	rm -rvf ${D}/usr/$(get_libdir)/alsa-lib
+	rm -rvf ${D}/usr/$(get_libdir)/gstreamer-1.0
+	rm -rvf ${D}/usr/$(get_libdir)/pipewire-0.3/jack
+	rm -rfv ${D}/usr/$(get_libdir)/pkgconfig
 	rm -rvf ${D}/usr/share
 }
