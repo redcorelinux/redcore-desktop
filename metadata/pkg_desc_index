@@ -21,9 +21,8 @@ dev-python/sh 1.12.14-r4: Python process launching
 dev-python/typer 0.2.1-r2: Build great CLIs. Easy to code. Based on Python type hints
 dev-python/wget 2.2-r2: Python library for downloading from http URLs
 gui-libs/display-manager-init 1.0-r100: RC init files for starting display and login managers
-kde-plasma/kinfocenter 5.22.4-r10: Utility providing information about the computer hardware
-mail-client/mailspring 1.9.1: A beautiful fast and maintained fork of Nylas Mail
-mail-client/wavebox 10.0.389-r1: The next generation of web-desktop communication
+kde-plasma/kinfocenter 5.22.5-r10: Utility providing information about the computer hardware
+mail-client/mailspring 1.9.2: A beautiful fast and maintained fork of Nylas Mail
 media-libs/libpipewire 0.3.32-r1: Pipewire client libraries
 media-libs/nv-codec-headers 11.0.10.0-r10: FFmpeg version of headers required to interface with Nvidias codec APIs
 media-sound/cantata 2.4.2-r10: Featureful and configurable Qt client for the music player daemon (MPD)
@@ -97,7 +96,7 @@ x11-misc/nvidia-prime 314: NVIDIA Prime Render Offload configuration and utiliti
 x11-misc/nvidia-settings 470.63.01: NVIDIA Linux X11 Settings Utility
 x11-misc/nvidia-settings-legacy 390.144: NVIDIA Linux X11 Settings Utility
 x11-misc/pcmanfm-qt-share 1337: PCManFM-QT custom action to share folder using Samba
-x11-misc/sddm 0.18.1-r11: Simple Desktop Display Manager
+x11-misc/sddm 0.18.1-r100: Simple Desktop Display Manager
 x11-themes/material-icon-theme 1337-r2: Icon theme following the Google's material design specifications
 x11-themes/redcore-artwork-calamares 314-r2: Redcore Linux branding component for Calamares
 x11-themes/redcore-artwork-community 314-r2: Redcore Linux Community Wallpapers
