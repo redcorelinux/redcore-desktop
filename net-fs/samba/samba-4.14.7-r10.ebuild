@@ -3,7 +3,7 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{7..9} )
+PYTHON_COMPAT=( python3_{8..9} )
 PYTHON_REQ_USE="threads(+),xml(+)"
 inherit python-single-r1 waf-utils multilib-minimal linux-info systemd pam tmpfiles
 
@@ -16,7 +16,7 @@ if [[ ${PV} = *_rc* ]]; then
 	SRC_URI="mirror://samba/rc/${MY_P}.tar.gz"
 else
 	SRC_URI="mirror://samba/stable/${MY_P}.tar.gz"
-	KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~ppc ~ppc64 ~sparc ~x86"
+	KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~ppc ~ppc64 ~riscv ~sparc ~x86"
 fi
 S="${WORKDIR}/${MY_P}"
 
@@ -78,19 +78,19 @@ COMMON_DEPEND="
 	>=sys-libs/tdb-1.4.3[${MULTILIB_USEDEP}]
 	>=sys-libs/tevent-0.10.2[${MULTILIB_USEDEP}]
 	sys-libs/zlib[${MULTILIB_USEDEP}]
+	virtual/libcrypt:=[${MULTILIB_USEDEP}]
 	virtual/libiconv
 	$(python_gen_cond_dep "
-		dev-python/subunit[\${PYTHON_MULTI_USEDEP},${MULTILIB_USEDEP}]
 		addc? (
-			dev-python/dnspython:=[\${PYTHON_MULTI_USEDEP}]
-			dev-python/markdown[\${PYTHON_MULTI_USEDEP}]
+			dev-python/dnspython:=[\${PYTHON_USEDEP}]
+			dev-python/markdown[\${PYTHON_USEDEP}]
 		)
 		addns? (
-			dev-python/dnspython:=[\${PYTHON_MULTI_USEDEP}]
+			dev-python/dnspython:=[\${PYTHON_USEDEP}]
 			net-dns/bind-tools[gssapi]
 		)
 	")
-	!alpha? ( !sparc? ( sys-libs/libunwind:= ) )
+	!alpha? ( !sparc? ( !riscv? ( sys-libs/libunwind:= ) ) )
 	acl? ( virtual/acl )
 	ceph? ( sys-cluster/ceph )
 	cluster? ( net-libs/rpcsvc-proto )
@@ -123,6 +123,7 @@ DEPEND="${COMMON_DEPEND}
 	)
 	spotlight? ( dev-libs/glib )
 	test? (
+		$(python_gen_cond_dep "dev-python/subunit[\${PYTHON_USEDEP},${MULTILIB_USEDEP}]" )
 		!system-mitkrb5? (
 			>=net-dns/resolv_wrapper-1.1.4
 			>=net-libs/socket_wrapper-1.1.9
@@ -324,6 +325,8 @@ multilib_src_test() {
 }
 
 pkg_postinst() {
+	tmpfiles_process samba.conf
+
 	if [[ -z ${REPLACING_VERSIONS} ]] ; then
 		elog "Be aware that this release contains the best of all of Samba's"
 		elog "technology parts, both a file server (that you can reasonably expect"
