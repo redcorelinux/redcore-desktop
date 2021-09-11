@@ -24,6 +24,7 @@ RDEPEND="${DEPEND}
 
 PATCHES=( 
 	"${FILESDIR}"/dkms.patch
+	"${FILESDIR}"/kernel-5.14.patch
 )
 
 S="${WORKDIR}/${AMD64_NV_PACKAGE}"
