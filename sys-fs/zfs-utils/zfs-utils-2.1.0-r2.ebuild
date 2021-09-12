@@ -20,14 +20,14 @@ S="${WORKDIR}/${MY_P}"
 
 LICENSE="BSD-2 CDDL MIT"
 SLOT="0"
-IUSE="debug pam python test-suite static-libs"
+IUSE="debug nls pam python test-suite"
 
 DEPEND="
-	net-libs/libtirpc[static-libs?]
-	sys-apps/util-linux[static-libs?]
-	sys-libs/zlib[static-libs(+)?]
-	virtual/libudev[static-libs(-)?]
-	dev-libs/openssl:0=[static-libs?]
+	net-libs/libtirpc
+	sys-apps/util-linux
+	sys-libs/zlib
+	virtual/libudev
+	dev-libs/openssl:0=
 	pam? ( sys-libs/pam )
 	python? (
 		virtual/python-cffi[${PYTHON_USEDEP}]
@@ -36,6 +36,7 @@ DEPEND="
 
 BDEPEND="virtual/awk
 	virtual/pkgconfig
+	nls? ( sys-devel/gettext )
 	python? (
 		dev-python/setuptools[${PYTHON_USEDEP}]
 	)
@@ -93,8 +94,10 @@ src_configure() {
 		--with-pammoduledir="$(getpam_mod_dir)"
 		--with-vendor=gentoo
 		$(use_enable debug)
+		$(use_enable nls)
 		$(use_enable pam)
 		$(use_enable python pyzfs)
+		--disable-static
 	)
 
 	econf "${myconf[@]}"
@@ -117,10 +120,6 @@ src_install() {
 	use pam && { rm -rv "${ED}/unwanted_files" || die ; }
 
 	use test-suite || { rm -r "${ED}/usr/share/zfs" || die ; }
-
-	if ! use static-libs; then
-		find "${ED}/" -name '*.la' -delete || die
-	fi
 
 	dobashcomp contrib/bash_completion.d/zfs
 	bashcomp_alias zfs zpool
