@@ -41,7 +41,6 @@ PATCHES=(
 	"${FILESDIR}"/"${KV_MAJOR}"-0001-Revert-cpufreq-Avoid-configuring-old-governors-as-de.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-revert-parts-of-a00ec3874e7d326ab2dffbed92faddf6a77a84e9-no-Intel-NO.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-k10temp-frugalware.patch
-	"${FILESDIR}"/"${KV_MAJOR}"-fix-bootconfig.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-C.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-uksm.patch
 )
