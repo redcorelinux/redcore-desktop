@@ -60,11 +60,6 @@ REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 RESTRICT="test"
 
-PATCHES=(
-	"${FILESDIR}"/eb17f92e1edabcde442e5fbdff4525054be8595.diff
-	"${FILESDIR}"/1c24bf966c373009f2be77438e8696aabf50a7e7.diff
-)
-
 src_prepare() {
 	default
 

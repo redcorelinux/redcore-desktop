@@ -20,11 +20,6 @@ IUSE=""
 DEPEND="sys-kernel/dkms"
 RDEPEND="${DEPEND}"
 
-PATCHES=(
-	"${FILESDIR}"/eb17f92e1edabcde442e5fbdff4525054be8595.diff
-	"${FILESDIR}"/1c24bf966c373009f2be77438e8696aabf50a7e7.diff
-)
-
 S="${WORKDIR}/${MY_P}"
 
 src_configure() {
