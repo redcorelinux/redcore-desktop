@@ -32,7 +32,6 @@ PATCHES=(
 	"${FILESDIR}"/"${KV_MAJOR}"-ata-fix-NCQ-LOG-strings-and-move-to-debug.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-radeon_dp_aux_transfer_native-no-ratelimited_debug.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-acpi-use-kern_warning_even_when_error.patch
-	"${FILESDIR}"/"${KV_MAJOR}"-nvme-Patriot_Viper_VPN100-QUIRK_IGNORE_DEV_SUBNQN.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-do_not_bug_the_next_18-years.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-iwlwifi-use-debug-for-debug-infos.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-fix-bootconfig-makefile.patch
