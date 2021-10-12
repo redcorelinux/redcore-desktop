@@ -2,6 +2,7 @@ DEFINED_PHASES=install
 DESCRIPTION=Redcore Linux branding component for Calamares
 EAPI=5
 HOMEPAGE=http://redcorelinux.org
+INHERIT=eutils
 KEYWORDS=amd64 x86
 LICENSE=GPL-2
 RDEPEND=app-admin/calamares
