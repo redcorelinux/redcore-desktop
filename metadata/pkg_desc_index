@@ -39,7 +39,7 @@ net-wireless/broadcom-sta 6.30.223.271-r2: Broadcom's IEEE 802.11a/b/g/n hybrid 
 net-wireless/rtl8821cu 5.8.1: Realtek RTL8821CU USB Wi-Fi adapter driver for Linux
 sys-apps/baselayout 2.7-r10: Filesystem baselayout and init scripts
 sys-apps/firetools 0.9.46: Graphical user interface of app-emulation/firejail
-sys-apps/lsb-release 1.4-r10: LSB version query program
+sys-apps/lsb-release 1.4-r11: LSB version query program
 sys-apps/openrc 0.42.1-r7: OpenRC manages the services, startup and shutdown of a host
 sys-auth/elogind 246.10-r10: The systemd project's logind, extracted to a standalone package
 sys-auth/polkit-qt 0.113.0-r10: PolicyKit Qt API wrapper library (meta package)

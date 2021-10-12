@@ -36,8 +36,8 @@ src_install() {
 	mkdir -p "${D}/etc"
 	cat > "${D}/etc/lsb-release" <<- EOF
 		DISTRIB_ID="Redcore"
-		DISTRIB_RELEASE="2101"
-		DISTRIB_CODENAME="Orion"
-		DISTRIB_DESCRIPTION="Redcore Linux Hardened 2101 - Orion"
+		DISTRIB_RELEASE="2102"
+		DISTRIB_CODENAME="Polaris"
+		DISTRIB_DESCRIPTION="Redcore Linux Hardened 2102 - Polaris"
 	EOF
 }
