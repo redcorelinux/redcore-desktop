@@ -1,5 +1,5 @@
 acct-group/smbshare 0: System group: smbshare
-app-admin/calamares 3.2.44.3: Distribution-independent installer framework
+app-admin/calamares 3.2.44.3-r1: Distribution-independent installer framework
 app-admin/vasile 2.1812.2: Versatile Advanced Script for ISO and Latest Enchantments
 app-emulation/linux-steam-integration 0.7.3-r1: Helper for enabling better Steam integration on Linux
 app-emulation/steam 1.0.0.71: Digital distribution client bootstrap package

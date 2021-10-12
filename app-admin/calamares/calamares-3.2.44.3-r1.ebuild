@@ -36,6 +36,8 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	dev-qt/qtwidgets:5
 	dev-qt/qtxml:5
 	dev-libs/appstream
+	dev-python/jsonschema
+	dev-python/pyyaml
 	kde-frameworks/kconfig:5
 	kde-frameworks/kcoreaddons:5
 	kde-frameworks/kcrash:5
@@ -47,6 +49,7 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	sys-apps/gptfdisk
 	sys-auth/polkit-qt
 	>=sys-libs/kpmcore-4.0.0:5=
+	virtual/libcrypt:=
 "
 DEPEND="${COMMON_DEPEND}
 	test? ( dev-qt/qttest:5 )
