@@ -58,7 +58,7 @@ sys-fs/zfs-utils 2.1.1: Userland utilities for ZFS Linux kernel module
 sys-kernel/bbswitch-dkms 0.8-r1: BBswitch sources for linux
 sys-kernel/broadcom-sta-dkms 6.30.223.271-r5: Broadcom's IEEE 802.11a/b/g/n hybrid Linux device driver source
 sys-kernel/dkms 2.3-r1: Dynamic Kernel Module Support
-sys-kernel/dracut 048-r5: Generic initramfs generation tool
+sys-kernel/dracut 048-r10: Generic initramfs generation tool
 sys-kernel/linux-headers 5.10-r10: Linux system headers
 sys-kernel/linux-image-redcore 5.14.10: Redcore Linux Kernel Image
 sys-kernel/linux-image-redcore-lts 5.10.71: Redcore Linux Kernel Image (LTS)
