@@ -1,7 +1,0 @@
-DEFINED_PHASES=install postinst preinst
-DESCRIPTION=Redcore Linux Dracut configuration files
-EAPI=5
-KEYWORDS=amd64 x86
-LICENSE=GPL-2
-SLOT=0
-_md5_=35e8dc545ff8618efcfcf1f443724748
