@@ -221,7 +221,7 @@ src_prepare() {
 	echo "LDPATH='${ldpaths#:}'" >> etc/env.d/50baselayout
 
 	# rc-scripts version for testing of features that *should* be present
-	echo "Redcore Linux Hardened - rolling" > etc/redcore-release
+	echo "Redcore Linux Hardened - current" > etc/redcore-release
 }
 
 src_install() {
@@ -350,7 +350,6 @@ pkg_postinst() {
 	fi
 
 	############### Redcore Linux ###############
-	mv "${EROOT}"etc/._cfg????_redcore-release "${EROOT}"etc/redcore-release || die
 	rm -rf "${EROOT}"etc/dracut.conf.d/._cfg????_dracut-redcore.conf
 	rm -rf "${EROOT}"etc/default/._cfg????_grub
 	rm -rf "${EROOT}"etc/samba/._cfg????_smb.conf
