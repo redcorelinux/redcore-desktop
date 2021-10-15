@@ -19,7 +19,10 @@ LICENSE="GPL-2"
 SLOT="0"
 IUSE="build kernel_FreeBSD kernel_linux +split-usr"
 
-DEPEND="acct-group/smbshare"
+DEPEND="acct-group/smbshare
+	!net-fs/sambacfg
+	!sys-boot/grubcfg
+	!sys-kernel/dracutcfg"
 RDEPEND="${DEPEND}"
 
 pkg_setup() {
