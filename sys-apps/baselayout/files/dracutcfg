@@ -1,0 +1,14 @@
+# Host-Only mode: Install only what is needed for booting the local host instead of a generic host and generate host-specific configuration. 
+hostonly="no"
+
+# Combine early microcode with ramdisk. Uncomment the line bellow, and run "dracut -f" if you want early microcode update.
+# early_microcode="yes"
+
+# Dracut modules to add when building the iniframfs
+add_dracutmodules+=" drm plymouth "
+
+# Dracut modules to ommit when building the initramfs.
+omit_dracutmodules+=" systemd systemd-initrd systemd-networkd dracut-systemd "
+
+# Make sure we have vboxvideo && qxl inside the initramfs (Virtualbox/Qemu)
+add_drivers+=" vboxvideo qxl "

@@ -19,6 +19,9 @@ LICENSE="GPL-2"
 SLOT="0"
 IUSE="build kernel_FreeBSD kernel_linux +split-usr"
 
+DEPEND="acct-group/smbshare"
+RDEPEND="${DEPEND}"
+
 pkg_setup() {
 	multilib_layout
 }
@@ -234,6 +237,38 @@ src_install() {
 	dodir /usr/lib
 	mv "${ED}"/etc/os-release "${ED}"/usr/lib || die
 	dosym ../usr/lib/os-release /etc/os-release
+
+	############### Redcore Linux ###############
+	#
+	# issue.logo
+	rm "${ED}"/etc/issue.logo
+	#
+	# NetworkManager
+	dodir /etc/NetworkManager
+	insinto /etc/NetworkManager
+	newins "${FILESDIR}"/nmcfg NetworkManager.conf
+	#
+	# dracut
+	dodir /etc/dracut.conf.d
+	insinto /etc/dracut.conf.d
+	newins "${FILESDIR}"/dracutcfg dracut-redcore.conf
+	#
+	# grub
+	dodir /etc/default
+	insinto /etc/default
+	newins "${FILESDIR}"/grubcfg grub
+	#
+	# samba
+	dodir /etc/samba
+	insinto /etc/samba
+	newins "${FILESDIR}"/smbcfg smb.conf
+	keepdir var/lib/samba/usershare
+	# cryptsetup
+	dodir /etc/conf.d
+	insinto /etc/conf.d
+	newins ${FILESDIR}/dmcryptcfg dmcrypt
+	#
+	##############################################
 }
 
 pkg_postinst() {
@@ -256,11 +291,6 @@ pkg_postinst() {
 			chmod o-rwx "${EROOT}etc/${x}" || die
 		fi
 	done
-
-	# Take care of the etc-update for the user
-	if [ -e "${EROOT}"etc/._cfg0000_redcore-release ] ; then
-		mv "${EROOT}"etc/._cfg0000_redcore-release "${EROOT}"etc/redcore-release || die
-	fi
 
 	# whine about users that lack passwords #193541
 	if [[ -e "${EROOT}"etc/shadow ]] ; then
@@ -315,4 +345,14 @@ pkg_postinst() {
 		ewarn "${EROOT}etc/env.d/00basic is now ${EROOT}etc/env.d/50baselayout"
 		ewarn "Please migrate your changes."
 	fi
+
+	############### Redcore Linux ###############
+	mv "${EROOT}"etc/._cfg????_redcore-release "${EROOT}"etc/redcore-release || die
+	rm -rf "${EROOT}"etc/dracut.conf.d/._cfg????_dracut-redcore.conf
+	rm -rf "${EROOT}"etc/default/._cfg????_grub
+	rm -rf "${EROOT}"etc/samba/._cfg????_smb.conf
+	rm -rf "${EROOT}"etc/conf.d/._cfg???_dmcrypt
+	chown root:smbshare /var/lib/samba/usershare
+	chmod 1770 /var/lib/samba/usershare
+	############################################
 }
