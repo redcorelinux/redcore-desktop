@@ -1,7 +1,0 @@
-DEFINED_PHASES=install postinst preinst
-DESCRIPTION=Redcore Linux GRUB configuration files
-EAPI=5
-KEYWORDS=amd64 x86
-LICENSE=GPL-2
-SLOT=0
-_md5_=b45ac8e9ff2671a53a8d760a8a41ba8d
