@@ -3,6 +3,7 @@ DEPEND=>=dev-vcs/git-1.8.2.1[curl]
 DESCRIPTION=Redcore Linux Community Wallpapers
 EAPI=6
 HOMEPAGE=https://redcorelinux.org
+INHERIT=eutils git-r3
 KEYWORDS=amd64 x86
 PROPERTIES=live
 SLOT=0
