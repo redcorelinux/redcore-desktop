@@ -37,6 +37,7 @@ else
 fi
 
 PATCHES=(
+	"${FILESDIR}"/0001-build-Fix-GRUB-i386-pc-build-with-Ubuntu-gcc.patch
 	"${FILESDIR}"/01-gfxpayload.patch
 	"${FILESDIR}"/02-KERNEL_GLOBS.patch
 	"${FILESDIR}"/03-sparc64-bios-boot.patch
