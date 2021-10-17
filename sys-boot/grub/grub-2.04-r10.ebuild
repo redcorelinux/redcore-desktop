@@ -71,6 +71,7 @@ BDEPEND="
 	app-misc/pax-utils
 	sys-devel/flex
 	sys-devel/bison
+	sys-devel/automake:1.15
 	sys-apps/help2man
 	sys-apps/texinfo
 	fonts? (
