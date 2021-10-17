@@ -4,9 +4,10 @@
 EAPI=7
 
 if [[ ${PV} == 9999  ]]; then
-	GRUB_AUTORECONF=1
 	GRUB_BOOTSTRAP=1
 fi
+
+GRUB_AUTORECONF=1
 
 if [[ -n ${GRUB_AUTOGEN} || -n ${GRUB_BOOTSTRAP} ]]; then
 	PYTHON_COMPAT=( python{2_7,3_{8,9,10}} )
