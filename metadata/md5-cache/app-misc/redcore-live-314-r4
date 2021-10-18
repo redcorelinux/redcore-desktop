@@ -3,6 +3,7 @@ DEPEND=>=dev-vcs/git-1.8.2.1[curl]
 DESCRIPTION=Redcore Linux live scripts
 EAPI=6
 HOMEPAGE=http://redcorelinux.org
+INHERIT=eutils git-r3
 KEYWORDS=amd64 x86
 LICENSE=GPL-2
 PROPERTIES=live
