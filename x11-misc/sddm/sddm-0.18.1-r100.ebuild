@@ -25,6 +25,8 @@ BDEPEND="
 	virtual/pkgconfig
 "
 RDEPEND="
+	acct-group/${PN}
+	acct-user/${PN}
 	>=dev-qt/qtcore-5.9.4:5
 	>=dev-qt/qtdbus-5.9.4:5
 	>=dev-qt/qtdeclarative-5.9.4:5
@@ -102,8 +104,6 @@ src_install() {
 }
 
 pkg_postinst() {
-	enewgroup ${PN}
-	enewuser ${PN} -1 -1 /var/lib/${PN} ${PN},video
-
+	chown -R ${PN}:${PN} /var/lib/${PN}
 	systemd_reenable sddm.service
 }
