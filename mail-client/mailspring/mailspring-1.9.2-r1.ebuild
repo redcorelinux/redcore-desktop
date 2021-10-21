@@ -17,7 +17,7 @@ IUSE=""
 
 DEPEND="
 	app-crypt/libsecret
-	app-text/tidy-html5
+	app-text/htmltidy
 	dev-cpp/ctemplate
 	dev-libs/nss
 	dev-libs/openssl-compat:1.0.0
