@@ -13,6 +13,8 @@ LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64"
 
+RDEPEND=">=x11-drivers/nvidia-drivers-470.57.02[${MULTILIB_USEDEP}]"
+
 src_prepare() {
 	multilib_copy_sources
 	default
