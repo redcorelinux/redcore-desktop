@@ -21,10 +21,11 @@ DEPEND="
 	>=x11-libs/libXfont2-2.0.1
 	dev-libs/openssl:=
 	dev-libs/wayland
+	gui-libs/egl-wayland
 	>=x11-libs/libXdmcp-1.0.2
 	>=x11-libs/libdrm-2.4.89
 	>=media-libs/libepoxy-1.5.4[X,egl(+)]
-	>=media-libs/mesa-18[X(+),egl(+),gbm(+)]
+	>=media-libs/mesa-21.1[X(+),egl(+),gbm(+)]
 	>=x11-libs/libxshmfence-1.1
 	rpc? ( net-libs/libtirpc )
 	>=x11-libs/libXau-1.0.4
@@ -40,6 +41,7 @@ DEPEND="
 
 RDEPEND="
 	${DEPEND}
+	x11-apps/xkbcomp
 	!<=x11-base/xorg-server-1.20.12
 	selinux? ( sec-policy/selinux-xserver )
 "
@@ -70,8 +72,8 @@ src_configure() {
 		-Dxinerama=true
 		-Dxv=true
 		-Dxvfb=true
-		-Dxwayland_eglstream=false
-		-Dxwayland-path="${EPREFIX}"/usr/libexec
+		-Dxwayland_eglstream=true
+		-Dxwayland-path="${EPREFIX}"/usr/bin
 		-Ddtrace=false
 	)
 
@@ -79,7 +81,7 @@ src_configure() {
 }
 
 src_install() {
-	dosym ../libexec/Xwayland /usr/bin/Xwayland
+	dosym ../bin/Xwayland /usr/libexec/Xwayland
 
 	meson_src_install
 }

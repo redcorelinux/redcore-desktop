@@ -85,7 +85,7 @@ virtual/tmpfiles 0-r100: Virtual to select between different tmpfiles.d handlers
 virtual/udev 1000: Virtual to select between different udev daemon providers
 x11-base/xorg-drivers 1.20-r100: Meta package containing deps on all xorg drivers (dummy package)
 x11-base/xorg-server 1.20.13-r100: X.Org X servers
-x11-base/xwayland 21.1.2-r100: Standalone X server running under Wayland
+x11-base/xwayland 21.1.2.901-r10: Standalone X server running under Wayland
 x11-drivers/nvidia-drivers 470.63.01: NVIDIA Accelerated Graphics Driver
 x11-drivers/nvidia-drivers-legacy 390.144-r3: NVIDIA Accelerated Graphics Driver
 x11-libs/gtk+ 2.24.33-r10 3.24.29-r10: Gimp ToolKit +
