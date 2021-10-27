@@ -21,7 +21,7 @@ DEPEND="
 	>=x11-libs/libXfont2-2.0.1
 	dev-libs/openssl:=
 	dev-libs/wayland
-	gui-libs/egl-wayland
+	amd64? ( gui-libs/egl-wayland )
 	>=x11-libs/libXdmcp-1.0.2
 	>=x11-libs/libdrm-2.4.89
 	>=media-libs/libepoxy-1.5.4[X,egl(+)]
@@ -72,10 +72,15 @@ src_configure() {
 		-Dxinerama=true
 		-Dxv=true
 		-Dxvfb=true
-		-Dxwayland_eglstream=true
 		-Dxwayland-path="${EPREFIX}"/usr/bin
 		-Ddtrace=false
 	)
+
+	if use amd64; then
+		local emesonargs+=(
+		-Dxwayland_eglstream=true
+	)
+	fi
 
 	meson_src_configure
 }
