@@ -9,7 +9,7 @@ DESCRIPTION="Standalone X server running under Wayland"
 HOMEPAGE="https://wayland.freedesktop.org/xserver.html"
 SRC_URI="https://xorg.freedesktop.org/archive/individual/xserver/${P}.tar.xz"
 
-IUSE="rpc unwind ipv6 xcsecurity selinux"
+IUSE="rpc unwind xcsecurity selinux"
 
 LICENSE="MIT"
 SLOT="0"
@@ -42,7 +42,7 @@ DEPEND="
 RDEPEND="
 	${DEPEND}
 	x11-apps/xkbcomp
-	!<=x11-base/xorg-server-1.20.12
+	!<=x11-base/xorg-server-1.20.11
 	selinux? ( sec-policy/selinux-xserver )
 "
 BDEPEND="
@@ -57,23 +57,23 @@ PATCHES=(
 src_configure() {
 	local emesonargs=(
 		$(meson_use rpc secure-rpc)
-		$(meson_use unwind libunwind)
-		$(meson_use ipv6)
-		$(meson_use xcsecurity)
 		$(meson_use selinux xselinux)
-		-Dsha1=libcrypto
+		$(meson_use unwind libunwind)
+		$(meson_use xcsecurity)
 		-Ddpms=true
 		-Ddri3=true
+		-Ddtrace=false
 		-Dglamor=true
 		-Dglx=true
+		-Dipv6=true
 		-Dscreensaver=true
+		-Dsha1=libcrypto
 		-Dxace=true
 		-Dxdmcp=true
 		-Dxinerama=true
-		-Dxv=true
 		-Dxvfb=true
+		-Dxv=true
 		-Dxwayland-path="${EPREFIX}"/usr/bin
-		-Ddtrace=false
 	)
 
 	if use amd64; then
