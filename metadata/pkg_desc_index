@@ -32,7 +32,7 @@ media-tv/sopcast 3.2.6-r2: SopCast free P2P Internet TV binary
 media-video/guvcview 2.0.6-r10: Simple Qt5 or GTK+3 interface for capturing and viewing video from v4l2 devices
 media-video/nvidia_video_sdk 6.0.1-r10: NVIDIA Video Codec SDK
 net-libs/libnm-glib 1.18.10-r1: Legacy NetworkManager glib and util libraries
-net-libs/webkit-gtk 2.30.3-r100: Open source web browser engine
+net-libs/webkit-gtk 2.34.1-r100: Open source web browser engine
 net-print/cnijfilter 4.10-r2: Canon InkJet Printer Driver for Linux (Pixus/Pixma-Series)
 net-wireless/broadcom-sta 6.30.223.271-r2: Broadcom's IEEE 802.11a/b/g/n hybrid Linux device driver
 net-wireless/rtl8821cu 5.8.1: Realtek RTL8821CU USB Wi-Fi adapter driver for Linux

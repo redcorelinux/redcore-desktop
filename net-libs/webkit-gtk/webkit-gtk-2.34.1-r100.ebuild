@@ -1,12 +1,10 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
-CMAKE_MAKEFILE_GENERATOR="ninja"
+EAPI=7
 PYTHON_COMPAT=( python3_{8..10} )
-CMAKE_MIN_VERSION=3.10
 
-inherit check-reqs cmake-utils flag-o-matic gnome2 pax-utils python-any-r1 toolchain-funcs virtualx
+inherit check-reqs cmake flag-o-matic gnome2 pax-utils python-any-r1 toolchain-funcs virtualx
 
 MY_P="webkitgtk-${PV}"
 DESCRIPTION="Open source web browser engine"
@@ -15,9 +13,9 @@ SRC_URI="https://www.webkitgtk.org/releases/${MY_P}.tar.xz"
 
 LICENSE="LGPL-2+ BSD"
 SLOT="4/37" # soname version of libwebkit2gtk-4.0
-KEYWORDS="amd64 ~arm arm64 ~ppc64 ~sparc x86"
+KEYWORDS="~amd64 ~arm ~arm64 ~ppc ~ppc64 ~riscv ~sparc ~x86"
 
-IUSE="aqua +egl gamepad +geolocation gles2-only gnome-keyring +gstreamer gtk-doc +introspection +jpeg2k +jumbo-build libnotify +opengl seccomp spell systemd wayland +X"
+IUSE="aqua avif +egl examples gamepad +geolocation gles2-only gnome-keyring +gstreamer gtk-doc +introspection +jpeg2k +jumbo-build lcms libnotify +opengl seccomp spell systemd wayland +X"
 
 # gstreamer with opengl/gles2 needs egl
 REQUIRED_USE="
@@ -48,7 +46,7 @@ RDEPEND="
 	>=dev-libs/libgcrypt-1.7.0:0=
 	>=x11-libs/gtk+-3.22.0:3[aqua?,introspection?,wayland?,X?]
 	>=media-libs/harfbuzz-1.4.2:=[icu(+)]
-	>=dev-libs/icu-60.2:=
+	>=dev-libs/icu-61.2:=
 	virtual/jpeg:0=
 	>=net-libs/libsoup-2.54:2.4[introspection?]
 	>=dev-libs/libxml2-2.8.0:2
@@ -58,11 +56,11 @@ RDEPEND="
 	>=dev-libs/atk-2.16.0
 	media-libs/libwebp:=
 
-	>=dev-libs/glib-2.44.0:2
+	>=dev-libs/glib-2.67.1:2
 	>=dev-libs/libxslt-1.1.7
 	media-libs/woff2
 	gnome-keyring? ( app-crypt/libsecret )
-	introspection? ( >=dev-libs/gobject-introspection-1.32.0:= )
+	introspection? ( >=dev-libs/gobject-introspection-1.59.1:= )
 	dev-libs/libtasn1:=
 	spell? ( >=app-text/enchant-0.22:2 )
 	gstreamer? (
@@ -82,8 +80,10 @@ RDEPEND="
 	libnotify? ( x11-libs/libnotify )
 	dev-libs/hyphen
 	jpeg2k? ( >=media-libs/openjpeg-2.2.0:2= )
+	avif? ( >=media-libs/libavif-0.9.0:= )
+	lcms? ( media-libs/lcms:2 )
 
-	egl? ( media-libs/mesa[egl] )
+	egl? ( media-libs/mesa[egl(+)] )
 	gles2-only? ( media-libs/mesa[gles2] )
 	opengl? ( virtual/opengl )
 	wayland? (
@@ -103,9 +103,10 @@ RDEPEND="
 	gamepad? ( >=dev-libs/libmanette-0.2.4 )
 "
 unset wpe_depend
+DEPEND="${RDEPEND}"
 # paxctl needed for bug #407085
 # Need real bison, not yacc
-DEPEND="${RDEPEND}
+BDEPEND="
 	${PYTHON_DEPS}
 	>=app-accessibility/at-spi2-core-2.5.3
 	dev-util/glib-utils
@@ -123,6 +124,7 @@ DEPEND="${RDEPEND}
 
 	gtk-doc? ( >=dev-util/gtk-doc-1.32 )
 	geolocation? ( dev-util/gdbus-codegen )
+	>=dev-util/cmake-3.10
 "
 #	test? (
 #		dev-python/pygobject:3[python_targets_python2_7]
@@ -168,13 +170,8 @@ pkg_setup() {
 }
 
 src_prepare() {
-	eapply "${FILESDIR}"/${PV}-icu68.patch
-	eapply "${FILESDIR}"/${PN}-2.24.4-eglmesaext-include.patch # bug 699054 # https://bugs.webkit.org/show_bug.cgi?id=204108
-	eapply "${FILESDIR}"/2.28.2-opengl-without-X-fixes.patch
-	eapply "${FILESDIR}"/2.28.2-non-jumbo-fix.patch
-	eapply "${FILESDIR}"/2.28.4-non-jumbo-fix2.patch
-	eapply "${FILESDIR}"/${PV}-fix-noGL-build.patch
-	cmake-utils_src_prepare
+	eapply "${FILESDIR}"/2.34.1-opengl-without-X-fixes.patch
+	cmake_src_prepare
 	gnome2_src_prepare
 }
 
@@ -201,11 +198,6 @@ src_configure() {
 		append-ldflags "-Wl,--no-keep-memory"
 	fi
 
-	# We try to use gold when possible for this package
-#	if ! tc-ld-is-gold ; then
-#		append-ldflags "-Wl,--reduce-memory-overheads"
-#	fi
-
 	# Ruby situation is a bit complicated. See bug 513888
 	ruby_interpreter="-DRUBY_EXECUTABLE=$(type -P ruby27)"
 	# This will rarely occur. Only a couple of corner cases could lead us to
@@ -214,9 +206,8 @@ src_configure() {
 
 	# TODO: Check Web Audio support
 	# should somehow let user select between them?
-	#
-	# opengl needs to be explicetly handled, bug #576634
 
+	# opengl needs to be explicetly handled, bug #576634
 	local use_wpe_renderer=OFF
 	local opengl_enabled
 	if use opengl || use gles2-only; then
@@ -227,64 +218,70 @@ src_configure() {
 	fi
 
 	local mycmakeargs=(
-		-DENABLE_UNIFIED_BUILDS=$(usex jumbo-build)
-		-DENABLE_QUARTZ_TARGET=$(usex aqua)
+		${ruby_interpreter}
+		$(cmake_use_find_package gles2-only OpenGLES2)
+		$(cmake_use_find_package egl EGL)
+		$(cmake_use_find_package opengl OpenGL)
+		-DBWRAP_EXECUTABLE:FILEPATH="${EPREFIX}"/usr/bin/bwrap # If bubblewrap[suid] then portage makes it go-r and cmake find_program fails with that
+		-DDBUS_PROXY_EXECUTABLE:FILEPATH="${EPREFIX}"/usr/bin/xdg-dbus-proxy
+		-DPORT=GTK
+		# Source/cmake/WebKitFeatures.cmake
 		-DENABLE_API_TESTS=$(usex test)
-		-DENABLE_GTKDOC=$(usex gtk-doc)
+		-DENABLE_BUBBLEWRAP_SANDBOX=$(usex seccomp)
+		-DENABLE_GAMEPAD=$(usex gamepad)
 		-DENABLE_GEOLOCATION=$(usex geolocation) # Runtime optional (talks over dbus service)
-		$(cmake-utils_use_find_package gles2-only OpenGLES2)
-		-DENABLE_GLES2=$(usex gles2-only)
+		-DENABLE_MINIBROWSER=$(usex examples)
+		-DENABLE_SPELLCHECK=$(usex spell)
+		-DENABLE_UNIFIED_BUILDS=$(usex jumbo-build)
 		-DENABLE_VIDEO=$(usex gstreamer)
+		-DENABLE_WEBGL=${opengl_enabled}
+		# Supported only under ANGLE and default off PRIVATE option still@2.34.1, see
+		# https://bugs.webkit.org/show_bug.cgi?id=225563
+		# https://bugs.webkit.org/show_bug.cgi?id=224888
+		-DENABLE_WEBGL2=OFF
 		-DENABLE_WEB_AUDIO=$(usex gstreamer)
+		# Source/cmake/OptionsGTK.cmake
+		-DENABLE_GLES2=$(usex gles2-only)
+		-DENABLE_GTKDOC=$(usex gtk-doc)
 		-DENABLE_INTROSPECTION=$(usex introspection)
+		-DENABLE_QUARTZ_TARGET=$(usex aqua)
+		-DENABLE_WAYLAND_TARGET=$(usex wayland)
+		-DENABLE_X11_TARGET=$(usex X)
+		-DUSE_AVIF=$(usex avif)
+		-DUSE_GTK4=OFF
+		-DUSE_LCMS=$(usex lcms)
+		-DUSE_LIBHYPHEN=ON
 		-DUSE_LIBNOTIFY=$(usex libnotify)
 		-DUSE_LIBSECRET=$(usex gnome-keyring)
+		-DUSE_OPENGL_OR_ES=${opengl_enabled}
 		-DUSE_OPENJPEG=$(usex jpeg2k)
-		-DUSE_WOFF2=ON
-		-DENABLE_SPELLCHECK=$(usex spell)
+		-DUSE_SOUP2=ON
 		-DUSE_SYSTEMD=$(usex systemd) # Whether to enable journald logging
-		-DENABLE_GAMEPAD=$(usex gamepad)
-		-DENABLE_WAYLAND_TARGET=$(usex wayland)
+		-DUSE_WOFF2=ON
 		-DUSE_WPE_RENDERER=${use_wpe_renderer} # WPE renderer is used to implement accelerated compositing under wayland
-		$(cmake-utils_use_find_package egl EGL)
-		$(cmake-utils_use_find_package opengl OpenGL)
-		-DENABLE_X11_TARGET=$(usex X)
-		-DENABLE_GRAPHICS_CONTEXT_GL=${opengl_enabled}
-		-DENABLE_WEBGL=${opengl_enabled}
-		-DENABLE_BUBBLEWRAP_SANDBOX=$(usex seccomp)
-		-DBWRAP_EXECUTABLE="${EPREFIX}"/usr/bin/bwrap # If bubblewrap[suid] then portage makes it go-r and cmake find_program fails with that
-		-DCMAKE_BUILD_TYPE=Release
-		-DPORT=GTK
-		${ruby_interpreter}
 	)
 
-	# Allow it to use GOLD when possible as it has all the magic to
-	# detect when to use it and using gold for this concrete package has
-	# multiple advantages and is also the upstream default, bug #585788
-#	if tc-ld-is-gold ; then
-#		mycmakeargs+=( -DUSE_LD_GOLD=ON )
-#	else
-#		mycmakeargs+=( -DUSE_LD_GOLD=OFF )
-#	fi
+	# https://bugs.gentoo.org/761238
+	append-cppflags -DNDEBUG
 
-	WK_USE_CCACHE=NO cmake-utils_src_configure
+	WK_USE_CCACHE=NO cmake_src_configure
 }
 
 src_compile() {
-	cmake-utils_src_compile
+	cmake_src_compile
 }
 
 src_test() {
 	# Prevents test failures on PaX systems
 	pax-mark m $(list-paxables Programs/*[Tt]ests/*) # Programs/unittests/.libs/test*
 
-	cmake-utils_src_test
+	cmake_src_test
 }
 
 src_install() {
-	cmake-utils_src_install
+	cmake_src_install
 
 	# Prevents crashes on PaX systems, bug #522808
-	pax-mark m "${ED}usr/libexec/webkit2gtk-4.0/jsc" "${ED}usr/libexec/webkit2gtk-4.0/WebKitWebProcess"
-	pax-mark m "${ED}usr/libexec/webkit2gtk-4.0/WebKitPluginProcess"
+	pax-mark m "${ED}/usr/libexec/webkit2gtk-4.0/jsc" "${ED}/usr/libexec/webkit2gtk-4.0/WebKitWebProcess"
+	pax-mark m "${ED}/usr/libexec/webkit2gtk-4.0/WebKitPluginProcess"
 }
