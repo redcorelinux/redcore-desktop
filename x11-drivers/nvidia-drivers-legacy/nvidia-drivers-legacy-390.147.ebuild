@@ -29,7 +29,8 @@ COMMON="
 	)"
 DEPEND="${COMMON}"
 PDEPEND="
-	tools? ( ~x11-misc/nvidia-settings-legacy-${PV}:${SLOT} )"
+	tools? ( ~x11-misc/nvidia-settings-legacy-${PV}:${SLOT} )
+	X? ( <x11-base/xorg-server-1.21 )"
 RDEPEND="
 	${COMMON}
 	>=virtual/opencl-3
@@ -38,7 +39,6 @@ RDEPEND="
 	dkms? ( ~sys-kernel/${PN}-dkms-${PV}:${SLOT} )
 	wayland? ( dev-libs/wayland[${MULTILIB_USEDEP}] )
 	X? (
-		<x11-base/xorg-server-1.20.99:=
 		>=x11-libs/libX11-1.6.2[${MULTILIB_USEDEP}]
 		>=x11-libs/libXext-1.3.2[${MULTILIB_USEDEP}]
 		sys-libs/zlib[${MULTILIB_USEDEP}]
