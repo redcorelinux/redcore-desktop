@@ -37,7 +37,7 @@ RDEPEND="
 	acpi? ( sys-power/acpid )
 	dkms? ( ~sys-kernel/${PN}-dkms-${PV}:${SLOT} )
 	wayland? (
-		>=gui-libs/egl-wayland-1.1.7-r1
+		~gui-libs/egl-wayland-1.1.7
 	)
 	X? (
 		>=x11-libs/libX11-1.6.2[${MULTILIB_USEDEP}]
