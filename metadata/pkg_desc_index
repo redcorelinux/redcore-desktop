@@ -61,10 +61,10 @@ sys-kernel/broadcom-sta-dkms 6.30.223.271-r5: Broadcom's IEEE 802.11a/b/g/n hybr
 sys-kernel/dkms 2.3-r1: Dynamic Kernel Module Support
 sys-kernel/dracut 048-r10: Generic initramfs generation tool
 sys-kernel/linux-headers 5.10-r10: Linux system headers
-sys-kernel/linux-image-redcore 5.14.15: Redcore Linux Kernel Image
+sys-kernel/linux-image-redcore 5.14.21: Redcore Linux Kernel Image
 sys-kernel/linux-image-redcore-lts 5.10.76: Redcore Linux Kernel Image (LTS)
 sys-kernel/linux-image-redcore-lts-legacy 5.4.156: Redcore Linux Kernel Image (LTS Legacy 5.4)
-sys-kernel/linux-sources-redcore 5.14.15: Redcore Linux Kernel Sources
+sys-kernel/linux-sources-redcore 5.14.21: Redcore Linux Kernel Sources
 sys-kernel/linux-sources-redcore-lts 5.10.76: Redcore Linux Kernel Sources (LTS)
 sys-kernel/linux-sources-redcore-lts-legacy 5.4.156: Redcore Linux Kernel Sources (LTS Legacy 5.4)
 sys-kernel/nvidia-drivers-dkms 470.63.01: NVIDIA driver sources for linux
