@@ -36,17 +36,17 @@ RDEPEND="
 	!!x11-drivers/nvidia-drivers-legacy
 	acpi? ( sys-power/acpid )
 	dkms? ( ~sys-kernel/${PN}-dkms-${PV}:${SLOT} )
-	tools? ( ~x11-misc/nvidia-settings-${PV}:${SLOT} )
 	wayland? (
 		>=gui-libs/egl-wayland-1.1.7-r1
 	)
 	X? (
-		<x11-base/xorg-server-1.20.99:=
 		>=x11-libs/libX11-1.6.2[${MULTILIB_USEDEP}]
 		>=x11-libs/libXext-1.3.2[${MULTILIB_USEDEP}]
 		sys-libs/zlib[${MULTILIB_USEDEP}]
 	)
 "
+PDEPEND="tools? ( ~x11-misc/nvidia-settings-${PV}:${SLOT} )
+	X? ( <x11-base/xorg-server-1.21 )"
 
 QA_PREBUILT="opt/* usr/lib*"
 S=${WORKDIR}/
