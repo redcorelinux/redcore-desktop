@@ -30,7 +30,7 @@ COMMON="
 DEPEND="${COMMON}"
 PDEPEND="
 	tools? ( ~x11-misc/nvidia-settings-legacy-${PV}:${SLOT} )
-	X? ( <x11-base/xorg-server-1.21 )"
+"
 RDEPEND="
 	${COMMON}
 	>=virtual/opencl-3

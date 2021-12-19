@@ -46,7 +46,7 @@ RDEPEND="
 	)
 "
 PDEPEND="tools? ( ~x11-misc/nvidia-settings-${PV}:${SLOT} )
-	X? ( <x11-base/xorg-server-1.21 )"
+"
 
 QA_PREBUILT="opt/* usr/lib*"
 S=${WORKDIR}/
