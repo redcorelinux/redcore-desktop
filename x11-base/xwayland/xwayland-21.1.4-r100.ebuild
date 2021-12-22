@@ -9,7 +9,7 @@ DESCRIPTION="Standalone X server running under Wayland"
 HOMEPAGE="https://wayland.freedesktop.org/xserver.html"
 SRC_URI="https://xorg.freedesktop.org/archive/individual/xserver/${P}.tar.xz"
 
-IUSE="rpc unwind xcsecurity selinux"
+IUSE="unwind xcsecurity selinux"
 
 LICENSE="MIT"
 SLOT="0"
@@ -27,7 +27,6 @@ DEPEND="
 	>=media-libs/libepoxy-1.5.4[X,egl(+)]
 	>=media-libs/mesa-21.1[X(+),egl(+),gbm(+)]
 	>=x11-libs/libxshmfence-1.1
-	rpc? ( net-libs/libtirpc )
 	>=x11-libs/libXau-1.0.4
 	media-libs/libglvnd[X]
 	unwind? ( sys-libs/libunwind )
@@ -56,7 +55,6 @@ PATCHES=(
 
 src_configure() {
 	local emesonargs=(
-		$(meson_use rpc secure-rpc)
 		$(meson_use selinux xselinux)
 		$(meson_use unwind libunwind)
 		$(meson_use xcsecurity)
