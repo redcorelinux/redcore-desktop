@@ -3,7 +3,6 @@
 
 EAPI=7
 
-XORG_DOC=doc
 XORG_TARBALL_SUFFIX="xz"
 XORG_EAUTORECONF="no"
 inherit xorg-3 meson
@@ -21,6 +20,7 @@ RESTRICT="!test? ( test )"
 
 CDEPEND="
 	media-libs/libglvnd[X]
+	dev-libs/libbsd
 	dev-libs/openssl:0=
 	>=x11-apps/iceauth-1.0.2
 	>=x11-apps/rgb-1.0.3
@@ -55,7 +55,6 @@ CDEPEND="
 	)
 	udev? ( virtual/libudev:= )
 	unwind? ( sys-libs/libunwind )
-	>=x11-apps/xinit-1.3.3-r1
 	selinux? ( sys-libs/libselinux )
 	systemd? (
 		sys-apps/dbus
@@ -66,18 +65,16 @@ CDEPEND="
 		sys-auth/elogind[pam]
 		sys-auth/pambase[elogind]
 	)
-	!!x11-drivers/nvidia-drivers[-libglvnd(+)]
 "
 DEPEND="${CDEPEND}
 	>=x11-base/xorg-proto-2021.4.99.2
 	>=x11-libs/xtrans-1.3.5
-	doc? (
-		x11-base/xorg-sgml-doctools
-	)
+	media-fonts/font-util
 "
 RDEPEND="${CDEPEND}
 	!systemd? ( gui-libs/display-manager-init )
 	selinux? ( sec-policy/selinux-xserver )
+	xorg? ( >=x11-apps/xinit-1.3.3-r1 )
 "
 BDEPEND="
 	sys-devel/flex
@@ -92,7 +89,7 @@ REQUIRED_USE="!minimal? (
 	?? ( elogind systemd )"
 
 UPSTREAMED_PATCHES=(
-	"${FILESDIR}"/${P}-DPI-revert.patch
+	"${FILESDIR}"/${P}-fix-resume-logind.patch
 )
 
 PATCHES=(
@@ -106,15 +103,12 @@ src_configure() {
 	# localstatedir is used for the log location; we need to override the default
 	#	from ebuild.sh
 	# sysconfdir is used for the xorg.conf location; same applies
-	# NOTE: fop is used for doc generating; and I have no idea if Gentoo
-	#	package it somewhere
 
 	local emesonargs=(
 		--localstatedir "${EPREFIX}/var"
 		--sysconfdir "${EPREFIX}/etc/X11"
 		--buildtype $(usex debug debug plain)
 		-Db_ndebug=$(usex debug false true)
-		$(meson_use doc docs)
 		$(meson_use !minimal dri1)
 		$(meson_use !minimal dri2)
 		$(meson_use !minimal dri3)
@@ -128,16 +122,22 @@ src_configure() {
 		$(meson_use xnest)
 		$(meson_use xorg)
 		$(meson_use xvfb)
-		-Ddefault_font_path="${EPREFIX}"/usr/share/fonts
+		-Ddocs=false
 		-Ddrm=true
 		-Ddtrace=false
 		-Dipv6=true
 		-Dhal=false
 		-Dlinux_acpi=false
 		-Dlinux_apm=false
+		-Dsecure-rpc=false
 		-Dsha1=libcrypto
 		-Dxkb_output_dir="${EPREFIX}/var/lib/xkb"
 	)
+
+	if [[ ${PV} == 9999 ]] ; then
+		# Gone in 21.1.x, but not in master.
+		emesonargs+=( -Dxwayland=false )
+	fi
 
 	if use systemd || use elogind; then
 		emesonargs+=(
@@ -147,7 +147,7 @@ src_configure() {
 	else
 		emesonargs+=(
 			-Dsystemd_logind=false
-			$(meson_use suid suid_wrapper)
+			-Dsuid_wrapper=false
 		)
 	fi
 
@@ -157,8 +157,12 @@ src_configure() {
 src_install() {
 	meson_src_install
 
-	#The new meson build system do not leave X symlink
-	ln -s Xorg "${ED}"/usr/bin/X
+	# The meson build system does not support install-setuid
+	if ! use systemd || ! use elogind; then
+		if use suid; then
+			chmod u+s "${ED}"/usr/bin/Xorg
+		fi
+	fi
 
 	if ! use xorg; then
 		rm -f "${ED}"/usr/share/man/man1/Xserver.1x \
@@ -167,13 +171,13 @@ src_install() {
 			"${ED}"/usr/share/man/man1/Xserver.1x || die
 	fi
 
-	# install the @x11-module-rebuild set for Portage
-	insinto /usr/share/portage/config/sets
-	newins "${FILESDIR}"/xorg-sets.conf xorg.conf
-
 	# enable clicks using touchpad (https://bugs.redcorelinux.org/show_bug.cgi?id=48)
 	insinto /usr/share/X11/xorg.conf.d
 	doins "${FILESDIR}"/99-synaptics-overrides.conf
+
+	# install the @x11-module-rebuild set for Portage
+	insinto /usr/share/portage/config/sets
+	newins "${FILESDIR}"/xorg-sets.conf xorg.conf
 }
 
 pkg_postrm() {
