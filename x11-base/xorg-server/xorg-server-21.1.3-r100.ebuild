@@ -89,7 +89,6 @@ REQUIRED_USE="!minimal? (
 	?? ( elogind systemd )"
 
 UPSTREAMED_PATCHES=(
-	"${FILESDIR}"/${P}-fix-resume-logind.patch
 )
 
 PATCHES=(
