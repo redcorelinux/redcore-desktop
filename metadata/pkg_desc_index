@@ -23,7 +23,7 @@ dev-python/sh 1.12.14-r4: Python process launching
 dev-python/typer 0.2.1-r2: Build great CLIs. Easy to code. Based on Python type hints
 dev-python/wget 2.2-r2: Python library for downloading from http URLs
 gui-libs/display-manager-init 1.0-r100: RC init files for starting display and login managers
-kde-apps/kdenetwork-meta 21.12.0-r10: kdenetwork - merge this to pull in all kdenetwork-derived packages
+kde-apps/kdenetwork-meta 21.12.1-r10: kdenetwork - merge this to pull in all kdenetwork-derived packages
 kde-plasma/kinfocenter 5.23.4-r10: Utility providing information about the computer hardware
 mail-client/mailspring 1.9.2-r1: A beautiful fast and maintained fork of Nylas Mail
 media-libs/libpipewire 0.3.32-r1: Pipewire client libraries
