@@ -12,7 +12,7 @@ MY_PN="pipewire"
 SRC_URI="https://gitlab.freedesktop.org/${MY_PN}/${MY_PN}/-/archive/${PV}/${MY_PN}-${PV}.tar.gz"
 KEYWORDS="~amd64 ~arm ~arm64 ~ppc ~ppc64 ~riscv ~sparc ~x86"
 
-DESCRIPTION="Multimedia processing graphs"
+DESCRIPTION="Pipewire client libraries"
 HOMEPAGE="https://pipewire.org/"
 
 LICENSE="MIT LGPL-2.1+ GPL-2"
@@ -83,20 +83,6 @@ RDEPEND="
 "
 
 DEPEND="${RDEPEND}"
-
-# TODO: Consider use cases where pipewire is not used for driving audio
-# Doing so with WirePlumber currently involves editing Lua scripts
-PDEPEND="media-video/wireplumber"
-
-# Present RDEPEND that are currently always disabled due to the PW
-# code using them being required to be disabled by Gentoo guidelines
-# (i.e. developer binaries not meant for users) and unready code
-#	media-video/ffmpeg:=
-#	media-libs/libsdl2
-#	>=media-libs/vulkan-loader-1.1.69
-#
-# Ditto for DEPEND
-#	>=dev-util/vulkan-headers-1.1.69
 
 S="${WORKDIR}/${MY_PN}-${PV}"
 
