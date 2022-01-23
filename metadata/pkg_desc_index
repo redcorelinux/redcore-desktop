@@ -77,8 +77,6 @@ sys-kernel/zfs-dkms 2.1.1: ZFS sources for linux
 sys-libs/binutils-libs 2.37_p1-r10: Core binutils libraries (libbfd, libopcodes, libiberty) for external packages
 sys-libs/glibc 2.33-r10: GNU libc C library
 sys-power/radeon-profile 20200824-r10: Read current clocks of ATi/AMD Radeon cards
-virtual/jdk 1.8.0-r100: Virtual for Java Development Kit (JDK)
-virtual/jre 1.8.0-r100: Virtual for Java Runtime Environment (JRE)
 virtual/libudev 1000: Virtual for libudev providers
 virtual/notification-daemon 0-r100: Virtual (dummy package) for notification daemon dbus service
 virtual/rust 100: Virtual for Rust language compiler
