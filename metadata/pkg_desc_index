@@ -11,8 +11,8 @@ app-emulation/virtualbox-modules 6.1.18: Kernel Modules for Virtualbox
 app-misc/calamares-config-redcore 314-r6: Redcore Linux Calamares modules config
 app-misc/redcore-live 314-r4: Redcore Linux live scripts
 app-misc/redcore-skel 314-r6: Redcore Linux skel tree
-app-portage/sisyphus 4.2107.0-r3: A simple portage python wrapper which works like other package managers(apt-get/yum/dnf)
-app-portage/sisyphus-qt 4.2107.0-r1: A simple portage python wrapper which works like other package managers(apt-get/yum/dnf)
+app-portage/sisyphus 4.2107.0-r4: A simple portage python wrapper which works like other package managers(apt-get/yum/dnf)
+app-portage/sisyphus-qt 4.2107.0-r2: A simple portage python wrapper which works like other package managers(apt-get/yum/dnf)
 app-text/simplenote 2.6.0: The simplest way to keep notes
 dev-libs/libdbusmenu-qt 0.9.3_pre20160218-r2: A library providing Qt implementation of DBusMenu specification (meta mackage)
 dev-libs/libdbusmenu-qt5 0.9.3_pre20160218-r2: Library providing Qt implementation of DBusMenu specification

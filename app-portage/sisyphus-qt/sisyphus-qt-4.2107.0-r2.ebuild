@@ -26,7 +26,7 @@ DEPEND="dev-lang/python[sqlite]
 RDEPEND="${DEPEND}
 	app-misc/tmux
 	$(python_gen_cond_dep '
-		dev-python/PyQt5[designer,gui,widgets,${PYTHON_MULTI_USEDEP}]
+		dev-python/PyQt5[designer,gui,widgets,${PYTHON_USEDEP}]
 	')"
 
 src_install() {

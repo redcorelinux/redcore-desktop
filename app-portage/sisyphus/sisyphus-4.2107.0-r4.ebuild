@@ -23,14 +23,14 @@ DEPEND="dev-lang/python[sqlite]"
 RDEPEND="${DEPEND}
 	app-portage/portage-utils
 	$(python_gen_cond_dep '
-		app-portage/gentoolkit[${PYTHON_MULTI_USEDEP}]
-		dev-python/animation[${PYTHON_MULTI_USEDEP}]
-		dev-python/GitPython[${PYTHON_MULTI_USEDEP}]
-		dev-python/typer[${PYTHON_MULTI_USEDEP}]
-		dev-python/typing-extensions[${PYTHON_MULTI_USEDEP}]
-		dev-python/urllib3[${PYTHON_MULTI_USEDEP}]
-		dev-python/wget[${PYTHON_MULTI_USEDEP}]
-		sys-apps/portage[${PYTHON_MULTI_USEDEP}]
+		app-portage/gentoolkit[${PYTHON_USEDEP}]
+		dev-python/animation[${PYTHON_USEDEP}]
+		dev-python/GitPython[${PYTHON_USEDEP}]
+		dev-python/typer[${PYTHON_USEDEP}]
+		dev-python/typing-extensions[${PYTHON_USEDEP}]
+		dev-python/urllib3[${PYTHON_USEDEP}]
+		dev-python/wget[${PYTHON_USEDEP}]
+		sys-apps/portage[${PYTHON_USEDEP}]
 	')
 	sys-apps/gentoo-functions"
 PDEPEND="qt5? ( ~app-portage/${PN}-qt-${PV} )"
