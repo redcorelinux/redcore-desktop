@@ -1,9 +1,9 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
-PLOCALES="cs da de en_GB es fr hu it ja ko pl pt_BR ru zh_CN"
+PLOCALES="cs da de en_GB es fi fr hu it ja ko nl pl pt_BR ru zh_CN"
 inherit cmake plocale qmake-utils xdg
 
 DESCRIPTION="Featureful and configurable Qt client for the music player daemon (MPD)"
@@ -13,7 +13,7 @@ SRC_URI="https://github.com/CDrummond/${PN}/releases/download/v${PV}/${P}.tar.bz
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~ppc64 ~x86"
-IUSE="cdda cddb cdio http-server libav mtp musicbrainz replaygain streaming taglib udisks zeroconf"
+IUSE="cdda cddb cdio http-server mtp musicbrainz replaygain streaming taglib udisks zeroconf"
 REQUIRED_USE="
 	?? ( cdda cdio )
 	cdda? ( udisks || ( cddb musicbrainz ) )
@@ -23,10 +23,9 @@ REQUIRED_USE="
 	musicbrainz? ( || ( cdio cdda ) taglib )
 	replaygain? ( taglib )
 "
+# cantata has no tests
+RESTRICT="test"
 
-BDEPEND="
-	dev-qt/linguist-tools:5
-"
 COMMON_DEPEND="
 	app-misc/media-player-info
 	dev-qt/qtcore:5
@@ -48,8 +47,7 @@ COMMON_DEPEND="
 	replaygain? (
 		media-libs/libebur128:=
 		media-sound/mpg123
-		libav? ( media-video/libav:= )
-		!libav? ( media-video/ffmpeg:0= )
+		media-video/ffmpeg:0=
 	)
 	streaming? ( dev-qt/qtmultimedia:5 )
 	taglib? (
@@ -65,9 +63,7 @@ RDEPEND="${COMMON_DEPEND}
 DEPEND="${COMMON_DEPEND}
 	dev-qt/qtconcurrent:5
 "
-
-# cantata has no tests
-RESTRICT="test"
+BDEPEND="dev-qt/linguist-tools:5"
 
 PATCHES=( "${FILESDIR}/${PN}-2.2.0-headers.patch" )
 
@@ -94,7 +90,6 @@ src_configure() {
 		-DENABLE_HTTP_SERVER=$(usex http-server)
 		-DENABLE_MTP=$(usex mtp)
 		-DENABLE_MUSICBRAINZ=$(usex musicbrainz)
-		-DLRELEASE_EXECUTABLE="$(qt5_get_bindir)/lrelease"
 		-DENABLE_FFMPEG=$(usex replaygain)
 		-DENABLE_MPG123=$(usex replaygain)
 		-DENABLE_HTTP_STREAM_PLAYBACK=$(usex streaming)
@@ -110,12 +105,4 @@ src_configure() {
 
 pkg_postinst() {
 	xdg_pkg_postinst
-
-	has_version media-sound/mpd || \
-		elog "An instance of media-sound/mpd, local or remote, is required to set up Cantata."
-
-	if ! has_version app-misc/media-player-info; then
-		elog "Install app-misc/media-player-info to enable identification"
-		elog "and querying of portable media players"
-	fi
 }
