@@ -31,6 +31,7 @@ media-libs/nv-codec-headers 11.1.5.1-r10: FFmpeg version of headers required to 
 media-sound/cantata 2.5.0-r10: Featureful and configurable Qt client for the music player daemon (MPD)
 media-tv/sopcast 3.2.6-r2: SopCast free P2P Internet TV binary
 media-video/guvcview 2.0.6-r10: Simple Qt5 or GTK+3 interface for capturing and viewing video from v4l2 devices
+media-video/mpv 0.34.0-r10: Media player based on MPlayer and mplayer2
 media-video/nvidia_video_sdk 6.0.1-r10: NVIDIA Video Codec SDK
 net-libs/libnm-glib 1.18.10-r1: Legacy NetworkManager glib and util libraries
 net-libs/webkit-gtk 2.34.1-r100: Open source web browser engine
