@@ -84,7 +84,7 @@ virtual/tmpfiles 0-r100: Virtual to select between different tmpfiles.d handlers
 virtual/udev 1000: Virtual to select between different udev daemon providers
 x11-base/xorg-drivers 21.1-r100: Meta package containing deps on all xorg drivers (dummy package)
 x11-base/xorg-server 21.1.3-r100: X.Org X servers
-x11-base/xwayland 22.1.0-r100: Standalone X server running under Wayland
+x11-base/xwayland 22.1.1-r100: Standalone X server running under Wayland
 x11-drivers/nvidia-drivers 470.94: NVIDIA Accelerated Graphics Driver
 x11-drivers/nvidia-drivers-legacy 390.147: NVIDIA Accelerated Graphics Driver
 x11-drivers/xf86-video-qxl 0.1.5_p20200205-r10: QEMU QXL paravirt video driver
