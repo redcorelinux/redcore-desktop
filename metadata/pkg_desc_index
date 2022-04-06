@@ -45,7 +45,7 @@ sys-auth/elogind 246.10-r10: The systemd project's logind, extracted to a standa
 sys-auth/polkit-qt 0.113.0-r10: PolicyKit Qt API wrapper library (meta package)
 sys-auth/polkit-qt5 0.113.0-r10: Qt wrapper around polkit-1 client libraries
 sys-boot/etcher 1.5.116: Flash OS images to SD cards & USB drives, safely and easily.
-sys-boot/grub 2.04-r10: GNU GRUB boot loader
+sys-boot/grub 2.04-r11: GNU GRUB boot loader
 sys-boot/os-prober 1.77-r10: Utility to detect other OSs on a set of drives
 sys-boot/plymouth 0.9.4-r10: Graphical boot animation (splash) and logger
 sys-boot/unetbootin-static 625-r2: Universal Netboot Installer creates Live USB systems for various OS distributions
