@@ -23,10 +23,6 @@ RDEPEND="${DEPEND}
 	!app-eselect/eselect-opencl
 	!dev-libs/opencl-icd-loader"
 
-PATCHES=(
-	"${FILESDIR}"/${P}-new-headers.patch
-)
-
 src_prepare() {
 	replace-flags -Os -O2 # bug 646122
 
