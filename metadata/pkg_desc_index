@@ -64,10 +64,10 @@ sys-kernel/dkms 2.3-r1: Dynamic Kernel Module Support
 sys-kernel/dracut 048-r10: Generic initramfs generation tool
 sys-kernel/linux-headers 5.10-r10: Linux system headers
 sys-kernel/linux-image-redcore 5.14.21: Redcore Linux Kernel Image
-sys-kernel/linux-image-redcore-lts 5.10.87: Redcore Linux Kernel Image (LTS)
+sys-kernel/linux-image-redcore-lts 5.15.35: Redcore Linux Kernel Image (LTS)
 sys-kernel/linux-image-redcore-lts-legacy 5.10.112: Redcore Linux Kernel Image (LTS Legacy v5.10)
 sys-kernel/linux-sources-redcore 5.14.21: Redcore Linux Kernel Sources
-sys-kernel/linux-sources-redcore-lts 5.10.87: Redcore Linux Kernel Sources (LTS)
+sys-kernel/linux-sources-redcore-lts 5.15.35: Redcore Linux Kernel Sources (LTS)
 sys-kernel/linux-sources-redcore-lts-legacy 5.10.112: Redcore Linux Kernel Sources (LTS Legacy v5.10)
 sys-kernel/nvidia-drivers-dkms 470.94: NVIDIA driver sources for linux
 sys-kernel/nvidia-drivers-legacy-dkms 390.147: NVIDIA driver sources for linux
