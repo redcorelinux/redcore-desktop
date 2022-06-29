@@ -29,7 +29,7 @@ CDEPEND="
 		>=x11-libs/gtk+-3.14:3
 		x11-libs/cairo
 	)
-	libkms? ( x11-libs/libdrm[libkms] )
+	libkms? ( x11-libs/libdrm )
 	pango? ( >=x11-libs/pango-1.21 )
 "
 DEPEND="${CDEPEND}
