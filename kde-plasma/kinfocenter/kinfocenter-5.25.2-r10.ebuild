@@ -4,9 +4,9 @@
 EAPI=8
 
 ECM_HANDBOOK="forceoptional"
-KFMIN=5.90.0
+KFMIN=5.94.0
 PVCUT=$(ver_cut 1-3)
-QTMIN=5.15.2
+QTMIN=5.15.4
 inherit ecm kde.org optfeature
 
 DESCRIPTION="Utility providing information about the computer hardware"
