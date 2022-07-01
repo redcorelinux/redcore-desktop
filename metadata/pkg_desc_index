@@ -77,6 +77,7 @@ sys-kernel/virtualbox-modules-dkms 6.1.18-r1: Kernel Modules source for Virtualb
 sys-kernel/zfs-dkms 2.1.4: ZFS sources for linux
 sys-libs/binutils-libs 2.37_p1-r10: Core binutils libraries (libbfd, libopcodes, libiberty) for external packages
 sys-libs/glibc 2.33-r10: GNU libc C library
+sys-libs/libseccomp 2.5.3-r10: high level interface to Linux seccomp filter
 sys-power/radeon-profile 20200824-r10: Read current clocks of ATi/AMD Radeon cards
 virtual/libudev 1000: Virtual for libudev providers
 virtual/notification-daemon 0-r100: Virtual (dummy package) for notification daemon dbus service
