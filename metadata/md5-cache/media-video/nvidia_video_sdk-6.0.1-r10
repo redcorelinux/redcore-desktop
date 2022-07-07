@@ -10,5 +10,5 @@ LICENSE=MIT tools? ( NVIDIA-CODEC-SDK )
 RDEPEND=!media-video/nvenc
 SLOT=0
 SRC_URI=https://developer.nvidia.com/video-sdk-601 -> nvidia_video_sdk_6.0.1.zip
-_eclasses_=estack	055c42df72f76a4f45ec92b35e83cd56	multilib	4a33c9008e5ee30cb8840a3fdc24df2b	toolchain-funcs	badd6e329e1f3e6bee99b35bf8763ce8	versionator	d3fb3ba33acc3bbbdc4d7970227c100d
+_eclasses_=estack	055c42df72f76a4f45ec92b35e83cd56	multilib	4fbbbc98f236f1b43acd99476bc3cd85	toolchain-funcs	e9da88162e7a3c60376e80c2c2adcdfb	versionator	d3fb3ba33acc3bbbdc4d7970227c100d
 _md5_=861228295b8ecbd12998c4cc5fd8f931
