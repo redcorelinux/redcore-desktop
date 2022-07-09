@@ -12,8 +12,7 @@ SLOT="0"
 KEYWORDS="amd64"
 IUSE="pulseaudio"
 
-DEPEND=""
-RDEPEND="
+DEPEND="
 	app-emulation/steam
 	app-arch/bzip2[abi_x86_32]
 	dev-libs/atk[abi_x86_32]
@@ -26,9 +25,7 @@ RDEPEND="
 	media-libs/fontconfig[abi_x86_32]
 	media-libs/freetype[abi_x86_32]
 	media-libs/libcaca[abi_x86_32]
-	media-libs/libcanberra[abi_x86_32]
 	media-libs/libpng-compat:1.2[abi_x86_32]
-	media-libs/libpipewire[abi_x86_32]
 	media-libs/libsdl[abi_x86_32]
 	media-libs/sdl-image[abi_x86_32]
 	media-libs/sdl-mixer[abi_x86_32]
@@ -69,8 +66,28 @@ RDEPEND="
 	x11-libs/libXtst[abi_x86_32]
 	x11-libs/pango[abi_x86_32]
 
-	pulseaudio? ( media-sound/pulseaudio[abi_x86_32] )
-	!pulseaudio? ( media-sound/apulse[abi_x86_32] )"
+	pulseaudio? (
+		media-libs/libcanberra[abi_x86_32]
+		media-sound/pulseaudio[abi_x86_32]
+	)
+	!pulseaudio? (
+		media-libs/libcanberra[abi_x86_32]
+		media-libs/libpipewire[abi_x86_32]
+		media-sound/apulse[abi_x86_32]
+	)
+"
+RDEPEND="${DEPEND}
+	pulseaudio? ( || (
+		media-video/pipewire
+		media-sound/pulseaudio-daemon
+		media-sound/pulseaudio[daemon(+)]
+	) )
+	!pulseaudio? (
+		media-libs/libcanberra[abi_x86_32]
+		media-libs/libpipewire[abi_x86_32]
+		media-sound/apulse[abi_x86_32]
+	)
+"
 
 S="${FILESDIR}"
 
