@@ -6,7 +6,6 @@ app-admin/vasile 2.1812.2: Versatile Advanced Script for ISO and Latest Enchantm
 app-emulation/linux-steam-integration 0.7.3-r2: Helper for enabling better Steam integration on Linux
 app-emulation/steam 1.0.0.71: Digital distribution client bootstrap package
 app-emulation/steam-native-runtime 1.0.0.71-r1: Native replacement for the Steam runtime using system libraries
-app-emulation/virt-manager 4.0.0-r10: A graphical tool for administering virtual machines
 app-emulation/virtualbox-bin 6.1.18.142142-r2: Family of powerful x86 virtualization products for enterprise and home use
 app-emulation/virtualbox-modules 6.1.18: Kernel Modules for Virtualbox
 app-misc/calamares-config-redcore 314-r6: Redcore Linux Calamares modules config
@@ -35,7 +34,6 @@ media-tv/sopcast 3.2.6-r2: SopCast free P2P Internet TV binary
 media-video/guvcview 2.0.6-r10: Simple Qt5 or GTK+3 interface for capturing and viewing video from v4l2 devices
 media-video/mpv 0.34.1-r10: Media player based on MPlayer and mplayer2
 media-video/nvidia_video_sdk 6.0.1-r10: NVIDIA Video Codec SDK
-net-libs/gtk-vnc 1.3.0-r10: VNC viewer widget for GTK
 net-libs/libnm-glib 1.18.10-r2: Legacy NetworkManager glib and util libraries
 net-libs/webkit-gtk 2.34.1-r100: Open source web browser engine
 net-wireless/broadcom-sta 6.30.223.271-r2: Broadcom's IEEE 802.11a/b/g/n hybrid Linux device driver
@@ -91,7 +89,6 @@ x11-base/xorg-server 21.1.3-r100: X.Org X servers
 x11-base/xwayland 22.1.2-r100: Standalone X server running under Wayland
 x11-drivers/nvidia-drivers 470.103.01: NVIDIA Accelerated Graphics Driver
 x11-drivers/nvidia-drivers-legacy 390.147: NVIDIA Accelerated Graphics Driver
-x11-drivers/xf86-video-qxl 0.1.5_p20200205-r10: QEMU QXL paravirt video driver
 x11-libs/gtk+ 2.24.33-r10 3.24.29-r10: Gimp ToolKit +
 x11-misc/nvidia-prime 314: NVIDIA Prime Render Offload configuration and utilities
 x11-misc/nvidia-settings 470.103.01: NVIDIA Linux X11 Settings Utility
