@@ -84,7 +84,7 @@ virtual/rust 100: Virtual for Rust language compiler
 virtual/tmpfiles 0-r100: Virtual to select between different tmpfiles.d handlers
 virtual/udev 1000: Virtual to select between different udev daemon providers
 x11-base/xorg-drivers 21.1-r100: Meta package containing deps on all xorg drivers (dummy package)
-x11-base/xorg-server 21.1.3-r100: X.Org X servers
+x11-base/xorg-server 21.1.4-r100: X.Org X servers
 x11-base/xwayland 22.1.3-r100: Standalone X server running under Wayland
 x11-drivers/nvidia-drivers 470.103.01: NVIDIA Accelerated Graphics Driver
 x11-drivers/nvidia-drivers-legacy 390.147: NVIDIA Accelerated Graphics Driver
