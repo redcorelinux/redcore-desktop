@@ -69,7 +69,7 @@ sys-kernel/linux-sources-redcore 5.14.21: Redcore Linux Kernel Sources
 sys-kernel/linux-sources-redcore-lts 5.15.53: Redcore Linux Kernel Sources (LTS)
 sys-kernel/linux-sources-redcore-lts-legacy 5.10.129: Redcore Linux Kernel Sources (LTS Legacy v5.10)
 sys-kernel/nvidia-drivers-dkms 470.129.06: NVIDIA driver sources for linux
-sys-kernel/nvidia-drivers-legacy-dkms 390.147: NVIDIA driver sources for linux
+sys-kernel/nvidia-drivers-legacy-dkms 390.151: NVIDIA driver sources for linux
 sys-kernel/rtl8821cu-dkms 5.8.1: Realtek RTL8811CU/RTL8821CU USB Wi-Fi adapter driver for Linux
 sys-kernel/vhba-dkms 20190831: Virtual (SCSI) Host Bus Adapter kernel module for the CDEmu suite sources
 sys-kernel/virtualbox-modules-dkms 6.1.18-r1: Kernel Modules source for Virtualbox
