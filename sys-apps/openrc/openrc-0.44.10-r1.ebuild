@@ -1,24 +1,24 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
-inherit flag-o-matic pam toolchain-funcs usr-ldscript
+inherit flag-o-matic meson pam toolchain-funcs
 
 DESCRIPTION="OpenRC manages the services, startup and shutdown of a host"
 HOMEPAGE="https://github.com/openrc/openrc/"
 
-if [[ ${PV} == "9999" ]]; then
+if [[ ${PV} =~ ^9{4,}$ ]]; then
 	EGIT_REPO_URI="https://github.com/OpenRC/${PN}.git"
 	inherit git-r3
 else
-	SRC_URI="https://github.com/${PN}/${PN}/archive/${PV}.tar.gz -> ${P}.tar.gz"
-	KEYWORDS="~amd64 ~arm64"
+	SRC_URI="https://github.com/OpenRC/openrc/archive/${PV}.tar.gz -> ${P}.tar.gz"
+KEYWORDS="~alpha amd64 arm arm64 hppa ~ia64 ~loong ~m68k ~mips ppc ppc64 ~riscv ~s390 sparc x86"
 fi
 
 LICENSE="BSD-2"
 SLOT="0"
-IUSE="+apparmor audit bash debug +dkms elogind +entropy ncurses pam newnet prefix +netifrc selinux +splash static-libs sysv-utils unicode"
+IUSE="+apparmor audit bash debug +dkms elogind +entropy ncurses pam newnet +netifrc selinux +splash sysv-utils unicode"
 
 COMMON_DEPEND="
 	apparmor? (
@@ -27,10 +27,7 @@ COMMON_DEPEND="
 		sec-policy/apparmor-profiles
 	)
 	ncurses? ( sys-libs/ncurses:0= )
-	pam? (
-		sys-auth/pambase
-		sys-libs/pam
-	)
+	pam? ( sys-libs/pam )
 	audit? ( sys-process/audit )
 	dkms? ( sys-kernel/dkms )
 	elogind? ( sys-auth/elogind )
@@ -50,7 +47,10 @@ DEPEND="${COMMON_DEPEND}
 RDEPEND="${COMMON_DEPEND}
 	bash? ( app-shells/bash )
 	!prefix? (
-		sysv-utils? ( !sys-apps/sysvinit )
+		sysv-utils? (
+			!sys-apps/systemd[sysv-utils(-)]
+			!sys-apps/sysvinit
+		)
 		!sysv-utils? ( >=sys-apps/sysvinit-2.86-r6[selinux?] )
 		virtual/tmpfiles
 	)
@@ -66,45 +66,27 @@ PDEPEND="netifrc? ( net-misc/netifrc )"
 
 src_prepare() {
 	default
-	if [[ ${PV} == "9999" ]] ; then
-		local ver="git-${EGIT_VERSION:0:6}"
-		sed -i "/^GITVER[[:space:]]*=/s:=.*:=${ver}:" mk/gitver.mk || die
-	fi
-
-	if use dkms ; then
+	if use dkms; then
 		eapply "${FILESDIR}"/${PN}-dkms.patch
 	fi
-
 	eapply "${FILESDIR}"/${PN}-enable-rclogger.patch
-	eapply "${FILESDIR}"/${PN}-gcc10.patch
 }
 
-src_compile() {
-	unset LIBDIR #266688
-
-	MAKE_ARGS="${MAKE_ARGS}
-		LIBNAME=$(get_libdir)
-		LIBEXECDIR=${EPREFIX}/lib/rc
-		MKBASHCOMP=yes
-		MKNET=$(usex newnet)
-		MKSELINUX=$(usex selinux)
-		MKSYSVINIT=$(usex sysv-utils)
-		MKAUDIT=$(usex audit)
-		MKPAM=$(usev pam)
-		MKSTATICLIBS=$(usex static-libs)
-		MKZSHCOMP=yes
-		SH=$(usex bash /bin/bash /bin/sh)"
-
-	local brand="Unknown"
-	MAKE_ARGS="${MAKE_ARGS} OS=Linux"
-	brand="Linux"
-	export BRANDING="Redcore ${brand} Hardened"
-	use prefix && MAKE_ARGS="${MAKE_ARGS} MKPREFIX=yes PREFIX=${EPREFIX}"
-	export DEBUG=$(usev debug)
-	export MKTERMCAP=$(usev ncurses)
-
-	tc-export CC AR RANLIB
-	emake ${MAKE_ARGS}
+src_configure() {
+	local emesonargs=(
+	$(meson_feature audit)
+	"-Dbranding=\"Redcore Linux Hardened\""
+		$(meson_use newnet)
+		-Dos=Linux
+		$(meson_use pam)
+		$(meson_feature selinux)
+		-Drootprefix="${EPREFIX}"
+		-Dshell=$(usex bash /bin/bash /bin/sh)
+		$(meson_use sysv-utils sysvinit)
+		-Dtermcap=$(usev ncurses)
+	)
+	# export DEBUG=$(usev debug)
+	meson_src_configure
 }
 
 # set_config <file> <option name> <yes value> <no value> test
@@ -121,15 +103,7 @@ set_config_yes_no() {
 }
 
 src_install() {
-	emake ${MAKE_ARGS} DESTDIR="${D}" install
-
-	# move the shared libs back to /usr so ldscript can install
-	# more of a minimal set of files
-	# disabled for now due to #270646
-	#mv "${ED}"/$(get_libdir)/lib{einfo,rc}* "${ED}"/usr/$(get_libdir)/ || die
-	#gen_usr_ldscript -a einfo rc
-	gen_usr_ldscript libeinfo.so
-	gen_usr_ldscript librc.so
+	meson_install
 
 	keepdir /lib/rc/tmp
 
@@ -148,15 +122,14 @@ src_install() {
 	insinto /etc/logrotate.d
 	newins "${FILESDIR}"/openrc.logrotate openrc
 
-	# install gentoo pam.d files
-	newpamd "${FILESDIR}"/start-stop-daemon.pam start-stop-daemon
-	newpamd "${FILESDIR}"/start-stop-daemon.pam supervise-daemon
+	if use pam; then
+		# install gentoo pam.d files
+		newpamd "${FILESDIR}"/start-stop-daemon.pam start-stop-daemon
+		newpamd "${FILESDIR}"/start-stop-daemon.pam supervise-daemon
+	fi
 
 	# install documentation
 	dodoc ChangeLog *.md
-	if use newnet; then
-		dodoc README.newnet
-	fi
 }
 
 pkg_preinst() {
@@ -176,23 +149,9 @@ pkg_preinst() {
 }
 
 pkg_postinst() {
-	if use hppa; then
-		elog "Setting the console font does not work on all HPPA consoles."
-		elog "You can still enable it by running:"
-		elog "# rc-update add consolefont boot"
-	fi
-
-	# Added for 0.35.
-	if [[ ! -h "${EROOT}"/lib ]]; then
-		if [[ -d "${EROOT}/$(get_libdir)"/rc ]]; then
-			cp -RPp "${EROOT}/$(get_libdir)/rc" "${EROOT}"/lib
-		fi
-	fi
-
-	# Redcore Linux Hardened :
 	if [ -e "${ROOT}"/etc/init.d/dkms ] && use dkms; then
 		if [ "$(rc-config list boot | grep dkms)" != "" ]; then
-			einfo
+			einfo > /dev/null 2>&1
 		else
 			"${ROOT}"/sbin/rc-update add dkms boot > /dev/null 2>&1
 		fi
@@ -200,7 +159,7 @@ pkg_postinst() {
 
 	if [ -e "${ROOT}"/etc/init.d/dbus ] && use elogind; then
 		if [ "$(rc-config list boot | grep dbus)" != "" ]; then
-			einfo
+			einfo > /dev/null 2>&1
 		elif [ "$(rc-config list default | grep dbus)" != "" ]; then
 			"${ROOT}"/sbin/rc-update del dbus default > /dev/null 2>&1
 			"${ROOT}"/sbin/rc-update add dbus boot > /dev/null 2>&1
@@ -211,7 +170,7 @@ pkg_postinst() {
 
 	if [ -e "${ROOT}"/etc/init.d/elogind ] && use elogind; then
 		if [ "$(rc-config list boot | grep elogind)" != "" ]; then
-			einfo
+			einfo > /dev/null 2>&1
 		else
 			"${ROOT}"/sbin/rc-update add elogind boot > /dev/null 2>&1
 		fi
@@ -227,7 +186,7 @@ pkg_postinst() {
 
 	if [ -e "${ROOT}"/etc/init.d/apparmor ] && use apparmor; then
 		if [ "$(rc-config list boot | grep apparmor)" != "" ]; then
-			einfo
+			einfo > /dev/null 2>&1
 		else
 			"${ROOT}"/sbin/rc-update add apparmor boot > /dev/null 2>&1
 		fi
@@ -235,7 +194,7 @@ pkg_postinst() {
 
 	if [ -e "${ROOT}"/etc/init.d/haveged ] && use entropy; then
 		if [ "$(rc-config list default | grep haveged)" != "" ]; then
-			einfo
+			einfo > /dev/null 2>&1
 		else
 			"${ROOT}"/sbin/rc-update add haveged default > /dev/null 2>&1
 		fi
@@ -245,7 +204,7 @@ pkg_postinst() {
 		if [ "$(rc-config list default | grep openrc-settingsd)" != "" ]; then
 			"${ROOT}"/sbin/rc-update del openrc-settingsd default > /dev/null 2>&1
 		else
-			einfo
+			einfo > /dev/null 2>&1
 		fi
 	fi
 }
