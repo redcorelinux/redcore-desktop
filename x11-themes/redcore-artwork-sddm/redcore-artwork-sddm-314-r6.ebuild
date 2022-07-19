@@ -11,6 +11,9 @@ SRC_URI=""
 LICENSE="CC-BY-SA"
 SLOT="0"
 KEYWORDS="amd64 x86"
+DEPENDS="
+	!x11-themes/redcore-theme-sddm
+"
 IUSE=""
 
 S="${FILESDIR}"

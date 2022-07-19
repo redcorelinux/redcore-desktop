@@ -34,7 +34,7 @@ RDEPEND="
 	>=dev-qt/qtnetwork-5.9.4:5
 	>=x11-base/xorg-server-1.15.1
 	x11-libs/libxcb[xkb]
-	branding? ( x11-themes/redcore-theme-sddm )
+	branding? ( x11-themes/redcore-artwork-sddm )
 	consolekit? ( >=sys-auth/consolekit-0.9.4 )
 	elogind? ( sys-auth/elogind )
 	pam? ( sys-libs/pam )
