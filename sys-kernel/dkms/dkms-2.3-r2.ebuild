@@ -13,13 +13,12 @@ RDEPEND="sys-apps/gentoo-functions"
 KEYWORDS="amd64 arm64"
 SLOT="0"
 
-src_prepare() {
-	default
-	epatch ${FILESDIR}/${P}-dont-touch-configs.patch
-	epatch ${FILESDIR}/${P}-gentoo-functions.patch
-	epatch ${FILESDIR}/${P}-systemd-service-fix.patch
-	epatch ${FILESDIR}/${P}-redcore-makefile.patch
-}
+PATCHES=(
+	"${FILESDIR}"/"${P}"-dont-touch-configs.patch
+	"${FILESDIR}"/"${P}"-gentoo-functions.patch
+	"${FILESDIR}"/"${P}"-systemd-service-fix.patch
+	"${FILESDIR}"/"${P}"-redcore-makefile.patch
+)
 
 src_install() {
 	emake DESTDIR=${D} install
