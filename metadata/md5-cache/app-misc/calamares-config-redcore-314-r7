@@ -1,8 +1,8 @@
 DEFINED_PHASES=install
 DESCRIPTION=Redcore Linux Calamares modules config
-EAPI=5
+EAPI=8
 KEYWORDS=amd64 x86
 LICENSE=GPL-2
 RDEPEND=app-admin/calamares
 SLOT=0
-_md5_=b44930dbe88d4a5768fd05fb01c74b6a
+_md5_=de3d1bbf72c2880d836ff2b07aea3f30
