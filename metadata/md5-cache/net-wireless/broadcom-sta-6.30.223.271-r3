@@ -1,0 +1,13 @@
+DEFINED_PHASES=install
+DEPEND=~sys-kernel/broadcom-sta-dkms-6.30.223.271
+DESCRIPTION=Broadcom's IEEE 802.11a/b/g/n hybrid Linux device driver
+EAPI=7
+HOMEPAGE=http://www.broadcom.com/support/802.11/
+INHERIT=eutils
+KEYWORDS=amd64 x86
+LICENSE=Broadcom
+RDEPEND=~sys-kernel/broadcom-sta-dkms-6.30.223.271
+RESTRICT=mirror
+SLOT=0
+_eclasses_=edos2unix	33e347e171066657f91f8b0c72ec8773	eutils	dab5d8ec471d025b79c9e6906bcf3bff	strip-linguas	ac3ee41ee2d31d8c41a77c0838320cc7	wrapper	4a1902f969e5718126434fc35f3a0d9c
+_md5_=0afd40497cbfd7df3b927a8a85f7e2d8

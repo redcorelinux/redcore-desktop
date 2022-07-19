@@ -8,7 +8,7 @@ app-emulation/steam 1.0.0.71: Digital distribution client bootstrap package
 app-emulation/steam-native-runtime 1.0.0.71-r1: Native replacement for the Steam runtime using system libraries
 app-emulation/virtualbox-bin 6.1.18.142142-r2: Family of powerful x86 virtualization products for enterprise and home use
 app-emulation/virtualbox-modules 6.1.18: Kernel Modules for Virtualbox
-app-misc/calamares-config-redcore 314-r6: Redcore Linux Calamares modules config
+app-misc/calamares-config-redcore 314-r7: Redcore Linux Calamares modules config
 app-misc/geoclue 2.6.0-r10: A location information D-Bus service
 app-misc/redcore-live 314-r4: Redcore Linux live scripts
 app-misc/redcore-skel 314-r6: Redcore Linux skel tree
@@ -29,35 +29,34 @@ mail-client/mailspring 1.9.2-r1: A beautiful fast and maintained fork of Nylas M
 media-libs/libpipewire 0.3.43-r10: Pipewire client libraries
 media-libs/nv-codec-headers 11.1.5.1-r10: FFmpeg version of headers required to interface with Nvidias codec APIs
 media-sound/cantata 2.5.0-r10: Featureful and configurable Qt client for the music player daemon (MPD)
-media-tv/sopcast 3.2.6-r2: SopCast free P2P Internet TV binary
+media-tv/sopcast 3.2.6-r3: SopCast free P2P Internet TV binary
 media-video/guvcview 2.0.6-r10: Simple Qt5 or GTK+3 interface for capturing and viewing video from v4l2 devices
 media-video/mpv 0.34.1-r10: Media player based on MPlayer and mplayer2
-media-video/nvidia_video_sdk 6.0.1-r10: NVIDIA Video Codec SDK
 net-libs/libnm-glib 1.18.10-r2: Legacy NetworkManager glib and util libraries
 net-libs/webkit-gtk 2.34.1-r100: Open source web browser engine
-net-wireless/broadcom-sta 6.30.223.271-r2: Broadcom's IEEE 802.11a/b/g/n hybrid Linux device driver
+net-wireless/broadcom-sta 6.30.223.271-r3: Broadcom's IEEE 802.11a/b/g/n hybrid Linux device driver
 net-wireless/rtl8821cu 5.8.1: Realtek RTL8821CU USB Wi-Fi adapter driver for Linux
 sys-apps/baselayout 2.7-r11: Filesystem baselayout and init scripts
 sys-apps/firetools 0.9.46-r1: Graphical user interface of app-emulation/firejail
-sys-apps/lsb-release 1.4-r11: LSB version query program
+sys-apps/lsb-release 1.4-r12: LSB version query program
 sys-apps/openrc 0.44.10-r1: OpenRC manages the services, startup and shutdown of a host
 sys-auth/elogind 246.10-r10: The systemd project's logind, extracted to a standalone package
-sys-auth/polkit-qt 0.113.0-r10: PolicyKit Qt API wrapper library (meta package)
+sys-auth/polkit-qt 0.113.0-r11: PolicyKit Qt API wrapper library (meta package)
 sys-auth/polkit-qt5 0.113.0-r10: Qt wrapper around polkit-1 client libraries
 sys-boot/etcher 1.5.116: Flash OS images to SD cards & USB drives, safely and easily.
 sys-boot/grub 2.04-r11: GNU GRUB boot loader
 sys-boot/os-prober 1.77-r10: Utility to detect other OSs on a set of drives
 sys-boot/plymouth 0.9.4-r11: Graphical boot animation (splash) and logger
-sys-boot/unetbootin-static 625-r2: Universal Netboot Installer creates Live USB systems for various OS distributions
+sys-boot/unetbootin-static 625-r3: Universal Netboot Installer creates Live USB systems for various OS distributions
 sys-devel/binutils 2.37_p1-r10: Tools necessary to build programs
 sys-devel/gcc 10.3.0-r10: The GNU Compiler Collection
 sys-devel/libtool 2.4.6-r10: A shared library tool for developers
 sys-fs/cryptsetup 2.3.4-r10: Tool to setup encrypted devices with dm-crypt
 sys-fs/gocryptfs 2.0.1-r1: Encrypted overlay filesystem written in Go
 sys-fs/vhba 20190831-r2: Virtual (SCSI) Host Bus Adapter kernel module for the CDEmu suite
-sys-fs/zfs 2.1.4: ZFS meta-package (Gentoo compatibility ebuild)
+sys-fs/zfs 2.1.4-r1: ZFS meta-package (Gentoo compatibility ebuild)
 sys-fs/zfs-utils 2.1.4: Userland utilities for ZFS Linux kernel module
-sys-kernel/bbswitch-dkms 0.8-r1: BBswitch sources for linux
+sys-kernel/bbswitch-dkms 0.8-r2: BBswitch sources for linux
 sys-kernel/broadcom-sta-dkms 6.30.223.271-r5: Broadcom's IEEE 802.11a/b/g/n hybrid Linux device driver source
 sys-kernel/dkms 2.3-r1: Dynamic Kernel Module Support
 sys-kernel/dracut 048-r10: Generic initramfs generation tool
@@ -72,7 +71,7 @@ sys-kernel/nvidia-drivers-dkms 470.129.06: NVIDIA driver sources for linux
 sys-kernel/nvidia-drivers-legacy-dkms 390.151: NVIDIA driver sources for linux
 sys-kernel/rtl8821cu-dkms 5.8.1: Realtek RTL8811CU/RTL8821CU USB Wi-Fi adapter driver for Linux
 sys-kernel/vhba-dkms 20190831: Virtual (SCSI) Host Bus Adapter kernel module for the CDEmu suite sources
-sys-kernel/virtualbox-modules-dkms 6.1.18-r1: Kernel Modules source for Virtualbox
+sys-kernel/virtualbox-modules-dkms 6.1.18-r2: Kernel Modules source for Virtualbox
 sys-kernel/zfs-dkms 2.1.4: ZFS sources for linux
 sys-libs/binutils-libs 2.37_p1-r10: Core binutils libraries (libbfd, libopcodes, libiberty) for external packages
 sys-libs/glibc 2.33-r10: GNU libc C library
@@ -95,9 +94,9 @@ x11-misc/nvidia-settings-legacy 390.151: NVIDIA Linux X11 Settings Utility
 x11-misc/pcmanfm-qt-share 1337: PCManFM-QT custom action to share folder using Samba
 x11-misc/sddm 0.18.1-r100: Simple Desktop Display Manager
 x11-themes/material-icon-theme 1337-r2: Icon theme following the Google's material design specifications
-x11-themes/redcore-artwork-calamares 314-r3: Redcore Linux branding component for Calamares
+x11-themes/redcore-artwork-calamares 314-r4: Redcore Linux branding component for Calamares
 x11-themes/redcore-artwork-community 314-r3: Redcore Linux Community Wallpapers
 x11-themes/redcore-artwork-core 314: Offical Redcore Linux Core Artwork
 x11-themes/redcore-artwork-grub 1337-r4: Redcore Linux GRUB2 Images
 x11-themes/redcore-theme 1337-r1: Official Redcore Linux GTK theme
-x11-themes/redcore-theme-sddm 314-r5: Redcore Linux SDDM Theme
+x11-themes/redcore-theme-sddm 314-r6: Redcore Linux SDDM Theme

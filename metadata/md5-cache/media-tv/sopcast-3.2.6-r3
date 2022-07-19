@@ -1,0 +1,14 @@
+DEFINED_PHASES=install
+DEPEND=amd64? ( sys-libs/libstdc++-v3[multilib] ) x86? ( >=virtual/libstdc++-3.3 )
+DESCRIPTION=SopCast free P2P Internet TV binary
+EAPI=7
+HOMEPAGE=http://www.sopcast.com/
+INHERIT=eutils
+KEYWORDS=~amd64 ~x86
+LICENSE=SopCast-unknown-license
+RDEPEND=amd64? ( sys-libs/libstdc++-v3[multilib] ) x86? ( >=virtual/libstdc++-3.3 )
+RESTRICT=strip
+SLOT=0
+SRC_URI=http://download.sopcast.com/download/sp-auth.tgz
+_eclasses_=edos2unix	33e347e171066657f91f8b0c72ec8773	eutils	dab5d8ec471d025b79c9e6906bcf3bff	strip-linguas	ac3ee41ee2d31d8c41a77c0838320cc7	wrapper	4a1902f969e5718126434fc35f3a0d9c
+_md5_=624e17bbce592666d373400c9a1efc56

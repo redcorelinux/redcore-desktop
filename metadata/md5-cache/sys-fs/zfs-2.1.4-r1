@@ -1,9 +1,9 @@
 DEFINED_PHASES=-
 DEPEND=~sys-fs/zfs-utils-2.1.4 ~sys-kernel/zfs-dkms-2.1.4
 DESCRIPTION=ZFS meta-package (Gentoo compatibility ebuild)
-EAPI=8
+EAPI=7
 KEYWORDS=amd64
 LICENSE=GPL-2
 RDEPEND=~sys-fs/zfs-utils-2.1.4 ~sys-kernel/zfs-dkms-2.1.4
 SLOT=0
-_md5_=2c85995ad62a10c213f63b043b60075b
+_md5_=e55b835fd30a4e79085053c624251ca7

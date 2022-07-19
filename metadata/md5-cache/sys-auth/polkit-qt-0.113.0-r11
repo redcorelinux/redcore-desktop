@@ -1,10 +1,10 @@
 DEFINED_PHASES=-
 DESCRIPTION=PolicyKit Qt API wrapper library (meta package)
-EAPI=8
+EAPI=7
 HOMEPAGE=http://www.kde.org/
 IUSE=+qt5
 KEYWORDS=amd64
 LICENSE=LGPL-2
 RDEPEND=qt5? ( ~sys-auth/polkit-qt5-0.113.0 )
 SLOT=0
-_md5_=714ee7d439170731c6d68289d3738939
+_md5_=194f5af747cf269114de862abe704f9d
