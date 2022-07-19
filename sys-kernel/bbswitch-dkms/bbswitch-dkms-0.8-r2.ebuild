@@ -20,10 +20,14 @@ RDEPEND="${DEPEND}"
 
 S="${WORKDIR}/${MY_PN}-${PV}"
 
+PATCHES=(
+	"${FILESDIR}"/"${P}"-conf.patch
+)
+
 src_prepare() {
+	default
 	# Fix build failure, bug #513542
 	sed -i 's/^KDIR.*$/KDIR\ \:= \/usr\/src\/linux/g' Makefile
-	epatch ${FILESDIR}/${P}-conf.patch
 }
 
 src_compile() {
