@@ -19,12 +19,9 @@ IUSE=""
 DEPEND="dev-lang/perl"
 RDEPEND=""
 
-src_unpack() {
-	unpack ${A}
-
-	cd "${S}"
-	epatch "${FILESDIR}/${PN}-redcore-version.patch"
-}
+PATCHES=(
+	"${FILESDIR}"/"${PN}"-redcore-version.patch
+)
 
 src_install() {
 	emake \
