@@ -14,6 +14,7 @@ KEYWORDS="amd64 arm64"
 SLOT="0"
 
 src_prepare() {
+	default
 	epatch ${FILESDIR}/${P}-dont-touch-configs.patch
 	epatch ${FILESDIR}/${P}-gentoo-functions.patch
 	epatch ${FILESDIR}/${P}-systemd-service-fix.patch
