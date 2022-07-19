@@ -90,11 +90,11 @@ x11-misc/nvidia-prime 314: NVIDIA Prime Render Offload configuration and utiliti
 x11-misc/nvidia-settings 470.129.06: NVIDIA Linux X11 Settings Utility
 x11-misc/nvidia-settings-legacy 390.151: NVIDIA Linux X11 Settings Utility
 x11-misc/pcmanfm-qt-share 1337: PCManFM-QT custom action to share folder using Samba
-x11-misc/sddm 0.18.1-r100: Simple Desktop Display Manager
+x11-misc/sddm 0.18.1-r101: Simple Desktop Display Manager
 x11-themes/material-icon-theme 1337-r2: Icon theme following the Google's material design specifications
 x11-themes/redcore-artwork-calamares 314-r4: Redcore Linux branding component for Calamares
 x11-themes/redcore-artwork-community 314-r3: Redcore Linux Community Wallpapers
 x11-themes/redcore-artwork-core 314: Offical Redcore Linux Core Artwork
 x11-themes/redcore-artwork-grub 1337-r4: Redcore Linux GRUB2 Images
+x11-themes/redcore-artwork-sddm 314-r6: Redcore Linux SDDM Theme
 x11-themes/redcore-theme 1337-r1: Official Redcore Linux GTK theme
-x11-themes/redcore-theme-sddm 314-r6: Redcore Linux SDDM Theme
