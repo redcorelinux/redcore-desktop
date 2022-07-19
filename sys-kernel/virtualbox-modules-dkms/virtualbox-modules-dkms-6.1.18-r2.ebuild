@@ -24,15 +24,19 @@ RDEPEND="${DEPEND}"
 
 S=${WORKDIR}
 
+PATCHES=(
+	"${FILESDIR}"/kernel-5.11.patch
+)
+
 src_unpack() {
 	unpack_deb ${A}
 }
 
 src_prepare() {
+	default
 	grep -lR linux/autoconf.h *  | xargs sed -i -e 's:<linux/autoconf.h>:<generated/autoconf.h>:'
 	sed -i "s/virtualbox/${PN}/g" usr/src/virtualbox-${PV}/dkms.conf
 	sed -i "s/updates/extra\/dkms/g" usr/src/virtualbox-${PV}/dkms.conf
-	epatch "${FILESDIR}"/kernel-5.11.patch
 }
 
 src_compile() {
