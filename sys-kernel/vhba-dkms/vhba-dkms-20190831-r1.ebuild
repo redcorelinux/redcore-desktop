@@ -21,6 +21,7 @@ RDEPEND="${DEPEND}"
 S=${WORKDIR}/${MY_P}
 
 src_prepare() {
+	default
 	sed -e '/ccflags/s/-Werror$/-Wall/' \
 		-i Makefile || die "sed failed"
 }

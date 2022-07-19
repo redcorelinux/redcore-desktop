@@ -10,4 +10,4 @@ RDEPEND=sys-kernel/dkms
 SLOT=0
 SRC_URI=mirror://sourceforge/cdemu/vhba-module-20190831.tar.bz2
 _eclasses_=edos2unix	33e347e171066657f91f8b0c72ec8773	eutils	dab5d8ec471d025b79c9e6906bcf3bff	strip-linguas	ac3ee41ee2d31d8c41a77c0838320cc7	wrapper	4a1902f969e5718126434fc35f3a0d9c
-_md5_=18c1a2ceac047b74eb57a301e2c560b9
+_md5_=a97aaee6e151a0465e0e91911a834615
