@@ -3,6 +3,7 @@ acct-group/smbshare 0: System group: smbshare
 acct-user/sddm 0: System user; sddm
 app-admin/calamares 3.2.44.3-r2: Distribution-independent installer framework
 app-admin/vasile 2.1812.2: Versatile Advanced Script for ISO and Latest Enchantments
+app-backup/timeshift 22.06.1-r1: A system restore utility for Linux
 app-emulation/linux-steam-integration 0.7.3-r2: Helper for enabling better Steam integration on Linux
 app-emulation/steam 1.0.0.71: Digital distribution client bootstrap package
 app-emulation/steam-native-runtime 1.0.0.71-r1: Native replacement for the Steam runtime using system libraries
