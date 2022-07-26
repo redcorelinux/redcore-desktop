@@ -9,5 +9,5 @@ LICENSE=GPL-3+
 RDEPEND=sys-kernel/dkms
 SLOT=0
 SRC_URI=https://github.com/Bumblebee-Project/bbswitch/archive/v0.8.tar.gz -> bbswitch-0.8.tar.gz
-_eclasses_=edos2unix	33e347e171066657f91f8b0c72ec8773	eutils	23cb2d46c80c12aa8b25973b4cdcb257	strip-linguas	ac3ee41ee2d31d8c41a77c0838320cc7	wrapper	4a1902f969e5718126434fc35f3a0d9c
+_eclasses_=edos2unix	33e347e171066657f91f8b0c72ec8773	eutils	8f942ebdcf04334697649d4a0bf65a32	strip-linguas	ac3ee41ee2d31d8c41a77c0838320cc7	wrapper	4a1902f969e5718126434fc35f3a0d9c
 _md5_=d55fc7c6746a96a23de1f552f5c6a2e1
