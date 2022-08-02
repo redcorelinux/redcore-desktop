@@ -1,7 +1,7 @@
 # Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 MY_PN="${PN/qt5/qt}"
 MY_PV=${PV/_pre/+16.04.}
@@ -9,7 +9,7 @@ MY_PV=${PV/_pre/+16.04.}
 EBZR_REPO_URI="lp:libdbusmenu-qt"
 
 [[ ${PV} == 9999* ]] && inherit bzr
-inherit cmake-utils virtualx
+inherit cmake virtualx
 
 DESCRIPTION="Library providing Qt implementation of DBusMenu specification"
 HOMEPAGE="https://launchpad.net/libdbusmenu-qt/"
@@ -41,7 +41,7 @@ S=${WORKDIR}/${MY_PN}-${MY_PV}
 
 src_prepare() {
 	[[ ${PV} == 9999* ]] && bzr_src_prepare
-	cmake-utils_src_prepare
+	cmake_src_prepare
 
 	cmake_comment_add_subdirectory tools
 	use test || cmake_comment_add_subdirectory tests
@@ -52,13 +52,13 @@ src_configure() {
 		-DWITH_DOC=OFF
 		-DUSE_QT5=ON
 	)
-	cmake-utils_src_configure
+	cmake_src_configure
 }
 
 src_test() {
 	local builddir=${BUILD_DIR}
 
-	BUILD_DIR=${BUILD_DIR}/tests virtx cmake-utils_src_test
+	BUILD_DIR=${BUILD_DIR}/tests virtx cmake_src_test
 
 	BUILD_DIR=${builddir}
 }
