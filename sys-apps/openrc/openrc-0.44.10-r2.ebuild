@@ -18,7 +18,7 @@ fi
 
 LICENSE="BSD-2"
 SLOT="0"
-IUSE="+apparmor audit bash debug +dkms elogind +entropy ncurses pam newnet +netifrc selinux +splash sysv-utils unicode"
+IUSE="+apparmor audit bash debug +dkms elogind +havege ncurses pam newnet +netifrc selinux +settingsd +splash sysv-utils unicode"
 
 COMMON_DEPEND="
 	apparmor? (
@@ -31,13 +31,14 @@ COMMON_DEPEND="
 	audit? ( sys-process/audit )
 	dkms? ( sys-kernel/dkms )
 	elogind? ( sys-auth/elogind )
-	entropy? ( sys-apps/haveged )
+	havege? ( sys-apps/haveged )
 	sys-process/psmisc
 	!<sys-process/procps-3.3.9-r2
 	selinux? (
 		sys-apps/policycoreutils
 		>=sys-libs/libselinux-2.6
 	)
+	settingsd? ( app-admin/openrc-settingsd )
 	amd64? ( splash? ( sys-boot/plymouth-openrc-plugin ) )
 	!<sys-apps/baselayout-2.1-r1
 	!<sys-fs/udev-init-scripts-27"
@@ -149,6 +150,7 @@ pkg_preinst() {
 }
 
 pkg_postinst() {
+	# add dkms to boot runlevel
 	if [ -e "${ROOT}"/etc/init.d/dkms ] && use dkms; then
 		if [ "$(rc-config list boot | grep dkms)" != "" ]; then
 			einfo > /dev/null 2>&1
@@ -156,7 +158,7 @@ pkg_postinst() {
 			"${ROOT}"/sbin/rc-update add dkms boot > /dev/null 2>&1
 		fi
 	fi
-
+	# move dbus to boot runlevel
 	if [ -e "${ROOT}"/etc/init.d/dbus ] && use elogind; then
 		if [ "$(rc-config list boot | grep dbus)" != "" ]; then
 			einfo > /dev/null 2>&1
@@ -167,7 +169,7 @@ pkg_postinst() {
 			"${ROOT}"/sbin/rc-update add dbus boot > /dev/null 2>&1
 		fi
 	fi
-
+	# add elogind to boot runlevel, disable consolekit && cgmanager
 	if [ -e "${ROOT}"/etc/init.d/elogind ] && use elogind; then
 		if [ "$(rc-config list boot | grep elogind)" != "" ]; then
 			einfo > /dev/null 2>&1
@@ -183,7 +185,7 @@ pkg_postinst() {
 			"${ROOT}"/sbin/rc-update del cgmanager default > /dev/null 2>&1
 		fi
 	fi
-
+	# add apparmor to boot runlevel
 	if [ -e "${ROOT}"/etc/init.d/apparmor ] && use apparmor; then
 		if [ "$(rc-config list boot | grep apparmor)" != "" ]; then
 			einfo > /dev/null 2>&1
@@ -191,20 +193,25 @@ pkg_postinst() {
 			"${ROOT}"/sbin/rc-update add apparmor boot > /dev/null 2>&1
 		fi
 	fi
-
-	if [ -e "${ROOT}"/etc/init.d/haveged ] && use entropy; then
+	# add haveged to default runlevel
+	if [ -e "${ROOT}"/etc/init.d/haveged ] && use havege; then
 		if [ "$(rc-config list default | grep haveged)" != "" ]; then
 			einfo > /dev/null 2>&1
 		else
 			"${ROOT}"/sbin/rc-update add haveged default > /dev/null 2>&1
 		fi
 	fi
-
-	if [ -e "${ROOT}"/etc/init.d/openrc-settingsd ]; then
+	# add openrc-settingsd to default level, disable ntpd
+	# this allows time & date to be set to network time zone in various desktop environments
+	if [ -e "${ROOT}"/etc/init.d/openrc-settingsd ] && use settingsd; then
 		if [ "$(rc-config list default | grep openrc-settingsd)" != "" ]; then
-			"${ROOT}"/sbin/rc-update del openrc-settingsd default > /dev/null 2>&1
-		else
 			einfo > /dev/null 2>&1
+		else
+			"${ROOT}"/sbin/rc-update add openrc-settingsd default > /dev/null 2>&1
+		fi
+
+		if [ "$(rc-config list default | grep ntpd)" != "" ]; then
+			"${ROOT}"/sbin/rc-update del ntpd default > /dev/null 2>&1
 		fi
 	fi
 }
