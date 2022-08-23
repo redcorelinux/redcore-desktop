@@ -4,10 +4,10 @@
 EAPI=8
 
 ECM_HANDBOOK="forceoptional"
-KFMIN=5.94.0
+KFMIN=5.95.0
 PVCUT=$(ver_cut 1-3)
-QTMIN=5.15.4
-inherit ecm kde.org optfeature
+QTMIN=5.15.5
+inherit ecm plasma.kde.org optfeature
 
 DESCRIPTION="Utility providing information about the computer hardware"
 HOMEPAGE="https://userbase.kde.org/KInfoCenter"
