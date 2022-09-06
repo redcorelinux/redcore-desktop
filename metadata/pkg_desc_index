@@ -25,7 +25,7 @@ dev-python/sh 1.12.14-r4: Python process launching
 dev-python/typer 0.2.1-r2: Build great CLIs. Easy to code. Based on Python type hints
 dev-python/wget 2.2-r2: Python library for downloading from http URLs
 gui-libs/display-manager-init 1.0-r100: RC init files for starting display and login managers
-kde-plasma/kinfocenter 5.25.4-r100: Utility providing information about the computer hardware
+kde-plasma/kinfocenter 5.25.5-r100: Utility providing information about the computer hardware
 mail-client/mailspring 1.9.2-r1: A beautiful fast and maintained fork of Nylas Mail
 media-libs/libpipewire 0.3.43-r10: Pipewire client libraries
 media-libs/nv-codec-headers 11.1.5.1-r10: FFmpeg version of headers required to interface with Nvidias codec APIs
