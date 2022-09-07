@@ -8,7 +8,7 @@ inherit eutils udev
 MY_P=vhba-module-${PV}
 DESCRIPTION="Virtual (SCSI) Host Bus Adapter kernel module for the CDEmu suite"
 HOMEPAGE="http://cdemu.org"
-SRC_URI="mirror://sourceforge/cdemu/${MY_P}.tar.bz2"
+SRC_URI="https://download.sourceforge.net/cdemu/vhba-module/${MY_P}.tar.xz"
 
 LICENSE="GPL-2+"
 SLOT="0"
