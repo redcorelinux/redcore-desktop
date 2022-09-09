@@ -131,7 +131,7 @@ _dracut_initramfs_regen() {
 
 pkg_postinst() {
 	if [ $(stat -c %d:%i /) == $(stat -c %d:%i /proc/1/root/.) ]; then
-		_dracut_initramfs_rege
+		_dracut_initramfs_regen
 	fi
 
 	if linux-info_get_any_version && linux_config_exists; then
