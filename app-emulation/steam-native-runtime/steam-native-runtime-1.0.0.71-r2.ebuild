@@ -10,7 +10,7 @@ SRC_URI=""
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="amd64"
-IUSE="pulseaudio"
+IUSE="screencast"
 
 DEPEND="
 	app-emulation/steam
@@ -30,6 +30,7 @@ DEPEND="
 	media-libs/sdl-image[abi_x86_32]
 	media-libs/sdl-mixer[abi_x86_32]
 	media-libs/sdl-ttf[abi_x86_32]
+	media-libs/libcanberra[abi_x86_32]
 	media-libs/libsdl2[abi_x86_32]
 	media-libs/sdl2-image[abi_x86_32]
 	media-libs/sdl2-mixer[abi_x86_32]
@@ -65,28 +66,14 @@ DEPEND="
 	x11-libs/libXrender[abi_x86_32]
 	x11-libs/libXtst[abi_x86_32]
 	x11-libs/pango[abi_x86_32]
-
-	pulseaudio? (
-		media-libs/libcanberra[abi_x86_32]
-		media-sound/pulseaudio[abi_x86_32]
-	)
-	!pulseaudio? (
-		media-libs/libcanberra[abi_x86_32]
-		media-libs/libpipewire[abi_x86_32]
-		media-sound/apulse[abi_x86_32]
-	)
 "
 RDEPEND="${DEPEND}
-	pulseaudio? ( || (
-		media-video/pipewire
-		media-sound/pulseaudio-daemon
-		media-sound/pulseaudio[daemon(+)]
-	) )
-	!pulseaudio? (
-		media-libs/libcanberra[abi_x86_32]
-		media-libs/libpipewire[abi_x86_32]
-		media-sound/apulse[abi_x86_32]
-	)
+	screencast? ( media-video/pipewire )
+	!screencast? ( media-libs/libpipewire[abi_x86_32] )
+	|| (
+	media-video/pipewire
+	media-sound/pulseaudio-daemon
+	media-sound/pulseaudio[daemon(+)] )
 "
 
 S="${FILESDIR}"
