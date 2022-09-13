@@ -24,6 +24,7 @@ dev-python/click 7.1.2-r100: A Python package for creating beautiful command lin
 dev-python/sh 1.12.14-r4: Python process launching
 dev-python/typer 0.2.1-r2: Build great CLIs. Easy to code. Based on Python type hints
 dev-python/wget 2.2-r2: Python library for downloading from http URLs
+dev-qt/qt-creator 6.0.0-r1: Lightweight IDE for C++/QML development centering around Qt
 gui-libs/display-manager-init 1.0-r100: RC init files for starting display and login managers
 kde-plasma/kinfocenter 5.25.5-r100: Utility providing information about the computer hardware
 mail-client/mailspring 1.9.2-r1: A beautiful fast and maintained fork of Nylas Mail
