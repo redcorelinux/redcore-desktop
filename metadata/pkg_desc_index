@@ -35,7 +35,7 @@ media-tv/sopcast 3.2.6-r3: SopCast free P2P Internet TV binary
 media-video/guvcview 2.0.6-r10: Simple Qt5 or GTK+3 interface for capturing and viewing video from v4l2 devices
 media-video/mpv 0.34.1-r10: Media player based on MPlayer and mplayer2
 net-libs/libnm-glib 1.18.10-r2: Legacy NetworkManager glib and util libraries
-net-libs/webkit-gtk 2.34.1-r100: Open source web browser engine
+net-libs/webkit-gtk 2.36.7-r1: Open source web browser engine
 net-wireless/broadcom-sta 6.30.223.271-r3: Broadcom's IEEE 802.11a/b/g/n hybrid Linux device driver
 sys-apps/baselayout 2.7-r11: Filesystem baselayout and init scripts
 sys-apps/firetools 0.9.46-r1: Graphical user interface of app-emulation/firejail
