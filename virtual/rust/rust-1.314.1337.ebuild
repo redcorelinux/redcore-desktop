@@ -14,5 +14,5 @@ IUSE="rustfmt"
 
 BDEPEND=""
 RDEPEND="|| (
-	~dev-lang/rust-${PV}[rustfmt?,${MULTILIB_USEDEP}]
+	~dev-lang/rust[rustfmt?,${MULTILIB_USEDEP}]
 )"
