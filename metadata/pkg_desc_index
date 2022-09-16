@@ -28,6 +28,7 @@ dev-qt/qt-creator 6.0.0-r1: Lightweight IDE for C++/QML development centering ar
 gui-libs/display-manager-init 1.0-r100: RC init files for starting display and login managers
 kde-plasma/kinfocenter 5.25.5-r100: Utility providing information about the computer hardware
 mail-client/mailspring 1.9.2-r1: A beautiful fast and maintained fork of Nylas Mail
+mail-client/thunderbird 102.2.2-r2: Thunderbird Mail Client
 media-libs/libpipewire 0.3.43-r10: Pipewire client libraries
 media-libs/nv-codec-headers 11.1.5.1-r10: FFmpeg version of headers required to interface with Nvidias codec APIs
 media-sound/cantata 2.5.0-r10: Featureful and configurable Qt client for the music player daemon (MPD)
