@@ -1,0 +1,6 @@
+# set mq-deadline scheduler for non-rotating disks (SATA SSDs)
+ACTION=="add|change", KERNEL=="sd[a-z]", ATTR{queue/rotational}=="0", ATTR{queue/scheduler}="mq-deadline"
+# set bfq scheduler for rotating disks (SATA HDDs)
+ACTION=="add|change", KERNEL=="sd[a-z]", ATTR{queue/rotational}=="1", ATTR{queue/scheduler}="bfq"
+# set mq-deadline scheduler for non-rotating nvme-disks (NVME SSDs)
+ACTION=="add|change", KERNEL=="nvme[0-9]n1", ATTR{queue/rotational}=="0", ATTR{queue/scheduler}="mq-deadline"

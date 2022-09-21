@@ -3,7 +3,7 @@
 
 EAPI=6
 
-inherit multilib versionator prefix
+inherit multilib versionator prefix udev
 
 DESCRIPTION="Filesystem baselayout and init scripts"
 HOMEPAGE="https://wiki.gentoo.org/wiki/No_homepage"
@@ -188,12 +188,11 @@ pkg_preinst() {
 
 src_prepare() {
 	default
-	eapply "${FILESDIR}/${PN}-redcore.patch"
+	eapply "${FILESDIR}"/"${PN}"-redcore.patch
 	if use prefix; then
 		hprefixify -e "/EUID/s,0,${EUID}," -q '"' etc/profile
 		hprefixify etc/{env.d/50baselayout,shells} share.Linux/passwd
-		echo PATH=/usr/bin:/bin >> etc/env.d/99host
-		echo ROOTPATH=/usr/sbin:/sbin:/usr/bin:/bin >> etc/env.d/99host
+		echo PATH=/usr/sbin:/sbin:/usr/bin:/bin >> etc/env.d/99host
 	fi
 
 	# don't want symlinked directories in PATH on systems with usr-merge
@@ -221,7 +220,7 @@ src_prepare() {
 	echo "LDPATH='${ldpaths#:}'" >> etc/env.d/50baselayout
 
 	# rc-scripts version for testing of features that *should* be present
-	echo "Redcore Linux Hardened - current" > etc/redcore-release
+	echo "Redcore Linux Hardened - rolling" > etc/redcore-release
 }
 
 src_install() {
@@ -229,17 +228,11 @@ src_install() {
 		OS=$(usex kernel_FreeBSD BSD Linux) \
 		DESTDIR="${ED}" \
 		install
-	dodoc ChangeLog
-	rm "${ED}"/etc/sysctl.d/README || die
 
 	# need the makefile in pkg_preinst
 	insinto /usr/share/${PN}
 	doins Makefile
-
-	# This is needed for https://bugs.gentoo.org/732142
-	dodir /usr/lib
-	mv "${ED}"/etc/os-release "${ED}"/usr/lib || die
-	dosym ../usr/lib/os-release /etc/os-release
+	dodoc ChangeLog
 
 	############### Redcore Linux ###############
 	#
@@ -270,6 +263,16 @@ src_install() {
 	dodir /etc/conf.d
 	insinto /etc/conf.d
 	newins ${FILESDIR}/dmcryptcfg dmcrypt
+	#
+	# esync
+	dodir /etc/security/limits.d
+	insinto /etc/security/limits.d
+	newins ${FILESDIR}/esynccfg 50-esync.conf
+	#
+	# IOsched
+	dodir /lib/udev/rules.d/
+	insinto /lib/udev/rules.d
+	newins ${FILESDIR}/ioschedcfg 60-iosched.rules
 	#
 	##############################################
 }
@@ -354,7 +357,16 @@ pkg_postinst() {
 	rm -rf "${EROOT}"etc/default/._cfg????_grub
 	rm -rf "${EROOT}"etc/samba/._cfg????_smb.conf
 	rm -rf "${EROOT}"etc/conf.d/._cfg???_dmcrypt
+	rm -rf "${EROOT}"etc/security/limits.d/._cfg???_50-esync.conf
+	rm -rf "${EROOT}"lib/udev/rules.d/._cfg???_60-iosched.rules
 	chown root:smbshare /var/lib/samba/usershare
 	chmod 1770 /var/lib/samba/usershare
+	udev_reload
+	############################################
+}
+
+pkg_postrm() {
+	############### Redcore Linux ###############
+	udev_reload
 	############################################
 }
