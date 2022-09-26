@@ -39,7 +39,7 @@ net-libs/webkit-gtk 2.36.7-r1: Open source web browser engine
 net-wireless/broadcom-sta 6.30.223.271-r3: Broadcom's IEEE 802.11a/b/g/n hybrid Linux device driver
 sys-apps/baselayout 2.8-r1: Filesystem baselayout and init scripts
 sys-apps/firetools 0.9.46-r1: Graphical user interface of app-emulation/firejail
-sys-apps/lsb-release 1.4-r12: LSB version query program
+sys-apps/lsb-release 3.2-r1: LSB version query program
 sys-apps/openrc 0.44.10-r2: OpenRC manages the services, startup and shutdown of a host
 sys-auth/elogind 246.10-r3: The systemd project's logind, extracted to a standalone package
 sys-auth/polkit-qt 0.113.0-r11: PolicyKit Qt API wrapper library (meta package)
