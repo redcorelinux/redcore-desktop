@@ -9,7 +9,7 @@ app-emulation/virtualbox-bin 6.1.18.142142-r2: Family of powerful x86 virtualiza
 app-emulation/virtualbox-modules 6.1.18: Kernel Modules for Virtualbox
 app-misc/calamares-config-redcore 1.314.1337: Redcore Linux Calamares modules config
 app-misc/geoclue 2.6.0-r10: A location information D-Bus service
-app-misc/redcore-live 314-r4: Redcore Linux live scripts
+app-misc/redcore-live 1.314.1337: Redcore Linux live scripts
 app-misc/redcore-skel 314-r6: Redcore Linux skel tree
 app-portage/sisyphus 4.2209.1: A simple portage python wrapper which works like other package managers(apt-get/yum/dnf)
 app-portage/sisyphus-qt 4.2209.1: A simple portage python wrapper which works like other package managers(apt-get/yum/dnf)
