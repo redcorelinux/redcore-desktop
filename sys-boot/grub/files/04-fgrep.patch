@@ -1,0 +1,75 @@
+diff -Nur a/grub-core/lib/libgcrypt/src/libgcrypt-config.in b/grub-core/lib/libgcrypt/src/libgcrypt-config.in
+--- a/grub-core/lib/libgcrypt/src/libgcrypt-config.in	2018-11-24 17:13:02.000000000 +0000
++++ b/grub-core/lib/libgcrypt/src/libgcrypt-config.in	2022-10-05 01:59:10.786495758 +0100
+@@ -142,7 +142,7 @@
+ 
+     tmp=""
+     for i in $includes $cflags_final; do
+-       if echo "$tmp" | fgrep -v -- "$i" >/dev/null; then
++       if echo "$tmp" | grep -Fv -- "$i" >/dev/null; then
+            tmp="$tmp $i"
+        fi
+     done
+@@ -163,7 +163,7 @@
+ 
+     tmp=""
+     for i in $libdirs $libs_final; do
+-       if echo "$tmp" | fgrep -v -- "$i" >/dev/null; then
++       if echo "$tmp" | grep -Fv -- "$i" >/dev/null; then
+            tmp="$tmp $i"
+        fi
+     done
+diff -Nur a/util/grub.d/10_hurd.in b/util/grub.d/10_hurd.in
+--- a/util/grub.d/10_hurd.in	2018-11-24 17:13:02.000000000 +0000
++++ b/util/grub.d/10_hurd.in	2022-10-05 02:02:09.500500296 +0100
+@@ -168,7 +168,7 @@
+   hurd_entry "$kernel" advanced
+   hurd_entry "$kernel" recovery
+ 
+-  kernels=`echo $kernels | tr ' ' '\n' | fgrep -vx "$kernel" | tr '\n' ' '`
++  kernels=`echo $kernels | tr ' ' '\n' | grep -Fvx "$kernel" | tr '\n' ' '`
+ done
+ 
+ # If at least one kernel was found, then we need to
+diff -Nur a/util/grub.d/10_kfreebsd.in b/util/grub.d/10_kfreebsd.in
+--- a/util/grub.d/10_kfreebsd.in	2018-11-24 17:13:02.000000000 +0000
++++ b/util/grub.d/10_kfreebsd.in	2022-10-05 02:02:31.978500866 +0100
+@@ -231,7 +231,7 @@
+     kfreebsd_entry "${OS}" "${version}" recovery "-s"
+   fi
+ 
+-  list=`echo $list | tr ' ' '\n' | fgrep -vx "$kfreebsd" | tr '\n' ' '`
++  list=`echo $list | tr ' ' '\n' | grep -Fvx "$kfreebsd" | tr '\n' ' '`
+ done
+ 
+ # If at least one kernel was found, then we need to
+diff -Nur a/util/grub.d/10_linux.in b/util/grub.d/10_linux.in
+--- a/util/grub.d/10_linux.in	2018-11-24 17:13:02.000000000 +0000
++++ b/util/grub.d/10_linux.in	2022-10-05 02:01:43.687499640 +0100
+@@ -282,7 +282,7 @@
+                 "single ${GRUB_CMDLINE_LINUX}"
+   fi
+ 
+-  list=`echo $list | tr ' ' '\n' | fgrep -vx "$linux" | tr '\n' ' '`
++  list=`echo $list | tr ' ' '\n' | grep -Fvx "$linux" | tr '\n' ' '`
+ done
+ 
+ # If at least one kernel was found, then we need to
+diff -Nur a/util/grub.d/20_linux_xen.in b/util/grub.d/20_linux_xen.in
+--- a/util/grub.d/20_linux_xen.in	2019-04-23 09:54:47.000000000 +0100
++++ b/util/grub.d/20_linux_xen.in	2022-10-05 02:00:13.501497350 +0100
+@@ -310,12 +310,12 @@
+ 		"single ${GRUB_CMDLINE_LINUX}" "${GRUB_CMDLINE_XEN}"
+ 	fi
+ 
+-	list=`echo $list | tr ' ' '\n' | fgrep -vx "$linux" | tr '\n' ' '`
++	list=`echo $list | tr ' ' '\n' | grep -Fvx "$linux" | tr '\n' ' '`
+     done
+     if [ x"$is_top_level" != xtrue ]; then
+ 	echo '	}'
+     fi
+-    xen_list=`echo $xen_list | tr ' ' '\n' | fgrep -vx "$current_xen" | tr '\n' ' '`
++    xen_list=`echo $xen_list | tr ' ' '\n' | grep -Fvx "$current_xen" | tr '\n' ' '`
+ done
+ 
+ # If at least one kernel was found, then we need to

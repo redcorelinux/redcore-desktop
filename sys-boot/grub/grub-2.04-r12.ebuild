@@ -42,6 +42,7 @@ PATCHES=(
 	"${FILESDIR}"/01-gfxpayload.patch
 	"${FILESDIR}"/02-KERNEL_GLOBS.patch
 	"${FILESDIR}"/03-sparc64-bios-boot.patch
+	"${FILESDIR}"/04-fgrep.patch
 )
 
 DEJAVU=dejavu-sans-ttf-2.37
