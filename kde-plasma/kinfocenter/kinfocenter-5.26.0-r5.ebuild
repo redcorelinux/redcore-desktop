@@ -4,7 +4,7 @@
 EAPI=8
 
 ECM_HANDBOOK="forceoptional"
-KFMIN=5.95.0
+KFMIN=5.99.0
 PVCUT=$(ver_cut 1-3)
 QTMIN=5.15.5
 inherit ecm plasma.kde.org optfeature
@@ -42,6 +42,7 @@ RDEPEND="${DEPEND}
 	>=kde-plasma/kde-cli-tools-${PVCUT}:5
 	>=kde-plasma/systemsettings-${PVCUT}:5
 "
+BDEPEND=">=kde-frameworks/kcmutils-${KFMIN}:5"
 
 src_configure() {
 	local mycmakeargs=(
@@ -70,6 +71,7 @@ pkg_postinst() {
 		optfeature "advanced CPU information module" sys-apps/util-linux
 	fi
 	optfeature "Wayland information module" app-misc/wayland-utils
+	optfeature "Firmware security module" "app-text/aha sys-apps/fwupd"
 	optfeature "OpenGL information module" x11-apps/mesa-progs
 	optfeature "PCI devices information module" sys-apps/pciutils
 	optfeature "X Server information module" x11-apps/xdpyinfo
