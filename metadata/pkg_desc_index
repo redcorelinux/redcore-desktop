@@ -23,7 +23,7 @@ dev-python/sh 1.12.14-r4: Python process launching
 dev-python/typer 0.2.1-r2: Build great CLIs. Easy to code. Based on Python type hints
 dev-python/wget 2.2-r2: Python library for downloading from http URLs
 dev-qt/qt-creator 6.0.0-r1: Lightweight IDE for C++/QML development centering around Qt
-gui-libs/display-manager-init 1.0-r100: RC init files for starting display and login managers
+gui-libs/display-manager-init 1.1.1-r1: RC init files for starting display and login managers
 kde-plasma/kinfocenter 5.25.5-r100: Utility providing information about the computer hardware
 mail-client/mailspring 1.9.2-r1: A beautiful fast and maintained fork of Nylas Mail
 media-libs/libpipewire 0.3.43-r10: Pipewire client libraries
@@ -31,7 +31,7 @@ media-libs/nv-codec-headers 11.1.5.1-r10: FFmpeg version of headers required to 
 media-sound/cantata 2.5.0-r10: Featureful and configurable Qt client for the music player daemon (MPD)
 media-tv/sopcast 3.2.6-r3: SopCast free P2P Internet TV binary
 media-video/guvcview 2.0.6-r10: Simple Qt5 or GTK+3 interface for capturing and viewing video from v4l2 devices
-media-video/mpv 0.34.1-r10: Media player based on MPlayer and mplayer2
+media-video/mpv 0.34.1-r2: Media player based on MPlayer and mplayer2
 net-libs/libnm-glib 1.18.10-r2: Legacy NetworkManager glib and util libraries
 net-libs/webkit-gtk 2.36.7-r1: Open source web browser engine
 net-wireless/broadcom-sta 6.30.223.271-r3: Broadcom's IEEE 802.11a/b/g/n hybrid Linux device driver
