@@ -7,11 +7,11 @@ inherit eutils
 
 EXTRAVERSION="redcore"
 KV_FULL="${PV}-${EXTRAVERSION}"
-KV_MAJOR="5.14"
+KV_MAJOR="6.0"
 
 DESCRIPTION="Redcore Linux Kernel Image"
 HOMEPAGE="https://redcorelinux.org"
-SRC_URI="https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-${PV}.tar.xz"
+SRC_URI="https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-${PV}.tar.xz"
 
 KEYWORDS="~amd64"
 LICENSE="GPL-2"
@@ -39,15 +39,11 @@ PATCHES=(
 	"${FILESDIR}"/"${KV_MAJOR}"-radeon_dp_aux_transfer_native-no-ratelimited_debug.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-acpi-use-kern_warning_even_when_error.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-do_not_bug_the_next_18-years.patch
-	"${FILESDIR}"/"${KV_MAJOR}"-iwlwifi-use-debug-for-debug-infos.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-fix-bootconfig-makefile.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-apic_vector-spam-in-debug-mode-only.patch
-	"${FILESDIR}"/"${KV_MAJOR}"-iwlwifi-fix-5e003982b07ae.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-0001-Revert-cpufreq-Avoid-configuring-old-governors-as-de.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-revert-parts-of-a00ec3874e7d326ab2dffbed92faddf6a77a84e9-no-Intel-NO.patch
-	"${FILESDIR}"/"${KV_MAJOR}"-k10temp-frugalware.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-C.patch
-	"${FILESDIR}"/"${KV_MAJOR}"-uksm.patch
 )
 
 S="${WORKDIR}"/linux-"${PV}"
