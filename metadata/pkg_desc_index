@@ -62,10 +62,10 @@ sys-kernel/dracut 056-r10: Generic initramfs generation tool
 sys-kernel/linux-headers 5.19: Linux system headers
 sys-kernel/linux-image-redcore 5.14.21: Redcore Linux Kernel Image
 sys-kernel/linux-image-redcore-lts 5.15.73: Redcore Linux Kernel Image (LTS)
-sys-kernel/linux-image-redcore-lts-legacy 5.10.146: Redcore Linux Kernel Image (LTS Legacy v5.10)
+sys-kernel/linux-image-redcore-lts-legacy 5.10.147: Redcore Linux Kernel Image (LTS Legacy v5.10)
 sys-kernel/linux-sources-redcore 5.14.21: Redcore Linux Kernel Sources
 sys-kernel/linux-sources-redcore-lts 5.15.73: Redcore Linux Kernel Sources (LTS)
-sys-kernel/linux-sources-redcore-lts-legacy 5.10.146: Redcore Linux Kernel Sources (LTS Legacy v5.10)
+sys-kernel/linux-sources-redcore-lts-legacy 5.10.147: Redcore Linux Kernel Sources (LTS Legacy v5.10)
 sys-kernel/nvidia-drivers-dkms 470.141.03: NVIDIA driver sources for linux
 sys-kernel/nvidia-drivers-legacy-dkms 390.154: NVIDIA driver sources for linux
 sys-kernel/vhba-dkms 20211218: Virtual (SCSI) Host Bus Adapter kernel module for the CDEmu suite sources
