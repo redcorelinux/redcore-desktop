@@ -17,7 +17,7 @@ KEYWORDS="amd64 x86"
 RESTRICT="mirror"
 SLOT="0"
 
-DEPEND="~sys-kernel/${PN}-dkms-${PV}"
+DEPEND="~sys-kernel/bcmwl-dkms-${PV}"
 RDEPEND="${DEPEND}"
 
 S=${WORKDIR}

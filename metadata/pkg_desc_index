@@ -34,7 +34,7 @@ media-video/guvcview 2.0.6-r10: Simple Qt5 or GTK+3 interface for capturing and 
 media-video/mpv 0.34.1-r2: Media player based on MPlayer and mplayer2
 net-libs/libnm-glib 1.18.10-r2: Legacy NetworkManager glib and util libraries
 net-libs/webkit-gtk 2.36.7-r1: Open source web browser engine
-net-wireless/broadcom-sta 6.30.223.271-r3: Broadcom's IEEE 802.11a/b/g/n hybrid Linux device driver
+net-wireless/broadcom-sta 6.30.223.271-r4: Broadcom's IEEE 802.11a/b/g/n hybrid Linux device driver
 sys-apps/baselayout 2.8-r1: Filesystem baselayout and init scripts
 sys-apps/firetools 0.9.46-r1: Graphical user interface of app-emulation/firejail
 sys-apps/lsb-release 3.2-r1: LSB version query program
@@ -55,8 +55,7 @@ sys-fs/gocryptfs 2.0.1-r1: Encrypted overlay filesystem written in Go
 sys-fs/vhba 20211218: Virtual (SCSI) Host Bus Adapter kernel module for the CDEmu suite
 sys-fs/zfs 2.1.5: ZFS meta-package (Gentoo compatibility ebuild)
 sys-fs/zfs-utils 2.1.5: Userland utilities for ZFS Linux kernel module
-sys-kernel/bbswitch-dkms 0.8-r2: BBswitch sources for linux
-sys-kernel/broadcom-sta-dkms 6.30.223.271-r7: Broadcom's IEEE 802.11a/b/g/n hybrid Linux device driver source
+sys-kernel/bcmwl-dkms 6.30.223.271: Broadcom's IEEE 802.11a/b/g/n hybrid Linux device driver source
 sys-kernel/dkms 2.3-r2: Dynamic Kernel Module Support
 sys-kernel/dracut 056-r10: Generic initramfs generation tool
 sys-kernel/linux-headers 5.19: Linux system headers
