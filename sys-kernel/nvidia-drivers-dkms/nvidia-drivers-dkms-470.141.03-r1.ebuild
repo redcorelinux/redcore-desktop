@@ -23,7 +23,8 @@ RDEPEND="${DEPEND}
 	!!sys-kernel/nvidia-drivers-legacy-dkms"
 
 PATCHES=(
-	"${FILESDIR}"/fs62142.patch 
+	"${FILESDIR}"/fs62142.patch
+	"${FILESDIR}"/kernel-6.0.patch
 	"${FILESDIR}"/dkms.patch
 )
 
