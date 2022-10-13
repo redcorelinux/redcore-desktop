@@ -1,0 +1,29 @@
+diff -Nur a/src/wl/sys/wl_linux.c b/src/wl/sys/wl_linux.c
+--- a/src/wl/sys/wl_linux.c	2022-10-13 22:44:30.922488855 +0100
++++ b/src/wl/sys/wl_linux.c	2022-10-13 22:48:36.115511672 +0100
+@@ -3307,8 +3307,12 @@
+ static ssize_t
+ wl_proc_read(struct file *filp, char __user *buffer, size_t length, loff_t *offp)
+ {
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(5, 17, 0)
++	wl_info_t * wl = pde_data(file_inode(filp));
++#else
+ 	wl_info_t * wl = PDE_DATA(file_inode(filp));
+ #endif
++#endif
+ 	int bcmerror, len;
+ 	int to_user = 0;
+ 	char tmp[8];
+@@ -3364,8 +3368,12 @@
+ static ssize_t
+ wl_proc_write(struct file *filp, const char __user *buff, size_t length, loff_t *offp)
+ {
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(5, 17, 0)
++	wl_info_t * wl = pde_data(file_inode(filp));
++#else
+ 	wl_info_t * wl = PDE_DATA(file_inode(filp));
+ #endif
++#endif
+ 	int from_user = 0;
+ 	int bcmerror;
+ 
