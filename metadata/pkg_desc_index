@@ -53,8 +53,8 @@ sys-devel/libtool 2.4.7: A shared library tool for developers
 sys-fs/cryptsetup 2.3.4-r10: Tool to setup encrypted devices with dm-crypt
 sys-fs/gocryptfs 2.0.1-r1: Encrypted overlay filesystem written in Go
 sys-fs/vhba 20211218: Virtual (SCSI) Host Bus Adapter kernel module for the CDEmu suite
-sys-fs/zfs 2.1.5: ZFS meta-package (Gentoo compatibility ebuild)
-sys-fs/zfs-utils 2.1.5: Userland utilities for ZFS Linux kernel module
+sys-fs/zfs 2.1.6: ZFS meta-package (Gentoo compatibility ebuild)
+sys-fs/zfs-utils 2.1.6: Userland utilities for ZFS Linux kernel module
 sys-kernel/bcmwl-dkms 6.30.223.271-r1: Broadcom's IEEE 802.11a/b/g/n hybrid Linux device driver source
 sys-kernel/dkms 2.3-r2: Dynamic Kernel Module Support
 sys-kernel/dracut 056-r10: Generic initramfs generation tool
@@ -69,7 +69,7 @@ sys-kernel/nvidia-drivers-dkms 470.141.03-r1: NVIDIA driver sources for linux
 sys-kernel/nvidia-drivers-legacy-dkms 390.154: NVIDIA driver sources for linux
 sys-kernel/vhba-dkms 20211218: Virtual (SCSI) Host Bus Adapter kernel module for the CDEmu suite sources
 sys-kernel/virtualbox-modules-dkms 6.1.18-r2: Kernel Modules source for Virtualbox
-sys-kernel/zfs-dkms 2.1.5: ZFS sources for linux
+sys-kernel/zfs-dkms 2.1.6: ZFS sources for linux
 sys-libs/binutils-libs 2.39-r1: Core binutils libraries (libbfd, libopcodes, libiberty) for external packages
 sys-libs/glibc 2.35-r8: GNU libc C library
 sys-power/radeon-profile 20200824-r10: Read current clocks of ATi/AMD Radeon cards
