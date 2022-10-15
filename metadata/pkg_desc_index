@@ -5,7 +5,6 @@ app-backup/timeshift 22.06.1-r1: A system restore utility for Linux
 app-emulation/linux-steam-integration 0.7.3-r3: Helper for enabling better Steam integration on Linux
 app-emulation/steam 1.0.0.71-r1: Digital distribution client bootstrap package
 app-emulation/steam-native-runtime 1.0.0.71-r2: Native replacement for the Steam runtime using system libraries
-app-emulation/virtualbox-bin 6.1.18.142142-r2: Family of powerful x86 virtualization products for enterprise and home use
 app-emulation/virtualbox-modules 6.1.38-r1: Kernel Modules for Virtualbox
 app-misc/calamares-config-redcore 1.314.1337-r1: Redcore Linux Calamares modules config
 app-misc/geoclue 2.6.0-r10: A location information D-Bus service
