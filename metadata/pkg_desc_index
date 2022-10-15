@@ -67,7 +67,7 @@ sys-kernel/linux-sources-redcore-lts-legacy 5.10.147-r1: Redcore Linux Kernel So
 sys-kernel/nvidia-drivers-dkms 470.141.03-r1: NVIDIA driver sources for linux
 sys-kernel/nvidia-drivers-legacy-dkms 390.154: NVIDIA driver sources for linux
 sys-kernel/vhba-dkms 20211218: Virtual (SCSI) Host Bus Adapter kernel module for the CDEmu suite sources
-sys-kernel/virtualbox-modules-dkms 6.1.38: Kernel Modules source for Virtualbox
+sys-kernel/virtualbox-modules-dkms 6.1.38-r1: Kernel Modules source for Virtualbox
 sys-kernel/zfs-dkms 2.1.6: ZFS sources for linux
 sys-libs/binutils-libs 2.39-r1: Core binutils libraries (libbfd, libopcodes, libiberty) for external packages
 sys-libs/glibc 2.35-r8: GNU libc C library
