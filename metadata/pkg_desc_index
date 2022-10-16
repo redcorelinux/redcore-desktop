@@ -4,7 +4,7 @@ app-admin/vasile 2.1812.2: Versatile Advanced Script for ISO and Latest Enchantm
 app-backup/timeshift 22.06.1-r1: A system restore utility for Linux
 app-emulation/linux-steam-integration 0.7.3-r3: Helper for enabling better Steam integration on Linux
 app-emulation/steam 1.0.0.71-r1: Digital distribution client bootstrap package
-app-emulation/steam-native-runtime 1.0.0.71-r2: Native replacement for the Steam runtime using system libraries
+app-emulation/steam-native-runtime 1.0.0.71-r3: Native replacement for the Steam runtime using system libraries
 app-emulation/virtualbox-modules 6.1.38-r1: Kernel Modules for Virtualbox
 app-misc/calamares-config-redcore 1.314.1337-r1: Redcore Linux Calamares modules config
 app-misc/geoclue 2.6.0-r10: A location information D-Bus service
@@ -30,7 +30,7 @@ media-libs/nv-codec-headers 11.1.5.1-r10: FFmpeg version of headers required to 
 media-sound/cantata 2.5.0-r10: Featureful and configurable Qt client for the music player daemon (MPD)
 media-tv/sopcast 3.2.6-r3: SopCast free P2P Internet TV binary
 media-video/guvcview 2.0.6-r10: Simple Qt5 or GTK+3 interface for capturing and viewing video from v4l2 devices
-media-video/mpv 0.34.1-r2: Media player based on MPlayer and mplayer2
+media-video/mpv 0.34.1-r3: Media player based on MPlayer and mplayer2
 net-libs/libnm-glib 1.18.10-r2: Legacy NetworkManager glib and util libraries
 net-libs/webkit-gtk 2.36.7-r1: Open source web browser engine
 net-wireless/broadcom-sta 6.30.223.271-r4: Broadcom's IEEE 802.11a/b/g/n hybrid Linux device driver
