@@ -12,6 +12,7 @@ SRC_URI="amd64? ( ${NV_URI}Linux-x86_64/${PV}/${AMD64_NV_PACKAGE}.run )"
 
 EMULTILIB_PKG="true"
 KEYWORDS="-* ~amd64"
+RESTRICT="bindist mirror strip"
 LICENSE="GPL-2 NVIDIA-r2"
 SLOT="515"
 

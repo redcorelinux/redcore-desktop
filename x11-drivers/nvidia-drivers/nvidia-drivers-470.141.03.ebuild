@@ -11,6 +11,7 @@ DESCRIPTION="NVIDIA Accelerated Graphics Driver"
 SRC_URI="amd64? ( ${NV_URI}Linux-x86_64/${PV}/${AMD64_NV_PACKAGE}.run )"
 
 EMULTILIB_PKG="true"
+RESTRICT="bindist mirror strip"
 KEYWORDS="-* ~amd64"
 LICENSE="GPL-2 NVIDIA-r2"
 SLOT="470"
