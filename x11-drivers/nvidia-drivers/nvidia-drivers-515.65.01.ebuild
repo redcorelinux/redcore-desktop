@@ -158,7 +158,6 @@ src_install() {
 	donvidia ${NV_OBJ}/libnvidia-fbc.so.${NV_SOVER}
 	donvidia ${NV_OBJ}/libnvidia-nvvm.so.${NV_SOVER}
 	donvidia ${NV_OBJ}/libnvidia-vulkan-producer.so.${NV_SOVER}
-	donvidia ${NV_OBJ}/libnvidia-wayland-client.so.${NV_SOVER}
 	donvidia ${NV_OBJ}/libnvcuvid.so.${NV_SOVER}
 	donvidia ${NV_OBJ}/libnvidia-encode.so.${NV_SOVER}
 
