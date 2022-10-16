@@ -1,7 +1,7 @@
 diff -Nur a/kernel/dkms.conf b/kernel/dkms.conf
 --- a/kernel/dkms.conf	2022-07-20 14:40:39.000000000 +0100
-+++ b/kernel/dkms.conf	2022-10-16 14:05:53.921574151 +0100
-@@ -1,12 +1,22 @@
++++ b/kernel/dkms.conf	2022-10-16 17:59:20.342158844 +0100
+@@ -1,12 +1,21 @@
 -PACKAGE_NAME="nvidia"
 -PACKAGE_VERSION="__VERSION_STRING"
 +PACKAGE_NAME="nvidia-drivers-dkms"
@@ -29,8 +29,8 @@ diff -Nur a/kernel/dkms.conf b/kernel/dkms.conf
 +DEST_MODULE_LOCATION[4]="/extra/dkms"
 diff -Nur a/kernel-open/dkms.conf b/kernel-open/dkms.conf
 --- a/kernel-open/dkms.conf	2022-07-20 14:40:39.000000000 +0100
-+++ b/kernel-open/dkms.conf	2022-10-16 14:07:17.596571670 +0100
-@@ -1,12 +1,22 @@
++++ b/kernel-open/dkms.conf	2022-10-16 17:59:28.942158589 +0100
+@@ -1,12 +1,21 @@
 -PACKAGE_NAME="nvidia"
 -PACKAGE_VERSION="__VERSION_STRING"
 +PACKAGE_NAME="nvidia-drivers-dkms"
