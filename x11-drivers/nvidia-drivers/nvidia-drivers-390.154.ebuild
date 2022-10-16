@@ -49,7 +49,6 @@ RDEPEND="
 QA_PREBUILT="opt/* usr/lib*"
 
 PATCHES=(
-	"${FILESDIR}"/locale.patch
 	"${FILESDIR}"/dkms390.patch
 )
 
