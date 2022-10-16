@@ -1,0 +1,28 @@
+diff -Nur a/kernel/nvidia-drm/nvidia-drm-helper.c b/kernel/nvidia-drm/nvidia-drm-helper.c
+--- a/kernel/nvidia-drm/nvidia-drm-helper.c	2022-07-20 14:42:53.000000000 +0100
++++ b/kernel/nvidia-drm/nvidia-drm-helper.c	2022-10-16 19:00:47.687049510 +0100
+@@ -41,6 +41,10 @@
+ #include <drm/drm_atomic_uapi.h>
+ #endif
+ 
++#if defined(NV_DRM_FRAMEBUFFER_GET_PRESENT)
++#include <drm/drm_framebuffer.h>
++#endif
++
+ static void __nv_drm_framebuffer_put(struct drm_framebuffer *fb)
+ {
+ #if defined(NV_DRM_FRAMEBUFFER_GET_PRESENT)
+diff -Nur a/kernel-open/nvidia-drm/nvidia-drm-helper.c b/kernel-open/nvidia-drm/nvidia-drm-helper.c
+--- a/kernel-open/nvidia-drm/nvidia-drm-helper.c	2022-07-20 14:43:40.000000000 +0100
++++ b/kernel-open/nvidia-drm/nvidia-drm-helper.c	2022-10-16 19:00:47.687049510 +0100
+@@ -41,6 +41,10 @@
+ #include <drm/drm_atomic_uapi.h>
+ #endif
+ 
++#if defined(NV_DRM_FRAMEBUFFER_GET_PRESENT)
++#include <drm/drm_framebuffer.h>
++#endif
++
+ static void __nv_drm_framebuffer_put(struct drm_framebuffer *fb)
+ {
+ #if defined(NV_DRM_FRAMEBUFFER_GET_PRESENT)
