@@ -13,7 +13,7 @@ SRC_URI="amd64? ( ${NV_URI}Linux-x86_64/${PV}/${AMD64_NV_PACKAGE}.run )"
 EMULTILIB_PKG="true"
 KEYWORDS="-* ~amd64"
 LICENSE="GPL-2 NVIDIA-r2"
-SLOT="0"
+SLOT="470"
 
 IUSE="acpi +dkms multilib +tools wayland +X"
 REQUIRED_USE="tools? ( X )"
@@ -33,7 +33,8 @@ DEPEND="${COMMON}"
 RDEPEND="
 	${COMMON}
 	>=virtual/opencl-3
-	!!x11-drivers/nvidia-drivers-legacy
+	!!x11-drivers/nvidia-drivers:390
+	!!x11-drivers/nvidia-drivers:515
 	acpi? ( sys-power/acpid )
 	dkms? ( ~sys-kernel/${PN}-dkms-${PV}:${SLOT} )
 	wayland? (

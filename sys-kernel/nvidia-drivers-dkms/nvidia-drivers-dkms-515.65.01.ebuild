@@ -14,18 +14,17 @@ HOMEPAGE="http://www.nvidia.com/"
 SRC_URI="amd64? ( ${NV_URI}Linux-x86_64/${PV}/${AMD64_NV_PACKAGE}.run )"
 
 LICENSE="GPL-2 NVIDIA-r2"
-SLOT="0"
+SLOT="515"
 KEYWORDS="amd64"
-IUSE=""
+IUSE="+kernel-open"
 
 DEPEND="sys-kernel/dkms"
 RDEPEND="${DEPEND}
-	!!sys-kernel/nvidia-drivers-legacy-dkms"
+	!!sys-kernel/nvidia-drivers-dkms:390
+	!!sys-kernel/nvidia-drivers-dkms:470"
 
 PATCHES=(
-	"${FILESDIR}"/fs62142.patch
-	"${FILESDIR}"/kernel-6.0.patch
-	"${FILESDIR}"/dkms.patch
+	"${FILESDIR}"/dkms515.patch
 )
 
 S="${WORKDIR}/${AMD64_NV_PACKAGE}"
@@ -37,7 +36,11 @@ src_unpack() {
 src_install() {
 	dodir usr/src/${P}
 	insinto usr/src/${P}
-	doins -r "${S}"/kernel/*
+	if use kernel-open; then
+		doins -r "${S}"/kernel-open/*
+	else
+		doins -r "${S}"/kernel/*
+	fi
 }
 
 pkg_postinst() {

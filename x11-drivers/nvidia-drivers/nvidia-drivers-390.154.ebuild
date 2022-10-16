@@ -12,7 +12,7 @@ HOMEPAGE="http://www.nvidia.com/ http://www.nvidia.com/Download/Find.aspx"
 SRC_URI="amd64? ( ${NV_URI}Linux-x86_64/${PV}/${AMD64_NV_PACKAGE}.run )"
 
 LICENSE="GPL-2 NVIDIA-r2"
-SLOT="0"
+SLOT="390"
 KEYWORDS="-* ~amd64"
 RESTRICT="bindist mirror"
 EMULTILIB_PKG="true"
@@ -29,12 +29,13 @@ COMMON="
 	)"
 DEPEND="${COMMON}"
 PDEPEND="
-	tools? ( ~x11-misc/nvidia-settings-legacy-${PV}:${SLOT} )
+	tools? ( ~x11-misc/nvidia-settings-${PV}:${SLOT} )
 "
 RDEPEND="
 	${COMMON}
 	>=virtual/opencl-3
-	!!x11-drivers/nvidia-drivers
+	!!x11-drivers/nvidia-drivers:470
+	!!x11-drivers/nvidia-drivers:515
 	acpi? ( sys-power/acpid )
 	dkms? ( ~sys-kernel/${PN}-dkms-${PV}:${SLOT} )
 	wayland? ( dev-libs/wayland[${MULTILIB_USEDEP}] )
@@ -47,8 +48,9 @@ RDEPEND="
 
 QA_PREBUILT="opt/* usr/lib*"
 
-PATCHES=( 
-	"${FILESDIR}"/dkms.patch
+PATCHES=(
+	"${FILESDIR}"/locale.patch
+	"${FILESDIR}"/dkms390.patch
 )
 
 S=${WORKDIR}/
