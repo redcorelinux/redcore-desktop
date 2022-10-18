@@ -23,6 +23,8 @@ DEPEND="
 "
 RDEPEND="${DEPEND}"
 
+PATCHES=( ${FILESDIR}/Makefile-dkms.patch )
+
 S=${WORKDIR}
 
 src_prepare() {
