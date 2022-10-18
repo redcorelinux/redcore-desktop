@@ -26,6 +26,7 @@ REQUIRED_USE="trash? ( filemanager )"
 RDEPEND="
 	kde-frameworks/oxygen-icons
 	>=lxde-base/lxmenu-data-0.1.5
+	>=lxde-base/lxappearance-0.5.5
 	=lxqt-base/lxqt-config-${MY_PV}*
 	=lxqt-base/lxqt-globalkeys-${MY_PV}*
 	=lxqt-base/lxqt-notificationd-${MY_PV}*
