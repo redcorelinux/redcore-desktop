@@ -46,7 +46,7 @@ RDEPEND="
 	)
 	filemanager? ( =x11-misc/pcmanfm-qt-${MY_PV}* )
 	gtk? (
-		dev-qt/qt5-styleplugins
+		dev-qt/qtstyleplugins
 		x11-libs/gtk+:2
 	)
 	!gtk? ( =lxqt-base/lxqt-qtplugin-${MY_PV}* )
