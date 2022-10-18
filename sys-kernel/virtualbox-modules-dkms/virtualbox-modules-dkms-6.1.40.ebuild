@@ -4,12 +4,12 @@
 
 EAPI=7
 
-inherit eutils unpacker
+inherit eutils
 
-MY_PN="virtualbox-dkms"
+MY_P="vbox-kernel-module-src-${PV}"
 DESCRIPTION="Kernel Modules source for Virtualbox"
 HOMEPAGE="http://www.virtualbox.org/"
-SRC_URI="http://mirrors.kernel.org/ubuntu/pool/multiverse/v/virtualbox/${MY_PN}_${PV}-dfsg-3_amd64.deb"
+SRC_URI="https://github.com/ceamac/virtualbox-modules-dist/releases/download/v${PV}/${MY_P}.tar.xz"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -25,15 +25,9 @@ RDEPEND="${DEPEND}"
 
 S=${WORKDIR}
 
-src_unpack() {
-	unpack_deb ${A}
-}
-
 src_prepare() {
 	default
 	grep -lR linux/autoconf.h *  | xargs sed -i -e 's:<linux/autoconf.h>:<generated/autoconf.h>:'
-	sed -i "s/virtualbox/${PN}/g" usr/src/virtualbox-${PV}/dkms.conf
-	sed -i "s/updates/extra\/dkms/g" usr/src/virtualbox-${PV}/dkms.conf
 }
 
 src_compile() {
@@ -43,7 +37,8 @@ src_compile() {
 src_install() {
 	dodir usr/src/${P}
 	insinto usr/src/${P}
-	doins -r ${S}/usr/src/virtualbox-${PV}/*
+	doins ${FILESDIR}/dkms.conf
+	doins -r ${S}/*
 }
 
 pkg_postinst() {
