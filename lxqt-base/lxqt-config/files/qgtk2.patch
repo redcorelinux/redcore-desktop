@@ -1,0 +1,83 @@
+diff -Nur a/lxqt-config-appearance/main.cpp b/lxqt-config-appearance/main.cpp
+--- a/lxqt-config-appearance/main.cpp	2022-04-16 13:47:00.000000000 +0100
++++ b/lxqt-config-appearance/main.cpp	2022-10-18 17:02:41.305914551 +0100
+@@ -33,12 +33,8 @@
+ #include <QMessageBox>
+ #include <QGuiApplication>
+ 
+-#include "iconthemeconfig.h"
+ #include "lxqtthemeconfig.h"
+-#include "styleconfig.h"
+-#include "fontsconfig.h"
+ #include "configothertoolkits.h"
+-#include "gtkconfig.h"
+ 
+ #include "../liblxqt-config-cursor/selectwnd.h"
+ 
+@@ -70,24 +66,6 @@
+ 
+     QSettings& qtSettings = *settings; // use lxqt config file for Qt settings in Qt5.
+ 
+-    /*** Widget Style ***/
+-    StyleConfig* stylePage = new StyleConfig(settings, &qtSettings, dialog);
+-    dialog->addPage(stylePage, QObject::tr("Widget Style"), QStringList() << QStringLiteral("preferences-desktop-theme") << QStringLiteral("preferences-desktop"));
+-    QObject::connect(dialog, &LXQt::ConfigDialog::reset, stylePage, &StyleConfig::initControls);
+-    QObject::connect(stylePage, &StyleConfig::settingsChanged, dialog, [dialog] {
+-        dialog->enableButton(QDialogButtonBox::Apply, true); // enable Apply button when something is changed
+-    });
+-    QObject::connect(stylePage, &StyleConfig::updateOtherSettings, configOtherToolKits, &ConfigOtherToolKits::setConfig);
+-
+-    /*** Icon Theme ***/
+-    IconThemeConfig* iconPage = new IconThemeConfig(settings, dialog);
+-    dialog->addPage(iconPage, QObject::tr("Icons Theme"), QStringList() << QStringLiteral("preferences-desktop-icons") << QStringLiteral("preferences-desktop"));
+-    QObject::connect(dialog, &LXQt::ConfigDialog::reset, iconPage, &IconThemeConfig::initControls);
+-    QObject::connect(iconPage, &IconThemeConfig::settingsChanged, dialog, [dialog] {
+-        dialog->enableButton(QDialogButtonBox::Apply, true);
+-    });
+-    QObject::connect(iconPage, &IconThemeConfig::updateOtherSettings, configOtherToolKits, &ConfigOtherToolKits::setConfig);
+-
+     /*** LXQt Theme ***/
+     LXQtThemeConfig* themePage = new LXQtThemeConfig(settings, dialog);
+     dialog->addPage(themePage, QObject::tr("LXQt Theme"), QStringList() << QStringLiteral("preferences-desktop-color") << QStringLiteral("preferences-desktop"));
+@@ -96,15 +74,6 @@
+         dialog->enableButton(QDialogButtonBox::Apply, true);
+     });
+ 
+-    /*** Font ***/
+-    FontsConfig* fontsPage = new FontsConfig(settings, &qtSettings, dialog);
+-    dialog->addPage(fontsPage, QObject::tr("Font"), QStringList() << QStringLiteral("preferences-desktop-font") << QStringLiteral("preferences-desktop"));
+-    QObject::connect(dialog, &LXQt::ConfigDialog::reset, fontsPage, &FontsConfig::initControls);
+-    QObject::connect(fontsPage, &FontsConfig::updateOtherSettings, configOtherToolKits, &ConfigOtherToolKits::setConfig);
+-    QObject::connect(fontsPage, &FontsConfig::settingsChanged, dialog, [dialog] {
+-        dialog->enableButton(QDialogButtonBox::Apply, true);
+-    });
+-
+     /*** Cursor Theme ***/
+     SelectWnd* cursorPage = new SelectWnd(sessionSettings, dialog);
+     cursorPage->setCurrent();
+@@ -113,25 +82,13 @@
+             dialog->enableButton(QDialogButtonBox::Apply, true);
+             });
+ 
+-    /*** GTK Theme ***/
+-    GTKConfig* GTKPage = new GTKConfig(&mConfigAppearanceSettings, configOtherToolKits, dialog);
+-    dialog->addPage(GTKPage, QObject::tr("GTK Style"), QStringList() << QStringLiteral("gtk-preferences") << QStringLiteral("preferences-desktop"));
+-    QObject::connect(dialog, &LXQt::ConfigDialog::reset, GTKPage, &GTKConfig::initControls);
+-    QObject::connect(GTKPage, &GTKConfig::settingsChanged, dialog, [dialog] {
+-        dialog->enableButton(QDialogButtonBox::Apply, true);
+-    });
+-
+     // apply all changes on clicking Apply
+     QObject::connect(dialog, &LXQt::ConfigDialog::clicked, [=] (QDialogButtonBox::StandardButton btn) {
+         if (btn == QDialogButtonBox::Apply)
+         {
+             // FIXME: Update cursor style on Qt apps on wayland and GTK on X11.
+-            iconPage->applyIconTheme();
+             themePage->applyLxqtTheme();
+-            fontsPage->updateQtFont();
+             cursorPage->applyCusorTheme();
+-            GTKPage->applyGTKStyle();
+-            stylePage->applyStyle(); // Cursor and font have to be set before style
+             // disable Apply button after changes are applied
+             dialog->enableButton(btn, false);
+         }
