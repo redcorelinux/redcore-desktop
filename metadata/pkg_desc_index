@@ -25,6 +25,8 @@ dev-qt/qt-creator 6.0.0-r1: Lightweight IDE for C++/QML development centering ar
 dev-util/lxqt-build-tools 0.11.0-r1: LXQt Build Tools
 gui-libs/display-manager-init 1.1.1-r1: RC init files for starting display and login managers
 kde-plasma/kinfocenter 5.26.0-r5: Utility providing information about the computer hardware
+lxqt-base/lxqt-meta 1.1.0-r2: Meta ebuild for LXQt, the Lightweight Desktop Environment
+lxqt-base/lxqt-session 1.1.1-r1: LXQt Session Manager
 mail-client/mailspring 1.9.2-r1: A beautiful fast and maintained fork of Nylas Mail
 media-libs/libpipewire 0.3.43-r10: Pipewire client libraries
 media-libs/nv-codec-headers 11.1.5.1-r10: FFmpeg version of headers required to interface with Nvidias codec APIs

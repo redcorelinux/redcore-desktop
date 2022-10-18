@@ -15,7 +15,7 @@ fi
 LICENSE="metapackage"
 SLOT="0"
 
-IUSE="+about admin archiver +desktop-portal discover +display-manager +filemanager
+IUSE="+about admin archiver +desktop-portal discover +display-manager +filemanager gtk
 lximage minimal nls +policykit powermanagement processviewer screenshot
 +sddm ssh-askpass sudo terminal +trash"
 
@@ -30,7 +30,6 @@ RDEPEND="
 	=lxqt-base/lxqt-globalkeys-${MY_PV}*
 	=lxqt-base/lxqt-notificationd-${MY_PV}*
 	=lxqt-base/lxqt-panel-${MY_PV}*
-	=lxqt-base/lxqt-qtplugin-${MY_PV}*
 	=lxqt-base/lxqt-runner-${MY_PV}*
 	=lxqt-base/lxqt-session-${MY_PV}*
 	virtual/ttf-fonts
@@ -46,6 +45,11 @@ RDEPEND="
 		!sddm? ( x11-misc/lightdm )
 	)
 	filemanager? ( =x11-misc/pcmanfm-qt-${MY_PV}* )
+	gtk? (
+		dev-qt/qt5-styleplugins
+		x11-libs/gtk+:2
+	)
+	!gtk? ( =lxqt-base/lxqt-qtplugin-${MY_PV}* )
 	lximage? ( media-gfx/lximage-qt )
 	!minimal? (
 		x11-wm/openbox
