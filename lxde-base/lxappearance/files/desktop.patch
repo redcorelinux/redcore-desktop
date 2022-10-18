@@ -1,0 +1,18 @@
+diff -Nur a/data/lxappearance.desktop b/data/lxappearance.desktop
+--- a/data/lxappearance.desktop	2017-01-25 01:35:20.000000000 +0000
++++ b/data/lxappearance.desktop	2017-12-18 16:55:52.477918777 +0000
+@@ -175,4 +175,4 @@
+ Exec=lxappearance
+ NotShowIn=GNOME;KDE;XFCE;MATE;
+ StartupNotify=true
+-Categories=GTK;Settings;DesktopSettings;X-LXDE-Settings;
++Categories=Settings;DesktopSettings;Qt;LXQt;
+diff -Nur a/data/lxappearance.desktop.in b/data/lxappearance.desktop.in
+--- a/data/lxappearance.desktop.in	2016-02-20 22:48:38.000000000 +0000
++++ b/data/lxappearance.desktop.in	2017-12-18 16:56:04.608154965 +0000
+@@ -8,4 +8,4 @@
+ Exec=lxappearance
+ NotShowIn=GNOME;KDE;XFCE;MATE;
+ StartupNotify=true
+-Categories=GTK;Settings;DesktopSettings;X-LXDE-Settings;
++Categories=Settings;DesktopSettings;Qt;LXQt;
