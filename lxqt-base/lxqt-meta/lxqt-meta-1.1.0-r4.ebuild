@@ -57,7 +57,7 @@ RDEPEND="
 		x11-misc/obconf-qt
 	)
 	networkmanager? (
-		net-misc/networkmanager[elogind?,systemd?]
+		net-misc/networkmanager
 		gnome-extra/nm-applet
 	)
 	nls? ( dev-qt/qttranslations:5 )
