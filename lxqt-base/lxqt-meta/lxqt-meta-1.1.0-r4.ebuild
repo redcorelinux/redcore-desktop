@@ -16,7 +16,7 @@ LICENSE="metapackage"
 SLOT="0"
 
 IUSE="+about admin archiver +desktop-portal discover +display-manager +filemanager gtk
-lximage minimal nls +policykit powermanagement processviewer screenshot
+lximage minimal networkmanager nls +policykit powermanagement processviewer screenshot
 +sddm ssh-askpass sudo terminal +trash"
 
 REQUIRED_USE="trash? ( filemanager )"
@@ -55,6 +55,10 @@ RDEPEND="
 	!minimal? (
 		x11-wm/openbox
 		x11-misc/obconf-qt
+	)
+	networkmanager? (
+		net-misc/networkmanager[elogind?,systemd?]
+		gnome-extra/nm-applet
 	)
 	nls? ( dev-qt/qttranslations:5 )
 	policykit? ( =lxqt-base/lxqt-policykit-${MY_PV}* )
