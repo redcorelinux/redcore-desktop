@@ -1,0 +1,28 @@
+diff --git a/unp b/unp-with-zstd
+old mode 100644
+new mode 100755
+index a633f67..33de8d0
+--- a/unp
++++ b/unp-with-zstd
+@@ -148,6 +148,10 @@ use constant
+       [ [ "bzip2" ], "tar", "--bzip2", "-x", "-v", "-f"]
+       ],
+ 
++      [ gettext("tar with zstd"), "tar.zst|tzst", undef, 0,
++      [ [ "zstd" ], "tar", "--zstd", "-x", "-v", "-f"]
++      ],
++
+       [ gettext("tar with xz-utils"), "tar.xz|txz", undef, 0,
+       
+       [ [ "xz" ], "tar", "--xz", "-x", "-v", "-f"]
+@@ -187,6 +191,10 @@ use constant
+       [ "xzcat" ]
+       ],
+ 
++      [ "zstd", "zst", "zstd.compressed", IS_STREAM_FILTER,
++      [ "zstd", "-cd" ]
++      ],
++
+       [ "lzip", "lz", "lzip.compressed", IS_STREAM_FILTER,
+       [ "lzip", "-cd" ]
+       ],
