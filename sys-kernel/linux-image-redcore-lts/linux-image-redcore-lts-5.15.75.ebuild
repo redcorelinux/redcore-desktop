@@ -42,7 +42,6 @@ PATCHES=(
 	"${FILESDIR}"/"${KV_MAJOR}"-0005-Bluetooth_btintel_Fix_bdaddress_comparison_with_garbage_value.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-0006-lg-laptop_Recognize_more_models.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-acpi-use-kern_warning_even_when_error.patch
-	"${FILESDIR}"/"${KV_MAJOR}"-alx-wol.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-apic_vector-spam-in-debug-mode-only.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-ata-fix-NCQ-LOG-strings-and-move-to-debug.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-ath10k-be-quiet.patch
