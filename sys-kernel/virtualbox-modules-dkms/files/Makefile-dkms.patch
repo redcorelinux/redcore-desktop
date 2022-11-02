@@ -1,8 +1,8 @@
 diff -Nur a/Makefile b/Makefile
---- a/Makefile	2022-10-11 16:40:10.000000000 +0100
-+++ b/Makefile	2022-10-18 15:54:45.877811069 +0100
-@@ -23,25 +23,25 @@
- # terms and conditions of either the GPL or the CDDL or both.
+--- a/Makefile	2022-10-19 22:19:09.000000000 +0100
++++ b/Makefile	2022-11-02 09:34:05.857715688 +0000
+@@ -33,25 +33,25 @@
+ # SPDX-License-Identifier: GPL-3.0-only OR CDDL-1.0
  #
  
 -ifneq ($(KERNELRELEASE),)
@@ -14,18 +14,18 @@ diff -Nur a/Makefile b/Makefile
 +# KBUILD_EXTMOD is set to $(M) in this case.
  
  obj-m = vboxdrv/
--ifneq ($(wildcard $(CURDIR)/vboxnetflt/Makefile),)
-+ifneq ($(wildcard $(KBUILD_EXTMOD)/vboxnetflt/Makefile),)
-  obj-m += vboxnetflt/
- endif
--ifneq ($(wildcard $(CURDIR)/vboxnetadp/Makefile),)
-+ifneq ($(wildcard $(KBUILD_EXTMOD)/vboxnetadp/Makefile),)
-  obj-m += vboxnetadp/
- endif
--ifneq ($(wildcard $(CURDIR)/vboxpci/Makefile),)
-+ifneq ($(wildcard $(KBUILD_EXTMOD)/vboxpci/Makefile),)
-  obj-m += vboxpci/
- endif
+- ifneq ($(wildcard $(CURDIR)/vboxnetflt/Makefile),)
++ ifneq ($(wildcard $(KBUILD_EXTMOD)/vboxnetflt/Makefile),)
+ obj-m += vboxnetflt/
+  endif
+- ifneq ($(wildcard $(CURDIR)/vboxnetadp/Makefile),)
++ ifneq ($(wildcard $(KBUILD_EXTMOD)/vboxnetadp/Makefile),)
+ obj-m += vboxnetadp/
+  endif
+- ifneq ($(wildcard $(CURDIR)/vboxpci/Makefile),)
++ ifneq ($(wildcard $(KBUILD_EXTMOD)/vboxpci/Makefile),)
+ obj-m += vboxpci/
+  endif
  
 -else # ! KERNELRELEASE
 +else # ! KBUILD_EXTMOD
@@ -33,11 +33,13 @@ diff -Nur a/Makefile b/Makefile
 -# convenience Makefile without KERNELRELEASE
 +# convenience Makefile without KBUILD_EXTMOD
  
- KBUILD_VERBOSE ?=
- KERN_VER ?= $(shell uname -r)
-@@ -167,4 +167,4 @@
+ ifndef SUDO
+  ifneq ($(shell id -u),0)
+@@ -244,5 +244,6 @@
  		fi; \
  	done
  
 -endif # ! KERNELRELEASE
 +endif # ! KBUILD_EXTMOD
++
+
