@@ -25,7 +25,7 @@ dev-python/wget 2.2-r2: Python library for downloading from http URLs
 gui-libs/display-manager-init 1.1.1-r1: RC init files for starting display and login managers
 kde-plasma/kinfocenter 5.26.3-r5: Utility providing information about the computer hardware
 lxde-base/lxappearance 0.6.3-r5: LXDE GTK+ theme switcher
-lxqt-base/lxqt-config 1.1.0-r1: LXQt system configuration control center
+lxqt-base/lxqt-config 1.2.0-r1: LXQt system configuration control center
 lxqt-base/lxqt-meta 1.2.0-r1: Meta ebuild for LXQt, the Lightweight Desktop Environment
 lxqt-base/lxqt-session 1.1.1-r1: LXQt Session Manager
 mail-client/mailspring 1.9.2-r1: A beautiful fast and maintained fork of Nylas Mail
