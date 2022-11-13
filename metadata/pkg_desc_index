@@ -3,6 +3,7 @@ app-admin/calamares 3.2.44.3-r2: Distribution-independent installer framework
 app-admin/vasile 2.1812.2: Versatile Advanced Script for ISO and Latest Enchantments
 app-arch/unp 2.0_pre9-r1: Script for unpacking various file formats
 app-backup/timeshift 22.06.1-r1: A system restore utility for Linux
+app-emulation/gallium-nine-standalone 0.8-r2: A standalone version of the WINE parts of Gallium Nine
 app-emulation/linux-steam-integration 0.7.3-r3: Helper for enabling better Steam integration on Linux
 app-emulation/steam 1.0.0.71-r1: Digital distribution client bootstrap package
 app-emulation/steam-native-runtime 1.0.0.71-r3: Native replacement for the Steam runtime using system libraries
