@@ -46,17 +46,17 @@ src_install() {
 
 	dodir etc/"${PN}"
 	insinto etc/"${PN}"
-	doins "${FILESDIR}"/"${PN}"-mirrors-amd64.conf
-	doins "${FILESDIR}"/"${PN}"-mirrors-arm64.conf
+	doins "${FILESDIR}"/"${PN}"-mirrors-amd64
+	doins "${FILESDIR}"/"${PN}"-mirrors-arm64
 
-	doins "${FILESDIR}"/"${PN}"-custom.env.conf
-	doins "${FILESDIR}"/"${PN}"-custom.make.conf
-	doins "${FILESDIR}"/"${PN}"-custom.package.accept_keywords
-	doins "${FILESDIR}"/"${PN}"-custom.package.env
-	doins "${FILESDIR}"/"${PN}"-custom.package.license
-	doins "${FILESDIR}"/"${PN}"-custom.package.mask
-	doins "${FILESDIR}"/"${PN}"-custom.package.unmask
-	doins "${FILESDIR}"/"${PN}"-custom.package.use
+	doins "${FILESDIR}"/"${PN}".env_conf
+	doins "${FILESDIR}"/"${PN}".make_conf
+	doins "${FILESDIR}"/"${PN}".package.keywords
+	doins "${FILESDIR}"/"${PN}".package.env
+	doins "${FILESDIR}"/"${PN}".package.license
+	doins "${FILESDIR}"/"${PN}".package.mask
+	doins "${FILESDIR}"/"${PN}".package.unmask
+	doins "${FILESDIR}"/"${PN}".package.use
 
 	# enforce the best available python implementation (CLI)
 	python_setup
@@ -71,8 +71,8 @@ pkg_postinst() {
 	rm -rf "{EROOT}"etc/"${PN}"/mirrors.conf
 
 	if [[ $(uname -m) == "x86_64" ]] ; then
-		ln -sf "${EROOT}"etc/"${PN}"/"${PN}"-mirrors-amd64.conf "${EROOT}"etc/"${PN}"/mirrors.conf
+		ln -sf "${EROOT}"etc/"${PN}"/"${PN}"-mirrors-amd64 "${EROOT}"etc/"${PN}"/mirrors.conf
 	elif [[ $(uname -m) == "aarch64" ]] ; then
-		ln -sf "${EROOT}"etc/"${PN}"/"${PN}"-mirrors-arm64.conf "${EROOT}"etc/"${PN}"/mirrors.conf
+		ln -sf "${EROOT}"etc/"${PN}"/"${PN}"-mirrors-arm64 "${EROOT}"etc/"${PN}"/mirrors.conf
 	fi
 }
