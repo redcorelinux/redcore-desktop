@@ -8,11 +8,11 @@ inherit multilib-build
 DESCRIPTION="Virtual for Rust language compiler"
 
 LICENSE=""
-SLOT="0"
+SLOT="0/llvm-15"
 KEYWORDS="amd64 arm arm64 ppc ppc64 ~riscv ~s390 sparc x86"
 IUSE="rustfmt"
 
 BDEPEND=""
 RDEPEND="|| (
-	dev-lang/rust[rustfmt?,${MULTILIB_USEDEP}]
+	>=dev-lang/rust1.65.0[rustfmt?,${MULTILIB_USEDEP}]
 )"

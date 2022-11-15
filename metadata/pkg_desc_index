@@ -75,7 +75,7 @@ sys-libs/glibc 2.35-r8: GNU libc C library
 sys-power/radeon-profile 20200824-r10: Read current clocks of ATi/AMD Radeon cards
 virtual/libudev 314.1337: Virtual for libudev providers
 virtual/notification-daemon 1.334.1337: Virtual (dummy package) for notification daemon dbus service
-virtual/rust 1.314.1337: Virtual for Rust language compiler
+virtual/rust 1.314.1337-r1: Virtual for Rust language compiler
 virtual/tmpfiles 1.314.1337: Virtual to select between different tmpfiles.d handlers
 virtual/udev 314.1337: Virtual to select between different udev daemon providers
 x11-base/xorg-drivers 21.1-r100: Meta package containing deps on all xorg drivers (dummy package)
