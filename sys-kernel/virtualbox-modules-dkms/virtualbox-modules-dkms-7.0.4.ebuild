@@ -9,7 +9,7 @@ inherit eutils
 MY_P="vbox-kernel-module-src-${PV}"
 DESCRIPTION="Kernel Modules source for Virtualbox"
 HOMEPAGE="http://www.virtualbox.org/"
-SRC_URI="https://github.com/ceamac/virtualbox-modules-dist/releases/download/v${PV}/${MY_P}.tar.xz"
+SRC_URI="https://dev.gentoo.org/~ceamac/app-emulation/virtualbox-modules/${MY_P}.tar.xz"
 
 LICENSE="GPL-2"
 SLOT="0"
