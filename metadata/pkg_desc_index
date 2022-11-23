@@ -31,6 +31,7 @@ lxqt-base/lxqt-session 1.2.0-r1: LXQt Session Manager
 mail-client/mailspring 1.9.2-r1: A beautiful fast and maintained fork of Nylas Mail
 media-libs/libpipewire 0.3.43-r10: Pipewire client libraries
 media-sound/cantata 2.5.0-r10: Featureful and configurable Qt client for the music player daemon (MPD)
+media-tv/kodi 19.4-r5: A free and open source media-player and entertainment hub
 media-tv/sopcast 3.2.6-r3: SopCast free P2P Internet TV binary
 media-video/guvcview 2.0.6-r10: Simple Qt5 or GTK+3 interface for capturing and viewing video from v4l2 devices
 net-libs/libnm-glib 1.18.10-r2: Legacy NetworkManager glib and util libraries
