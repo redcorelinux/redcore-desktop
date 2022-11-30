@@ -4,7 +4,7 @@
 EAPI=7
 
 PLOCALES="ar bn ca cs da de es et fi fr hi_IN hu is it ja kk ko lt lv nb nl nn pl pt_BR pt_PT ro ru sk sr sr@ijekavian sr@ijekavianlatin sr@latin sv tr uk zh_CN zh_TW"
-inherit cmake plocale systemd user
+inherit cmake plocale systemd user tmpfiles
 
 DESCRIPTION="Simple Desktop Display Manager"
 HOMEPAGE="https://github.com/sddm/sddm"
@@ -49,16 +49,16 @@ PATCHES=(
 	"${FILESDIR}/${PN}-0.12.0-respect-user-flags.patch"
 	"${FILESDIR}/${PN}-0.18.0-Xsession.patch" # bug 611210
 	"${FILESDIR}/${PN}-0.18.0-sddmconfdir.patch"
-	# fix for groups: https://github.com/sddm/sddm/issues/1159
 	"${FILESDIR}/${P}-revert-honor-PAM-supplemental-groups.patch"
 	"${FILESDIR}/${P}-honor-PAM-supplemental-groups-v2.patch"
-	# fix for ReuseSession=true
 	"${FILESDIR}/${P}-only-reuse-online-sessions.patch"
-	# TODO: fix properly
 	"${FILESDIR}/${PN}-0.16.0-ck2-revert.patch" # bug 633920
 	"${FILESDIR}/pam-1.4-substack.patch"
-	# upstream git develop branch:
 	"${FILESDIR}/${P}-qt-5.15.2.patch"
+	"${FILESDIR}/${P}-cve-2020-28049.patch"
+	"${FILESDIR}/${P}-drop-wayland-suffix.patch"
+	"${FILESDIR}/${P}-fix-qt-5.15.7.patch"
+	"${FILESDIR}/${P}-nvidia-glitches-vt-switch.patch"
 )
 
 src_prepare() {
@@ -89,6 +89,7 @@ src_configure() {
 
 src_install() {
 	cmake_src_install
+	newtmpfiles "${FILESDIR}/${PN}.tmpfiles" "${PN}.conf"
 
 	# since 0.18.0 sddm no longer installs a config file
 	# install one ourselves in gentoo's default location
