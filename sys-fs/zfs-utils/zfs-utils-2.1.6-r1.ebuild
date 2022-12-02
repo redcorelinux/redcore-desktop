@@ -34,7 +34,7 @@ DEPEND="
 	)
 "
 
-BDEPEND="virtual/awk
+BDEPEND="app-alternatives/awk
 	virtual/pkgconfig
 	nls? ( sys-devel/gettext )
 	python? (
