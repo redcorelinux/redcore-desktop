@@ -79,6 +79,7 @@ virtual/notification-daemon 1.334.1337: Virtual (dummy package) for notification
 virtual/rust 1.314.1337-r2: Virtual for Rust language compiler
 virtual/tmpfiles 1.314.1337: Virtual to select between different tmpfiles.d handlers
 virtual/udev 314.1337: Virtual to select between different udev daemon providers
+www-client/chromium 108.0.5359.94-r1: Open-source version of Google Chrome web browser
 x11-base/xorg-drivers 21.1-r100: Meta package containing deps on all xorg drivers (dummy package)
 x11-base/xorg-server 21.1.4-r100: X.Org X servers
 x11-drivers/nvidia-drivers 390.154 470.141.03 515.65.01: NVIDIA Accelerated Graphics Driver
