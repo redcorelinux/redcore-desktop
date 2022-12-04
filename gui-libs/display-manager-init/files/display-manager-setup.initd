@@ -7,7 +7,7 @@ depend() {
 }
 
 start() {
-	if get_bootparam "nogui" ; then
+	if get_bootparam "nogui" || get_bootparam "nox"; then
 		touch /run/.nogui
 	fi
 }
