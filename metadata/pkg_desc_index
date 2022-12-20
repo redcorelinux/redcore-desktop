@@ -80,7 +80,7 @@ virtual/rust 1.314.1337-r2: Virtual for Rust language compiler
 virtual/tmpfiles 1.314.1337: Virtual to select between different tmpfiles.d handlers
 virtual/udev 314.1337: Virtual to select between different udev daemon providers
 x11-base/xorg-drivers 21.1-r100: Meta package containing deps on all xorg drivers (dummy package)
-x11-base/xorg-server 21.1.5-r10: X.Org X servers
+x11-base/xorg-server 21.1.6-r10: X.Org X servers
 x11-drivers/nvidia-drivers 390.154 470.141.03 515.65.01: NVIDIA Accelerated Graphics Driver
 x11-libs/gtk+ 2.24.33-r3 3.24.34-r2: Gimp ToolKit +
 x11-libs/libX11 1.8.1-r1: X.Org X11 library
