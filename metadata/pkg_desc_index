@@ -1,5 +1,5 @@
 acct-group/smbshare 0: System group: smbshare
-app-admin/calamares 3.2.44.3-r2: Distribution-independent installer framework
+app-admin/calamares 3.2.44.3-r3: Distribution-independent installer framework
 app-admin/vasile 2.1812.2: Versatile Advanced Script for ISO and Latest Enchantments
 app-arch/unp 2.0_pre9-r1: Script for unpacking various file formats
 app-backup/timeshift 22.11.1-r1: A system restore utility for Linux
@@ -42,7 +42,7 @@ sys-apps/lsb-release 3.2-r1: LSB version query program
 sys-apps/openrc 0.44.10-r2: OpenRC manages the services, startup and shutdown of a host
 sys-auth/elogind 246.10-r3: The systemd project's logind, extracted to a standalone package
 sys-auth/polkit-qt 0.113.0-r11: PolicyKit Qt API wrapper library (meta package)
-sys-auth/polkit-qt5 0.113.0-r10: Qt wrapper around polkit-1 client libraries
+sys-auth/polkit-qt5 0.113.0-r5: Qt wrapper around polkit-1 client libraries
 sys-boot/etcher 1.5.116: Flash OS images to SD cards & USB drives, safely and easily.
 sys-boot/grub 2.04-r12: GNU GRUB boot loader
 sys-boot/os-prober 1.77-r10: Utility to detect other OSs on a set of drives
