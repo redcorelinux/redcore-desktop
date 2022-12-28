@@ -36,7 +36,7 @@ RDEPEND="${DEPEND}
 PDEPEND="qt5? ( ~app-portage/${PN}-qt-${PV} )"
 
 src_install() {
-	emake DESTDIR="${D}" install-cli
+	emake DESTDIR="${D}"/ install-cli
 
 	python_moduleinto "$(python_get_sitedir)"/"${PN}"
 	python_domodule src/backend/*.py
@@ -60,19 +60,19 @@ src_install() {
 
 	# enforce the best available python implementation (CLI)
 	python_setup
-	python_fix_shebang "${ED}"usr/share/"${PN}"/"${PN}"-cli.py
+	python_fix_shebang "${ED}"/usr/share/"${PN}"/"${PN}"-cli.py
 }
 
 pkg_postinst() {
 	# Take care of the etc-update for the user
-	rm -rf "${EROOT}"etc/"${PN}"/._cfg*
+	rm -rf "${EROOT}"/etc/"${PN}"/._cfg*
 
 	# Make sure portage sees the new mirror configuration file
-	rm -rf "{EROOT}"etc/"${PN}"/mirrors.conf
+	rm -rf "{EROOT}"/etc/"${PN}"/mirrors.conf
 
 	if [[ $(uname -m) == "x86_64" ]] ; then
-		ln -sf "${EROOT}"etc/"${PN}"/"${PN}"-mirrors-amd64.conf "${EROOT}"etc/"${PN}"/mirrors.conf
+		ln -sf "${EROOT}"/etc/"${PN}"/"${PN}"-mirrors-amd64.conf "${EROOT}"/etc/"${PN}"/mirrors.conf
 	elif [[ $(uname -m) == "aarch64" ]] ; then
-		ln -sf "${EROOT}"etc/"${PN}"/"${PN}"-mirrors-arm64.conf "${EROOT}"etc/"${PN}"/mirrors.conf
+		ln -sf "${EROOT}"/etc/"${PN}"/"${PN}"-mirrors-arm64.conf "${EROOT}"/etc/"${PN}"/mirrors.conf
 	fi
 }

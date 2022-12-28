@@ -30,9 +30,9 @@ RDEPEND="${DEPEND}
 	')"
 
 src_install() {
-	emake DESTDIR="${D}" install-gui
+	emake DESTDIR="${D}"/ install-gui
 
 	# enforce the best available python implementation (CLI)
 	python_setup
-	python_fix_shebang "${ED}"usr/share/"${MY_PN}"/"${MY_PN}"-gui.py
+	python_fix_shebang "${ED}"/usr/share/"${MY_PN}"/"${MY_PN}"-gui.py
 }
