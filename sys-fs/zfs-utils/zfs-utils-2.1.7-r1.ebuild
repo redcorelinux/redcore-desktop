@@ -23,10 +23,10 @@ SLOT="0"
 IUSE="debug nls pam python test-suite"
 
 DEPEND="
-	net-libs/libtirpc
+	net-libs/libtirpc:=
 	sys-apps/util-linux
 	sys-libs/zlib
-	virtual/libudev
+	virtual/libudev:=
 	dev-libs/openssl:0=
 	pam? ( sys-libs/pam )
 	python? (
@@ -43,7 +43,7 @@ BDEPEND="app-alternatives/awk
 "
 
 RDEPEND="${DEPEND}
-	!prefix? ( virtual/udev )
+	virtual/udev
 	sys-fs/udev-init-scripts
 	test-suite? (
 		sys-apps/kmod[tools]
@@ -59,6 +59,15 @@ RDEPEND="${DEPEND}
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 RESTRICT="test"
+
+PATCHES=(
+	"${FILESDIR}"/2.1.5-r2-dracut-non-root.patch
+	"${FILESDIR}"/2.1.5-dracut-zfs-missing.patch
+	"${FILESDIR}"/2.1.5-dracut-mount.patch
+	"${FILESDIR}"/2.1.6-fgrep.patch
+	"${FILESDIR}"/2.1.7-dracut-include-systemd-overrides.patch
+	"${FILESDIR}"/2.1.7-systemd-zed-restart-always.patch
+)
 
 src_prepare() {
 	default
