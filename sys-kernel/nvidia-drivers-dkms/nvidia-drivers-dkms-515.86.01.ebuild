@@ -24,7 +24,6 @@ RDEPEND="${DEPEND}
 	!!sys-kernel/nvidia-drivers-dkms:470"
 
 PATCHES=(
-	"${FILESDIR}"/515-kernel6.patch
 	"${FILESDIR}"/dkms515.patch
 )
 
