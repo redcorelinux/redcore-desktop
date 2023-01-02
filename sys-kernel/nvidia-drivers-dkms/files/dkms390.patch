@@ -5,7 +5,7 @@ diff -Nur a/kernel/dkms.conf b/kernel/dkms.conf
 -PACKAGE_NAME="nvidia"
 -PACKAGE_VERSION="__VERSION_STRING"
 +PACKAGE_NAME="nvidia-drivers-dkms"
-+PACKAGE_VERSION="390.154"
++PACKAGE_VERSION="390.157"
  AUTOINSTALL="yes"
  
  # By default, DKMS will add KERNELRELEASE to the make command line; however,
