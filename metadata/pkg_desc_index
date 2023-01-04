@@ -22,7 +22,7 @@ dev-python/sh 1.12.14-r5: Python process launching
 dev-python/typer 0.2.1-r3: Build great CLIs. Easy to code. Based on Python type hints
 dev-python/wget 2.2-r3: Python library for downloading from http URLs
 gui-libs/display-manager-init 1.1.2-r1: RC init files for starting display and login managers
-kde-plasma/kinfocenter 5.26.4-r5: Utility providing information about the computer hardware
+kde-plasma/kinfocenter 5.26.5-r5: Utility providing information about the computer hardware
 lxde-base/lxappearance 0.6.3-r5: LXDE GTK+ theme switcher
 lxqt-base/lxqt-config 1.2.0-r1: LXQt system configuration control center
 lxqt-base/lxqt-meta 1.2.0-r1: Meta ebuild for LXQt, the Lightweight Desktop Environment
