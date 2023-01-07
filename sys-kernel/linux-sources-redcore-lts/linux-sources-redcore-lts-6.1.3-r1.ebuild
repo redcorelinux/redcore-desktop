@@ -5,17 +5,17 @@ EAPI=6
 
 inherit eutils
 
-EXTRAVERSION="redcore"
+EXTRAVERSION="redcore-lts-r1"
 KV_FULL="${PV}-${EXTRAVERSION}"
-KV_MAJOR="6.0"
+KV_MAJOR="6.1"
 
-DESCRIPTION="Redcore Linux Kernel Sources"
+DESCRIPTION="Redcore Linux Kernel Sources (LTS v6.1)"
 HOMEPAGE="https://redcorelinux.org"
 SRC_URI="https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-${PV}.tar.xz"
 
 KEYWORDS="~amd64"
 LICENSE="GPL-2"
-SLOT="${PVR}"
+SLOT="${KV_MAJOR}"
 IUSE=""
 
 RESTRICT="strip mirror"
