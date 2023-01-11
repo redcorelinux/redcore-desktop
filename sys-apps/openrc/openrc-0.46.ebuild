@@ -130,7 +130,7 @@ src_install() {
 	fi
 
 	# install documentation
-	dodoc ChangeLog *.md
+	dodoc *.md
 }
 
 pkg_preinst() {
@@ -212,6 +212,15 @@ pkg_postinst() {
 
 		if [ "$(rc-config list default | grep ntpd)" != "" ]; then
 			"${ROOT}"/sbin/rc-update del ntpd default > /dev/null 2>&1
+		fi
+	fi
+	# urandom -> seedrng migration
+	if [ -e "${ROOT}"/etc/init.d/seedrng ] && [ ! -e"${ROOT}"/etc/init.d/urandom]; then
+		if [ "$(rc-config list boot | grep urandom)" != "" ]; then
+			"${ROOT}"/sbin/rc-update del urandom boot > /dev/null 2>&1
+			"${ROOT}"/sbin/rc-update add seedrng boot > /dev/null 2>&1
+		else
+			"${ROOT}"/sbin/rc-update add seedrng boot > /dev/null 2>&1
 		fi
 	fi
 }
