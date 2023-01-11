@@ -215,7 +215,7 @@ pkg_postinst() {
 		fi
 	fi
 	# urandom -> seedrng migration
-	if [ -e "${ROOT}"/etc/init.d/seedrng ] && [ ! -e"${ROOT}"/etc/init.d/urandom]; then
+	if [ -e "${ROOT}"/etc/init.d/seedrng ] && [ ! -e"${ROOT}"/etc/init.d/urandom ]; then
 		if [ "$(rc-config list boot | grep urandom)" != "" ]; then
 			"${ROOT}"/sbin/rc-update del urandom boot > /dev/null 2>&1
 			"${ROOT}"/sbin/rc-update add seedrng boot > /dev/null 2>&1
