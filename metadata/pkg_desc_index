@@ -11,8 +11,8 @@ app-misc/calamares-config-redcore 1.314.1337-r2: Redcore Linux Calamares modules
 app-misc/geoclue 2.6.0-r10: A location information D-Bus service
 app-misc/redcore-live 1.314.1337: Redcore Linux live scripts
 app-misc/redcore-skel 1.314.1337-r1: Redcore Linux skel tree
-app-portage/sisyphus 4.2212.0-r3: A simple portage python wrapper which works like other package managers(apt-get/yum/dnf)
-app-portage/sisyphus-qt 4.2212.0-r3: A simple portage python wrapper which works like other package managers(apt-get/yum/dnf)
+app-portage/sisyphus 4.2301: A simple portage python wrapper which works like other package managers(apt-get/yum/dnf)
+app-portage/sisyphus-qt 4.2301: A simple portage python wrapper which works like other package managers(apt-get/yum/dnf)
 app-text/simplenote 2.6.0: The simplest way to keep notes
 dev-libs/libdbusmenu-qt 0.9.3_pre20160218-r2: A library providing Qt implementation of DBusMenu specification (meta mackage)
 dev-libs/libdbusmenu-qt5 0.9.3_pre20160218-r3: Library providing Qt implementation of DBusMenu specification
