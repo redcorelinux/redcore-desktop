@@ -29,7 +29,6 @@ RDEPEND="${DEPEND}
 		dev-python/typer[${PYTHON_USEDEP}]
 		dev-python/typing-extensions[${PYTHON_USEDEP}]
 		dev-python/urllib3[${PYTHON_USEDEP}]
-		dev-python/wget[${PYTHON_USEDEP}]
 		sys-apps/portage[${PYTHON_USEDEP}]
 	')
 	sys-apps/gentoo-functions"
