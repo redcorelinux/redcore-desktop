@@ -9,7 +9,7 @@ EXTRAVERSION="redcore-lts"
 KV_FULL="${PV}-${EXTRAVERSION}"
 KV_MAJOR="6.1"
 
-DESCRIPTION="Redcore Linux Kernel Image (LTS v6.1)"
+DESCRIPTION="Redcore Linux LTS Kernel Image"
 HOMEPAGE="https://redcorelinux.org"
 SRC_URI="https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-${PV}.tar.xz"
 
