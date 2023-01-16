@@ -36,6 +36,7 @@ RDEPEND="
 	>=virtual/opencl-3
 	!!x11-drivers/nvidia-drivers:390
 	!!x11-drivers/nvidia-drivers:470
+	!!x11-drivers/nvidia-drivers:525
 	acpi? ( sys-power/acpid )
 	dkms? ( ~sys-kernel/${PN}-dkms-${PV}:${SLOT} )
 	wayland? (
@@ -213,8 +214,8 @@ src_install() {
 	doexe ${NV_OBJ}/nvidia-smi
 	doexe ${NV_OBJ}/nvidia-modprobe
 
-	fowners root:video /opt/bin/nvidia-modprobe
-	fperms 4710 /opt/bin/nvidia-modprobe
+	#fowners root:video /opt/bin/nvidia-modprobe
+	#fperms 4710 /opt/bin/nvidia-modprobe
 	dosym /{opt,usr}/bin/nvidia-modprobe
 
 	newinitd "${FILESDIR}/nvidia-smi.init" nvidia-smi

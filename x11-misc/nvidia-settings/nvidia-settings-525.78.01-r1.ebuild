@@ -7,10 +7,10 @@ inherit eutils multilib toolchain-funcs
 
 DESCRIPTION="NVIDIA Linux X11 Settings Utility"
 HOMEPAGE="http://www.nvidia.com/"
-SRC_URI="https://github.com/NVIDIA/nvidia-settings/archive/refs/tags/${PV}.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://github.com/NVIDIA/nvidia-settings/archive/refs/tags/${PV}.tar.gz -> nvidia-settings-${PV}.tar.gz"
 
 LICENSE="GPL-2"
-SLOT="390"
+SLOT="515"
 KEYWORDS="-* amd64"
 IUSE=""
 
@@ -33,6 +33,7 @@ COMMON_DEPEND="
 	>=x11-libs/libvdpau-1.0"
 
 RDEPEND="${COMMON_DEPEND}
+	!!x11-misc/nvidia-settings:390
 	!!x11-misc/nvidia-settings:470
 	!!x11-misc/nvidia-settings:515
 	~x11-drivers/nvidia-drivers-${PV}:${SLOT}"
@@ -40,47 +41,44 @@ DEPEND="${RDEPEND}
 	virtual/pkgconfig
 	x11-base/xorg-proto"
 
-S=${WORKDIR}/nvidia-settings-${PV}
-
 src_prepare() {
 	default
 	eapply "${FILESDIR}"/"${PN}"-linker.patch
-	eapply "${FILESDIR}"/"${PN}"-fno-common.patch
 }
 
+
 src_compile() {
-	emake -C src/ \
-		AR="$(tc-getAR)" \
-		CC="$(tc-getCC)" \
+	einfo "Building libXNVCtrl..."
+	emake -C src/libXNVCtrl \
 		DO_STRIP= \
-		LD="$(tc-getCC)" \
 		LIBDIR="$(get_libdir)" \
 		NVLD="$(tc-getLD)" \
 		NV_VERBOSE=1 \
-		RANLIB="$(tc-getRANLIB)" \
-		build-xnvctrl
+		OUTPUTDIR=. \
+		RANLIB="$(tc-getRANLIB)"
 
+	einfo "Building nvidia-settings..."
 	emake -C src/ \
-		CC="$(tc-getCC)" \
 		DO_STRIP= \
 		GTK3_AVAILABLE=1 \
-		LD="$(tc-getCC)" \
 		LIBDIR="$(get_libdir)" \
 		NVLD="$(tc-getLD)" \
 		NVML_ENABLED=0 \
 		NV_USE_BUNDLED_LIBJANSSON=0 \
-		NV_VERBOSE=1
+		NV_VERBOSE=1 \
+		OUTPUTDIR=.
 }
 
 src_install() {
 	emake -C src/ \
 		DESTDIR="${D}" \
+		DO_STRIP= \
 		GTK3_AVAILABLE=1 \
 		LIBDIR="${D}/usr/$(get_libdir)" \
 		NV_USE_BUNDLED_LIBJANSSON=0 \
 		NV_VERBOSE=1 \
+		OUTPUTDIR=. \
 		PREFIX=/usr \
-		DO_STRIP= \
 		install
 
 	insinto /usr/$(get_libdir)
@@ -89,7 +87,7 @@ src_install() {
 	insinto /usr/include/NVCtrl
 	doins src/libXNVCtrl/*.h
 
-	doicon doc/nvidia-settings.png || die
+	doicon doc/${PN}.png || die
 	domenu ${FILESDIR}/${PN}.desktop || die
 
 	dodoc doc/*.txt

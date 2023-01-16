@@ -21,10 +21,11 @@ IUSE="kernel-open"
 DEPEND="sys-kernel/dkms"
 RDEPEND="${DEPEND}
 	!!sys-kernel/nvidia-drivers-dkms:390
-	!!sys-kernel/nvidia-drivers-dkms:470"
+	!!sys-kernel/nvidia-drivers-dkms:470
+	!!sys-kernel/nvidia-drivers-dkms:515"
 
 PATCHES=(
-	"${FILESDIR}"/dkms515.patch
+	"${FILESDIR}"/dkms525.patch
 )
 
 S="${WORKDIR}/${AMD64_NV_PACKAGE}"
