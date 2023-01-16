@@ -14,7 +14,7 @@ EMULTILIB_PKG="true"
 KEYWORDS="-* ~amd64"
 RESTRICT="bindist mirror strip"
 LICENSE="GPL-2 NVIDIA-r2"
-SLOT="515"
+SLOT="525"
 
 IUSE="acpi +dkms multilib +tools wayland +X"
 REQUIRED_USE="tools? ( X )"
