@@ -37,7 +37,7 @@ net-libs/webkit-gtk 2.36.7-r1 2.38.2-r1: Open source web browser engine
 net-print/lexmark-upd-ppd 1.0.0.20210304-r1: Lexmark universal printer driver PPDs
 net-wireless/broadcom-sta 6.30.223.271-r4: Broadcom's IEEE 802.11a/b/g/n hybrid Linux device driver
 sys-apps/baselayout 2.8-r2: Filesystem baselayout and init scripts
-sys-apps/firetools 0.9.46-r1: Graphical user interface of app-emulation/firejail
+sys-apps/firetools 0.9.64: Graphical user interface of app-emulation/firejail
 sys-apps/lsb-release 3.2-r1: LSB version query program
 sys-apps/openrc 0.46-r1: OpenRC manages the services, startup and shutdown of a host
 sys-auth/elogind 246.10-r3: The systemd project's logind, extracted to a standalone package
