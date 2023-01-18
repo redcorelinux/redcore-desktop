@@ -8,7 +8,7 @@ inherit multilib-build
 DESCRIPTION="Virtual for Rust language compiler"
 
 LICENSE=""
-SLOT="0/llvm-14"
+SLOT="0/llvm-15"
 KEYWORDS="amd64 arm arm64 ppc ppc64 ~riscv ~s390 sparc x86"
 IUSE="+rustfmt system-llvm"
 
