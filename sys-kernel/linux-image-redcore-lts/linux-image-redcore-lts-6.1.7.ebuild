@@ -7,11 +7,11 @@ inherit eutils
 
 EXTRAVERSION="redcore-lts"
 KV_FULL="${PV}-${EXTRAVERSION}"
-KV_MAJOR="5.10"
+KV_MAJOR="6.1"
 
 DESCRIPTION="Redcore Linux LTS Kernel Image"
 HOMEPAGE="https://redcorelinux.org"
-SRC_URI="https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-${PV}.tar.xz"
+SRC_URI="https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-${PV}.tar.xz"
 
 KEYWORDS="~amd64"
 LICENSE="GPL-2"
@@ -39,20 +39,11 @@ PATCHES=(
 	"${FILESDIR}"/"${KV_MAJOR}"-radeon_dp_aux_transfer_native-no-ratelimited_debug.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-acpi-use-kern_warning_even_when_error.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-do_not_bug_the_next_18-years.patch
-	"${FILESDIR}"/"${KV_MAJOR}"-iwlwifi-use-debug-for-debug-infos.patch
-	"${FILESDIR}"/"${KV_MAJOR}"-compress-modules-zstd-support.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-fix-bootconfig-makefile.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-apic_vector-spam-in-debug-mode-only.patch
-	"${FILESDIR}"/"${KV_MAJOR}"-iwlwifi-fix-5e003982b07ae.patch
-	"${FILESDIR}"/"${KV_MAJOR}"-enable-new-amd-energy-driver-for-all-ryzen.patch
-	"${FILESDIR}"/"${KV_MAJOR}"-0001-Revert-hwmon-k10temp-Remove-support-for-displaying-v.patch
-	"${FILESDIR}"/"${KV_MAJOR}"-k10temp-fix-ZEN2-desktop-add-ZEN3-desktop.patch
-	"${FILESDIR}"/"${KV_MAJOR}"-add-amd-sfh-hid_driver.patch
-	"${FILESDIR}"/"${KV_MAJOR}"-add-sbtsi_driver.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-0001-Revert-cpufreq-Avoid-configuring-old-governors-as-de.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-revert-parts-of-a00ec3874e7d326ab2dffbed92faddf6a77a84e9-no-Intel-NO.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-C.patch
-	"${FILESDIR}"/"${KV_MAJOR}"-uksm.patch
 )
 
 S="${WORKDIR}"/linux-"${PV}"
@@ -124,11 +115,12 @@ _dracut_initrd_delete() {
 	rm -rf "${ROOT}"boot/initrd-"${KV_FULL}"
 }
 
-_dkms_modules_delete() {
+_dkms_modules_manage() {
 	if [[ -x $(which dkms) ]] ; then
 		export local DKMSMOD
 		for DKMSMOD in $(dkms status | cut -d " " -f1,2 | sed -e 's/,//g' | sed -e 's/ /\//g' | sed -e 's/://g' | uniq) ; do
 			dkms remove "${DKMSMOD}" -k "${KV_FULL}"
+			dkms add "${DKMSMOD}" > /dev/null 2>&1
 		done
 	fi
 }
@@ -154,7 +146,7 @@ pkg_postrm() {
 		_grub2_update_grubcfg
 	fi
 	if use dkms; then
-		_dkms_modules_delete
+		_dkms_modules_manage
 	fi
 	_kernel_modules_delete
 }
