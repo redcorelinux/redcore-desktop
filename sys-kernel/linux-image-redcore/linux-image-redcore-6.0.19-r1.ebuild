@@ -5,7 +5,7 @@ EAPI=6
 
 inherit eutils
 
-EXTRAVERSION="redcore"
+EXTRAVERSION="redcore-r1"
 KV_FULL="${PV}-${EXTRAVERSION}"
 KV_MAJOR="6.0"
 
@@ -115,11 +115,12 @@ _dracut_initrd_delete() {
 	rm -rf "${ROOT}"boot/initrd-"${KV_FULL}"
 }
 
-_dkms_modules_delete() {
+_dkms_modules_manage() {
 	if [[ -x $(which dkms) ]] ; then
 		export local DKMSMOD
 		for DKMSMOD in $(dkms status | cut -d " " -f1,2 | sed -e 's/,//g' | sed -e 's/ /\//g' | sed -e 's/://g' | uniq) ; do
 			dkms remove "${DKMSMOD}" -k "${KV_FULL}"
+			dkms add "${DKMSMOD}" > /dev/null 2>&1
 		done
 	fi
 }
@@ -145,7 +146,7 @@ pkg_postrm() {
 		_grub2_update_grubcfg
 	fi
 	if use dkms; then
-		_dkms_modules_delete
+		_dkms_modules_manage
 	fi
 	_kernel_modules_delete
 }
