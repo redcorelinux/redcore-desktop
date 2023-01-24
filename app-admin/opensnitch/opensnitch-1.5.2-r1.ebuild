@@ -44,7 +44,7 @@ SRC_URI="https://github.com/evilsocket/opensnitch/archive/refs/tags/v${PV}.tar.g
 LICENSE="Apache-2.0"
 SLOT="0"
 IUSE="systemd"
-KEYWORDS=""
+KEYWORDS="~amd64"
 
 DEPEND=">=dev-lang/go-1.13
 	net-libs/libnetfilter_queue
