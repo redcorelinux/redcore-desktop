@@ -1,5 +1,5 @@
 DEFINED_PHASES=compile install postinst postrm prepare setup
-DEPEND=app-arch/lz4 app-arch/xz-utils sys-devel/autoconf sys-devel/bc sys-devel/make cryptsetup? ( sys-fs/cryptsetup ) dmraid? ( sys-fs/dmraid ) dracut? ( >=sys-kernel/dracut-0.44-r8 ) dkms? ( sys-kernel/dkms sys-kernel/linux-sources-redcore-lts:5.15 ) mdadm? ( sys-fs/mdadm ) >=sys-kernel/linux-firmware-20180314
+DEPEND=app-arch/lz4 app-arch/xz-utils sys-devel/autoconf sys-devel/bc sys-devel/make cryptsetup? ( sys-fs/cryptsetup ) dmraid? ( sys-fs/dmraid ) dracut? ( >=sys-kernel/dracut-0.44-r8 ) dkms? ( sys-kernel/dkms sys-kernel/linux-sources-redcore-lts:6.1 ) mdadm? ( sys-fs/mdadm ) >=sys-kernel/linux-firmware-20180314
 DESCRIPTION=Redcore Linux LTS Kernel Image
 EAPI=6
 HOMEPAGE=https://redcorelinux.org
@@ -7,9 +7,9 @@ INHERIT=eutils
 IUSE=+cryptsetup +dmraid +dracut +dkms +mdadm
 KEYWORDS=~amd64
 LICENSE=GPL-2
-RDEPEND=app-arch/lz4 app-arch/xz-utils sys-devel/autoconf sys-devel/bc sys-devel/make cryptsetup? ( sys-fs/cryptsetup ) dmraid? ( sys-fs/dmraid ) dracut? ( >=sys-kernel/dracut-0.44-r8 ) dkms? ( sys-kernel/dkms sys-kernel/linux-sources-redcore-lts:5.15 ) mdadm? ( sys-fs/mdadm ) >=sys-kernel/linux-firmware-20180314
+RDEPEND=app-arch/lz4 app-arch/xz-utils sys-devel/autoconf sys-devel/bc sys-devel/make cryptsetup? ( sys-fs/cryptsetup ) dmraid? ( sys-fs/dmraid ) dracut? ( >=sys-kernel/dracut-0.44-r8 ) dkms? ( sys-kernel/dkms sys-kernel/linux-sources-redcore-lts:6.1 ) mdadm? ( sys-fs/mdadm ) >=sys-kernel/linux-firmware-20180314
 RESTRICT=binchecks strip mirror
-SLOT=5.15
-SRC_URI=https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-5.15.90.tar.xz
+SLOT=6.1
+SRC_URI=https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.1.8.tar.xz
 _eclasses_=desktop	7eb20ad915a0a318176d51bc2508ff5c	edos2unix	33e347e171066657f91f8b0c72ec8773	epatch	447396341f5f896d722e435a06f87a4f	eqawarn	c9847c43b3253a276ae2eabddedab3d7	estack	055c42df72f76a4f45ec92b35e83cd56	eutils	8f942ebdcf04334697649d4a0bf65a32	ltprune	97143780d341cc8d8f1d4c6187a36d29	multilib	5ca4e49abed8e3a2f7b56920eadee157	preserve-libs	a8e50acee31b5759b4df1f7707cae54b	strip-linguas	ac3ee41ee2d31d8c41a77c0838320cc7	toolchain-funcs	ec8bbc28394c7305b43ea07164bd8f5f	vcs-clean	d271b7bc7e6a009758d7d4ef749174e3	wrapper	4a1902f969e5718126434fc35f3a0d9c
-_md5_=67734c6f99143690a8918bad6ed1de91
+_md5_=36c67b10311ce007e1f8a46c401f870c
