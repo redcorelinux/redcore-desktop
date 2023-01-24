@@ -15,6 +15,7 @@ app-misc/redcore-skel 1.314.1337-r1: Redcore Linux skel tree
 app-portage/sisyphus 5.2301.1: A simple portage python wrapper which works like other package managers(apt-get/yum/dnf)
 app-portage/sisyphus-qt 5.2301.1: A simple portage python wrapper which works like other package managers(apt-get/yum/dnf)
 app-text/simplenote 2.6.0: The simplest way to keep notes
+dev-go/go-protobuf 1.5.2: Go support for Google's protocol buffers
 dev-libs/libdbusmenu-qt 0.9.3_pre20160218-r2: A library providing Qt implementation of DBusMenu specification (meta mackage)
 dev-libs/libdbusmenu-qt5 0.9.3_pre20160218-r3: Library providing Qt implementation of DBusMenu specification
 dev-python/animation 0.0.5-r3: Tools for terminal-based wait animations
