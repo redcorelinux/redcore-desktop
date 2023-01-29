@@ -9,7 +9,6 @@ app-emulation/steam 1.0.0.71-r1: Digital distribution client bootstrap package
 app-emulation/steam-native-runtime 1.0.0.71-r3: Native replacement for the Steam runtime using system libraries
 app-emulation/virtualbox-modules 7.0.6: Kernel Modules for Virtualbox
 app-misc/calamares-config-redcore 1.314.1337-r2: Redcore Linux Calamares modules config
-app-misc/geoclue 2.6.0-r10: A location information D-Bus service
 app-misc/redcore-live 1.314.1337: Redcore Linux live scripts
 app-misc/redcore-skel 1.314.1337-r1: Redcore Linux skel tree
 app-portage/sisyphus 5.2301.1: A simple portage python wrapper which works like other package managers(apt-get/yum/dnf)
