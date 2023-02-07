@@ -52,7 +52,7 @@ sys-boot/os-prober 1.77-r10: Utility to detect other OSs on a set of drives
 sys-boot/plymouth 0.9.4-r11: Graphical boot animation (splash) and logger
 sys-boot/unetbootin-static 625-r3: Universal Netboot Installer creates Live USB systems for various OS distributions
 sys-devel/binutils 2.39-r4: Tools necessary to build programs
-sys-devel/gcc 12.2.0: The GNU Compiler Collection
+sys-devel/gcc 12.2.1_p20230121-r1: The GNU Compiler Collection
 sys-devel/libtool 2.4.7-r1: A shared library tool for developers
 sys-fs/cryptsetup 2.3.4-r10: Tool to setup encrypted devices with dm-crypt
 sys-fs/gocryptfs 2.0.1-r1: Encrypted overlay filesystem written in Go
