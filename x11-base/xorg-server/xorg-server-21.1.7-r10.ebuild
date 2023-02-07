@@ -96,8 +96,6 @@ REQUIRED_USE="!minimal? (
 	?? ( elogind systemd )"
 
 UPSTREAMED_PATCHES=(
-	# https://gitlab.freedesktop.org/xorg/xserver/-/merge_requests/953
-	"${FILESDIR}"/${PN}-21.1.4-BadIDChoice.patch
 )
 
 PATCHES=(
