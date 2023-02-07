@@ -62,7 +62,7 @@ sys-fs/zfs-utils 2.1.7-r1: Userland utilities for ZFS Linux kernel module
 sys-kernel/bcmwl-dkms 6.30.223.271-r2: Broadcom's IEEE 802.11a/b/g/n hybrid Linux device driver source
 sys-kernel/dkms 2.3-r2: Dynamic Kernel Module Support
 sys-kernel/dracut 056-r10: Generic initramfs generation tool
-sys-kernel/linux-headers 5.19: Linux system headers
+sys-kernel/linux-headers 6.1: Linux system headers
 sys-kernel/linux-image-redcore 6.0.19-r2: Redcore Linux Kernel Image
 sys-kernel/linux-image-redcore-lts 5.10.165-r1 5.15.90-r1 6.1.8-r1: Redcore Linux LTS Kernel Image
 sys-kernel/linux-sources-redcore 6.0.19-r2: Redcore Linux Kernel Sources
@@ -72,7 +72,7 @@ sys-kernel/vhba-dkms 20211218: Virtual (SCSI) Host Bus Adapter kernel module for
 sys-kernel/virtualbox-modules-dkms 7.0.6: Kernel Modules source for Virtualbox
 sys-kernel/zfs-dkms 2.1.7: ZFS sources for linux
 sys-libs/binutils-libs 2.39-r1: Core binutils libraries (libbfd, libopcodes, libiberty) for external packages
-sys-libs/glibc 2.35-r8: GNU libc C library
+sys-libs/glibc 2.36-r5: GNU libc C library
 sys-power/radeon-profile 20200824-r10: Read current clocks of ATi/AMD Radeon cards
 virtual/libudev 314.1337: Virtual for libudev providers
 virtual/notification-daemon 1.334.1337: Virtual (dummy package) for notification daemon dbus service
