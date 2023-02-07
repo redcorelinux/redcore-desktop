@@ -1,4 +1,4 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -20,7 +20,7 @@ REQUIRED_USE="default-gold? ( gold )"
 # PATCH_DEV          - Use download URI https://dev.gentoo.org/~{PATCH_DEV}/distfiles/...
 #                      for the patchsets
 
-PATCH_VER=4
+PATCH_VER=5
 PATCH_DEV=dilfridge
 
 if [[ ${PV} == 9999* ]]; then
@@ -32,8 +32,8 @@ else
 	SRC_URI="mirror://gnu/binutils/binutils-${PV}.tar.xz https://dev.gentoo.org/~${PATCH_DEV}/distfiles/binutils-${PV}.tar.xz"
 	[[ -z ${PATCH_VER} ]] || SRC_URI="${SRC_URI}
 		https://dev.gentoo.org/~${PATCH_DEV}/distfiles/binutils-${PATCH_BINUTILS_VER}-patches-${PATCH_VER}.tar.xz"
-	SLOT=${PV}
-	KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~loong ~m68k ~mips ~ppc ~ppc64 ~riscv ~s390 ~sparc ~x86"
+	SLOT=$(ver_cut 1-2)
+	KEYWORDS="~alpha amd64 arm arm64 hppa ~ia64 ~loong ~m68k ~mips ppc ppc64 ~riscv ~s390 sparc x86"
 fi
 
 #
@@ -171,6 +171,13 @@ src_configure() {
 	# Keep things sane
 	strip-flags
 
+	# ideally we want !tc-ld-is-bfd for best future-proofing, but it needs
+	# https://github.com/gentoo/gentoo/pull/28355
+	# mold needs this too but right now tc-ld-is-mold is also not available
+	if tc-ld-is-lld; then
+		append-ldflags -Wl,--undefined-version
+	fi
+
 	use elibc_musl && append-ldflags -Wl,-z,stack-size=2097152
 
 	local x
@@ -248,12 +255,12 @@ src_configure() {
 		# Available from 2.35 on
 		--enable-textrel-check=warning
 
-		# Available from 2.39 on
-		--enable-warn-execstack
-		--enable-warn-rwx-segments
-		# TODO: Available from 2.39+ on but let's try the warning on for a bit
-		# first... (--enable-warn-execstack)
-		# Could put it under USE=hardened?
+		# These hardening options are available from 2.39+ but
+		# they unconditionally enable the behaviour even on arches
+		# where e.g. execstacks can't be avoided.
+		# See https://sourceware.org/bugzilla/show_bug.cgi?id=29592.
+		#--enable-warn-execstack
+		#--enable-warn-rwx-segments
 		#--disable-default-execstack (or is it --enable-default-execstack=no? docs are confusing)
 
 		# Things to think about
