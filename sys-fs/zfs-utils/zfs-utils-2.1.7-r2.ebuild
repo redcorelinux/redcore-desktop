@@ -98,7 +98,7 @@ src_install() {
 	bashcomp_alias zfs zpool
 	dodir etc/conf.d
 	insinto etc/conf.d
-	newins "${FILESDIR}"/zfs-conf.d zfs
+	doins "${S}"/etc/default/zfs
 	use pam && { rm -rv "${ED}/unwanted_files" || die ; }
 	use test-suite || { rm -r "${ED}/usr/share/zfs" || die ; }
 }
