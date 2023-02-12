@@ -94,14 +94,11 @@ src_install() {
 	default
 
 	gen_usr_ldscript -a nvpair uutil zfsbootenv zfs zfs_core zpool
-
-	use pam && { rm -rv "${ED}/unwanted_files" || die ; }
-
-	use test-suite || { rm -r "${ED}/usr/share/zfs" || die ; }
-
 	dobashcomp contrib/bash_completion.d/zfs
 	bashcomp_alias zfs zpool
-
-	# strip executable bit from conf.d file
-	fperms 0644 /etc/conf.d/zfs
+	dodir etc/conf.d
+	insinto etc/conf.d
+	newins "${FILESDIR}"/zfs-conf.d zfs
+	use pam && { rm -rv "${ED}/unwanted_files" || die ; }
+	use test-suite || { rm -r "${ED}/usr/share/zfs" || die ; }
 }
