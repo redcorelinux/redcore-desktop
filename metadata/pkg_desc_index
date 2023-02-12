@@ -4,7 +4,7 @@ app-admin/opensnitch 1.5.2-r1: Desktop application firewall
 app-admin/vasile 2.1812.2: Versatile Advanced Script for ISO and Latest Enchantments
 app-arch/unp 2.0_pre9-r1: Script for unpacking various file formats
 app-backup/timeshift 22.11.1-r1: A system restore utility for Linux
-app-emulation/steam 1.0.0.71-r1: Digital distribution client bootstrap package
+app-emulation/steam 1.0.0.71-r2: Digital distribution client bootstrap package
 app-emulation/virtualbox-modules 7.0.6: Kernel Modules for Virtualbox
 app-misc/calamares-config-redcore 1.314.1337-r2: Redcore Linux Calamares modules config
 app-misc/redcore-live 1.314.1337: Redcore Linux live scripts
@@ -60,9 +60,9 @@ sys-kernel/dkms 2.3-r2: Dynamic Kernel Module Support
 sys-kernel/dracut 056-r10: Generic initramfs generation tool
 sys-kernel/linux-headers 6.1: Linux system headers
 sys-kernel/linux-image-redcore 6.0.19-r3: Redcore Linux Kernel Image
-sys-kernel/linux-image-redcore-lts 5.10.165-r1 5.15.90-r1 6.1.8-r1: Redcore Linux LTS Kernel Image
+sys-kernel/linux-image-redcore-lts 5.10.167 5.15.93 6.1.11: Redcore Linux LTS Kernel Image
 sys-kernel/linux-sources-redcore 6.0.19-r3: Redcore Linux Kernel Sources
-sys-kernel/linux-sources-redcore-lts 5.10.165-r1 5.15.90-r1 6.1.8-r1: Redcore Linux LTS Kernel Sources
+sys-kernel/linux-sources-redcore-lts 5.10.167 5.15.93 6.1.11: Redcore Linux LTS Kernel Sources
 sys-kernel/nvidia-drivers-dkms 390.157-r1 470.161.03-r1 515.86.01-r1 525.85.05: NVIDIA driver sources for linux
 sys-kernel/vhba-dkms 20211218: Virtual (SCSI) Host Bus Adapter kernel module for the CDEmu suite sources
 sys-kernel/virtualbox-modules-dkms 7.0.6: Kernel Modules source for Virtualbox
