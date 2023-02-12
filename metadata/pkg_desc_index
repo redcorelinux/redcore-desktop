@@ -4,9 +4,7 @@ app-admin/opensnitch 1.5.2-r1: Desktop application firewall
 app-admin/vasile 2.1812.2: Versatile Advanced Script for ISO and Latest Enchantments
 app-arch/unp 2.0_pre9-r1: Script for unpacking various file formats
 app-backup/timeshift 22.11.1-r1: A system restore utility for Linux
-app-emulation/linux-steam-integration 0.7.3-r3: Helper for enabling better Steam integration on Linux
 app-emulation/steam 1.0.0.71-r1: Digital distribution client bootstrap package
-app-emulation/steam-native-runtime 1.0.0.71-r3: Native replacement for the Steam runtime using system libraries
 app-emulation/virtualbox-modules 7.0.6: Kernel Modules for Virtualbox
 app-misc/calamares-config-redcore 1.314.1337-r2: Redcore Linux Calamares modules config
 app-misc/redcore-live 1.314.1337: Redcore Linux live scripts
@@ -30,12 +28,10 @@ lxqt-base/lxqt-config 1.2.0-r1: LXQt system configuration control center
 lxqt-base/lxqt-meta 1.2.0-r1: Meta ebuild for LXQt, the Lightweight Desktop Environment
 lxqt-base/lxqt-session 1.2.0-r1: LXQt Session Manager
 mail-client/mailspring 1.9.2-r1: A beautiful fast and maintained fork of Nylas Mail
-media-libs/libpipewire 0.3.43-r10: Pipewire client libraries
 media-libs/portsmf 239-r1: The Tenacity fork of PortSMF, a Standard MIDI File library
 media-sound/cantata 2.5.0-r10: Featureful and configurable Qt client for the music player daemon (MPD)
 media-tv/sopcast 3.2.6-r3: SopCast free P2P Internet TV binary
 media-video/guvcview 2.0.6-r10: Simple Qt5 or GTK+3 interface for capturing and viewing video from v4l2 devices
-net-libs/libnm-glib 1.18.10-r2: Legacy NetworkManager glib and util libraries
 net-libs/webkit-gtk 2.36.7-r1 2.38.2-r1: Open source web browser engine
 net-print/lexmark-upd-ppd 1.0.0.20210304-r1: Lexmark universal printer driver PPDs
 net-wireless/broadcom-sta 6.30.223.271-r4: Broadcom's IEEE 802.11a/b/g/n hybrid Linux device driver
