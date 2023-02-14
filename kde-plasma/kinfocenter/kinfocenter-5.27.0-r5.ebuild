@@ -4,9 +4,9 @@
 EAPI=8
 
 ECM_HANDBOOK="forceoptional"
-KFMIN=5.99.0
+KFMIN=5.102.0
 PVCUT=$(ver_cut 1-3)
-QTMIN=5.15.5
+QTMIN=5.15.7
 inherit ecm plasma.kde.org optfeature
 
 DESCRIPTION="Utility providing information about the computer hardware"
@@ -37,6 +37,7 @@ DEPEND="
 	usb? ( virtual/libusb:1 )
 "
 RDEPEND="${DEPEND}
+	dev-qt/qdbus:*
 	>=dev-qt/qtquickcontrols2-${QTMIN}:5
 	>=kde-frameworks/kirigami-${KFMIN}:5
 	>=kde-plasma/kde-cli-tools-${PVCUT}:5
