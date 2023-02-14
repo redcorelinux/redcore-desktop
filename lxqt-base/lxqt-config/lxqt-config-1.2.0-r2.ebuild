@@ -50,6 +50,9 @@ DEPEND="
 RDEPEND="${DEPEND}"
 
 src_prepare() {
+	if has_version ">=kde-plasma/libkscreen-5.26.90" ; then
+		eapply "${FILESDIR}"/kscreen.patch
+	fi
 	if use gtk; then
 		eapply "${FILESDIR}"/qgtk2.patch
 		cmake_src_prepare
