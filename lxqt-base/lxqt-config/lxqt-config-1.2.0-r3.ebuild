@@ -15,7 +15,7 @@ if [[ ${PV} = *9999* ]]; then
 	EGIT_REPO_URI="https://github.com/lxqt/${PN}.git"
 else
 	SRC_URI="https://github.com/lxqt/${PN}/releases/download/${PV}/${P}.tar.xz"
-	KEYWORDS="amd64 ~arm arm64 ~loong ~ppc64 ~riscv x86"
+	KEYWORDS="~amd64 ~arm ~arm64 ~loong ~ppc64 ~riscv ~x86"
 fi
 
 LICENSE="GPL-2 GPL-2+ GPL-3 LGPL-2 LGPL-2+ LGPL-2.1+ WTFPL-2"
@@ -49,16 +49,13 @@ DEPEND="
 "
 RDEPEND="${DEPEND}"
 
+PATCHES=( "${FILESDIR}"/"${PN}"-kscreen-52690.patch )
+
 src_prepare() {
-	if has_version ">=kde-plasma/libkscreen-5.26.90" ; then
-		eapply "${FILESDIR}"/kscreen.patch
-	fi
 	if use gtk; then
-		eapply "${FILESDIR}"/qgtk2.patch
-		cmake_src_prepare
-	else
-		cmake_src_prepare
+		PATCHES+=( "${FILESDIR}"/"${PN}"-qgtk2.patch )
 	fi
+	cmake_src_prepare
 }
 
 src_configure() {
