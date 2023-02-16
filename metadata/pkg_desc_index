@@ -21,7 +21,7 @@ dev-python/click 7.1.2-r100: A Python package for creating beautiful command lin
 dev-python/sh 1.12.14-r5: Python process launching
 dev-python/typer 0.2.1-r3: Build great CLIs. Easy to code. Based on Python type hints
 dev-python/wget 2.2-r3: Python library for downloading from http URLs
-dev-util/lxqt-build-tools 0.12.0-r1: LXQt Build Tools
+dev-util/lxqt-build-tools 0.12.0-r2: LXQt Build Tools
 gui-libs/display-manager-init 1.1.2-r1: RC init files for starting display and login managers
 kde-plasma/kinfocenter 5.27.0-r5: Utility providing information about the computer hardware
 lxde-base/lxappearance 0.6.3-r5: LXDE GTK+ theme switcher
