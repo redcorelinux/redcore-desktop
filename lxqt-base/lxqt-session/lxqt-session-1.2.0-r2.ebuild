@@ -15,7 +15,7 @@ if [[ ${PV} = *9999* ]]; then
 	EGIT_REPO_URI="https://github.com/lxqt/${PN}.git"
 else
 	SRC_URI="https://github.com/lxqt/${PN}/releases/download/${PV}/${P}.tar.xz"
-	KEYWORDS="amd64 ~arm arm64 ~loong ~ppc64 ~riscv x86"
+	KEYWORDS="~amd64 ~arm ~arm64 ~loong ~ppc64 ~riscv ~x86"
 fi
 
 IUSE="gtk +udev"
@@ -46,11 +46,9 @@ RDEPEND="${DEPEND}"
 
 src_prepare() {
 	if use gtk; then
-		eapply ${FILESDIR}/platform-plugin.patch
-		cmake_src_prepare
-	else
-		cmake_src_prepare
+		PATCHES=( "${FILESDIR}"/"${PN}"-platform-plugin.patch )
 	fi
+	cmake_src_prepare
 }
 
 src_configure() {
