@@ -6,7 +6,7 @@ app-arch/unp 2.0_pre9-r1: Script for unpacking various file formats
 app-backup/timeshift 22.11.1-r1: A system restore utility for Linux
 app-emulation/steam 1.0.0.71-r2: Digital distribution client bootstrap package
 app-emulation/virtualbox-modules 7.0.6: Kernel Modules for Virtualbox
-app-misc/calamares-config-redcore 1.314.1337-r2: Redcore Linux Calamares modules config
+app-misc/calamares-config-redcore 1.314.1337-r3: Redcore Linux Calamares modules config
 app-misc/redcore-live 1.314.1337: Redcore Linux live scripts
 app-misc/redcore-skel 1.314.1337-r1: Redcore Linux skel tree
 app-portage/sisyphus 5.2301.1-r2: A simple portage python wrapper which works like other package managers(apt-get/yum/dnf)
@@ -87,7 +87,7 @@ x11-misc/nvidia-settings 390.157-r1 470.161.03-r1 515.86.01-r1 525.85.05: NVIDIA
 x11-misc/pcmanfm-qt-share 1337: PCManFM-QT custom action to share folder using Samba
 x11-misc/sddm 0.18.1-r11: Simple Desktop Display Manager
 x11-themes/material-icon-theme 1.314.1337: Icon theme following the Google's material design specifications
-x11-themes/redcore-artwork-calamares 1.314.1337: Redcore Linux branding component for Calamares
+x11-themes/redcore-artwork-calamares 1.314.1337-r1: Redcore Linux branding component for Calamares
 x11-themes/redcore-artwork-community 1.314.1337: Redcore Linux Community Wallpapers
 x11-themes/redcore-artwork-core 1.314.1337: Offical Redcore Linux Core Artwork
 x11-themes/redcore-artwork-grub 1.314.1337: Redcore Linux GRUB2 Images
