@@ -38,11 +38,12 @@ else
 fi
 
 PATCHES=(
-	"${FILESDIR}"/0001-build-Fix-GRUB-i386-pc-build-with-Ubuntu-gcc.patch
+	"${FILESDIR}"/00-build-Fix-GRUB-i386-pc-build-with-Ubuntu-gcc.patch
 	"${FILESDIR}"/01-gfxpayload.patch
 	"${FILESDIR}"/02-KERNEL_GLOBS.patch
 	"${FILESDIR}"/03-sparc64-bios-boot.patch
 	"${FILESDIR}"/04-fgrep.patch
+	"${FILESDIR}"/05-fs-ext2-ignore-checksum-seed.patch
 )
 
 DEJAVU=dejavu-sans-ttf-2.37

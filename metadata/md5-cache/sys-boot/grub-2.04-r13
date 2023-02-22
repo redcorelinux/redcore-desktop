@@ -11,7 +11,7 @@ LICENSE=GPL-3 fonts? ( GPL-2-with-font-exception ) themes? ( BitstreamVera )
 RDEPEND=app-arch/xz-utils >=sys-libs/ncurses-5.2-r5:0= sdl? ( media-libs/libsdl ) device-mapper? ( >=sys-fs/lvm2-2.02.45 ) mount? ( sys-fs/fuse:0 ) truetype? ( media-libs/freetype:2= ) ppc? ( >=sys-apps/ibm-powerpc-utils-1.3.5 ) ppc64? ( >=sys-apps/ibm-powerpc-utils-1.3.5 ) grub_platforms_xen? ( app-emulation/xen-tools:= ) grub_platforms_xen-32? ( app-emulation/xen-tools:= ) grub_platforms_xen-pvh? ( app-emulation/xen-tools:= ) kernel_linux? ( grub_platforms_efi-32? ( sys-boot/efibootmgr ) grub_platforms_efi-64? ( sys-boot/efibootmgr ) ) !sys-boot/grub:0 !sys-boot/grub-static nls? ( sys-devel/gettext )
 REQUIRED_USE=grub_platforms_coreboot? ( fonts ) grub_platforms_qemu? ( fonts ) grub_platforms_ieee1275? ( fonts ) grub_platforms_loongson? ( fonts )
 RESTRICT=!test? ( test )
-SLOT=2/2.04-r12
+SLOT=2/2.04-r13
 SRC_URI=mirror://gnu/grub/grub-2.04.tar.xz fonts? ( mirror://gnu/unifont/unifont-12.1.02/unifont-12.1.02.pcf.gz ) themes? ( mirror://sourceforge/dejavu/dejavu-sans-ttf-2.37.zip )
 _eclasses_=autotools	6dcd6b6a486e79928e1243ff9ba41fcc	bash-completion-r1	f5e7a020fd9c741740756aac61bf75ff	edos2unix	33e347e171066657f91f8b0c72ec8773	eutils	8f942ebdcf04334697649d4a0bf65a32	flag-o-matic	69394e25812406faa1f90edaf4969395	gnuconfig	b6b3e92f8b8c996400074b5f61a59256	libtool	241a8f577b9781a42a7421e53448a44e	multibuild	bddcb51b74f4a76724ff7cf8e7388869	multilib	5ca4e49abed8e3a2f7b56920eadee157	out-of-source-utils	1a9007554652a6e627edbccb3c25a439	pax-utils	91d47e5d20627c717aa878b9167c62a8	strip-linguas	ac3ee41ee2d31d8c41a77c0838320cc7	toolchain-funcs	6001248ef162a5fa2a21ce132a212f6b	wrapper	4a1902f969e5718126434fc35f3a0d9c
-_md5_=e09dbc3a4ff424c670f6d77cb2b8602e
+_md5_=c9c8b19bbae10a9e4248409d87d3a15d
