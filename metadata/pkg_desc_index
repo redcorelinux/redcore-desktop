@@ -62,9 +62,9 @@ sys-kernel/dkms 2.3-r2: Dynamic Kernel Module Support
 sys-kernel/dracut 056-r10: Generic initramfs generation tool
 sys-kernel/linux-headers 6.1: Linux system headers
 sys-kernel/linux-image-redcore 6.0.19-r3: Redcore Linux Kernel Image
-sys-kernel/linux-image-redcore-lts 5.10.170 5.15.96 6.1.14: Redcore Linux LTS Kernel Image
+sys-kernel/linux-image-redcore-lts 5.10.172 5.15.98 6.1.15: Redcore Linux LTS Kernel Image
 sys-kernel/linux-sources-redcore 6.0.19-r3: Redcore Linux Kernel Sources
-sys-kernel/linux-sources-redcore-lts 5.10.170 5.15.96 6.1.14: Redcore Linux LTS Kernel Sources
+sys-kernel/linux-sources-redcore-lts 5.10.172 5.15.98 6.1.15: Redcore Linux LTS Kernel Sources
 sys-kernel/nvidia-drivers-dkms 390.157-r1 470.161.03-r1 515.86.01-r1 525.85.05: NVIDIA driver sources for linux
 sys-kernel/vhba-dkms 20211218: Virtual (SCSI) Host Bus Adapter kernel module for the CDEmu suite sources
 sys-kernel/virtualbox-modules-dkms 7.0.6: Kernel Modules source for Virtualbox
