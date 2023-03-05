@@ -52,10 +52,6 @@ RESTRICT="test"
 PATCHES=(
 	"${FILESDIR}"/2.1.5-r2-dracut-non-root.patch
 	"${FILESDIR}"/2.1.5-dracut-zfs-missing.patch
-	"${FILESDIR}"/2.1.5-dracut-mount.patch
-	"${FILESDIR}"/2.1.6-fgrep.patch
-	"${FILESDIR}"/2.1.7-dracut-include-systemd-overrides.patch
-	"${FILESDIR}"/2.1.7-systemd-zed-restart-always.patch
 )
 
 src_prepare() {
