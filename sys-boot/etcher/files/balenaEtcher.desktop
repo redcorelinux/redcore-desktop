@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=balenaEtcher
+Exec=balenaEtcher %U
+Terminal=false
+Type=Application
+Icon=etcher-electron
+StartupWMClass=balenaEtcher
+Comment=Flash OS images to SD cards and USB drives, safely and easily.
+MimeType=x-scheme-handler/etcher;
+Categories=System;
