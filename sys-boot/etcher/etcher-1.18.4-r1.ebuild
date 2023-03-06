@@ -6,7 +6,7 @@ EAPI=6
 
 MY_PN="balenaEtcher"
 
-inherit eutils
+inherit eutils xdg-utils
 
 DESCRIPTION="Flash OS images to SD cards & USB drives, safely and easily."
 HOMEPAGE="https://etcher.io/"
@@ -37,3 +37,12 @@ src_install() {
 	newbin ${MY_PN}-${PV}-x64.AppImage ${MY_PN}
 	domenu ${FILESDIR}/${MY_PN}.desktop
 }
+
+pkg_postinst() {
+	xdg_desktop_database_update
+}
+
+pkg_postrm() {
+	xdg_desktop_database_update
+}
+
