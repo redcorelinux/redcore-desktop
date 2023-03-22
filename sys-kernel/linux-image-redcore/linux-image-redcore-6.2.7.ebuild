@@ -5,9 +5,9 @@ EAPI=6
 
 inherit eutils
 
-EXTRAVERSION="redcore-r3"
+EXTRAVERSION="redcore"
 KV_FULL="${PV}-${EXTRAVERSION}"
-KV_MAJOR="6.0"
+KV_MAJOR="6.2"
 
 DESCRIPTION="Redcore Linux Kernel Image"
 HOMEPAGE="https://redcorelinux.org"
