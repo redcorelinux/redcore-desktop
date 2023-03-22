@@ -1,0 +1,39 @@
+diff -Nur a/Makefile b/Makefile
+--- a/Makefile	2023-01-28 02:07:40.000000000 +0000
++++ b/Makefile	2023-03-22 12:56:40.286162399 +0000
+@@ -52,12 +52,11 @@
+ install:
+ 	$(INSTALL_DIR) $(DESTDIR)/etc
+ 	cp -pPR etc/* $(DESTDIR)/etc/
+-	echo "Gentoo Base System release ${PV}" > ${DESTDIR}/etc/gentoo-release
+ 	$(INSTALL_DIR) $(DESTDIR)/lib
+ 	cp -pPR lib/* $(DESTDIR)/lib/
+ 	$(INSTALL_DIR) $(DESTDIR)/usr/lib
+ 	ln -snf ../usr/lib/os-release ${DESTDIR}/etc/os-release
+-	./make_os_release ${PV} > $(DESTDIR)/usr/lib/os-release
++	./make_os_release rolling > $(DESTDIR)/usr/lib/os-release
+ 	$(INSTALL_DIR) $(DESTDIR)/usr/share/baselayout
+ 	cp -pPR share/* $(DESTDIR)/usr/share/baselayout/
+ 	ln -snf ../proc/self/mounts $(DESTDIR)/etc/mtab
+diff -Nur a/make_os_release b/make_os_release
+--- a/make_os_release	2023-01-28 02:07:40.000000000 +0000
++++ b/make_os_release	2023-03-22 12:55:10.748165053 +0000
+@@ -4,12 +4,12 @@
+ 	exit 1
+ fi
+ cat <<EOF
+-NAME=Gentoo
+-ID=gentoo
+-PRETTY_NAME="Gentoo Linux"
++NAME=Redcore
++ID=redcore
++PRETTY_NAME="Redcore Linux Hardened"
+ ANSI_COLOR="1;32"
+-HOME_URL="https://www.gentoo.org/"
+-SUPPORT_URL="https://www.gentoo.org/support/"
+-BUG_REPORT_URL="https://bugs.gentoo.org/"
++HOME_URL="https://redcorelinux.org/"
++SUPPORT_URL="https://wiki.redcorelinux.org/"
++BUG_REPORT_URL="https://bugs.redcorelinux.org/"
+ VERSION_ID="${1}"
+ EOF

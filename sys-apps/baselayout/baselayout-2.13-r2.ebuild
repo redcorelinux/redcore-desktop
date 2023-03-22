@@ -1,9 +1,9 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
-inherit multilib versionator prefix udev
+inherit multilib prefix udev
 
 DESCRIPTION="Filesystem baselayout and init scripts"
 HOMEPAGE="https://wiki.gentoo.org/wiki/No_homepage"
@@ -12,21 +12,50 @@ if [[ ${PV} = 9999 ]]; then
 	inherit git-r3
 else
 	SRC_URI="https://gitweb.gentoo.org/proj/${PN}.git/snapshot/${P}.tar.bz2"
-	KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~riscv ~s390 ~sparc ~x86"
+	KEYWORDS="~alpha amd64 arm arm64 hppa ~ia64 ~loong ~m68k ~mips ppc ppc64 ~riscv ~s390 sparc x86 ~x64-cygwin ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris ~x86-winnt"
 fi
 
 LICENSE="GPL-2"
 SLOT="0"
-IUSE="build kernel_FreeBSD kernel_linux +split-usr"
+IUSE="build +split-usr"
 
 DEPEND="acct-group/smbshare
 	!net-fs/sambacfg
 	!sys-boot/grubcfg
 	!sys-kernel/dracutcfg"
-RDEPEND="${DEPEND}"
+RDEPEND="${DEPEND}
+	!sys-apps/baselayout-prefix"
 
 pkg_setup() {
 	multilib_layout
+}
+
+riscv_compat_symlink() {
+	# Here we apply some special sauce for riscv.
+	# Two multilib layouts exist for now:
+	# 1) one level libdirs, (32bit) "lib" and (64bit) "lib64"
+	#    these are chosen by us to closely resemble other arches
+	# 2) two level libdirs, "lib64/lp64d" "lib64/lp64" "lib32/ilp32d" ...
+	#    this is the glibc/gcc default
+	# Unfortunately, the default has only one fallback, which is "lib"
+	# for both 32bit and 64bit. So things do not break in 1), we need
+	# to provide compatibility symlinks...
+
+	# This function has exactly two parameters:
+	# - the default libdir, to determine if 1) or 2) applies
+	# - the location of the symlink (which points to ".")
+
+	# Note: we call this only in the ${SYMLINK_LIB} = no codepath, since
+	# there never was a ${SYMLINK_LIB} = yes riscv profile.
+
+	case ${CHOST} in
+	riscv*)
+		# are we on a one level libdir profile? is there no symlink yet?
+		if [[ ${1} != */* && ! -L ${2} ]] ; then
+			ln -s . $2 || die "Unable to make $2 riscv compatibility symlink"
+		fi
+		;;
+	esac
 }
 
 # Create our multilib dirs - the Makefile has no knowledge of this
@@ -35,10 +64,9 @@ multilib_layout() {
 	local prefix prefix_lst
 	def_libdir=$(get_abi_LIBDIR $DEFAULT_ABI)
 	libdirs=$(get_all_libdirs)
-	: ${libdirs:=lib}	# it isn't that we don't trust multilib.eclass...
 
 	if [[ -z "${SYMLINK_LIB}" || ${SYMLINK_LIB} = no ]] ; then
-		prefix_lst=( "${EROOT}"{,usr/,usr/local/} )
+		prefix_lst=( "${EROOT}"/{,usr/,usr/local/} )
 		for prefix in "${prefix_lst[@]}"; do
 			for libdir in ${libdirs}; do
 				dir="${prefix}${libdir}"
@@ -47,16 +75,19 @@ multilib_layout() {
 						die "${dir} exists but is not a directory"
 					continue
 				fi
-				if ! use split-usr && [[ ${prefix} = ${EROOT} ]]; then
+				if ! use split-usr && [[ ${prefix} = ${EROOT}/ ]]; then
+					libdir="${libdir%%/*}"
+					dir="${prefix}${libdir}"
 					einfo "symlinking ${dir} to usr/${libdir}"
 					ln -s usr/${libdir} ${dir} ||
-						die " Unable to make ${dir} symlink"
+						die "Unable to make ${dir} symlink"
 				else
 					einfo "creating directory ${dir}"
 					mkdir -p "${dir}" ||
 						die "Unable to create ${dir} directory"
 				fi
 			done
+			[[ -d "${prefix}${def_libdir}" ]] && riscv_compat_symlink "${def_libdir}" "${prefix}${def_libdir}/${DEFAULT_ABI}"
 		done
 		return 0
 	fi
@@ -94,9 +125,9 @@ multilib_layout() {
 	# setup symlinks and dirs where we expect them to be; do not migrate
 	# data ... just fall over in that case.
 	if use split-usr ; then
-		prefix_lst=( "${EROOT}"{,usr/,usr/local/} )
+		prefix_lst=( "${EROOT}"/{,usr/,usr/local/} )
 	else
-		prefix_lst=( "${EROOT}"{usr/,usr/local/} )
+		prefix_lst=( "${EROOT}"/{usr/,usr/local/} )
 	fi
 	for prefix in "${prefix_lst[@]}"; do
 		if [ "${SYMLINK_LIB}" = yes ] ; then
@@ -138,7 +169,6 @@ multilib_layout() {
 				# only symlinked the lib dir on systems where we moved it
 				# to "lib32" ...
 				case ${CHOST} in
-				*-gentoo-freebsd*) ;; # We want it the other way on fbsd.
 				i?86*|x86_64*|powerpc*|sparc*|s390*)
 					if [[ -d ${prefix}lib32 && ! -h ${prefix}lib32 ]] ; then
 						rm -f "${prefix}lib32"/.keep || die
@@ -160,18 +190,13 @@ multilib_layout() {
 		for libdir in ${libdirs}; do
 			if [[ ! -e "${EROOT}${libdir}" ]]; then
 				ln -s usr/"${libdir}" "${EROOT}${libdir}" ||
-					die " Unable to make ${EROOT}${libdir} symlink"
+					die "Unable to make ${EROOT}${libdir} symlink"
 			fi
 		done
 	fi
 }
 
 pkg_preinst() {
-	# This is written in src_install (so it's in CONTENTS), but punt all
-	# pending updates to avoid user having to do etc-update (and make the
-	# pkg_postinst logic simpler).
-	rm -f "${EROOT}"/etc/._cfg????_gentoo-release || die
-
 	# We need to install directories and maybe some dev nodes when building
 	# stages, but they cannot be in CONTENTS.
 	# Also, we cannot reference $S as binpkg will break so we do this.
@@ -184,25 +209,43 @@ pkg_preinst() {
 		fi
 	fi
 	rm -f "${ED}"/usr/share/${PN}/Makefile || die
+
+	# Create symlinks in pkg_preinst to avoid Portage collision check.
+	# Create the symlinks in ${ED} via dosym so that we own it.
+	# Only create the symlinks if it wont cause a conflict in ${EROOT}.
+	if [[ -L ${EROOT}/var/lock || ! -e ${EROOT}/var/lock ]]; then
+		dosym ../run/lock /var/lock
+	fi
+	if [[ -L ${EROOT}/var/run || ! -e ${EROOT}/var/run ]]; then
+		dosym ../run /var/run
+	fi
 }
 
 src_prepare() {
 	default
-	eapply "${FILESDIR}"/"${PN}"-redcore.patch
-	if use prefix; then
-		hprefixify -e "/EUID/s,0,${EUID}," -q '"' etc/profile
-		hprefixify etc/{env.d/50baselayout,shells} share.Linux/passwd
-		echo PATH=/usr/sbin:/sbin:/usr/bin:/bin >> etc/env.d/99host
-	fi
+	eapply "${FILESDIR}"/"${P}"-redcore.patch
 
 	# don't want symlinked directories in PATH on systems with usr-merge
-	if ! use split-usr; then
+	if ! use split-usr && ! use prefix-guest; then
 		sed \
-			-e 's|/usr/local/sbin:||g' \
 			-e 's|:/usr/sbin:|:|g' \
 			-e 's|:/sbin:|:|g' \
 			-e 's|:/bin:|:|g' \
 			-i etc/env.d/50baselayout || die
+	fi
+
+	if use prefix; then
+		hprefixify -e "/EUID/s,0,${EUID}," -q '"' etc/profile
+		hprefixify etc/shells share/passwd
+		hprefixify -w '/PATH=/' etc/env.d/50baselayout
+		hprefixify -w 1 etc/env.d/50baselayout
+		echo PATH=/usr/sbin:/sbin:/usr/bin:/bin >> etc/env.d/99host
+
+		# change branding
+		sed -i \
+			-e '/gentoo-release/s/Gentoo Base/Gentoo Prefix Base/' \
+			-e '/make_os_release/s/${OS}/Prefix/' \
+			Makefile || die
 	fi
 
 	# handle multilib paths.  do it here because we want this behavior
@@ -213,26 +256,45 @@ src_prepare() {
 	# path and the symlinked path doesn't change the resulting cache.
 	local libdir ldpaths
 	for libdir in $(get_all_libdirs) ; do
-		use split-usr && ldpaths+=":${EPREFIX}/${libdir}"
+		if use split-usr || use prefix-guest; then
+			ldpaths+=":${EPREFIX}/${libdir}"
+		fi
 		ldpaths+=":${EPREFIX}/usr/${libdir}"
 		ldpaths+=":${EPREFIX}/usr/local/${libdir}"
 	done
 	echo "LDPATH='${ldpaths#:}'" >> etc/env.d/50baselayout
-
-	# rc-scripts version for testing of features that *should* be present
-	echo "Redcore Linux Hardened - rolling" > etc/redcore-release
 }
 
 src_install() {
 	emake \
-		OS=$(usex kernel_FreeBSD BSD Linux) \
 		DESTDIR="${ED}" \
 		install
+
+	if [[ ${CHOST} == *-darwin* ]] ; then
+		# add SDK path which contains development manpages
+		echo "MANPATH=${EPREFIX}/MacOSX.sdk/usr/share/man" \
+			> "${ED}"/etc/env.d/98macos-sdk
+	fi
 
 	# need the makefile in pkg_preinst
 	insinto /usr/share/${PN}
 	doins Makefile
+
 	dodoc ChangeLog
+
+	# bug 858596
+	if use prefix-guest ; then
+		dodir sbin
+		cat > "${ED}"/sbin/runscript <<- EOF
+			#!/usr/bin/env sh
+			source "${EPREFIX}/lib/gentoo/functions.sh"
+
+			eerror "runscript/openrc-run not supported by Gentoo Prefix Base System release ${PV}" 1>&2
+			exit 1
+		EOF
+		chmod 755 "${ED}"/sbin/runscript || die
+		cp "${ED}"/sbin/{runscript,openrc-run} || die
+	fi
 
 	############### Redcore Linux ###############
 	#
@@ -286,20 +348,19 @@ pkg_postinst() {
 	# (3) accidentally packaging up personal files with quickpkg
 	# If they don't exist then we install them
 	for x in master.passwd passwd shadow group fstab ; do
-		[ -e "${EROOT}etc/${x}" ] && continue
-		[ -e "${EROOT}usr/share/baselayout/${x}" ] || continue
-		cp -p "${EROOT}usr/share/baselayout/${x}" "${EROOT}"etc || die
+		[ -e "${EROOT}/etc/${x}" ] && continue
+		[ -e "${EROOT}/usr/share/baselayout/${x}" ] || continue
+		cp -p "${EROOT}/usr/share/baselayout/${x}" "${EROOT}"/etc || die
 	done
 
 	# Force shadow permissions to not be world-readable #260993
 	for x in shadow ; do
-		if [ -e "${EROOT}etc/${x}" ] ; then
-			chmod o-rwx "${EROOT}etc/${x}" || die
+		if [ -e "${EROOT}/etc/${x}" ] ; then
+			chmod o-rwx "${EROOT}/etc/${x}" || die
 		fi
 	done
-
 	# whine about users that lack passwords #193541
-	if [[ -e "${EROOT}"etc/shadow ]] ; then
+	if [[ -e "${EROOT}"/etc/shadow ]] ; then
 		local bad_users=$(sed -n '/^[^:]*::/s|^\([^:]*\)::.*|\1|p' "${EROOT}"/etc/shadow)
 		if [[ -n ${bad_users} ]] ; then
 			echo
@@ -309,8 +370,8 @@ pkg_postinst() {
 	fi
 
 	# whine about users with invalid shells #215698
-	if [[ -e "${EROOT}"etc/passwd ]] ; then
-		local bad_shells=$(awk -F: 'system("test -e " $7) { print $1 " - " $7}' "${EROOT}"etc/passwd | sort)
+	if [[ -e "${EROOT}"/etc/passwd ]] ; then
+		local bad_shells=$(awk -F: 'system("test -e ${ROOT}" $7) { print $1 " - " $7}' "${EROOT}"/etc/passwd | sort)
 		if [[ -n ${bad_shells} ]] ; then
 			echo
 			ewarn "The following users have non-existent shells!"
@@ -320,37 +381,38 @@ pkg_postinst() {
 
 	# https://bugs.gentoo.org/361349
 	if use kernel_linux; then
-		mkdir -p "${EROOT}"run || die
+		mkdir -p "${EROOT}"/run || die
 
 		local found fstype mountpoint
 		while read -r _ mountpoint fstype _; do
 		[[ ${mountpoint} = /run ]] && [[ ${fstype} = tmpfs ]] && found=1
-		done < "${ROOT}"proc/mounts
+		done < "${ROOT}"/proc/mounts
 		[[ -z ${found} ]] &&
 			ewarn "You should reboot now to get /run mounted with tmpfs!"
 	fi
 
 	for x in ${REPLACING_VERSIONS}; do
-		if ! version_is_at_least 2.4 ${x}; then
-			ewarn "After updating ${EROOT}etc/profile, please run"
+		if ver_test 2.4 -lt ${x}; then
+			ewarn "After updating ${EROOT}/etc/profile, please run"
 			ewarn "env-update && . /etc/profile"
 		fi
 
-		if ! version_is_at_least 2.6 ${x}; then
+		if ver_test 2.6 -lt ${x}; then
 			ewarn "Please run env-update then log out and back in to"
 			ewarn "update your path."
 		fi
 		# clean up after 2.5 typos
 		# https://bugs.gentoo.org/show_bug.cgi?id=656380
 		if [[ ${x} == 2.5 ]]; then
-			rm -fr "${EROOT}{,usr" || die
+			rm -fr "${EROOT}/{,usr" || die
 		fi
 	done
 
-	if [[ -e "${EROOT}"etc/env.d/00basic ]]; then
-		ewarn "${EROOT}etc/env.d/00basic is now ${EROOT}etc/env.d/50baselayout"
+	if [[ -e "${EROOT}"/etc/env.d/00basic ]]; then
+		ewarn "${EROOT}/etc/env.d/00basic is now ${EROOT}/etc/env.d/50baselayout"
 		ewarn "Please migrate your changes."
 	fi
+
 
 	############### Redcore Linux ###############
 	rm -rf "${EROOT}"etc/dracut.conf.d/._cfg????_dracut-redcore.conf
