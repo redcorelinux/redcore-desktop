@@ -263,6 +263,9 @@ src_prepare() {
 		ldpaths+=":${EPREFIX}/usr/local/${libdir}"
 	done
 	echo "LDPATH='${ldpaths#:}'" >> etc/env.d/50baselayout
+
+	# rc-scripts version for testing of features that *should* be present
+	echo "Redcore Linux Hardened - rolling" > etc/redcore-release
 }
 
 src_install() {

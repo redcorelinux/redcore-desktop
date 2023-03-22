@@ -12,4 +12,4 @@ RDEPEND=acct-group/smbshare !net-fs/sambacfg !sys-boot/grubcfg !sys-kernel/dracu
 SLOT=0
 SRC_URI=https://gitweb.gentoo.org/proj/baselayout.git/snapshot/baselayout-2.13.tar.bz2
 _eclasses_=multilib	5ca4e49abed8e3a2f7b56920eadee157	prefix	eab3c99d77fe00506c109c8a736186f7	toolchain-funcs	6001248ef162a5fa2a21ce132a212f6b	udev	eec0bbab06977f1cfc5597269c1fa152
-_md5_=060bcba3f42c5372cfa15a436ee57f6f
+_md5_=e423573f0e8a362efc7c095c6fb56bdc
