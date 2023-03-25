@@ -69,7 +69,7 @@ sys-kernel/linux-sources-redcore-lts 5.10.176 5.15.104 6.1.21: Redcore Linux LTS
 sys-kernel/nvidia-drivers-dkms 390.157-r1 470.161.03-r1 515.86.01-r1 525.85.05: NVIDIA driver sources for linux
 sys-kernel/vhba-dkms 20211218: Virtual (SCSI) Host Bus Adapter kernel module for the CDEmu suite sources
 sys-kernel/virtualbox-modules-dkms 7.0.6: Kernel Modules source for Virtualbox
-sys-kernel/zfs-dkms 2.1.9: ZFS sources for linux
+sys-kernel/zfs-dkms 2.1.9-r1: ZFS sources for linux
 sys-libs/binutils-libs 2.39-r4: Core binutils libraries (libbfd, libopcodes, libiberty) for external packages
 sys-libs/glibc 2.36-r5: GNU libc C library
 sys-power/radeon-profile 20200824-r10: Read current clocks of ATi/AMD Radeon cards
