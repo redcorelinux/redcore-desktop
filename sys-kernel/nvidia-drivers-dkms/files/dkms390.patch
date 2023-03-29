@@ -1,11 +1,12 @@
 diff -Nur a/kernel/dkms.conf b/kernel/dkms.conf
---- a/kernel/dkms.conf	2021-11-02 06:16:12.000000000 +0000
-+++ b/kernel/dkms.conf	2022-10-16 19:24:47.535006817 +0100
-@@ -1,12 +1,19 @@
+--- a/kernel/dkms.conf	2021-11-07 11:53:27.000000000 +0000
++++ b/kernel/dkms.conf	2023-03-29 11:57:23.888798613 +0100
+@@ -1,12 +1,20 @@
 -PACKAGE_NAME="nvidia"
 -PACKAGE_VERSION="__VERSION_STRING"
 +PACKAGE_NAME="nvidia-drivers-dkms"
 +PACKAGE_VERSION="390.157"
++BUILD_EXCLUSIVE_KERNEL="^(5\.[0-9]+\.|6\.[0-1]\.)" # only build for kernels v5.x.x up to and including v6.1.x
  AUTOINSTALL="yes"
  
  # By default, DKMS will add KERNELRELEASE to the make command line; however,
