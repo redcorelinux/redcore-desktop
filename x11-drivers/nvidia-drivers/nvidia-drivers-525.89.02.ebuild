@@ -55,7 +55,6 @@ PDEPEND="tools? ( ~x11-misc/nvidia-settings-${PV}:${SLOT} )
 QA_PREBUILT="opt/* usr/lib*"
 S=${WORKDIR}/
 PATCHES=(
-	"${FILESDIR}"/dkms525.patch
 	"${FILESDIR}"/locale.patch
 )
 
