@@ -3,7 +3,7 @@ app-admin/calamares 3.2.44.3-r3: Distribution-independent installer framework
 app-admin/opensnitch 1.5.2-r1: Desktop application firewall
 app-admin/vasile 2.1812.2: Versatile Advanced Script for ISO and Latest Enchantments
 app-arch/unp 2.0_pre9-r1: Script for unpacking various file formats
-app-backup/timeshift 22.11.1-r1: A system restore utility for Linux
+app-backup/timeshift 22.11.1-r2: A system restore utility for Linux
 app-emulation/steam 1.0.0.71-r2: Digital distribution client bootstrap package
 app-emulation/virtualbox-modules 7.0.6: Kernel Modules for Virtualbox
 app-misc/calamares-config-redcore 1.314.1337-r3: Redcore Linux Calamares modules config

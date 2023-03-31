@@ -38,7 +38,10 @@ BDEPEND="
 	virtual/pkgconfig
 "
 
-PATCHES=( "${FILESDIR}"/${PN}-22.11.1-build-system.patch )
+PATCHES=( 
+	"${FILESDIR}"/"${P}"-build-system.patch 
+	"${FILESDIR}"/"${P}"-glib-deprecations.patch
+)
 
 src_prepare() {
 	default

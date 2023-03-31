@@ -1,0 +1,135 @@
+diff --git a/src/Core/Main.vala b/src/Core/Main.vala
+index 9ee386b..b4b9b96 100644
+--- a/src/Core/Main.vala
++++ b/src/Core/Main.vala
+@@ -1742,7 +1742,7 @@ public class Main : GLib.Object{
+ 		try {
+ 			thread_delete_running = true;
+ 			thread_delete_success = false;
+-			Thread.create<void> (delete_thread, true);
++			new Thread<void>.try ("delete", () => {delete_thread();});
+ 
+ 			//new Thread<bool> ("", delete_thread);
+ 
+@@ -2226,13 +2226,13 @@ public class Main : GLib.Object{
+ 			thr_success = false;
+ 			
+ 			if (btrfs_mode){
+-				Thread.create<bool> (restore_execute_btrfs, true);
++				new Thread<bool>.try ("restore-execute-btrfs", () => {restore_execute_btrfs(); return true;});
+ 			}
+ 			else{
+-				Thread.create<bool> (restore_execute_rsync, true);
++				new Thread<bool>.try ("restore-execute-rsync", () => {restore_execute_rsync(); return true;});
+ 			}
+ 		}
+-		catch (ThreadError e) {
++		catch (Error e) {
+ 			thread_restore_running = false;
+ 			thr_success = false;
+ 			log_error (e.message);
+@@ -3842,8 +3842,8 @@ public class Main : GLib.Object{
+ 		try {
+ 			thread_estimate_running = true;
+ 			thr_success = false;
+-			Thread.create<void> (estimate_system_size_thread, true);
+-		} catch (ThreadError e) {
++			new Thread<void>.try ("estimate-system-size", () => {estimate_system_size_thread();});
++		} catch (Error e) {
+ 			thread_estimate_running = false;
+ 			thr_success = false;
+ 			log_error (e.message);
+@@ -3964,8 +3964,8 @@ public class Main : GLib.Object{
+ 		try {
+ 			thread_subvol_info_running = true;
+ 			thread_subvol_info_success = false;
+-			Thread.create<void> (query_subvolume_info_thread, true);
+-		} catch (ThreadError e) {
++			new Thread<void>.try ("query-subvolume-info", () => {query_subvolume_info_thread();});
++		} catch (Error e) {
+ 			thread_subvol_info_running = false;
+ 			thread_subvol_info_success = false;
+ 			log_error (e.message);
+diff --git a/src/Core/SnapshotRepo.vala b/src/Core/SnapshotRepo.vala
+index 12351b2..955c9df 100644
+--- a/src/Core/SnapshotRepo.vala
++++ b/src/Core/SnapshotRepo.vala
+@@ -865,8 +865,8 @@ public class SnapshotRepo : GLib.Object{
+ 		try {
+ 			thr_running = true;
+ 			thr_success = false;
+-			Thread.create<void> (delete_directory_thread, true);
+-		} catch (ThreadError e) {
++			new Thread<void>.try ("delete-directory", () => {delete_directory_thread();});
++		} catch (Error e) {
+ 			thr_running = false;
+ 			thr_success = false;
+ 			log_error (e.message);
+diff --git a/src/Gtk/BackupBox.vala b/src/Gtk/BackupBox.vala
+index daa7cef..ad00a10 100644
+--- a/src/Gtk/BackupBox.vala
++++ b/src/Gtk/BackupBox.vala
+@@ -179,7 +179,7 @@ class BackupBox : Gtk.Box{
+ 
+ 		try {
+ 			thread_is_running = true;
+-			Thread.create<void> (take_snapshot_thread, true);
++			new Thread<void>.try ("snapshot-taker", () => {take_snapshot_thread();});
+ 		}
+ 		catch (Error e) {
+ 			log_error (e.message);
+diff --git a/src/Gtk/EstimateBox.vala b/src/Gtk/EstimateBox.vala
+index efdfaf7..f006e4a 100644
+--- a/src/Gtk/EstimateBox.vala
++++ b/src/Gtk/EstimateBox.vala
+@@ -93,9 +93,9 @@ class EstimateBox : Gtk.Box{
+ 			
+ 			try {
+ 				thread_is_running = true;
+-				Thread.create<void> (estimate_system_size_thread, true);
++				new Thread<void>.try ("estimate-system-size", () => {estimate_system_size_thread();});
+ 			}
+-			catch (ThreadError e) {
++			catch (Error e) {
+ 				thread_is_running = false;
+ 				log_error (e.message);
+ 			}
+diff --git a/src/Gtk/RestoreBox.vala b/src/Gtk/RestoreBox.vala
+index 4d483b0..9871dd0 100644
+--- a/src/Gtk/RestoreBox.vala
++++ b/src/Gtk/RestoreBox.vala
+@@ -192,7 +192,7 @@ class RestoreBox : Gtk.Box{
+ 		
+ 		try {
+ 			thread_is_running = true;
+-			Thread.create<void> (restore_thread, true);
++			new Thread<void>.try ("restore", () => {restore_thread();});
+ 		}
+ 		catch (Error e) {
+ 			log_error (e.message);
+diff --git a/src/Gtk/RsyncLogBox.vala b/src/Gtk/RsyncLogBox.vala
+index 4006a04..a38b361 100644
+--- a/src/Gtk/RsyncLogBox.vala
++++ b/src/Gtk/RsyncLogBox.vala
+@@ -164,7 +164,7 @@ public class RsyncLogBox : Gtk.Box {
+ 
+ 		try {
+ 			thread_is_running = true;
+-			Thread.create<void> (parse_log_file_thread, true);
++			new Thread<void>.try ("log-file-parser", () => {parse_log_file_thread();});
+ 		}
+ 		catch (Error e) {
+ 			log_error (e.message);
+diff --git a/src/Utility/FileItem.vala b/src/Utility/FileItem.vala
+index 0d2c8bb..dd517c0 100644
+--- a/src/Utility/FileItem.vala
++++ b/src/Utility/FileItem.vala
+@@ -182,7 +182,7 @@ public class FileItem : GLib.Object,Gee.Comparable<FileItem> {
+ 				}
+ 
+ 				// modified
+-				this.modified = (new DateTime.from_timeval_utc(info.get_modification_time())).to_local();
++				this.modified = info.get_modification_date_time().to_local();
+ 
+ 				// owner_user
+ 				this.owner_user = info.get_attribute_string(FileAttribute.OWNER_USER);
