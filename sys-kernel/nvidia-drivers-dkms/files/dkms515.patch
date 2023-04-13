@@ -1,12 +1,11 @@
 diff -Nur a/kernel/dkms.conf b/kernel/dkms.conf
---- a/kernel/dkms.conf	2022-10-26 09:58:29.000000000 +0100
-+++ b/kernel/dkms.conf	2023-03-29 12:04:16.447837005 +0100
-@@ -1,12 +1,22 @@
+--- a/kernel/dkms.conf	2023-02-27 12:37:07.000000000 +0000
++++ b/kernel/dkms.conf	2023-04-13 11:45:48.253796496 +0100
+@@ -1,12 +1,21 @@
 -PACKAGE_NAME="nvidia"
 -PACKAGE_VERSION="__VERSION_STRING"
 +PACKAGE_NAME="nvidia-drivers-dkms"
-+PACKAGE_VERSION="515.86.01"
-+BUILD_EXCLUSIVE_KERNEL="^(5\.[0-9]+\.|6\.[0-1]\.)" # only build for kernels v5.x.x up to and including v6.1.x
++PACKAGE_VERSION="515.105.01"
  AUTOINSTALL="yes"
  
  # By default, DKMS will add KERNELRELEASE to the make command line; however,
@@ -29,14 +28,13 @@ diff -Nur a/kernel/dkms.conf b/kernel/dkms.conf
 +BUILT_MODULE_NAME[4]="nvidia-peermem"
 +DEST_MODULE_LOCATION[4]="/extra/dkms"
 diff -Nur a/kernel-open/dkms.conf b/kernel-open/dkms.conf
---- a/kernel-open/dkms.conf	2022-10-26 09:58:29.000000000 +0100
-+++ b/kernel-open/dkms.conf	2023-03-29 12:04:25.738837870 +0100
-@@ -1,12 +1,22 @@
+--- a/kernel-open/dkms.conf	2023-02-27 12:37:07.000000000 +0000
++++ b/kernel-open/dkms.conf	2023-04-13 11:46:10.534798569 +0100
+@@ -1,12 +1,21 @@
 -PACKAGE_NAME="nvidia"
 -PACKAGE_VERSION="__VERSION_STRING"
 +PACKAGE_NAME="nvidia-drivers-dkms"
-+PACKAGE_VERSION="515.86.01"
-+BUILD_EXCLUSIVE_KERNEL="^(5\.[0-9]+\.|6\.[0-1]\.)" # only build for kernels v5.x.x up to and including v6.1.x
++PACKAGE_VERSION="515.105.01"
  AUTOINSTALL="yes"
  
  # By default, DKMS will add KERNELRELEASE to the make command line; however,
