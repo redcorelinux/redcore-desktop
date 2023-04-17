@@ -35,6 +35,7 @@ media-libs/portsmf 239-r1: The Tenacity fork of PortSMF, a Standard MIDI File li
 media-sound/cantata 2.5.0-r10: Featureful and configurable Qt client for the music player daemon (MPD)
 media-tv/sopcast 3.2.6-r3: SopCast free P2P Internet TV binary
 media-video/guvcview 2.0.6-r10: Simple Qt5 or GTK+3 interface for capturing and viewing video from v4l2 devices
+net-im/skypeforlinux 8.96.0.408-r1: Instant messaging client, with support for audio and video
 net-misc/warpinator 1.4.5: Share files across the LAN
 net-print/lexmark-upd-ppd 1.0.0.20210304-r1: Lexmark universal printer driver PPDs
 net-wireless/broadcom-sta 6.30.223.271-r4: Broadcom's IEEE 802.11a/b/g/n hybrid Linux device driver
