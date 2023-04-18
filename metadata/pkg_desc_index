@@ -28,7 +28,7 @@ kde-plasma/plasma-meta 5.27.4-r5: Merge this to pull in all Plasma 5 packages
 lxde-base/lxappearance 0.6.3-r5: LXDE GTK+ theme switcher
 lxqt-base/lxqt-config 1.3.0-r1: LXQt system configuration control center
 lxqt-base/lxqt-meta 1.2.0-r1: Meta ebuild for LXQt, the Lightweight Desktop Environment
-lxqt-base/lxqt-session 1.2.0-r2: LXQt Session Manager
+lxqt-base/lxqt-session 1.3.0-r1: LXQt Session Manager
 mail-client/mailspring 1.9.2-r1: A beautiful fast and maintained fork of Nylas Mail
 media-libs/portsmf 239-r1: The Tenacity fork of PortSMF, a Standard MIDI File library
 media-sound/cantata 2.5.0-r10: Featureful and configurable Qt client for the music player daemon (MPD)
