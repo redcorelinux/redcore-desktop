@@ -49,11 +49,9 @@ DEPEND="
 "
 RDEPEND="${DEPEND}"
 
-PATCHES=( "${FILESDIR}"/"${PN}"-kscreen-52690.patch )
-
 src_prepare() {
 	if use gtk; then
-		PATCHES+=( "${FILESDIR}"/"${PN}"-qgtk2.patch )
+		PATCHES=( "${FILESDIR}"/"${PN}"-qgtk2.patch )
 	fi
 	cmake_src_prepare
 }
