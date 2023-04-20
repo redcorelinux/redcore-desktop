@@ -9,7 +9,7 @@ app-emulation/virtualbox-modules 7.0.6: Kernel Modules for Virtualbox
 app-misc/calamares-config-redcore 1.314.1337-r3: Redcore Linux Calamares modules config
 app-misc/geoclue 2.7.0-r5: A location information D-Bus service
 app-misc/redcore-live 1.314.1337: Redcore Linux live scripts
-app-misc/redcore-skel 1.314.1337-r1: Redcore Linux skel tree
+app-misc/redcore-skel 1.314.1337-r2: Redcore Linux skel tree
 app-portage/sisyphus 5.2302.0-r2: A simple portage python wrapper which works like other package managers(apt-get/yum/dnf)
 app-portage/sisyphus-qt 5.2302.0-r2: A simple portage python wrapper which works like other package managers(apt-get/yum/dnf)
 app-text/simplenote 2.6.0: The simplest way to keep notes

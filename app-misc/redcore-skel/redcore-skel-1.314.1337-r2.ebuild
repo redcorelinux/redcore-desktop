@@ -14,6 +14,7 @@ KEYWORDS="amd64 x86"
 IUSE=""
 DEPEND=""
 RDEPEND="
+	media-fonts/jetbrains-mono
 	media-fonts/roboto
 	x11-themes/material-icon-theme
 	x11-themes/numix-icon-theme
