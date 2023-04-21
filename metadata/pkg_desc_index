@@ -5,7 +5,7 @@ app-admin/vasile 2.1812.2: Versatile Advanced Script for ISO and Latest Enchantm
 app-arch/unp 2.0_pre9-r1: Script for unpacking various file formats
 app-backup/timeshift 22.11.1-r2: A system restore utility for Linux
 app-emulation/steam 1.0.0.71-r2: Digital distribution client bootstrap package
-app-emulation/virtualbox-modules 7.0.6: Kernel Modules for Virtualbox
+app-emulation/virtualbox-modules 7.0.8: Kernel Modules for Virtualbox
 app-misc/calamares-config-redcore 1.314.1337-r3: Redcore Linux Calamares modules config
 app-misc/geoclue 2.7.0-r5: A location information D-Bus service
 app-misc/redcore-live 1.314.1337: Redcore Linux live scripts
@@ -68,7 +68,7 @@ sys-kernel/linux-sources-redcore 6.2.12: Redcore Linux Kernel Sources
 sys-kernel/linux-sources-redcore-lts 5.10.178 5.15.108 6.1.25: Redcore Linux LTS Kernel Sources
 sys-kernel/nvidia-drivers-dkms 390.157-r2 470.182.03 515.105.01 525.105.17: NVIDIA driver sources for linux
 sys-kernel/vhba-dkms 20211218: Virtual (SCSI) Host Bus Adapter kernel module for the CDEmu suite sources
-sys-kernel/virtualbox-modules-dkms 7.0.6: Kernel Modules source for Virtualbox
+sys-kernel/virtualbox-modules-dkms 7.0.8: Kernel Modules source for Virtualbox
 sys-kernel/zfs-dkms 2.1.11: ZFS sources for linux
 sys-libs/binutils-libs 2.39-r4: Core binutils libraries (libbfd, libopcodes, libiberty) for external packages
 sys-libs/glibc 2.36-r5: GNU libc C library
