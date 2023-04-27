@@ -3,7 +3,7 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{8,9,10} )
+PYTHON_COMPAT=( python3_{9..11} )
 
 inherit eutils python-single-r1 git-r3
 
@@ -12,7 +12,7 @@ HOMEPAGE="http://redcorelinux.org"
 
 EGIT_REPO_URI="https://gitlab.com/redcore/sisyphus.git"
 EGIT_BRANCH="master"
-EGIT_COMMIT="0b4cdf8f6b57160fd77c3a45165fdb7fa371e31c"
+EGIT_COMMIT="c07b06aa7ab944b5fee70d5a37ef60a45ff1c24b"
 
 LICENSE="GPL-2"
 SLOT="0"
