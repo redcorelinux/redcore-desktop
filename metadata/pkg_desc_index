@@ -18,7 +18,7 @@ dev-go/protoc-gen-go-grpc 1.2.0: This tool generates Go language bindings of ser
 dev-libs/libdbusmenu-qt 0.9.3_pre20160218-r2: A library providing Qt implementation of DBusMenu specification (meta mackage)
 dev-libs/libdbusmenu-qt5 0.9.3_pre20160218-r3: Library providing Qt implementation of DBusMenu specification
 dev-python/animation 0.0.5-r4: Tools for terminal-based wait animations
-dev-python/click 7.1.2-r100: A Python package for creating beautiful command line interfaces
+dev-python/click 7.1.2-r101: A Python package for creating beautiful command line interfaces
 dev-python/sh 1.12.14-r5: Python process launching
 dev-python/typer 0.2.1-r3: Build great CLIs. Easy to code. Based on Python type hints
 dev-python/wget 2.2-r3: Python library for downloading from http URLs
