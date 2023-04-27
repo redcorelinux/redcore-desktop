@@ -20,7 +20,7 @@ dev-libs/libdbusmenu-qt5 0.9.3_pre20160218-r3: Library providing Qt implementati
 dev-python/animation 0.0.5-r4: Tools for terminal-based wait animations
 dev-python/click 7.1.2-r101: A Python package for creating beautiful command line interfaces
 dev-python/sh 1.12.14-r5: Python process launching
-dev-python/typer 0.2.1-r3: Build great CLIs. Easy to code. Based on Python type hints
+dev-python/typer 0.2.1-r4: Build great CLIs. Easy to code. Based on Python type hints
 dev-python/wget 2.2-r3: Python library for downloading from http URLs
 gui-libs/display-manager-init 1.1.2-r1: RC init files for starting display and login managers
 kde-plasma/kinfocenter 5.27.4-r5: Utility providing information about the computer hardware
