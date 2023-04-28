@@ -1,32 +1,27 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
-GNOME2_EAUTORECONF="yes"
+EAPI=8
 
-inherit gnome2 multilib multilib-minimal virtualx
+inherit gnome2 meson-multilib multilib virtualx
 
 DESCRIPTION="Gimp ToolKit +"
 HOMEPAGE="https://www.gtk.org/"
 
 LICENSE="LGPL-2+"
 SLOT="3"
-IUSE="aqua broadway colord cups examples gtk-doc +introspection sysprof test vim-syntax wayland +X xinerama"
+IUSE="aqua broadway cloudproviders colord cups examples gtk-doc +introspection sysprof test vim-syntax wayland +X xinerama"
 REQUIRED_USE="
 	|| ( aqua wayland X )
+	test? ( X )
 	xinerama? ( X )
 "
+RESTRICT="!test? ( test )"
 
-KEYWORDS="~alpha amd64 arm arm64 hppa ~ia64 ~loong ~mips ppc ppc64 ~riscv ~s390 sparc x86 ~amd64-linux ~x86-linux ~ppc-macos ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
+KEYWORDS="~alpha amd64 arm arm64 ~hppa ~ia64 ~loong ~mips ppc ppc64 ~riscv sparc x86 ~amd64-linux ~x86-linux ~ppc-macos ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
 
-# Upstream wants us to do their job:
-# https://bugzilla.gnome.org/show_bug.cgi?id=768662#c1
-RESTRICT="test"
-
-# FIXME: introspection data is built against system installation of gtk+:3,
-# bug #????
 COMMON_DEPEND="
-	>=dev-libs/atk-2.32.0[introspection?,${MULTILIB_USEDEP}]
+	>=app-accessibility/at-spi2-core-2.46.0[introspection?,${MULTILIB_USEDEP}]
 	>=dev-libs/fribidi-0.19.7[${MULTILIB_USEDEP}]
 	>=dev-libs/glib-2.57.2:2[${MULTILIB_USEDEP}]
 	media-libs/fontconfig[${MULTILIB_USEDEP}]
@@ -38,19 +33,19 @@ COMMON_DEPEND="
 	>=x11-libs/pango-1.44.0[introspection?,${MULTILIB_USEDEP}]
 	x11-misc/shared-mime-info
 
+	cloudproviders? ( net-libs/libcloudproviders[${MULTILIB_USEDEP}] )
 	colord? ( >=x11-misc/colord-0.1.9:0=[${MULTILIB_USEDEP}] )
 	cups? ( >=net-print/cups-2.0[${MULTILIB_USEDEP}] )
 	introspection? ( >=dev-libs/gobject-introspection-1.39:= )
 	sysprof? ( >=dev-util/sysprof-capture-3.33.2:3[${MULTILIB_USEDEP}] )
 	wayland? (
 		>=dev-libs/wayland-1.14.91[${MULTILIB_USEDEP}]
-		>=dev-libs/wayland-protocols-1.17
+		>=dev-libs/wayland-protocols-1.21
 		media-libs/mesa[wayland,${MULTILIB_USEDEP}]
 		>=x11-libs/libxkbcommon-0.2[${MULTILIB_USEDEP}]
 	)
 	X? (
-		>=app-accessibility/at-spi2-atk-2.15.1[${MULTILIB_USEDEP}]
-		media-libs/mesa[X(+),${MULTILIB_USEDEP}]
+		media-libs/libglvnd[X(+),${MULTILIB_USEDEP}]
 		x11-libs/libX11[${MULTILIB_USEDEP}]
 		x11-libs/libXcomposite[${MULTILIB_USEDEP}]
 		x11-libs/libXcursor[${MULTILIB_USEDEP}]
@@ -69,11 +64,8 @@ DEPEND="${COMMON_DEPEND}
 	)
 	X? ( x11-base/xorg-proto )
 "
-# gtk+-3.2.2 breaks Alt key handling in <=x11-libs/vte-0.30.1:2.90
-# gtk+-3.3.18 breaks scrolling in <=x11-libs/vte-0.31.0:2.90
 RDEPEND="${COMMON_DEPEND}
 	>=dev-util/gtk-update-icon-cache-3
-	!<x11-libs/vte-0.31.0:2.90
 "
 # librsvg for svg icons (PDEPEND to avoid circular dep), bug #547710
 PDEPEND="
@@ -105,103 +97,52 @@ MULTILIB_CHOST_TOOLS=(
 
 PATCHES=(
 	# gtk-update-icon-cache is installed by dev-util/gtk-update-icon-cache
-	"${FILESDIR}"/${PN}-3.24.25-update-icon-cache.patch
-
-	# Fix broken autotools logic
-	"${FILESDIR}"/${PN}-3.22.20-libcloudproviders-automagic.patch
+	"${FILESDIR}"/${PN}-3.24.36-update-icon-cache.patch
 )
 
-strip_builddir() {
-	local rule=$1
-	shift
-	local directory=$1
-	shift
-	sed -e "s/^\(${rule} =.*\)${directory}\(.*\)$/\1\2/" -i $@ \
-		|| die "Could not strip director ${directory} from build."
-}
-
-src_prepare() {
-	if ! use test ; then
-		# don't waste time building tests
-		strip_builddir SRC_SUBDIRS testsuite Makefile.{am,in}
-
-		# the tests dir needs to be build now because since commit
-		# 7ff3c6df80185e165e3bf6aa31bd014d1f8bf224 tests/gtkgears.o needs to be there
-		# strip_builddir SRC_SUBDIRS tests Makefile.{am,in}
-	fi
-
-	if ! use examples; then
-		# don't waste time building demos
-		strip_builddir SRC_SUBDIRS demos Makefile.{am,in}
-		strip_builddir SRC_SUBDIRS examples Makefile.{am,in}
-	fi
-
-	gnome2_src_prepare
-}
-
 multilib_src_configure() {
-	local myconf=(
-		$(use_enable aqua quartz-backend)
-		$(use_enable broadway broadway-backend)
-		$(use_enable colord)
-		$(use_enable cups cups auto)
-		$(multilib_native_use_enable gtk-doc)
-		$(multilib_native_use_enable introspection)
-		$(use_enable sysprof profiler)
-		$(use_enable wayland wayland-backend)
-		$(use_enable X x11-backend)
-		$(use_enable X xcomposite)
-		$(use_enable X xdamage)
-		$(use_enable X xfixes)
-		$(use_enable X xkb)
-		$(use_enable X xrandr)
-		$(use_enable xinerama)
-		# cloudprovider is not packaged in Gentoo yet
-		--disable-cloudproviders
-		--disable-papi
-		--enable-man
-		--with-xml-catalog="${EPREFIX}"/etc/xml/catalog
-		# need libdir here to avoid a double slash in a path that libtool doesn't
-		# grok so well during install (// between $EPREFIX and usr ...)
-		# TODO: Is this still the case?
-		--libdir="${EPREFIX}"/usr/$(get_libdir)
-		CUPS_CONFIG="${EPREFIX}/usr/bin/${CHOST}-cups-config"
+	local emesonargs=(
+		$(meson_use aqua quartz_backend)
+		$(meson_use broadway broadway_backend)
+		$(meson_use cloudproviders)
+		$(meson_use examples demos)
+		$(meson_use examples)
+		$(meson_native_use_bool gtk-doc gtk_doc)
+		$(meson_native_use_bool introspection)
+		$(meson_use sysprof profiler)
+		$(meson_use wayland wayland_backend)
+		$(meson_use X x11_backend)
+		-Dcolord=$(usex colord yes no)
+		-Dprint_backends=$(usex cups cups,file,lpr file,lpr)
+		-Dxinerama=$(usex xinerama yes no)
+		# Include backend immodules into gtk itself, to avoid problems like
+		# https://gitlab.gnome.org/GNOME/gnome-shell/issues/109 from a
+		# user overridden GTK_IM_MODULE envvar
+		-Dbuiltin_immodules=backend
+		-Dman=true
+		$(meson_use test tests)
+		-Dtracker3=false
 	)
+	meson_src_configure
+}
 
-	if use wayland; then
-		myconf+=(
-			# Include wayland immodule into gtk itself, to avoid problems like
-			# https://gitlab.gnome.org/GNOME/gnome-shell/issues/109 from a
-			# user overridden GTK_IM_MODULE envvar
-			--with-included-immodules=wayland
-		)
-	fi;
-
-	ECONF_SOURCE=${S} gnome2_src_configure "${myconf[@]}"
-
-	# work-around gtk-doc out-of-source brokedness
-	if multilib_is_native_abi; then
-		local d
-		for d in gdk gtk libgail-util; do
-			ln -s "${S}"/docs/reference/${d}/html docs/reference/${d}/html || die
-		done
-	fi
+multilib_src_compile() {
+	meson_src_compile
 }
 
 multilib_src_test() {
-	"${EROOT}${GLIB_COMPILE_SCHEMAS}" --allow-any-name "${S}/gtk" || die
-	GSETTINGS_SCHEMA_DIR="${S}/gtk" virtx emake check
+	virtx meson_src_test
 }
 
 multilib_src_install() {
-	gnome2_src_install
+	meson_src_install
 }
 
 multilib_src_install_all() {
 	insinto /etc/gtk-3.0
 	doins "${FILESDIR}"/settings.ini
-	# Skip README.{in,commits,win32} that would get installed by default
-	DOCS=( AUTHORS ChangeLog NEWS README )
+	# Skip README.win32.md that would get installed by default
+	DOCS=( NEWS README.md )
 	einstalldocs
 }
 
