@@ -16,7 +16,7 @@ SRC_URI="https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-${PV}.tar.xz"
 KEYWORDS=""
 LICENSE="GPL-2"
 SLOT="${KV_MAJOR}"
-IUSE=""
+IUSE="~amd64"
 
 RESTRICT="strip mirror"
 DEPEND="
