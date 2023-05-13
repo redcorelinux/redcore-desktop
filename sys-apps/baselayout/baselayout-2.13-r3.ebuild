@@ -20,6 +20,7 @@ SLOT="0"
 IUSE="build +split-usr"
 
 DEPEND="acct-group/smbshare
+	sys-apps/fakeroot
 	!net-fs/sambacfg
 	!sys-boot/grubcfg
 	!sys-kernel/dracutcfg"
