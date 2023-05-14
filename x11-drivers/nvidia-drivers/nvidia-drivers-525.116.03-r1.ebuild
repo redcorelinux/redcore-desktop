@@ -37,6 +37,7 @@ RDEPEND="
 	!!x11-drivers/nvidia-drivers:390
 	!!x11-drivers/nvidia-drivers:470
 	!!x11-drivers/nvidia-drivers:515
+	!!x11-drivers/nvidia-drivers:530
 	acpi? ( sys-power/acpid )
 	dkms? ( ~sys-kernel/${PN}-dkms-${PV}:${SLOT} )
 	wayland? (

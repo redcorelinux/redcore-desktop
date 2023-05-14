@@ -11,10 +11,10 @@ DESCRIPTION="NVIDIA Accelerated Graphics Driver"
 SRC_URI="amd64? ( ${NV_URI}Linux-x86_64/${PV}/${AMD64_NV_PACKAGE}.run )"
 
 EMULTILIB_PKG="true"
-KEYWORDS="-* ~amd64"
 RESTRICT="bindist mirror strip"
+KEYWORDS="-* ~amd64"
 LICENSE="GPL-2 NVIDIA-r2"
-SLOT="515"
+SLOT="470"
 
 IUSE="acpi +dkms multilib +tools wayland +X"
 REQUIRED_USE="tools? ( X )"
@@ -35,13 +35,13 @@ RDEPEND="
 	${COMMON}
 	>=virtual/opencl-3
 	!!x11-drivers/nvidia-drivers:390
-	!!x11-drivers/nvidia-drivers:470
+	!!x11-drivers/nvidia-drivers:515
 	!!x11-drivers/nvidia-drivers:525
+	!!x11-drivers/nvidia-drivers:530
 	acpi? ( sys-power/acpid )
 	dkms? ( ~sys-kernel/${PN}-dkms-${PV}:${SLOT} )
 	wayland? (
-		gui-libs/egl-gbm
-		>=gui-libs/egl-wayland-1.1.10
+		~gui-libs/egl-wayland-1.1.7
 	)
 	X? (
 		>=x11-libs/libX11-1.6.2[${MULTILIB_USEDEP}]
@@ -132,6 +132,7 @@ src_install-libs() {
 			"libnvidia-glcore.so.${NV_SOVER}"
 			"libnvidia-glsi.so.${NV_SOVER}"
 			"libnvidia-glvkspirv.so.${NV_SOVER}"
+			"libnvidia-ifr.so.${NV_SOVER}"
 			"libnvidia-opencl.so.${NV_SOVER}"
 			"libnvidia-ptxjitcompiler.so.${NV_SOVER}"
 			"libnvidia-opticalflow.so.${NV_SOVER}"
@@ -142,6 +143,7 @@ src_install-libs() {
 
 		if has_multilib_profile && [[ ${ABI} == "amd64" ]]; then
 			NV_GLX_LIBRARIES+=(
+				"libnvidia-cbl.so.${NV_SOVER}"
 				"libnvidia-ngx.so.${NV_SOVER}"
 				"libnvidia-rtcore.so.${NV_SOVER}"
 				"libnvoptix.so.${NV_SOVER}"
@@ -157,8 +159,6 @@ src_install-libs() {
 src_install() {
 	donvidia ${NV_OBJ}/libnvidia-cfg.so.${NV_SOVER}
 	donvidia ${NV_OBJ}/libnvidia-fbc.so.${NV_SOVER}
-	donvidia ${NV_OBJ}/libnvidia-nvvm.so.${NV_SOVER}
-	donvidia ${NV_OBJ}/libnvidia-vulkan-producer.so.${NV_SOVER}
 	donvidia ${NV_OBJ}/libnvcuvid.so.${NV_SOVER}
 	donvidia ${NV_OBJ}/libnvidia-encode.so.${NV_SOVER}
 
@@ -213,8 +213,8 @@ src_install() {
 	doexe ${NV_OBJ}/nvidia-smi
 	doexe ${NV_OBJ}/nvidia-modprobe
 
-	#fowners root:video /opt/bin/nvidia-modprobe
-	#fperms 4710 /opt/bin/nvidia-modprobe
+	fowners root:video /opt/bin/nvidia-modprobe
+	fperms 4710 /opt/bin/nvidia-modprobe
 	dosym /{opt,usr}/bin/nvidia-modprobe
 
 	newinitd "${FILESDIR}/nvidia-smi.init" nvidia-smi
