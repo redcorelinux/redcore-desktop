@@ -10,8 +10,8 @@ app-misc/calamares-config-redcore 1.314.1337-r3: Redcore Linux Calamares modules
 app-misc/geoclue 2.7.0-r5: A location information D-Bus service
 app-misc/redcore-live 1.314.1337: Redcore Linux live scripts
 app-misc/redcore-skel 1.314.1337-r2: Redcore Linux skel tree
-app-portage/sisyphus 6.2304.0-r1: A simple portage python wrapper which works like other package managers(apt-get/yum/dnf)
-app-portage/sisyphus-qt 6.2304.0-r1: A simple portage python wrapper which works like other package managers(apt-get/yum/dnf)
+app-portage/sisyphus 6.2305.0: A simple portage python wrapper which works like other package managers(apt-get/yum/dnf)
+app-portage/sisyphus-qt 6.2305.0: A simple portage python wrapper which works like other package managers(apt-get/yum/dnf)
 app-text/simplenote 2.6.0: The simplest way to keep notes
 dev-go/go-protobuf 1.5.2: Go support for Google's protocol buffers
 dev-go/protoc-gen-go-grpc 1.2.0: This tool generates Go language bindings of services in protobuf definition files for gRPC
