@@ -33,15 +33,12 @@ COMMON_DEPEND="
 	elogind? ( sys-auth/elogind )
 	havege? ( sys-apps/haveged )
 	sys-process/psmisc
-	!<sys-process/procps-3.3.9-r2
 	selinux? (
 		sys-apps/policycoreutils
 		>=sys-libs/libselinux-2.6
 	)
 	settingsd? ( app-admin/openrc-settingsd )
-	amd64? ( splash? ( sys-boot/plymouth-openrc-plugin ) )
-	!<sys-apps/baselayout-2.1-r1
-	!<sys-fs/udev-init-scripts-27"
+	amd64? ( splash? ( sys-boot/plymouth-openrc-plugin ) )"
 DEPEND="${COMMON_DEPEND}
 	virtual/os-headers
 	ncurses? ( virtual/pkgconfig )"
@@ -59,8 +56,6 @@ RDEPEND="${COMMON_DEPEND}
 		>=sec-policy/selinux-base-policy-2.20170204-r4
 		>=sec-policy/selinux-openrc-2.20170204-r4
 	)
-	!<app-shells/gentoo-bashcomp-20180302
-	!<app-shells/gentoo-zsh-completions-20180228
 "
 
 PDEPEND="netifrc? ( net-misc/netifrc )"
@@ -75,8 +70,8 @@ src_prepare() {
 
 src_configure() {
 	local emesonargs=(
-	$(meson_feature audit)
-	"-Dbranding=\"Redcore Linux Hardened\""
+		$(meson_feature audit)
+		"-Dbranding=\"Redcore Linux Hardened\""
 		$(meson_use newnet)
 		-Dos=Linux
 		$(meson_use pam)
