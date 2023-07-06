@@ -45,7 +45,6 @@ PATCHES=(
 	"${FILESDIR}"/"${KV_MAJOR}"-iwlwifi-use-debug-for-debug-infos.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-radeon_dp_aux_transfer_native-no-ratelimited_debug.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-revert-parts-of-a00ec3874e7d326ab2dffbed92faddf6a77a84e9-no-Intel-NO.patch
-	"${FILESDIR}"/"${KV_MAJOR}"-uksm.patch
 )
 
 S="${WORKDIR}"/linux-"${PV}"
