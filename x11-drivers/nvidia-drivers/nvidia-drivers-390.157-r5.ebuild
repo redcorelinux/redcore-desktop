@@ -29,15 +29,14 @@ COMMON="
 	)"
 DEPEND="${COMMON}"
 PDEPEND="
-	tools? ( ~x11-misc/nvidia-settings-${PV}:${SLOT} )
+	tools? ( x11-misc/nvidia-settings:${SLOT} )
 "
 RDEPEND="
 	${COMMON}
 	>=virtual/opencl-3
 	!!x11-drivers/nvidia-drivers:470
-	!!x11-drivers/nvidia-drivers:515
 	!!x11-drivers/nvidia-drivers:525
-	!!x11-drivers/nvidia-drivers:530
+	!!x11-drivers/nvidia-drivers:535
 	acpi? ( sys-power/acpid )
 	dkms? ( ~sys-kernel/${PN}-dkms-${PV}:${SLOT} )
 	wayland? ( dev-libs/wayland[${MULTILIB_USEDEP}] )

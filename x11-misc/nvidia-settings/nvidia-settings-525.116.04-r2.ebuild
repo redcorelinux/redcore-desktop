@@ -10,7 +10,7 @@ HOMEPAGE="http://www.nvidia.com/"
 SRC_URI="https://github.com/NVIDIA/nvidia-settings/archive/refs/tags/${PV}.tar.gz -> nvidia-settings-${PV}.tar.gz"
 
 LICENSE="GPL-2"
-SLOT="530"
+SLOT="525"
 KEYWORDS="-* amd64"
 IUSE=""
 
@@ -35,9 +35,8 @@ COMMON_DEPEND="
 RDEPEND="${COMMON_DEPEND}
 	!!x11-misc/nvidia-settings:390
 	!!x11-misc/nvidia-settings:470
-	!!x11-misc/nvidia-settings:515
-	!!x11-misc/nvidia-settings:525
-	~x11-drivers/nvidia-drivers-${PV}:${SLOT}"
+	!!x11-misc/nvidia-settings:535
+	x11-drivers/nvidia-drivers:${SLOT}"
 DEPEND="${RDEPEND}
 	virtual/pkgconfig
 	x11-base/xorg-proto"

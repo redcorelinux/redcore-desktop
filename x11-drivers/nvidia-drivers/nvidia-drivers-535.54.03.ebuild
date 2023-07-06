@@ -14,7 +14,7 @@ EMULTILIB_PKG="true"
 KEYWORDS="-* ~amd64"
 RESTRICT="bindist mirror strip"
 LICENSE="GPL-2 NVIDIA-r2"
-SLOT="515"
+SLOT="535"
 
 IUSE="acpi +dkms multilib +tools wayland +X"
 REQUIRED_USE="tools? ( X )"
@@ -37,7 +37,6 @@ RDEPEND="
 	!!x11-drivers/nvidia-drivers:390
 	!!x11-drivers/nvidia-drivers:470
 	!!x11-drivers/nvidia-drivers:525
-	!!x11-drivers/nvidia-drivers:530
 	acpi? ( sys-power/acpid )
 	dkms? ( ~sys-kernel/${PN}-dkms-${PV}:${SLOT} )
 	wayland? (
@@ -50,7 +49,7 @@ RDEPEND="
 		sys-libs/zlib[${MULTILIB_USEDEP}]
 	)
 "
-PDEPEND="tools? ( ~x11-misc/nvidia-settings-${PV}:${SLOT} )
+PDEPEND="tools? ( x11-misc/nvidia-settings:${SLOT} )
 "
 
 QA_PREBUILT="opt/* usr/lib*"
@@ -214,8 +213,8 @@ src_install() {
 	doexe ${NV_OBJ}/nvidia-smi
 	doexe ${NV_OBJ}/nvidia-modprobe
 
-	#fowners root:video /opt/bin/nvidia-modprobe
-	#fperms 4710 /opt/bin/nvidia-modprobe
+	fowners root:video /opt/bin/nvidia-modprobe
+	fperms 4710 /opt/bin/nvidia-modprobe
 	dosym /{opt,usr}/bin/nvidia-modprobe
 
 	newinitd "${FILESDIR}/nvidia-smi.init" nvidia-smi
