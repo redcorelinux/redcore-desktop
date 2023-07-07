@@ -125,7 +125,6 @@ src_install-libs() {
 			"libOpenCL.so.1.0.0 ${CL_ROOT}"
 			"libcuda.so.${NV_SOVER}"
 			"libnvcuvid.so.${NV_SOVER}"
-			"libnvidia-compiler.so.${NV_SOVER}"
 			"libnvidia-allocator.so.${NV_SOVER}"
 			"libnvidia-eglcore.so.${NV_SOVER}"
 			"libnvidia-encode.so.${NV_SOVER}"
