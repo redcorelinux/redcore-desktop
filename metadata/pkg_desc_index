@@ -57,9 +57,9 @@ sys-fs/zfs-utils 2.1.11: Userland utilities for ZFS Linux kernel module
 sys-kernel/bcmwl-dkms 6.30.223.271-r4: Broadcom's IEEE 802.11a/b/g/n hybrid Linux device driver source
 sys-kernel/dkms 2.3-r2: Dynamic Kernel Module Support
 sys-kernel/dracut 056-r10: Generic initramfs generation tool
-sys-kernel/linux-image-redcore 6.2.16 6.3.12: Redcore Linux Kernel Image
+sys-kernel/linux-image-redcore 6.2.16 6.3.12 6.4.2: Redcore Linux Kernel Image
 sys-kernel/linux-image-redcore-lts 5.10.186 5.15.120 6.1.38: Redcore Linux LTS Kernel Image
-sys-kernel/linux-sources-redcore 6.2.16 6.3.12: Redcore Linux Kernel Sources
+sys-kernel/linux-sources-redcore 6.2.16 6.3.12 6.4.2: Redcore Linux Kernel Sources
 sys-kernel/linux-sources-redcore-lts 5.10.186 5.15.120 6.1.38: Redcore Linux LTS Kernel Sources
 sys-kernel/nvidia-drivers-dkms 390.157-r5 470.199.02-r2 525.125.06-r1 535.54.03: NVIDIA driver sources for linux
 sys-kernel/vhba-dkms 20211218-r2: Virtual (SCSI) Host Bus Adapter kernel module for the CDEmu suite sources
