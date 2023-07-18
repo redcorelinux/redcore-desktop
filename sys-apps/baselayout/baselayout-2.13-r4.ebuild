@@ -266,7 +266,7 @@ src_prepare() {
 	echo "LDPATH='${ldpaths#:}'" >> etc/env.d/50baselayout
 
 	# rc-scripts version for testing of features that *should* be present
-	echo "Redcore Linux Hardened - rolling" > etc/redcore-release
+	echo "Redcore Linux Hardened - rolling_boulder_uphill" > etc/redcore-release
 }
 
 src_install() {
@@ -340,6 +340,10 @@ src_install() {
 	insinto /lib/udev/rules.d
 	newins ${FILESDIR}/ioschedcfg 60-iosched.rules
 	#
+	# Xorg
+	dodir /usr/share/X11/xorg.conf.d
+	insinto /usr/share/X11/xorg.conf.d
+	newins ${FILESDIR}/xorgcfg 80-synaptics-overrides.conf
 	##############################################
 }
 

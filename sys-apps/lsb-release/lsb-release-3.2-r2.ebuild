@@ -37,7 +37,7 @@ src_install() {
 	dodir /etc
 	cat > "${D}/etc/lsb-release" <<- EOF
 		DISTRIB_ID="Redcore"
-		DISTRIB_RELEASE="rolling"
-		DISTRIB_DESCRIPTION="Redcore Linux Hardened - rolling"
+		DISTRIB_RELEASE="rolling_boulder_uphill"
+		DISTRIB_DESCRIPTION="Redcore Linux Hardened - rolling_boulder_uphill"
 	EOF
 }

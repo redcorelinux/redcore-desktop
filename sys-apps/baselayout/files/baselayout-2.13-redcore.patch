@@ -11,7 +11,7 @@ diff -Nur a/Makefile b/Makefile
  	$(INSTALL_DIR) $(DESTDIR)/usr/lib
  	ln -snf ../usr/lib/os-release ${DESTDIR}/etc/os-release
 -	./make_os_release ${PV} > $(DESTDIR)/usr/lib/os-release
-+	./make_os_release rolling > $(DESTDIR)/usr/lib/os-release
++	./make_os_release rolling_boulder_uphill > $(DESTDIR)/usr/lib/os-release
  	$(INSTALL_DIR) $(DESTDIR)/usr/share/baselayout
  	cp -pPR share/* $(DESTDIR)/usr/share/baselayout/
  	ln -snf ../proc/self/mounts $(DESTDIR)/etc/mtab

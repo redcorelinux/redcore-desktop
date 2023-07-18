@@ -1,6 +1,6 @@
 # Enable clicks using touchpad (https://bugs.redcorelinux.org/show_bug.cgi?id=48)
 
-Section  "InputClass"
+Section "InputClass"
 	Identifier  "touchpad overrides"
 	MatchDriver  "synaptics"
 	Option  "TapButton1"  "1"
