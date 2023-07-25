@@ -67,10 +67,10 @@ sys-kernel/vhba-dkms 20211218-r3: Virtual (SCSI) Host Bus Adapter kernel module 
 sys-kernel/virtualbox-modules-dkms 7.0.10: Kernel Modules source for Virtualbox
 sys-kernel/zfs-dkms 2.1.12: ZFS sources for linux
 sys-power/radeon-profile 20200824-r10: Read current clocks of ATi/AMD Radeon cards
-virtual/libudev 314.1337: Virtual for libudev providers
+virtual/libudev 314.1337-r1: Virtual for libudev providers
 virtual/notification-daemon 1.334.1337: Virtual (dummy package) for notification daemon dbus service
-virtual/tmpfiles 1.314.1337: Virtual to select between different tmpfiles.d handlers
-virtual/udev 314.1337: Virtual to select between different udev daemon providers
+virtual/tmpfiles 1.314.1337-r1: Virtual to select between different tmpfiles.d handlers
+virtual/udev 314.1337-r1: Virtual to select between different udev daemon providers
 x11-base/xorg-drivers 21.1-r100: Meta package containing deps on all xorg drivers (dummy package)
 x11-drivers/nvidia-drivers 390.157-r5 470.199.02-r2 525.125.06-r2 535.54.03-r1: NVIDIA Accelerated Graphics Driver
 x11-libs/gtk+ 2.24.33-r3 3.24.37-r1: Gimp ToolKit +
