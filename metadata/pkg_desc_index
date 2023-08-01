@@ -39,7 +39,7 @@ net-dialup/rp-pppoe 4.0-r5: A user-mode PPPoE client and server suite for Linux
 net-misc/warpinator 1.4.5: Share files across the LAN
 net-print/lexmark-upd-ppd 1.0.0.20210304-r1: Lexmark universal printer driver PPDs
 net-wireless/broadcom-sta 6.30.223.271-r4: Broadcom's IEEE 802.11a/b/g/n hybrid Linux device driver
-sys-apps/baselayout 2.13-r5: Filesystem baselayout and init scripts
+sys-apps/baselayout 2.13-r6: Filesystem baselayout and init scripts
 sys-apps/firetools 0.9.64: Graphical user interface of app-emulation/firejail
 sys-apps/lsb-release 3.2-r3: LSB version query program
 sys-apps/openrc 0.47.1-r1: OpenRC manages the services, startup and shutdown of a host

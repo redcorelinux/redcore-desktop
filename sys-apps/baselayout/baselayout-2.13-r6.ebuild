@@ -266,7 +266,7 @@ src_prepare() {
 	echo "LDPATH='${ldpaths#:}'" >> etc/env.d/50baselayout
 
 	# rc-scripts version for testing of features that *should* be present
-	echo "Redcore Linux Hardened - rolling_boulder_uphill" > etc/redcore-release
+	echo "Redcore Linux Hardened - Rolling.Boulder.Uphill" > etc/redcore-release
 }
 
 src_install() {
