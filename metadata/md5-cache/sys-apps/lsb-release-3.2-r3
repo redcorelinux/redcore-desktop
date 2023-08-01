@@ -9,4 +9,4 @@ LICENSE=GPL-2
 SLOT=0
 SRC_URI=https://github.com/thkukuk/lsb-release_os-release/archive/refs/tags/v3.2.tar.gz -> lsb-release-3.2.tar.gz
 _eclasses_=prefix	eab3c99d77fe00506c109c8a736186f7
-_md5_=08f195ff3e6541b7dd61d8df7800a6e4
+_md5_=ddd0c4437e4b5449ca44b522c66cadcb

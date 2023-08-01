@@ -41,7 +41,7 @@ net-print/lexmark-upd-ppd 1.0.0.20210304-r1: Lexmark universal printer driver PP
 net-wireless/broadcom-sta 6.30.223.271-r4: Broadcom's IEEE 802.11a/b/g/n hybrid Linux device driver
 sys-apps/baselayout 2.13-r5: Filesystem baselayout and init scripts
 sys-apps/firetools 0.9.64: Graphical user interface of app-emulation/firejail
-sys-apps/lsb-release 3.2-r2: LSB version query program
+sys-apps/lsb-release 3.2-r3: LSB version query program
 sys-apps/openrc 0.47.1-r1: OpenRC manages the services, startup and shutdown of a host
 sys-auth/polkit-qt 0.113.0-r11: PolicyKit Qt API wrapper library (meta package)
 sys-auth/polkit-qt5 0.113.0-r5: Qt wrapper around polkit-1 client libraries
