@@ -34,6 +34,8 @@ RDEPEND="${DEPEND}
 	sys-apps/gentoo-functions"
 PDEPEND="qt5? ( ~app-portage/${PN}-qt-${PV} )"
 
+PATCHES=( "${FILESDIR}"/"${PN}"-makeopts.patch )
+
 src_install() {
 	emake DESTDIR="${D}"/ install-cli
 
@@ -48,14 +50,15 @@ src_install() {
 	doins "${FILESDIR}"/"${PN}"-mirrors-amd64.conf
 	doins "${FILESDIR}"/"${PN}"-mirrors-arm64.conf
 
-	doins "${FILESDIR}"/"${PN}".env.conf
-	doins "${FILESDIR}"/"${PN}".make.conf
-	doins "${FILESDIR}"/"${PN}".package.keywords
-	doins "${FILESDIR}"/"${PN}".package.env
-	doins "${FILESDIR}"/"${PN}".package.license
-	doins "${FILESDIR}"/"${PN}".package.mask
-	doins "${FILESDIR}"/"${PN}".package.unmask
-	doins "${FILESDIR}"/"${PN}".package.use
+	doins "${FILESDIR}"/"${PN}".build-env.conf
+	doins "${FILESDIR}"/"${PN}".make-conf.conf
+	doins "${FILESDIR}"/"${PN}".make-opts.conf
+	doins "${FILESDIR}"/"${PN}".package-keywords.conf
+	doins "${FILESDIR}"/"${PN}".package-env.conf
+	doins "${FILESDIR}"/"${PN}".package-license.conf
+	doins "${FILESDIR}"/"${PN}".package-mask.conf
+	doins "${FILESDIR}"/"${PN}".package-unmask.conf
+	doins "${FILESDIR}"/"${PN}".package-use.conf
 
 	# enforce the best available python implementation (CLI)
 	python_setup
