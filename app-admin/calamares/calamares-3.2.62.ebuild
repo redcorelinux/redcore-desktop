@@ -67,10 +67,6 @@ RDEPEND="${COMMON_DEPEND}
 	config? ( app-misc/calamares-config-redcore )
 "
 
-PATCHES="
-	${FILESDIR}/calamares-dont-run-locale-gen.patch
-"
-
 src_prepare() {
 	ecm_src_prepare
 	export PYTHON_INCLUDE_DIRS="$(python_get_includedir)" \
