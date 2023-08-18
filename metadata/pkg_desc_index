@@ -58,9 +58,9 @@ sys-kernel/bcmwl-dkms 6.30.223.271-r5: Broadcom's IEEE 802.11a/b/g/n hybrid Linu
 sys-kernel/dkms 2.3-r2: Dynamic Kernel Module Support
 sys-kernel/dracut 056-r10: Generic initramfs generation tool
 sys-kernel/linux-image-redcore 6.3.13 6.4.11: Redcore Linux Kernel Image
-sys-kernel/linux-image-redcore-lts 5.10.190 5.15.126 6.1.45: Redcore Linux LTS Kernel Image
+sys-kernel/linux-image-redcore-lts 5.10.191 5.15.127 6.1.46: Redcore Linux LTS Kernel Image
 sys-kernel/linux-sources-redcore 6.3.13 6.4.11: Redcore Linux Kernel Sources
-sys-kernel/linux-sources-redcore-lts 5.10.190 5.15.126 6.1.45: Redcore Linux LTS Kernel Sources
+sys-kernel/linux-sources-redcore-lts 5.10.191 5.15.127 6.1.46: Redcore Linux LTS Kernel Sources
 sys-kernel/nvidia-drivers-dkms 390.157-r5 470.199.02-r2 525.125.06-r1 535.86.05: NVIDIA driver sources for linux
 sys-kernel/vhba-dkms 20211218-r3: Virtual (SCSI) Host Bus Adapter kernel module for the CDEmu suite sources
 sys-kernel/virtualbox-modules-dkms 7.0.10: Kernel Modules source for Virtualbox
