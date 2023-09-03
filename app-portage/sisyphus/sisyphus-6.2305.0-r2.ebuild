@@ -5,7 +5,7 @@ EAPI=7
 
 PYTHON_COMPAT=( python3_{9..11} )
 
-inherit eutils python-single-r1 git-r3
+inherit python-single-r1 git-r3
 
 DESCRIPTION="A simple portage python wrapper which works like other package managers(apt-get/yum/dnf)"
 HOMEPAGE="http://redcorelinux.org"
