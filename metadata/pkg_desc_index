@@ -55,7 +55,7 @@ sys-fs/vhba 20211218: Virtual (SCSI) Host Bus Adapter kernel module for the CDEm
 sys-fs/zfs 2.1.12: ZFS meta-package (Gentoo compatibility ebuild)
 sys-fs/zfs-utils 2.1.12: Userland utilities for ZFS Linux kernel module
 sys-kernel/bcmwl-dkms 6.30.223.271-r5: Broadcom's IEEE 802.11a/b/g/n hybrid Linux device driver source
-sys-kernel/dkms 2.3-r2: Dynamic Kernel Module Support
+sys-kernel/dkms 2.3-r3: Dynamic Kernel Module Support
 sys-kernel/dracut 056-r10: Generic initramfs generation tool
 sys-kernel/linux-image-redcore 6.3.13 6.4.11: Redcore Linux Kernel Image
 sys-kernel/linux-image-redcore-lts 5.10.191 5.15.127 6.1.46: Redcore Linux LTS Kernel Image
