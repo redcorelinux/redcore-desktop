@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
-PYTHON_COMPAT=( python3_{9..11} )
+PYTHON_COMPAT=( python3_{10..11} )
 PYTHON_REQ_USE="xml(+)"
 
 inherit meson python-any-r1 systemd vala xdg
@@ -18,7 +18,7 @@ IUSE="+introspection gtk-doc modemmanager vala zeroconf"
 REQUIRED_USE="vala? ( introspection )"
 
 DEPEND="
-	>=dev-libs/glib-2.44:2
+	>=dev-libs/glib-2.68:2
 	>=dev-libs/json-glib-0.14.0
 	>=net-libs/libsoup-3.0.0:3.0
 	introspection? ( >=dev-libs/gobject-introspection-1.54:= )

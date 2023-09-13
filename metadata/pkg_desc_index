@@ -7,7 +7,7 @@ app-backup/timeshift 22.11.1-r2: A system restore utility for Linux
 app-emulation/steam 1.0.0.71-r2: Digital distribution client bootstrap package
 app-emulation/virtualbox-modules 7.0.10: Kernel Modules for Virtualbox
 app-misc/calamares-config-redcore 1.314.1337-r3: Redcore Linux Calamares modules config
-app-misc/geoclue 2.7.0-r5: A location information D-Bus service
+app-misc/geoclue 2.7.1-r5: A location information D-Bus service
 app-misc/redcore-live 1.314.1337: Redcore Linux live scripts
 app-misc/redcore-skel 1.314.1337-r2: Redcore Linux skel tree
 app-portage/sisyphus 6.2305.0-r2: A simple portage python wrapper which works like other package managers(apt-get/yum/dnf)
