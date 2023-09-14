@@ -1,12 +1,12 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
 ECM_HANDBOOK="forceoptional"
-KFMIN=5.102.0
+KFMIN=5.106.0
 PVCUT=$(ver_cut 1-3)
-QTMIN=5.15.7
+QTMIN=5.15.9
 inherit ecm plasma.kde.org optfeature
 
 DESCRIPTION="Utility providing information about the computer hardware"
