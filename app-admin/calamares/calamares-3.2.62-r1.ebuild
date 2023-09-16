@@ -4,7 +4,7 @@
 EAPI=8
 
 ECM_TEST="true"
-PYTHON_COMPAT=( python3_{8,9,10} )
+PYTHON_COMPAT=( python3_{10..12} )
 inherit ecm python-single-r1
 
 DESCRIPTION="Distribution-independent installer framework"
