@@ -49,6 +49,7 @@ sys-boot/grub 2.04-r13: GNU GRUB boot loader
 sys-boot/os-prober 1.77-r10: Utility to detect other OSs on a set of drives
 sys-boot/plymouth 0.9.4-r11: Graphical boot animation (splash) and logger
 sys-boot/unetbootin-static 625-r4: Universal Netboot Installer creates Live USB systems for various OS distributions
+sys-devel/gcc 13.2.0-r10: The GNU Compiler Collection
 sys-fs/cryptsetup 2.6.1-r5: Tool to setup encrypted devices with dm-crypt
 sys-fs/gocryptfs 2.0.1-r1: Encrypted overlay filesystem written in Go
 sys-fs/vhba 20211218: Virtual (SCSI) Host Bus Adapter kernel module for the CDEmu suite
