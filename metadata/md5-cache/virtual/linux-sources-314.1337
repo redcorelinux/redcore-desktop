@@ -1,0 +1,8 @@
+DEFINED_PHASES=-
+DESCRIPTION=Virtual for Linux kernel sources
+EAPI=7
+IUSE=firmware
+KEYWORDS=amd64
+RDEPEND=firmware? ( sys-kernel/linux-firmware ) || ( sys-kernel/linux-sources-redcore sys-kernel/linux-sources-redcore-lts )
+SLOT=0
+_md5_=06ab1e926c80cfe96c99d69240d37f21
