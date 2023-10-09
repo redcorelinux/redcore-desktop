@@ -69,7 +69,7 @@ sys-kernel/virtualbox-modules-dkms 7.0.10-r2: Kernel Modules source for Virtualb
 sys-kernel/zfs-dkms 2.1.13: ZFS sources for linux
 sys-power/radeon-profile 20200824-r10: Read current clocks of ATi/AMD Radeon cards
 virtual/libudev 314.1337-r1: Virtual for libudev providers
-virtual/linux-sources 314.1337: Virtual for Linux kernel sources
+virtual/linux-sources 314.1337-r1: Virtual for Linux kernel sources
 virtual/notification-daemon 1.334.1337: Virtual (dummy package) for notification daemon dbus service
 virtual/tmpfiles 1.314.1337-r1: Virtual to select between different tmpfiles.d handlers
 virtual/udev 314.1337-r1: Virtual to select between different udev daemon providers
