@@ -5,7 +5,7 @@ app-admin/vasile 2.1812.2: Versatile Advanced Script for ISO and Latest Enchantm
 app-arch/unp 2.0_pre9-r1: Script for unpacking various file formats
 app-backup/timeshift 22.11.1-r2: A system restore utility for Linux
 app-emulation/steam 1.0.0.71-r3: Digital distribution client bootstrap package
-app-emulation/virtualbox-modules 7.0.10: Kernel Modules for Virtualbox
+app-emulation/virtualbox-modules 7.0.12: Kernel Modules for Virtualbox
 app-misc/calamares-config-redcore 1.314.1337-r4: Redcore Linux Calamares modules config
 app-misc/geoclue 2.7.1-r5: A location information D-Bus service
 app-misc/redcore-live 1.314.1337: Redcore Linux live scripts
