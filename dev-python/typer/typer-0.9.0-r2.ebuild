@@ -22,6 +22,8 @@ DEPEND="
 "
 RDEPEND="
 	dev-python/click[${PYTHON_USEDEP}]
+	dev-python/rich[${PYTHON_USEDEP}]
+	dev-python/shellingham[${PYTHON_USEDEP}]
 	dev-python/typing-extensions[${PYTHON_USEDEP}]
 "
 
