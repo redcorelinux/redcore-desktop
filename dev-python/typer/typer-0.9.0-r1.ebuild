@@ -21,8 +21,7 @@ DEPEND="
 	dev-python/setuptools[${PYTHON_USEDEP}]
 "
 RDEPEND="
-	<dev-python/click-8.1.0[${PYTHON_USEDEP}]
-	>=dev-python/click-8.0.0[${PYTHON_USEDEP}]
+	dev-python/click[${PYTHON_USEDEP}]
 	dev-python/typing-extensions[${PYTHON_USEDEP}]
 "
 

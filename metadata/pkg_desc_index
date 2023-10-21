@@ -19,11 +19,10 @@ dev-go/protoc-gen-go-grpc 1.2.0: This tool generates Go language bindings of ser
 dev-libs/libdbusmenu-qt 0.9.3_pre20160218-r2: A library providing Qt implementation of DBusMenu specification (meta mackage)
 dev-libs/libdbusmenu-qt5 0.9.3_pre20160218-r3: Library providing Qt implementation of DBusMenu specification
 dev-python/animation 0.0.5-r4: Tools for terminal-based wait animations
-dev-python/click 8.0.4: A Python package for creating beautiful command line interfaces
 dev-python/grpcio 1.59.0: High-performance RPC framework (python libraries)
 dev-python/grpcio-tools 1.59.0: Protobuf code generator for gRPC
 dev-python/sh 1.12.14-r5: Python process launching
-dev-python/typer 0.9.0: Build great CLIs. Easy to code. Based on Python type hints
+dev-python/typer 0.9.0-r1: Build great CLIs. Easy to code. Based on Python type hints
 dev-python/wget 2.2-r3: Python library for downloading from http URLs
 dev-python/zeroconf 0.82.1-r10: Pure Python Multicast DNS Service Discovery Library (Bonjour/Avahi compatible)
 gui-libs/display-manager-init 1.1.2-r1: RC init files for starting display and login managers
