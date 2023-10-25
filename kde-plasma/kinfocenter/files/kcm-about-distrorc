@@ -2,3 +2,5 @@
 Name=Redcore Linux Hardened
 LogoPath=/usr/share/kinfocenter/glogo-small.png
 Website=https://redcorelinux.org/
+Variant=Rolling Boulder Uphill
+Version=x86_64
