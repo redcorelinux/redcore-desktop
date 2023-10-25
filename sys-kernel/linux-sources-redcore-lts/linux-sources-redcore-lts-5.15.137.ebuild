@@ -5,9 +5,9 @@ EAPI=6
 
 inherit eutils
 
-EXTRAVERSION="redcore-lts-r1"
+EXTRAVERSION="redcore-lts"
 KV_FULL="${PV}-${EXTRAVERSION}"
-KV_MAJOR="5.10"
+KV_MAJOR="5.15"
 
 DESCRIPTION="Redcore Linux LTS Kernel Sources"
 HOMEPAGE="https://redcorelinux.org"
@@ -28,25 +28,23 @@ DEPEND="
 RDEPEND="${DEPEND}"
 
 PATCHES=(
-	"${FILESDIR}"/"${KV_MAJOR}"-ath10k-be-quiet.patch
-	"${FILESDIR}"/"${KV_MAJOR}"-ata-fix-NCQ-LOG-strings-and-move-to-debug.patch
-	"${FILESDIR}"/"${KV_MAJOR}"-radeon_dp_aux_transfer_native-no-ratelimited_debug.patch
-	"${FILESDIR}"/"${KV_MAJOR}"-acpi-use-kern_warning_even_when_error.patch
-	"${FILESDIR}"/"${KV_MAJOR}"-do_not_bug_the_next_18-years.patch
-	"${FILESDIR}"/"${KV_MAJOR}"-iwlwifi-use-debug-for-debug-infos.patch
-	"${FILESDIR}"/"${KV_MAJOR}"-compress-modules-zstd-support.patch
-	"${FILESDIR}"/"${KV_MAJOR}"-fix-bootconfig-makefile.patch
-	"${FILESDIR}"/"${KV_MAJOR}"-apic_vector-spam-in-debug-mode-only.patch
-	"${FILESDIR}"/"${KV_MAJOR}"-iwlwifi-fix-5e003982b07ae.patch
-	"${FILESDIR}"/"${KV_MAJOR}"-enable-new-amd-energy-driver-for-all-ryzen.patch
-	"${FILESDIR}"/"${KV_MAJOR}"-0001-Revert-hwmon-k10temp-Remove-support-for-displaying-v.patch
-	"${FILESDIR}"/"${KV_MAJOR}"-k10temp-fix-ZEN2-desktop-add-ZEN3-desktop.patch
-	"${FILESDIR}"/"${KV_MAJOR}"-add-amd-sfh-hid_driver.patch
-	"${FILESDIR}"/"${KV_MAJOR}"-add-sbtsi_driver.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-0001-Revert-cpufreq-Avoid-configuring-old-governors-as-de.patch
+	"${FILESDIR}"/"${KV_MAJOR}"-0001-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-C.patch
+	"${FILESDIR}"/"${KV_MAJOR}"-0002-PCI_Add_more_NVIDIA_controllers_to_the_MSI_masking_quirk.patch
+	"${FILESDIR}"/"${KV_MAJOR}"-0003-iommu_intel_do_deep_dma-unmapping_to_avoid_kernel-flooding.patch
+	"${FILESDIR}"/"${KV_MAJOR}"-0004-cpufreq_intel_pstate_ITMT_support_for_overclocked_system.patch
+	"${FILESDIR}"/"${KV_MAJOR}"-0005-Bluetooth_btintel_Fix_bdaddress_comparison_with_garbage_value.patch
+	"${FILESDIR}"/"${KV_MAJOR}"-0006-lg-laptop_Recognize_more_models.patch
+	"${FILESDIR}"/"${KV_MAJOR}"-acpi-use-kern_warning_even_when_error.patch
+	"${FILESDIR}"/"${KV_MAJOR}"-apic_vector-spam-in-debug-mode-only.patch
+	"${FILESDIR}"/"${KV_MAJOR}"-ata-fix-NCQ-LOG-strings-and-move-to-debug.patch
+	"${FILESDIR}"/"${KV_MAJOR}"-ath10k-be-quiet.patch
+	"${FILESDIR}"/"${KV_MAJOR}"-do_not_bug_the_next_18-years.patch
+	"${FILESDIR}"/"${KV_MAJOR}"-fix-bootconfig-makefile.patch
+	"${FILESDIR}"/"${KV_MAJOR}"-iwlwifi-fix-5e003982b07ae.patch
+	"${FILESDIR}"/"${KV_MAJOR}"-iwlwifi-use-debug-for-debug-infos.patch
+	"${FILESDIR}"/"${KV_MAJOR}"-radeon_dp_aux_transfer_native-no-ratelimited_debug.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-revert-parts-of-a00ec3874e7d326ab2dffbed92faddf6a77a84e9-no-Intel-NO.patch
-	"${FILESDIR}"/"${KV_MAJOR}"-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-C.patch
-	"${FILESDIR}"/"${KV_MAJOR}"-uksm.patch	
 )
 
 S="${WORKDIR}"/linux-"${PV}"
