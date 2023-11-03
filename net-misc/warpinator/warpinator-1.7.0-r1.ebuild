@@ -30,6 +30,10 @@ BDEPEND="
 
 S="${WORKDIR}/${PN}-master.lmde6"
 
+PATCHES=(
+	"${FILESDIR}/${PN}-bundled-grpcio-cython3.patch"
+)
+
 src_configure() {
 	local emesonargs=(
 		-Dinclude-firewall-mod=true
