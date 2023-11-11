@@ -23,19 +23,23 @@ REQUIRED_USE="trash? ( filemanager )"
 
 # Note: we prefer kde-frameworks/oxygen-icons over other icon sets, as the initial
 # install expects oxygen icons, until the user specifies otherwise (bug 543380)
+
+# For lxqt-themes there is no release 1.4.0 at this time.
+
 RDEPEND="
 	kde-frameworks/oxygen-icons
 	>=lxde-base/lxmenu-data-0.1.5
 	>=lxde-base/lxappearance-0.5.5
 	=lxqt-base/lxqt-config-${MY_PV}*
 	=lxqt-base/lxqt-globalkeys-${MY_PV}*
+	=lxqt-base/lxqt-menu-data-${MY_PV}*
 	=lxqt-base/lxqt-notificationd-${MY_PV}*
 	=lxqt-base/lxqt-panel-${MY_PV}*
 	=lxqt-base/lxqt-runner-${MY_PV}*
 	=lxqt-base/lxqt-session-${MY_PV}*
 	virtual/ttf-fonts
 	x11-terms/xterm
-	=x11-themes/lxqt-themes-${MY_PV}*
+	>=x11-themes/lxqt-themes-1.3.0
 	about? ( =lxqt-base/lxqt-about-${MY_PV}* )
 	admin? ( =lxqt-base/lxqt-admin-${MY_PV}* )
 	archiver? ( app-arch/lxqt-archiver )
