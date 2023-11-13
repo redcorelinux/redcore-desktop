@@ -32,6 +32,7 @@ S="${WORKDIR}/${PN}-master.lmde6"
 
 PATCHES=(
 	"${FILESDIR}/${PN}-bundled-grpcio-cython3.patch"
+	"${FILESDIR}/${PN}-system-paths.patch"
 )
 
 src_configure() {
