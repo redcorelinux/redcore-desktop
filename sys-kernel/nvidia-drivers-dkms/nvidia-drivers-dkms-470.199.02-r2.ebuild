@@ -21,7 +21,6 @@ IUSE=""
 DEPEND="sys-kernel/dkms"
 RDEPEND="${DEPEND}
 	!!sys-kernel/nvidia-drivers-dkms:390
-	!!sys-kernel/nvidia-drivers-dkms:525
 	!!sys-kernel/nvidia-drivers-dkms:535"
 
 PATCHES=(

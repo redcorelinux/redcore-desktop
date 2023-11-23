@@ -35,7 +35,6 @@ RDEPEND="
 	${COMMON}
 	>=virtual/opencl-3
 	!!x11-drivers/nvidia-drivers:390
-	!!x11-drivers/nvidia-drivers:525
 	!!x11-drivers/nvidia-drivers:535
 	acpi? ( sys-power/acpid )
 	dkms? ( ~sys-kernel/${PN}-dkms-${PV}:${SLOT} )

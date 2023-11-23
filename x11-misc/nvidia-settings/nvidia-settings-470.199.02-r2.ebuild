@@ -34,7 +34,6 @@ COMMON_DEPEND="
 
 RDEPEND="${COMMON_DEPEND}
 	!!x11-misc/nvidia-settings:390
-	!!x11-misc/nvidia-settings:525
 	!!x11-misc/nvidia-settings:535
 	x11-drivers/nvidia-drivers:${SLOT}"
 DEPEND="${RDEPEND}

@@ -36,7 +36,6 @@ RDEPEND="
 	>=virtual/opencl-3
 	!!x11-drivers/nvidia-drivers:390
 	!!x11-drivers/nvidia-drivers:470
-	!!x11-drivers/nvidia-drivers:525
 	acpi? ( sys-power/acpid )
 	dkms? ( ~sys-kernel/${PN}-dkms-${PV}:${SLOT} )
 	wayland? (
