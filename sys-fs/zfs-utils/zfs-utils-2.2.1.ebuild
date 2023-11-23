@@ -50,7 +50,6 @@ RDEPEND="${DEPEND}
 RESTRICT="test"
 
 PATCHES=(
-	"${FILESDIR}"/2.1.5-r2-dracut-non-root.patch
 	"${FILESDIR}"/2.1.5-dracut-zfs-missing.patch
 )
 
