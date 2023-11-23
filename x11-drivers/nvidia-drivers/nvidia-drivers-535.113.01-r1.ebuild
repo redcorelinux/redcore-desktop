@@ -14,7 +14,7 @@ EMULTILIB_PKG="true"
 KEYWORDS="-* ~amd64"
 RESTRICT="bindist mirror strip"
 LICENSE="GPL-2 NVIDIA-r2"
-SLOT="535"
+SLOT="5"
 
 IUSE="acpi +dkms multilib +tools wayland +X"
 REQUIRED_USE="tools? ( X )"
@@ -34,8 +34,8 @@ DEPEND="${COMMON}"
 RDEPEND="
 	${COMMON}
 	>=virtual/opencl-3
-	!!x11-drivers/nvidia-drivers:390
-	!!x11-drivers/nvidia-drivers:470
+	!!x11-drivers/nvidia-drivers:3
+	!!x11-drivers/nvidia-drivers:4
 	acpi? ( sys-power/acpid )
 	dkms? ( ~sys-kernel/${PN}-dkms-${PV}:${SLOT} )
 	wayland? (
