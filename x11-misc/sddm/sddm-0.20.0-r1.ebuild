@@ -45,7 +45,7 @@ RDEPEND="${COMMON_DEPEND}
 BDEPEND="
 	dev-python/docutils
 	>=dev-qt/linguist-tools-${QTMIN}:5
-	kde-frameworks/extra-cmake-modules:5
+	kde-frameworks/extra-cmake-modules
 	virtual/pkgconfig
 "
 
