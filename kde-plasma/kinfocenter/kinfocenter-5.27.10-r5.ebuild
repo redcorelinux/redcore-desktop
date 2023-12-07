@@ -22,6 +22,7 @@ DEPEND="
 	>=dev-qt/qtdeclarative-${QTMIN}:5
 	>=dev-qt/qtgui-${QTMIN}:5[gles2-only=]
 	>=dev-qt/qtwidgets-${QTMIN}:5
+	>=kde-frameworks/kauth-${KFMIN}:5
 	>=kde-frameworks/kcmutils-${KFMIN}:5
 	>=kde-frameworks/kconfig-${KFMIN}:5
 	>=kde-frameworks/kconfigwidgets-${KFMIN}:5
@@ -40,7 +41,7 @@ RDEPEND="${DEPEND}
 	dev-qt/qdbus:*
 	>=dev-qt/qtquickcontrols2-${QTMIN}:5
 	>=kde-frameworks/kirigami-${KFMIN}:5
-	>=kde-plasma/kde-cli-tools-${PVCUT}:5
+	>=kde-plasma/kde-cli-tools-${PVCUT}:*
 	>=kde-plasma/systemsettings-${PVCUT}:5
 "
 BDEPEND=">=kde-frameworks/kcmutils-${KFMIN}:5"
