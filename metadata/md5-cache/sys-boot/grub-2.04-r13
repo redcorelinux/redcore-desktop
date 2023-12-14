@@ -13,5 +13,5 @@ REQUIRED_USE=grub_platforms_coreboot? ( fonts ) grub_platforms_qemu? ( fonts ) g
 RESTRICT=!test? ( test )
 SLOT=2/2.04-r13
 SRC_URI=mirror://gnu/grub/grub-2.04.tar.xz fonts? ( mirror://gnu/unifont/unifont-12.1.02/unifont-12.1.02.pcf.gz ) themes? ( mirror://sourceforge/dejavu/dejavu-sans-ttf-2.37.zip )
-_eclasses_=autotools	6ae9a4347149b19a112caa1182d03bde	bash-completion-r1	f5e7a020fd9c741740756aac61bf75ff	flag-o-matic	b97a0a7215b2f463a485ff0599ab30bb	gnuconfig	b6b3e92f8b8c996400074b5f61a59256	libtool	9d3a9a889a6fa62ae794f817c156491b	multibuild	d67e78a235f541871c7dfe4cf7931489	multilib	c19072c3cd7ac5cb21de013f7e9832e0	out-of-source-utils	1a9007554652a6e627edbccb3c25a439	pax-utils	91d47e5d20627c717aa878b9167c62a8	toolchain-funcs	eed10cf5e5a06916e654d31f5a1925cc
+_eclasses_=autotools	6ae9a4347149b19a112caa1182d03bde	bash-completion-r1	f5e7a020fd9c741740756aac61bf75ff	flag-o-matic	c816c598969cbaf38cc02d2496ad2e98	gnuconfig	b6b3e92f8b8c996400074b5f61a59256	libtool	9d3a9a889a6fa62ae794f817c156491b	multibuild	d67e78a235f541871c7dfe4cf7931489	multilib	c19072c3cd7ac5cb21de013f7e9832e0	out-of-source-utils	1a9007554652a6e627edbccb3c25a439	pax-utils	91d47e5d20627c717aa878b9167c62a8	toolchain-funcs	eed10cf5e5a06916e654d31f5a1925cc
 _md5_=c9c8b19bbae10a9e4248409d87d3a15d
