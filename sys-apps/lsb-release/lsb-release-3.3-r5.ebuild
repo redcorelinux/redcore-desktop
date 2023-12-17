@@ -1,4 +1,4 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -13,19 +13,17 @@ S="${WORKDIR}"/${PN}_os-release-${PV}
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~alpha amd64 arm arm64 ~hppa ~ia64 ~loong ~m68k ~mips ppc ppc64 ~riscv ~s390 sparc x86"
+KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~loong ~m68k ~mips ~ppc ~ppc64 ~riscv ~s390 ~sparc ~x86"
 
-# Perl isn't needed at runtime, it is just used to generate the man page.
+# Perl isn't needed at runtime, it is just used to generate the man page via
+# bundled sys-apps/help2man.
 BDEPEND="dev-lang/perl"
 
 src_prepare() {
 	default
 
-	# Use POSIX 'printf' instead of bash 'echo -e', bug #482370
-	sed -i \
-		-e "s:echo -e:printf '%b\\\n':g" \
-		-e 's:--long:-l:g' \
-		lsb_release || die
+	# POSIX compat
+	sed -i -e 's:--long:-l:g' lsb_release || die
 
 	# TODO: unbundle help2man?
 	hprefixify lsb_release help2man
@@ -34,8 +32,8 @@ src_prepare() {
 src_install() {
 	emake prefix="${ED}"/usr install
 
-	dodir /etc
-	cat > "${D}/etc/lsb-release" <<- EOF
+	insinto /etc
+	newins - lsb-release <<-EOF
 		DISTRIB_ID="Redcore"
 		DISTRIB_RELEASE="Rolling.Boulder.Uphill"
 		DISTRIB_DESCRIPTION="Redcore Linux Hardened - Rolling.Boulder.Uphill"
