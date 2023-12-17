@@ -31,15 +31,9 @@ src_compile() {
 }
 
 src_install() {
-	cp "${FILESDIR}/dkms.conf" "${S}" || die
-	dodir /usr/src/${P}
-	insinto /usr/src/${P}
-	doins -r ${S}/*
-	fperms 0755 /usr/src/${P}/configure
-	fperms 0755 /usr/src/${P}/scripts/dkms.mkconf
-	fperms 0755 /usr/src/${P}/scripts/dkms.postbuild
-	fperms 0755 /usr/src/${P}/scripts/enum-extract.pl
-	fperms 0755 /usr/src/${P}/scripts/make_gitrev.sh
+	dodir usr/src/"${P}"
+	cp -ax "${FILESDIR}"/dkms.conf "${S}" || die
+	cp -ax "${S}"/* "${D}"usr/src/"${P}" || die
 }
 
 pkg_postinst() {
