@@ -18,7 +18,7 @@ fi
 
 LICENSE="BSD-2"
 SLOT="0"
-IUSE="+apparmor audit bash debug +dkms elogind +havege ncurses pam newnet +netifrc selinux +settingsd +splash sysv-utils unicode"
+IUSE="+apparmor audit bash debug +dkms elogind +havege ncurses pam newnet +netifrc selinux +settingsd +splash sysvinit sysv-utils unicode"
 
 COMMON_DEPEND="
 	apparmor? (
@@ -45,14 +45,12 @@ DEPEND="${COMMON_DEPEND}
 	ncurses? ( virtual/pkgconfig )"
 RDEPEND="${COMMON_DEPEND}
 	bash? ( app-shells/bash )
-	!prefix? (
-		sysv-utils? (
-			!sys-apps/systemd[sysv-utils(-)]
-			!sys-apps/sysvinit
-		)
-		!sysv-utils? ( >=sys-apps/sysvinit-2.86-r6[selinux?] )
-		virtual/tmpfiles
+	sysv-utils? (
+		!sys-apps/systemd[sysv-utils(-)]
+		!sys-apps/sysvinit
 	)
+	!sysv-utils? ( sysvinit? ( >=sys-apps/sysvinit-2.86-r6[selinux?] ) )
+	virtual/tmpfiles
 	selinux? (
 		>=sec-policy/selinux-base-policy-2.20170204-r4
 		>=sec-policy/selinux-openrc-2.20170204-r4

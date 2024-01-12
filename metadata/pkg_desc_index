@@ -45,7 +45,7 @@ net-wireless/broadcom-sta 6.30.223.271-r5: Broadcom's IEEE 802.11a/b/g/n hybrid 
 sys-apps/baselayout 2.13-r6: Filesystem baselayout and init scripts
 sys-apps/firetools 0.9.64: Graphical user interface of app-emulation/firejail
 sys-apps/lsb-release 3.3-r5: LSB version query program
-sys-apps/openrc 0.47.1-r1: OpenRC manages the services, startup and shutdown of a host
+sys-apps/openrc 0.52.1: OpenRC manages the services, startup and shutdown of a host
 sys-auth/polkit-qt 0.113.0-r11: PolicyKit Qt API wrapper library (meta package)
 sys-auth/polkit-qt5 0.113.0-r5: Qt wrapper around polkit-1 client libraries
 sys-boot/etcher 1.18.4-r1: Flash OS images to SD cards & USB drives, safely and easily.
@@ -73,6 +73,7 @@ sys-kernel/zfs-dkms 2.2.2-r2: ZFS sources for linux
 sys-power/radeon-profile 20200824-r10: Read current clocks of ATi/AMD Radeon cards
 virtual/libudev 314.1337-r1: Virtual for libudev providers
 virtual/linux-sources 314.1337-r1: Virtual for Linux kernel sources
+virtual/logger 1.314.1337: Virtual for system loggers
 virtual/notification-daemon 1.334.1337: Virtual (dummy package) for notification daemon dbus service
 virtual/tmpfiles 1.314.1337-r1: Virtual to select between different tmpfiles.d handlers
 virtual/udev 314.1337-r1: Virtual to select between different udev daemon providers
