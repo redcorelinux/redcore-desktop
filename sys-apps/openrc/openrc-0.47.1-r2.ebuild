@@ -38,7 +38,8 @@ COMMON_DEPEND="
 		>=sys-libs/libselinux-2.6
 	)
 	settingsd? ( app-admin/openrc-settingsd )
-	amd64? ( splash? ( sys-boot/plymouth-openrc-plugin ) )"
+	amd64? ( splash? ( sys-boot/plymouth-openrc-plugin ) )
+	>=virtual/logger-1.314.1337"
 DEPEND="${COMMON_DEPEND}
 	virtual/os-headers
 	ncurses? ( virtual/pkgconfig )"
@@ -164,7 +165,7 @@ pkg_postinst() {
 			"${ROOT}"/sbin/rc-update add dbus boot > /dev/null 2>&1
 		fi
 	fi
-	# add elogind to boot runlevel, disable consolekit && cgmanager
+	# consolekit -> elogind migration
 	if [ -e "${ROOT}"/etc/init.d/elogind ] && use elogind; then
 		if [ "$(rc-config list boot | grep elogind)" != "" ]; then
 			einfo > /dev/null 2>&1
@@ -216,6 +217,18 @@ pkg_postinst() {
 			"${ROOT}"/sbin/rc-update add seedrng boot > /dev/null 2>&1
 		else
 			"${ROOT}"/sbin/rc-update add seedrng boot > /dev/null 2>&1
+		fi
+	fi
+	# syslog-ng -> metalog migration
+	if [ -e "${ROOT}"/etc/init.d/metalog ]; then
+		if [ "$(rc-config list default | grep metalog)" != "" ]; then
+			einfo > /dev/null 2>&1
+		else
+			"${ROOT}"/sbin/rc-update add metalog default > /dev/null 2>&1
+		fi
+
+		if [ "$(rc-config list default | grep syslog-ng)" != "" ]; then
+			"${ROOT}"/sbin/rc-update del syslog-ng default > /dev/null 2>&1
 		fi
 	fi
 }
