@@ -5,11 +5,11 @@ EAPI=6
 
 inherit eutils
 
-EXTRAVERSION="redcore"
+EXTRAVERSION="redcore-lts-r1"
 KV_FULL="${PV}-${EXTRAVERSION}"
-KV_MAJOR="6.5"
+KV_MAJOR="6.6"
 
-DESCRIPTION="Redcore Linux Kernel Image"
+DESCRIPTION="Redcore Linux LTS Kernel Image"
 HOMEPAGE="https://redcorelinux.org"
 SRC_URI="https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-${PV}.tar.xz"
 
@@ -22,13 +22,13 @@ RESTRICT="binchecks strip mirror"
 DEPEND="
 	app-arch/lz4
 	app-arch/xz-utils
+	dev-build/make
 	sys-devel/autoconf
 	sys-devel/bc
-	sys-devel/make
 	cryptsetup? ( sys-fs/cryptsetup )
 	dmraid? ( sys-fs/dmraid )
 	dracut? ( >=sys-kernel/dracut-0.44-r8 )
-	dkms? ( sys-kernel/dkms sys-kernel/linux-sources-redcore:${SLOT} )
+	dkms? ( sys-kernel/dkms sys-kernel/linux-sources-redcore-lts:${SLOT} )
 	mdadm? ( sys-fs/mdadm )
 	>=sys-kernel/linux-firmware-20180314"
 RDEPEND="${DEPEND}"

@@ -5,11 +5,11 @@ EAPI=6
 
 inherit eutils
 
-EXTRAVERSION="redcore-lts"
+EXTRAVERSION="redcore-r1"
 KV_FULL="${PV}-${EXTRAVERSION}"
-KV_MAJOR="6.6"
+KV_MAJOR="6.5"
 
-DESCRIPTION="Redcore Linux LTS Kernel Sources"
+DESCRIPTION="Redcore Linux Kernel Sources"
 HOMEPAGE="https://redcorelinux.org"
 SRC_URI="https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-${PV}.tar.xz"
 
@@ -22,9 +22,9 @@ RESTRICT="strip mirror"
 DEPEND="
 	app-arch/lz4
 	app-arch/xz-utils
+	dev-build/make
 	sys-devel/autoconf
-	sys-devel/bc
-	sys-devel/make"
+	sys-devel/bc"
 RDEPEND="${DEPEND}"
 
 PATCHES=(

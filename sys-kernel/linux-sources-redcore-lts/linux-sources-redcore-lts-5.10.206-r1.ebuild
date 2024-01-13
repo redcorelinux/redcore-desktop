@@ -5,7 +5,7 @@ EAPI=6
 
 inherit eutils
 
-EXTRAVERSION="redcore-lts"
+EXTRAVERSION="redcore-lts-r1"
 KV_FULL="${PV}-${EXTRAVERSION}"
 KV_MAJOR="5.10"
 
@@ -22,9 +22,9 @@ RESTRICT="strip mirror"
 DEPEND="
 	app-arch/lz4
 	app-arch/xz-utils
+	dev-build/make
 	sys-devel/autoconf
-	sys-devel/bc
-	sys-devel/make"
+	sys-devel/bc"
 RDEPEND="${DEPEND}"
 
 PATCHES=(
