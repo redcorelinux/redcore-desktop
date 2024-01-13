@@ -1,0 +1,21 @@
+diff -Nur a/dracut.sh b/dracut.sh
+--- a/dracut.sh	2022-12-24 16:49:27.000000000 +0000
++++ b/dracut.sh	2024-01-13 15:33:43.657110274 +0000
+@@ -1142,7 +1142,7 @@
+         elif [[ -f "$dracutsysrootdir"/lib/modules/${kernel}/initrd ]]; then
+             outfile="$dracutsysrootdir/lib/modules/${kernel}/initrd"
+         elif [[ -e $dracutsysrootdir/boot/vmlinuz-${kernel} ]]; then
+-            outfile="$dracutsysrootdir/boot/initramfs-${kernel}.img"
++            outfile="$dracutsysrootdir/boot/initrd-${kernel}"
+         elif [[ -z $dracutsysrootdir ]] \
+             && [[ $MACHINE_ID ]] \
+             && mountpoint -q /efi; then
+@@ -1152,7 +1152,7 @@
+             && mountpoint -q /boot/efi; then
+             outfile="/boot/efi/${MACHINE_ID}/${kernel}/initrd"
+         else
+-            outfile="$dracutsysrootdir/boot/initramfs-${kernel}.img"
++            outfile="$dracutsysrootdir/boot/initrd-${kernel}"
+         fi
+     fi
+ fi
