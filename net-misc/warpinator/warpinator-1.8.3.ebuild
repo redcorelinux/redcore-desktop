@@ -25,7 +25,7 @@ DEPEND="
 "
 RDEPEND="${DEPEND}"
 BDEPEND="
-	>=dev-util/meson-0.45.0
+	>=dev-build/meson-0.45.0
 "
 
 S="${WORKDIR}/${PN}-master.lmde6"
@@ -33,6 +33,7 @@ S="${WORKDIR}/${PN}-master.lmde6"
 PATCHES=(
 	"${FILESDIR}/${PN}-bundled-grpcio-cython3.patch"
 	"${FILESDIR}/${PN}-system-paths.patch"
+	"${FILESDIR}/${PN}-dbus-fallback.patch"
 )
 
 src_configure() {
