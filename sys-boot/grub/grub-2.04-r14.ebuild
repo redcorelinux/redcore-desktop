@@ -72,9 +72,9 @@ REQUIRED_USE="
 BDEPEND="
 	${PYTHON_DEPS}
 	app-misc/pax-utils
+	dev-build/automake
 	sys-devel/flex
 	sys-devel/bison
-	sys-devel/automake
 	sys-apps/help2man
 	sys-apps/texinfo
 	fonts? (
