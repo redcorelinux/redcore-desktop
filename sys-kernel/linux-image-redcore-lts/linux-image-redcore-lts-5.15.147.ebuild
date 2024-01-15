@@ -5,7 +5,7 @@ EAPI=6
 
 inherit eutils
 
-EXTRAVERSION="redcore-lts-r2"
+EXTRAVERSION="redcore-lts"
 KV_FULL="${PV}-${EXTRAVERSION}"
 KV_MAJOR="5.15"
 
@@ -22,8 +22,8 @@ RESTRICT="binchecks strip mirror"
 DEPEND="
 	app-arch/lz4
 	app-arch/xz-utils
+	dev-build/autoconf
 	dev-build/make
-	sys-devel/autoconf
 	sys-devel/bc
 	cryptsetup? ( sys-fs/cryptsetup )
 	dmraid? ( sys-fs/dmraid )

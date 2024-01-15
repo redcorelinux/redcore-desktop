@@ -5,9 +5,9 @@ EAPI=6
 
 inherit eutils
 
-EXTRAVERSION="redcore-lts-r2"
+EXTRAVERSION="redcore-lts"
 KV_FULL="${PV}-${EXTRAVERSION}"
-KV_MAJOR="6.1"
+KV_MAJOR="6.6"
 
 DESCRIPTION="Redcore Linux LTS Kernel Sources"
 HOMEPAGE="https://redcorelinux.org"
@@ -22,17 +22,15 @@ RESTRICT="strip mirror"
 DEPEND="
 	app-arch/lz4
 	app-arch/xz-utils
+	dev-build/autoconf
 	dev-build/make
-	sys-devel/autoconf
 	sys-devel/bc"
 RDEPEND="${DEPEND}"
 
 PATCHES=(
 	"${FILESDIR}"/"${KV_MAJOR}"-ath10k-be-quiet.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-ata-fix-NCQ-LOG-strings-and-move-to-debug.patch
-	"${FILESDIR}"/"${KV_MAJOR}"-radeon_dp_aux_transfer_native-no-ratelimited_debug.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-acpi-use-kern_warning_even_when_error.patch
-	"${FILESDIR}"/"${KV_MAJOR}"-do_not_bug_the_next_18-years.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-fix-bootconfig-makefile.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-apic_vector-spam-in-debug-mode-only.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-0001-Revert-cpufreq-Avoid-configuring-old-governors-as-de.patch
