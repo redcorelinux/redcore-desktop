@@ -17,6 +17,7 @@ DEPEND="
 	dev-libs/gobject-introspection
 	dev-python/cryptography
 	dev-python/ifaddr
+	dev-python/qrcode
 	dev-python/netaddr
 	dev-python/netifaces
 	dev-python/pynacl
