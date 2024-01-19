@@ -77,10 +77,10 @@ BDEPEND="
 	app-text/docbook-xml-dtd:4.1.2
 	app-text/docbook-xsl-stylesheets
 	dev-libs/gobject-introspection-common
+	>=dev-build/gtk-doc-am-1.20
 	dev-libs/libxslt
 	>=dev-util/gdbus-codegen-2.48
 	dev-util/glib-utils
-	>=dev-util/gtk-doc-am-1.20
 	wayland? ( dev-util/wayland-scanner )
 	>=sys-devel/gettext-0.19.7
 	virtual/pkgconfig
