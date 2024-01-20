@@ -1,0 +1,43 @@
+diff -ruN old/flaggie/config.py new/flaggie/config.py
+--- old/flaggie/config.py	2023-01-15 08:39:45.000000000 +0100
++++ new/flaggie/config.py	2023-10-08 12:46:51.500298249 +0200
+@@ -63,6 +63,10 @@
+ COMMENT_RE = re.compile(r"(?<!\S)#(.*)$")
+ 
+ 
++def to_sisyphus_filename(filename: str) -> str:
++    return "sisyphus." + re.sub(r'\.(accept_)?', "-", filename) + ".conf"
++
++
+ def find_config_files(config_root: Path, token_type: TokenType) -> list[Path]:
+     """
+     Find all configuration files of given type
+@@ -72,7 +76,11 @@
+     order as they are read by Portage.
+     """
+ 
+-    path = config_root / "etc/portage" / CONFIG_FILENAMES[token_type]
++    filename = CONFIG_FILENAMES[token_type]
++    sisyphus = config_root / "etc/sisyphus" / to_sisyphus_filename(filename)
++    if sisyphus.exists():
++        return [sisyphus]
++    path = config_root / "etc/portage" / filename
+ 
+     # if it's an existing directory, find the last visible file
+     # in the directory (provided there is any)
+diff -ruN old/test/test_config.py new/test/test_config.py
+--- old/test/test_config.py	2023-01-15 08:39:45.000000000 +0100
++++ new/test/test_config.py	2023-10-08 12:35:11.372100053 +0200
+@@ -26,9 +26,11 @@
+       ["package.use/foo.conf"]),
+      # corner case: package.use yielding no valid files
+      (["package.use/.foo"], ["package.use/99local.conf"]),
++     (["sisyphus.package-use.conf"], None),
+      ])
+ def test_find_config(tmp_path, layout, expected):
+-    confdir = tmp_path / "etc/portage"
++    sisyphus = layout and layout[0].startswith("sisyphus.")
++    confdir = tmp_path / "etc" / ("sisyphus" if sisyphus else "portage")
+     for f in layout:
+         path = confdir / f
+         path.parent.mkdir(parents=True, exist_ok=True)
