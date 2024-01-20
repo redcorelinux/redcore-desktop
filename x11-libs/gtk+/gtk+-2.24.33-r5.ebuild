@@ -1,7 +1,7 @@
 # Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 GNOME2_EAUTORECONF="yes"
 
 inherit flag-o-matic gnome2 multilib multilib-minimal readme.gentoo-r1 virtualx
@@ -23,7 +23,7 @@ KEYWORDS="~alpha amd64 arm arm64 ~hppa ~ia64 ~loong ~mips ppc ppc64 ~riscv ~s390
 RESTRICT="test"
 
 COMMON_DEPEND="
-	>=dev-libs/atk-2.10.0[introspection?,${MULTILIB_USEDEP}]
+	>=app-accessibility/at-spi2-core-2.46.0[introspection?,${MULTILIB_USEDEP}]
 	>=dev-libs/glib-2.34.3:2[${MULTILIB_USEDEP}]
 	>=media-libs/fontconfig-2.10.92[${MULTILIB_USEDEP}]
 	virtual/libintl[${MULTILIB_USEDEP}]
@@ -104,6 +104,8 @@ PATCHES=(
 	"${FILESDIR}"/${PN}-2.24.31-update-icon-cache.patch # requires eautoreconf
 	# Respect ${NM}, bug #725852
 	"${FILESDIR}"/${PN}-2.24.33-respect-NM.patch # requires eautoreconf
+	# Fix casts, bug #880617
+	"${FILESDIR}"/${PN}-2.24.33-Fix-casts.patch
 )
 
 strip_builddir() {
@@ -249,13 +251,13 @@ pkg_postinst() {
 
 	set_gtk2_confdir
 
-	if [ -e "${EROOT}/etc/gtk-2.0/gtk.immodules" ]; then
+	if [[ -e "${EROOT}/etc/gtk-2.0/gtk.immodules" ]]; then
 		elog "File /etc/gtk-2.0/gtk.immodules has been moved to \$CHOST"
 		elog "aware location. Removing deprecated file."
 		rm -f "${EROOT}/etc/gtk-2.0/gtk.immodules"
 	fi
 
-	if [ -e "${EROOT}${GTK2_CONFDIR}/gtk.immodules" ]; then
+	if [[ -e "${EROOT}${GTK2_CONFDIR}/gtk.immodules" ]]; then
 		elog "File /etc/gtk-2.0/gtk.immodules has been moved to"
 		elog "${EROOT}/usr/$(get_libdir)/gtk-2.0/2.10.0/immodules.cache"
 		elog "Removing deprecated file."
@@ -263,20 +265,20 @@ pkg_postinst() {
 	fi
 
 	# pixbufs are now handled by x11-libs/gdk-pixbuf
-	if [ -e "${EROOT}${GTK2_CONFDIR}/gdk-pixbuf.loaders" ]; then
+	if [[ -e "${EROOT}${GTK2_CONFDIR}/gdk-pixbuf.loaders" ]]; then
 		elog "File ${EROOT}${GTK2_CONFDIR}/gdk-pixbuf.loaders is now handled by x11-libs/gdk-pixbuf"
 		elog "Removing deprecated file."
 		rm -f "${EROOT}${GTK2_CONFDIR}/gdk-pixbuf.loaders"
 	fi
 
 	# two checks needed since we dropped multilib conditional
-	if [ -e "${EROOT}/etc/gtk-2.0/gdk-pixbuf.loaders" ]; then
+	if [[ -e "${EROOT}/etc/gtk-2.0/gdk-pixbuf.loaders" ]]; then
 		elog "File ${EROOT}/etc/gtk-2.0/gdk-pixbuf.loaders is now handled by x11-libs/gdk-pixbuf"
 		elog "Removing deprecated file."
 		rm -f "${EROOT}/etc/gtk-2.0/gdk-pixbuf.loaders"
 	fi
 
-	if [ -e "${EROOT}"/usr/lib/gtk-2.0/2.[^1]* ]; then
+	if [[ -e "${EROOT}"/usr/lib/gtk-2.0/2.[^1]* ]]; then
 		elog "You need to rebuild ebuilds that installed into" "${EROOT}"/usr/lib/gtk-2.0/2.[^1]*
 		elog "to do that you can use qfile from portage-utils:"
 		elog "emerge -va1 \$(qfile -qC ${EPREFIX}/usr/lib/gtk-2.0/2.[^1]*)"
