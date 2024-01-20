@@ -12,7 +12,7 @@ HOMEPAGE="http://redcorelinux.org"
 
 EGIT_REPO_URI="https://gitlab.com/redcore/sisyphus.git"
 EGIT_BRANCH="master"
-EGIT_COMMIT="78eca7889aebbc3e7f141f23a41eb9b3b79f3a69"
+EGIT_COMMIT="5cf564d3b5109c2a9e4b5917eb7d834f8b911d3b"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -33,8 +33,6 @@ RDEPEND="${DEPEND}
 	')
 	sys-apps/gentoo-functions"
 PDEPEND="qt5? ( ~app-portage/${PN}-qt-${PV} )"
-
-PATCHES=( "${FILESDIR}"/"${PN}"-makeopts.patch )
 
 src_install() {
 	emake DESTDIR="${D}"/ install-cli
