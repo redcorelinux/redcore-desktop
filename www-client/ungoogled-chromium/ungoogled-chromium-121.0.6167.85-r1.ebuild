@@ -87,23 +87,19 @@ S="${WORKDIR}/${PN}_${PV}-1.1_linux"
 src_install() {
 	local CHROMIUM_HOME="/opt/chromium-browser"
 	dodir "${CHROMIUM_HOME}"
+
 	exeinto "${CHROMIUM_HOME}"
+	for i in chrome chrome_crashpad_handler chromedriver chrome_sandbox chrome-wrapper xdg-mime xdg-settings; do
+		doexe $i || die
+	done
+
 	doexe "${FILESDIR}"/chromium-launcher.sh
-	doexe chrome
-	doexe chrome_crashpad_handler
-	doexe chromedriver
-	doexe chrome_sandbox
-	doexe chrome-wrapper
-	doexe xdg-mime
-	doexe xdg-settings
 	fperms 4711 "${CHROMIUM_HOME}"/chrome_sandbox
 
 	insinto "${CHROMIUM_HOME}"
-	doins *.bin
-	doins *.pak
-	doins *.so
-	doins *.so.1
-	doins icudtl.dat
+	for i in *.bin *.pak *.so *.so.1 icudtl.dat; do
+		doins $i || die
+	done
 	doins -r locales
 	doins -r resources
 	doins vk_swiftshader_icd.json
@@ -118,9 +114,9 @@ src_install() {
 	newicon -s 48 product_logo_48.png chromium-browser.png
 
 	local mime_types="text/html;text/xml;application/xhtml+xml;"
-	mime_types+="x-scheme-handler/http;x-scheme-handler/https;" # bug #360797
-	mime_types+="x-scheme-handler/ftp;" # bug #412185
-	mime_types+="x-scheme-handler/mailto;x-scheme-handler/webcal;" # bug #416393
+	mime_types+="x-scheme-handler/http;x-scheme-handler/https;"
+	mime_types+="x-scheme-handler/ftp;"
+	mime_types+="x-scheme-handler/mailto;x-scheme-handler/webcal;"
 
 	make_desktop_entry \
 		chromium-browser \
