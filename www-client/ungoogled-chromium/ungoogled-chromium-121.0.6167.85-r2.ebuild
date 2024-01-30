@@ -13,46 +13,48 @@ RESTRICT="mirror"
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~amd64"
-IUSE=""
+IUSE="+widevine"
 
 CDEPEND="
+	app-accessibility/at-spi2-core
+	dev-libs/expat
+	dev-libs/glib:2
+	dev-libs/libxslt
+	dev-libs/nspr
+	>=dev-libs/icu-71.1:=
+	>=dev-libs/libxml2-2.9.4-r3[icu]
+	>=dev-libs/nss-3.26
+	media-libs/fontconfig
+	media-libs/freetype
+	media-libs/libjpeg-turbo
+	media-libs/libpng
+	media-libs/libpulse
+	media-libs/libva
+	media-libs/lcms
+	media-libs/flac
+	>=media-libs/alsa-lib-1.0.19
+	>=media-libs/libwebp-0.4.0
+	>=net-print/cups-1.3.11
+	sys-apps/dbus
+	sys-apps/pciutils
+	sys-libs/zlib[minizip]
+	x11-libs/cairo
+	x11-libs/pango
+	x11-libs/gtk+:3[X]
 	x11-libs/libX11
 	x11-libs/libXcomposite
 	x11-libs/libXcursor
 	x11-libs/libXdamage
 	x11-libs/libXext
 	x11-libs/libXfixes
-	>=x11-libs/libXi-1.6.0
 	x11-libs/libXrandr
 	x11-libs/libXrender
 	x11-libs/libXtst
 	x11-libs/libxcb
-	media-libs/libva
-	>=net-print/cups-1.3.11
-	dev-libs/expat
-	dev-libs/glib:2
-	>=dev-libs/libxml2-2.9.4-r3[icu]
-	dev-libs/nspr
-	>=dev-libs/nss-3.26
-	>=media-libs/alsa-lib-1.0.19
-	media-libs/fontconfig
-	media-libs/freetype
-	media-libs/libjpeg-turbo
-	media-libs/libpng
-	media-libs/libpulse
-	sys-apps/dbus
-	sys-apps/pciutils
+	>=x11-libs/libXi-1.6.0
 	virtual/udev
-	x11-libs/cairo
-	x11-libs/pango
-	media-libs/flac
-	>=media-libs/libwebp-0.4.0
-	sys-libs/zlib[minizip]
-	app-accessibility/at-spi2-core
-	x11-libs/gtk+:3[X]
-	media-libs/lcms
-	dev-libs/libxslt
-	>=dev-libs/icu-71.1:="
+	widevine? ( www-plugins/chrome-binary-plugins )
+"
 
 RDEPEND="${CDEPEND}
 	x11-misc/xdg-utils
@@ -110,6 +112,10 @@ src_install() {
 	dodir /etc/chromium
 	insinto /etc/chromium
 	newins "${FILESDIR}"/chromium.default default
+
+	if use widevine; then
+		dosym ../../usr/$(get_libdir)/chromium-browser/WidevineCdm "${CHROMIUM_HOME}"/WidevineCdm
+	fi
 
 	newicon -s 48 product_logo_48.png chromium-browser.png
 
