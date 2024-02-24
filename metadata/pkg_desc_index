@@ -68,7 +68,7 @@ sys-kernel/linux-image-redcore 6.7.6: Redcore Linux Kernel Image
 sys-kernel/linux-image-redcore-lts 5.15.149 6.1.79 6.6.18: Redcore Linux LTS Kernel Image
 sys-kernel/linux-sources-redcore 6.7.6: Redcore Linux Kernel Sources
 sys-kernel/linux-sources-redcore-lts 5.15.149 6.1.79 6.6.18: Redcore Linux LTS Kernel Sources
-sys-kernel/nvidia-drivers-dkms 390.157-r6 470.223.02-r1 535.129.03: NVIDIA driver sources for linux
+sys-kernel/nvidia-drivers-dkms 390.157-r6 470.223.02-r1 535.154.05: NVIDIA driver sources for linux
 sys-kernel/vhba-dkms 20211218-r7: Virtual (SCSI) Host Bus Adapter kernel module for the CDEmu suite sources
 sys-kernel/virtualbox-modules-dkms 7.0.14-r1: Kernel Modules source for Virtualbox
 sys-kernel/zfs-dkms 2.2.2-r2: ZFS sources for linux
@@ -81,10 +81,10 @@ virtual/tmpfiles 1.314.1337-r1: Virtual to select between different tmpfiles.d h
 virtual/udev 314.1337-r1: Virtual to select between different udev daemon providers
 www-client/ungoogled-chromium 121.0.6167.184: Modifications to Chromium for removing Google integration and enhancing privacy
 x11-base/xorg-drivers 21.1-r100: Meta package containing deps on all xorg drivers (dummy package)
-x11-drivers/nvidia-drivers 390.157-r6 470.223.02 535.129.03: NVIDIA Accelerated Graphics Driver
+x11-drivers/nvidia-drivers 390.157-r6 470.223.02 535.154.05: NVIDIA Accelerated Graphics Driver
 x11-libs/gtk+ 2.24.33-r5 3.24.40-r1: Gimp ToolKit +
 x11-misc/nvidia-prime 314: NVIDIA Prime Render Offload configuration and utilities
-x11-misc/nvidia-settings 390.157-r5 470.223.02 535.129.03: NVIDIA Linux X11 Settings Utility
+x11-misc/nvidia-settings 390.157-r5 470.223.02 535.154.05: NVIDIA Linux X11 Settings Utility
 x11-misc/pcmanfm-qt-share 1337: PCManFM-QT custom action to share folder using Samba
 x11-misc/sddm 0.20.0-r1: Simple Desktop Display Manager
 x11-themes/material-icon-theme 1.314.1337: Icon theme following the Google's material design specifications
