@@ -63,7 +63,7 @@ sys-fs/zfs 2.2.2: ZFS meta-package (Gentoo compatibility ebuild)
 sys-fs/zfs-utils 2.2.2: Userland utilities for ZFS Linux kernel module
 sys-kernel/bcmwl-dkms 6.30.223.271-r8: Broadcom's IEEE 802.11a/b/g/n hybrid Linux device driver source
 sys-kernel/dkms 2.3-r3: Dynamic Kernel Module Support
-sys-kernel/dracut 059-r10: Generic initramfs generation tool
+sys-kernel/dracut 059-r15: Generic initramfs generation tool
 sys-kernel/linux-image-redcore 6.7.6: Redcore Linux Kernel Image
 sys-kernel/linux-image-redcore-lts 5.15.149 6.1.79 6.6.18: Redcore Linux LTS Kernel Image
 sys-kernel/linux-sources-redcore 6.7.6: Redcore Linux Kernel Sources

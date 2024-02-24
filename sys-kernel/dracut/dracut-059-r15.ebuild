@@ -84,6 +84,7 @@ PATCHES=(
 	"${FILESDIR}"/dracut-059-dmsquash-live.patch
 	"${FILESDIR}"/059-systemd-pcrphase.patch
 	"${FILESDIR}"/059-systemd-executor.patch
+	"${FILESDIR}"/059-early_microcode.patch
 	"${FILESDIR}"/dracut-059-install-new-systemd-hibernate-resume.service.patch
 	"${FILESDIR}"/059-redcore-change-default-initramfs-name.patch
 )
