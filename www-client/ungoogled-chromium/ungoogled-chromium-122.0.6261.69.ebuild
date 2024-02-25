@@ -7,7 +7,7 @@ inherit desktop readme.gentoo-r1 xdg-utils
 
 DESCRIPTION="Modifications to Chromium for removing Google integration and enhancing privacy"
 HOMEPAGE="https://www.chromium.org/Home https://github.com/ungoogled-software/ungoogled-chromium"
-SRC_URI="http://mirrors.redcorelinux.org/redcorelinux/amd64/distfiles/${PN}_${PV}-1.1_linux.tar.xz"
+SRC_URI="http://mirrors.redcorelinux.org/redcorelinux/amd64/distfiles/${PN}_${PV}-1_linux.tar.xz"
 RESTRICT="binchecks mirror strip"
 
 LICENSE="BSD"
@@ -84,7 +84,7 @@ GTK+ icon theme.
 For native file dialogs in KDE, install kde-apps/kdialog."
 
 QA_PREBUILT="*"
-S="${WORKDIR}/${PN}_${PV}-1.1_linux"
+S="${WORKDIR}/${PN}_${PV}-1_linux"
 
 src_install() {
 	local CHROMIUM_HOME="/opt/chromium-browser"
