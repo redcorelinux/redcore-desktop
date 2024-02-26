@@ -1,6 +1,6 @@
 BDEPEND=>=dev-vcs/git-1.8.2.1[curl]
 DEFINED_PHASES=install setup unpack
-DEPEND=dev-lang/python[sqlite] ~app-portage/sisyphus-6.2401.0
+DEPEND=dev-lang/python[sqlite] ~app-portage/sisyphus-6.2402.0
 DESCRIPTION=A simple portage python wrapper which works like other package managers(apt-get/yum/dnf)
 EAPI=7
 HOMEPAGE=http://redcorelinux.org
@@ -9,7 +9,7 @@ IUSE=python_single_target_python3_10 python_single_target_python3_11
 KEYWORDS=amd64 arm64
 LICENSE=GPL-2
 PROPERTIES=live
-RDEPEND=dev-lang/python[sqlite] ~app-portage/sisyphus-6.2401.0 app-misc/tmux python_single_target_python3_10? ( dev-python/PyQt5[designer,gui,widgets,python_targets_python3_10(-)] ) python_single_target_python3_11? ( dev-python/PyQt5[designer,gui,widgets,python_targets_python3_11(-)] )
+RDEPEND=dev-lang/python[sqlite] ~app-portage/sisyphus-6.2402.0 app-misc/tmux python_single_target_python3_10? ( dev-python/PyQt5[designer,gui,widgets,python_targets_python3_10(-)] ) python_single_target_python3_11? ( dev-python/PyQt5[designer,gui,widgets,python_targets_python3_11(-)] )
 SLOT=0
 _eclasses_=eapi8-dosym	5ac4857ad078256d939c44f7c64197a9	git-r3	86fa1f157b70b9d2ff340c4633b1cf4b	multilib	c19072c3cd7ac5cb21de013f7e9832e0	multiprocessing	30ead54fa2e2b5f9cd4e612ffc34d0fe	python-single-r1	75118e916668a74c660a13b0ecb22562	python-utils-r1	042f4cc53680245bf99a84669b94155a	toolchain-funcs	e56c7649b804f051623c8bc1a1c44084
-_md5_=00aa4a18fa4dbb78d872e9abf00e5ca3
+_md5_=9b33492a5f162885a46e67af2ba062f4
