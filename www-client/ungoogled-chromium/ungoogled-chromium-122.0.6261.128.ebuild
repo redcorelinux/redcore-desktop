@@ -3,7 +3,7 @@
 
 EAPI=8
 
-inherit desktop readme.gentoo-r1 xdg-utils
+inherit desktop pax-utils readme.gentoo-r1 xdg-utils
 
 DESCRIPTION="Modifications to Chromium for removing Google integration and enhancing privacy"
 HOMEPAGE="https://www.chromium.org/Home https://github.com/ungoogled-software/ungoogled-chromium"
@@ -13,7 +13,7 @@ RESTRICT="binchecks mirror strip"
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~amd64"
-IUSE="+widevine"
+IUSE="qt5 qt6 +suid +widevine"
 
 CDEPEND="
 	app-accessibility/at-spi2-core
@@ -53,6 +53,12 @@ CDEPEND="
 	x11-libs/libxcb
 	>=x11-libs/libXi-1.6.0
 	virtual/udev
+	qt5? (
+		dev-qt/qtcore:5
+		dev-qt/qtgui:5[X]
+		dev-qt/qtwidgets:5
+	)
+	qt6? ( dev-qt/qtbase:6[gui,widgets] )
 	widevine? ( www-plugins/chrome-binary-plugins )
 "
 
@@ -94,9 +100,7 @@ src_install() {
 	for i in chrome chrome_crashpad_handler chromedriver chrome_sandbox chrome-wrapper xdg-mime xdg-settings; do
 		doexe $i || die
 	done
-
 	doexe "${FILESDIR}"/chromium-launcher.sh
-	fperms 4711 "${CHROMIUM_HOME}"/chrome_sandbox
 
 	insinto "${CHROMIUM_HOME}"
 	for i in *.bin *.pak *.so *.so.1 icudtl.dat; do
@@ -113,9 +117,24 @@ src_install() {
 	insinto /etc/chromium
 	newins "${FILESDIR}"/chromium.default default
 
+	if ! use qt5; then
+		rm "${ED}"/"${CHROMIUM_HOME}"/libqt5_shim.so || die
+	else
+		fperms 0755 "${CHROMIUM_HOME}"/libqt5_shim.so || die
+	fi
+
+	if ! use qt6; then
+		rm "${ED}"/"${CHROMIUM_HOME}"/libqt6_shim.so || die
+	else
+		fperms 0755 "${CHROMIUM_HOME}"/libqt6_shim.so || die
+	fi
+
 	if use widevine; then
 		dosym ../../usr/$(get_libdir)/chromium-browser/WidevineCdm "${CHROMIUM_HOME}"/WidevineCdm
 	fi
+
+	pax-mark m "${CHROMIUM_HOME}"/chrome
+	use suid && fperms 4711 "${CHROMIUM_HOME}"/chrome_sandbox
 
 	newicon -s 48 product_logo_48.png chromium-browser.png
 
