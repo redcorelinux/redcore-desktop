@@ -30,7 +30,6 @@ RDEPEND="${DEPEND}"
 PATCHES=(
 	"${FILESDIR}"/"${KV_MAJOR}"-0001-Revert-cpufreq-Avoid-configuring-old-governors-as-de.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-0001-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-C.patch
-	"${FILESDIR}"/"${KV_MAJOR}"-0002-PCI_Add_more_NVIDIA_controllers_to_the_MSI_masking_quirk.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-0003-iommu_intel_do_deep_dma-unmapping_to_avoid_kernel-flooding.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-0004-cpufreq_intel_pstate_ITMT_support_for_overclocked_system.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-0005-Bluetooth_btintel_Fix_bdaddress_comparison_with_garbage_value.patch
