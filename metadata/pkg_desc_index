@@ -73,6 +73,7 @@ sys-kernel/nvidia-drivers-dkms 390.157-r6 470.223.02-r1 535.154.05: NVIDIA drive
 sys-kernel/vhba-dkms 20211218-r7: Virtual (SCSI) Host Bus Adapter kernel module for the CDEmu suite sources
 sys-kernel/virtualbox-modules-dkms 7.0.16: Kernel Modules source for Virtualbox
 sys-kernel/zfs-dkms 2.2.3: ZFS sources for linux
+sys-libs/glibc 2.37-r15: GNU libc C library
 sys-power/radeon-profile 20200824-r10: Read current clocks of ATi/AMD Radeon cards
 virtual/libudev 314.1337-r1: Virtual for libudev providers
 virtual/linux-sources 314.1337-r1: Virtual for Linux kernel sources
