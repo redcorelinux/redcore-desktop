@@ -61,8 +61,8 @@ sys-devel/gcc 13.2.0-r15: The GNU Compiler Collection
 sys-fs/cryptsetup 2.6.1-r5: Tool to setup encrypted devices with dm-crypt
 sys-fs/gocryptfs 2.0.1-r1: Encrypted overlay filesystem written in Go
 sys-fs/vhba 20240202: Virtual (SCSI) Host Bus Adapter kernel module for the CDEmu suite
-sys-fs/zfs 2.2.3: ZFS meta-package (Gentoo compatibility ebuild)
-sys-fs/zfs-utils 2.2.3: Userland utilities for ZFS Linux kernel module
+sys-fs/zfs 2.2.4: ZFS meta-package (Gentoo compatibility ebuild)
+sys-fs/zfs-utils 2.2.4: Userland utilities for ZFS Linux kernel module
 sys-kernel/bcmwl-dkms 6.30.223.271-r10: Broadcom's IEEE 802.11a/b/g/n hybrid Linux device driver source
 sys-kernel/dkms 2.3-r3: Dynamic Kernel Module Support
 sys-kernel/dracut 059-r15: Generic initramfs generation tool
@@ -74,7 +74,7 @@ sys-kernel/nvidia-drivers-dkms 390.157-r6 470.239.06 535.171.04: NVIDIA driver s
 sys-kernel/tp_smapi-dkms 0.44: IBM ThinkPad SMAPI BIOS driver sources
 sys-kernel/vhba-dkms 20240202: Virtual (SCSI) Host Bus Adapter kernel module for the CDEmu suite sources
 sys-kernel/virtualbox-modules-dkms 7.0.16-r1: Kernel Modules source for Virtualbox
-sys-kernel/zfs-dkms 2.2.3-r1: ZFS sources for linux
+sys-kernel/zfs-dkms 2.2.4: ZFS sources for linux
 sys-libs/glibc 2.37-r15: GNU libc C library
 sys-power/radeon-profile 20200824-r10: Read current clocks of ATi/AMD Radeon cards
 virtual/libudev 314.1337-r1: Virtual for libudev providers
