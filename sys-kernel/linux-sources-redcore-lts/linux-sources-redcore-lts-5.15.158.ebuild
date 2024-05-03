@@ -28,8 +28,6 @@ DEPEND="
 RDEPEND="${DEPEND}"
 
 PATCHES=(
-	"${FILESDIR}"/"${KV_MAJOR}"-0001-linux5.15.y-bore5.1.0.patch
-	"${FILESDIR}"/"${KV_MAJOR}"-0002-constgran-vanilla-max.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-0001-Revert-cpufreq-Avoid-configuring-old-governors-as-de.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-0001-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-C.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-0003-iommu_intel_do_deep_dma-unmapping_to_avoid_kernel-flooding.patch

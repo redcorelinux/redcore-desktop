@@ -28,8 +28,6 @@ DEPEND="
 RDEPEND="${DEPEND}"
 
 PATCHES=(
-	"${FILESDIR}"/"${KV_MAJOR}"-0001-linux6.1.y-bore5.1.0.patch
-	"${FILESDIR}"/"${KV_MAJOR}"-0002-constgran-vanilla-max.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-ath10k-be-quiet.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-ata-fix-NCQ-LOG-strings-and-move-to-debug.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-radeon_dp_aux_transfer_native-no-ratelimited_debug.patch
