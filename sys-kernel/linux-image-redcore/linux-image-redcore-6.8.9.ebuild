@@ -34,7 +34,6 @@ DEPEND="
 RDEPEND="${DEPEND}"
 
 PATCHES=(
-	"${FILESDIR}"/"${KV_MAJOR}"-0001-linux6.8.y-bore5.1.0.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-ath10k-be-quiet.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-ata-fix-NCQ-LOG-strings-and-move-to-debug.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-acpi-use-kern_warning_even_when_error.patch
