@@ -57,8 +57,8 @@ COMMON_DEPEND="
 	zeroconf? ( net-dns/avahi )
 "
 RDEPEND="${COMMON_DEPEND}
-	dev-lang/perl[ithreads]
-	|| ( kde-frameworks/breeze-icons:5 kde-frameworks/oxygen-icons:* )
+	|| ( >=dev-lang/perl-5.38.2-r3[perl_features_ithreads] <dev-lang/perl-5.38.2-r3[ithreads] )
+	|| ( kde-frameworks/breeze-icons:* kde-frameworks/oxygen-icons:* )
 "
 DEPEND="${COMMON_DEPEND}
 	dev-qt/qtconcurrent:5

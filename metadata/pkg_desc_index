@@ -37,7 +37,7 @@ lxqt-base/lxqt-meta 1.4.0-r1: Meta ebuild for LXQt, the Lightweight Desktop Envi
 lxqt-base/lxqt-session 1.4.0-r1: LXQt Session Manager
 mail-client/mailspring 1.9.2-r1: A beautiful fast and maintained fork of Nylas Mail
 media-libs/portsmf 239-r1: The Tenacity fork of PortSMF, a Standard MIDI File library
-media-sound/cantata 2.5.0-r10: Featureful and configurable Qt client for the music player daemon (MPD)
+media-sound/cantata 2.5.0-r15: Featureful and configurable Qt client for the music player daemon (MPD)
 media-sound/strawberry 1.0.23-r10: Modern music player and library organizer based on Clementine and Qt
 media-tv/sopcast 3.2.6-r4: SopCast free P2P Internet TV binary
 media-tv/tv-lite 0.7.6: IPTV viewer with Sopcast and Acestream handling capabilities.
