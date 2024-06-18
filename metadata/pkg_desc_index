@@ -13,7 +13,7 @@ app-laptop/tp_smapi 0.44-r1: IBM ThinkPad SMAPI BIOS driver
 app-misc/calamares-config-redcore 1.314.1337-r6: Redcore Linux Calamares modules config
 app-misc/geoclue 2.7.1-r5: A location information D-Bus service
 app-misc/redcore-live 1.314.1337-r1: Redcore Linux live scripts
-app-misc/redcore-skel 1.314.1337-r2: Redcore Linux skel tree
+app-misc/redcore-skel 1.314.1337-r3: Redcore Linux skel tree
 app-portage/flaggie 0.99.8-r1: A smart CLI mangler for package.* files
 app-portage/sisyphus 6.2403.1: A simple portage python wrapper which works like other package managers(apt-get/yum/dnf)
 app-portage/sisyphus-qt 6.2403.1: A simple portage python wrapper which works like other package managers(apt-get/yum/dnf)

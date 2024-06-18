@@ -1,10 +1,10 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=6
+EAPI=8
 EGIT_REPO_URI="https://pagure.io/redcore/redcore-skel.git"
 
-inherit eutils git-r3
+inherit desktop git-r3
 
 DESCRIPTION="Redcore Linux skel tree"
 HOMEPAGE="https://redcorelinux.org"

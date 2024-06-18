@@ -1,0 +1,13 @@
+BDEPEND=>=dev-vcs/git-1.8.2.1[curl]
+DEFINED_PHASES=install unpack
+DESCRIPTION=Redcore Linux skel tree
+EAPI=8
+HOMEPAGE=https://redcorelinux.org
+INHERIT=desktop git-r3
+KEYWORDS=amd64 x86
+LICENSE=GPL-2
+PROPERTIES=live
+RDEPEND=media-fonts/jetbrains-mono media-fonts/roboto x11-themes/material-icon-theme x11-themes/numix-icon-theme x11-themes/numix-icon-theme-circle x11-themes/redcore-theme x11-themes/redcore-artwork-community x11-themes/redcore-artwork-core x11-themes/redcore-artwork-grub
+SLOT=0
+_eclasses_=desktop	021728fdc1b03b36357dbc89489e0f0d	git-r3	fbb2889c81f3a05910c1524db69425c1
+_md5_=f59cad915ca7145b069c410ff29c57b4
