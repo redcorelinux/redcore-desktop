@@ -2,9 +2,9 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI=6
+EAPI=8
 
-inherit eutils unpacker
+inherit unpacker
 
 DESCRIPTION="The simplest way to keep notes"
 HOMEPAGE="https://github.com/Automattic/simplenote-electron"
