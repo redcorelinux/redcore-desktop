@@ -1,0 +1,12 @@
+DEFINED_PHASES=install
+DEPEND=amd64? ( sys-libs/libstdc++-v3[multilib] ) x86? ( >=virtual/libstdc++-3.3 )
+DESCRIPTION=SopCast free P2P Internet TV binary
+EAPI=8
+HOMEPAGE=http://www.sopcast.com/
+KEYWORDS=~amd64 ~x86
+LICENSE=SopCast-unknown-license
+RDEPEND=amd64? ( sys-libs/libstdc++-v3[multilib] ) x86? ( >=virtual/libstdc++-3.3 )
+RESTRICT=strip
+SLOT=0
+SRC_URI=http://download.sopcast.com/download/sp-auth.tgz
+_md5_=c8a33e2f98d4a54e85f490f7615da5b4
