@@ -2,9 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 
-EAPI=6
-
-inherit eutils
+EAPI=8
 
 DESCRIPTION="Digital distribution client bootstrap package"
 HOMEPAGE="http://steampowered.com/"
