@@ -28,12 +28,14 @@ RDEPEND="
 	>=sys-auth/polkit-0.103
 "
 DEPEND="${RDEPEND}"
+BDEPEND="virtual/pkgconfig"
 
 DOCS=( AUTHORS README README.porting TODO )
 
 src_configure() {
 	local mycmakeargs=(
 		-DBUILD_EXAMPLES=OFF
+		-DQT_MAJOR_VERSION=5
 	)
 
 	cmake_src_configure

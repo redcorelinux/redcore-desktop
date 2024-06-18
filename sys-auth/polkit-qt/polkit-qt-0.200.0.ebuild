@@ -12,9 +12,11 @@ SRC_URI=""
 LICENSE="LGPL-2"
 SLOT="0"
 KEYWORDS="amd64"
-IUSE="+qt5"
+IUSE="+qt5 qt6"
+REQUIRED_USE="|| ( qt5 qt6 )"
 
 RDEPEND="
 	qt5? ( ~sys-auth/polkit-qt5-${PV} )
+	qt6? ( ~sys-auth/polkit-qt6-${PV} )
 "
 DEPEND=""

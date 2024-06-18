@@ -49,8 +49,9 @@ sys-apps/baselayout 2.13-r6: Filesystem baselayout and init scripts
 sys-apps/firetools 0.9.64: Graphical user interface of app-emulation/firejail
 sys-apps/lsb-release 3.3-r5: LSB version query program
 sys-apps/openrc 0.53: OpenRC manages the services, startup and shutdown of a host
-sys-auth/polkit-qt 0.113.0-r11: PolicyKit Qt API wrapper library (meta package)
-sys-auth/polkit-qt5 0.113.0-r5: Qt wrapper around polkit-1 client libraries
+sys-auth/polkit-qt 0.200.0: PolicyKit Qt API wrapper library (meta package)
+sys-auth/polkit-qt5 0.200.0: Qt wrapper around polkit-1 client libraries
+sys-auth/polkit-qt6 0.200.0: Qt wrapper around polkit-1 client libraries
 sys-boot/etcher 1.18.4-r1: Flash OS images to SD cards & USB drives, safely and easily.
 sys-boot/grub 2.04-r14: GNU GRUB boot loader
 sys-boot/os-prober 1.77-r10: Utility to detect other OSs on a set of drives
