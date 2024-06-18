@@ -1,0 +1,14 @@
+BDEPEND=>=dev-vcs/git-1.8.2.1[curl]
+DEFINED_PHASES=install unpack
+DEPEND=sys-apps/gentoo-functions
+DESCRIPTION=Versatile Advanced Script for ISO and Latest Enchantments
+EAPI=8
+HOMEPAGE=https://redcorelinux.org
+INHERIT=git-r3
+KEYWORDS=amd64
+LICENSE=GPL-2
+PROPERTIES=live
+RDEPEND=sys-apps/gentoo-functions dev-libs/libisoburn dev-vcs/git sys-boot/grub:2 sys-kernel/dkms sys-fs/mtools sys-fs/squashfs-tools
+SLOT=0
+_eclasses_=git-r3	fbb2889c81f3a05910c1524db69425c1
+_md5_=b22e77a7235d154530a555d3277bb3c1
