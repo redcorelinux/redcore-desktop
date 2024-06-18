@@ -1,0 +1,10 @@
+DEFINED_PHASES=install
+DESCRIPTION=Universal Netboot Installer creates Live USB systems for various OS distributions
+EAPI=8
+HOMEPAGE=http://unetbootin.sourceforge.net
+KEYWORDS=amd64 x86
+LICENSE=GPL-2
+RDEPEND=app-arch/p7zip media-libs/libpng-compat:1.2
+SLOT=0
+SRC_URI=http://redcorelinux.org/distfiles/unetbootin-static-625.tar.bz2
+_md5_=df7e72da586ebc5a0a0334f9f1fcfebc
