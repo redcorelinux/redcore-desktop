@@ -2,9 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI=6
-
-inherit eutils
+EAPI=8
 
 MY_P="vbox-kernel-module-src-${PV}"
 DESCRIPTION="Kernel Modules source for Virtualbox"

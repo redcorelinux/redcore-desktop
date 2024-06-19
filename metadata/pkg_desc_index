@@ -73,7 +73,7 @@ sys-kernel/linux-sources-redcore-lts 5.15.158 6.1.89 6.6.30: Redcore Linux LTS K
 sys-kernel/nvidia-drivers-dkms 390.157-r7 470.239.06-r1 535.171.04-r1: NVIDIA driver sources for linux
 sys-kernel/tp_smapi-dkms 0.44-r1: IBM ThinkPad SMAPI BIOS driver sources
 sys-kernel/vhba-dkms 20240202-r1: Virtual (SCSI) Host Bus Adapter kernel module for the CDEmu suite sources
-sys-kernel/virtualbox-modules-dkms 7.0.18: Kernel Modules source for Virtualbox
+sys-kernel/virtualbox-modules-dkms 7.0.18-r1: Kernel Modules source for Virtualbox
 sys-kernel/zfs-dkms 2.2.4: ZFS sources for linux
 sys-libs/glibc 2.37-r15: GNU libc C library
 sys-power/radeon-profile 20200824-r10: Read current clocks of ATi/AMD Radeon cards
