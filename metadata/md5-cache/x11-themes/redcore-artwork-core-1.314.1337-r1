@@ -1,0 +1,14 @@
+BDEPEND=>=dev-vcs/git-1.8.2.1[curl]
+DEFINED_PHASES=install postinst unpack
+DESCRIPTION=Offical Redcore Linux Core Artwork
+EAPI=8
+HOMEPAGE=https://redcorelinux.org
+INHERIT=git-r3
+IUSE=+splash
+KEYWORDS=x86 amd64
+LICENSE=CCPL-Attribution-ShareAlike-3.0
+PROPERTIES=live
+RDEPEND=sys-apps/findutils sys-boot/plymouth >=x11-themes/hicolor-icon-theme-0.10 splash? ( sys-kernel/dracut[splash] )
+SLOT=0
+_eclasses_=git-r3	fbb2889c81f3a05910c1524db69425c1
+_md5_=6c9201cd221522a02d2761400e341736

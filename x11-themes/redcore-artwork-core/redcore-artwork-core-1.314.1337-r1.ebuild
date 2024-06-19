@@ -1,8 +1,9 @@
 # Copyright 2016 Redcore Linux
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
-inherit eutils git-r3
+EAPI=8
+
+inherit git-r3
 
 DESCRIPTION="Offical Redcore Linux Core Artwork"
 HOMEPAGE="https://redcorelinux.org"
