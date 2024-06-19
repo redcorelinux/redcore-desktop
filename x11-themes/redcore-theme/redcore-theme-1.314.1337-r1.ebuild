@@ -1,9 +1,9 @@
 # Copyright 2015 Rogentos
 # Distributed under the terms of the GNU General Public License v3
 
-EAPI=6
+EAPI=8
 
-inherit eutils git-r3
+inherit git-r3
 
 DESCRIPTION="Official Redcore Linux GTK theme"
 HOMEPAGE="http://redcorelinux.org"
