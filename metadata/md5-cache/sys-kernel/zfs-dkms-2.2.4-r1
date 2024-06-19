@@ -1,0 +1,11 @@
+DEFINED_PHASES=compile configure install postinst prerm
+DEPEND=sys-kernel/dkms
+DESCRIPTION=ZFS sources for linux
+EAPI=8
+HOMEPAGE=http://zfsonlinux.org/
+KEYWORDS=amd64
+LICENSE=GPL-2
+RDEPEND=sys-kernel/dkms
+SLOT=0
+SRC_URI=https://github.com/zfsonlinux/zfs/releases/download/zfs-2.2.4/zfs-2.2.4.tar.gz
+_md5_=203f7d3ab6774e06f727f587aee703af
