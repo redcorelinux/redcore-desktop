@@ -3,7 +3,7 @@
 
 EAPI=8
 
-inherit git-r3 gnome2-utils
+inherit git-r3 xdg-utils
 
 DESCRIPTION="Icon theme following the Google's material design specifications"
 HOMEPAGE="https://gitlab.com/bionel/bionel-icons"
@@ -27,14 +27,10 @@ src_install() {
 	doins -r material-icons/*
 }
 
-pkg_preinst() {
-	gnome2_icon_savelist
-}
-
 pkg_postinst() {
-	gnome2_icon_cache_update
+	xdg_icon_cache_update
 }
 
 pkg_postrm() {
-	gnome2_icon_cache_update
+	xdg_icon_cache_update
 }
