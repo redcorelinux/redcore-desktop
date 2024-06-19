@@ -1,9 +1,7 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
-
-inherit eutils
+EAPI=8
 
 MY_P=vhba-module-${PV}
 DESCRIPTION="Virtual (SCSI) Host Bus Adapter kernel module for the CDEmu suite sources"
