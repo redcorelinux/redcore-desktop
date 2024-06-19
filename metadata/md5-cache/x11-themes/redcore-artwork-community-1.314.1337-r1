@@ -1,0 +1,11 @@
+BDEPEND=>=dev-vcs/git-1.8.2.1[curl]
+DEFINED_PHASES=install unpack
+DESCRIPTION=Redcore Linux Community Wallpapers
+EAPI=8
+HOMEPAGE=https://redcorelinux.org
+INHERIT=git-r3
+KEYWORDS=amd64 x86
+PROPERTIES=live
+SLOT=0
+_eclasses_=git-r3	fbb2889c81f3a05910c1524db69425c1
+_md5_=0e179388378c9d5bd5e19e9fd09571b7
