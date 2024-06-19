@@ -9,4 +9,4 @@ RDEPEND=app-arch/lz4 app-arch/xz-utils dev-build/autoconf dev-build/make sys-dev
 RESTRICT=strip mirror
 SLOT=6.7
 SRC_URI=https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.7.12.tar.xz
-_md5_=7ac37c9de1166527a5093ab263c8af68
+_md5_=66950d1835d84d1f2d2e7d0cf3931b80

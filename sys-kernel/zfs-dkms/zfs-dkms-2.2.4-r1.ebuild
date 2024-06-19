@@ -31,7 +31,7 @@ src_compile() {
 src_install() {
 	dodir usr/src/"${P}"
 	cp -ax "${FILESDIR}"/dkms.conf "${S}" || die
-	cp -ax "${S}"/* "${D}"usr/src/"${P}" || die
+	cp -ax "${S}"/* "${D}"/usr/src/"${P}" || die
 }
 
 pkg_postinst() {

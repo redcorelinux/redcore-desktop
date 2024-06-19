@@ -9,4 +9,4 @@ RDEPEND=app-arch/lz4 app-arch/xz-utils dev-build/autoconf dev-build/make sys-dev
 RESTRICT=strip mirror
 SLOT=6.6
 SRC_URI=https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.6.30.tar.xz
-_md5_=655ba3b758d11a65b7243d9ec94ba6a5
+_md5_=02dcd6030111cdbb24a08e03e9825ef7
