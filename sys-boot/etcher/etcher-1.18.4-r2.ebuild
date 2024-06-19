@@ -2,11 +2,11 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI=6
+EAPI=8
 
 MY_PN="balenaEtcher"
 
-inherit eutils xdg-utils
+inherit desktop xdg-utils
 
 DESCRIPTION="Flash OS images to SD cards & USB drives, safely and easily."
 HOMEPAGE="https://etcher.io/"
