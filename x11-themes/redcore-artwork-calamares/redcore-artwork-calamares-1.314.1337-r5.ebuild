@@ -2,9 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=6
-
-inherit eutils
+EAPI=8
 
 DESCRIPTION="Redcore Linux branding component for Calamares"
 HOMEPAGE="http://redcorelinux.org"
