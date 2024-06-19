@@ -1,0 +1,12 @@
+BDEPEND=>=dev-vcs/git-1.8.2.1[curl]
+DEFINED_PHASES=install unpack
+DESCRIPTION=Redcore Linux GRUB2 Images
+EAPI=8
+HOMEPAGE=http://redcorelinux.org
+INHERIT=git-r3
+KEYWORDS=amd64 x86
+LICENSE=CCPL-Attribution-ShareAlike-3.0
+PROPERTIES=live
+SLOT=0
+_eclasses_=git-r3	fbb2889c81f3a05910c1524db69425c1
+_md5_=7f3e566ef2775548e3f1b68a993a3c5c

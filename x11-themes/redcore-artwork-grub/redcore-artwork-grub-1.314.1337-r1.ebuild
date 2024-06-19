@@ -1,8 +1,8 @@
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=8
 
-inherit mount-boot git-r3 eutils
+inherit git-r3
 
 DESCRIPTION="Redcore Linux GRUB2 Images"
 HOMEPAGE="http://redcorelinux.org"
