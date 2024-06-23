@@ -5,7 +5,7 @@ EAPI=7
 
 MY_PN="${PN/-qt/}"
 
-PYTHON_COMPAT=( python3_{9..11} )
+PYTHON_COMPAT=( python3_{10..12} )
 
 inherit python-single-r1 git-r3
 
