@@ -75,7 +75,6 @@ sys-kernel/tp_smapi-dkms 0.44-r1: IBM ThinkPad SMAPI BIOS driver sources
 sys-kernel/vhba-dkms 20240202-r1: Virtual (SCSI) Host Bus Adapter kernel module for the CDEmu suite sources
 sys-kernel/virtualbox-modules-dkms 7.0.18-r1: Kernel Modules source for Virtualbox
 sys-kernel/zfs-dkms 2.2.4-r1: ZFS sources for linux
-sys-libs/glibc 2.37-r15: GNU libc C library
 sys-power/radeon-profile 20200824-r10: Read current clocks of ATi/AMD Radeon cards
 virtual/libudev 314.1337-r1: Virtual for libudev providers
 virtual/linux-sources 314.1337-r1: Virtual for Linux kernel sources
