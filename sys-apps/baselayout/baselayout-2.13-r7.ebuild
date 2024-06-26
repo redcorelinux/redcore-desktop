@@ -344,6 +344,11 @@ src_install() {
 	dodir /usr/share/X11/xorg.conf.d
 	insinto /usr/share/X11/xorg.conf.d
 	newins ${FILESDIR}/xorgcfg 80-synaptics-overrides.conf
+	#
+	# sddm
+	dodir /etc/sddm.conf.d
+	insinto /etc/sddm.conf.d
+	newins ${FILESDIR}/sddmcfg 00redcore.conf
 	##############################################
 }
 
