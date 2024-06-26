@@ -32,9 +32,7 @@ dev-python/zeroconf 0.82.1-r10: Pure Python Multicast DNS Service Discovery Libr
 gui-libs/display-manager-init 1.1.2-r1: RC init files for starting display and login managers
 kde-plasma/kinfocenter 5.27.11-r5 6.1.1-r5: Utility providing information about the computer hardware
 lxde-base/lxappearance 0.6.3-r5: LXDE GTK+ theme switcher
-lxqt-base/lxqt-config 1.4.0-r1: LXQt system configuration control center
-lxqt-base/lxqt-meta 1.4.0-r1: Meta ebuild for LXQt, the Lightweight Desktop Environment
-lxqt-base/lxqt-session 1.4.0-r1: LXQt Session Manager
+lxqt-base/lxqt-meta 2.0.0-r1: Meta ebuild for LXQt, the Lightweight Desktop Environment
 media-libs/portsmf 239-r1: The Tenacity fork of PortSMF, a Standard MIDI File library
 media-sound/cantata 2.5.0-r15: Featureful and configurable Qt client for the music player daemon (MPD)
 media-sound/strawberry 1.0.23-r10: Modern music player and library organizer based on Clementine and Qt
