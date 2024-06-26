@@ -19,11 +19,11 @@ RDEPEND="
 	x11-themes/material-icon-theme
 	x11-themes/numix-icon-theme
 	x11-themes/numix-icon-theme-circle
-	x11-themes/redcore-theme
 	x11-themes/redcore-artwork-community
 	x11-themes/redcore-artwork-core
-	x11-themes/redcore-artwork-grub"
-
+	x11-themes/redcore-artwork-grub
+	x11-themes/redcore-theme
+	x11-themes/redcore-theme-sddm"
 S="${WORKDIR}/${P}"
 
 src_install () {
