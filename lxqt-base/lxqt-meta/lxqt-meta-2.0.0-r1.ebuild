@@ -67,7 +67,7 @@ RDEPEND="
 	window-manager? (
 		openbox? (
 			x11-wm/openbox
-			x11-misc/obconf-qt
+			x11-misc/obconf
 		)
 		!openbox? (
 			kde-plasma/kwin:6
