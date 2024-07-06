@@ -10,4 +10,4 @@ RDEPEND=app-arch/lz4 app-arch/xz-utils dev-build/autoconf dev-build/make sys-dev
 RESTRICT=binchecks strip mirror
 SLOT=5.15
 SRC_URI=https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-5.15.162.tar.xz
-_md5_=4dc91015e7d5b4be12d3de0b124ecadb
+_md5_=f2ecf8d0937069e32b1ea1c03175dd27

@@ -3,11 +3,11 @@
 
 EAPI=8
 
-EXTRAVERSION="redcore-lts"
+EXTRAVERSION="redcore-r1"
 KV_FULL="${PV}-${EXTRAVERSION}"
-KV_MAJOR="6.6"
+KV_MAJOR="6.8"
 
-DESCRIPTION="Redcore Linux LTS Kernel Image"
+DESCRIPTION="Redcore Linux Kernel Image"
 HOMEPAGE="https://redcorelinux.org"
 SRC_URI="https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-${PV}.tar.xz"
 
@@ -26,7 +26,7 @@ DEPEND="
 	cryptsetup? ( sys-fs/cryptsetup )
 	dmraid? ( sys-fs/dmraid )
 	dracut? ( >=sys-kernel/dracut-0.44-r8 )
-	dkms? ( sys-kernel/dkms sys-kernel/linux-sources-redcore-lts:${SLOT} )
+	dkms? ( sys-kernel/dkms sys-kernel/linux-sources-redcore:${SLOT} )
 	mdadm? ( sys-fs/mdadm )
 	>=sys-kernel/linux-firmware-20180314"
 RDEPEND="${DEPEND}"
@@ -80,8 +80,8 @@ src_install() {
 
 	emake INSTALL_MOD_PATH="${D}" modules_install
 
-	rm -f "${D}"lib/modules/"${KV_FULL}"/build
-	rm -f "${D}"lib/modules/"${KV_FULL}"/source
+	rm -f "${D}"/lib/modules/"${KV_FULL}"/build
+	rm -f "${D}"/lib/modules/"${KV_FULL}"/source
 	export local KSYMS
 	for KSYMS in build source ; do
 		dosym ../../../usr/src/linux-"${KV_FULL}" lib/modules/"${KV_FULL}"/"${KSYMS}"
@@ -91,7 +91,7 @@ src_install() {
 _grub2_update_grubcfg() {
 	if [[ -x $(which grub2-mkconfig) ]]; then
 		elog "Updating GRUB-2 bootloader configuration, please wait"
-		grub2-mkconfig -o "${ROOT}"boot/grub/grub.cfg
+		grub2-mkconfig -o "${ROOT}"/boot/grub/grub.cfg
 	else
 		elog "It looks like you're not using GRUB-2, you must update bootloader configuration by hand"
 	fi
@@ -101,14 +101,14 @@ _dracut_initrd_create() {
 	if [[ -x $(which dracut) ]]; then
 		elog "Generating initrd for "${KV_FULL}", please wait"
 		addpredict /etc/ld.so.cache~
-		dracut -N -f --kver="${KV_FULL}" "${ROOT}"boot/initrd-"${KV_FULL}"
+		dracut -N -f --kver="${KV_FULL}" "${ROOT}"/boot/initrd-"${KV_FULL}"
 	else
 		elog "It looks like you're not using dracut, you must generate an initrd by hand"
 	fi
 }
 
 _dracut_initrd_delete() {
-	rm -rf "${ROOT}"boot/initrd-"${KV_FULL}"
+	rm -rf "${ROOT}"/boot/initrd-"${KV_FULL}"
 }
 
 _dkms_modules_manage() {
@@ -122,7 +122,7 @@ _dkms_modules_manage() {
 }
 
 _kernel_modules_delete() {
-	rm -rf "${ROOT}"lib/modules/"${KV_FULL}"
+	rm -rf "${ROOT}"/lib/modules/"${KV_FULL}"
 }
 
 pkg_postinst() {

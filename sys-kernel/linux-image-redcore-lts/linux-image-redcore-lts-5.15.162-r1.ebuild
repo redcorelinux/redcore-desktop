@@ -3,13 +3,13 @@
 
 EAPI=8
 
-EXTRAVERSION="redcore-lts"
+EXTRAVERSION="redcore-lts-r1"
 KV_FULL="${PV}-${EXTRAVERSION}"
-KV_MAJOR="6.1"
+KV_MAJOR="5.15"
 
 DESCRIPTION="Redcore Linux LTS Kernel Image"
 HOMEPAGE="https://redcorelinux.org"
-SRC_URI="https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-${PV}.tar.xz"
+SRC_URI="https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-${PV}.tar.xz"
 
 KEYWORDS="~amd64"
 LICENSE="GPL-2"
@@ -32,16 +32,22 @@ DEPEND="
 RDEPEND="${DEPEND}"
 
 PATCHES=(
-	"${FILESDIR}"/"${KV_MAJOR}"-ath10k-be-quiet.patch
-	"${FILESDIR}"/"${KV_MAJOR}"-ata-fix-NCQ-LOG-strings-and-move-to-debug.patch
-	"${FILESDIR}"/"${KV_MAJOR}"-radeon_dp_aux_transfer_native-no-ratelimited_debug.patch
+	"${FILESDIR}"/"${KV_MAJOR}"-0001-Revert-cpufreq-Avoid-configuring-old-governors-as-de.patch
+	"${FILESDIR}"/"${KV_MAJOR}"-0001-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-C.patch
+	"${FILESDIR}"/"${KV_MAJOR}"-0003-iommu_intel_do_deep_dma-unmapping_to_avoid_kernel-flooding.patch
+	"${FILESDIR}"/"${KV_MAJOR}"-0004-cpufreq_intel_pstate_ITMT_support_for_overclocked_system.patch
+	"${FILESDIR}"/"${KV_MAJOR}"-0005-Bluetooth_btintel_Fix_bdaddress_comparison_with_garbage_value.patch
+	"${FILESDIR}"/"${KV_MAJOR}"-0006-lg-laptop_Recognize_more_models.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-acpi-use-kern_warning_even_when_error.patch
+	"${FILESDIR}"/"${KV_MAJOR}"-apic_vector-spam-in-debug-mode-only.patch
+	"${FILESDIR}"/"${KV_MAJOR}"-ata-fix-NCQ-LOG-strings-and-move-to-debug.patch
+	"${FILESDIR}"/"${KV_MAJOR}"-ath10k-be-quiet.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-do_not_bug_the_next_18-years.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-fix-bootconfig-makefile.patch
-	"${FILESDIR}"/"${KV_MAJOR}"-apic_vector-spam-in-debug-mode-only.patch
-	"${FILESDIR}"/"${KV_MAJOR}"-0001-Revert-cpufreq-Avoid-configuring-old-governors-as-de.patch
+	"${FILESDIR}"/"${KV_MAJOR}"-iwlwifi-fix-5e003982b07ae.patch
+	"${FILESDIR}"/"${KV_MAJOR}"-iwlwifi-use-debug-for-debug-infos.patch
+	"${FILESDIR}"/"${KV_MAJOR}"-radeon_dp_aux_transfer_native-no-ratelimited_debug.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-revert-parts-of-a00ec3874e7d326ab2dffbed92faddf6a77a84e9-no-Intel-NO.patch
-	"${FILESDIR}"/"${KV_MAJOR}"-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-C.patch
 )
 
 S="${WORKDIR}"/linux-"${PV}"
@@ -82,8 +88,8 @@ src_install() {
 
 	emake INSTALL_MOD_PATH="${D}" modules_install
 
-	rm -f "${D}"lib/modules/"${KV_FULL}"/build
-	rm -f "${D}"lib/modules/"${KV_FULL}"/source
+	rm -f "${D}"/lib/modules/"${KV_FULL}"/build
+	rm -f "${D}"/lib/modules/"${KV_FULL}"/source
 	export local KSYMS
 	for KSYMS in build source ; do
 		dosym ../../../usr/src/linux-"${KV_FULL}" lib/modules/"${KV_FULL}"/"${KSYMS}"
@@ -93,7 +99,7 @@ src_install() {
 _grub2_update_grubcfg() {
 	if [[ -x $(which grub2-mkconfig) ]]; then
 		elog "Updating GRUB-2 bootloader configuration, please wait"
-		grub2-mkconfig -o "${ROOT}"boot/grub/grub.cfg
+		grub2-mkconfig -o "${ROOT}"/boot/grub/grub.cfg
 	else
 		elog "It looks like you're not using GRUB-2, you must update bootloader configuration by hand"
 	fi
@@ -103,14 +109,14 @@ _dracut_initrd_create() {
 	if [[ -x $(which dracut) ]]; then
 		elog "Generating initrd for "${KV_FULL}", please wait"
 		addpredict /etc/ld.so.cache~
-		dracut -N -f --kver="${KV_FULL}" "${ROOT}"boot/initrd-"${KV_FULL}"
+		dracut -N -f --kver="${KV_FULL}" "${ROOT}"/boot/initrd-"${KV_FULL}"
 	else
 		elog "It looks like you're not using dracut, you must generate an initrd by hand"
 	fi
 }
 
 _dracut_initrd_delete() {
-	rm -rf "${ROOT}"boot/initrd-"${KV_FULL}"
+	rm -rf "${ROOT}"/boot/initrd-"${KV_FULL}"
 }
 
 _dkms_modules_manage() {
@@ -124,7 +130,7 @@ _dkms_modules_manage() {
 }
 
 _kernel_modules_delete() {
-	rm -rf "${ROOT}"lib/modules/"${KV_FULL}"
+	rm -rf "${ROOT}"/lib/modules/"${KV_FULL}"
 }
 
 pkg_postinst() {
