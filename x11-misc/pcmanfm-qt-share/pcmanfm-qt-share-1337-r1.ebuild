@@ -3,8 +3,6 @@
 
 EAPI=6
 
-inherit eutils
-
 DESCRIPTION="PCManFM-QT custom action to share folder using Samba"
 HOMEPAGE="https://redcorelinux.org"
 SRC_URI=""

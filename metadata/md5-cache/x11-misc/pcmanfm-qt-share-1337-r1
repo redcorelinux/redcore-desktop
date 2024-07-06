@@ -1,0 +1,10 @@
+DEFINED_PHASES=install
+DEPEND=net-fs/samba
+DESCRIPTION=PCManFM-QT custom action to share folder using Samba
+EAPI=6
+HOMEPAGE=https://redcorelinux.org
+KEYWORDS=amd64 x86
+LICENSE=GPL-2
+RDEPEND=net-fs/samba
+SLOT=0
+_md5_=d0ff776acdb42803be711af7f6aaa951

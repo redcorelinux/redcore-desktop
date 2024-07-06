@@ -3,14 +3,14 @@
 
 EAPI=6
 
-inherit eutils multilib toolchain-funcs
+inherit desktop multilib toolchain-funcs
 
 DESCRIPTION="NVIDIA Linux X11 Settings Utility"
 HOMEPAGE="http://www.nvidia.com/"
 SRC_URI="https://github.com/NVIDIA/nvidia-settings/archive/refs/tags/${PV}.tar.gz -> nvidia-settings-${PV}.tar.gz"
 
 LICENSE="GPL-2"
-SLOT="5"
+SLOT="4"
 KEYWORDS="-* amd64"
 IUSE=""
 
@@ -34,7 +34,7 @@ COMMON_DEPEND="
 
 RDEPEND="${COMMON_DEPEND}
 	!!x11-misc/nvidia-settings:3
-	!!x11-misc/nvidia-settings:4
+	!!x11-misc/nvidia-settings:5
 	x11-drivers/nvidia-drivers:${SLOT}"
 DEPEND="${RDEPEND}
 	virtual/pkgconfig
