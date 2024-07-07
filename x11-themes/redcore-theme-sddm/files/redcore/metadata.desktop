@@ -1,16 +1,17 @@
 [SddmGreeterTheme]
-Name=Redcore
-Description=ChromeOS Theme
-Author=Vince Liuice
-Copyright=(c) 2020, Vince Liuice
+Name=Redcore-Breeze
+Description=Redcore-Breeze
+Author=KDE Visual Design Group
+Copyright=(c) 2014, David Edmundson
 License=CC-BY-SA
 Type=sddm-theme
-Version=0.1.0
-Website=https://github.com/vinceliuice/Orchis-kde
-Screenshot=preview.png
+Version=0.1
+Website=https://github.com/sddm/sddm
+Screenshot=background.png
 MainScript=Main.qml
 ConfigFile=theme.conf
 TranslationsDirectory=translations
-Email=vinceliuice@hotmail.com
-Theme-Id=Orchis
+Email=plasma-devel@kde.org
+Theme-Id=redcore-breeze
 Theme-API=2.0
+QtVersion=6
