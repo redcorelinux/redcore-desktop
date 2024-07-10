@@ -5,7 +5,7 @@ EAPI=8
 
 DISTUTILS_EXT=1
 DISTUTILS_USE_PEP517=setuptools
-PYTHON_COMPAT=( python3_{10..12} )
+PYTHON_COMPAT=( python3_{9..12} )
 
 inherit distutils-r1 multiprocessing prefix pypi
 
@@ -14,24 +14,24 @@ HOMEPAGE="https://grpc.io"
 
 LICENSE="Apache-2.0"
 SLOT="0"
-KEYWORDS="amd64 ~arm ~arm64 ~ppc64 ~riscv x86"
+KEYWORDS="amd64 ~arm arm64 ~ppc64 ~riscv x86"
 
 RDEPEND="
 	>=dev-libs/openssl-1.1.1:0=[-bindist(-)]
 	>=dev-libs/re2-0.2021.11.01:=
-	>=dev-python/cython-0.29.36[${PYTHON_USEDEP}]
 	<dev-python/protobuf-python-5[${PYTHON_USEDEP}]
 	>=dev-python/protobuf-python-4.21.3[${PYTHON_USEDEP}]
 	net-dns/c-ares:=
 	sys-libs/zlib:=
 "
-
 DEPEND="${RDEPEND}"
+BDEPEND="dev-python/cython[${PYTHON_USEDEP}]"
+
+PATCHES=(
+	"${FILESDIR}/1.62.0-cython3.patch"
+)
 
 python_prepare_all() {
-	if has_version ">=dev-python/cython-3.0.0[${PYTHON_USEDEP}]"; then
-		PATCHES=( "${FILESDIR}/1.59.0-cython3.patch" )
-	fi
 	distutils-r1_python_prepare_all
 	hprefixify setup.py
 }
