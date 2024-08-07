@@ -1,61 +1,54 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
-inherit flag-o-matic multilib-minimal portability toolchain-funcs unpacker
+inherit flag-o-matic multilib-minimal portability toolchain-funcs
 
-NV_URI="https://us.download.nvidia.com/XFree86/"
+NV_URI="http://http.download.nvidia.com/XFree86/"
 AMD64_NV_PACKAGE="NVIDIA-Linux-x86_64-${PV}"
-DESCRIPTION="NVIDIA Accelerated Graphics Driver"
 
+DESCRIPTION="NVIDIA Accelerated Graphics Driver"
+HOMEPAGE="http://www.nvidia.com/ http://www.nvidia.com/Download/Find.aspx"
 SRC_URI="amd64? ( ${NV_URI}Linux-x86_64/${PV}/${AMD64_NV_PACKAGE}.run )"
 
-EMULTILIB_PKG="true"
+LICENSE="GPL-2 NVIDIA-r2"
+SLOT="3"
 KEYWORDS="-* ~amd64"
 RESTRICT="bindist mirror strip"
-LICENSE="GPL-2 NVIDIA-r2"
-SLOT="5"
+EMULTILIB_PKG="true"
 
 IUSE="acpi +dkms multilib +tools wayland +X"
-REQUIRED_USE="tools? ( X )"
 
 COMMON="
 	acct-group/video
 	acct-user/nvpd
 	net-libs/libtirpc
 	X? (
-		>=x11-libs/libvdpau-1.0[${MULTILIB_USEDEP}]
-		media-libs/libglvnd[X,${MULTILIB_USEDEP}]
-	)
-"
-
+			>=x11-libs/libvdpau-1.0[${MULTILIB_USEDEP}]
+			media-libs/libglvnd[X,${MULTILIB_USEDEP}]
+	)"
 DEPEND="${COMMON}"
-
+PDEPEND="
+	tools? ( x11-misc/nvidia-settings:${SLOT} )
+"
 RDEPEND="
 	${COMMON}
 	>=virtual/opencl-3
-	!!x11-drivers/nvidia-drivers:3
 	!!x11-drivers/nvidia-drivers:4
+	!!x11-drivers/nvidia-drivers:5
 	acpi? ( sys-power/acpid )
 	dkms? ( ~sys-kernel/${PN}-dkms-${PV}:${SLOT} )
-	wayland? (
-		gui-libs/egl-gbm
-		>=gui-libs/egl-wayland-1.1.10
-	)
+	wayland? ( dev-libs/wayland[${MULTILIB_USEDEP}] )
 	X? (
 		>=x11-libs/libX11-1.6.2[${MULTILIB_USEDEP}]
 		>=x11-libs/libXext-1.3.2[${MULTILIB_USEDEP}]
 		sys-libs/zlib[${MULTILIB_USEDEP}]
 	)
 "
-PDEPEND="tools? ( x11-misc/nvidia-settings:${SLOT} )
-"
 
 QA_PREBUILT="opt/* usr/lib*"
+
 S=${WORKDIR}/
-PATCHES=(
-	"${FILESDIR}"/locale.patch
-)
 
 pkg_setup() {
 	export DISTCC_DISABLE=1
@@ -111,7 +104,7 @@ src_install-libs() {
 	local CL_ROOT="/usr/$(get_libdir)/OpenCL/vendors/nvidia"
 	local nv_libdir="${NV_OBJ}"
 
-	if has_multilib_profile && [[ ${ABI} == "x86" ]]; then
+	if  has_multilib_profile && [[ ${ABI} == "x86" ]]; then
 		nv_libdir="${NV_OBJ}"/32
 	fi
 
@@ -124,25 +117,32 @@ src_install-libs() {
 			"libOpenCL.so.1.0.0 ${CL_ROOT}"
 			"libcuda.so.${NV_SOVER}"
 			"libnvcuvid.so.${NV_SOVER}"
-			"libnvidia-allocator.so.${NV_SOVER}"
+			"libnvidia-compiler.so.${NV_SOVER}"
 			"libnvidia-eglcore.so.${NV_SOVER}"
 			"libnvidia-encode.so.${NV_SOVER}"
+			"libnvidia-fatbinaryloader.so.${NV_SOVER}"
+			"libnvidia-fbc.so.${NV_SOVER}"
 			"libnvidia-glcore.so.${NV_SOVER}"
 			"libnvidia-glsi.so.${NV_SOVER}"
-			"libnvidia-glvkspirv.so.${NV_SOVER}"
+			"libnvidia-ifr.so.${NV_SOVER}"
 			"libnvidia-opencl.so.${NV_SOVER}"
 			"libnvidia-ptxjitcompiler.so.${NV_SOVER}"
-			"libnvidia-opticalflow.so.${NV_SOVER}"
 			"libvdpau_nvidia.so.${NV_SOVER}"
 			"libnvidia-ml.so.${NV_SOVER}"
-			"libnvidia-tls.so.${NV_SOVER}"
+			"tls/libnvidia-tls.so.${NV_SOVER}"
 		)
 
-		if has_multilib_profile && [[ ${ABI} == "amd64" ]]; then
+		if use wayland && has_multilib_profile && [[ ${ABI} == "amd64" ]];
+		then
 			NV_GLX_LIBRARIES+=(
-				"libnvidia-ngx.so.${NV_SOVER}"
-				"libnvidia-rtcore.so.${NV_SOVER}"
-				"libnvoptix.so.${NV_SOVER}"
+				"libnvidia-egl-wayland.so.1.0.2"
+			)
+		fi
+
+		if has_multilib_profile && [[ ${ABI} == "amd64" ]];
+		then
+			NV_GLX_LIBRARIES+=(
+				"libnvidia-wfb.so.${NV_SOVER}"
 			)
 		fi
 
@@ -155,14 +155,12 @@ src_install-libs() {
 src_install() {
 	donvidia ${NV_OBJ}/libnvidia-cfg.so.${NV_SOVER}
 	donvidia ${NV_OBJ}/libnvidia-fbc.so.${NV_SOVER}
-	donvidia ${NV_OBJ}/libnvidia-nvvm.so.${NV_SOVER}
-	donvidia ${NV_OBJ}/libnvidia-vulkan-producer.so.${NV_SOVER}
 	donvidia ${NV_OBJ}/libnvcuvid.so.${NV_SOVER}
 	donvidia ${NV_OBJ}/libnvidia-encode.so.${NV_SOVER}
 
 	if has_multilib_profile && use multilib; then
 		local OABI=${ABI}
-		for ABI in $(multilib_get_enabled_abis); do
+		for ABI in $(get_install_abis); do
 			src_install-libs
 		done
 		ABI=${OABI}
@@ -174,16 +172,19 @@ src_install() {
 	is_final_abi || die "failed to iterate through all ABIs"
 
 	if use X; then
-		donvidia ${NV_X11}/libglxserver_nvidia.so.${NV_SOVER} /usr/$(get_libdir)/nvidia/xorg
-		
 		insinto /usr/$(get_libdir)/xorg/modules/drivers
 		doins ${NV_X11}/nvidia_drv.so
 
+		donvidia ${NV_X11}/libglx.so.${NV_SOVER} /usr/$(get_libdir)/nvidia/xorg
+
 		insinto /usr/share/X11/xorg.conf.d
-		newins ${FILESDIR}/nvidia-drm-outputclass.conf 50-nvidia-drm-outputclass.conf
+		newins "${FILESDIR}"/nvidia-drm-outputclass.conf 50-nvidia-drm-outputclass.conf
 
 		insinto /usr/share/glvnd/egl_vendor.d
 		doins ${NV_X11}/10_nvidia.json
+
+		insinto /etc/vulkan/icd.d
+		doins ${NV_X11}/nvidia_icd.json
 
 		exeinto /opt/bin
 		doexe ${NV_OBJ}/nvidia-xconfig
@@ -191,14 +192,13 @@ src_install() {
 		doman "${NV_MAN}"/nvidia-xconfig.1
 	fi
 
+	if use wayland; then
+		insinto /usr/share/egl/egl_external_platform.d
+		doins ${NV_X11}/10_nvidia_wayland.json
+	fi
+
 	insinto /etc/modprobe.d
 	doins "${FILESDIR}"/nouveau.conf
-
-	insinto /etc/vulkan/icd.d
-	doins nvidia_icd.json
-
-	insinto /etc/vulkan/implicit_layer.d
-	doins nvidia_layers.json
 
 	insinto /etc/OpenCL/vendors
 	doins ${NV_OBJ}/nvidia.icd
@@ -219,15 +219,10 @@ src_install() {
 	newconfd "${FILESDIR}/nvidia-persistenced.conf" nvidia-persistenced
 	newinitd "${FILESDIR}/nvidia-persistenced.init" nvidia-persistenced
 
-	newdoc "${NV_DOC}/README.txt" README
-	dodoc "${NV_DOC}/NVIDIA_Changelog"
 	doman "${NV_MAN}"/nvidia-smi.1
 	doman "${NV_MAN}"/nvidia-cuda-mps-control.1
 	doman "${NV_MAN}"/nvidia-modprobe.1
 	doman "${NV_MAN}"/nvidia-persistenced.1
-
-	docinto html
-	dodoc -r ${NV_DOC}/html/*
 }
 
 _dracut_initramfs_regen() {

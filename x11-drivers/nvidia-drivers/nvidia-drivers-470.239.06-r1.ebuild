@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
-inherit flag-o-matic multilib-minimal portability toolchain-funcs unpacker
+inherit flag-o-matic multilib-minimal portability toolchain-funcs
 
 NV_URI="https://us.download.nvidia.com/XFree86/"
 AMD64_NV_PACKAGE="NVIDIA-Linux-x86_64-${PV}"
