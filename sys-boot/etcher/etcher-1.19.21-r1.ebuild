@@ -21,8 +21,9 @@ S="${WORKDIR}/usr/lib/balena-etcher"
 LICENSE="Apache-2.0"
 SLOT="0"
 KEYWORDS="-* ~amd64"
+IUSE="+suid"
 
-RESTRICT="mirror test"
+RESTRICT="mirror strip test"
 
 RDEPEND="
 	virtual/libudev
@@ -35,4 +36,18 @@ src_prepare() {
 
 	# Weird symlink
 	rm balenaEtcher || die
+}
+
+src_install() {
+	bintron-r1_src_install
+
+	for i in balena-etcher chrome_crashpad_handler chrome-sandbox libEGL.so libGLESv2.so libffmpeg.so libvk_swiftshader.so libvulkan.so.1 ; do
+		fperms 0755 "${BINTRON_HOME}"/$i || die
+	done
+
+	for i in etcher-util sudo-askpass.osascript-en.js sudo-askpass.osascript-zh.js ; do
+		fperms 0755 "${BINTRON_HOME}"/resources/$i || die
+	done
+
+	use suid && fperms 4711 "${BINTRON_HOME}"/chrome-sandbox
 }
