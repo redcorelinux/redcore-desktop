@@ -14,7 +14,7 @@ HOMEPAGE="http://redcorelinux.org"
 
 EGIT_REPO_URI="https://gitlab.com/redcore/sisyphus.git"
 EGIT_BRANCH="master"
-EGIT_COMMIT="84df9e9070477c3d3a7f2067edeb3f14f82560ed"
+EGIT_COMMIT="e327ad76cfd12c8d70b8f9bee5f2b86c975ed073"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -32,7 +32,7 @@ RDEPEND="${DEPEND}
 src_install() {
 	emake DESTDIR="${D}"/ install-gui
 
-	# enforce the best available python implementation (CLI)
+	# enforce the best available python implementation (GUI)
 	python_setup
 	python_fix_shebang "${ED}"/usr/share/"${MY_PN}"/"${MY_PN}"-gui.py
 }
