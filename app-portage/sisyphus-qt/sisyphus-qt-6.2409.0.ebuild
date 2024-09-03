@@ -14,25 +14,34 @@ HOMEPAGE="http://redcorelinux.org"
 
 EGIT_REPO_URI="https://gitlab.com/redcore/sisyphus.git"
 EGIT_BRANCH="master"
-EGIT_COMMIT="e327ad76cfd12c8d70b8f9bee5f2b86c975ed073"
+EGIT_COMMIT="17e31142c0021821319cd3effc5e9ba4cccf5d82"
 
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="amd64 arm64"
-IUSE=""
+IUSE="qt5 qt6"
 
 DEPEND="dev-lang/python[sqlite]
 	~app-portage/sisyphus-${PV}"
 RDEPEND="${DEPEND}
 	app-misc/tmux
-	$(python_gen_cond_dep '
+	qt5? ( $(python_gen_cond_dep '
 		dev-python/PyQt5[designer,gui,widgets,${PYTHON_USEDEP}]
-	')"
+	') )
+	qt6? ( $(python_gen_cond_dep '
+		dev-python/PyQt6[designer,gui,widgets,${PYTHON_USEDEP}]
+	') )"
 
 src_install() {
 	emake DESTDIR="${D}"/ install-gui
 
 	# enforce the best available python implementation (GUI)
 	python_setup
-	python_fix_shebang "${ED}"/usr/share/"${MY_PN}"/"${MY_PN}"-gui.py
+	if use qt5; then
+		python_fix_shebang "${ED}"/usr/share/"${MY_PN}"/"${MY_PN}"-qt5.py
+	fi
+
+	if use qt6; then
+		python_fix_shebang "${ED}"/usr/share/"${MY_PN}"/"${MY_PN}"-qt6.py
+	fi
 }

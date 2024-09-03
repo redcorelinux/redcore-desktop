@@ -12,12 +12,12 @@ HOMEPAGE="http://redcorelinux.org"
 
 EGIT_REPO_URI="https://gitlab.com/redcore/sisyphus.git"
 EGIT_BRANCH="master"
-EGIT_COMMIT="e327ad76cfd12c8d70b8f9bee5f2b86c975ed073"
+EGIT_COMMIT="17e31142c0021821319cd3effc5e9ba4cccf5d82"
 
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="amd64 arm64"
-IUSE="qt5"
+IUSE="+gui"
 
 DEPEND="dev-lang/python[sqlite]"
 RDEPEND="${DEPEND}
@@ -32,7 +32,7 @@ RDEPEND="${DEPEND}
 		sys-apps/portage[${PYTHON_USEDEP}]
 	')
 	sys-apps/gentoo-functions"
-PDEPEND="qt5? ( ~app-portage/${PN}-qt-${PV} )"
+PDEPEND="gui? ( ~app-portage/${PN}-qt-${PV} )"
 
 src_install() {
 	emake DESTDIR="${D}"/ install-cli
