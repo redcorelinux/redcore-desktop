@@ -88,7 +88,7 @@ x11-misc/nvidia-prime 314: NVIDIA Prime Render Offload configuration and utiliti
 x11-misc/nvidia-settings 390.157-r6 470.239.06-r1 535.171.04-r1: NVIDIA Linux X11 Settings Utility
 x11-misc/pcmanfm-qt-share 1337-r1: PCManFM-QT custom action to share folder using Samba
 x11-themes/material-icon-theme 1.314.1337-r2: Icon theme following the Google's material design specifications
-x11-themes/redcore-artwork-calamares 1.314.1337-r5: Redcore Linux branding component for Calamares
+x11-themes/redcore-artwork-calamares 1.314.1337-r6: Redcore Linux branding component for Calamares
 x11-themes/redcore-artwork-community 1.314.1337-r1: Redcore Linux Community Wallpapers
 x11-themes/redcore-artwork-core 1.314.1337-r1: Offical Redcore Linux Core Artwork
 x11-themes/redcore-artwork-grub 1.314.1337-r1: Redcore Linux GRUB2 Images
