@@ -1,5 +1,5 @@
 acct-group/smbshare 0: System group: smbshare
-app-admin/calamares 3.3.6-r10: Distribution-independent installer framework
+app-admin/calamares 3.3.9-r10: Distribution-independent installer framework
 app-admin/conky 1.19.8-r10: An advanced, highly configurable system monitor for X
 app-admin/opensnitch 1.6.2: Desktop application firewall
 app-admin/opensnitch-ebpf-module 1.6.2: eBPF process monitor module for opensnitch
