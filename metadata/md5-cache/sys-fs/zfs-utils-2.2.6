@@ -1,0 +1,16 @@
+BDEPEND=app-alternatives/awk virtual/pkgconfig nls? ( sys-devel/gettext ) >=app-portage/elt-patches-20240116 sys-devel/gnuconfig || ( >=dev-build/automake-1.17-r1:1.17 >=dev-build/automake-1.16.5:1.16 ) || ( >=dev-build/autoconf-2.72-r1:2.72 >=dev-build/autoconf-2.71-r6:2.71 ) >=dev-build/libtool-2.4.7-r3 virtual/pkgconfig
+DEFINED_PHASES=configure install prepare
+DEPEND=net-libs/libtirpc:= sys-apps/util-linux sys-libs/zlib virtual/libudev:= dev-libs/openssl:= pam? ( sys-libs/pam ) unwind? ( sys-libs/libunwind:= )
+DESCRIPTION=Userland utilities for ZFS Linux kernel module
+EAPI=7
+HOMEPAGE=https://zfsonlinux.org/
+INHERIT=autotools bash-completion-r1 flag-o-matic pam toolchain-funcs udev usr-ldscript
+IUSE=debug nls pam test-suite unwind split-usr
+KEYWORDS=~amd64
+LICENSE=BSD-2 CDDL MIT
+RDEPEND=net-libs/libtirpc:= sys-apps/util-linux sys-libs/zlib virtual/libudev:= dev-libs/openssl:= pam? ( sys-libs/pam ) unwind? ( sys-libs/libunwind:= ) app-alternatives/awk virtual/udev sys-fs/udev-init-scripts test-suite? ( sys-apps/kmod[tools] sys-apps/util-linux sys-devel/bc sys-block/parted sys-fs/lsscsi sys-fs/mdadm sys-process/procps )
+RESTRICT=test
+SLOT=0
+SRC_URI=https://github.com/openzfs/zfs-utils/releases/download/zfs-2.2.6/zfs-2.2.6.tar.gz
+_eclasses_=autotools	61927ff6474f1d141b4ea4a5b9870424	bash-completion-r1	3047612be964ffd4a549447fc4289f12	flag-o-matic	fa33e3696fe4689dda7e9affe92e2c94	gnuconfig	f8b9cc21e72de8cbedde6ca5108d208b	libtool	f9e6905c12590c1cac06d85371a0819a	multilib	7e1347c006a76bb812f3a9f663b79991	pam	b56d0c9c20fc5b553f13c8ae165a10a5	toolchain-funcs	948855ec7ad9f11351edf9066708dfa9	udev	3b4170e9c327a8ed17097484a016c0c8	usr-ldscript	ff03a5d223e97515fa25b5cae97ebda9
+_md5_=3f5136e6a091af53b0864f79c9f80a60
