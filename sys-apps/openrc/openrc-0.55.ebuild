@@ -18,7 +18,7 @@ fi
 
 LICENSE="BSD-2"
 SLOT="0"
-IUSE="+apparmor audit bash debug +dkms elogind +havege ncurses pam newnet +netifrc selinux +settingsd +splash sysvinit sysv-utils unicode"
+IUSE="+apparmor audit bash caps debug +dkms elogind +havege pam newnet +netifrc selinux +settingsd +splash sysvinit sysv-utils unicode"
 
 COMMON_DEPEND="
 	apparmor? (
@@ -26,9 +26,9 @@ COMMON_DEPEND="
 		sys-apps/apparmor-utils
 		sec-policy/apparmor-profiles
 	)
-	ncurses? ( sys-libs/ncurses:0= )
 	pam? ( sys-libs/pam )
 	audit? ( sys-process/audit )
+	caps? ( sys-libs/libcap )
 	dkms? ( sys-kernel/dkms )
 	elogind? ( sys-auth/elogind )
 	havege? ( sys-apps/haveged )
@@ -41,8 +41,7 @@ COMMON_DEPEND="
 	amd64? ( splash? ( sys-boot/plymouth-openrc-plugin ) )
 	>=virtual/logger-1.314.1337"
 DEPEND="${COMMON_DEPEND}
-	virtual/os-headers
-	ncurses? ( virtual/pkgconfig )"
+	virtual/os-headers"
 RDEPEND="${COMMON_DEPEND}
 	bash? ( app-shells/bash )
 	sysv-utils? (
@@ -71,6 +70,7 @@ src_configure() {
 	local emesonargs=(
 		$(meson_feature audit)
 		"-Dbranding=\"Redcore Linux Hardened\""
+		$(meson_feature caps capabilities)
 		$(meson_use newnet)
 		-Dos=Linux
 		$(meson_use pam)
@@ -78,7 +78,6 @@ src_configure() {
 		-Drootprefix="${EPREFIX}"
 		-Dshell=$(usex bash /bin/bash /bin/sh)
 		$(meson_use sysv-utils sysvinit)
-		-Dtermcap=$(usev ncurses)
 	)
 	# export DEBUG=$(usev debug)
 	meson_src_configure
