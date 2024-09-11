@@ -4,9 +4,9 @@
 EAPI=8
 
 ECM_HANDBOOK="forceoptional"
-KFMIN=6.3.0
+KFMIN=6.5.0
 PVCUT=$(ver_cut 1-3)
-QTMIN=6.7.1
+QTMIN=6.7.2
 inherit ecm plasma.kde.org optfeature
 
 DESCRIPTION="Utility providing information about the computer hardware"
@@ -14,7 +14,7 @@ HOMEPAGE="https://userbase.kde.org/KInfoCenter"
 
 LICENSE="GPL-2" # TODO: CHECK
 SLOT="6"
-KEYWORDS="~amd64"
+KEYWORDS="~amd64 ~arm64 ~ppc64 ~riscv ~x86"
 IUSE="gles2-only usb"
 
 DEPEND="
@@ -40,10 +40,14 @@ RDEPEND="${DEPEND}
 		dev-qt/qdbus:*
 	)
 	>=kde-frameworks/kirigami-${KFMIN}:6
-	>=kde-plasma/kde-cli-tools-${PVCUT}:*
 	>=kde-plasma/systemsettings-${PVCUT}:6
 "
 BDEPEND=">=kde-frameworks/kcmutils-${KFMIN}:6"
+
+CMAKE_SKIP_TESTS=(
+	# bug 816591
+	smbmountmodeltest
+)
 
 src_configure() {
 	local mycmakeargs=(
@@ -67,15 +71,24 @@ src_install() {
 
 pkg_postinst() {
 	if [[ -z "${REPLACING_VERSIONS}" ]]; then
+		optfeature_header "Query network filesystem info:"
 		optfeature "NFS information module" net-fs/nfs-utils
 		optfeature "Samba status information module" net-fs/samba
-		optfeature "Vulkan graphics API information module" dev-util/vulkan-tools
-		optfeature "advanced CPU information module" sys-apps/util-linux
+		optfeature_header "Query firmware/hardware info:"
 	fi
-	optfeature "Wayland information module" app-misc/wayland-utils
-	optfeature "Firmware security module" "app-text/aha sys-apps/fwupd"
-	optfeature "OpenGL information module" x11-apps/mesa-progs
-	optfeature "PCI devices information module" sys-apps/pciutils
-	optfeature "X Server information module" x11-apps/xdpyinfo
+	optfeature "System DMI table readout" sys-apps/dmidecode
+	if [[ -z "${REPLACING_VERSIONS}" ]]; then
+		optfeature "Firmware security module" "app-text/aha sys-apps/fwupd"
+		optfeature "PCI devices information module" sys-apps/pciutils
+		optfeature "advanced CPU information module" sys-apps/util-linux
+		optfeature_header "Query GPU/graphics support info:"
+	fi
+	optfeature "OpenCL information module" dev-util/clinfo
+	if [[ -z "${REPLACING_VERSIONS}" ]]; then
+		optfeature "OpenGL information module" x11-apps/mesa-progs
+		optfeature "Vulkan graphics API information module" dev-util/vulkan-tools
+		optfeature "Wayland information module" app-misc/wayland-utils
+		optfeature "X Server information module" x11-apps/xdpyinfo
+	fi
 	ecm_pkg_postinst
 }
