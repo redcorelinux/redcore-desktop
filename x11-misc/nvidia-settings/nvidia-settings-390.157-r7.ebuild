@@ -1,18 +1,19 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=8
 
 inherit desktop multilib toolchain-funcs
 
 DESCRIPTION="NVIDIA Linux X11 Settings Utility"
 HOMEPAGE="http://www.nvidia.com/"
-SRC_URI="https://github.com/NVIDIA/nvidia-settings/archive/refs/tags/${PV}.tar.gz -> nvidia-settings-${PV}.tar.gz"
+SRC_URI="https://github.com/NVIDIA/nvidia-settings/archive/refs/tags/${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-2"
-SLOT="4"
+SLOT="3"
 KEYWORDS="-* amd64"
 IUSE=""
+RESTRICT="strip"
 
 QA_PREBUILT=
 
@@ -33,51 +34,54 @@ COMMON_DEPEND="
 	>=x11-libs/libvdpau-1.0"
 
 RDEPEND="${COMMON_DEPEND}
-	!!x11-misc/nvidia-settings:3
+	!!x11-misc/nvidia-settings:4
 	!!x11-misc/nvidia-settings:5
 	x11-drivers/nvidia-drivers:${SLOT}"
 DEPEND="${RDEPEND}
 	virtual/pkgconfig
 	x11-base/xorg-proto"
 
+S=${WORKDIR}/nvidia-settings-${PV}
+
 src_prepare() {
 	default
 	eapply "${FILESDIR}"/"${PN}"-linker.patch
+	eapply "${FILESDIR}"/"${PN}"-fno-common.patch
 }
 
-
 src_compile() {
-	einfo "Building libXNVCtrl..."
-	emake -C src/libXNVCtrl \
+	emake -C src/ \
+		AR="$(tc-getAR)" \
+		CC="$(tc-getCC)" \
 		DO_STRIP= \
+		LD="$(tc-getCC)" \
 		LIBDIR="$(get_libdir)" \
 		NVLD="$(tc-getLD)" \
 		NV_VERBOSE=1 \
-		OUTPUTDIR=. \
-		RANLIB="$(tc-getRANLIB)"
+		RANLIB="$(tc-getRANLIB)" \
+		build-xnvctrl
 
-	einfo "Building nvidia-settings..."
 	emake -C src/ \
+		CC="$(tc-getCC)" \
 		DO_STRIP= \
 		GTK3_AVAILABLE=1 \
+		LD="$(tc-getCC)" \
 		LIBDIR="$(get_libdir)" \
 		NVLD="$(tc-getLD)" \
 		NVML_ENABLED=0 \
 		NV_USE_BUNDLED_LIBJANSSON=0 \
-		NV_VERBOSE=1 \
-		OUTPUTDIR=.
+		NV_VERBOSE=1
 }
 
 src_install() {
 	emake -C src/ \
 		DESTDIR="${D}" \
-		DO_STRIP= \
 		GTK3_AVAILABLE=1 \
 		LIBDIR="${D}/usr/$(get_libdir)" \
 		NV_USE_BUNDLED_LIBJANSSON=0 \
 		NV_VERBOSE=1 \
-		OUTPUTDIR=. \
 		PREFIX=/usr \
+		DO_STRIP= \
 		install
 
 	insinto /usr/$(get_libdir)
@@ -86,10 +90,8 @@ src_install() {
 	insinto /usr/include/NVCtrl
 	doins src/libXNVCtrl/*.h
 
-	doicon doc/${PN}.png || die
+	doicon doc/nvidia-settings.png || die
 	domenu ${FILESDIR}/${PN}.desktop || die
 
 	dodoc doc/*.txt
-
-	rm -rvf ${D}usr/$(get_libdir)/libnvidia-gtk2.so.${PV}
 }

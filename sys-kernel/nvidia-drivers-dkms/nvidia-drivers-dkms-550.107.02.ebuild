@@ -15,6 +15,7 @@ LICENSE="GPL-2 NVIDIA-r2"
 SLOT="5"
 KEYWORDS="amd64"
 IUSE="kernel-open"
+RESTRICT="strip"
 
 DEPEND="sys-kernel/dkms"
 RDEPEND="${DEPEND}
@@ -22,7 +23,7 @@ RDEPEND="${DEPEND}
 	!!sys-kernel/nvidia-drivers-dkms:4"
 
 PATCHES=(
-	"${FILESDIR}"/dkms535.patch
+	"${FILESDIR}"/dkms550.patch
 )
 
 S="${WORKDIR}/${AMD64_NV_PACKAGE}"

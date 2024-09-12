@@ -1,7 +1,7 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=8
 
 inherit desktop multilib toolchain-funcs
 
@@ -10,9 +10,10 @@ HOMEPAGE="http://www.nvidia.com/"
 SRC_URI="https://github.com/NVIDIA/nvidia-settings/archive/refs/tags/${PV}.tar.gz -> nvidia-settings-${PV}.tar.gz"
 
 LICENSE="GPL-2"
-SLOT="5"
+SLOT="4"
 KEYWORDS="-* amd64"
 IUSE=""
+RESTRICT="strip"
 
 QA_PREBUILT=
 
@@ -34,7 +35,7 @@ COMMON_DEPEND="
 
 RDEPEND="${COMMON_DEPEND}
 	!!x11-misc/nvidia-settings:3
-	!!x11-misc/nvidia-settings:4
+	!!x11-misc/nvidia-settings:5
 	x11-drivers/nvidia-drivers:${SLOT}"
 DEPEND="${RDEPEND}
 	virtual/pkgconfig
@@ -90,6 +91,4 @@ src_install() {
 	domenu ${FILESDIR}/${PN}.desktop || die
 
 	dodoc doc/*.txt
-
-	rm -rvf ${D}usr/$(get_libdir)/libnvidia-gtk2.so.${PV}
 }

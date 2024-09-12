@@ -12,17 +12,18 @@ HOMEPAGE="http://www.nvidia.com/"
 SRC_URI="amd64? ( ${NV_URI}Linux-x86_64/${PV}/${AMD64_NV_PACKAGE}.run )"
 
 LICENSE="GPL-2 NVIDIA-r2"
-SLOT="3"
+SLOT="4"
 KEYWORDS="amd64"
 IUSE=""
+RESTRICT="strip"
 
 DEPEND="sys-kernel/dkms"
 RDEPEND="${DEPEND}
-	!!sys-kernel/nvidia-drivers-dkms:4
+	!!sys-kernel/nvidia-drivers-dkms:3
 	!!sys-kernel/nvidia-drivers-dkms:5"
 
 PATCHES=(
-	"${FILESDIR}"/dkms390.patch
+	"${FILESDIR}"/dkms470.patch
 )
 
 S="${WORKDIR}/${AMD64_NV_PACKAGE}"
