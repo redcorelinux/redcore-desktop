@@ -3,7 +3,7 @@
 
 EAPI=8
 
-inherit desktop flag-o-matic linux-mod-r1 multilib readme.gentoo-r1
+inherit desktop flag-o-matic multilib readme.gentoo-r1
 inherit systemd toolchain-funcs unpacker user-info
 
 NV_URI="https://download.nvidia.com/XFree86/"
