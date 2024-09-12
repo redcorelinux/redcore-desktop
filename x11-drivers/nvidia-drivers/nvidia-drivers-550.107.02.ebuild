@@ -31,7 +31,6 @@ COMMON_DEPEND="
 		acct-user/nvpd
 		net-libs/libtirpc:=
 	)
-	tools? ( x11-misc/nvidia-settings:${SLOT} )
 "
 RDEPEND="
 	${COMMON_DEPEND}
@@ -57,11 +56,13 @@ DEPEND="
 	x11-base/xorg-proto
 	x11-libs/libX11
 	x11-libs/libXext
-	tools? ( x11-misc/nvidia-settings:${SLOT} )
 "
 BDEPEND="
 	sys-devel/m4
 	virtual/pkgconfig
+"
+PDEPEND="
+	tools? ( x11-misc/nvidia-settings:${SLOT} )
 "
 
 QA_PREBUILT="lib/firmware/* opt/bin/* usr/lib*"
