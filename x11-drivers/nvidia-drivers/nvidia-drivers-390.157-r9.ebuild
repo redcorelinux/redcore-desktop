@@ -309,6 +309,12 @@ documentation that is installed alongside this README."
 	newins - 20nvidia <<<'SANDBOX_PREDICT="/dev/nvidiactl"'
 }
 
+_dracut_initramfs_regen() {
+	if [ -x $(which dracut) ]; then
+		dracut -N -f --no-hostonly-cmdline
+	fi
+}
+
 pkg_preinst() {
 	# set video group id based on live system (bug #491414)
 	local g=$(egetent group video | cut -d: -f3)
@@ -317,6 +323,10 @@ pkg_preinst() {
 }
 
 pkg_postinst() {
+	if [ $(stat -c %d:%i /) == $(stat -c %d:%i /proc/1/root/.) ]; then
+		_dracut_initramfs_regen
+	fi
+
 	readme.gentoo_print_elog
 	ewarn
 	ewarn "Be warned/reminded that the 390.xx branch reached end-of-life and"
@@ -327,4 +337,10 @@ pkg_postinst() {
 	ewarn
 	ewarn "Note that there is no plans to patch in support for kernels branches"
 	ewarn "newer than 6.1.x which will be supported upstream until December 2026."
+}
+
+pkg_postrm() {
+	if [ $(stat -c %d:%i /) == $(stat -c %d:%i /proc/1/root/.) ]; then
+		_dracut_initramfs_regen
+	fi
 }

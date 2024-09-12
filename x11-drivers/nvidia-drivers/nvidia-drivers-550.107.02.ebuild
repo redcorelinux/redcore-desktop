@@ -307,6 +307,12 @@ documentation that is installed alongside this README."
 	newins - 20nvidia <<<'SANDBOX_PREDICT="/dev/nvidiactl:/dev/nvidia-caps:/dev/char"'
 }
 
+_dracut_initramfs_regen() {
+	if [ -x $(which dracut) ]; then
+		dracut -N -f --no-hostonly-cmdline
+	fi
+}
+
 pkg_preinst() {
 	# set video group id based on live system (bug #491414)
 	local g=$(egetent group video | cut -d: -f3)
@@ -315,11 +321,21 @@ pkg_preinst() {
 }
 
 pkg_postinst() {
+	if [ $(stat -c %d:%i /) == $(stat -c %d:%i /proc/1/root/.) ]; then
+		_dracut_initramfs_regen
+	fi
+
 	readme.gentoo_print_elog
 
 	if [[ $(</proc/cmdline) == *slub_debug=[!-]* ]]; then
 		ewarn "Detected that the current kernel command line is using 'slub_debug=',"
 		ewarn "this may lead to system instability/freezes with this version of"
 		ewarn "${PN}. Bug: https://bugs.gentoo.org/796329"
+	fi
+}
+
+pkg_postrm() {
+	if [ $(stat -c %d:%i /) == $(stat -c %d:%i /proc/1/root/.) ]; then
+		_dracut_initramfs_regen
 	fi
 }

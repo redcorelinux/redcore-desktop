@@ -1,5 +1,5 @@
 BDEPEND=sys-devel/m4 virtual/pkgconfig virtual/pkgconfig
-DEFINED_PHASES=compile install postinst preinst prepare setup unpack
+DEFINED_PHASES=compile install postinst postrm preinst prepare setup unpack
 DEPEND=acct-group/video X? ( x11-libs/libpciaccess ) persistenced? ( acct-user/nvpd net-libs/libtirpc:= ) x11-base/xorg-proto x11-libs/libX11 x11-libs/libXext
 DESCRIPTION=NVIDIA Accelerated Graphics Driver
 EAPI=8
@@ -14,4 +14,4 @@ RESTRICT=strip
 SLOT=5
 SRC_URI=https://download.nvidia.com/XFree86/Linux-x86_64/550.107.02/NVIDIA-Linux-x86_64-550.107.02.run https://download.nvidia.com/XFree86/nvidia-installer/nvidia-installer-550.107.02.tar.bz2 https://download.nvidia.com/XFree86/nvidia-modprobe/nvidia-modprobe-550.107.02.tar.bz2 https://download.nvidia.com/XFree86/nvidia-persistenced/nvidia-persistenced-550.107.02.tar.bz2 https://download.nvidia.com/XFree86/nvidia-xconfig/nvidia-xconfig-550.107.02.tar.bz2
 _eclasses_=desktop	56973babb9c5f19cab0eeb53ece644c6	flag-o-matic	fa33e3696fe4689dda7e9affe92e2c94	multilib	7e1347c006a76bb812f3a9f663b79991	multiprocessing	e644caa6eb7ce7e5ab0864383ac13ad9	readme.gentoo-r1	32b48460d813533d85f082897cec1b80	systemd	0f241b5c9f3758c3d3423df59a7f655a	toolchain-funcs	948855ec7ad9f11351edf9066708dfa9	unpacker	fb4b84181244b3b9990fa0bf40232dd2	user-info	9951b1a0e4f026d16c33a001fd2d5cdf
-_md5_=994b6789754cab4e83b168b7c610b389
+_md5_=17c4e2d0191f238c1333011271b13c8f
