@@ -1,0 +1,24 @@
+diff '--color=auto' -Nur a/src/libXNVCtrl/utils.mk b/src/libXNVCtrl/utils.mk
+--- a/src/libXNVCtrl/utils.mk	2024-07-29 22:36:22.000000000 +0100
++++ b/src/libXNVCtrl/utils.mk	2024-09-13 11:58:38.747900807 +0100
+@@ -590,7 +590,7 @@
+   $$(OUTPUTDIR)/$$(notdir $(1)).o: $(1)
+ 	$(at_if_quiet)$$(MKDIR) $$(OUTPUTDIR)
+ 	$(at_if_quiet)cd $$(dir $(1)); \
+-	$$(call quiet_cmd_no_at,LD) -r -z noexecstack --format=binary \
++	$$(call quiet_cmd_no_at,NVLD) -r -z noexecstack --format=binary \
+ 	    $$(LD_TARGET_EMULATION_FLAG) \
+ 	    $$(notdir $(1)) -o $$(OUTPUTDIR_ABSOLUTE)/$$(notdir $$@)
+ 	$$(call quiet_cmd,OBJCOPY) \
+diff '--color=auto' -Nur a/utils.mk b/utils.mk
+--- a/utils.mk	2024-07-29 22:36:22.000000000 +0100
++++ b/utils.mk	2024-09-13 11:57:53.341987920 +0100
+@@ -590,7 +590,7 @@
+   $$(OUTPUTDIR)/$$(notdir $(1)).o: $(1)
+ 	$(at_if_quiet)$$(MKDIR) $$(OUTPUTDIR)
+ 	$(at_if_quiet)cd $$(dir $(1)); \
+-	$$(call quiet_cmd_no_at,LD) -r -z noexecstack --format=binary \
++	$$(call quiet_cmd_no_at,NVLD) -r -z noexecstack --format=binary \
+ 	    $$(LD_TARGET_EMULATION_FLAG) \
+ 	    $$(notdir $(1)) -o $$(OUTPUTDIR_ABSOLUTE)/$$(notdir $$@)
+ 	$$(call quiet_cmd,OBJCOPY) \

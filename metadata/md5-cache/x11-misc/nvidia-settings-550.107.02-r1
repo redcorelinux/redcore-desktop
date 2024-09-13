@@ -11,4 +11,4 @@ RESTRICT=strip
 SLOT=5
 SRC_URI=https://github.com/NVIDIA/nvidia-settings/archive/refs/tags/550.107.02.tar.gz -> nvidia-settings-550.107.02.tar.gz
 _eclasses_=desktop	56973babb9c5f19cab0eeb53ece644c6	multilib	7e1347c006a76bb812f3a9f663b79991	toolchain-funcs	948855ec7ad9f11351edf9066708dfa9
-_md5_=3d5d6aede0deaaed90caf197ad403dcb
+_md5_=eeddb1b0c712b4ce76df8f100ed0e73c

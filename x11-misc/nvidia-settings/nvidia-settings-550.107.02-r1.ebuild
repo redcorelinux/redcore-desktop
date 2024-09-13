@@ -43,7 +43,7 @@ DEPEND="${RDEPEND}
 
 src_prepare() {
 	default
-	eapply "${FILESDIR}"/"${PN}"-linker.patch
+	eapply "${FILESDIR}"/"${PN}"-550-linker.patch
 }
 
 
