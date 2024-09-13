@@ -3,7 +3,7 @@
 
 EAPI=8
 
-inherit desktop flag-o-matic multilib readme.gentoo-r1
+inherit desktop flag-o-matic readme.gentoo-r1
 inherit systemd toolchain-funcs unpacker user-info
 
 NV_URI="https://download.nvidia.com/XFree86/"
@@ -18,14 +18,15 @@ SRC_URI="
 # nvidia-installer is unused but here for GPL-2's "distribute sources"
 S=${WORKDIR}
 
-LICENSE="NVIDIA-r2 BSD BSD-2 GPL-2 MIT"
-SLOT="3"
+LICENSE="NVIDIA-r2 Apache-2.0 BSD BSD-2 GPL-2 MIT ZLIB curl openssl"
+SLOT="5"
 KEYWORDS="-* amd64"
-IUSE="abi_x86_32 abi_x86_64 +acpi +dkms +persistenced +tools +X"
+IUSE="abi_x86_32 abi_x86_64 +acpi +dkms +persistenced +powerd +tools +wayland +X"
 RESTRICT="strip"
 
 COMMON_DEPEND="
 	acct-group/video
+	X? ( x11-libs/libpciaccess )
 	persistenced? (
 		acct-user/nvpd
 		net-libs/libtirpc:=
@@ -33,15 +34,21 @@ COMMON_DEPEND="
 "
 RDEPEND="
 	${COMMON_DEPEND}
+	dev-libs/openssl:0/3
 	sys-libs/glibc
+	!!x11-drivers/nvidia-drivers:3
 	!!x11-drivers/nvidia-drivers:4
-	!!x11-drivers/nvidia-drivers:5
 	acpi? ( sys-power/acpid )
 	dkms? ( ~sys-kernel/${PN}-dkms-${PV}:${SLOT} )
 	X? (
 		media-libs/libglvnd[X,abi_x86_32(-)?]
 		x11-libs/libX11[abi_x86_32(-)?]
 		x11-libs/libXext[abi_x86_32(-)?]
+	)
+	powerd? ( sys-apps/dbus[abi_x86_32(-)?] )
+	wayland? (
+		gui-libs/egl-gbm
+		>=gui-libs/egl-wayland-1.1.10
 	)
 "
 DEPEND="
@@ -58,11 +65,9 @@ PDEPEND="
 	tools? ( x11-misc/nvidia-settings:${SLOT} )
 "
 
-QA_PREBUILT="opt/bin/* usr/lib*"
+QA_PREBUILT="lib/firmware/* opt/bin/* usr/lib*"
 
 PATCHES=(
-	# note: no plans to add patches for newer kernels here, when the last
-	# working 6.1.x LTS is EOL then 390 will simply be removed from the tree
 	"${FILESDIR}"/nvidia-modprobe-390.141-uvm-perms.patch
 )
 
@@ -71,25 +76,24 @@ pkg_setup() {
 		PROC_FS
 		~DRM_KMS_HELPER
 		~SYSVIPC
-		~!AMD_MEM_ENCRYPT_ACTIVE_BY_DEFAULT
 		~!LOCKDEP
-		~!X86_KERNEL_IBT
+		~!SLUB_DEBUG_ON
 		!DEBUG_MUTEXES
+		$(usev powerd '~CPU_FREQ')
 	"
 
-	local ERROR_DRM_KMS_HELPER="CONFIG_DRM_KMS_HELPER: is not set but needed for Xorg auto-detection
-	of drivers (no custom config), and optional nvidia-drm.modeset=1.
-	With 390.xx drivers, also used by a GLX workaround needed for OpenGL.
+	local ERROR_DRM_KMS_HELPER="CONFIG_DRM_KMS_HELPER: is not set but required
+	for drivers (no custom config), and for wayland / nvidia-drm.modeset=1.
 	Cannot be directly selected in the kernel's menuconfig, and may need
 	selection of a DRM device even if unused, e.g. CONFIG_DRM_AMDGPU=m or
 	DRM_I915=y, DRM_NOUVEAU=m also acceptable if a module and not built-in."
 
-	local ERROR_X86_KERNEL_IBT="CONFIG_X86_KERNEL_IBT: is set and, if the CPU supports the feature,
-	this will likely lead to modules load failure with ENDBR errors.
-	Please ignore if not having issues, but otherwise try to unset or
-	pass ibt=off to the kernel's command line." #911142
-
 	CONFIG_CHECK+=" X86_PAT" #817764
+
+	CONFIG_CHECK+=" MMU_NOTIFIER" #843827
+	local ERROR_MMU_NOTIFIER="CONFIG_MMU_NOTIFIER: is not set but required.
+	Cannot be directly selected in the kernel's menuconfig, and may need
+	selection of another option that requires it such as CONFIG_KVM."
 }
 
 src_prepare() {
@@ -98,55 +102,45 @@ src_prepare() {
 	rm nvidia-persistenced && mv nvidia-persistenced{-${PV},} || die
 	rm nvidia-xconfig && mv nvidia-xconfig{-${PV},} || die
 
-	eapply "${FILESDIR}"/nvidia-drivers-390.154-clang15.patch
-
 	default
 
 	# prevent detection of incomplete kernel DRM support (bug #603818)
 	sed 's/defined(CONFIG_DRM/defined(CONFIG_DRM_KMS_HELPER/g' \
 		-i kernel/conftest.sh || die
 
+	# adjust service files
 	sed 's/__USER__/nvpd/' \
 		nvidia-persistenced/init/systemd/nvidia-persistenced.service.template \
 		> "${T}"/nvidia-persistenced.service || die
+	sed -i "s|/usr|${EPREFIX}/opt|" systemd/system/nvidia-powerd.service || die
 
 	# use alternative vulkan icd option if USE=-X (bug #909181)
-	sed "s/__NV_VK_ICD__/lib$(usex X GLX EGL)_nvidia.so.0/" \
-		nvidia_icd.json.template > nvidia_icd.json || die
+	use X || sed -i 's/"libGLX/"libEGL/' nvidia_{layers,icd}.json || die
 
-	# 390 has legacy glx needing a modified .conf (bug #713546)
-	# directory is not quite right, but kept for any existing custom xorg.conf
-	sed "s|@LIBDIR@|${EPREFIX}/usr/$(get_libdir)|" \
-		"${FILESDIR}"/nvidia-drm-outputclass-390.conf > nvidia-drm-outputclass.conf || die
+	# enable nvidia-drm.modeset=1 by default with USE=wayland
+	cp "${FILESDIR}"/nvidia-545.conf "${T}"/nvidia.conf || die
+	use !wayland || sed -i '/^#.*modeset=1$/s/^#//' "${T}"/nvidia.conf || die
 }
 
 src_compile() {
 	tc-export AR CC CXX LD OBJCOPY OBJDUMP PKG_CONFIG
-	local -x RAW_LDFLAGS="$(get_abi_LDFLAGS) $(raw-ldflags)" # raw-ldflags.patch
 
-	# latest branches has proper fixes, but legacy have more issues and are
-	# not worth the trouble, so doing the lame "fix" for gcc14 (bug #921370)
-	local noerr=(
-		-Wno-error=implicit-function-declaration
-		-Wno-error=incompatible-pointer-types
-	)
-	# not *FLAGS to ensure it's used everywhere including conftest.sh
-	CC+=" $(test-flags-CC "${noerr[@]}")"
+	local xnvflags=-fPIC #840389
+	# lto static libraries tend to cause problems without fat objects
+	tc-is-lto && xnvflags+=" $(test-flags-CC -ffat-lto-objects)"
 
 	NV_ARGS=(
 		PREFIX="${EPREFIX}"/usr
 		HOST_CC="$(tc-getBUILD_CC)"
 		HOST_LD="$(tc-getBUILD_LD)"
+		BUILD_GTK2LIB=
 		NV_USE_BUNDLED_LIBJANSSON=0
 		NV_VERBOSE=1 DO_STRIP= MANPAGE_GZIP= OUTPUTDIR=out
+		WAYLAND_AVAILABLE=$(usex wayland 1 0)
+		XNVCTRL_CFLAGS="${xnvflags}"
 	)
 
-	if use persistenced; then
-		# 390.xx persistenced does not auto-detect libtirpc
-		LIBS=$(${PKG_CONFIG} --libs libtirpc || die) \
-			common_cflags=$(${PKG_CONFIG} --cflags libtirpc || die) \
-			emake "${NV_ARGS[@]}" -C nvidia-persistenced
-	fi
+	use persistenced && emake "${NV_ARGS[@]}" -C nvidia-persistenced
 
 	emake "${NV_ARGS[@]}" -C nvidia-modprobe
 	use X && emake "${NV_ARGS[@]}" -C nvidia-xconfig
@@ -161,36 +155,41 @@ src_install() {
 		[APPLICATION_PROFILE]=/usr/share/nvidia
 		[CUDA_ICD]=/etc/OpenCL/vendors
 		[EGL_EXTERNAL_PLATFORM_JSON]=/usr/share/egl/egl_external_platform.d
+		[FIRMWARE]=/lib/firmware/nvidia/${PV}
+		[GBM_BACKEND_LIB_SYMLINK]=/usr/${libdir}/gbm
 		[GLVND_EGL_ICD_JSON]=/usr/share/glvnd/egl_vendor.d
-		[VULKAN_ICD_JSON]=/usr/share/vulkan/icd.d
+		[OPENGL_DATA]=/usr/share/nvidia
+		[VULKAN_ICD_JSON]=/usr/share/vulkan
+		[WINE_LIB]=/usr/${libdir}/nvidia/wine
 		[XORG_OUTPUTCLASS_CONFIG]=/usr/share/X11/xorg.conf.d
 
 		[GLX_MODULE_SHARED_LIB]=/usr/${libdir}/xorg/modules/extensions
-		[GLX_MODULE_SYMLINK]=/usr/${libdir}/extensions/nvidia
+		[GLX_MODULE_SYMLINK]=/usr/${libdir}/xorg/modules
 		[XMODULE_SHARED_LIB]=/usr/${libdir}/xorg/modules
-		[XMODULE_SYMLINK]=/usr/${libdir}/xorg/modules
 	)
 
 	local skip_files=(
-		$(usev !X "libGLX_nvidia libglx libnvidia-ifr")
+		$(usev !X "libGLX_nvidia libglxserver_nvidia")
 		libGLX_indirect # non-glvnd unused fallback
-		libnvidia-gtk nvidia-xconfig # built from source
+		libnvidia-{gtk,wayland-client} nvidia-{settings,xconfig} # from source
+		libnvidia-egl-gbm 15_nvidia_gbm # gui-libs/egl-gbm
 		libnvidia-egl-wayland 10_nvidia_wayland # gui-libs/egl-wayland
+		libnvidia-pkcs11.so # using the openssl3 version instead
 	)
 	local skip_modules=(
 		$(usev !X "nvfbc vdpau xdriver")
+		$(usev !dkms gsp)
+		$(usev !powerd powerd)
 		installer nvpd # handled separately / built from source
 	)
 	local skip_types=(
 		GLVND_LIB GLVND_SYMLINK EGL_CLIENT.\* GLX_CLIENT.\* # media-libs/libglvnd
 		OPENCL_WRAPPER.\* # virtual/opencl
-		DOCUMENTATION DOT_DESKTOP # handled separately
-		XMODULE_NEWSYM # use xorg's libwfb.so, nvidia also keeps it if it exists
-		.\*_SRC DKMS_CONF LIBGL_LA OPENGL_HEADER # unused
+		DOCUMENTATION DOT_DESKTOP .\*_SRC DKMS_CONF SYSTEMD_UNIT # handled separately / unused
 	)
 
 	local DOCS=(
-		README.txt NVIDIA_Changelog
+		README.txt NVIDIA_Changelog supported-gpus/supported-gpus.json
 	)
 	local HTML_DOCS=( html/. )
 	einstalldocs
@@ -200,21 +199,10 @@ src_install() {
 Trusted users should be in the 'video' group to use NVIDIA devices.
 You can add yourself by using: gpasswd -a my-user video\
 
-390.xx libglvnd support is partial and requires different Xorg modules
-for working OpenGL/GLX. If using the default Xorg configuration these
-should be used automatically, otherwise manually add the ModulePath
-from: '${EPREFIX}/${paths[XORG_OUTPUTCLASS_CONFIG]#/}/nvidia-drm-outputclass.conf'\
+See '${EPREFIX}/etc/modprobe.d/nvidia.conf' for modules options.\
 
-Note that NVIDIA is no longer offering support for the unified memory
-module (nvidia-uvm) on x86 (32bit), as such the module is missing.
-This means OpenCL/CUDA (and related, like nvenc) cannot be used.
-Other functions, like OpenGL, will continue to work.
-
-Support from NVIDIA for 390.xx will end in December 2022, how long
-Gentoo will be able to reasonably support it beyond that is unknown.
-If wish to continue using this hardware, should consider switching
-to the Nouveau open source driver.
-https://nvidia.custhelp.com/app/answers/detail/a_id/3142/
+Note that without USE=abi_x86_32 on ${PN}, 32bit applications
+(typically using wine / steam) will not be able to use GPU acceleration.\
 
 For additional information or for troubleshooting issues, please see
 https://wiki.gentoo.org/wiki/NVIDIA/nvidia-drivers and NVIDIA's own
@@ -222,7 +210,7 @@ documentation that is installed alongside this README."
 	readme.gentoo_create_doc
 
 	insinto /etc/modprobe.d
-	newins "${FILESDIR}"/nvidia-390.conf nvidia.conf
+	doins "${T}"/nvidia.conf
 
 	emake "${NV_ARGS[@]}" -C nvidia-modprobe install
 	fowners :video /usr/bin/nvidia-modprobe #505092
@@ -251,19 +239,14 @@ documentation that is installed alongside this README."
 				gzip -dc ${m[0]} | newman - ${m[0]%.gz}; assert
 				continue
 			;;
-			GLX_MODULE_SYMLINK|XMODULE_NEWSYM)
-				# messy symlinks for non-glvnd xorg modules overrides put
-				# in a different directory to avoid collisions (390-only)
-				m[4]=../../xorg/modules/${m[3]#/}${m[4]}
-				m[3]=/
-			;;
-			TLS_LIB) [[ ${m[4]} == CLASSIC ]] && continue;; # segfaults (bug #785289)
+			GBM_BACKEND_LIB_SYMLINK) m[4]=../${m[4]};; # missing ../
 			VDPAU_SYMLINK) m[4]=vdpau/; m[5]=${m[5]#vdpau/};; # .so to vdpau/
-			VULKAN_ICD_JSON) m[0]=${m[0]%.template};;
 		esac
 
 		if [[ -v 'paths[${m[2]}]' ]]; then
 			into=${paths[${m[2]}]}
+		elif [[ ${m[2]} == EXPLICIT_PATH ]]; then
+			into=${m[3]}
 		elif [[ ${m[2]} == *_BINARY ]]; then
 			into=/opt/bin
 		elif [[ ${m[3]} == COMPAT32 ]]; then
@@ -277,11 +260,13 @@ documentation that is installed alongside this README."
 		[[ ${m[3]: -2} == ?/ ]] && into+=/${m[3]%/}
 		[[ ${m[4]: -2} == ?/ ]] && into+=/${m[4]%/}
 
-		if [[ ${m[2]} =~ _SYMLINK$|_NEWSYM$ ]]; then
+		if [[ ${m[2]} =~ _SYMLINK$ ]]; then
 			[[ ${m[4]: -1} == / ]] && m[4]=${m[5]}
 			dosym ${m[4]} ${into}/${m[0]}
 			continue
 		fi
+		[[ ${m[0]} =~ ^libnvidia-ngx.so|^libnvidia-egl-gbm.so ]] &&
+			dosym ${m[0]} ${into}/${m[0]%.so*}.so.1 # soname not in .manifest
 
 		printf -v m[1] %o $((m[1] | 0200)) # 444->644
 		insopts -m${m[1]}
@@ -291,22 +276,36 @@ documentation that is installed alongside this README."
 	insopts -m0644 # reset
 
 	# MODULE:installer non-skipped extras
-	dolib.so libnvidia-cfg.so.${PV}
-	dosym libnvidia-cfg.so.${PV} /usr/${libdir}/libnvidia-cfg.so.1
-	dosym libnvidia-cfg.so.${PV} /usr/${libdir}/libnvidia-cfg.so
+	: "$(systemd_get_sleepdir)"
+	exeinto "${_#"${EPREFIX}"}"
+	doexe systemd/system-sleep/nvidia
+	dobin systemd/nvidia-sleep.sh
+	systemd_dounit systemd/system/nvidia-{hibernate,resume,suspend}.service
 
 	dobin nvidia-bug-report.sh
+
+	# MODULE:powerd extras
+	if use powerd; then
+		newinitd "${FILESDIR}"/nvidia-powerd.initd nvidia-powerd #923117
+		systemd_dounit systemd/system/nvidia-powerd.service
+
+		insinto /usr/share/dbus-1/system.d
+		doins nvidia-dbus.conf
+	fi
 
 	# symlink non-versioned so nvidia-settings can use it even if misdetected
 	dosym nvidia-application-profiles-${PV}-key-documentation \
 		${paths[APPLICATION_PROFILE]}/nvidia-application-profiles-key-documentation
 
-	# sandbox issues with /dev/nvidiactl are widespread and sometime
-	# affect revdeps of packages built with USE=opencl/cuda making it
-	# hard to manage in ebuilds (minimal set, ebuilds should handle
-	# manually if need others or addwrite)
+	# don't attempt to strip firmware files (silences errors)
+	dostrip -x ${paths[FIRMWARE]}
+
+	# sandbox issues with /dev/nvidiactl others (bug #904292,#921578)
+	# are widespread and sometime affect revdeps of packages built with
+	# USE=opencl/cuda making it hard to manage in ebuilds (minimal set,
+	# ebuilds should handle manually if need others or addwrite)
 	insinto /etc/sandbox.d
-	newins - 20nvidia <<<'SANDBOX_PREDICT="/dev/nvidiactl"'
+	newins - 20nvidia <<<'SANDBOX_PREDICT="/dev/nvidiactl:/dev/nvidia-caps:/dev/char"'
 }
 
 _dracut_initramfs_regen() {
@@ -328,15 +327,12 @@ pkg_postinst() {
 	fi
 
 	readme.gentoo_print_elog
-	ewarn
-	ewarn "Be warned/reminded that the 390.xx branch reached end-of-life and"
-	ewarn "NVIDIA is no longer fixing issues (including security). Free to keep"
-	ewarn "using (for now) but it is recommended to either switch to nouveau or"
-	ewarn "replace hardware. Will be kept in-tree while possible, but expect it"
-	ewarn "to be removed likely in early 2027 or earlier if major issues arise."
-	ewarn
-	ewarn "Note that there is no plans to patch in support for kernels branches"
-	ewarn "newer than 6.1.x which will be supported upstream until December 2026."
+
+	if [[ $(</proc/cmdline) == *slub_debug=[!-]* ]]; then
+		ewarn "Detected that the current kernel command line is using 'slub_debug=',"
+		ewarn "this may lead to system instability/freezes with this version of"
+		ewarn "${PN}. Bug: https://bugs.gentoo.org/796329"
+	fi
 }
 
 pkg_postrm() {
