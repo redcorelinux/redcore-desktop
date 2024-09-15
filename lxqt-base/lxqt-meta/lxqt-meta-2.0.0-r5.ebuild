@@ -18,7 +18,7 @@ SLOT="0"
 IUSE="
 	+about admin +archiver +desktop-portal discover +display-manager +filemanager
 	+lximage networkmanager nls +openbox +policykit powermanagement +processviewer
-	+screenshot +sddm ssh-askpass +sudo +terminal +trash +window-manager
+	+qt5 +screenshot +sddm ssh-askpass +sudo +terminal +trash +window-manager
 "
 
 REQUIRED_USE="trash? ( filemanager )"
@@ -58,6 +58,7 @@ RDEPEND="
 	policykit? ( =lxqt-base/lxqt-policykit-${MY_PV}* )
 	powermanagement? ( =lxqt-base/lxqt-powermanagement-${MY_PV}* )
 	processviewer? ( >=x11-misc/qps-2.9 )
+	qt5? ( >=lxqt-base/lxqt-qtplugin-1.4.1:0/5 )
 	screenshot? ( >=x11-misc/screengrab-2.8 )
 	sddm? ( x11-misc/sddm )
 	ssh-askpass? ( =lxqt-base/lxqt-openssh-askpass-${MY_PV}* )
