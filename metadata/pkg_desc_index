@@ -22,7 +22,6 @@ dev-go/go-protobuf 1.5.2: Go support for Google's protocol buffers
 dev-go/protoc-gen-go-grpc 1.2.0: This tool generates Go language bindings of services in protobuf definition files for gRPC
 dev-libs/libdbusmenu-qt 0.9.3_pre20160218-r2: A library providing Qt implementation of DBusMenu specification (meta mackage)
 dev-libs/libdbusmenu-qt5 0.9.3_pre20160218-r3: Library providing Qt implementation of DBusMenu specification
-dev-libs/libqtxdg 3.12.0-r5 4.0.0-r5: Qt Implementation of XDG Standards
 dev-python/animation 0.0.5-r5: Tools for terminal-based wait animations
 dev-python/grpcio 1.62.0: High-performance RPC framework (python libraries)
 dev-python/grpcio-tools 1.62.0: Protobuf code generator for gRPC
@@ -30,12 +29,10 @@ dev-python/sh 1.12.14-r6: Python process launching
 dev-python/typer 0.9.0-r3: Build great CLIs. Easy to code. Based on Python type hints
 dev-python/wget 2.2-r4: Python library for downloading from http URLs
 dev-python/zeroconf 0.82.1-r10: Pure Python Multicast DNS Service Discovery Library (Bonjour/Avahi compatible)
-dev-util/lxqt-build-tools 0.13.0-r5 2.0.0-r5: LXQt Build Tools
 gui-libs/display-manager-init 1.1.2-r1: RC init files for starting display and login managers
 kde-plasma/kinfocenter 5.27.11-r5 6.1.5-r5: Utility providing information about the computer hardware
 lxde-base/lxappearance 0.6.3-r5: LXDE GTK+ theme switcher
-lxqt-base/lxqt-meta 2.0.0-r5: Meta ebuild for LXQt, the Lightweight Desktop Environment
-lxqt-base/lxqt-qtplugin 1.4.1-r5 2.0.0-r5: LXQt system integration plugin for Qt
+lxqt-base/lxqt-meta 2.0.0-r1: Meta ebuild for LXQt, the Lightweight Desktop Environment
 media-libs/portsmf 239-r1: The Tenacity fork of PortSMF, a Standard MIDI File library
 media-sound/cantata 2.5.0-r15: Featureful and configurable Qt client for the music player daemon (MPD)
 media-sound/strawberry 1.0.23-r10: Modern music player and library organizer based on Clementine and Qt
@@ -87,7 +84,6 @@ www-client/ungoogled-chromium 128.0.6613.84: Modifications to Chromium for remov
 x11-base/xorg-drivers 21.1-r100: Meta package containing deps on all xorg drivers (dummy package)
 x11-drivers/nvidia-drivers 390.157-r10 470.256.02-r2 550.107.02-r2: NVIDIA Accelerated Graphics Driver
 x11-libs/gtk+ 2.24.33-r5 3.24.41-r5: Gimp ToolKit +
-x11-libs/libfm-qt 1.4.0-r5 2.0.2-r5: Qt Library for Building File Managers
 x11-misc/nvidia-prime 314: NVIDIA Prime Render Offload configuration and utilities
 x11-misc/nvidia-settings 390.157-r7 470.256.02 550.107.02-r1: NVIDIA Linux X11 Settings Utility
 x11-misc/pcmanfm-qt-share 1337-r1: PCManFM-QT custom action to share folder using Samba
