@@ -80,7 +80,7 @@ virtual/logger 1.314.1337: Virtual for system loggers
 virtual/notification-daemon 1.334.1337: Virtual (dummy package) for notification daemon dbus service
 virtual/tmpfiles 1.314.1337-r1: Virtual to select between different tmpfiles.d handlers
 virtual/udev 314.1337-r1: Virtual to select between different udev daemon providers
-www-client/ungoogled-chromium 128.0.6613.84: Modifications to Chromium for removing Google integration and enhancing privacy
+www-client/ungoogled-chromium 129.0.6668.58: Modifications to Chromium for removing Google integration and enhancing privacy
 x11-base/xorg-drivers 21.1-r100: Meta package containing deps on all xorg drivers (dummy package)
 x11-drivers/nvidia-drivers 390.157-r10 470.256.02-r2 550.107.02-r2: NVIDIA Accelerated Graphics Driver
 x11-libs/gtk+ 2.24.33-r5 3.24.41-r5: Gimp ToolKit +
