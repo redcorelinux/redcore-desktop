@@ -14,7 +14,7 @@ HOMEPAGE="http://redcorelinux.org"
 
 EGIT_REPO_URI="https://gitlab.com/redcore/sisyphus.git"
 EGIT_BRANCH="master"
-EGIT_COMMIT="2f890f90a1efeb782eda100cd95fb25194777ea4"
+EGIT_COMMIT="69cba5b0c4695197100bb8e2454c9e7622cfb1b2"
 
 LICENSE="GPL-2"
 SLOT="0"
