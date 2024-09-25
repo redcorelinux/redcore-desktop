@@ -13,26 +13,40 @@ fi
 LICENSE="metapackage"
 SLOT="0"
 
-IUSE="+archiver discover +display-manager gtk +lximage networkmanager qt5 qt6 +screenshot +sddm +terminal"
+IUSE="+archiver +desktop-portal discover +display-manager +editor +gtk +imgview +launcher +networkmanager +notifications +policykit +pulseaudio +qt5 +qt6 +screenshot +sddm +terminal +wallpaper +wayland +X"
 
 RDEPEND="
-	x11-misc/rofi
-	x11-themes/kvantum
+	x11-wm/qtile
 	archiver? ( app-arch/lxqt-archiver )
+	desktop-portal? ( gui-libs/xdg-desktop-portal-wlr )
 	discover? ( kde-plasma/discover )
 	display-manager? (
 		sddm? ( x11-misc/sddm )
 		!sddm? ( x11-misc/lightdm )
 	)
+	editor? ( app-editors/featherpad )
 	gtk? ( lxde-base/lxappearance )
-	lximage? ( media-gfx/lximage-qt )
+	imgview? ( media-gfx/qimgv )
+	launcher? ( x11-misc/rofi )
 	networkmanager? (
 		net-misc/networkmanager
 		gnome-extra/nm-applet
 	)
+	notifications? ( x11-misc/dunst )
+	policykit? ( || (
+		kde-plasma/polkit-kde-agent
+		gnome-extra/polkit-gnome
+		)
+	)
+	pulseaudio? ( media-sound/pavucontrol-qt )
 	qt5? ( x11-misc/qt5ct )
 	qt6? ( gui-apps/qt6ct )
 	screenshot? ( media-gfx/flameshot )
 	sddm? ( x11-misc/sddm )
 	terminal? ( x11-terms/alacritty )
+	wallpaper? (
+		X? ( media-gfx/feh )
+		wayland? ( gui-apps/swaybg )
+	)
+	X? ( x11-misc/picom )
 "

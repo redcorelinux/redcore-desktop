@@ -24,23 +24,28 @@ RDEPEND="
 	x11-themes/redcore-artwork-grub
 	x11-themes/redcore-theme
 	x11-themes/redcore-theme-sddm"
-S="${WORKDIR}/${P}"
+S="${WORKDIR}/${P}/skel"
 
 src_install () {
-	dodir etc/skel
-	insinto etc/skel
-	doins -r skel/*
-	doins -r skel/.*
+	local SKEL_HOME="/etc/skel"
+	dodir "${SKEL_HOME}"
+	insinto "${SKEL_HOME}"
+	doins -r *
+	doins -r .*
+	fperms 755 "${SKEL_HOME}"/.config/autostart/scripts/disable-dpms.sh
+	fperms 755 "${SKEL_HOME}"/.config/qtile/scripts/autostart.sh
+
+	local XDG_HOME="/etc/xdg"
+	dodir "${XDG_HOME}"/autostart
+	insinto "${XDG_HOME}"/autostart
+	doins "${FILESDIR}"/loginsound.desktop
+
+	local SND_HOME="/usr/share/sounds"
+	dodir "${SND_HOME}"
+	insinto "${SND_HOME}"
+	doins "${FILESDIR}"/redcore.ogg
 
 	doicon "${FILESDIR}"/redcore-weblink.svg
 
-	dodir etc/xdg/autostart
-	insinto etc/xdg/autostart
-	doins "${FILESDIR}"/loginsound.desktop
-
-	dodir usr/share/sounds
-	insinto usr/share/sounds
-	doins "${FILESDIR}"/redcore.ogg
-
-	rm -rf ${D}etc/.git
+	rm -rvf "${D}"/etc/.git
 }
