@@ -8,7 +8,7 @@ app-arch/unp 2.0_pre9-r1: Script for unpacking various file formats
 app-backup/timeshift 22.11.1-r2: A system restore utility for Linux
 app-emulation/qemu-guest-agent 8.2.0-r6: QEMU Guest Agent (qemu-ga) for use when running inside a VM
 app-emulation/steam 1.0.0.79: Installer, launcher and supplementary files for Valve's Steam client
-app-emulation/virtualbox-modules 7.1.0: Kernel Modules for Virtualbox
+app-emulation/virtualbox-modules 7.1.2: Kernel Modules for Virtualbox
 app-laptop/tp_smapi 0.44-r1: IBM ThinkPad SMAPI BIOS driver
 app-misc/calamares-config-redcore 1.314.1337-r9: Redcore Linux Calamares modules config
 app-misc/geoclue 2.7.1-r6: A location information D-Bus service
@@ -72,7 +72,7 @@ sys-kernel/linux-sources-redcore-lts 5.15.167 6.1.111 6.6.52: Redcore Linux LTS 
 sys-kernel/nvidia-drivers-dkms 390.157-r8 470.256.02 550.107.02: NVIDIA driver sources for linux
 sys-kernel/tp_smapi-dkms 0.44-r2: IBM ThinkPad SMAPI BIOS driver sources
 sys-kernel/vhba-dkms 20240202-r2: Virtual (SCSI) Host Bus Adapter kernel module for the CDEmu suite sources
-sys-kernel/virtualbox-modules-dkms 7.1.0: Kernel Modules source for Virtualbox
+sys-kernel/virtualbox-modules-dkms 7.1.2: Kernel Modules source for Virtualbox
 sys-kernel/zfs-dkms 2.2.6: ZFS sources for linux
 sys-power/radeon-profile 20200824-r10: Read current clocks of ATi/AMD Radeon cards
 virtual/libudev 314.1337-r1: Virtual for libudev providers
