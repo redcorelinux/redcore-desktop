@@ -1,0 +1,16 @@
+diff '--color=auto' -Nur a/startlxqt.in b/startlxqt.in
+--- a/startlxqt.in	2024-04-17 12:22:25.000000000 +0100
++++ b/startlxqt.in	2024-09-30 03:19:21.606222756 +0100
+@@ -53,11 +53,8 @@
+     fi
+ fi
+ 
+-# Qt4 platform plugin
+-export QT_PLATFORM_PLUGIN=lxqt
+-
+ # Qt5 platform plugin
+-export QT_QPA_PLATFORMTHEME=lxqt
++export QT_QPA_PLATFORMTHEME=qt5ct
+ 
+ # use lxqt-applications.menu for main app menu
+ export XDG_MENU_PREFIX="lxqt-"

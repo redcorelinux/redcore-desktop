@@ -18,7 +18,7 @@ SLOT="0"
 IUSE="
 	+about admin +archiver +desktop-portal discover +display-manager +filemanager
 	+lximage networkmanager nls +openbox +policykit powermanagement +processviewer
-	+screenshot +sddm ssh-askpass +sudo +terminal +trash +window-manager
+	qt5 qt6 +screenshot +sddm ssh-askpass +sudo +terminal +trash +window-manager
 "
 
 REQUIRED_USE="trash? ( filemanager )"
@@ -33,7 +33,6 @@ RDEPEND="
 	=lxqt-base/lxqt-menu-data-${MY_PV}*
 	=lxqt-base/lxqt-notificationd-${MY_PV}*
 	=lxqt-base/lxqt-panel-${MY_PV}*
-	=lxqt-base/lxqt-qtplugin-${MY_PV}*
 	=lxqt-base/lxqt-runner-${MY_PV}*
 	=lxqt-base/lxqt-session-${MY_PV}*
 	virtual/ttf-fonts
@@ -58,6 +57,8 @@ RDEPEND="
 	policykit? ( =lxqt-base/lxqt-policykit-${MY_PV}* )
 	powermanagement? ( =lxqt-base/lxqt-powermanagement-${MY_PV}* )
 	processviewer? ( >=x11-misc/qps-2.9 )
+	qt5? ( x11-misc/qt5ct )
+	qt6? ( gui-apps/qt6ct )
 	screenshot? ( >=x11-misc/screengrab-2.8 )
 	sddm? ( x11-misc/sddm )
 	ssh-askpass? ( =lxqt-base/lxqt-openssh-askpass-${MY_PV}* )
