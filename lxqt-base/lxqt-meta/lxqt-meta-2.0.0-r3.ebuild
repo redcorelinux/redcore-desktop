@@ -38,6 +38,7 @@ RDEPEND="
 	virtual/ttf-fonts
 	x11-terms/xterm
 	=x11-themes/lxqt-themes-${MY_PV}*
+	x11-themes/redcore-theme-lxqt
 	about? ( =lxqt-base/lxqt-about-${MY_PV}* )
 	admin? ( =lxqt-base/lxqt-admin-${MY_PV}* )
 	archiver? ( >=app-arch/lxqt-archiver-1.0 )
