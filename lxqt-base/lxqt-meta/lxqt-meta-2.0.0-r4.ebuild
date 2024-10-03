@@ -16,7 +16,7 @@ LICENSE="metapackage"
 SLOT="0"
 
 IUSE="
-	+about admin +archiver +desktop-portal discover +display-manager +filemanager
+	+about admin +archiver +desktop-portal discover +display-manager +filemanager gtk
 	+lximage networkmanager nls +openbox +policykit powermanagement +processviewer
 	qt5 qt6 +screenshot +sddm ssh-askpass +sudo +terminal +trash +window-manager
 "
@@ -49,6 +49,7 @@ RDEPEND="
 		!sddm? ( x11-misc/lightdm )
 	)
 	filemanager? ( =x11-misc/pcmanfm-qt-${MY_PV}* )
+	gtk? ( lxde-base/lxappearance )
 	lximage? ( =media-gfx/lximage-qt-${MY_PV}* )
 	networkmanager? (
 		net-misc/networkmanager
