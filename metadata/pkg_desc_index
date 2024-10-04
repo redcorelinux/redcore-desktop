@@ -10,7 +10,7 @@ app-emulation/qemu-guest-agent 8.2.0-r6: QEMU Guest Agent (qemu-ga) for use when
 app-emulation/steam 1.0.0.79: Installer, launcher and supplementary files for Valve's Steam client
 app-emulation/virtualbox-modules 7.1.2: Kernel Modules for Virtualbox
 app-laptop/tp_smapi 0.44-r1: IBM ThinkPad SMAPI BIOS driver
-app-misc/calamares-config-redcore 1.314.1337-r10: Redcore Linux Calamares modules config
+app-misc/calamares-config-redcore 1.314.1337-r11: Redcore Linux Calamares modules config
 app-misc/geoclue 2.7.1-r6: A location information D-Bus service
 app-misc/redcore-live 1.314.1337-r4: Redcore Linux live scripts
 app-misc/redcore-skel 1.314.1337-r9: Redcore Linux skel tree
