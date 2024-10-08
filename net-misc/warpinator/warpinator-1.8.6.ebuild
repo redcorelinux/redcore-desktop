@@ -33,7 +33,6 @@ S="${WORKDIR}/${PN}-master.lmde6"
 
 PATCHES=(
 	"${FILESDIR}/${PN}-bundled-grpcio-cython3.patch"
-	"${FILESDIR}/${PN}-system-paths.patch"
 	"${FILESDIR}/${PN}-dbus-fallback.patch"
 )
 
