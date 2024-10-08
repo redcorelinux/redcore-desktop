@@ -12,7 +12,7 @@ HOMEPAGE="http://redcorelinux.org"
 
 EGIT_REPO_URI="https://gitlab.com/redcore/sisyphus.git"
 EGIT_BRANCH="master"
-EGIT_COMMIT="1d0d37324a8fbdd0a3587698af577fcd39a25b08"
+EGIT_COMMIT="000419569794cf93adac725cbf3dc521378c9a28"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -44,6 +44,7 @@ src_install() {
 	keepdir var/lib/"${PN}"/{csv,db}
 
 	dodir etc/"${PN}"
+	keepdir etc/"${PN}"
 	insinto etc/"${PN}"
 	doins "${FILESDIR}"/"${PN}"-mirrors-amd64.conf
 	doins "${FILESDIR}"/"${PN}"-mirrors-arm64.conf
@@ -58,6 +59,9 @@ src_install() {
 	doins "${FILESDIR}"/"${PN}".package-unmask.conf
 	doins "${FILESDIR}"/"${PN}".package-use.conf
 
+	dodir etc/"${PN}"/news
+	keepdir etc/"${PN}"/news
+
 	# enforce the best available python implementation (CLI)
 	python_setup
 	python_fix_shebang "${ED}"/usr/share/"${PN}"/"${PN}"-cli.py
@@ -66,6 +70,7 @@ src_install() {
 pkg_postinst() {
 	# Take care of the etc-update for the user
 	rm -rf "${EROOT}"/etc/"${PN}"/._cfg*
+	rm -rf "${EROOT}"/etc/"${PN}"/news/._cfg*
 
 	# Make sure portage sees the new mirror configuration file
 	rm -rf "{EROOT}"/etc/"${PN}"/mirrors.conf
