@@ -5,7 +5,7 @@ app-admin/opensnitch 1.6.2: Desktop application firewall
 app-admin/opensnitch-ebpf-module 1.6.2: eBPF process monitor module for opensnitch
 app-admin/vasile 2.1812.2-r1: Versatile Advanced Script for ISO and Latest Enchantments
 app-arch/unp 2.0_pre9-r1: Script for unpacking various file formats
-app-backup/timeshift 22.11.1-r2: A system restore utility for Linux
+app-backup/timeshift 24.06.3: A system restore utility for Linux
 app-emulation/qemu-guest-agent 8.2.0-r6: QEMU Guest Agent (qemu-ga) for use when running inside a VM
 app-emulation/steam 1.0.0.79: Installer, launcher and supplementary files for Valve's Steam client
 app-emulation/virtualbox-modules 7.1.2: Kernel Modules for Virtualbox
