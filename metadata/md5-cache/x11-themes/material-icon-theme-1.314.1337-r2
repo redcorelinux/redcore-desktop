@@ -8,5 +8,5 @@ KEYWORDS=amd64 x86
 LICENSE=Apache-2.0
 PROPERTIES=live
 SLOT=0
-_eclasses_=git-r3	875eb471682d3e1f18da124be97dcc81	xdg-utils	5465aed08f1dfc2a75f14cbea4272961
+_eclasses_=git-r3	875eb471682d3e1f18da124be97dcc81	xdg-utils	42869b3c8d86a70ef3cf75165a395e09
 _md5_=42b676e590d1ffba05301353d0a1d3a3
