@@ -4,7 +4,7 @@
 EAPI=8
 
 ECM_HANDBOOK="forceoptional"
-KFMIN=6.5.0
+KFMIN=6.6.0
 PVCUT=$(ver_cut 1-3)
 QTMIN=6.7.2
 inherit ecm plasma.kde.org optfeature
@@ -27,7 +27,6 @@ DEPEND="
 	>=kde-frameworks/ki18n-${KFMIN}:6
 	>=kde-frameworks/kio-${KFMIN}:6
 	>=kde-frameworks/kservice-${KFMIN}:6
-	>=kde-frameworks/solid-${KFMIN}:6
 	gles2-only? ( || (
 		>=media-libs/mesa-24.1.0_rc1[opengl]
 		<media-libs/mesa-24.1.0_rc1[gles2]
