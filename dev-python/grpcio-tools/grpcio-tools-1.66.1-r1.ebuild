@@ -31,14 +31,6 @@ BDEPEND="
 python_prepare_all() {
 	distutils-r1_python_prepare_all
 	hprefixify setup.py
-
-	# use system protobuf
-	sed -r -i \
-		-e '/^CC_FILES=\[/,/\]/{/^CC_FILES=\[/n;/\]/!d;}' \
-		-e '/^CC_INCLUDES=\[/,/\]/{/^CC_INCLUDES=\[/n;/\]/!d;}' \
-		-e "s@^(PROTO_INCLUDE=')[^']+'@\1/usr/include'@" \
-		-e '/^PROTOBUF_SUBMODULE_VERSION=/d' \
-		protoc_lib_deps.py
 }
 
 python_configure_all() {
