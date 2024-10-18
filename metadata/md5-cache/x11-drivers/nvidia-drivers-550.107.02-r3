@@ -14,4 +14,4 @@ RESTRICT=strip
 SLOT=5
 SRC_URI=https://download.nvidia.com/XFree86/Linux-x86_64/550.107.02/NVIDIA-Linux-x86_64-550.107.02.run https://download.nvidia.com/XFree86/nvidia-installer/nvidia-installer-550.107.02.tar.bz2 https://download.nvidia.com/XFree86/nvidia-modprobe/nvidia-modprobe-550.107.02.tar.bz2 https://download.nvidia.com/XFree86/nvidia-persistenced/nvidia-persistenced-550.107.02.tar.bz2 https://download.nvidia.com/XFree86/nvidia-xconfig/nvidia-xconfig-550.107.02.tar.bz2
 _eclasses_=desktop	3a72ffe0d8e1dd73af3a1c8c15a59fed	flag-o-matic	f14aba975c94ccaa9f357a27e3b17ffe	multilib	b2a329026f2e404e9e371097dda47f96	multiprocessing	1e32df7deee68372153dca65f4a7c21f	readme.gentoo-r1	b045f3acf546393ab6b3170781875358	systemd	54bd206bb5c4efac6ae28b6b006713b0	toolchain-funcs	d3d42b22a610ce81c267b644bcec9b87	unpacker	fb4b84181244b3b9990fa0bf40232dd2	user-info	9951b1a0e4f026d16c33a001fd2d5cdf
-_md5_=1472d5f5a218447aed41a0fa0de056be
+_md5_=afe4bbbf8f25eede2301ac71be036c42
