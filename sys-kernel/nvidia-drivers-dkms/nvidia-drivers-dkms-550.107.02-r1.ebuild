@@ -24,6 +24,7 @@ RDEPEND="${DEPEND}
 
 PATCHES=(
 	"${FILESDIR}"/dkms550.patch
+	"${FILESDIR}"/nvidia-drivers-550.107.02-kernel-6.11-fbdev.patch
 )
 
 S="${WORKDIR}/${AMD64_NV_PACKAGE}"
