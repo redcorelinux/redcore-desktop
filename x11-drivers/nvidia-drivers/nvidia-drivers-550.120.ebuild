@@ -69,7 +69,6 @@ QA_PREBUILT="lib/firmware/* opt/bin/* usr/lib*"
 
 PATCHES=(
 	"${FILESDIR}"/nvidia-modprobe-390.141-uvm-perms.patch
-	"${FILESDIR}"/nvidia-drivers-550.107.02-kernel-6.11-fbdev.patch
 )
 
 pkg_setup() {

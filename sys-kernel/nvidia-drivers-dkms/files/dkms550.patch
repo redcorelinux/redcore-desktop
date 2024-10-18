@@ -5,7 +5,7 @@ diff -Nur a/kernel/dkms.conf b/kernel/dkms.conf
 -PACKAGE_NAME="nvidia"
 -PACKAGE_VERSION="__VERSION_STRING"
 +PACKAGE_NAME="nvidia-drivers-dkms"
-+PACKAGE_VERSION="550.107.02"
++PACKAGE_VERSION="550.120"
 +BUILD_EXCLUSIVE_KERNEL="^(5\.[0-9]+\.|6\.[0-9]\.|\.|6\.1[0-0]\.)" # only build for kernels v5.x.x up to and including v6.10.x
  AUTOINSTALL="yes"
  
@@ -35,7 +35,7 @@ diff -Nur a/kernel-open/dkms.conf b/kernel-open/dkms.conf
 -PACKAGE_NAME="nvidia"
 -PACKAGE_VERSION="__VERSION_STRING"
 +PACKAGE_NAME="nvidia-drivers-dkms"
-+PACKAGE_VERSION="550.107.02"
++PACKAGE_VERSION="550.120"
 +BUILD_EXCLUSIVE_KERNEL="^(5\.[0-9]+\.|6\.[0-9]\.|\.|6\.1[0-0]\.)" # only build for kernels v5.x.x up to and including v6.10.x
  AUTOINSTALL="yes"
  
