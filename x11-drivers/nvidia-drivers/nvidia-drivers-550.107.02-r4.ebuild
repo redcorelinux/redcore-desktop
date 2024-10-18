@@ -328,8 +328,10 @@ documentation that is installed alongside this README."
 	# to ensure that the nouveau blacklist is applied
 	# https://github.com/dracut-ng/dracut-ng/issues/674
 	# https://bugs.gentoo.org/932781
-	echo "install_items+=\" ${EPREFIX}/etc/modprobe.d/nvidia.conf \"" >> \
-		"${ED}/usr/lib/dracut/dracut.conf.d/10-${PN}.conf" || die
+	if use dkms; then
+		echo "install_items+=\" ${EPREFIX}/etc/modprobe.d/nvidia.conf \"" >> \
+			"${ED}/usr/lib/dracut/dracut.conf.d/10-${PN}.conf" || die
+	fi
 }
 
 _dracut_initramfs_regen() {
