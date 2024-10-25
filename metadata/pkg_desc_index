@@ -61,7 +61,7 @@ sys-boot/unetbootin-static 625-r5: Universal Netboot Installer creates Live USB 
 sys-devel/gcc 13.2.1_p20240210-r5: The GNU Compiler Collection
 sys-fs/cryptsetup 2.6.1-r5: Tool to setup encrypted devices with dm-crypt
 sys-fs/gocryptfs 2.0.1-r1: Encrypted overlay filesystem written in Go
-sys-fs/vhba 20240202-r1: Virtual (SCSI) Host Bus Adapter kernel module for the CDEmu suite
+sys-fs/vhba 20240917: Virtual (SCSI) Host Bus Adapter kernel module for the CDEmu suite
 sys-fs/zfs 2.2.6: ZFS meta-package (Gentoo compatibility ebuild)
 sys-fs/zfs-utils 2.2.6: Userland utilities for ZFS Linux kernel module
 sys-kernel/bcmwl-dkms 6.30.223.271-r13: Broadcom's IEEE 802.11a/b/g/n hybrid Linux device driver source
@@ -73,7 +73,7 @@ sys-kernel/linux-sources-redcore 6.10.14 6.11.5: Redcore Linux Kernel Sources
 sys-kernel/linux-sources-redcore-lts 5.15.169 6.1.114 6.6.58: Redcore Linux LTS Kernel Sources
 sys-kernel/nvidia-drivers-dkms 390.157-r8 470.256.02 550.127.05: NVIDIA driver sources for linux
 sys-kernel/tp_smapi-dkms 0.44-r3: IBM ThinkPad SMAPI BIOS driver sources
-sys-kernel/vhba-dkms 20240202-r2: Virtual (SCSI) Host Bus Adapter kernel module for the CDEmu suite sources
+sys-kernel/vhba-dkms 20240917: Virtual (SCSI) Host Bus Adapter kernel module for the CDEmu suite sources
 sys-kernel/virtualbox-modules-dkms 7.1.4: Kernel Modules source for Virtualbox
 sys-kernel/zfs-dkms 2.2.6: ZFS sources for linux
 sys-power/radeon-profile 20200824-r10: Read current clocks of ATi/AMD Radeon cards

@@ -7,5 +7,5 @@ KEYWORDS=amd64 ~hppa x86
 LICENSE=GPL-2+
 RDEPEND=sys-kernel/dkms
 SLOT=0
-SRC_URI=https://download.sourceforge.net/cdemu/vhba-module/vhba-module-20240202.tar.xz
+SRC_URI=https://download.sourceforge.net/cdemu/vhba-module/vhba-module-20240917.tar.xz
 _md5_=b1e4fe5d53ec9a2e837f7e0622435325
