@@ -1,540 +1,528 @@
-/*
-    SPDX-FileCopyrightText: 2016 David Edmundson <davidedmundson@kde.org>
-
-    SPDX-License-Identifier: LGPL-2.0-or-later
-*/
-
 import QtQuick 2.15
-import QtQuick.Layouts 1.15
-import QtQuick.Controls 2.15 as QQC2
-import Qt5Compat.GraphicalEffects
-
-import org.kde.plasma.components 3.0 as PlasmaComponents3
-import org.kde.plasma.private.keyboardindicator as KeyboardIndicator
-import org.kde.kirigami 2.20 as Kirigami
-
-import org.kde.breeze.components
+import QtQuick.Controls 2.15
+import QtQuick.Layouts 2.15
+import "Components"
 
 Item {
     id: root
+    width: Screen.width
+    height: Screen.height
 
-    // If we're using software rendering, draw outlines instead of shadows
-    // See https://bugs.kde.org/show_bug.cgi?id=398317
-    readonly property bool softwareRendering: GraphicsInfo.api === GraphicsInfo.Software
+    FontLoader {
+        id: segoeui
+        source: Qt.resolvedUrl("fonts/segoeui.ttf")
+    }
 
-    Kirigami.Theme.colorSet: Kirigami.Theme.Complementary
-    Kirigami.Theme.inherit: false
+    FontLoader {
+        id: segoeuil
+        source: Qt.resolvedUrl("fonts/segoeuil.ttf")
+    }
 
-    width: 1600
-    height: 900
+    FontLoader {
+        id: iconfont
+        source: Qt.resolvedUrl("fonts/SegMDL2.ttf")
+    }
 
-    property string notificationMessage
+    Rectangle {
+        id: background
+        anchors.fill: parent
+        width: parent.width
+        height: parent.height
 
-    LayoutMirroring.enabled: Qt.application.layoutDirection === Qt.RightToLeft
-    LayoutMirroring.childrenInherit: true
+        Image {
+            anchors.fill: parent
+            width: parent.width
+            height: parent.height
+            source: config.background
 
-    KeyboardIndicator.KeyState {
-        id: capsLockState
-        key: Qt.Key_CapsLock
+            Rectangle {
+                width: parent.width
+                height: parent.height
+                color: "#75000000"
+            }
+        }
+    }
+
+    Rectangle {
+        id: startupBg
+        width: Screen.width
+        height: Screen.height
+        color: "transparent"
+        z: 4
+
+        Image {
+            anchors.fill: parent
+            width: Screen.width
+            height: Screen.height
+            smooth: true
+            source: config.background
+
+            Rectangle {
+                id: backRect
+                width: Screen.width
+                height: Screen.height
+                color: "#15000000"
+            }
+        }
+
+        FontLoader {
+            id: localsys
+            source: "/usr/local/share/fonts/s/SegMDL2.ttf"
+        }
+
+        Text {
+            id: warning
+            visible: {
+                if (segoeui.status === FontLoader.Error && localsys.status === FontLoader.Error) return true
+
+                return false
+            }
+
+            color: "white"
+            font.pointSize: 19
+            font.family: Qt.resolvedUrl("../fonts") ? "Segoe UI Light" : segoeuisb.name
+            font.weight: Font.DemiBold
+            renderType: Text.NativeRendering
+            horizontalAlignment: Text.AlignLeft
+            text: "w00t"
+            bottomPadding: 400
+
+            anchors {
+                horizontalCenter: parent.horizontalCenter
+                verticalCenter: parent.verticalCenter
+            }
+        }
+
+        Text {
+            id: warning2
+            visible: warning.visible ? true : false
+
+            color: "white"
+            font.pointSize: 19
+            font.family: Qt.resolvedUrl("../fonts") ? "Segoe UI Light" : segoeuisb.name
+            font.weight: Font.DemiBold
+            renderType: Text.NativeRendering
+            horizontalAlignment: Text.AlignLeft
+            text: "w00t"
+            bottomPadding: 250
+
+            anchors {
+                horizontalCenter: parent.horizontalCenter
+                verticalCenter: parent.verticalCenter
+            }
+        }
+
+        Text {
+            id: warning3
+            visible: warning.visible ? true : false
+
+            color: "white"
+            font.pointSize: 19
+            font.family: Qt.resolvedUrl("../fonts") ? "Segoe UI Light" : segoeuisb.name
+            font.weight: Font.DemiBold
+            renderType: Text.NativeRendering
+            horizontalAlignment: Text.AlignLeft
+            text: "w00t"
+            bottomPadding: 200
+
+            anchors {
+                horizontalCenter: parent.horizontalCenter
+                verticalCenter: parent.verticalCenter
+            }
+        }
+
+        Text {
+            id: warning4
+            visible: warning.visible ? true : false
+
+            color: "white"
+            font.pointSize: 19
+            font.family: Qt.resolvedUrl("../fonts") ? "Segoe UI Light" : segoeuisb.name
+            font.weight: Font.DemiBold
+            renderType: Text.NativeRendering
+            horizontalAlignment: Text.AlignLeft
+            text: "w00t"
+            bottomPadding: 50
+
+            anchors {
+                horizontalCenter: parent.horizontalCenter
+                verticalCenter: parent.verticalCenter
+            }
+        }
+
+        MouseArea {
+            id: mouseArea
+            anchors.fill: parent
+            drag.target: timeDate
+            drag.axis: Drag.YAxis
+            drag.minimumY: -Screen.height / 2
+            drag.maximumY: 0
+            focus: true
+
+            onClicked: {
+                listView.focus = true
+                mouseArea.focus = false
+                mouseArea.enabled = false
+                seqStart.start()
+                parStart.start()
+            }
+
+            Keys.onPressed: {
+                listView.focus = true
+                mouseArea.focus = false
+                mouseArea.enabled = false
+                seqStart.start()
+                parStart.start()
+            }
+
+            property bool dragActive: drag.active
+
+            onDragActiveChanged: {
+                if(drag.active) {}
+                else {
+                    listView.focus = true
+                    mouseArea.focus = false
+                    mouseArea.enabled = false
+                    seqStart.start()
+                    parslideStart.start()
+                }
+            }
+        }
+
+        ParallelAnimation {
+            id: parStart
+            running: false
+
+            NumberAnimation {
+                target: timeDate
+                properties: "y"
+                from: 0
+                to: -45
+                duration: 125
+            }
+
+            NumberAnimation {
+                target: timeDate
+                properties: "visible"
+                from: 1
+                to: 0
+                duration: 125
+            }
+
+            NumberAnimation {
+                target: startupBg
+                properties: "opacity"
+                from: 1
+                to: 0
+                duration: 100
+            }
+        }
+
+        ParallelAnimation {
+            id: parslideStart
+            running: false
+
+            NumberAnimation {
+                target: startupBg
+                properties: "opacity"
+                from: 1
+                to: 0
+                duration: 100
+            }
+        }
+
+        SequentialAnimation {
+            id: seqStart
+            running: false
+
+            ColorAnimation {
+                target: backRect
+                properties: "color"
+                from: "#15000000"
+                to: "#75000000"
+                duration: 125
+            }
+
+            ParallelAnimation {
+
+                ScaleAnimator {
+                    target: background
+                    from: 1
+                    to: 1.01
+                    duration: 250
+                }
+
+                NumberAnimation {
+                    target: centerPanel
+                    properties: "opacity"
+                    from: 0
+                    to: 1
+                    duration: 225
+                }
+
+                NumberAnimation {
+                    target: rightPanel
+                    properties: "opacity"
+                    from: 0
+                    to: 1
+                    duration: 100
+                }
+
+                NumberAnimation {
+                    target: leftPanel
+                    properties: "opacity"
+                    from: 0
+                    to: 1
+                    duration: 100
+                }
+            }
+        }
+
+        Rectangle {
+            id: timeDate
+            width: parent.width
+            height: parent.height
+            color: "transparent"
+
+            Column {
+                id: timeContainer
+
+                anchors {
+                    bottom: parent.bottom
+                    left: parent.left
+                    bottomMargin: 90
+                    leftMargin: 35
+                }
+
+                property date dateTime: new Date()
+
+                Timer {
+                    interval: 100; running: true; repeat: true;
+                    onTriggered: timeContainer.dateTime = new Date()
+                }
+
+                Text {
+                    id: time
+
+                    color: "white"
+                    font.pointSize: 95
+                    font.family: Qt.resolvedUrl("../fonts") ? "Segoe UI Light" : segoeuil.name
+                    renderType: Text.NativeRendering
+                    text: Qt.formatTime(timeContainer.dateTime, "hh:mm")
+
+                    anchors {
+                        horizontalCenter: parent.horizontalCenter
+                        left: parent.left
+                    }
+                }
+
+                Rectangle {
+                    id: spacingRect
+                    color: "transparent"
+                    width: 15
+                    height: 15
+
+                    anchors {
+                        horizontalCenter: parent.horizontalCenter
+                    }
+                }
+
+                Text {
+                    id: date
+
+                    color: "white"
+                    font.pointSize: 45
+                    font.family: "Segoe UI Light"
+                    renderType: Text.NativeRendering
+                    horizontalAlignment: Text.AlignLeft
+                    text: Qt.formatDate(timeContainer.dateTime, "dddd, MMMM dd")
+
+                    anchors {
+                        horizontalCenter: parent.horizontalCenter
+                    }
+                }
+            }
+        }
     }
 
     Item {
-        id: wallpaper
-        anchors.fill: parent
-        Repeater {
-            model: screenModel
+        id: rightPanel
+        z: 2
+        opacity: 0
 
-            Background {
-                x: geometry.x; y: geometry.y; width: geometry.width; height: geometry.height
-                sceneBackgroundType: config.type
-                sceneBackgroundColor: config.color
-                sceneBackgroundImage: config.background
-            }
-        }
-    }
-
-    RejectPasswordAnimation {
-        id: rejectPasswordAnimation
-        target: mainStack
-    }
-
-    MouseArea {
-        id: loginScreenRoot
-        anchors.fill: parent
-
-        property bool uiVisible: true
-        property bool blockUI: mainStack.depth > 1 || userListComponent.mainPasswordBox.text.length > 0 || inputPanel.keyboardActive || config.type !== "image"
-
-        hoverEnabled: true
-        drag.filterChildren: true
-        onPressed: uiVisible = true;
-        onPositionChanged: uiVisible = true;
-        onUiVisibleChanged: {
-            if (blockUI) {
-                fadeoutTimer.running = false;
-            } else if (uiVisible) {
-                fadeoutTimer.restart();
-            }
-        }
-        onBlockUIChanged: {
-            if (blockUI) {
-                fadeoutTimer.running = false;
-                uiVisible = true;
-            } else {
-                fadeoutTimer.restart();
-            }
+        anchors {
+            bottom: parent.bottom
+            right: parent.right
+            margins: 75
         }
 
-        Keys.onPressed: event => {
-            uiVisible = true;
-            event.accepted = false;
+        PowerPanel {
+            id: powerPanel
         }
 
-        //takes one full minute for the ui to disappear
-        Timer {
-            id: fadeoutTimer
-            running: true
-            interval: 60000
-            onTriggered: {
-                if (!loginScreenRoot.blockUI) {
-                    userListComponent.mainPasswordBox.showPassword = false;
-                    loginScreenRoot.uiVisible = false;
-                }
-            }
-        }
-        WallpaperFader {
-            visible: config.type === "image"
-            anchors.fill: parent
-            state: loginScreenRoot.uiVisible ? "on" : "off"
-            source: wallpaper
-            mainStack: mainStack
-            footer: footer
-            clock: clock
-        }
+        SessionPanel {
+            id: sessionPanel
 
-        DropShadow {
-            id: clockShadow
-            anchors.fill: clock
-            source: clock
-            visible: !softwareRendering
-            radius: 6
-            samples: 14
-            spread: 0.3
-            color : "black" // shadows should always be black
-            Behavior on opacity {
-                OpacityAnimator {
-                    duration: Kirigami.Units.veryLongDuration * 2
-                    easing.type: Easing.InOutQuad
-                }
-            }
-        }
-
-        Clock {
-            id: clock
-            property Item shadow: clockShadow
-            visible: y > 0
-            anchors.horizontalCenter: parent.horizontalCenter
-            y: (userListComponent.userList.y + mainStack.y)/2 - height/2
-            Layout.alignment: Qt.AlignBaseline
-        }
-
-        QQC2.StackView {
-            id: mainStack
             anchors {
-                left: parent.left
-                right: parent.right
-            }
-            height: root.height + Kirigami.Units.gridUnit * 3
-
-            // If true (depends on the style and environment variables), hover events are always accepted
-            // and propagation stopped. This means the parent MouseArea won't get them and the UI won't be shown.
-            // Disable capturing those events while the UI is hidden to avoid that, while still passing events otherwise.
-            // One issue is that while the UI is visible, mouse activity won't keep resetting the timer, but when it
-            // finally expires, the next event should immediately set uiVisible = true again.
-            hoverEnabled: loginScreenRoot.uiVisible ? undefined : false
-
-            focus: true //StackView is an implicit focus scope, so we need to give this focus so the item inside will have it
-
-            Timer {
-                //SDDM has a bug in 0.13 where even though we set the focus on the right item within the window, the window doesn't have focus
-                //it is fixed in 6d5b36b28907b16280ff78995fef764bb0c573db which will be 0.14
-                //we need to call "window->activate()" *After* it's been shown. We can't control that in QML so we use a shoddy timer
-                //it's been this way for all Plasma 5.x without a huge problem
-                running: true
-                repeat: false
-                interval: 200
-                onTriggered: mainStack.forceActiveFocus()
-            }
-
-            initialItem: Login {
-                id: userListComponent
-                userListModel: userModel
-                loginScreenUiVisible: loginScreenRoot.uiVisible
-                userListCurrentIndex: userModel.lastIndex >= 0 ? userModel.lastIndex : 0
-                lastUserName: userModel.lastUser
-                showUserList: {
-                    if (!userListModel.hasOwnProperty("count")
-                        || !userListModel.hasOwnProperty("disableAvatarsThreshold")) {
-                        return false
-                    }
-
-                    if (userListModel.count === 0 ) {
-                        return false
-                    }
-
-                    if (userListModel.hasOwnProperty("containsAllUsers") && !userListModel.containsAllUsers) {
-                        return false
-                    }
-
-                    return userListModel.count <= userListModel.disableAvatarsThreshold
-                }
-
-                notificationMessage: {
-                    const parts = [];
-                    if (capsLockState.locked) {
-                        parts.push(i18nd("plasma-desktop-sddm-theme", "Caps Lock is on"));
-                    }
-                    if (root.notificationMessage) {
-                        parts.push(root.notificationMessage);
-                    }
-                    return parts.join(" • ");
-                }
-
-                actionItemsVisible: !inputPanel.keyboardActive
-                actionItems: [
-                    ActionButton {
-                        iconSource: "system-suspend"
-                        text: i18ndc("plasma-desktop-sddm-theme", "Suspend to RAM", "Sleep")
-                        fontSize: Kirigami.Theme.defaultFont.pointSize + 1
-                        onClicked: sddm.suspend()
-                        enabled: sddm.canSuspend
-                    },
-                    ActionButton {
-                        iconSource: "system-reboot"
-                        text: i18nd("plasma-desktop-sddm-theme", "Restart")
-                        fontSize: Kirigami.Theme.defaultFont.pointSize + 1
-                        onClicked: sddm.reboot()
-                        enabled: sddm.canReboot
-                    },
-                    ActionButton {
-                        iconSource: "system-shutdown"
-                        text: i18nd("plasma-desktop-sddm-theme", "Shut Down")
-                        fontSize: Kirigami.Theme.defaultFont.pointSize + 1
-                        onClicked: sddm.powerOff()
-                        enabled: sddm.canPowerOff
-                    },
-                    ActionButton {
-                        iconSource: "system-user-prompt"
-                        text: i18ndc("plasma-desktop-sddm-theme", "For switching to a username and password prompt", "Other…")
-                        fontSize: Kirigami.Theme.defaultFont.pointSize + 1
-                        onClicked: mainStack.push(userPromptComponent)
-                        enabled: true
-                        visible: !userListComponent.showUsernamePrompt
-                    }]
-
-                onLoginRequest: {
-                    root.notificationMessage = ""
-                    sddm.login(username, password, sessionButton.currentIndex)
-                }
-            }
-
-            Behavior on opacity {
-                OpacityAnimator {
-                    duration: Kirigami.Units.longDuration
-                }
-            }
-
-            readonly property real zoomFactor: 1.5
-
-            popEnter: Transition {
-                ScaleAnimator {
-                    from: mainStack.zoomFactor
-                    to: 1
-                    duration: Kirigami.Units.veryLongDuration
-                    easing.type: Easing.OutCubic
-                }
-                OpacityAnimator {
-                    from: 0
-                    to: 1
-                    duration: Kirigami.Units.veryLongDuration
-                    easing.type: Easing.OutCubic
-                }
-            }
-
-            popExit: Transition {
-                ScaleAnimator {
-                    from: 1
-                    to: 1 / mainStack.zoomFactor
-                    duration: Kirigami.Units.veryLongDuration
-                    easing.type: Easing.OutCubic
-                }
-                OpacityAnimator {
-                    from: 1
-                    to: 0
-                    duration: Kirigami.Units.veryLongDuration
-                    easing.type: Easing.OutCubic
-                }
-            }
-
-            pushEnter: Transition {
-                ScaleAnimator {
-                    from: 1 / mainStack.zoomFactor
-                    to: 1
-                    duration: Kirigami.Units.veryLongDuration
-                    easing.type: Easing.OutCubic
-                }
-                OpacityAnimator {
-                    from: 0
-                    to: 1
-                    duration: Kirigami.Units.veryLongDuration
-                    easing.type: Easing.OutCubic
-                }
-            }
-
-            pushExit: Transition {
-                ScaleAnimator {
-                    from: 1
-                    to: mainStack.zoomFactor
-                    duration: Kirigami.Units.veryLongDuration
-                    easing.type: Easing.OutCubic
-                }
-                OpacityAnimator {
-                    from: 1
-                    to: 0
-                    duration: Kirigami.Units.veryLongDuration
-                    easing.type: Easing.OutCubic
-                }
+                right: powerPanel.left
             }
         }
 
-        VirtualKeyboardLoader {
-            id: inputPanel
+        LayoutPanel {
+            id: layoutPanel
 
-            z: 1
-
-            screenRoot: root
-            mainStack: mainStack
-            mainBlock: userListComponent
-            passwordField: userListComponent.mainPasswordBox
+            anchors {
+                right: sessionPanel.left
+            }
         }
+    }
+
+    Rectangle {
+        id: leftPanel
+        color: "transparent"
+        anchors.fill: parent
+        z: 2
+        opacity: 0
+
+        visible: listView2.count > 1 ? true : false
+        enabled: listView2.count > 1 ? true : false
 
         Component {
-            id: userPromptComponent
-            Login {
-                showUsernamePrompt: true
-                notificationMessage: root.notificationMessage
-                loginScreenUiVisible: loginScreenRoot.uiVisible
-                fontSize: Kirigami.Theme.defaultFont.pointSize + 2
+            id: userDelegate2
 
-                // using a model rather than a QObject list to avoid QTBUG-75900
-                userListModel: ListModel {
-                    ListElement {
-                        name: ""
-                        icon: ""
-                    }
-                    Component.onCompleted: {
-                        // as we can't bind inside ListElement
-                        setProperty(0, "name", i18nd("plasma-desktop-sddm-theme", "Type in Username and Password"));
-                        setProperty(0, "icon", Qt.resolvedUrl("faces/.face.icon"))
-                    }
+            UserList {
+                id: userList
+                name: (model.realName === "") ? model.name : model.realName
+                icon: "/var/lib/AccountsService/icons/" + name
+
+                anchors {
+                    horizontalCenter: parent.horizontalCenter
                 }
 
-                onLoginRequest: {
-                    root.notificationMessage = ""
-                    sddm.login(username, password, sessionButton.currentIndex)
-                }
-
-                actionItemsVisible: !inputPanel.keyboardActive
-                actionItems: [
-                    ActionButton {
-                        iconSource: "system-suspend"
-                        text: i18ndc("plasma-desktop-sddm-theme", "Suspend to RAM", "Sleep")
-                        fontSize: Kirigami.Theme.defaultFont.pointSize + 1
-                        onClicked: sddm.suspend()
-                        enabled: sddm.canSuspend
-                    },
-                    ActionButton {
-                        iconSource: "system-reboot"
-                        text: i18nd("plasma-desktop-sddm-theme", "Restart")
-                        fontSize: Kirigami.Theme.defaultFont.pointSize + 1
-                        onClicked: sddm.reboot()
-                        enabled: sddm.canReboot
-                    },
-                    ActionButton {
-                        iconSource: "system-shutdown"
-                        text: i18nd("plasma-desktop-sddm-theme", "Shut Down")
-                        fontSize: Kirigami.Theme.defaultFont.pointSize + 1
-                        onClicked: sddm.powerOff()
-                        enabled: sddm.canPowerOff
-                    },
-                    ActionButton {
-                        iconSource: "system-user-list"
-                        text: i18nd("plasma-desktop-sddm-theme", "List Users")
-                        fontSize: Kirigami.Theme.defaultFont.pointSize + 1
-                        onClicked: mainStack.pop()
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        listView2.currentIndex = index
+                        listView2.focus = true
+                        listView.currentIndex = index
+                        listView.focus = true
                     }
-                ]
-            }
-        }
-
-        DropShadow {
-            id: logoShadow
-            anchors.fill: logo
-            source: logo
-            visible: !softwareRendering && config.showlogo === "shown"
-            horizontalOffset: 1
-            verticalOffset: 1
-            radius: 6
-            samples: 14
-            spread: 0.3
-            color : "black" // shadows should always be black
-            opacity: loginScreenRoot.uiVisible ? 0 : 1
-            Behavior on opacity {
-                //OpacityAnimator when starting from 0 is buggy (it shows one frame with opacity 1)"
-                NumberAnimation {
-                    duration: Kirigami.Units.longDuration
-                    easing.type: Easing.InOutQuad
                 }
             }
         }
 
-        Image {
-            id: logo
-            visible: config.showlogo === "shown"
-            source: config.logo
-            anchors.horizontalCenter: parent.horizontalCenter
-            anchors.bottom: footer.top
-            anchors.bottomMargin: Kirigami.Units.largeSpacing
-            asynchronous: true
-            sourceSize.height: height
-            opacity: loginScreenRoot.uiVisible ? 0 : 1
-            fillMode: Image.PreserveAspectFit
-            height: Math.round(Kirigami.Units.gridUnit * 3.5)
-            Behavior on opacity {
-                // OpacityAnimator when starting from 0 is buggy (it shows one frame with opacity 1)"
-                NumberAnimation {
-                    duration: Kirigami.Units.longDuration
-                    easing.type: Easing.InOutQuad
-                }
-            }
-        }
+        Rectangle {
+            width: 150
+            height: listView2.count > 17 ? Screen.height - 68 : 58 * listView2.count
+            color: "transparent"
+            clip: true
 
-        // Note: Containment masks stretch clickable area of their buttons to
-        // the screen edges, essentially making them adhere to Fitts's law.
-        // Due to virtual keyboard button having an icon, buttons may have
-        // different heights, so fillHeight is required.
-        //
-        // Note for contributors: Keep this in sync with LockScreenUi.qml footer.
-        RowLayout {
-            id: footer
             anchors {
                 bottom: parent.bottom
+                bottomMargin: 35
                 left: parent.left
-                right: parent.right
-                margins: Kirigami.Units.smallSpacing
-            }
-            spacing: Kirigami.Units.smallSpacing
-
-            Behavior on opacity {
-                OpacityAnimator {
-                    duration: Kirigami.Units.longDuration
-                }
-            }
-
-            PlasmaComponents3.ToolButton {
-                id: virtualKeyboardButton
-
-                text: i18ndc("plasma-desktop-sddm-theme", "Button to show/hide virtual keyboard", "Virtual Keyboard")
-                icon.name: inputPanel.keyboardActive ? "input-keyboard-virtual-on" : "input-keyboard-virtual-off"
-                onClicked: {
-                    // Otherwise the password field loses focus and virtual keyboard
-                    // keystrokes get eaten
-                    userListComponent.mainPasswordBox.forceActiveFocus();
-                    inputPanel.showHide()
-                }
-                visible: inputPanel.status === Loader.Ready
-
-                Layout.fillHeight: true
-                containmentMask: Item {
-                    parent: virtualKeyboardButton
-                    anchors.fill: parent
-                    anchors.leftMargin: -footer.anchors.margins
-                    anchors.bottomMargin: -footer.anchors.margins
-                }
-            }
-
-            KeyboardButton {
-                id: keyboardButton
-
-                onKeyboardLayoutChanged: {
-                    // Otherwise the password field loses focus and virtual keyboard
-                    // keystrokes get eaten
-                    userListComponent.mainPasswordBox.forceActiveFocus();
-                }
-
-                Layout.fillHeight: true
-                containmentMask: Item {
-                    parent: keyboardButton
-                    anchors.fill: parent
-                    anchors.leftMargin: virtualKeyboardButton.visible ? 0 : -footer.anchors.margins
-                    anchors.bottomMargin: -footer.anchors.margins
-                }
-            }
-
-            SessionButton {
-                id: sessionButton
-
-                onSessionChanged: {
-                    // Otherwise the password field loses focus and virtual keyboard
-                    // keystrokes get eaten
-                    userListComponent.mainPasswordBox.forceActiveFocus();
-                }
-
-                Layout.fillHeight: true
-                containmentMask: Item {
-                    parent: sessionButton
-                    anchors.fill: parent
-                    anchors.leftMargin: virtualKeyboardButton.visible || keyboardButton.visible
-                        ? 0 : -footer.anchors.margins
-                    anchors.bottomMargin: -footer.anchors.margins
-                }
+                leftMargin: 35
             }
 
             Item {
-                Layout.fillWidth: true
+                id: usersContainer2
+                width: 255
+                height: parent.height
+
+                anchors {
+                    bottom: parent.bottom
+                    left: parent.left
+                }
+
+                Button {
+                    id: prevUser2
+                    visible: true
+                    enabled: false
+                    width: 0
+
+                    anchors {
+                        bottom: parent.bottom
+                        left: parent.left
+                    }
+                }
+
+                ListView {
+                    id: listView2
+                    height: parent.height
+                    focus: true
+                    model: userModel
+                    currentIndex: userModel.lastIndex
+                    delegate: userDelegate2
+                    verticalLayoutDirection: ListView.TopToBottom
+                    orientation: ListView.Vertical
+                    interactive: listView2.count > 17 ? true : false
+
+                    anchors {
+                        left: prevUser2.right
+                        right: nextUser2.left
+                    }
+                }
+
+                Button {
+                    id: nextUser2
+                    visible: true
+                    width: 0
+                    enabled: false
+
+                    anchors {
+                        bottom: parent.bottom
+                        right: parent.right
+                    }
+                }
+            }
+        }
+    }
+
+    Item {
+        id: centerPanel
+        anchors.centerIn: root
+        z: 2
+        opacity: 0
+
+        Item {
+
+            Component {
+                id: userDelegate
+
+                UserPanel {
+                    anchors.centerIn: parent
+                    name: (model.realName === "") ? model.name : model.realName
+                    icon: "/var/lib/AccountsService/icons/" + name
+                }
             }
 
-            Battery {}
-        }
-    }
+            Button {
+                id: prevUser
+                anchors.left: parent.left
+                enabled: false
+                visible: false
+            }
 
-    Connections {
-        target: sddm
-        function onLoginFailed() {
-            notificationMessage = i18nd("plasma-desktop-sddm-theme", "Login Failed")
-            footer.enabled = true
-            mainStack.enabled = true
-            userListComponent.userList.opacity = 1
-            rejectPasswordAnimation.start()
-        }
-        function onLoginSucceeded() {
-            //note SDDM will kill the greeter at some random point after this
-            //there is no certainty any transition will finish, it depends on the time it
-            //takes to complete the init
-            mainStack.opacity = 0
-            footer.opacity = 0
-        }
-    }
+            ListView {
+                id: listView
+                focus: true
+                model: userModel
+                delegate: userDelegate
+                currentIndex: userModel.lastIndex
+                interactive: false
 
-    onNotificationMessageChanged: {
-        if (notificationMessage) {
-            notificationResetTimer.start();
-        }
-    }
+                anchors {
+                    left: prevUser.right
+                    right: nextUser.left
+                }
+            }
 
-    Timer {
-        id: notificationResetTimer
-        interval: 3000
-        onTriggered: notificationMessage = ""
+            Button {
+                id: nextUser
+                anchors.right: parent.right
+                enabled: false
+                visible: false
+            }
+        }
     }
 }
