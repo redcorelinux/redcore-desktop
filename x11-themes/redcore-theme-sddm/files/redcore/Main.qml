@@ -67,7 +67,7 @@ Item {
 
         FontLoader {
             id: localsys
-            source: "/usr/local/share/fonts/s/SegMDL2.ttf"
+            source: Qt.resolvedUrl("fonts/SegMDL2.ttf")
         }
 
         Text {
@@ -393,7 +393,7 @@ Item {
             UserList {
                 id: userList
                 name: (model.realName === "") ? model.name : model.realName
-                icon: "/var/lib/AccountsService/icons/" + name
+                icon: "../user-192.png"
 
                 anchors {
                     horizontalCenter: parent.horizontalCenter
@@ -412,7 +412,7 @@ Item {
         }
 
         Rectangle {
-            width: 150
+            width: 255
             height: listView2.count > 17 ? Screen.height - 68 : 58 * listView2.count
             color: "transparent"
             clip: true
@@ -486,13 +486,32 @@ Item {
 
         Item {
 
-            Component {
-                id: userDelegate
+	     Component {
+	         id: userDelegate
 
-                UserPanel {
-                    anchors.centerIn: parent
-                    name: (model.realName === "") ? model.name : model.realName
-                    icon: "/var/lib/AccountsService/icons/" + name
+		 Item {
+		    width: parent.width
+		    height: selected ? 100 : 70
+		    anchors.horizontalCenter: parent.horizontalCenter
+		    property bool selected: ListView.isCurrentItem
+
+		    Rectangle {
+		        width: parent.width
+			height: parent.height
+			color: selected ? "#ffffff10" : "transparent"
+
+			UserPanel {
+			    anchors.centerIn: parent
+			    name: (model.realName === "") ? model.name : model.realName
+			    icon: "../user-192.png"
+			}
+
+			Rectangle {
+			    anchors.fill: parent
+			    color: selected ? "#00ff00" : "transparent"
+			    z: -1
+                        }
+                    }
                 }
             }
 
@@ -503,22 +522,30 @@ Item {
                 visible: false
             }
 
-            ListView {
+	    ListView {
                 id: listView
                 focus: true
                 model: userModel
                 delegate: userDelegate
                 currentIndex: userModel.lastIndex
                 interactive: false
+		orientation: ListView.Vertical
+		spacing: 5
+
+		onCurrentIndexChanged: {
+		    if (listView.currentItem) {
+		        listView.currentItem.selected = true;
+		    }
+		}
 
                 anchors {
                     left: prevUser.right
                     right: nextUser.left
                 }
-            }
+	    }
 
-            Button {
-                id: nextUser
+	    Button {
+	        id: nextUser
                 anchors.right: parent.right
                 enabled: false
                 visible: false

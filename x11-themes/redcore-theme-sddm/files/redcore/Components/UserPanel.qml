@@ -43,8 +43,8 @@ FocusScope {
 
     Image {
         id: icon
-        width: 192
-        height: 192
+        width: 128
+        height: 128
         smooth: true
         visible: false
 
@@ -52,7 +52,7 @@ FocusScope {
             if (icon.status == Image.Error)
                 icon.source = "../user-192.png"
             else
-                "/var/lib/AccountsService/icons/" + name
+                icon.source = "../user-192.png"
         }
 
         x: -(icon.width / 2)

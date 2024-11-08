@@ -63,7 +63,7 @@ Rectangle {
                 if (icon.status == Image.Error)
                     icon.source = "../user-192.png"
                 else
-                    "/var/lib/AccountsService/icons/" + name
+                    icon.source = "../user-192.png"
             }
 
             x: 12
