@@ -47,7 +47,9 @@ DEPEND="
 "
 RDEPEND="${DEPEND}"
 
-PATCHES=( "${FILESDIR}"/"${PN}"-qt5ct.patch )
+PATCHES=( 
+	"${FILESDIR}"/revert-2aff948ea19508317c185d87bc5f5e20fe64a30f.patch
+	"${FILESDIR}"/"${PN}"-qt5ct.patch )
 
 src_configure() {
 	local mycmakeargs=(
