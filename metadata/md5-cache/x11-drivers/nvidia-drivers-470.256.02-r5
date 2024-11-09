@@ -7,11 +7,11 @@ HOMEPAGE=https://www.nvidia.com/download/index.aspx
 INHERIT=desktop flag-o-matic multilib readme.gentoo-r1 systemd toolchain-funcs unpacker user-info
 IUSE=abi_x86_32 abi_x86_64 +acpi +dkms +persistenced +tools +X
 KEYWORDS=-* amd64
-LICENSE=NVIDIA-r2 BSD BSD-2 GPL-2 MIT
-PDEPEND=tools? ( x11-misc/nvidia-settings:3 )
-RDEPEND=acct-group/video persistenced? ( acct-user/nvpd net-libs/libtirpc:= ) sys-libs/glibc !!x11-drivers/nvidia-drivers:4 !!x11-drivers/nvidia-drivers:5 acpi? ( sys-power/acpid ) dkms? ( ~sys-kernel/nvidia-drivers-dkms-390.157:3 ) X? ( media-libs/libglvnd[X,abi_x86_32(-)?] x11-libs/libX11[abi_x86_32(-)?] x11-libs/libXext[abi_x86_32(-)?] )
+LICENSE=NVIDIA-r2 BSD BSD-2 GPL-2 MIT ZLIB curl openssl
+PDEPEND=tools? ( x11-misc/nvidia-settings:4 )
+RDEPEND=acct-group/video persistenced? ( acct-user/nvpd net-libs/libtirpc:= ) sys-libs/glibc !!x11-drivers/nvidia-drivers:3 !!x11-drivers/nvidia-drivers:5 acpi? ( sys-power/acpid ) dkms? ( ~sys-kernel/nvidia-drivers-dkms-470.256.02:4 ) X? ( media-libs/libglvnd[X,abi_x86_32(-)?] x11-libs/libX11[abi_x86_32(-)?] x11-libs/libXext[abi_x86_32(-)?] )
 RESTRICT=strip
-SLOT=3
-SRC_URI=https://download.nvidia.com/XFree86/Linux-x86_64/390.157/NVIDIA-Linux-x86_64-390.157.run https://download.nvidia.com/XFree86/nvidia-installer/nvidia-installer-390.157.tar.bz2 https://download.nvidia.com/XFree86/nvidia-modprobe/nvidia-modprobe-390.157.tar.bz2 https://download.nvidia.com/XFree86/nvidia-persistenced/nvidia-persistenced-390.157.tar.bz2 https://download.nvidia.com/XFree86/nvidia-xconfig/nvidia-xconfig-390.157.tar.bz2
+SLOT=4
+SRC_URI=https://download.nvidia.com/XFree86/Linux-x86_64/470.256.02/NVIDIA-Linux-x86_64-470.256.02.run https://download.nvidia.com/XFree86/nvidia-installer/nvidia-installer-470.256.02.tar.bz2 https://download.nvidia.com/XFree86/nvidia-modprobe/nvidia-modprobe-470.256.02.tar.bz2 https://download.nvidia.com/XFree86/nvidia-persistenced/nvidia-persistenced-470.256.02.tar.bz2 https://download.nvidia.com/XFree86/nvidia-xconfig/nvidia-xconfig-470.256.02.tar.bz2
 _eclasses_=desktop	3a72ffe0d8e1dd73af3a1c8c15a59fed	flag-o-matic	f14aba975c94ccaa9f357a27e3b17ffe	multilib	b2a329026f2e404e9e371097dda47f96	multiprocessing	1e32df7deee68372153dca65f4a7c21f	readme.gentoo-r1	b045f3acf546393ab6b3170781875358	systemd	54bd206bb5c4efac6ae28b6b006713b0	toolchain-funcs	d3d42b22a610ce81c267b644bcec9b87	unpacker	fb4b84181244b3b9990fa0bf40232dd2	user-info	9951b1a0e4f026d16c33a001fd2d5cdf
-_md5_=030f55e2691c168f2c7896ff188ccfc0
+_md5_=635699f9edf4e38d71d982a10366ad92
