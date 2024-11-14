@@ -19,8 +19,8 @@ KEYWORDS="~amd64"
 RDEPEND="
 	dev-libs/openssl:=[-bindist(-)]
 	dev-libs/re2:=
-	<dev-python/protobuf-python-6[${PYTHON_USEDEP}]
-	>=dev-python/protobuf-python-5.26.1[${PYTHON_USEDEP}]
+	<dev-python/protobuf-6[${PYTHON_USEDEP}]
+	>=dev-python/protobuf-5.26.1[${PYTHON_USEDEP}]
 	net-dns/c-ares:=
 	sys-libs/zlib:=
 "
