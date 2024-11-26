@@ -25,7 +25,7 @@ RDEPEND="${DEPEND}
 	$(python_gen_cond_dep '
 		app-portage/gentoolkit[${PYTHON_USEDEP}]
 		dev-python/animation[${PYTHON_USEDEP}]
-		dev-python/GitPython[${PYTHON_USEDEP}]
+		dev-python/gitpython[${PYTHON_USEDEP}]
 		dev-python/typer[${PYTHON_USEDEP}]
 		dev-python/typing-extensions[${PYTHON_USEDEP}]
 		dev-python/urllib3[${PYTHON_USEDEP}]
