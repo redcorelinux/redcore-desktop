@@ -29,7 +29,7 @@ dev-python/typer 0.9.0-r3: Build great CLIs. Easy to code. Based on Python type 
 dev-python/wget 2.2-r4: Python library for downloading from http URLs
 dev-python/zeroconf 0.82.1-r10: Pure Python Multicast DNS Service Discovery Library (Bonjour/Avahi compatible)
 gui-libs/display-manager-init 1.1.2-r1: RC init files for starting display and login managers
-kde-plasma/kinfocenter 6.2.3-r5: Utility providing information about the computer hardware
+kde-plasma/kinfocenter 6.2.4-r5: Utility providing information about the computer hardware
 lxde-base/lxappearance 0.6.3-r5: LXDE GTK+ theme switcher
 lxqt-base/lxqt-config 2.1.0-r1: LXQt system configuration control center
 lxqt-base/lxqt-meta 2.1.0: Meta ebuild for LXQt, the Lightweight Desktop Environment
