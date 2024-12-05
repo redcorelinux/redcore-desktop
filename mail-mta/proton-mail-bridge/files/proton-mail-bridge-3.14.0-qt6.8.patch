@@ -1,0 +1,149 @@
+diff --git a/internal/frontend/bridge-gui/bridge-gui/qml/Banner.qml b/internal/frontend/bridge-gui/bridge-gui/qml/Banner.qml
+index f3affdc9..88d3a48a 100644
+--- a/internal/frontend/bridge-gui/bridge-gui/qml/Banner.qml
++++ b/internal/frontend/bridge-gui/bridge-gui/qml/Banner.qml
+@@ -28,7 +28,7 @@ Popup {
+     implicitWidth: 600 // contentLayout.implicitWidth + contentLayout.anchors.leftMargin + contentLayout.anchors.rightMargin
+     leftMargin: (mainWindow.width - root.implicitWidth) / 2
+     modal: false
+-    popupType: ApplicationWindow.PopupType.Banner
++    popupPrio: ApplicationWindow.PopupPriority.Banner
+     shouldShow: notification ? (notification.active && !notification.dismissed) : false
+     topMargin: 37
+ 
+diff --git a/internal/frontend/bridge-gui/bridge-gui/qml/BugReport/QuestionItem.qml b/internal/frontend/bridge-gui/bridge-gui/qml/BugReport/QuestionItem.qml
+index 9cf37cc1..2e0ca39c 100644
+--- a/internal/frontend/bridge-gui/bridge-gui/qml/BugReport/QuestionItem.qml
++++ b/internal/frontend/bridge-gui/bridge-gui/qml/BugReport/QuestionItem.qml
+@@ -13,6 +13,7 @@
+ import QtQuick
+ import QtQuick.Layouts
+ import QtQuick.Controls
++import QtQuick.Controls.impl
+ import Proton
+ 
+ Item {
+diff --git a/internal/frontend/bridge-gui/bridge-gui/qml/Proton/ApplicationWindow.qml b/internal/frontend/bridge-gui/bridge-gui/qml/Proton/ApplicationWindow.qml
+index ef23ede5..72207896 100644
+--- a/internal/frontend/bridge-gui/bridge-gui/qml/Proton/ApplicationWindow.qml
++++ b/internal/frontend/bridge-gui/bridge-gui/qml/Proton/ApplicationWindow.qml
+@@ -21,7 +21,7 @@ T.ApplicationWindow {
+     id: root
+ 
+     // popup priority based on types
+-    enum PopupType {
++    enum PopupPriority {
+         Banner,
+         Dialog
+     }
+@@ -78,10 +78,10 @@ T.ApplicationWindow {
+                 topmost = obj;
+                 break;
+             }
+-            if (topmost && (topmost.popupType > obj.popupType)) {
++            if (topmost && (topmost.popupPrio > obj.popupPrio)) {
+                 continue;
+             }
+-            if (topmost && (topmost.popupType === obj.popupType) && (topmost.occurred > obj.occurred)) {
++            if (topmost && (topmost.popupPrio === obj.popupPrio) && (topmost.occurred > obj.occurred)) {
+                 continue;
+             }
+             topmost = obj;
+diff --git a/internal/frontend/bridge-gui/bridge-gui/qml/Proton/Dialog.qml b/internal/frontend/bridge-gui/bridge-gui/qml/Proton/Dialog.qml
+index f1ab61a0..30e7a99d 100644
+--- a/internal/frontend/bridge-gui/bridge-gui/qml/Proton/Dialog.qml
++++ b/internal/frontend/bridge-gui/bridge-gui/qml/Proton/Dialog.qml
+@@ -21,7 +21,7 @@ T.Dialog {
+ 
+     property ColorScheme colorScheme
+     readonly property var occurred: shouldShow ? new Date() : undefined
+-    readonly property int popupType: ApplicationWindow.PopupType.Dialog
++    readonly property int popupPrio: ApplicationWindow.PopupPriority.Dialog
+     property bool shouldShow: false
+ 
+     function close() {
+diff --git a/internal/frontend/bridge-gui/bridge-gui/qml/Proton/InfoTooltip.qml b/internal/frontend/bridge-gui/bridge-gui/qml/Proton/InfoTooltip.qml
+index 281e93e8..0ec6bf26 100644
+--- a/internal/frontend/bridge-gui/bridge-gui/qml/Proton/InfoTooltip.qml
++++ b/internal/frontend/bridge-gui/bridge-gui/qml/Proton/InfoTooltip.qml
+@@ -16,6 +16,7 @@
+ // along with Proton Mail Bridge. If not, see <https://www.gnu.org/licenses/>.
+ import QtQuick
+ import QtQuick.Controls
++import QtQuick.Controls.impl
+ import QtQuick.Layouts
+ 
+ ColorImage {
+diff --git a/internal/frontend/bridge-gui/bridge-gui/qml/Proton/LinkLabel.qml b/internal/frontend/bridge-gui/bridge-gui/qml/Proton/LinkLabel.qml
+index 30871f21..af9b40d2 100644
+--- a/internal/frontend/bridge-gui/bridge-gui/qml/Proton/LinkLabel.qml
++++ b/internal/frontend/bridge-gui/bridge-gui/qml/Proton/LinkLabel.qml
+@@ -12,6 +12,7 @@
+ // along with Proton Mail Bridge. If not, see <https://www.gnu.org/licenses/>.
+ import QtQuick
+ import QtQuick.Controls
++import QtQuick.Controls.impl
+ import QtQuick.Layouts
+ 
+ RowLayout {
+diff --git a/internal/frontend/bridge-gui/bridge-gui/qml/Proton/Popup.qml b/internal/frontend/bridge-gui/bridge-gui/qml/Proton/Popup.qml
+index 68c3af7c..78fa29c1 100644
+--- a/internal/frontend/bridge-gui/bridge-gui/qml/Proton/Popup.qml
++++ b/internal/frontend/bridge-gui/bridge-gui/qml/Proton/Popup.qml
+@@ -21,7 +21,7 @@ T.Popup {
+ 
+     property ColorScheme colorScheme
+     readonly property var occurred: shouldShow ? new Date() : undefined
+-    property int popupType: ApplicationWindow.PopupType.Banner
++    property int popupPrio: ApplicationWindow.PopupPriority.Banner
+     property bool shouldShow: false
+ 
+     function close() {
+diff --git a/internal/frontend/bridge-gui/bridge-gui/qml/SetupWizard/ClientConfigCertInstall.qml b/internal/frontend/bridge-gui/bridge-gui/qml/SetupWizard/ClientConfigCertInstall.qml
+index 1ac498b0..9790afe9 100644
+--- a/internal/frontend/bridge-gui/bridge-gui/qml/SetupWizard/ClientConfigCertInstall.qml
++++ b/internal/frontend/bridge-gui/bridge-gui/qml/SetupWizard/ClientConfigCertInstall.qml
+@@ -15,6 +15,7 @@ import QtQml
+ import QtQuick
+ import QtQuick.Layouts
+ import QtQuick.Controls
++import QtQuick.Controls.impl
+ 
+ Item {
+     id: root
+diff --git a/internal/frontend/bridge-gui/bridge-gui/qml/SetupWizard/ClientConfigParameters.qml b/internal/frontend/bridge-gui/bridge-gui/qml/SetupWizard/ClientConfigParameters.qml
+index 52e3fec2..2a4c7d39 100644
+--- a/internal/frontend/bridge-gui/bridge-gui/qml/SetupWizard/ClientConfigParameters.qml
++++ b/internal/frontend/bridge-gui/bridge-gui/qml/SetupWizard/ClientConfigParameters.qml
+@@ -14,6 +14,7 @@ import QtQml
+ import QtQuick
+ import QtQuick.Layouts
+ import QtQuick.Controls
++import QtQuick.Controls.impl
+ import ".."
+ 
+ Rectangle {
+diff --git a/internal/frontend/bridge-gui/bridge-gui/qml/SetupWizard/ClientListItem.qml b/internal/frontend/bridge-gui/bridge-gui/qml/SetupWizard/ClientListItem.qml
+index 3e781d16..30e9307e 100644
+--- a/internal/frontend/bridge-gui/bridge-gui/qml/SetupWizard/ClientListItem.qml
++++ b/internal/frontend/bridge-gui/bridge-gui/qml/SetupWizard/ClientListItem.qml
+@@ -14,6 +14,7 @@ import QtQml
+ import QtQuick
+ import QtQuick.Layouts
+ import QtQuick.Controls
++import QtQuick.Controls.impl
+ 
+ Rectangle {
+     id: root
+diff --git a/internal/frontend/bridge-gui/bridge-gui/qml/SetupWizard/Login.qml b/internal/frontend/bridge-gui/bridge-gui/qml/SetupWizard/Login.qml
+index 20eba753..2f1a86a9 100644
+--- a/internal/frontend/bridge-gui/bridge-gui/qml/SetupWizard/Login.qml
++++ b/internal/frontend/bridge-gui/bridge-gui/qml/SetupWizard/Login.qml
+@@ -14,6 +14,7 @@ import QtQml
+ import QtQuick
+ import QtQuick.Layouts
+ import QtQuick.Controls
++import QtQuick.Controls.impl
+ 
+ FocusScope {
+     id: root
