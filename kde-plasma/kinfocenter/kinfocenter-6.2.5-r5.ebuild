@@ -5,7 +5,6 @@ EAPI=8
 
 ECM_HANDBOOK="forceoptional"
 KFMIN=6.6.0
-PVCUT=$(ver_cut 1-3)
 QTMIN=6.7.2
 inherit ecm plasma.kde.org optfeature
 
@@ -27,10 +26,7 @@ DEPEND="
 	>=kde-frameworks/ki18n-${KFMIN}:6
 	>=kde-frameworks/kio-${KFMIN}:6
 	>=kde-frameworks/kservice-${KFMIN}:6
-	gles2-only? ( || (
-		>=media-libs/mesa-24.1.0_rc1[opengl]
-		<media-libs/mesa-24.1.0_rc1[gles2]
-	) )
+	gles2-only? ( >=media-libs/mesa-24.1.0_rc1[opengl] )
 	usb? ( virtual/libusb:1 )
 "
 RDEPEND="${DEPEND}
@@ -39,7 +35,7 @@ RDEPEND="${DEPEND}
 		dev-qt/qdbus:*
 	)
 	>=kde-frameworks/kirigami-${KFMIN}:6
-	>=kde-plasma/systemsettings-${PVCUT}:6
+	>=kde-plasma/systemsettings-${KDE_CATV}:6
 "
 BDEPEND=">=kde-frameworks/kcmutils-${KFMIN}:6"
 
@@ -51,7 +47,6 @@ CMAKE_SKIP_TESTS=(
 src_configure() {
 	local mycmakeargs=(
 		$(cmake_use_find_package usb USB1)
-		-DCMAKE_DISABLE_FIND_PACKAGE_SeleniumWebDriverATSPI=ON # missing
 	)
 
 	ecm_src_configure
