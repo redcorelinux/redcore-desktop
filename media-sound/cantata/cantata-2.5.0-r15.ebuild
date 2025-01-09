@@ -65,7 +65,10 @@ DEPEND="${COMMON_DEPEND}
 "
 BDEPEND="dev-qt/linguist-tools:5"
 
-PATCHES=( "${FILESDIR}/${PN}-2.2.0-headers.patch" )
+PATCHES=( 
+	"${FILESDIR}/${PN}-2.2.0-headers.patch"
+	"${FILESDIR}/${PN}-2.5.0-fix-build-taglib2.patch"
+)
 
 src_prepare() {
 	remove_locale() {
