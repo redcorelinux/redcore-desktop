@@ -36,6 +36,7 @@ lxqt-base/lxqt-meta 2.1.0: Meta ebuild for LXQt, the Lightweight Desktop Environ
 lxqt-base/lxqt-session 2.1.1-r1: LXQt Session Manager
 media-libs/portsmf 239-r1: The Tenacity fork of PortSMF, a Standard MIDI File library
 media-sound/cantata 2.5.0-r15: Featureful and configurable Qt client for the music player daemon (MPD)
+media-sound/mixxx 2.5.0: Advanced Digital DJ tool based on Qt
 media-tv/sopcast 3.2.6-r5: SopCast free P2P Internet TV binary
 media-tv/tv-lite 0.7.6: IPTV viewer with Sopcast and Acestream handling capabilities.
 media-video/guvcview 2.0.6-r10: Simple Qt5 or GTK+3 interface for capturing and viewing video from v4l2 devices
