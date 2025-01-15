@@ -34,10 +34,8 @@ lxde-base/lxappearance 0.6.3-r5: LXDE GTK+ theme switcher
 lxqt-base/lxqt-config 2.1.0-r1: LXQt system configuration control center
 lxqt-base/lxqt-meta 2.1.0: Meta ebuild for LXQt, the Lightweight Desktop Environment
 lxqt-base/lxqt-session 2.1.1-r1: LXQt Session Manager
-mail-mta/proton-mail-bridge 3.14.0: Serves Proton Mail to IMAP/SMTP clients
 media-libs/portsmf 239-r1: The Tenacity fork of PortSMF, a Standard MIDI File library
 media-sound/cantata 2.5.0-r15: Featureful and configurable Qt client for the music player daemon (MPD)
-media-sound/strawberry 1.0.23-r10: Modern music player and library organizer based on Clementine and Qt
 media-tv/sopcast 3.2.6-r5: SopCast free P2P Internet TV binary
 media-tv/tv-lite 0.7.6: IPTV viewer with Sopcast and Acestream handling capabilities.
 media-video/guvcview 2.0.6-r10: Simple Qt5 or GTK+3 interface for capturing and viewing video from v4l2 devices
