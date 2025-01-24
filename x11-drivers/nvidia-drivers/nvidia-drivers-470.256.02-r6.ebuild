@@ -349,6 +349,15 @@ pkg_postinst() {
 	fi
 
 	readme.gentoo_print_elog
+	ewarn
+	ewarn "Be warned/reminded that the 470.xx branch reached end-of-life and"
+	ewarn "NVIDIA is no longer fixing issues (including security). Free to keep"
+	ewarn "using (for now) but it is recommended to either switch to nouveau or"
+	ewarn "replace hardware. Will be kept in-tree while possible, but expect it"
+	ewarn "to be removed likely in early 2027 or earlier if major issues arise."
+	ewarn
+	ewarn "Note that there is no plans to patch in support for kernels branches"
+	ewarn "newer than 6.6.x which will be supported upstream until December 2026."
 
 	if [[ $(</proc/cmdline) == *slub_debug=[!-]* ]]; then
 		ewarn "Detected that the current kernel command line is using 'slub_debug=',"
