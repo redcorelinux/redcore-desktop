@@ -59,7 +59,6 @@ sys-boot/rpi-imager 1.8.5: Raspberry Pi Imaging Utility
 sys-boot/unetbootin-static 625-r5: Universal Netboot Installer creates Live USB systems for various OS distributions
 sys-devel/gcc 13.2.1_p20240210-r5: The GNU Compiler Collection
 sys-fs/cryptsetup 2.6.1-r5: Tool to setup encrypted devices with dm-crypt
-sys-fs/gocryptfs 2.0.1-r1: Encrypted overlay filesystem written in Go
 sys-fs/vhba 20240917: Virtual (SCSI) Host Bus Adapter kernel module for the CDEmu suite
 sys-fs/zfs 2.3.0: ZFS meta-package (Gentoo compatibility ebuild)
 sys-fs/zfs-utils 2.3.0: Userland utilities for ZFS Linux kernel module
