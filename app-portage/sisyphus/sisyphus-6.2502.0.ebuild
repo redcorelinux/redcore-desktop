@@ -12,7 +12,7 @@ HOMEPAGE="http://redcorelinux.org"
 
 EGIT_REPO_URI="https://gitlab.com/redcore/sisyphus.git"
 EGIT_BRANCH="master"
-EGIT_COMMIT="4ecc940c177eecfab5f046205785aca0b7a8d06a"
+EGIT_COMMIT="5ad866a13b4754cbdf56f8f6c85f1debcd8d06c6"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -25,6 +25,7 @@ RDEPEND="${DEPEND}
 	$(python_gen_cond_dep '
 		app-portage/gentoolkit[${PYTHON_USEDEP}]
 		dev-python/animation[${PYTHON_USEDEP}]
+		dev-python/colorama[${PYTHON_USEDEP}]
 		dev-python/gitpython[${PYTHON_USEDEP}]
 		dev-python/typer[${PYTHON_USEDEP}]
 		dev-python/typing-extensions[${PYTHON_USEDEP}]
@@ -46,7 +47,7 @@ src_install() {
 	dodir etc/"${PN}"
 	keepdir etc/"${PN}"
 	insinto etc/"${PN}"
-	doins "${FILESDIR}"/network_check_url.conf
+	doins "${FILESDIR}"/"${PN}".net_chk_addr.conf
 
 	doins "${FILESDIR}"/"${PN}"-mirrors-amd64.conf
 	doins "${FILESDIR}"/"${PN}"-mirrors-arm64.conf
