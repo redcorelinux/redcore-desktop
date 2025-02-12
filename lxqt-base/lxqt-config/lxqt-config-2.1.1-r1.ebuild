@@ -5,7 +5,7 @@ EAPI=8
 
 MY_PV="$(ver_cut 1-2)"
 
-inherit cmake xdg-utils
+inherit cmake xdg
 
 DESCRIPTION="LXQt system configuration control center"
 HOMEPAGE="https://lxqt-project.org/"
@@ -63,12 +63,4 @@ src_configure() {
 src_install() {
 	cmake_src_install
 	doman man/*.1 liblxqt-config-cursor/man/*.1 lxqt-config-appearance/man/*.1
-}
-
-pkg_postinst() {
-	xdg_icon_cache_update
-}
-
-pkg_postrm() {
-	xdg_icon_cache_update
 }
