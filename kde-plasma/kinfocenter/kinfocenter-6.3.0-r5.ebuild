@@ -3,10 +3,10 @@
 
 EAPI=8
 
-ECM_HANDBOOK="forceoptional"
-KFMIN=6.6.0
-QTMIN=6.7.2
-inherit ecm plasma.kde.org optfeature
+ECM_HANDBOOK="optional"
+KFMIN=6.10.0
+QTMIN=6.8.1
+inherit ecm plasma.kde.org optfeature xdg
 
 DESCRIPTION="Utility providing information about the computer hardware"
 HOMEPAGE="https://userbase.kde.org/KInfoCenter"
@@ -37,7 +37,10 @@ RDEPEND="${DEPEND}
 	>=kde-frameworks/kirigami-${KFMIN}:6
 	>=kde-plasma/systemsettings-${KDE_CATV}:6
 "
-BDEPEND=">=kde-frameworks/kcmutils-${KFMIN}:6"
+BDEPEND="
+	>=kde-frameworks/kcmutils-${KFMIN}:6
+	virtual/pkgconfig
+"
 
 CMAKE_SKIP_TESTS=(
 	# bug 816591
@@ -84,5 +87,5 @@ pkg_postinst() {
 		optfeature "Wayland information module" app-misc/wayland-utils
 		optfeature "X Server information module" x11-apps/xdpyinfo
 	fi
-	ecm_pkg_postinst
+	xdg_pkg_postinst
 }
