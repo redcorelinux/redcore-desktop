@@ -10,7 +10,7 @@ app-emulation/qemu-guest-agent 8.2.0-r6: QEMU Guest Agent (qemu-ga) for use when
 app-emulation/steam 1.0.0.79: Installer, launcher and supplementary files for Valve's Steam client
 app-emulation/virtualbox-modules 7.1.6: Kernel Modules for Virtualbox
 app-laptop/tp_smapi 0.44-r1: IBM ThinkPad SMAPI BIOS driver
-app-misc/calamares-config-redcore 1.314.1337-r17: Redcore Linux Calamares modules config
+app-misc/calamares-config-redcore 1.314.1337-r18: Redcore Linux Calamares modules config
 app-misc/redcore-live 1.314.1337-r4: Redcore Linux live scripts
 app-misc/redcore-skel 1.314.1337-r10: Redcore Linux skel tree
 app-portage/flaggie 0.99.8-r1: A smart CLI mangler for package.* files
@@ -65,8 +65,8 @@ sys-fs/zfs-utils 2.3.0: Userland utilities for ZFS Linux kernel module
 sys-kernel/bcmwl-dkms 6.30.223.271-r14: Broadcom's IEEE 802.11a/b/g/n hybrid Linux device driver source
 sys-kernel/dkms 2.3-r4: Dynamic Kernel Module Support
 sys-kernel/dracut 059-r15: Generic initramfs generation tool
-sys-kernel/linux-image-redcore 6.10.14 6.11.10: Redcore Linux Kernel Image
-sys-kernel/linux-image-redcore-lts 5.15.178 6.1.129 6.6.80 6.12.17: Redcore Linux Kernel Image
+sys-kernel/linux-image-redcore 6.10.14-r1 6.11.10-r1: Redcore Linux Kernel Image
+sys-kernel/linux-image-redcore-lts 5.15.178-r1 6.1.129-r1 6.6.80-r1 6.12.17-r1: Redcore Linux Kernel Image
 sys-kernel/linux-sources-redcore 6.10.14 6.11.10: Redcore Linux Kernel Sources
 sys-kernel/linux-sources-redcore-lts 5.15.178 6.1.129 6.6.80 6.12.17: Redcore Linux Kernel Sources
 sys-kernel/nvidia-drivers-dkms 390.157-r8 470.256.02-r1 550.144.03: NVIDIA driver sources for linux
