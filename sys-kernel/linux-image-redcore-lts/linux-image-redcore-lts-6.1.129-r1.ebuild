@@ -3,18 +3,18 @@
 
 EAPI=8
 
-EXTRAVERSION="redcore"
+EXTRAVERSION="redcore-lts-${PR}"
 KV_FULL="${PV}-${EXTRAVERSION}"
-KV_MAJOR="6.10"
+KV_MAJOR="6.1"
 
-DESCRIPTION="Redcore Linux Kernel Image"
+DESCRIPTION="Redcore Linux LTS Kernel Image"
 HOMEPAGE="https://redcorelinux.org"
 SRC_URI="https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-${PV}.tar.xz"
 
 KEYWORDS="~amd64"
 LICENSE="GPL-2"
 SLOT="${KV_MAJOR}"
-IUSE="+cryptsetup +dmraid +dracut +dkms +mdadm"
+IUSE="+cryptsetup +dmraid +dracut +dkms live +mdadm"
 
 RESTRICT="binchecks strip mirror"
 DEPEND="
@@ -26,7 +26,7 @@ DEPEND="
 	cryptsetup? ( sys-fs/cryptsetup )
 	dmraid? ( sys-fs/dmraid )
 	dracut? ( >=sys-kernel/dracut-0.44-r8 )
-	dkms? ( sys-kernel/dkms sys-kernel/linux-sources-redcore:${SLOT} )
+	dkms? ( sys-kernel/dkms sys-kernel/linux-sources-redcore-lts:${SLOT} )
 	mdadm? ( sys-fs/mdadm )
 	>=sys-kernel/linux-firmware-20180314"
 RDEPEND="${DEPEND}"
@@ -34,6 +34,7 @@ RDEPEND="${DEPEND}"
 PATCHES=(
 	"${FILESDIR}"/"${KV_MAJOR}"-ath10k-be-quiet.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-ata-fix-NCQ-LOG-strings-and-move-to-debug.patch
+	"${FILESDIR}"/"${KV_MAJOR}"-radeon_dp_aux_transfer_native-no-ratelimited_debug.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-acpi-use-kern_warning_even_when_error.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-fix-bootconfig-makefile.patch
 	"${FILESDIR}"/"${KV_MAJOR}"-apic_vector-spam-in-debug-mode-only.patch
@@ -86,6 +87,13 @@ src_install() {
 	for KSYMS in build source ; do
 		dosym ../../../usr/src/linux-"${KV_FULL}" lib/modules/"${KV_FULL}"/"${KSYMS}"
 	done
+	if use live ; then
+		insinto /etc/calamares/modules
+		doins "${FILESDIR}"/bootloader.conf
+		doins "${FILESDIR}"/dracut.conf
+		sed -i 's|REDCORE_KERNEL_VERSION|'"${KV_FULL}"'|g' "${D}/etc/calamares/modules/bootloader.conf" || die
+		sed -i 's|REDCORE_KERNEL_VERSION|'"${KV_FULL}"'|g' "${D}/etc/calamares/modules/dracut.conf" || die	
+	fi
 }
 
 _grub2_update_grubcfg() {

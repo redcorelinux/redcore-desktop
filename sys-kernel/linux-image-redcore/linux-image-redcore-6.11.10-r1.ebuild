@@ -1,11 +1,12 @@
 # Copyright 1999-2017 Gentoo Foundation
+# Copyright 2017-2025 Redcore Linux Project
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
-EXTRAVERSION="redcore-lts"
+EXTRAVERSION="redcore-${PR}"
 KV_FULL="${PV}-${EXTRAVERSION}"
-KV_MAJOR="6.12"
+KV_MAJOR="6.11"
 
 DESCRIPTION="Redcore Linux Kernel Image"
 HOMEPAGE="https://redcorelinux.org"
@@ -14,7 +15,7 @@ SRC_URI="https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-${PV}.tar.xz"
 KEYWORDS="~amd64"
 LICENSE="GPL-2"
 SLOT="${KV_MAJOR}"
-IUSE="+cryptsetup +dmraid +dracut +dkms +mdadm"
+IUSE="+cryptsetup +dmraid +dracut +dkms live +mdadm"
 
 RESTRICT="binchecks strip mirror"
 DEPEND="
@@ -26,7 +27,7 @@ DEPEND="
 	cryptsetup? ( sys-fs/cryptsetup )
 	dmraid? ( sys-fs/dmraid )
 	dracut? ( >=sys-kernel/dracut-0.44-r8 )
-	dkms? ( sys-kernel/dkms sys-kernel/linux-sources-redcore-lts:${SLOT} )
+	dkms? ( sys-kernel/dkms sys-kernel/linux-sources-redcore:${SLOT} )
 	mdadm? ( sys-fs/mdadm )
 	>=sys-kernel/linux-firmware-20180314"
 RDEPEND="${DEPEND}"
@@ -86,6 +87,13 @@ src_install() {
 	for KSYMS in build source ; do
 		dosym ../../../usr/src/linux-"${KV_FULL}" lib/modules/"${KV_FULL}"/"${KSYMS}"
 	done
+	if use live ; then
+		insinto /etc/calamares/modules
+		doins "${FILESDIR}"/bootloader.conf
+		doins "${FILESDIR}"/dracut.conf
+		sed -i 's|REDCORE_KERNEL_VERSION|'"${KV_FULL}"'|g' "${D}/etc/calamares/modules/bootloader.conf" || die
+		sed -i 's|REDCORE_KERNEL_VERSION|'"${KV_FULL}"'|g' "${D}/etc/calamares/modules/dracut.conf" || die	
+	fi
 }
 
 _grub2_update_grubcfg() {

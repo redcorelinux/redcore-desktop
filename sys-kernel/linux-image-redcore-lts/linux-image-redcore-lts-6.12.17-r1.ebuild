@@ -3,18 +3,18 @@
 
 EAPI=8
 
-EXTRAVERSION="redcore-lts"
+EXTRAVERSION="redcore-lts-${PR}"
 KV_FULL="${PV}-${EXTRAVERSION}"
-KV_MAJOR="6.6"
+KV_MAJOR="6.12"
 
-DESCRIPTION="Redcore Linux LTS Kernel Image"
+DESCRIPTION="Redcore Linux Kernel Image"
 HOMEPAGE="https://redcorelinux.org"
 SRC_URI="https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-${PV}.tar.xz"
 
 KEYWORDS="~amd64"
 LICENSE="GPL-2"
 SLOT="${KV_MAJOR}"
-IUSE="+cryptsetup +dmraid +dracut +dkms +mdadm"
+IUSE="+cryptsetup +dmraid +dracut +dkms live +mdadm"
 
 RESTRICT="binchecks strip mirror"
 DEPEND="
@@ -86,6 +86,13 @@ src_install() {
 	for KSYMS in build source ; do
 		dosym ../../../usr/src/linux-"${KV_FULL}" lib/modules/"${KV_FULL}"/"${KSYMS}"
 	done
+	if use live ; then
+		insinto /etc/calamares/modules
+		doins "${FILESDIR}"/bootloader.conf
+		doins "${FILESDIR}"/dracut.conf
+		sed -i 's|REDCORE_KERNEL_VERSION|'"${KV_FULL}"'|g' "${D}/etc/calamares/modules/bootloader.conf" || die
+		sed -i 's|REDCORE_KERNEL_VERSION|'"${KV_FULL}"'|g' "${D}/etc/calamares/modules/dracut.conf" || die	
+	fi
 }
 
 _grub2_update_grubcfg() {
