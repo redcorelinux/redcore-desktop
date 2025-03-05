@@ -3,7 +3,7 @@
 
 EAPI=8
 
-EXTRAVERSION="redcore"
+EXTRAVERSION="redcore-${PR}"
 KV_FULL="${PV}-${EXTRAVERSION}"
 KV_MAJOR="6.10"
 
