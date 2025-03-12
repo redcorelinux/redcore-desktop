@@ -17,7 +17,7 @@ KEYWORDS="~amd64 ~arm64 ~ppc64 ~riscv ~x86"
 IUSE="gles2-only usb"
 
 DEPEND="
-	>=dev-qt/qtbase-${QTMIN}:6[dbus,gles2-only=,gui,widgets]
+	>=dev-qt/qtbase-${QTMIN}:6[dbus,gles2-only=,gui,vulkan,widgets]
 	>=dev-qt/qtdeclarative-${QTMIN}:6
 	>=kde-frameworks/kauth-${KFMIN}:6
 	>=kde-frameworks/kcmutils-${KFMIN}:6
