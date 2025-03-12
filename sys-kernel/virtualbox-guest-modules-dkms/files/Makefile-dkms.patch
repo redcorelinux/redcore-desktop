@@ -1,0 +1,32 @@
+diff '--color=auto' -Nur a/Makefile b/Makefile
+--- a/Makefile	2025-03-12 10:37:08.581683046 +0000
++++ b/Makefile	2025-03-12 10:35:30.305692527 +0000
+@@ -24,14 +24,17 @@
+ # SPDX-License-Identifier: GPL-3.0-only
+ #
+ 
+-ifneq ($(KERNELRELEASE),)
++ifneq ($(KBUILD_EXTMOD),)
+ 
+-# Building from kBuild (make -C <kernel_directory> M=`pwd`)
+-# or inside a kernel source tree.
++# Building from kBuild (make -C <kernel_directory> M=`pwd`).
++# KBUILD_EXTMOD is set to $(M) in this case.
+ 
+-obj-m = vboxguest/ vboxsf/
++obj-m = vboxguest/
++ ifneq ($(wildcard $(KBUILD_EXTMOD)/vboxsf/Makefile),)
++obj-m += vboxsf/
++ endif
+ 
+-else # ! KERNELRELEASE
++else # ! KBUILD_EXTMOD
+ 
+ KBUILD_VERBOSE =
+  ifeq ($(KBUILD_VERBOSE),)
+@@ -107,4 +110,4 @@
+     install-vboxguest install-vboxsf \
+     clean-vboxguest clean-vboxsf
+ 
+-endif # ! KERNELRELEASE
++endif # ! KBUILD_EXTMOD

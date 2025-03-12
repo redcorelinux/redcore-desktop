@@ -1,0 +1,90 @@
+diff '--color=auto' -Nur a/Makefile b/Makefile
+--- a/Makefile	2025-01-21 12:49:27.000000000 +0000
++++ b/Makefile	2025-03-12 10:31:49.695713811 +0000
+@@ -29,7 +29,7 @@
+ # Building from kBuild (make -C <kernel_directory> M=`pwd`)
+ # or inside a kernel source tree.
+ 
+-obj-m = vboxguest/ vboxsf/ vboxvideo/
++obj-m = vboxguest/ vboxsf/
+ 
+ else # ! KERNELRELEASE
+ 
+@@ -42,7 +42,7 @@
+ VBOX_QUIET_SH := set -x;
+  endif
+ 
+-all: vboxguest vboxsf vboxvideo
++all: vboxguest vboxsf
+ 
+ vboxguest:
+ 	@echo "=== Building 'vboxguest' module ==="
+@@ -69,18 +69,6 @@
+ 	    echo; \
+ 	fi
+ 
+-vboxvideo:
+-	+ $(VBOX_QUIET_SH)if [ -d vboxvideo ]; then \
+-	    echo "=== Building 'vboxvideo' module ==="; \
+-	    $(MAKE) KBUILD_VERBOSE=$(KBUILD_VERBOSE) -C vboxvideo || exit 1; \
+-	    if [ -f vboxvideo/vboxvideo.ko ]; then \
+-	        cp vboxvideo/vboxvideo.ko .; \
+-	    elif [ -f vboxvideo/vboxvideo.o ]; then \
+-	        cp vboxvideo/vboxvideo.o .; \
+-	    fi; \
+-	    echo; \
+-	fi
+-
+ install-vboxguest:
+ 	+ $(VBOX_QUIET)$(MAKE) KBUILD_VERBOSE=$(KBUILD_VERBOSE) -C vboxguest install
+ 
+@@ -89,12 +77,7 @@
+ 	    $(MAKE) KBUILD_VERBOSE=$(KBUILD_VERBOSE) -C vboxsf install; \
+ 	fi
+ 
+-install-vboxvideo:
+-	+ $(VBOX_QUIET_SH)if [ -d vboxvideo ]; then \
+-	    $(MAKE) KBUILD_VERBOSE=$(KBUILD_VERBOSE) -C vboxvideo install; \
+-	fi
+-
+-install: install-vboxguest install-vboxsf install-vboxvideo
++install: install-vboxguest install-vboxsf
+ 
+ clean-vboxguest:
+ 	+ $(VBOX_QUIET)$(MAKE) -C vboxguest clean
+@@ -106,31 +89,22 @@
+ 	fi
+ 	rm -f vboxsf.*o
+ 
+-clean-vboxvideo:
+-	+ $(VBOX_QUIET_SH)if [ -d vboxvideo ]; then \
+-	    $(MAKE) -C vboxvideo clean; \
+-	fi
+-	rm -f vboxvideo.*o
+-
+-clean: clean-vboxguest clean-vboxsf clean-vboxvideo
++clean: clean-vboxguest clean-vboxsf
+ 
+ check:
+ 	$(VBOX_QUIET)$(MAKE) KBUILD_VERBOSE=$(KBUILD_VERBOSE) -C vboxguest check
+ 
+ unload:
+-	$(VBOX_QUIET)/sbin/rmmod vboxvideo || true
+-	$(VBOX_QUIET)/sbin/rmmod vboxvfs || true
+ 	$(VBOX_QUIET)/sbin/rmmod vboxsf || true
+ 	$(VBOX_QUIET)/sbin/rmmod vboxguest || true
+ 
+ load: unload
+ 	$(VBOX_QUIET)/sbin/insmod vboxguest.ko
+ 	$(VBOX_QUIET)if [ -f vboxsf.ko ]; then /sbin/insmod vboxsf.ko; fi
+-	$(VBOX_QUIET)if [ -f vboxvideo.ko ]; then /sbin/insmod vboxvideo.ko; fi
+ 
+ .PHONY: all install clean check unload load \
+-    vboxguest vboxsf vboxvideo \
+-    install-vboxguest install-vboxsf install-vboxvideo \
+-    clean-vboxguest clean-vboxsf clean-vboxvideo
++    vboxguest vboxsf \
++    install-vboxguest install-vboxsf \
++    clean-vboxguest clean-vboxsf
+ 
+ endif # ! KERNELRELEASE

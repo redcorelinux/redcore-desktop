@@ -1,0 +1,5 @@
+# modprobe.d configuration file for VBOXSF
+
+# Internal Aliases - Do not edit
+# ------------------------------
+alias fs-vboxsf vboxsf
