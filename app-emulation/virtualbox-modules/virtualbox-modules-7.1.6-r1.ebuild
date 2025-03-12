@@ -26,6 +26,8 @@ src_compile() {
 
 src_install() {
 	insinto /etc/modules-load.d/
-	insinto /etc/modules-load.d/
 	newins "${FILESDIR}"/virtualbox-kmod virtualbox.conf
+
+	insinto /etc/modprobe.d/
+	newins "${FILESDIR}"/virtualbox-host-kmod virtualbox-host.conf
 }

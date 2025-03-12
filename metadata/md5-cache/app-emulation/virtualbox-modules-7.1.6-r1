@@ -7,4 +7,4 @@ KEYWORDS=amd64
 LICENSE=GPL-2
 RDEPEND=acct-group/vboxusers ~sys-kernel/virtualbox-modules-dkms-7.1.6
 SLOT=0
-_md5_=e29ff93175c62a16320425d7e3ebd0c4
+_md5_=955370ceca22eac1fb61001baf794501
