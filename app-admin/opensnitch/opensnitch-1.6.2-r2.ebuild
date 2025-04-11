@@ -164,6 +164,10 @@ src_install(){
 	else
 		newinitd "${FILESDIR}"/opensnitch.initd ${PN}
 	fi
+
+	# enforce the best available python implementation (GUI)
+	python_setup
+	python_fix_shebang "${ED}"/usr/bin/"${PN}"-ui
 }
 
 pkg_postinst() {
