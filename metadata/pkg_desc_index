@@ -29,7 +29,6 @@ dev-python/grpcio-tools 1.66.1-r2: Protobuf code generator for gRPC
 dev-python/sh 1.12.14-r6: Python process launching
 dev-python/typer 0.9.0-r3: Build great CLIs. Easy to code. Based on Python type hints
 dev-python/wget 2.2-r4: Python library for downloading from http URLs
-dev-python/zeroconf 0.82.1-r10: Pure Python Multicast DNS Service Discovery Library (Bonjour/Avahi compatible)
 gui-libs/display-manager-init 1.1.2-r1: RC init files for starting display and login managers
 kde-plasma/kinfocenter 6.3.4-r1: Utility providing information about the computer hardware
 lxde-base/lxappearance 0.6.3-r5: LXDE GTK+ theme switcher
