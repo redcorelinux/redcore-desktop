@@ -19,7 +19,6 @@ app-portage/flaggie 0.99.8-r1: A smart CLI mangler for package.* files
 app-portage/sisyphus 6.2502.0: A simple portage python wrapper which works like other package managers(apt-get/yum/dnf)
 app-portage/sisyphus-qt 6.2502.0: A simple portage python wrapper which works like other package managers(apt-get/yum/dnf)
 app-text/simplenote 2.6.0-r1: The simplest way to keep notes
-dev-go/go-protobuf 1.5.2: Go support for Google's protocol buffers
 dev-go/protobuf-go 1.30.0-r1: Go support for Google's protocol buffers
 dev-go/protoc-gen-go-grpc 1.2.0: This tool generates Go language bindings of services in protobuf definition files for gRPC
 dev-lang/ruby 3.1.4-r10: An object-oriented scripting language
