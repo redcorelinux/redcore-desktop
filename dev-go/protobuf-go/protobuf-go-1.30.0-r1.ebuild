@@ -13,8 +13,9 @@ LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~amd64"
 
-DEPEND="!dev-go/go-protobuf"
-RDEPEND="dev-libs/protobuf"
+RDEPEND="
+	!dev-go/go-protobuf
+	dev-libs/protobuf"
 
 src_compile() {
 	ego build ./cmd/protoc-gen-go
