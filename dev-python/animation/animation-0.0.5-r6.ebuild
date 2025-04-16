@@ -3,6 +3,7 @@
 
 EAPI=7
 
+DISTUTILS_USE_PEP517=setuptools
 PYTHON_COMPAT=( python3_{10..12} )
 
 inherit distutils-r1
@@ -15,6 +16,7 @@ LICENSE="GPL"
 SLOT="0"
 KEYWORDS="amd64 arm64"
 IUSE=""
+RESTRICT="test"
 
 RDEPEND=""
 DEPEND="
