@@ -3,7 +3,6 @@
 
 EAPI=7
 
-DISTUTILS_USE_PEP517=setuptools
 PYTHON_COMPAT=( python3_{10..12} )
 inherit distutils-r1 linux-info systemd xdg-utils
 
