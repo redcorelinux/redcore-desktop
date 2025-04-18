@@ -21,7 +21,7 @@ KEYWORDS="~amd64 ~x86"
 IUSE="+dbus gui"
 
 RDEPEND="
-	app-emulation/virtualbox-guest-modules
+	~app-emulation/virtualbox-guest-modules-${PV}
 	sys-libs/pam
 	sys-libs/zlib
 	dbus? ( sys-apps/dbus )
@@ -34,6 +34,8 @@ RDEPEND="
 		x11-libs/libXt
 	)
 "
+# some libs here are indirect dependencies, and also needed at compile time.
+# keeping them in DEPEND to avoid warnings from qa-vdb.
 DEPEND="
 	${RDEPEND}
 	gui? (
@@ -52,10 +54,6 @@ BDEPEND="
 "
 
 DOCS=()	# Don't install the default README file during einstalldocs
-
-CONFIG_CHECK="~DRM_TTM ~DRM_VMWGFX"
-WARNING_DRM_TTM="DRM_TTM is needed for running the vboxvideo driver."
-WARNING_DRM_VMWGFX="DRM_VMWGFX is the recommended driver for VMSVGA."
 
 DOC_CONTENTS="\n
 Please add users to the \"vboxguest\" group so they can\n
@@ -119,6 +117,7 @@ src_configure() {
 		--disable-alsa
 		$(usev !dbus --disable-dbus)
 		--target-arch=${ARCH}
+		--disable-kmods
 		--build-headless
 	)
 
