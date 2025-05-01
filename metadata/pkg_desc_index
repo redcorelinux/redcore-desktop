@@ -32,7 +32,7 @@ gui-libs/display-manager-init 1.1.2-r1: RC init files for starting display and l
 kde-plasma/kinfocenter 6.3.4-r1: Utility providing information about the computer hardware
 lxde-base/lxappearance 0.6.3-r5: LXDE GTK+ theme switcher
 lxqt-base/lxqt-config 2.2.0-r5: LXQt system configuration control center
-lxqt-base/lxqt-meta 2.1.0: Meta ebuild for LXQt, the Lightweight Desktop Environment
+lxqt-base/lxqt-meta 2.2.0-r5: Meta ebuild for LXQt, the Lightweight Desktop Environment
 lxqt-base/lxqt-session 2.2.0-r5: LXQt Session Manager
 media-libs/portsmf 239-r1: The Tenacity fork of PortSMF, a Standard MIDI File library
 media-sound/mixxx 2.5.0: Advanced Digital DJ tool based on Qt
