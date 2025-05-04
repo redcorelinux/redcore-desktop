@@ -4,7 +4,7 @@
 EAPI=8
 
 DISTUTILS_EXT=1
-PYTHON_COMPAT=( python3_{9..12} )
+PYTHON_COMPAT=( python3_{11..13} )
 DISTUTILS_USE_PEP517=setuptools
 
 inherit distutils-r1 multiprocessing prefix pypi
@@ -18,8 +18,7 @@ KEYWORDS="~amd64 ~arm ~arm64 ~x86"
 
 RDEPEND="
 	~dev-python/grpcio-${PV}[${PYTHON_USEDEP}]
-	>=dev-python/protobuf-5.26.1[${PYTHON_USEDEP}]
-	<dev-python/protobuf-6[${PYTHON_USEDEP}]
+	>=dev-python/protobuf-6[${PYTHON_USEDEP}]
 "
 
 DEPEND="${RDEPEND}"
