@@ -13,5 +13,5 @@ RDEPEND=acct-group/video X? ( x11-libs/libpciaccess ) persistenced? ( acct-user/
 RESTRICT=strip
 SLOT=5
 SRC_URI=https://download.nvidia.com/XFree86/Linux-x86_64/550.144.03/NVIDIA-Linux-x86_64-550.144.03.run https://download.nvidia.com/XFree86/nvidia-installer/nvidia-installer-550.144.03.tar.bz2 https://download.nvidia.com/XFree86/nvidia-modprobe/nvidia-modprobe-550.144.03.tar.bz2 https://download.nvidia.com/XFree86/nvidia-persistenced/nvidia-persistenced-550.144.03.tar.bz2 https://download.nvidia.com/XFree86/nvidia-xconfig/nvidia-xconfig-550.144.03.tar.bz2
-_eclasses_=desktop	3a72ffe0d8e1dd73af3a1c8c15a59fed	flag-o-matic	e8de74bac929ba17427e740e95707d00	multiprocessing	1e32df7deee68372153dca65f4a7c21f	readme.gentoo-r1	b045f3acf546393ab6b3170781875358	systemd	54bd206bb5c4efac6ae28b6b006713b0	toolchain-funcs	f9d71a6efe9d083aec750dd13968e169	unpacker	3b4ee72d1e2e0374fd8cd3eddfa00627	user-info	9951b1a0e4f026d16c33a001fd2d5cdf
+_eclasses_=desktop	3a72ffe0d8e1dd73af3a1c8c15a59fed	flag-o-matic	e8de74bac929ba17427e740e95707d00	multiprocessing	1e32df7deee68372153dca65f4a7c21f	readme.gentoo-r1	b045f3acf546393ab6b3170781875358	systemd	a964c0cbe818b5729da1dbfcee5be861	toolchain-funcs	f9d71a6efe9d083aec750dd13968e169	unpacker	3b4ee72d1e2e0374fd8cd3eddfa00627	user-info	9951b1a0e4f026d16c33a001fd2d5cdf
 _md5_=0487952eb78675c1915cf65f5f863be5
