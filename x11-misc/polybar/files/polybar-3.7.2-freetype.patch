@@ -1,0 +1,11 @@
+diff '--color=auto' -Nur a/src/CMakeLists.txt b/src/CMakeLists.txt
+--- a/src/CMakeLists.txt	2024-08-17 12:39:55.000000000 +0100
++++ b/src/CMakeLists.txt	2025-05-06 10:14:10.645565586 +0100
+@@ -159,6 +159,7 @@
+ target_link_libraries(poly PUBLIC
+   Threads::Threads
+   Cairo::CairoFC
++  freetype
+   xpp
+   LibUV::LibUV
+   )
