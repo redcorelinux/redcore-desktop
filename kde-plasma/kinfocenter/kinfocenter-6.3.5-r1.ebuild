@@ -30,10 +30,7 @@ DEPEND="
 	usb? ( virtual/libusb:1 )
 "
 RDEPEND="${DEPEND}
-	|| (
-		>=dev-qt/qttools-${QTMIN}:6[qdbus]
-		dev-qt/qdbus:*
-	)
+	>=dev-qt/qttools-${QTMIN}:6[qdbus]
 	>=kde-frameworks/kirigami-${KFMIN}:6
 	>=kde-plasma/systemsettings-${KDE_CATV}:6
 "
