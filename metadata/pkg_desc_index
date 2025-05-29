@@ -39,7 +39,7 @@ media-tv/sopcast 3.2.6-r5: SopCast free P2P Internet TV binary
 media-tv/tv-lite 0.7.6: IPTV viewer with Sopcast and Acestream handling capabilities.
 media-video/guvcview 2.0.6-r10: Simple Qt5 or GTK+3 interface for capturing and viewing video from v4l2 devices
 net-dialup/rp-pppoe 4.0-r5: A user-mode PPPoE client and server suite for Linux
-net-misc/dropbox 223.4.4909-r10: Dropbox daemon (pretends to be GUI-less)
+net-misc/dropbox 225.4.4896-r10: Dropbox daemon (pretends to be GUI-less)
 net-misc/warpinator 1.8.6: Share files across the LAN
 net-print/lexmark-upd-ppd 1.0.0.20210304-r1: Lexmark universal printer driver PPDs
 net-wireless/broadcom-sta 6.30.223.271-r6: Broadcom's IEEE 802.11a/b/g/n hybrid Linux device driver
