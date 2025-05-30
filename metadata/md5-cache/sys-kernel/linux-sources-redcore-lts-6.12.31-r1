@@ -1,12 +1,12 @@
 DEFINED_PHASES=compile install postrm prepare setup
 DEPEND=app-arch/lz4 app-arch/xz-utils dev-build/autoconf dev-build/make sys-devel/bc
-DESCRIPTION=Redcore Linux LTS Kernel Sources
+DESCRIPTION=Redcore Linux Kernel Sources
 EAPI=8
 HOMEPAGE=https://redcorelinux.org
 KEYWORDS=~amd64
 LICENSE=GPL-2
 RDEPEND=app-arch/lz4 app-arch/xz-utils dev-build/autoconf dev-build/make sys-devel/bc
 RESTRICT=strip mirror
-SLOT=5.15
-SRC_URI=https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-5.15.182.tar.xz
-_md5_=29a873e6fdfce8f87efa584e42379c39
+SLOT=6.12
+SRC_URI=https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.12.31.tar.xz
+_md5_=7599ec281a4b7ed5b2c739ec2afe65e2
