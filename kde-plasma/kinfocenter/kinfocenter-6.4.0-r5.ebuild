@@ -4,7 +4,7 @@
 EAPI=8
 
 ECM_HANDBOOK="optional"
-KFMIN=6.10.0
+KFMIN=6.14.0
 QTMIN=6.8.1
 inherit ecm plasma.kde.org optfeature xdg
 
@@ -26,6 +26,7 @@ DEPEND="
 	>=kde-frameworks/ki18n-${KFMIN}:6
 	>=kde-frameworks/kio-${KFMIN}:6
 	>=kde-frameworks/kservice-${KFMIN}:6
+	virtual/libudev:=
 	gles2-only? ( >=media-libs/mesa-24.1.0_rc1[opengl] )
 	usb? ( virtual/libusb:1 )
 "
