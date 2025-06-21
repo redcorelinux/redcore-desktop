@@ -4,10 +4,12 @@
 
 EAPI=8
 
-MY_P="vbox-kernel-module-src-${PV}"
+MY_CATEGORY="app-emulation"
+MY_PN="virtualbox-modules"
+MY_P="vbox-host-kernel-module-src-${PV}"
 DESCRIPTION="Kernel Modules source for Virtualbox"
 HOMEPAGE="http://www.virtualbox.org/"
-SRC_URI="https://dev.gentoo.org/~ceamac/app-emulation/virtualbox-modules/${MY_P}.tar.xz"
+SRC_URI="https://dev.gentoo.org/~ceamac/${MY_CATEGORY}/${MY_PN}/${MY_P}.tar.xz"
 
 LICENSE="GPL-2"
 SLOT="0"
