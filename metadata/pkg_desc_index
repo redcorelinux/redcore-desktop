@@ -23,7 +23,7 @@ dev-go/protobuf-go 1.30.0-r1: Go support for Google's protocol buffers
 dev-go/protoc-gen-go-grpc 1.2.0: This tool generates Go language bindings of services in protobuf definition files for gRPC
 dev-libs/libdbusmenu-qt 0.9.3_pre20160218-r2: A library providing Qt implementation of DBusMenu specification (meta mackage)
 dev-libs/libdbusmenu-qt5 0.9.3_pre20160218-r3: Library providing Qt implementation of DBusMenu specification
-dev-python/animation 0.0.5-r6: Tools for terminal-based wait animations
+dev-python/animation 0.0.5-r7: Tools for terminal-based wait animations
 dev-python/grpcio-tools 1.72.0: Protobuf code generator for gRPC
 dev-python/sh 1.12.14-r6: Python process launching
 dev-python/typer 0.9.0-r3: Build great CLIs. Easy to code. Based on Python type hints
