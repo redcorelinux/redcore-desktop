@@ -35,11 +35,6 @@ RDEPEND="${DEPEND}
 	"
 BDEPEND="${DEPEND}"
 
-PATCHES=(
-	"${FILESDIR}"/"${P}"-sopprotocol.patch
-	"${FILESDIR}"/"${P}"-desktopfile-qa.patch
-)
-
 S="${WORKDIR}/${P}/src"
 
 src_configure() {
