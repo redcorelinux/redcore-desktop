@@ -1,9 +1,9 @@
-# Copyright 2016-2020 Redcore Linux Project
+# Copyright 2016-2025 Redcore Linux Project
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{10..12} )
+PYTHON_COMPAT=( python3_{11..13} )
 
 inherit python-single-r1 git-r3
 
@@ -12,7 +12,7 @@ HOMEPAGE="http://redcorelinux.org"
 
 EGIT_REPO_URI="https://gitlab.com/redcore/sisyphus.git"
 EGIT_BRANCH="master"
-EGIT_COMMIT="d58c9ddf1df8253617a0cc23ca9a0c4bc04efc5c"
+EGIT_COMMIT="889db6594c45f6dc5efecb9ea487f53a059593df"
 
 LICENSE="GPL-2"
 SLOT="0"
