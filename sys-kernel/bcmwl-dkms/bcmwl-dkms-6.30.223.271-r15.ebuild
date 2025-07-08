@@ -30,6 +30,9 @@ PATCHES=(
 	"${FILESDIR}"/kernel-6.0.patch
 	"${FILESDIR}"/kernel-6.1.patch
 	"${FILESDIR}"/kernel-6.12.patch
+	"${FILESDIR}"/kernel-6.13.patch
+	"${FILESDIR}"/kernel-6.14.patch
+	"${FILESDIR}"/kernel-6.15.patch
 )
 
 S="${WORKDIR}"
