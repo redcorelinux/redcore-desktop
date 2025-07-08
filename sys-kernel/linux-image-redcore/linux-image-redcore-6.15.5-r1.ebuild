@@ -6,13 +6,13 @@ EAPI=8
 
 EXTRAVERSION="redcore-${PR}"
 KV_FULL="${PV}-${EXTRAVERSION}"
-KV_MAJOR="6.11"
+KV_MAJOR="6.15"
 
 DESCRIPTION="Redcore Linux Kernel Image"
 HOMEPAGE="https://redcorelinux.org"
 SRC_URI="https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-${PV}.tar.xz"
 
-KEYWORDS="~amd64"
+KEYWORDS=""
 LICENSE="GPL-2"
 SLOT="${KV_MAJOR}"
 IUSE="+cryptsetup +dmraid +dracut +dkms live +mdadm"
