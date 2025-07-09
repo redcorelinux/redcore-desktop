@@ -47,8 +47,9 @@ RDEPEND="
 	)
 	powerd? ( sys-apps/dbus[abi_x86_32(-)?] )
 	wayland? (
-		gui-libs/egl-gbm
-		>=gui-libs/egl-wayland-1.1.10
+		>=gui-libs/egl-gbm-1.1.1-r2[abi_x86_32(-)?]
+		>=gui-libs/egl-wayland-1.1.13.1[abi_x86_32(-)?]
+		X? ( gui-libs/egl-x11[abi_x86_32(-)?] )
 	)
 "
 DEPEND="
@@ -75,6 +76,7 @@ pkg_setup() {
 	local CONFIG_CHECK="
 		PROC_FS
 		~DRM_KMS_HELPER
+		~DRM_FBDEV_EMULATION
 		~SYSVIPC
 		~!LOCKDEP
 		~!SLUB_DEBUG_ON
@@ -82,18 +84,32 @@ pkg_setup() {
 		$(usev powerd '~CPU_FREQ')
 	"
 
-	local ERROR_DRM_KMS_HELPER="CONFIG_DRM_KMS_HELPER: is not set but required
-	for drivers (no custom config), and for wayland / nvidia-drm.modeset=1.
-	Cannot be directly selected in the kernel's menuconfig, and may need
-	selection of a DRM device even if unused, e.g. CONFIG_DRM_AMDGPU=m or
-	DRM_I915=y, DRM_NOUVEAU=m also acceptable if a module and not built-in."
+	CONFIG_CHECK+=" DRM_TTM_HELPER"
 
 	CONFIG_CHECK+=" X86_PAT" #817764
 
 	CONFIG_CHECK+=" MMU_NOTIFIER" #843827
-	local ERROR_MMU_NOTIFIER="CONFIG_MMU_NOTIFIER: is not set but required.
+
+	local drm_helper_msg="Cannot be directly selected in the kernel's config menus, and may need
+	selection of a DRM device even if unused, e.g. CONFIG_DRM_QXL=m or
+	DRM_AMDGPU=m (among others, consult the kernel config's help), can
+	also use DRM_NOUVEAU=m as long as built as module *not* built-in."
+	local ERROR_DRM_KMS_HELPER="CONFIG_DRM_KMS_HELPER: is not set but needed for Xorg auto-detection
+	of drivers (no custom config), and for wayland / nvidia-drm.modeset=1.
+	${drm_helper_msg}"
+	local ERROR_DRM_TTM_HELPER="CONFIG_DRM_TTM_HELPER: is not set but is needed to compile when using
+	kernel version 6.11.x or newer while DRM_FBDEV_EMULATION is set.
+	${drm_helper_msg}"
+	local ERROR_DRM_FBDEV_EMULATION="CONFIG_DRM_FBDEV_EMULATION: is not set but is needed for
+	nvidia-drm.fbdev=1 support, currently off-by-default and it could
+	be ignored, but note that is due to change in the future."
+	local ERROR_MMU_NOTIFIER="CONFIG_MMU_NOTIFIER: is not set but needed to build with USE=kernel-open.
 	Cannot be directly selected in the kernel's menuconfig, and may need
 	selection of another option that requires it such as CONFIG_KVM."
+	local ERROR_PREEMPT_RT="CONFIG_PREEMPT_RT: is set but is unsupported by NVIDIA upstream and
+	will fail to build unless the env var IGNORE_PREEMPT_RT_PRESENCE=1 is
+	set. Please do not report issues if run into e.g. kernel panics while
+	ignoring this."
 }
 
 src_prepare() {
@@ -118,7 +134,7 @@ src_prepare() {
 	use X || sed -i 's/"libGLX/"libEGL/' nvidia_{layers,icd}.json || die
 
 	# enable nvidia-drm.modeset=1 by default with USE=wayland
-	cp "${FILESDIR}"/nvidia-545.conf "${T}"/nvidia.conf || die
+	cp "${FILESDIR}"/nvidia-570.conf "${T}"/nvidia.conf || die
 	use !wayland || sed -i '/^#.*modeset=1$/s/^#//' "${T}"/nvidia.conf || die
 }
 
@@ -159,6 +175,7 @@ src_install() {
 		[GBM_BACKEND_LIB_SYMLINK]=/usr/${libdir}/gbm
 		[GLVND_EGL_ICD_JSON]=/usr/share/glvnd/egl_vendor.d
 		[OPENGL_DATA]=/usr/share/nvidia
+		[VULKANSC_ICD_JSON]=/usr/share/vulkansc
 		[VULKAN_ICD_JSON]=/usr/share/vulkan
 		[WINE_LIB]=/usr/${libdir}/nvidia/wine
 		[XORG_OUTPUTCLASS_CONFIG]=/usr/share/X11/xorg.conf.d
@@ -174,6 +191,8 @@ src_install() {
 		libnvidia-{gtk,wayland-client} nvidia-{settings,xconfig} # from source
 		libnvidia-egl-gbm 15_nvidia_gbm # gui-libs/egl-gbm
 		libnvidia-egl-wayland 10_nvidia_wayland # gui-libs/egl-wayland
+		libnvidia-egl-xcb 20_nvidia_xcb.json # gui-libs/egl-x11
+		libnvidia-egl-xlib 20_nvidia_xlib.json # gui-libs/egl-x11
 		libnvidia-pkcs11.so # using the openssl3 version instead
 	)
 	local skip_modules=(
@@ -203,6 +222,12 @@ See '${EPREFIX}/etc/modprobe.d/nvidia.conf' for modules options.\
 
 Note that without USE=abi_x86_32 on ${PN}, 32bit applications
 (typically using wine / steam) will not be able to use GPU acceleration.\
+
+Be warned that USE=kernel-open may need to be either enabled or
+disabled for certain cards to function:
+- GTX 50xx (blackwell) and higher require it to be enabled
+- GTX 1650 and higher (pre-blackwell) should work either way
+- Older cards require it to be disabled
 
 For additional information or for troubleshooting issues, please see
 https://wiki.gentoo.org/wiki/NVIDIA/nvidia-drivers and NVIDIA's own
@@ -265,8 +290,9 @@ documentation that is installed alongside this README."
 			dosym ${m[4]} ${into}/${m[0]}
 			continue
 		fi
-		[[ ${m[0]} =~ ^libnvidia-ngx.so|^libnvidia-egl-gbm.so ]] &&
-			dosym ${m[0]} ${into}/${m[0]%.so*}.so.1 # soname not in .manifest
+		# avoid portage warning due to missing soname links in manifest
+		[[ ${m[0]} =~ ^libnvidia-ngx.so ]] &&
+			dosym ${m[0]} ${into}/${m[0]%.so*}.so.1
 
 		printf -v m[1] %o $((m[1] | 0200)) # 444->644
 		insopts -m${m[1]}
@@ -280,9 +306,12 @@ documentation that is installed alongside this README."
 	exeinto "${_#"${EPREFIX}"}"
 	doexe systemd/system-sleep/nvidia
 	dobin systemd/nvidia-sleep.sh
-	systemd_dounit systemd/system/nvidia-{hibernate,resume,suspend}.service
+	systemd_dounit systemd/system/nvidia-{hibernate,resume,suspend,suspend-then-hibernate}.service
 
 	dobin nvidia-bug-report.sh
+
+	insinto /usr/share/nvidia/files.d
+	doins sandboxutils-filelist.json
 
 	# MODULE:powerd extras
 	if use powerd; then
@@ -300,6 +329,8 @@ documentation that is installed alongside this README."
 	# not using relative symlinks to match systemd's own links
 	dosym {"${unitdir}",/etc/systemd/system/systemd-hibernate.service.wants}/nvidia-hibernate.service
 	dosym {"${unitdir}",/etc/systemd/system/systemd-hibernate.service.wants}/nvidia-resume.service
+	dosym {"${unitdir}",/etc/systemd/system/systemd-suspend-then-hibernate.service.wants}/nvidia-suspend-then-hibernate.service
+	dosym {"${unitdir}",/etc/systemd/system/systemd-suspend-then-hibernate.service.wants}/nvidia-resume.service
 	dosym {"${unitdir}",/etc/systemd/system/systemd-suspend.service.wants}/nvidia-suspend.service
 	dosym {"${unitdir}",/etc/systemd/system/systemd-suspend.service.wants}/nvidia-resume.service
 	# also add a custom elogind hook to do the equivalent of the above
