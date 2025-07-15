@@ -59,7 +59,7 @@ src_prepare() {
 		PYTHON_CFLAGS="$(python_get_CFLAGS)"\
 		PYTHON_LIBS="$(python_get_LIBS)"
 
-	sed -i -e 's:pkexec /usr/bin/calamares:calamares-pkexec:' \
+	sed -i -e 's:pkexec calamares:calamares-pkexec:' \
 		calamares.desktop || die
 	sed -i -e 's:Icon=calamares:Icon=redcore-weblink:' \
 		calamares.desktop || die
