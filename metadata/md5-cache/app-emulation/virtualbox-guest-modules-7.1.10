@@ -9,5 +9,5 @@ KEYWORDS=amd64
 LICENSE=GPL-2
 RDEPEND=acct-group/vboxguest acct-group/vboxsf acct-user/vboxguest ~sys-kernel/virtualbox-guest-modules-dkms-7.1.10
 SLOT=0
-_eclasses_=toolchain-funcs	a6df79c1e9bc84369dbf3d44206ac772	udev	f3d9a4376ebd22131726a68e1a0a058f
+_eclasses_=toolchain-funcs	a0b29008c671a362b505f96fa80ce9c0	udev	f3d9a4376ebd22131726a68e1a0a058f
 _md5_=4af167ac0905c4dd3df23afbaa0bb4fd
