@@ -9,5 +9,5 @@ LICENSE=GPL-2
 RDEPEND=sys-kernel/dkms
 RESTRICT=mirror
 SLOT=0
-SRC_URI=https://download.virtualbox.org/virtualbox/7.1.10/VirtualBox-7.1.10.tar.bz2
+SRC_URI=https://download.virtualbox.org/virtualbox/7.1.12/VirtualBox-7.1.12.tar.bz2
 _md5_=0de8db54e057e9e18e6a6fa3e40760f5
