@@ -31,6 +31,7 @@ lxde-base/lxappearance 0.6.3-r5: LXDE GTK+ theme switcher
 lxqt-base/lxqt-config 2.2.0-r5: LXQt system configuration control center
 lxqt-base/lxqt-meta 2.2.0-r5: Meta ebuild for LXQt, the Lightweight Desktop Environment
 lxqt-base/lxqt-session 2.2.0-r5: LXQt Session Manager
+media-libs/openimageio 2.5.19.0: A library for reading and writing images
 media-libs/portsmf 239-r1: The Tenacity fork of PortSMF, a Standard MIDI File library
 media-tv/sopcast 3.2.6-r5: SopCast free P2P Internet TV binary
 media-tv/tv-lite 0.7.7: IPTV viewer with Sopcast and Acestream handling capabilities.
