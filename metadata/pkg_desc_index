@@ -20,7 +20,7 @@ app-portage/sisyphus-qt 6.2507.1: A simple portage python wrapper which works li
 app-text/simplenote 2.6.0-r1: The simplest way to keep notes
 dev-go/protobuf-go 1.30.0-r1: Go support for Google's protocol buffers
 dev-go/protoc-gen-go-grpc 1.2.0: This tool generates Go language bindings of services in protobuf definition files for gRPC
-dev-python/animation 0.0.5-r7: Tools for terminal-based wait animations
+dev-python/animation 0.0.5-r8: Tools for terminal-based wait animations
 dev-python/grpcio-tools 1.73.1: Protobuf code generator for gRPC
 dev-python/sh 1.12.14-r7: Python process launching
 dev-python/typer 0.9.0-r3: Build great CLIs. Easy to code. Based on Python type hints
