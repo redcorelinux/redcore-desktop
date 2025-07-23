@@ -23,7 +23,7 @@ dev-go/protoc-gen-go-grpc 1.2.0: This tool generates Go language bindings of ser
 dev-python/animation 0.0.5-r8: Tools for terminal-based wait animations
 dev-python/grpcio-tools 1.73.1: Protobuf code generator for gRPC
 dev-python/sh 1.12.14-r7: Python process launching
-dev-python/typer 0.9.0-r3: Build great CLIs. Easy to code. Based on Python type hints
+dev-python/typer 0.9.0-r4: Build great CLIs. Easy to code. Based on Python type hints
 dev-python/wget 2.2-r5: Python library for downloading from http URLs
 gui-libs/display-manager-init 1.1.2-r10: RC init files for starting display and login managers
 kde-plasma/kinfocenter 6.4.3-r10: Utility providing information about the computer hardware
