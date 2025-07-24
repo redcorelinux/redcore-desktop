@@ -8,5 +8,5 @@ LICENSE=GPL-2
 RDEPEND=app-arch/lz4 app-arch/xz-utils dev-build/autoconf dev-build/make sys-devel/bc
 RESTRICT=strip mirror
 SLOT=6.15
-SRC_URI=https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.15.7.tar.xz
+SRC_URI=https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.15.8.tar.xz
 _md5_=de871ec6d6fc08c2a7415670d4147e6e
