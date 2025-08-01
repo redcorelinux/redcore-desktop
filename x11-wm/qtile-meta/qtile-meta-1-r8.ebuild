@@ -13,7 +13,7 @@ fi
 LICENSE="metapackage"
 SLOT="0"
 
-IUSE="+archiver +desktop-portal discover +display-manager +editor +gtk +imgview +launcher +networkmanager +notifications +policykit +pulseaudio +qt5 +qt6 +screenshot +sddm +terminal +wallpaper +wayland +X"
+IUSE="+archiver +desktop-portal discover +display-manager +editor +extras +gtk +imgview +launcher +networkmanager +notifications +policykit +pulseaudio +qt5 +qt6 +screenshot +sddm +terminal +wallpaper +wayland +X"
 
 RDEPEND="
 	x11-wm/qtile
@@ -25,6 +25,7 @@ RDEPEND="
 		!sddm? ( x11-misc/lightdm )
 	)
 	editor? ( app-editors/featherpad )
+	extras? ( x11-wm/qtile-extras )
 	gtk? ( lxde-base/lxappearance )
 	imgview? ( media-gfx/qimgv )
 	launcher? ( x11-misc/rofi )

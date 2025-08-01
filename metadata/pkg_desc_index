@@ -94,4 +94,4 @@ x11-themes/redcore-theme 1.314.1337-r1: Official Redcore Linux GTK theme
 x11-themes/redcore-theme-lxqt 1.314.1337: Official Redcore Linux LXQT theme
 x11-themes/redcore-theme-sddm 1.314.1337-r3: Redcore Linux SDDM Theme
 x11-wm/qtile-extras 0.33.0: elParaguayo's Qtile Extras
-x11-wm/qtile-meta 1-r7: Meta ebuild for Qtile, a hackable tiling window manager written in Python
+x11-wm/qtile-meta 1-r8: Meta ebuild for Qtile, a hackable tiling window manager written in Python
