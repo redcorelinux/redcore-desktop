@@ -6,6 +6,7 @@ app-admin/opensnitch-ebpf-module 1.6.2: eBPF process monitor module for opensnit
 app-admin/vasile 2.1812.2-r1: Versatile Advanced Script for ISO and Latest Enchantments
 app-arch/unp 2.0_pre9-r1: Script for unpacking various file formats
 app-backup/timeshift 24.06.3: A system restore utility for Linux
+app-editors/zed 0.187.9-r10: The fast, collaborative code editor
 app-emulation/steam 1.0.0.79: Installer, launcher and supplementary files for Valve's Steam client
 app-emulation/virtualbox-guest-additions 7.1.12: VirtualBox user-space tools for Gentoo guests
 app-emulation/virtualbox-guest-modules 7.1.12: Kernel Modules (guest) for Virtualbox
