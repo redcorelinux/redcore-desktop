@@ -5,7 +5,7 @@ EAPI=8
 
 EXTRAVERSION="redcore-lts-${PR}"
 KV_FULL="${PV}-${EXTRAVERSION}"
-KV_MAJOR="6.12"
+KV_MAJOR="6.6"
 
 DESCRIPTION="Redcore Linux LTS Kernel Sources"
 HOMEPAGE="https://redcorelinux.org"
@@ -61,6 +61,8 @@ src_compile() {
 src_install() {
 	dodir usr/src/linux-"${KV_FULL}"
 	cp -ax "${S}"/* "${D}"/usr/src/linux-"${KV_FULL}"
+	insinto usr/src/linux-"${KV_FULL}"
+	newins "${FILESDIR}"/"${KV_MAJOR}"-amd64.config .config
 }
 
 _kernel_sources_delete() {
