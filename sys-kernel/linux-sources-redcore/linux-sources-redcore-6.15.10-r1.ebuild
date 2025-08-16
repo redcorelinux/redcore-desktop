@@ -61,6 +61,8 @@ src_compile() {
 src_install() {
 	dodir usr/src/linux-"${KV_FULL}"
 	cp -ax "${S}"/* "${D}"/usr/src/linux-"${KV_FULL}"
+	insinto usr/src/linux-"${KV_FULL}"
+	newins "${FILESDIR}"/"${KV_MAJOR}"-amd64.config .config
 }
 
 _kernel_sources_delete() {
