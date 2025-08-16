@@ -27,7 +27,7 @@ RDEPEND="
 	${DEPEND}
 "
 BDEPEND="
-	>=dev-build/kbuild-0.1.9998.3127
+	>=dev-build/kbuild-0.1.9998.3660
 "
 
 VBOX_MOD_SRC_DIR="out/linux.${ARCH}/release/bin/additions/src"
