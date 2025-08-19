@@ -11,8 +11,8 @@ DESCRIPTION="A simple portage python wrapper which works like other package mana
 HOMEPAGE="http://redcorelinux.org"
 
 EGIT_REPO_URI="https://gitlab.com/redcore/sisyphus.git"
-EGIT_BRANCH="master"
-EGIT_COMMIT="1d5337798e4ff56632eb750e3990805a6c34930f"
+EGIT_BRANCH="next"
+EGIT_COMMIT="0473ea6848be4d833f94313a58cd216140fd3b09"
 
 LICENSE="GPL-2"
 SLOT="0"
