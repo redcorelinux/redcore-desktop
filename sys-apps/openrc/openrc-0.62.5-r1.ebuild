@@ -150,7 +150,7 @@ pkg_preinst() {
 pkg_postinst() {
 	# add dkms to boot runlevel
 	if [ -e "${ROOT}"/etc/init.d/dkms ] && use dkms; then
-		if [ "$(rc-config list boot | grep dkms)" != "" ]; then
+		if [ "$(rc-status boot | grep dkms)" != "" ]; then
 			einfo > /dev/null 2>&1
 		else
 			"${ROOT}"/sbin/rc-update add dkms boot > /dev/null 2>&1
@@ -158,9 +158,9 @@ pkg_postinst() {
 	fi
 	# move dbus to boot runlevel
 	if [ -e "${ROOT}"/etc/init.d/dbus ] && use elogind; then
-		if [ "$(rc-config list boot | grep dbus)" != "" ]; then
+		if [ "$(rc-status boot | grep dbus)" != "" ]; then
 			einfo > /dev/null 2>&1
-		elif [ "$(rc-config list default | grep dbus)" != "" ]; then
+		elif [ "$(rc-status default | grep dbus)" != "" ]; then
 			"${ROOT}"/sbin/rc-update del dbus default > /dev/null 2>&1
 			"${ROOT}"/sbin/rc-update add dbus boot > /dev/null 2>&1
 		else
@@ -169,23 +169,23 @@ pkg_postinst() {
 	fi
 	# consolekit -> elogind migration
 	if [ -e "${ROOT}"/etc/init.d/elogind ] && use elogind; then
-		if [ "$(rc-config list boot | grep elogind)" != "" ]; then
+		if [ "$(rc-status boot | grep elogind)" != "" ]; then
 			einfo > /dev/null 2>&1
 		else
 			"${ROOT}"/sbin/rc-update add elogind boot > /dev/null 2>&1
 		fi
 
-		if [ "$(rc-config list default | grep consolekit)" != "" ]; then
+		if [ "$(rc-status default | grep consolekit)" != "" ]; then
 			"${ROOT}"/sbin/rc-update del consolekit default > /dev/null 2>&1
 		fi
 
-		if [ "$(rc-config list default | grep cgmanager)" != "" ]; then
+		if [ "$(rc-status default | grep cgmanager)" != "" ]; then
 			"${ROOT}"/sbin/rc-update del cgmanager default > /dev/null 2>&1
 		fi
 	fi
 	# add apparmor to boot runlevel
 	if [ -e "${ROOT}"/etc/init.d/apparmor ] && use apparmor; then
-		if [ "$(rc-config list boot | grep apparmor)" != "" ]; then
+		if [ "$(rc-status boot | grep apparmor)" != "" ]; then
 			einfo > /dev/null 2>&1
 		else
 			"${ROOT}"/sbin/rc-update add apparmor boot > /dev/null 2>&1
@@ -193,7 +193,7 @@ pkg_postinst() {
 	fi
 	# add haveged to default runlevel
 	if [ -e "${ROOT}"/etc/init.d/haveged ] && use havege; then
-		if [ "$(rc-config list default | grep haveged)" != "" ]; then
+		if [ "$(rc-status default | grep haveged)" != "" ]; then
 			einfo > /dev/null 2>&1
 		else
 			"${ROOT}"/sbin/rc-update add haveged default > /dev/null 2>&1
@@ -202,19 +202,19 @@ pkg_postinst() {
 	# add openrc-settingsd to default level, disable ntpd
 	# this allows time & date to be set to network time zone in various desktop environments
 	if [ -e "${ROOT}"/etc/init.d/openrc-settingsd ] && use settingsd; then
-		if [ "$(rc-config list default | grep openrc-settingsd)" != "" ]; then
+		if [ "$(rc-status default | grep openrc-settingsd)" != "" ]; then
 			einfo > /dev/null 2>&1
 		else
 			"${ROOT}"/sbin/rc-update add openrc-settingsd default > /dev/null 2>&1
 		fi
 
-		if [ "$(rc-config list default | grep ntpd)" != "" ]; then
+		if [ "$(rc-status default | grep ntpd)" != "" ]; then
 			"${ROOT}"/sbin/rc-update del ntpd default > /dev/null 2>&1
 		fi
 	fi
 	# urandom -> seedrng migration
 	if [ -e "${ROOT}"/etc/init.d/seedrng ] && [ ! -e"${ROOT}"/etc/init.d/urandom ]; then
-		if [ "$(rc-config list boot | grep urandom)" != "" ]; then
+		if [ "$(rc-status boot | grep urandom)" != "" ]; then
 			"${ROOT}"/sbin/rc-update del urandom boot > /dev/null 2>&1
 			"${ROOT}"/sbin/rc-update add seedrng boot > /dev/null 2>&1
 		else
@@ -223,13 +223,13 @@ pkg_postinst() {
 	fi
 	# syslog-ng -> metalog migration
 	if [ -e "${ROOT}"/etc/init.d/metalog ]; then
-		if [ "$(rc-config list default | grep metalog)" != "" ]; then
+		if [ "$(rc-status default | grep metalog)" != "" ]; then
 			einfo > /dev/null 2>&1
 		else
 			"${ROOT}"/sbin/rc-update add metalog default > /dev/null 2>&1
 		fi
 
-		if [ "$(rc-config list default | grep syslog-ng)" != "" ]; then
+		if [ "$(rc-status default | grep syslog-ng)" != "" ]; then
 			"${ROOT}"/sbin/rc-update del syslog-ng default > /dev/null 2>&1
 		fi
 	fi
