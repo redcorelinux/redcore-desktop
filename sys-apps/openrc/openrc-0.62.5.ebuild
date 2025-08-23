@@ -1,9 +1,9 @@
 # Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
-inherit flag-o-matic meson pam toolchain-funcs
+inherit eapi9-ver meson pam
 
 DESCRIPTION="OpenRC manages the services, startup and shutdown of a host"
 HOMEPAGE="https://github.com/openrc/openrc/"
@@ -18,7 +18,7 @@ fi
 
 LICENSE="BSD-2"
 SLOT="0"
-IUSE="+apparmor audit bash caps debug +dkms elogind +havege pam newnet +netifrc selinux +settingsd +splash sysvinit sysv-utils unicode"
+IUSE="+apparmor audit bash debug +dkms elogind +havege pam newnet +netifrc selinux s6 +settingsd +splash sysvinit sysv-utils unicode"
 
 COMMON_DEPEND="
 	apparmor? (
@@ -26,13 +26,13 @@ COMMON_DEPEND="
 		sys-apps/apparmor-utils
 		sec-policy/apparmor-profiles
 	)
+	sys-libs/libcap
+	sys-process/psmisc
 	pam? ( sys-libs/pam )
 	audit? ( sys-process/audit )
-	caps? ( sys-libs/libcap )
 	dkms? ( sys-kernel/dkms )
 	elogind? ( sys-auth/elogind )
 	havege? ( sys-apps/haveged )
-	sys-process/psmisc
 	selinux? (
 		sys-apps/policycoreutils
 		>=sys-libs/libselinux-2.6
@@ -48,7 +48,10 @@ RDEPEND="${COMMON_DEPEND}
 		!sys-apps/systemd[sysv-utils(-)]
 		!sys-apps/sysvinit
 	)
-	!sysv-utils? ( sysvinit? ( >=sys-apps/sysvinit-2.86-r6[selinux?] ) )
+	!sysv-utils? (
+		sysvinit? ( >=sys-apps/sysvinit-2.86-r6[selinux?] )
+		s6? ( sys-apps/s6-linux-init[sysv-utils(-)] )
+	)
 	virtual/tmpfiles
 	selinux? (
 		>=sec-policy/selinux-base-policy-2.20170204-r4
@@ -68,14 +71,15 @@ src_prepare() {
 
 src_configure() {
 	local emesonargs=(
+	--bindir=/bin
+	--sbindir=/sbin
 		$(meson_feature audit)
 		"-Dbranding=\"Redcore Linux Hardened\""
-		$(meson_feature caps capabilities)
 		$(meson_use newnet)
 		-Dos=Linux
 		$(meson_use pam)
+		-Dpam_libdir="$(getpam_mod_dir)"
 		$(meson_feature selinux)
-		-Drootprefix="${EPREFIX}"
 		-Dshell=$(usex bash /bin/bash /bin/sh)
 		$(meson_use sysv-utils sysvinit)
 	)
@@ -120,6 +124,7 @@ src_install() {
 		# install gentoo pam.d files
 		newpamd "${FILESDIR}"/start-stop-daemon.pam start-stop-daemon
 		newpamd "${FILESDIR}"/start-stop-daemon.pam supervise-daemon
+		pamd_mimic system-local-login openrc-user session
 	fi
 
 	# install documentation
