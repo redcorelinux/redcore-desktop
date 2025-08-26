@@ -11,7 +11,7 @@ MY_P="${MY_PN}-${PV}"
 DESCRIPTION="Userland utilities for ZFS Linux kernel module"
 HOMEPAGE="https://zfsonlinux.org/"
 
-SRC_URI="https://github.com/openzfs/${PN}/releases/download/${MY_P}/${MY_P}.tar.gz"
+SRC_URI="https://github.com/openzfs/${MY_PN}/releases/download/${MY_P}/${MY_P}.tar.gz"
 KEYWORDS="~amd64"
 S="${WORKDIR}/${MY_P}"
 
