@@ -12,7 +12,7 @@ HOMEPAGE="http://redcorelinux.org"
 
 EGIT_REPO_URI="https://gitlab.com/redcore/hermes.git"
 EGIT_BRANCH="redcore"
-EGIT_COMMIT="e255302fe5e8b949f219a7eabba8348354d54968"
+EGIT_COMMIT="f11c6f6dc4444fc56a1bdaefc2844ce1ca0a0a5e"
 
 LICENSE="GPL-2"
 SLOT="0"
