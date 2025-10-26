@@ -13,7 +13,7 @@ diff '--color=auto' -Nur a/Makefile b/Makefile
 +# Building from kBuild (make -C <kernel_directory> M=`pwd`).
 +# KBUILD_EXTMOD is set to $(M) in this case.
  
--obj-m = vboxguest/ vboxsf/
+-obj-m = vboxguest/ vboxsf/ vboxvideo/
 +obj-m = vboxguest/
 + ifneq ($(wildcard $(KBUILD_EXTMOD)/vboxsf/Makefile),)
 +obj-m += vboxsf/
