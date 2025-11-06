@@ -48,9 +48,10 @@ DEPEND="
 RDEPEND="${DEPEND}"
 
 PATCHES=(
-	"${FILESDIR}"/revert0-adfb181b7924ac2e71347709171542316ea248de.patch
-	"${FILESDIR}"/revert1-c66eb66b58328beb1cac4b3576f30bb68001021c.patch
-	"${FILESDIR}"/revert2-2aff948ea19508317c185d87bc5f5e20fe64a30f.patch
+	"${FILESDIR}"/revert-f3c715720126f760f318730eed799a0580aa4e04.patch
+	"${FILESDIR}"/revert-adfb181b7924ac2e71347709171542316ea248de.patch
+	"${FILESDIR}"/revert-c66eb66b58328beb1cac4b3576f30bb68001021c.patch
+	"${FILESDIR}"/revert-2aff948ea19508317c185d87bc5f5e20fe64a30f.patch
 	"${FILESDIR}"/"${PN}"-qt5ct.patch )
 
 src_configure() {
