@@ -26,10 +26,10 @@ DEPEND="dev-lang/python[sqlite]
 RDEPEND="${DEPEND}
 	app-misc/tmux
 	qt5? ( $(python_gen_cond_dep '
-		dev-python/pyqt5[designer,gui,widgets,${PYTHON_USEDEP}]
+		dev-python/pyqt5[gui,widgets,${PYTHON_USEDEP}]
 	') )
 	qt6? ( $(python_gen_cond_dep '
-		dev-python/pyqt6[designer,gui,widgets,${PYTHON_USEDEP}]
+		dev-python/pyqt6[gui,widgets,${PYTHON_USEDEP}]
 	') )"
 
 src_install() {
