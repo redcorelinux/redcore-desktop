@@ -16,7 +16,7 @@ app-misc/calamares-config-redcore 1.314.1337-r19: Redcore Linux Calamares module
 app-misc/redcore-live 1.314.1337-r4: Redcore Linux live scripts
 app-misc/redcore-skel 1.314.1337-r10: Redcore Linux skel tree
 app-portage/flaggie 0.99.8-r2: A smart CLI mangler for package.* files
-app-portage/hermes 0.2509.1: System Upgrade Watchdog Service
+app-portage/hermes 0.2511.0: System Upgrade Watchdog Service
 app-portage/sisyphus 6.2509.0-r1: A simple portage python wrapper which works like other package managers(apt-get/yum/dnf)
 app-portage/sisyphus-qt 6.2509.0-r1: A simple portage python wrapper which works like other package managers(apt-get/yum/dnf)
 app-text/simplenote 2.6.0-r1: The simplest way to keep notes
@@ -70,7 +70,6 @@ sys-kernel/vhba-dkms 20250329-r1: Virtual (SCSI) Host Bus Adapter kernel module 
 sys-kernel/virtualbox-guest-modules-dkms 7.2.4: Kernel Modules (guest) source for Virtualbox
 sys-kernel/virtualbox-modules-dkms 7.2.4: Kernel Modules source for Virtualbox
 sys-kernel/zfs-dkms 2.3.4: ZFS sources for linux
-sys-power/radeon-profile 20200824-r10: Read current clocks of ATi/AMD Radeon cards
 virtual/libudev 314.1337-r1: Virtual for libudev providers
 virtual/linux-sources 314.1337-r1: Virtual for Linux kernel sources
 virtual/logger 1.314.1337: Virtual for system loggers

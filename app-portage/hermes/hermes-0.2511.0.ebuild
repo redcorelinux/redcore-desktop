@@ -12,7 +12,7 @@ HOMEPAGE="http://redcorelinux.org"
 
 EGIT_REPO_URI="https://gitlab.com/redcore/hermes.git"
 EGIT_BRANCH="redcore"
-EGIT_COMMIT="f11c6f6dc4444fc56a1bdaefc2844ce1ca0a0a5e"
+EGIT_COMMIT="01236fb0a3de6ccaf1284657e6b6b944b310ea4a"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -40,7 +40,8 @@ src_install() {
 	doins src/daemon/hermesd.py
 
 	insopts -m 644
-	doicon src/icon/hermes.png
+	doicon src/icon/hermes-light.png
+	doicon src/icon/hermes-dark.png
 	domenu src/menu/org.redcorelinux.hermes.desktop
 
 	insinto /etc/dbus-1/system.d
