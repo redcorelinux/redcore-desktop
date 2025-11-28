@@ -1,0 +1,16 @@
+BDEPEND=>=dev-vcs/git-1.8.2.1[curl]
+DEFINED_PHASES=install postinst setup unpack
+DEPEND=dev-lang/python[sqlite]
+DESCRIPTION=A simple portage python wrapper which works like other package managers(apt-get/yum/dnf)
+EAPI=7
+HOMEPAGE=http://redcorelinux.org
+INHERIT=python-single-r1 git-r3
+IUSE=+gui python_single_target_python3_11 python_single_target_python3_12 python_single_target_python3_13
+KEYWORDS=amd64 arm64
+LICENSE=GPL-2
+PDEPEND=gui? ( ~app-portage/sisyphus-qt-6.2511.0 )
+PROPERTIES=live
+RDEPEND=dev-lang/python[sqlite] app-portage/portage-utils python_single_target_python3_11? ( app-portage/gentoolkit[python_targets_python3_11(-)] dev-python/animation[python_targets_python3_11(-)] dev-python/click[python_targets_python3_11(-)] dev-python/colorama[python_targets_python3_11(-)] dev-python/gitpython[python_targets_python3_11(-)] dev-python/typer[python_targets_python3_11(-)] dev-python/typing-extensions[python_targets_python3_11(-)] dev-python/urllib3[python_targets_python3_11(-)] sys-apps/portage[python_targets_python3_11(-)] ) python_single_target_python3_12? ( app-portage/gentoolkit[python_targets_python3_12(-)] dev-python/animation[python_targets_python3_12(-)] dev-python/click[python_targets_python3_12(-)] dev-python/colorama[python_targets_python3_12(-)] dev-python/gitpython[python_targets_python3_12(-)] dev-python/typer[python_targets_python3_12(-)] dev-python/typing-extensions[python_targets_python3_12(-)] dev-python/urllib3[python_targets_python3_12(-)] sys-apps/portage[python_targets_python3_12(-)] ) python_single_target_python3_13? ( app-portage/gentoolkit[python_targets_python3_13(-)] dev-python/animation[python_targets_python3_13(-)] dev-python/click[python_targets_python3_13(-)] dev-python/colorama[python_targets_python3_13(-)] dev-python/gitpython[python_targets_python3_13(-)] dev-python/typer[python_targets_python3_13(-)] dev-python/typing-extensions[python_targets_python3_13(-)] dev-python/urllib3[python_targets_python3_13(-)] sys-apps/portage[python_targets_python3_13(-)] ) sys-apps/gentoo-functions
+SLOT=0
+_eclasses_=eapi8-dosym	5ac4857ad078256d939c44f7c64197a9	git-r3	875eb471682d3e1f18da124be97dcc81	multiprocessing	1e32df7deee68372153dca65f4a7c21f	python-single-r1	47d8ac9be330c9366112b78fd4f8ce57	python-utils-r1	dbb8c4d794033ad7e7221eaf567a6c90	toolchain-funcs	98d9f464d912ae6b7316fb8a3721f5db
+_md5_=fc990b15a4dd082aa2faab23eb63f9cc
