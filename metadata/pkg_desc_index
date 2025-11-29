@@ -23,7 +23,7 @@ app-text/simplenote 2.6.0-r1: The simplest way to keep notes
 dev-go/protobuf-go 1.30.0-r1: Go support for Google's protocol buffers
 dev-go/protoc-gen-go-grpc 1.2.0: This tool generates Go language bindings of services in protobuf definition files for gRPC
 dev-python/animation 0.0.5-r8: Tools for terminal-based wait animations
-dev-python/grpcio-tools 1.73.1: Protobuf code generator for gRPC
+dev-python/grpcio-tools 1.76.0: Protobuf code generator for gRPC
 dev-python/sh 1.12.14-r7: Python process launching
 dev-python/wget 2.2-r5: Python library for downloading from http URLs
 gui-libs/display-manager-init 1.1.2-r10: RC init files for starting display and login managers
