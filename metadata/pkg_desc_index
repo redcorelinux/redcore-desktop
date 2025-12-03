@@ -64,7 +64,7 @@ sys-kernel/linux-image-redcore 6.17.10-r1: Redcore Linux Kernel Image
 sys-kernel/linux-image-redcore-lts 5.15.196-r1 6.1.158-r1 6.6.118-r1 6.12.60-r1: Redcore Linux LTS Kernel Image
 sys-kernel/linux-sources-redcore 6.17.10-r1: Redcore Linux Kernel Sources
 sys-kernel/linux-sources-redcore-lts 5.15.196-r1 6.1.158-r1 6.6.118-r1 6.12.60-r1: Redcore Linux LTS Kernel Sources
-sys-kernel/nvidia-drivers-dkms 390.157-r8 470.256.02-r1 580.95.05: NVIDIA driver sources for linux
+sys-kernel/nvidia-drivers-dkms 390.157-r8 470.256.02-r1 580.95.05-r1: NVIDIA driver sources for linux
 sys-kernel/tp_smapi-dkms 0.44-r6: IBM ThinkPad SMAPI BIOS driver sources
 sys-kernel/vhba-dkms 20250329-r1: Virtual (SCSI) Host Bus Adapter kernel module for the CDEmu suite sources
 sys-kernel/virtualbox-guest-modules-dkms 7.2.4: Kernel Modules (guest) source for Virtualbox
