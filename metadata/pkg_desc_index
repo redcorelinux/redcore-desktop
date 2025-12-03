@@ -64,7 +64,7 @@ sys-kernel/linux-image-redcore 6.16.12-r2: Redcore Linux Kernel Image
 sys-kernel/linux-image-redcore-lts 5.15.196-r1 6.1.158-r1 6.6.117-r1 6.12.59-r1: Redcore Linux LTS Kernel Image
 sys-kernel/linux-sources-redcore 6.16.12-r2: Redcore Linux Kernel Sources
 sys-kernel/linux-sources-redcore-lts 5.15.196-r1 6.1.158-r1 6.6.117-r1 6.12.59-r1: Redcore Linux LTS Kernel Sources
-sys-kernel/nvidia-drivers-dkms 390.157-r8 470.256.02-r1 570.169-r1: NVIDIA driver sources for linux
+sys-kernel/nvidia-drivers-dkms 390.157-r8 470.256.02-r1 580.95.05: NVIDIA driver sources for linux
 sys-kernel/tp_smapi-dkms 0.44-r6: IBM ThinkPad SMAPI BIOS driver sources
 sys-kernel/vhba-dkms 20250329-r1: Virtual (SCSI) Host Bus Adapter kernel module for the CDEmu suite sources
 sys-kernel/virtualbox-guest-modules-dkms 7.2.4: Kernel Modules (guest) source for Virtualbox
@@ -78,10 +78,10 @@ virtual/tmpfiles 1.314.1337-r1: Virtual to select between different tmpfiles.d h
 virtual/udev 314.1337-r1: Virtual to select between different udev daemon providers
 www-client/ungoogled-chromium 132.0.6834.83: Modifications to Chromium for removing Google integration and enhancing privacy
 x11-base/xorg-drivers 21.1-r100: Meta package containing deps on all xorg drivers (dummy package)
-x11-drivers/nvidia-drivers 390.157-r12 470.256.02-r6 570.169: NVIDIA Accelerated Graphics Driver
+x11-drivers/nvidia-drivers 390.157-r13 470.256.02-r7 580.95.05: NVIDIA Accelerated Graphics Driver
 x11-libs/gtk+ 2.24.33-r6 3.24.48: Gimp ToolKit +
 x11-misc/nvidia-prime 314: NVIDIA Prime Render Offload configuration and utilities
-x11-misc/nvidia-settings 390.157-r7 470.256.02 570.169: NVIDIA Linux X11 Settings Utility
+x11-misc/nvidia-settings 390.157-r7 470.256.02 580.95.05: NVIDIA Linux X11 Settings Utility
 x11-misc/pcmanfm-qt-share 1337-r1: PCManFM-QT custom action to share folder using Samba
 x11-misc/polybar 3.7.2-r10: A fast and easy-to-use tool for creating status bars
 x11-themes/material-icon-theme 1.314.1337-r2: Icon theme following the Google's material design specifications

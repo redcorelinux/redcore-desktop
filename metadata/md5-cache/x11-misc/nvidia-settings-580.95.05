@@ -9,6 +9,6 @@ LICENSE=GPL-2
 RDEPEND=x11-libs/gtk+:2 x11-libs/gtk+:3 x11-libs/libX11 x11-libs/libXext x11-libs/libXxf86vm x11-libs/gdk-pixbuf-xlib media-libs/mesa x11-libs/pango[X] x11-libs/libXv x11-libs/libXrandr dev-libs/glib:2 dev-libs/jansson x11-libs/cairo >=x11-libs/libvdpau-1.0 !!x11-misc/nvidia-settings:3 !!x11-misc/nvidia-settings:4 x11-drivers/nvidia-drivers:5
 RESTRICT=strip
 SLOT=5
-SRC_URI=https://github.com/NVIDIA/nvidia-settings/archive/refs/tags/570.169.tar.gz -> nvidia-settings-570.169.tar.gz
+SRC_URI=https://github.com/NVIDIA/nvidia-settings/archive/refs/tags/580.95.05.tar.gz -> nvidia-settings-580.95.05.tar.gz
 _eclasses_=desktop	3a72ffe0d8e1dd73af3a1c8c15a59fed	multilib	a199af442898963433d6f038a88cce9c	toolchain-funcs	98d9f464d912ae6b7316fb8a3721f5db
 _md5_=eeddb1b0c712b4ce76df8f100ed0e73c

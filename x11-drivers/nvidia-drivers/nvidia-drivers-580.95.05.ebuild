@@ -18,7 +18,10 @@ SRC_URI="
 # nvidia-installer is unused but here for GPL-2's "distribute sources"
 S=${WORKDIR}
 
-LICENSE="NVIDIA-r2 Apache-2.0 BSD BSD-2 GPL-2 MIT ZLIB curl openssl"
+LICENSE="
+	NVIDIA-2025 Apache-2.0 Boost-1.0 BSD BSD-2 GPL-2 MIT ZLIB
+	curl openssl public-domain
+"
 SLOT="5"
 KEYWORDS="-* amd64"
 IUSE="abi_x86_32 abi_x86_64 +acpi +dkms +persistenced +powerd +tools +wayland +X"
@@ -48,7 +51,10 @@ RDEPEND="
 	powerd? ( sys-apps/dbus[abi_x86_32(-)?] )
 	wayland? (
 		>=gui-libs/egl-gbm-1.1.1-r2[abi_x86_32(-)?]
-		>=gui-libs/egl-wayland-1.1.13.1[abi_x86_32(-)?]
+		|| (
+			>=gui-libs/egl-wayland-1.1.13.1[abi_x86_32(-)?]
+			gui-libs/egl-wayland2[abi_x86_32(-)?]
+		)
 		X? ( gui-libs/egl-x11[abi_x86_32(-)?] )
 	)
 "
@@ -59,6 +65,7 @@ DEPEND="
 	x11-libs/libXext
 "
 BDEPEND="
+	app-alternatives/awk
 	sys-devel/m4
 	virtual/pkgconfig
 "
@@ -198,7 +205,7 @@ src_install() {
 	local skip_modules=(
 		$(usev !X "nvfbc vdpau xdriver")
 		$(usev !dkms gsp)
-		$(usev !powerd powerd)
+		$(usev !powerd nvtops)
 		installer nvpd # handled separately / built from source
 	)
 	local skip_types=(
@@ -402,7 +409,7 @@ pkg_postinst() {
 	readme.gentoo_print_elog
 
 	if [[ $(</proc/cmdline) == *slub_debug=[!-]* ]]; then
-		ewarn "Detected that the current kernel command line is using 'slub_debug=',"
+		ewarn "\nDetected that the current kernel command line is using 'slub_debug=',"
 		ewarn "this may lead to system instability/freezes with this version of"
 		ewarn "${PN}. Bug: https://bugs.gentoo.org/796329"
 	fi
