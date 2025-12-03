@@ -11,7 +11,7 @@ app-emulation/steam 1.0.0.79: Installer, launcher and supplementary files for Va
 app-emulation/virtualbox-guest-additions 7.2.4: VirtualBox user-space tools for Gentoo guests
 app-emulation/virtualbox-guest-modules 7.2.4: Kernel Modules (guest) for Virtualbox
 app-emulation/virtualbox-modules 7.2.4: Kernel Modules for Virtualbox
-app-laptop/tp_smapi 0.44-r1: IBM ThinkPad SMAPI BIOS driver
+app-laptop/tp_smapi 0.45: IBM ThinkPad SMAPI BIOS driver
 app-misc/calamares-config-redcore 1.314.1337-r19: Redcore Linux Calamares modules config
 app-misc/redcore-live 1.314.1337-r4: Redcore Linux live scripts
 app-misc/redcore-skel 1.314.1337-r10: Redcore Linux skel tree
@@ -65,7 +65,7 @@ sys-kernel/linux-image-redcore-lts 5.15.196-r1 6.1.158-r1 6.6.118-r1 6.12.60-r1:
 sys-kernel/linux-sources-redcore 6.17.10-r1: Redcore Linux Kernel Sources
 sys-kernel/linux-sources-redcore-lts 5.15.196-r1 6.1.158-r1 6.6.118-r1 6.12.60-r1: Redcore Linux LTS Kernel Sources
 sys-kernel/nvidia-drivers-dkms 390.157-r8 470.256.02-r1 580.95.05-r1: NVIDIA driver sources for linux
-sys-kernel/tp_smapi-dkms 0.44-r6: IBM ThinkPad SMAPI BIOS driver sources
+sys-kernel/tp_smapi-dkms 0.45: IBM ThinkPad SMAPI BIOS driver sources
 sys-kernel/vhba-dkms 20250329-r2: Virtual (SCSI) Host Bus Adapter kernel module for the CDEmu suite sources
 sys-kernel/virtualbox-guest-modules-dkms 7.2.4: Kernel Modules (guest) source for Virtualbox
 sys-kernel/virtualbox-modules-dkms 7.2.4: Kernel Modules source for Virtualbox

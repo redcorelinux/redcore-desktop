@@ -1,10 +1,10 @@
 DEFINED_PHASES=compile install prepare
-DEPEND=~sys-kernel/tp_smapi-dkms-0.44
+DEPEND=~sys-kernel/tp_smapi-dkms-0.45
 DESCRIPTION=IBM ThinkPad SMAPI BIOS driver
 EAPI=8
 HOMEPAGE=https://github.com/linux-thinkpad/tp_smapi
 KEYWORDS=amd64 x86
 LICENSE=GPL-2
-RDEPEND=~sys-kernel/tp_smapi-dkms-0.44
+RDEPEND=~sys-kernel/tp_smapi-dkms-0.45
 SLOT=0
 _md5_=4652d0c9ce8251c9b38af26c7b3054b3
