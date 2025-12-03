@@ -9,4 +9,4 @@ RDEPEND=sys-kernel/dkms
 RESTRICT=mirror
 SLOT=0
 SRC_URI=x86? ( https://docs.broadcom.com/docs-and-downloads/docs/linux_sta/hybrid-v35-nodebug-pcoem-6_30_223_271.tar.gz ) amd64? ( https://docs.broadcom.com/docs-and-downloads/docs/linux_sta/hybrid-v35_64-nodebug-pcoem-6_30_223_271.tar.gz ) https://docs.broadcom.com/docs-and-downloads/docs/linux_sta/README_6.30.223.271.txt -> README-bcmwl-dkms-6.30.223.271.txt
-_md5_=5b1d630a80d573245abe8cd9255c543b
+_md5_=35cc627ff082f6bed473b10f74d24d6d

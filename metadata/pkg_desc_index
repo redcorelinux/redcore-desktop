@@ -57,7 +57,7 @@ sys-fs/cryptsetup 2.8.1-r10: Tool to setup encrypted devices with dm-crypt
 sys-fs/vhba 20250329: Virtual (SCSI) Host Bus Adapter kernel module for the CDEmu suite
 sys-fs/zfs 2.3.5: ZFS meta-package (Gentoo compatibility ebuild)
 sys-fs/zfs-utils 2.3.5: Userland utilities for ZFS Linux kernel module
-sys-kernel/bcmwl-dkms 6.30.223.271-r17: Broadcom's IEEE 802.11a/b/g/n hybrid Linux device driver source
+sys-kernel/bcmwl-dkms 6.30.223.271-r18: Broadcom's IEEE 802.11a/b/g/n hybrid Linux device driver source
 sys-kernel/dkms 2.3-r4: Dynamic Kernel Module Support
 sys-kernel/dracut 059-r15: Generic initramfs generation tool
 sys-kernel/linux-image-redcore 6.17.10-r1: Redcore Linux Kernel Image
