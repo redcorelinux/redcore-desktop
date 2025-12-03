@@ -6,7 +6,7 @@ EAPI=8
 
 EXTRAVERSION="redcore-${PR}"
 KV_FULL="${PV}-${EXTRAVERSION}"
-KV_MAJOR="6.16"
+KV_MAJOR="6.17"
 
 DESCRIPTION="Redcore Linux Kernel Image"
 HOMEPAGE="https://redcorelinux.org"

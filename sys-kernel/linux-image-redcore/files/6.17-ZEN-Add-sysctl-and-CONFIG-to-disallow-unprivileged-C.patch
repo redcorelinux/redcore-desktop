@@ -1,6 +1,6 @@
 diff '--color=auto' -Nur a/include/linux/user_namespace.h b/include/linux/user_namespace.h
---- a/include/linux/user_namespace.h	2025-08-23 15:49:42.000000000 +0100
-+++ b/include/linux/user_namespace.h	2025-08-24 14:19:47.669164042 +0100
+--- a/include/linux/user_namespace.h	2025-12-01 10:46:09.000000000 +0000
++++ b/include/linux/user_namespace.h	2025-12-03 15:47:27.069839907 +0000
 @@ -168,6 +168,8 @@
  
  #ifdef CONFIG_USER_NS
@@ -20,9 +20,9 @@ diff '--color=auto' -Nur a/include/linux/user_namespace.h b/include/linux/user_n
  {
  	return &init_user_ns;
 diff '--color=auto' -Nur a/init/Kconfig b/init/Kconfig
---- a/init/Kconfig	2025-08-23 15:49:42.000000000 +0100
-+++ b/init/Kconfig	2025-08-24 14:19:47.670865753 +0100
-@@ -1349,6 +1349,22 @@
+--- a/init/Kconfig	2025-12-01 10:46:09.000000000 +0000
++++ b/init/Kconfig	2025-12-03 15:47:27.070228686 +0000
+@@ -1381,6 +1381,22 @@
  
  	  If unsure, say N.
  
@@ -46,11 +46,11 @@ diff '--color=auto' -Nur a/init/Kconfig b/init/Kconfig
  	bool "PID Namespaces"
  	default y
 diff '--color=auto' -Nur a/kernel/fork.c b/kernel/fork.c
---- a/kernel/fork.c	2025-08-23 15:49:42.000000000 +0100
-+++ b/kernel/fork.c	2025-08-24 14:19:47.671480496 +0100
-@@ -106,6 +106,10 @@
- #include <linux/pidfs.h>
+--- a/kernel/fork.c	2025-12-01 10:46:09.000000000 +0000
++++ b/kernel/fork.c	2025-12-03 15:47:27.070890478 +0000
+@@ -107,6 +107,10 @@
  #include <linux/tick.h>
+ #include <linux/unwind_deferred.h>
  
 +#ifdef CONFIG_USER_NS
 +#include <linux/user_namespace.h>
@@ -59,7 +59,7 @@ diff '--color=auto' -Nur a/kernel/fork.c b/kernel/fork.c
  #include <asm/pgalloc.h>
  #include <linux/uaccess.h>
  #include <asm/mmu_context.h>
-@@ -1933,6 +1937,10 @@
+@@ -1938,6 +1942,10 @@
  	if ((clone_flags & (CLONE_NEWUSER|CLONE_FS)) == (CLONE_NEWUSER|CLONE_FS))
  		return ERR_PTR(-EINVAL);
  
@@ -70,7 +70,7 @@ diff '--color=auto' -Nur a/kernel/fork.c b/kernel/fork.c
  	/*
  	 * Thread groups must share signals as well, and detached threads
  	 * can only be started up within the thread group.
-@@ -3099,6 +3107,12 @@
+@@ -3105,6 +3113,12 @@
  	if (unshare_flags & CLONE_NEWNS)
  		unshare_flags |= CLONE_FS;
  
@@ -84,22 +84,23 @@ diff '--color=auto' -Nur a/kernel/fork.c b/kernel/fork.c
  	if (err)
  		goto bad_unshare_out;
 diff '--color=auto' -Nur a/kernel/sysctl.c b/kernel/sysctl.c
---- a/kernel/sysctl.c	2025-08-23 15:49:42.000000000 +0100
-+++ b/kernel/sysctl.c	2025-08-24 14:25:08.088600039 +0100
-@@ -63,6 +63,9 @@
- #ifdef CONFIG_RT_MUTEXES
- #include <linux/rtmutex.h>
- #endif
+--- a/kernel/sysctl.c	2025-12-01 10:46:09.000000000 +0000
++++ b/kernel/sysctl.c	2025-12-03 15:53:27.526332774 +0000
+@@ -23,6 +23,10 @@
+ #include <linux/uaccess.h>
+ #include <asm/processor.h>
+ 
 +#ifdef CONFIG_USER_NS
 +#include <linux/user_namespace.h>
 +#endif
- 
++
  /* shared constants to be used in various sysctls */
  const int sysctl_vals[] = { 0, 1, 2, 3, 4, 100, 200, 1000, 3000, INT_MAX, 65535, -1 };
-@@ -1581,6 +1584,15 @@
+ EXPORT_SYMBOL(sysctl_vals);
+@@ -1455,6 +1459,15 @@
  }
  
- static const struct ctl_table kern_table[] = {
+ static const struct ctl_table sysctl_subsys_table[] = {
 +#ifdef CONFIG_USER_NS
 +	{
 +		.procname       = "unprivileged_userns_clone",
@@ -111,10 +112,10 @@ diff '--color=auto' -Nur a/kernel/sysctl.c b/kernel/sysctl.c
 +#endif
  #ifdef CONFIG_PROC_SYSCTL
  	{
- 		.procname	= "tainted",
+ 		.procname	= "sysctl_writes_strict",
 diff '--color=auto' -Nur a/kernel/user_namespace.c b/kernel/user_namespace.c
---- a/kernel/user_namespace.c	2025-08-23 15:49:42.000000000 +0100
-+++ b/kernel/user_namespace.c	2025-08-24 14:19:47.672484358 +0100
+--- a/kernel/user_namespace.c	2025-12-01 10:46:09.000000000 +0000
++++ b/kernel/user_namespace.c	2025-12-03 15:47:27.071449897 +0000
 @@ -22,6 +22,13 @@
  #include <linux/bsearch.h>
  #include <linux/sort.h>

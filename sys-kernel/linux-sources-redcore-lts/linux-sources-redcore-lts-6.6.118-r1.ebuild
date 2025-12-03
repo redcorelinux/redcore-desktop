@@ -3,11 +3,11 @@
 
 EAPI=8
 
-EXTRAVERSION="redcore-${PR}"
+EXTRAVERSION="redcore-lts-${PR}"
 KV_FULL="${PV}-${EXTRAVERSION}"
-KV_MAJOR="6.16"
+KV_MAJOR="6.6"
 
-DESCRIPTION="Redcore Linux Kernel Sources"
+DESCRIPTION="Redcore Linux LTS Kernel Sources"
 HOMEPAGE="https://redcorelinux.org"
 SRC_URI="https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-${PV}.tar.xz"
 
