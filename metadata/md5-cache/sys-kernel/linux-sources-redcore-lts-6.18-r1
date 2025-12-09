@@ -1,0 +1,11 @@
+DEFINED_PHASES=compile install postrm prepare setup
+DEPEND=app-arch/lz4 app-arch/xz-utils dev-build/autoconf dev-build/make sys-devel/bc
+DESCRIPTION=Redcore Linux LTS Kernel Sources
+EAPI=8
+HOMEPAGE=https://redcorelinux.org
+LICENSE=GPL-2
+RDEPEND=app-arch/lz4 app-arch/xz-utils dev-build/autoconf dev-build/make sys-devel/bc
+RESTRICT=strip mirror
+SLOT=6.18
+SRC_URI=https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.18.tar.xz
+_md5_=454c5007018e43e9976135a0222be49b

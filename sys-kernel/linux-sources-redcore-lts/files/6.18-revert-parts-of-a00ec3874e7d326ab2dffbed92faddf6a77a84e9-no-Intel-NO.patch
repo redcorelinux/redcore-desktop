@@ -1,0 +1,10 @@
+--- a/drivers/cpufreq/Kconfig	2023-09-13 08:53:58.000000000 +0100
++++ b/drivers/cpufreq/Kconfig	2023-09-15 14:53:03.737010082 +0100
+@@ -38,7 +38,6 @@
+ 	prompt "Default CPUFreq governor"
+ 	default CPU_FREQ_DEFAULT_GOV_USERSPACE if ARM_SA1110_CPUFREQ
+ 	default CPU_FREQ_DEFAULT_GOV_SCHEDUTIL if ARM64 || ARM
+-	default CPU_FREQ_DEFAULT_GOV_SCHEDUTIL if (X86_INTEL_PSTATE || X86_AMD_PSTATE) && SMP
+ 	default CPU_FREQ_DEFAULT_GOV_PERFORMANCE
+ 	help
+ 	  This option sets which CPUFreq governor shall be loaded at
