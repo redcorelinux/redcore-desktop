@@ -9,5 +9,5 @@ LICENSE=GPL-2
 RDEPEND=app-arch/lz4 app-arch/xz-utils dev-build/autoconf dev-build/make sys-devel/bc cryptsetup? ( sys-fs/cryptsetup ) dmraid? ( sys-fs/dmraid ) dracut? ( >=sys-kernel/dracut-0.44-r8 ) dkms? ( sys-kernel/dkms sys-kernel/linux-sources-redcore-lts:6.1 ) mdadm? ( sys-fs/mdadm ) >=sys-kernel/linux-firmware-20180314
 RESTRICT=binchecks strip mirror
 SLOT=6.1
-SRC_URI=https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.1.158.tar.xz
+SRC_URI=https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.1.159.tar.xz
 _md5_=c0990c65f9f897629a99cf1f58b57fc7
