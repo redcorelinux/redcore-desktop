@@ -34,7 +34,6 @@ RDEPEND="${DEPEND}
 		sys-apps/portage[${PYTHON_USEDEP}]
 	')
 	sys-apps/gentoo-functions"
-PDEPEND="gui? ( ~app-portage/${PN}-qt-${PV} )"
 
 src_install() {
 	emake DESTDIR="${D}"/ install-cli
