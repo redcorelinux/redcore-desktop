@@ -17,7 +17,7 @@ EGIT_COMMIT="1cbf700cca1cf75e7dd36c3053313c87d8775805"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="amd64 arm64"
-IUSE="+gui"
+IUSE=""
 
 DEPEND="dev-lang/python[sqlite]"
 RDEPEND="${DEPEND}
