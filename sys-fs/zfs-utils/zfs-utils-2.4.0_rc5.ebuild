@@ -6,7 +6,7 @@ EAPI=7
 inherit autotools bash-completion-r1 flag-o-matic pam toolchain-funcs udev usr-ldscript
 
 MY_PN="zfs"
-MY_P="${MY_PN}-${PV}"
+MY_P="${MY_PN}-${PV//_rc5/-rc5}"
 
 DESCRIPTION="Userland utilities for ZFS Linux kernel module"
 HOMEPAGE="https://zfsonlinux.org/"
@@ -20,11 +20,11 @@ SLOT="0"
 IUSE="debug nls pam test-suite unwind"
 
 DEPEND="
+	dev-libs/openssl:=
 	net-libs/libtirpc:=
 	sys-apps/util-linux
-	sys-libs/zlib
+	virtual/zlib:=
 	virtual/libudev:=
-	dev-libs/openssl:=
 	pam? ( sys-libs/pam )
 	unwind? ( sys-libs/libunwind:= )
 "
@@ -50,10 +50,6 @@ RDEPEND="${DEPEND}
 "
 
 RESTRICT="test"
-
-PATCHES=(
-	"${FILESDIR}"/2.1.5-dracut-zfs-missing.patch
-)
 
 src_prepare() {
 	default
@@ -108,4 +104,12 @@ src_install() {
 
 	# strip executable bit from conf.d file
 	fperms 0644 /etc/conf.d/zfs
+}
+
+pkg_postinst() {
+	udev_reload
+}
+
+pkg_postrm() {
+	udev_reload
 }
