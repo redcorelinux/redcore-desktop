@@ -10,4 +10,4 @@ RDEPEND=sys-kernel/dkms !!sys-kernel/nvidia-drivers-dkms:3 !!sys-kernel/nvidia-d
 RESTRICT=strip
 SLOT=5
 SRC_URI=amd64? ( http://us.download.nvidia.com/XFree86/Linux-x86_64/580.95.05/NVIDIA-Linux-x86_64-580.95.05.run )
-_md5_=85ba68cc5770e7a512005e720a52522a
+_md5_=02bdbc4831f6a4076d202cababaaba0a
