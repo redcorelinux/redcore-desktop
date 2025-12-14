@@ -12,7 +12,7 @@ DESCRIPTION="Redcore Linux LTS Kernel Image"
 HOMEPAGE="https://redcorelinux.org"
 SRC_URI="https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-${PV}.tar.xz"
 
-KEYWORDS=""
+KEYWORDS="~amd64"
 LICENSE="GPL-2"
 SLOT="${KV_MAJOR}"
 IUSE="+cryptsetup +dmraid +dracut +dkms live +mdadm"
