@@ -1,13 +1,13 @@
 DEFINED_PHASES=compile install postinst postrm prepare setup
-DEPEND=app-arch/lz4 app-arch/xz-utils dev-build/autoconf dev-build/make sys-devel/bc cryptsetup? ( sys-fs/cryptsetup ) dmraid? ( sys-fs/dmraid ) dracut? ( >=sys-kernel/dracut-0.44-r8 ) dkms? ( sys-kernel/dkms sys-kernel/linux-sources-redcore:6.18 ) mdadm? ( sys-fs/mdadm ) >=sys-kernel/linux-firmware-20180314
+DEPEND=app-arch/lz4 app-arch/xz-utils dev-build/autoconf dev-build/make sys-devel/bc cryptsetup? ( sys-fs/cryptsetup ) dmraid? ( sys-fs/dmraid ) dracut? ( >=sys-kernel/dracut-0.44-r8 ) dkms? ( sys-kernel/dkms sys-kernel/linux-sources-redcore-lts:6.18 ) mdadm? ( sys-fs/mdadm ) >=sys-kernel/linux-firmware-20180314
 DESCRIPTION=Redcore Linux LTS Kernel Image
 EAPI=8
 HOMEPAGE=https://redcorelinux.org
 IUSE=+cryptsetup +dmraid +dracut +dkms live +mdadm
 KEYWORDS=~amd64
 LICENSE=GPL-2
-RDEPEND=app-arch/lz4 app-arch/xz-utils dev-build/autoconf dev-build/make sys-devel/bc cryptsetup? ( sys-fs/cryptsetup ) dmraid? ( sys-fs/dmraid ) dracut? ( >=sys-kernel/dracut-0.44-r8 ) dkms? ( sys-kernel/dkms sys-kernel/linux-sources-redcore:6.18 ) mdadm? ( sys-fs/mdadm ) >=sys-kernel/linux-firmware-20180314
+RDEPEND=app-arch/lz4 app-arch/xz-utils dev-build/autoconf dev-build/make sys-devel/bc cryptsetup? ( sys-fs/cryptsetup ) dmraid? ( sys-fs/dmraid ) dracut? ( >=sys-kernel/dracut-0.44-r8 ) dkms? ( sys-kernel/dkms sys-kernel/linux-sources-redcore-lts:6.18 ) mdadm? ( sys-fs/mdadm ) >=sys-kernel/linux-firmware-20180314
 RESTRICT=binchecks strip mirror
 SLOT=6.18
 SRC_URI=https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.18.1.tar.xz
-_md5_=6ff8e6a89baff6a407870fceefe739a1
+_md5_=796d23ee1ebf1fe186df60bd15c7deab

@@ -27,7 +27,7 @@ DEPEND="
 	cryptsetup? ( sys-fs/cryptsetup )
 	dmraid? ( sys-fs/dmraid )
 	dracut? ( >=sys-kernel/dracut-0.44-r8 )
-	dkms? ( sys-kernel/dkms sys-kernel/linux-sources-redcore:${SLOT} )
+	dkms? ( sys-kernel/dkms sys-kernel/linux-sources-redcore-lts:${SLOT} )
 	mdadm? ( sys-fs/mdadm )
 	>=sys-kernel/linux-firmware-20180314"
 RDEPEND="${DEPEND}"
