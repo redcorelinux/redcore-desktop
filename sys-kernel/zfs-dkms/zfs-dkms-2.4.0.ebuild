@@ -5,7 +5,7 @@
 EAPI=8
 
 MY_PN="zfs"
-MY_P="${MY_PN}-${PV//_rc5/-rc5}"
+MY_P="${MY_PN}-${PV}"
 
 DESCRIPTION="ZFS sources for linux"
 HOMEPAGE="http://zfsonlinux.org/"
@@ -29,15 +29,15 @@ src_compile() {
 }
 
 src_install() {
-	dodir usr/src/"${P//_rc5/-rc5}"
+	dodir usr/src/"${P}"
 	cp -ax "${FILESDIR}"/dkms.conf "${S}" || die
-	cp -ax "${S}"/* "${D}"/usr/src/"${P//_rc5/-rc5}" || die
+	cp -ax "${S}"/* "${D}"/usr/src/"${P}" || die
 }
 
 pkg_postinst() {
-	dkms add ${PN}/${PV//_rc5/-rc5}
+	dkms add ${PN}/${PV}
 }
 
 pkg_prerm() {
-	dkms remove ${PN}/${PV//_rc5/-rc5} --all
+	dkms remove ${PN}/${PV} --all
 }
