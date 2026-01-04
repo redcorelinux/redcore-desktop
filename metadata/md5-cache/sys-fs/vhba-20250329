@@ -10,5 +10,5 @@ LICENSE=GPL-2+
 RDEPEND=~sys-kernel/vhba-dkms-20250329 virtual/udev
 SLOT=0
 SRC_URI=https://download.sourceforge.net/cdemu/vhba-module/vhba-module-20250329.tar.xz
-_eclasses_=toolchain-funcs	98d9f464d912ae6b7316fb8a3721f5db	udev	f3d9a4376ebd22131726a68e1a0a058f
+_eclasses_=toolchain-funcs	30214924c0c3b92ec7dbf24fc70d60d3	udev	f3d9a4376ebd22131726a68e1a0a058f
 _md5_=bb73be054574cf31bf5982ad6ed5b3d3

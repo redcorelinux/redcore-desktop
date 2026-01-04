@@ -10,5 +10,5 @@ RDEPEND=x11-libs/gtk+:2 x11-libs/gtk+:3 x11-libs/libX11 x11-libs/libXext x11-lib
 RESTRICT=strip
 SLOT=5
 SRC_URI=https://github.com/NVIDIA/nvidia-settings/archive/refs/tags/580.95.05.tar.gz -> nvidia-settings-580.95.05.tar.gz
-_eclasses_=desktop	7b6f6e9d65093966fbc8475399c5dd4e	multilib	a199af442898963433d6f038a88cce9c	toolchain-funcs	98d9f464d912ae6b7316fb8a3721f5db
+_eclasses_=desktop	7b6f6e9d65093966fbc8475399c5dd4e	multilib	404b65bd5212cff83b3935c685419d08	toolchain-funcs	30214924c0c3b92ec7dbf24fc70d60d3
 _md5_=eeddb1b0c712b4ce76df8f100ed0e73c
