@@ -17,7 +17,7 @@ app-misc/redcore-live 1.314.1337-r4: Redcore Linux live scripts
 app-misc/redcore-skel 1.314.1337-r10: Redcore Linux skel tree
 app-portage/flaggie 0.99.8-r2: A smart CLI mangler for package.* files
 app-portage/hermes 0.2512.1-r1: System Upgrade Watchdog Service
-app-portage/sisyphus 6.2601.0-r1: A simple portage python wrapper which works like other package managers(apt-get/yum/dnf)
+app-portage/sisyphus 6.2601.0-r2: A simple portage python wrapper which works like other package managers(apt-get/yum/dnf)
 app-portage/sisyphus-qt 6.2601.0: A simple portage python wrapper which works like other package managers(apt-get/yum/dnf)
 app-text/simplenote 2.6.0-r1: The simplest way to keep notes
 dev-go/protobuf-go 1.30.0-r1: Go support for Google's protocol buffers
