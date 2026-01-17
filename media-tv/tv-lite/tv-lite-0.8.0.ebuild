@@ -13,8 +13,7 @@ LICENSE="GPLv2"
 SLOT="0"
 KEYWORDS="~amd64"
 
-IUSE="gtk +gtk3 sopcast"
-REQUIRED_USE="^^ ( gtk gtk3 )"
+IUSE="sopcast"
 
 DEPEND="
 	dev-libs/rapidjson
@@ -23,14 +22,9 @@ RDEPEND="${DEPEND}
 	dev-db/sqlite
 	media-video/vlc
 	net-misc/curl
+	net-misc/yt-dlp
 	sys-apps/util-linux
-	gtk? ( x11-libs/wxGTK:3.0 )
-	gtk3? (
-			|| (
-				x11-libs/wxGTK:3.2-gtk3
-				x11-libs/wxGTK:3.0-gtk3
-			)
-	)
+	x11-libs/wxGTK:3.2-gtk3
 	sopcast? ( media-tv/sopcast )
 	"
 BDEPEND="${DEPEND}"
@@ -41,10 +35,5 @@ src_configure() {
 	local mycmakeargs=(
 		-DWX_CONFIG=wx-config
 	)
-	if use gtk; then
-		local mycmakeargs+=(
-			-DGTKVER=gtk+-2.0
-		)
-	fi
 	cmake_src_configure
 }
