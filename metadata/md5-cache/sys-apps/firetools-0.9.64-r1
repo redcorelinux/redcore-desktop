@@ -1,7 +1,7 @@
 DEFINED_PHASES=configure
 DEPEND=|| ( sys-apps/firejail sys-apps/firejail-lts ) dev-qt/qtcore:5 dev-qt/qtgui:5 dev-qt/qtsvg:5 x11-terms/xterm
 DESCRIPTION=Graphical user interface of app-emulation/firejail
-EAPI=7
+EAPI=8
 HOMEPAGE=https://l3net.wordpress.com/projects/firejail
 INHERIT=qmake-utils
 KEYWORDS=~amd64
@@ -10,4 +10,4 @@ RDEPEND=|| ( sys-apps/firejail sys-apps/firejail-lts ) dev-qt/qtcore:5 dev-qt/qt
 SLOT=0
 SRC_URI=https://github.com/netblue30/firetools/archive/0.9.64.tar.gz -> firetools-0.9.64.tar.gz
 _eclasses_=qmake-utils	a8dd17b1d94586164f5e3fc12b1c6b81	toolchain-funcs	30214924c0c3b92ec7dbf24fc70d60d3
-_md5_=0e045f1c9a1fd4d2de6ed0aa0c8474a0
+_md5_=ec5ced0ba2dd0844cb92e715c0a959ce
