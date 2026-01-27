@@ -34,7 +34,7 @@ lxqt-base/lxqt-meta 2.3.0-r10: Meta ebuild for LXQt, the Lightweight Desktop Env
 lxqt-base/lxqt-session 2.3.0-r10: LXQt Session Manager
 media-libs/portsmf 239-r1: The Tenacity fork of PortSMF, a Standard MIDI File library
 media-tv/sopcast 3.2.6-r5: SopCast free P2P Internet TV binary
-media-tv/tv-lite 0.8.0: IPTV viewer with Sopcast and Acestream handling capabilities.
+media-tv/tv-lite 0.8.1: IPTV viewer with Sopcast and Acestream handling capabilities.
 media-video/guvcview 2.0.6-r10: Simple Qt5 or GTK+3 interface for capturing and viewing video from v4l2 devices
 net-dialup/rp-pppoe 4.0-r5: A user-mode PPPoE client and server suite for Linux
 net-misc/warpinator 1.8.6: Share files across the LAN
