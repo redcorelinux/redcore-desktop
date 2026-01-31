@@ -8,7 +8,7 @@ inherit git-r3
 DESCRIPTION="Versatile Advanced Script for ISO and Latest Enchantments"
 HOMEPAGE="https://redcorelinux.org"
 
-EGIT_REPO_URI="https://pagure.io/redcore/vasile.git"
+EGIT_REPO_URI="https://codeberg.org/redcore/vasile.git"
 EGIT_BRANCH="master"
 EGIT_COMMIT="4461a01202018c5120d19f6b997e402f85ee66cd"
 

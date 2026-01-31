@@ -8,7 +8,7 @@ DESCRIPTION="Redcore Linux GRUB2 Images"
 HOMEPAGE="http://redcorelinux.org"
 
 EGIT_BRANCH="master"
-EGIT_REPO_URI="https://pagure.io/redcore/boot-core.git"
+EGIT_REPO_URI="https://codeberg.org/redcore/boot-core.git"
 
 LICENSE="CCPL-Attribution-ShareAlike-3.0"
 SLOT="0"

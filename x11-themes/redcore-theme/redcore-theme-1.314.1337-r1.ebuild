@@ -9,7 +9,7 @@ DESCRIPTION="Official Redcore Linux GTK theme"
 HOMEPAGE="http://redcorelinux.org"
 
 EGIT_BRANCH="master"
-EGIT_REPO_URI="https://pagure.io/redcore/redcore-theme.git"
+EGIT_REPO_URI="https://codeberg.org/redcore/redcore-theme.git"
 
 LICENSE="GPLv3"
 SLOT="0"

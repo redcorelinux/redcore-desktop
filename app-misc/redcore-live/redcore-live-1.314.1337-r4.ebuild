@@ -3,7 +3,7 @@
 EAPI=8
 
 EGIT_BRANCH="master"
-EGIT_REPO_URI="https://pagure.io/redcore/redcore-live.git"
+EGIT_REPO_URI="https://codeberg.org/redcore/redcore-live.git"
 
 inherit git-r3
 

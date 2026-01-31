@@ -9,7 +9,7 @@ DESCRIPTION="Official Redcore Linux LXQT theme"
 HOMEPAGE="http://redcorelinux.org"
 
 EGIT_BRANCH="master"
-EGIT_REPO_URI="https://pagure.io/redcore/redcore-theme-lxqt.git"
+EGIT_REPO_URI="https://codeberg.org/redcore/redcore-theme-lxqt.git"
 
 LICENSE="GPLv3"
 SLOT="0"

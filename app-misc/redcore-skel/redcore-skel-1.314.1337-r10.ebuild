@@ -2,7 +2,7 @@
 # $Header: $
 
 EAPI=8
-EGIT_REPO_URI="https://pagure.io/redcore/redcore-skel.git"
+EGIT_REPO_URI="https://codeberg.org/redcore/redcore-skel.git"
 
 inherit desktop git-r3
 
