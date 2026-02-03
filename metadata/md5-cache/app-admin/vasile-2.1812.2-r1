@@ -11,4 +11,4 @@ PROPERTIES=live
 RDEPEND=sys-apps/gentoo-functions dev-libs/libisoburn dev-vcs/git sys-boot/grub:2 sys-kernel/dkms sys-fs/mtools sys-fs/squashfs-tools
 SLOT=0
 _eclasses_=git-r3	875eb471682d3e1f18da124be97dcc81
-_md5_=b22e77a7235d154530a555d3277bb3c1
+_md5_=4482f1668ffb6c37b089e3d29b686654
