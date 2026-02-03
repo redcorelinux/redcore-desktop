@@ -8,7 +8,7 @@ inherit edo readme.gentoo-r1 systemd toolchain-funcs
 MY_PN="VirtualBox"
 MY_PV=${PV^^}
 MY_P=${MY_PN}-${MY_PV}
-PATCHES_PV="7.2.0_p20250830"
+PATCHES_PV="7.2.6"
 
 DESCRIPTION="VirtualBox user-space tools for Gentoo guests"
 HOMEPAGE="https://www.virtualbox.org/"
