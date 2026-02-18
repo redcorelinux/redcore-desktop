@@ -9,5 +9,5 @@ LICENSE=GPL-2
 PROPERTIES=live
 RDEPEND=media-fonts/fontawesome media-fonts/roboto x11-themes/material-icon-theme x11-themes/redcore-artwork-community x11-themes/redcore-artwork-core x11-themes/redcore-artwork-grub x11-themes/redcore-theme x11-themes/redcore-theme-sddm
 SLOT=0
-_eclasses_=desktop	7b6f6e9d65093966fbc8475399c5dd4e	git-r3	875eb471682d3e1f18da124be97dcc81
+_eclasses_=desktop	26d57169ca094c04be416993844ec8bc	git-r3	875eb471682d3e1f18da124be97dcc81
 _md5_=878368bd3b20ce957d3ad91d00da5858
