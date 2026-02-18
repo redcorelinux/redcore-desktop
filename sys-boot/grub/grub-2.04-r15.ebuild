@@ -236,6 +236,9 @@ src_configure() {
 	# Bug 508758.
 	replace-flags -O3 -O2
 
+	# Not compatible with C23 decls
+	append-flags -std=gnu17
+
 	# We don't want to leak flags onto boot code.
 	export HOST_CCASFLAGS=${CCASFLAGS}
 	export HOST_CFLAGS=${CFLAGS}
