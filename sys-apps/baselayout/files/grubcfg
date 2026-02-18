@@ -61,3 +61,6 @@ GRUB_BACKGROUND="/usr/share/grub/themes/redcore/terminal_bg.png"
 # This is useful, for example, to allow users who can't see the screen
 # to know when they can make a choice on the menu.
 #GRUB_INIT_TUNE="60 800 1"
+
+# Uncomment to enable os-prober
+GRUB_DISABLE_OS_PROBER=false

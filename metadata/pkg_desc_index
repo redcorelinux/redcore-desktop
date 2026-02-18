@@ -38,7 +38,7 @@ net-dialup/rp-pppoe 4.0-r5: A user-mode PPPoE client and server suite for Linux
 net-misc/warpinator 1.8.6: Share files across the LAN
 net-print/lexmark-upd-ppd 1.0.0.20210304-r1: Lexmark universal printer driver PPDs
 net-wireless/broadcom-sta 6.30.223.271-r6: Broadcom's IEEE 802.11a/b/g/n hybrid Linux device driver
-sys-apps/baselayout 2.13-r7: Filesystem baselayout and init scripts
+sys-apps/baselayout 2.13-r8: Filesystem baselayout and init scripts
 sys-apps/firetools 0.9.64-r1: Graphical user interface of app-emulation/firejail
 sys-apps/lsb-release 3.3-r5: LSB version query program
 sys-apps/openrc 0.62.8-r1: OpenRC manages the services, startup and shutdown of a host
@@ -46,7 +46,7 @@ sys-auth/polkit-qt 0.200.0: PolicyKit Qt API wrapper library (meta package)
 sys-auth/polkit-qt5 0.200.0: Qt wrapper around polkit-1 client libraries
 sys-auth/polkit-qt6 0.200.0: Qt wrapper around polkit-1 client libraries
 sys-boot/etcher 1.19.21-r1: Flash OS images to SD cards & USB drives, safely and easily.
-sys-boot/grub 2.04-r15: GNU GRUB boot loader
+sys-boot/grub 2.14-r10: GNU GRUB boot loader
 sys-boot/os-prober 1.77-r10: Utility to detect other OSs on a set of drives
 sys-boot/plymouth 0.9.4-r11: Graphical boot animation (splash) and logger
 sys-boot/rpi-imager 1.8.5: Raspberry Pi Imaging Utility
