@@ -8,5 +8,5 @@ LICENSE=GPL-2
 RDEPEND=app-arch/lz4 app-arch/xz-utils dev-build/autoconf dev-build/make sys-devel/bc
 RESTRICT=strip mirror
 SLOT=5.15
-SRC_URI=https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-5.15.200.tar.xz
+SRC_URI=https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-5.15.201.tar.xz
 _md5_=a6028110158f1900186a1776e00a5c6a
