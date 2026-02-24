@@ -14,7 +14,7 @@ app-emulation/virtualbox-modules 7.2.6: Kernel Modules for Virtualbox
 app-laptop/tp_smapi 0.45: IBM ThinkPad SMAPI BIOS driver
 app-misc/calamares-config-redcore 1.314.1337-r19: Redcore Linux Calamares modules config
 app-misc/redcore-live 1.314.1337-r4: Redcore Linux live scripts
-app-misc/redcore-skel 1.314.1337-r10: Redcore Linux skel tree
+app-misc/redcore-skel 1.314.1337-r11: Redcore Linux skel tree
 app-portage/flaggie 0.99.8-r2: A smart CLI mangler for package.* files
 app-portage/hermes 0.2512.1-r1: System Upgrade Watchdog Service
 app-portage/sisyphus 6.2601.2: A simple portage python wrapper which works like other package managers(apt-get/yum/dnf)
