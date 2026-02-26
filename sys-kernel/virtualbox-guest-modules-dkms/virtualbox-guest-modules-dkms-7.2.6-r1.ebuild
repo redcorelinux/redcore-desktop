@@ -25,7 +25,9 @@ RDEPEND="
 	${DEPEND}
 "
 
-PATCHES=( ${FILESDIR}/Makefile-dkms.patch
+PATCHES=( 
+	${FILESDIR}/kernel-6.19.patch
+	${FILESDIR}/Makefile-dkms.patch
 	${FILESDIR}/Makefile-no-vboxvideo.patch)
 
 S=${WORKDIR}
