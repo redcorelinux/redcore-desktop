@@ -9,4 +9,4 @@ RDEPEND=sys-apps/ethtool sys-kernel/dkms
 RESTRICT=mirror
 SLOT=0
 SRC_URI=https://dev.gentoo.org/~ceamac/app-emulation/virtualbox-modules/vbox-host-kernel-module-src-7.2.6.tar.xz
-_md5_=ce94088018c20ea8d427b3dd5d8f544e
+_md5_=acbd07d53edec482814b9636195f8e55
