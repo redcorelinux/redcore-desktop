@@ -54,8 +54,8 @@ sys-boot/rpi-imager 1.8.5: Raspberry Pi Imaging Utility
 sys-boot/unetbootin-static 625-r5: Universal Netboot Installer creates Live USB systems for various OS distributions
 sys-fs/cryptsetup 2.8.1-r10: Tool to setup encrypted devices with dm-crypt
 sys-fs/vhba 20250329: Virtual (SCSI) Host Bus Adapter kernel module for the CDEmu suite
-sys-fs/zfs 2.4.0: ZFS meta-package (Gentoo compatibility ebuild)
-sys-fs/zfs-utils 2.4.0: Userland utilities for ZFS Linux kernel module
+sys-fs/zfs 2.4.1: ZFS meta-package (Gentoo compatibility ebuild)
+sys-fs/zfs-utils 2.4.1: Userland utilities for ZFS Linux kernel module
 sys-kernel/bcmwl-dkms 6.30.223.271-r20: Broadcom's IEEE 802.11a/b/g/n hybrid Linux device driver source
 sys-kernel/dkms 2.3-r4: Dynamic Kernel Module Support
 sys-kernel/dracut 059-r15: Generic initramfs generation tool
@@ -63,12 +63,12 @@ sys-kernel/linux-image-redcore 6.19.3-r1: Redcore Linux Kernel Image
 sys-kernel/linux-image-redcore-lts 5.15.201-r1 6.1.164-r1 6.6.127-r1 6.12.74-r1 6.18.13-r1: Redcore Linux LTS Kernel Image
 sys-kernel/linux-sources-redcore 6.19.3-r1: Redcore Linux Kernel Sources
 sys-kernel/linux-sources-redcore-lts 5.15.201-r1 6.1.164-r1 6.6.127-r1 6.12.74-r1 6.18.13-r1: Redcore Linux LTS Kernel Sources
-sys-kernel/nvidia-drivers-dkms 390.157-r8 470.256.02-r1 580.95.05-r2: NVIDIA driver sources for linux
+sys-kernel/nvidia-drivers-dkms 390.157-r8 470.256.02-r1 580.126.18: NVIDIA driver sources for linux
 sys-kernel/tp_smapi-dkms 0.45-r2: IBM ThinkPad SMAPI BIOS driver sources
 sys-kernel/vhba-dkms 20250329-r4: Virtual (SCSI) Host Bus Adapter kernel module for the CDEmu suite sources
 sys-kernel/virtualbox-guest-modules-dkms 7.2.6-r1: Kernel Modules (guest) source for Virtualbox
 sys-kernel/virtualbox-modules-dkms 7.2.6-r1: Kernel Modules source for Virtualbox
-sys-kernel/zfs-dkms 2.4.0: ZFS sources for linux
+sys-kernel/zfs-dkms 2.4.1: ZFS sources for linux
 sys-process/procps 4.0.6-r1: Standard informational utilities and process-handling tools
 virtual/libudev 314.1337-r1: Virtual for libudev providers
 virtual/linux-sources 314.1337-r1: Virtual for Linux kernel sources
@@ -78,10 +78,10 @@ virtual/tmpfiles 1.314.1337-r1: Virtual to select between different tmpfiles.d h
 virtual/udev 314.1337-r1: Virtual to select between different udev daemon providers
 www-client/ungoogled-chromium 132.0.6834.83: Modifications to Chromium for removing Google integration and enhancing privacy
 x11-base/xorg-drivers 21.1-r100: Meta package containing deps on all xorg drivers (dummy package)
-x11-drivers/nvidia-drivers 390.157-r13 470.256.02-r7 580.95.05: NVIDIA Accelerated Graphics Driver
+x11-drivers/nvidia-drivers 390.157-r13 470.256.02-r7 580.126.18: NVIDIA Accelerated Graphics Driver
 x11-libs/gtk+ 2.24.33-r6 3.24.48: Gimp ToolKit +
 x11-misc/nvidia-prime 314: NVIDIA Prime Render Offload configuration and utilities
-x11-misc/nvidia-settings 390.157-r7 470.256.02 580.95.05: NVIDIA Linux X11 Settings Utility
+x11-misc/nvidia-settings 390.157-r7 470.256.02 580.126.18: NVIDIA Linux X11 Settings Utility
 x11-misc/pcmanfm-qt-share 1337-r1: PCManFM-QT custom action to share folder using Samba
 x11-misc/polybar 3.7.2-r10: A fast and easy-to-use tool for creating status bars
 x11-themes/material-icon-theme 1.314.1337-r2: Icon theme following the Google's material design specifications
