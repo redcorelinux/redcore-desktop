@@ -23,7 +23,7 @@ DEPEND="dev-lang/python[sqlite]"
 RDEPEND="${DEPEND}
 	app-portage/portage-utils
 	$(python_gen_cond_dep '
-		>=app-eselect/eselect-repository-14-r1[git,${PYTHON_USEDEP}]
+		>=app-eselect/eselect-repository-14-r1[git]
 		app-portage/gentoolkit[${PYTHON_USEDEP}]
 		dev-python/animation[${PYTHON_USEDEP}]
 		dev-python/click[${PYTHON_USEDEP}]
