@@ -20,4 +20,6 @@ src_install() {
 	dodir etc/calamares/branding/redcore_branding || die
 	insinto etc/calamares/branding/redcore_branding || die
 	doins -r "${S}"/* || die
+
+	sed -i 's|REDCORE_ISO_VERSION|'"${PV}"'|g' "${D}/etc/calamares/branding/redcore_branding/branding.desc" || die
 }

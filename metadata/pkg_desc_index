@@ -85,7 +85,7 @@ x11-misc/nvidia-settings 390.157-r7 470.256.02 580.142: NVIDIA Linux X11 Setting
 x11-misc/pcmanfm-qt-share 1337-r1: PCManFM-QT custom action to share folder using Samba
 x11-misc/polybar 3.7.2-r10: A fast and easy-to-use tool for creating status bars
 x11-themes/material-icon-theme 1.314.1337-r2: Icon theme following the Google's material design specifications
-x11-themes/redcore-artwork-calamares 1.314.1337-r7: Redcore Linux branding component for Calamares
+x11-themes/redcore-artwork-calamares 2601: Redcore Linux branding component for Calamares
 x11-themes/redcore-artwork-community 1.314.1337-r1: Redcore Linux Community Wallpapers
 x11-themes/redcore-artwork-core 1.314.1337-r1: Offical Redcore Linux Core Artwork
 x11-themes/redcore-artwork-grub 1.314.1337-r1: Redcore Linux GRUB2 Images

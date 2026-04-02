@@ -6,4 +6,4 @@ KEYWORDS=amd64 x86
 LICENSE=GPL-2
 RDEPEND=app-admin/calamares
 SLOT=0
-_md5_=a80f0048ef0cef280cab44d62c6c0e82
+_md5_=ecac1abb32d568e70bc5084b243a37b7
