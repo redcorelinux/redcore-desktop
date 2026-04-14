@@ -68,7 +68,10 @@ RDEPEND="
 	sudo? ( =lxqt-base/lxqt-sudo-${MY_PV}* )
 	terminal? ( =x11-terms/qterminal-${MY_PV}* )
 	trash? ( gnome-base/gvfs )
-	wayland? ( lxqt-base/lxqt-wayland-session )
+	wayland? (
+		lxqt-base/lxqt-wayland-session
+		gui-wm/labwc
+		)
 	window-manager? (
 		openbox? (
 			x11-wm/openbox
