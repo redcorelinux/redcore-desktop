@@ -49,4 +49,5 @@ RDEPEND="
 		X? ( media-gfx/feh )
 		wayland? ( gui-apps/swaybg )
 	)
+	X? ( x11-misc/picom )
 "
