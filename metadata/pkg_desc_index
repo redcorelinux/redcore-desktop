@@ -8,7 +8,7 @@ app-arch/unp 2.0_pre9-r1: Script for unpacking various file formats
 app-backup/timeshift 24.06.3: A system restore utility for Linux
 app-editors/zed 0.187.9-r10: The fast, collaborative code editor
 app-emulation/steam 1.0.0.79: Installer, launcher and supplementary files for Valve's Steam client
-app-emulation/virtualbox-guest-additions 7.2.6: VirtualBox user-space tools for Gentoo guests
+app-emulation/virtualbox-guest-additions 7.2.8: VirtualBox user-space tools for Gentoo guests
 app-emulation/virtualbox-guest-modules 7.2.6: Kernel Modules (guest) for Virtualbox
 app-emulation/virtualbox-modules 7.2.6: Kernel Modules for Virtualbox
 app-i18n/man-pages-l10n 4.30.0-r1: A somewhat comprehensive collection of man page translations
