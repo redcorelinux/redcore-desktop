@@ -6,11 +6,11 @@ EAPI=8
 
 MY_CATEGORY="app-emulation"
 MY_PN="virtualbox-guest-modules"
-MY_P="vbox-guest-kernel-module-src-${PV}"
+MY_P="vbox-guest-kernel-module-src-${PV^^}"
 
 DESCRIPTION="Kernel Modules (guest) source for Virtualbox"
 HOMEPAGE="http://www.virtualbox.org/"
-SRC_URI="https://dev.gentoo.org/~ceamac/${MY_CATEGORY}/${MY_PN}/${MY_P}.tar.xz"
+SRC_URI="https://distfiles.gentoo.org/pub/dev/ceamac@gentoo.org/${MY_CATEGORY}/${MY_PN}/${MY_P}.tar.xz"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -26,7 +26,6 @@ RDEPEND="
 "
 
 PATCHES=( 
-	${FILESDIR}/kernel-6.19.patch
 	${FILESDIR}/Makefile-dkms.patch
 	${FILESDIR}/Makefile-no-vboxvideo.patch)
 
