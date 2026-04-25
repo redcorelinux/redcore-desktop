@@ -10,7 +10,7 @@ app-editors/zed 0.187.9-r10: The fast, collaborative code editor
 app-emulation/steam 1.0.0.79: Installer, launcher and supplementary files for Valve's Steam client
 app-emulation/virtualbox-guest-additions 7.2.8: VirtualBox user-space tools for Gentoo guests
 app-emulation/virtualbox-guest-modules 7.2.8: Kernel Modules (guest) for Virtualbox
-app-emulation/virtualbox-modules 7.2.6: Kernel Modules for Virtualbox
+app-emulation/virtualbox-modules 7.2.8: Kernel Modules for Virtualbox
 app-i18n/man-pages-l10n 4.30.0-r1: A somewhat comprehensive collection of man page translations
 app-laptop/tp_smapi 0.45: IBM ThinkPad SMAPI BIOS driver
 app-misc/calamares-config-redcore 1.314.1337-r19: Redcore Linux Calamares modules config
