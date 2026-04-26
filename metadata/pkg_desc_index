@@ -26,6 +26,7 @@ dev-go/protoc-gen-go-grpc 1.2.0: This tool generates Go language bindings of ser
 dev-python/animation 0.0.5-r8: Tools for terminal-based wait animations
 dev-python/grpcio-tools 1.80.0: Protobuf code generator for gRPC
 dev-python/pybind11 2.13.6-r10: AST-based Python refactoring library
+dev-python/qt-material 2.17: Material inspired stylesheet for PySide6 and PyQt6.
 dev-python/sh 1.12.14-r7: Python process launching
 dev-python/wget 2.2-r5: Python library for downloading from http URLs
 gui-libs/display-manager-init 1.1.2-r10: RC init files for starting display and login managers
