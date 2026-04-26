@@ -19,33 +19,21 @@ EGIT_COMMIT="c78e89b47fa5099955c85f1c6c1e672094bda684"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="amd64 arm64"
-IUSE="qt5 qt6"
+IUSE=""
 
 DEPEND="dev-lang/python[sqlite]
 	~app-portage/sisyphus-${PV}"
 RDEPEND="${DEPEND}
 	app-misc/tmux
-	qt5? ( $(python_gen_cond_dep '
-		dev-python/pyqt5[gui,widgets,${PYTHON_USEDEP}]
-	') )
-	qt6? ( $(python_gen_cond_dep '
+	$(python_gen_cond_dep '
 		dev-python/pyqt6[gui,widgets,${PYTHON_USEDEP}]
-	') )"
+	')"
 
 src_install() {
 	emake DESTDIR="${D}"/ install-gui
 
 	# enforce the best available python implementation (GUI)
 	python_setup
-	if use qt5; then
-		python_fix_shebang "${ED}"/usr/share/"${MY_PN}"/"${MY_PN}"-qt5.py
-	else
-		rm -rvf "${ED}"/usr/share/"${MY_PN}"/"${MY_PN}"-qt5.py
-	fi
-
-	if use qt6; then
-		python_fix_shebang "${ED}"/usr/share/"${MY_PN}"/"${MY_PN}"-qt6.py
-	else
-		rm -rvf "${ED}"/usr/share/"${MY_PN}"/"${MY_PN}"-qt6.py
-	fi
+	python_fix_shebang "${ED}"/usr/share/"${MY_PN}"/"${MY_PN}"-qt6.py
+	rm -rvf "${ED}"/usr/share/"${MY_PN}"/"${MY_PN}"-qt5.py
 }
