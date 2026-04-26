@@ -1,4 +1,4 @@
-# Copyright 1999-2023 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -9,16 +9,16 @@ DESCRIPTION="eBPF process monitor module for opensnitch"
 HOMEPAGE="https://github.com/evilsocket/opensnitch"
 # NOTE: app-admin/opensnitch and this ebuild share the same source
 SRC_URI="
-	https://github.com/evilsocket/opensnitch/archive/refs/tags/v${PV}.tar.gz -> opensnitch-${PV}.tar.gz
+	https://github.com/evilsocket/opensnitch/archive/refs/tags/v${PV}.tar.gz -> opensnitch-${PV}.gh.tar.gz
 "
-S="${WORKDIR}/opensnitch-${PV}"
-EBPF_DIR=ebpf_prog
 
-KEYWORDS="~amd64"
+S="${WORKDIR}/opensnitch-${PV}"
 LICENSE="GPL-3"
 SLOT="0"
+KEYWORDS="amd64"
 IUSE="dist-kernel"
 
+EBPF_DIR=ebpf_prog
 MINKV=5.5 # only compatible with kernels >= 5.5
 
 RDEPEND="
@@ -33,8 +33,8 @@ DEPEND="
 
 BDEPEND="
 	sys-devel/bc
-	sys-devel/clang
-	sys-devel/llvm
+	llvm-core/clang
+	llvm-core/llvm
 "
 
 RESTRICT="strip test"

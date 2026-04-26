@@ -1,8 +1,8 @@
 acct-group/smbshare 0: System group: smbshare
 app-admin/calamares 3.3.14-r12: Distribution-independent installer framework
 app-admin/conky 1.19.8-r10: An advanced, highly configurable system monitor for X
-app-admin/opensnitch 1.6.7: Desktop application firewall
-app-admin/opensnitch-ebpf-module 1.6.2: eBPF process monitor module for opensnitch
+app-admin/opensnitch 1.8.0-r1: Desktop application firewall
+app-admin/opensnitch-ebpf-module 1.8.0: eBPF process monitor module for opensnitch
 app-admin/vasile 2.1812.2-r1: Versatile Advanced Script for ISO and Latest Enchantments
 app-arch/unp 2.0_pre9-r1: Script for unpacking various file formats
 app-backup/timeshift 24.06.3: A system restore utility for Linux

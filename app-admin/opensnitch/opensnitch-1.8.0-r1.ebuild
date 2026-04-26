@@ -1,10 +1,10 @@
-# Copyright 1999-2024 Gentoo Authors
+# Copyright 2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
 DISTUTILS_USE_PEP517=setuptools
-PYTHON_COMPAT=( python3_{11..13} )
+PYTHON_COMPAT=( python3_{12..14} )
 inherit distutils-r1 go-module linux-info systemd xdg-utils
 
 DESCRIPTION="Desktop application firewall"
@@ -12,12 +12,13 @@ HOMEPAGE="https://github.com/evilsocket/opensnitch"
 
 SRC_URI="
 	https://github.com/evilsocket/opensnitch/archive/refs/tags/v${PV}.tar.gz -> ${P}.gh.tar.gz
-	https://dev.pentoo.ch/~blshkv/distfiles/${P}-deps.tar.xz
-	"
+	https://dev.pentoo.ch/~blshkv/distfiles/${P}-vendor.tar.xz
+"
 
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="amd64"
+
 IUSE="+audit bpf +iptables +nftables systemd"
 REQUIRED_USE="|| ( iptables nftables )"
 
@@ -27,12 +28,15 @@ DEPEND=">=dev-lang/go-1.19
 	dev-go/protoc-gen-go-grpc
 "
 RDEPEND="
-	!dev-go/go-protobuf
+	dev-python/pyqt6[network,sql,${PYTHON_USEDEP}]
+	dev-python/protobuf[${PYTHON_USEDEP}]
 	dev-python/grpcio-tools[${PYTHON_USEDEP}]
-	dev-python/notify2[${PYTHON_USEDEP}]
 	dev-python/python-slugify[${PYTHON_USEDEP}]
 	dev-python/pyinotify[${PYTHON_USEDEP}]
-	dev-python/pyqt5[network,sql,${PYTHON_USEDEP}]
+	dev-python/notify2[${PYTHON_USEDEP}]
+	dev-python/qt-material[${PYTHON_USEDEP}]
+	dev-python/pyside[tools,${PYTHON_USEDEP}]
+
 	bpf? ( ~app-admin/opensnitch-ebpf-module-$PV )
 "
 
@@ -82,7 +86,7 @@ src_unpack() {
 
 src_prepare() {
 	rm -rf ui/tests || die
-	use systemd && eapply "${FILESDIR}/systemd.patch"
+	use systemd && eapply "${FILESDIR}/systemd-1.8.patch"
 	default
 }
 
@@ -90,11 +94,12 @@ src_compile() {
 	emake protocol || die
 
 	pushd ui || die
-	pyrcc5 -o opensnitch/{resources_rc.py,/res/resources.qrc} || die
+	pyside6-rcc -o opensnitch/{resources_rc.py,/res/resources.qrc} || die
 	# workaround for namespace conflict
 	# see https://github.com/evilsocket/opensnitch/issues/496
 	# and https://github.com/evilsocket/opensnitch/pull/442
-	sed -i 's/^import ui_pb2/from . import ui_pb2/' opensnitch/ui_pb2* || die
+	#sed -i 's/^from . import ui_pb2/import opensnitch.proto.ui_pb2/' opensnitch/proto/ui_pb2_grpc.py || die
+	sed -i 's/^import ui_pb2/import opensnitch.proto.ui_pb2/' opensnitch/proto/ui_pb2_grpc.py || die
 	popd > /dev/null || die
 
 	pushd daemon || die
@@ -117,13 +122,14 @@ src_install(){
 	dobin opensnitchd
 	keepdir /etc/opensnitchd/rules
 	insinto /etc/opensnitchd/
-	doins default-config.json
-	doins system-fw.json
+	doins ./data/default-config.json
+	doins ./data/network_aliases.json
+	doins ./data/system-fw.json
 	popd > /dev/null || die
 
 	if use systemd; then
 		pushd daemon || die
-		systemd_dounit opensnitchd.service
+		systemd_dounit ./data/init/opensnitchd.service
 		popd > /dev/null || die
 	else
 		newinitd "${FILESDIR}"/opensnitch.initd ${PN}
