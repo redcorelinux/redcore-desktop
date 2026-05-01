@@ -37,7 +37,10 @@ COMMON_DEPEND="
 "
 RDEPEND="
 	${COMMON_DEPEND}
-	dev-libs/openssl:0/3
+	|| (
+		dev-libs/openssl-compat:3
+		dev-libs/openssl:0/3
+	)
 	sys-libs/glibc
 	!!x11-drivers/nvidia-drivers:3
 	!!x11-drivers/nvidia-drivers:4
