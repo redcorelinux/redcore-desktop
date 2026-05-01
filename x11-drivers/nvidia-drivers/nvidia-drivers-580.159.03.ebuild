@@ -68,6 +68,7 @@ DEPEND="
 	x11-libs/libXext
 "
 BDEPEND="
+	app-alternatives/awk
 	sys-devel/m4
 	virtual/pkgconfig
 "
