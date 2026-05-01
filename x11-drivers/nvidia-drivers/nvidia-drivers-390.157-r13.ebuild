@@ -19,7 +19,7 @@ SRC_URI="
 S=${WORKDIR}
 
 LICENSE="NVIDIA-r2 BSD BSD-2 GPL-2 MIT"
-SLOT="3"
+SLOT="3/${PV%%.*}"
 KEYWORDS="-* amd64"
 IUSE="abi_x86_32 abi_x86_64 +acpi +dkms +persistenced +tools +X"
 RESTRICT="strip"
