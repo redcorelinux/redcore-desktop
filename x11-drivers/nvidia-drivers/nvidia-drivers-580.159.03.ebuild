@@ -65,7 +65,6 @@ DEPEND="
 	x11-libs/libXext
 "
 BDEPEND="
-	app-alternatives/awk
 	sys-devel/m4
 	virtual/pkgconfig
 "
@@ -77,6 +76,7 @@ QA_PREBUILT="lib/firmware/* opt/bin/* usr/lib*"
 
 PATCHES=(
 	"${FILESDIR}"/nvidia-modprobe-390.141-uvm-perms.patch
+	"${FILESDIR}"/nvidia-drivers-580.159.03-null-deref.patch
 )
 
 pkg_setup() {
@@ -88,12 +88,11 @@ pkg_setup() {
 		~!LOCKDEP
 		~!SLUB_DEBUG_ON
 		!DEBUG_MUTEXES
+		$(usev amd64 'X86_PAT')
 		$(usev powerd '~CPU_FREQ')
 	"
 
 	CONFIG_CHECK+=" DRM_TTM_HELPER"
-
-	CONFIG_CHECK+=" X86_PAT" #817764
 
 	CONFIG_CHECK+=" MMU_NOTIFIER" #843827
 
