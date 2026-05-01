@@ -43,3 +43,11 @@ src_install() {
 	insinto /etc/modules-load.d
 	newins "${FILESDIR}/${PN}"-kmod vhba.conf
 }
+
+pkg_postinst() {
+	udev_reload
+}
+
+pkg_postrm() {
+	udev_reload
+}

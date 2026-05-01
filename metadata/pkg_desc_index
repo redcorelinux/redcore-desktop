@@ -55,7 +55,7 @@ sys-boot/plymouth 0.9.4-r11: Graphical boot animation (splash) and logger
 sys-boot/rpi-imager 1.8.5: Raspberry Pi Imaging Utility
 sys-boot/unetbootin-static 625-r5: Universal Netboot Installer creates Live USB systems for various OS distributions
 sys-fs/cryptsetup 2.8.1-r10: Tool to setup encrypted devices with dm-crypt
-sys-fs/vhba 20260313: Virtual (SCSI) Host Bus Adapter kernel module for the CDEmu suite
+sys-fs/vhba 20260313-r1: Virtual (SCSI) Host Bus Adapter kernel module for the CDEmu suite
 sys-fs/zfs 2.4.1: ZFS meta-package (Gentoo compatibility ebuild)
 sys-fs/zfs-utils 2.4.1: Userland utilities for ZFS Linux kernel module
 sys-kernel/bcmwl-dkms 6.30.223.271-r21: Broadcom's IEEE 802.11a/b/g/n hybrid Linux device driver source

@@ -1,5 +1,5 @@
 BDEPEND=virtual/pkgconfig
-DEFINED_PHASES=compile install prepare
+DEFINED_PHASES=compile install postinst postrm prepare
 DEPEND=~sys-kernel/vhba-dkms-20260313 virtual/udev virtual/pkgconfig
 DESCRIPTION=Virtual (SCSI) Host Bus Adapter kernel module for the CDEmu suite
 EAPI=8
@@ -11,4 +11,4 @@ RDEPEND=~sys-kernel/vhba-dkms-20260313 virtual/udev
 SLOT=0
 SRC_URI=https://download.sourceforge.net/cdemu/vhba-module/vhba-module-20260313.tar.xz
 _eclasses_=toolchain-funcs	58a918e3a42d0156f010dcfd43725be5	udev	1a23882bb73bc31c64a6f00a5e515f34
-_md5_=bb73be054574cf31bf5982ad6ed5b3d3
+_md5_=46425fad6f3a632ce360806637cbf0fa
