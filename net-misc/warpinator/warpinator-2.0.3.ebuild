@@ -5,7 +5,7 @@ EAPI=8
 
 DESCRIPTION="Share files across the LAN"
 HOMEPAGE="https://github.com/linuxmint/warpinator"
-SRC_URI="https://github.com/linuxmint/${PN}/archive/refs/tags/master.lmde6.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://github.com/linuxmint/${PN}/archive/refs/tags/${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"
@@ -29,10 +29,7 @@ BDEPEND="
 	>=dev-build/meson-0.45.0
 "
 
-S="${WORKDIR}/${PN}-master.lmde6"
-
 PATCHES=(
-	"${FILESDIR}/${PN}-bundled-grpcio-cython3.patch"
 	"${FILESDIR}/${PN}-dbus-fallback.patch"
 )
 

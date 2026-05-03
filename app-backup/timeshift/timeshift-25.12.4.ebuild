@@ -7,7 +7,7 @@ inherit optfeature meson vala xdg
 
 DESCRIPTION="A system restore utility for Linux"
 HOMEPAGE="https://github.com/linuxmint/timeshift"
-SRC_URI="https://github.com/linuxmint/${PN}/archive/${PV}.tar.gz -> ${PF}.tar.gz"
+SRC_URI="https://github.com/linuxmint/${PN}/archive/refs/tags/${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-2+"
 SLOT="0"

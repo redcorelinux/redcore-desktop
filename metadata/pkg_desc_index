@@ -5,7 +5,7 @@ app-admin/opensnitch 1.8.0-r1: Desktop application firewall
 app-admin/opensnitch-ebpf-module 1.8.0: eBPF process monitor module for opensnitch
 app-admin/vasile 2.1812.2-r1: Versatile Advanced Script for ISO and Latest Enchantments
 app-arch/unp 2.0_pre9-r1: Script for unpacking various file formats
-app-backup/timeshift 24.06.3: A system restore utility for Linux
+app-backup/timeshift 25.12.4: A system restore utility for Linux
 app-editors/zed 0.187.9-r10: The fast, collaborative code editor
 app-emulation/steam 1.0.0.79: Installer, launcher and supplementary files for Valve's Steam client
 app-emulation/virtualbox-guest-additions 7.2.8: VirtualBox user-space tools for Gentoo guests
@@ -38,7 +38,7 @@ media-libs/portsmf 239-r1: The Tenacity fork of PortSMF, a Standard MIDI File li
 media-tv/sopcast 3.2.6-r5: SopCast free P2P Internet TV binary
 media-tv/tv-lite 0.8.1: IPTV viewer with Sopcast and Acestream handling capabilities.
 net-dialup/rp-pppoe 4.0-r5: A user-mode PPPoE client and server suite for Linux
-net-misc/warpinator 1.8.6: Share files across the LAN
+net-misc/warpinator 2.0.3: Share files across the LAN
 net-print/lexmark-upd-ppd 1.0.0.20210304-r1: Lexmark universal printer driver PPDs
 net-wireless/broadcom-sta 6.30.223.271-r6: Broadcom's IEEE 802.11a/b/g/n hybrid Linux device driver
 sys-apps/baselayout 2.13-r8: Filesystem baselayout and init scripts
