@@ -1,0 +1,8 @@
+DEFINED_PHASES=install
+DESCRIPTION=OpenPGP keys used for Redcore Linux Project releases (iso, packages)
+EAPI=8
+HOMEPAGE=https://redcorelinux.org
+KEYWORDS=amd64 arm64
+LICENSE=public-domain
+SLOT=0
+_md5_=0972b5f7babccb0817a21f46fbe38c29
