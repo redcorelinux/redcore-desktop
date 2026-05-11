@@ -20,7 +20,7 @@ DEPEND="
 	"
 RDEPEND="${DEPEND}
 	dev-db/sqlite
-	media-video/vlc
+	<media-video/vlc-4
 	net-misc/curl
 	net-misc/yt-dlp
 	sys-apps/util-linux
