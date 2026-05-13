@@ -29,7 +29,7 @@ RDEPEND="${DEPEND}
 		dev-python/colorama[${PYTHON_USEDEP}]
 		dev-python/gitpython[${PYTHON_USEDEP}]
 		dev-python/python-gnupg[${PYTHON_USEDEP}]
-		dev-python/requests[$PYTHON_USEDEP]
+		dev-python/requests[${PYTHON_USEDEP}]
 		dev-python/rich[${PYTHON_USEDEP}]
 		dev-python/typer[${PYTHON_USEDEP}]
 		dev-python/typing-extensions[${PYTHON_USEDEP}]
