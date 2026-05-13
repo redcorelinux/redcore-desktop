@@ -1,0 +1,38 @@
+# Copyright 2016-2025 Redcore Linux Project
+# Distributed under the terms of the GNU General Public License v2
+
+EAPI=7
+
+MY_PN="${PN/-qt/}"
+
+PYTHON_COMPAT=( python3_{11..13} )
+
+inherit python-single-r1 git-r3
+
+DESCRIPTION="A simple portage python wrapper which works like other package managers(apt-get/yum/dnf)"
+HOMEPAGE="http://redcorelinux.org"
+
+EGIT_REPO_URI="https://gitlab.com/redcore/sisyphus.git"
+EGIT_BRANCH="next"
+
+LICENSE="GPL-2"
+SLOT="0"
+KEYWORDS=""
+IUSE=""
+
+DEPEND="dev-lang/python[sqlite]
+	~app-portage/sisyphus-${PV}"
+RDEPEND="${DEPEND}
+	app-misc/tmux
+	$(python_gen_cond_dep '
+		dev-python/pyqt6[gui,widgets,${PYTHON_USEDEP}]
+	')"
+
+src_install() {
+	emake DESTDIR="${D}"/ install-gui
+
+	# enforce the best available python implementation (GUI)
+	python_setup
+	python_fix_shebang "${ED}"/usr/share/"${MY_PN}"/"${MY_PN}"-qt6.py
+	rm -rvf "${ED}"/usr/share/"${MY_PN}"/"${MY_PN}"-qt5.py
+}
