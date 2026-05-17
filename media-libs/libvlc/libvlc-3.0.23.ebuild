@@ -20,6 +20,8 @@ S="${WORKDIR}/${MY_P}"
 LICENSE="LGPL-2.1 GPL-2"
 SLOT="3/5-9" # vlc - vlccore
 
+KEYWORDS="amd64 arm64"
+
 IUSE="alsa aom archive aribsub bidi bluray chromaprint chromecast dav1d dbus
 	dc1394 debug directx +dvbpsi dvd +encode faad fdk +ffmpeg flac fluidsynth
 	fontconfig +gcrypt gme keyring gstreamer ieee1394 jack jpeg kate
