@@ -3,7 +3,7 @@
 
 EAPI=8
 
-inherit cmake
+inherit cmake flag-o-matic
 
 DESCRIPTION="IPTV viewer with Sopcast and Acestream handling capabilities."
 HOMEPAGE="http://tv-lite.com"
@@ -34,8 +34,11 @@ S="${WORKDIR}/${P}/src"
 PATCHES=( "${FILESDIR}"/"${P}-use-libvlc3-compat.patch" )
 
 src_configure() {
+	append-cppflags "-I${ESYSROOT}/usr/include/vlc3"
+	append-ldflags "-Wl,--no-as-needed"
 	local mycmakeargs=(
 		-DWX_CONFIG=wx-config
+		-DPKG_CONFIG_EXECUTABLE="$(tc-getPKG_CONFIG)"
 	)
 	cmake_src_configure
 }

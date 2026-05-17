@@ -37,7 +37,7 @@ lxqt-base/lxqt-session 2.4.0-r10: LXQt Session Manager
 media-libs/libvlc 3.0.23-r1: Compatibility library for VLC 3 (libvlc and plugins only)
 media-libs/portsmf 239-r1: The Tenacity fork of PortSMF, a Standard MIDI File library
 media-tv/sopcast 3.2.6-r5: SopCast free P2P Internet TV binary
-media-tv/tv-lite 0.8.1-r2: IPTV viewer with Sopcast and Acestream handling capabilities.
+media-tv/tv-lite 0.8.1-r3: IPTV viewer with Sopcast and Acestream handling capabilities.
 net-dialup/rp-pppoe 4.0-r5: A user-mode PPPoE client and server suite for Linux
 net-misc/warpinator 2.0.3: Share files across the LAN
 net-print/lexmark-upd-ppd 1.0.0.20210304-r1: Lexmark universal printer driver PPDs
