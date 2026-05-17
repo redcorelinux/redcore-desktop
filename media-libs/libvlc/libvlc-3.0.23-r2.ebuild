@@ -443,10 +443,3 @@ src_install() {
 
 	find "${ED}" -name '*.la' -delete || die
 }
-
-pkg_postinst() {
-	local libdir=$(get_libdir)
-	if [[ -x "${EROOT}/usr/${libdir}/vlc3/vlc-cache-gen" ]] ; then
-		"${EROOT}/usr/${libdir}/vlc3/vlc-cache-gen" "${EROOT}/usr/${libdir}/vlc3/plugins/"
-	fi
-}
