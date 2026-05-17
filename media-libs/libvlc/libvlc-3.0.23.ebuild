@@ -1,0 +1,449 @@
+# Copyright 2000-2026 Gentoo Authors
+# Copyright 2026 Redcore Linux Project
+# Distributed under the terms of the GNU General Public License v2
+
+EAPI=8
+
+LUA_COMPAT=( lua5-{1..2} )
+
+MY_PV="${PV/_/-}"
+MY_PV="${MY_PV/-beta/-test}"
+MY_P="vlc-${MY_PV}"
+
+inherit autotools flag-o-matic lua-single toolchain-funcs virtualx xdg-utils
+
+DESCRIPTION="Compatibility library for VLC 3 (libvlc and plugins only)"
+HOMEPAGE="https://www.videolan.org/vlc/"
+SRC_URI="https://download.videolan.org/pub/videolan/vlc/${PV}/${MY_P}.tar.xz"
+S="${WORKDIR}/${MY_P}"
+
+LICENSE="LGPL-2.1 GPL-2"
+SLOT="3/5-9" # vlc - vlccore
+
+IUSE="alsa aom archive aribsub bidi bluray chromaprint chromecast dav1d dbus
+	dc1394 debug directx +dvbpsi dvd +encode faad fdk +ffmpeg flac fluidsynth
+	fontconfig +gcrypt gme keyring gstreamer ieee1394 jack jpeg kate
+	libass libcaca libnotify +libsamplerate libtiger linsys lirc live lua
+	macosx-notifications mad matroska modplug mp3 mtp musepack ncurses nfs ogg
+	omxil optimisememory opus png projectm pulseaudio run-as-root samba
+	sftp shout sid soxr speex srt ssl svg taglib theora tremor truetype twolame
+	udev upnp vaapi v4l vdpau vnc vpx wayland +X x264 x265 xml zeroconf zvbi
+	cpu_flags_arm_neon cpu_flags_ppc_altivec cpu_flags_x86_mmx cpu_flags_x86_sse
+"
+REQUIRED_USE="
+	chromecast? ( encode )
+	directx? ( ffmpeg )
+	fontconfig? ( truetype )
+	libcaca? ( X )
+	libtiger? ( kate )
+	lua? ( ${LUA_REQUIRED_USE} )
+	ssl? ( gcrypt )
+	vaapi? ( ffmpeg X )
+	vdpau? ( ffmpeg X )
+"
+BDEPEND="
+	sys-devel/bison
+	sys-devel/flex
+	>=sys-devel/gettext-0.19.8
+	virtual/pkgconfig
+	lua? ( ${LUA_DEPS} )
+	amd64? ( dev-lang/yasm )
+	wayland? ( dev-util/wayland-scanner )
+	x86? ( dev-lang/yasm )
+"
+RDEPEND="
+	media-libs/libvorbis
+	net-dns/libidn:=
+	virtual/zlib:=
+	virtual/libintl
+	virtual/opengl
+	alsa? ( media-libs/alsa-lib )
+	aom? ( media-libs/libaom:= )
+	archive? ( app-arch/libarchive:= )
+	aribsub? ( media-libs/aribb24 )
+	bidi? (
+		dev-libs/fribidi
+		media-libs/freetype:2[harfbuzz]
+		media-libs/harfbuzz:=
+		virtual/ttf-fonts
+	)
+	bluray? ( >=media-libs/libbluray-1.3.0:= )
+	chromaprint? ( media-libs/chromaprint:= )
+	chromecast? (
+		dev-cpp/abseil-cpp:=
+		>=dev-libs/protobuf-2.5.0:=
+		>=net-libs/libmicrodns-0.1.2:=
+	)
+	dav1d? ( media-libs/dav1d:= )
+	dbus? ( sys-apps/dbus )
+	dc1394? (
+		media-libs/libdc1394:2
+		sys-libs/libraw1394
+	)
+	dvbpsi? ( >=media-libs/libdvbpsi-1.2.0:= )
+	dvd? (
+		>=media-libs/libdvdnav-6.1.1:=
+		>=media-libs/libdvdread-6.1.2:=
+	)
+	faad? ( media-libs/faad2 )
+	fdk? ( media-libs/fdk-aac:= )
+	ffmpeg? ( >=media-video/ffmpeg-3.1.3:=[vaapi?,vdpau?] )
+	flac? (
+		media-libs/flac:=
+		media-libs/libogg
+	)
+	fluidsynth? ( media-sound/fluidsynth:= )
+	fontconfig? ( media-libs/fontconfig:1.0 )
+	gcrypt? (
+		dev-libs/libgcrypt:=
+		dev-libs/libgpg-error
+	)
+	gme? ( media-libs/game-music-emu )
+	keyring? ( app-crypt/libsecret )
+	gstreamer? ( >=media-libs/gst-plugins-base-1.4.5:1.0 )
+	ieee1394? (
+		sys-libs/libavc1394
+		sys-libs/libraw1394
+	)
+	jack? ( virtual/jack )
+	jpeg? ( media-libs/libjpeg-turbo:0 )
+	kate? ( media-libs/libkate )
+	libass? (
+		media-libs/fontconfig:1.0
+		media-libs/libass:=
+	)
+	libcaca? ( media-libs/libcaca )
+	libnotify? (
+		dev-libs/glib:2
+		x11-libs/gdk-pixbuf:2
+		x11-libs/gtk+:3
+		x11-libs/libnotify
+	)
+	libsamplerate? ( media-libs/libsamplerate )
+	libtiger? ( media-libs/libtiger )
+	linsys? ( media-libs/zvbi )
+	lirc? ( app-misc/lirc )
+	live? ( media-plugins/live:= )
+	lua? ( ${LUA_DEPS} )
+	mad? ( media-libs/libmad )
+	matroska? (
+		>=dev-libs/libebml-1.4.2:=
+		media-libs/libmatroska:=
+	)
+	modplug? ( >=media-libs/libmodplug-0.8.9.0 )
+	mp3? ( media-sound/mpg123-base )
+	mtp? ( media-libs/libmtp:= )
+	musepack? ( media-sound/musepack-tools )
+	ncurses? ( sys-libs/ncurses:=[unicode(+)] )
+	nfs? ( >=net-fs/libnfs-0.10.0:= )
+	ogg? ( media-libs/libogg )
+	opus? ( >=media-libs/opus-1.0.3 )
+	png? ( media-libs/libpng:0= )
+	projectm? (
+		media-fonts/dejavu
+		>=media-libs/libprojectm-3.1.12:0=
+	)
+	pulseaudio? ( media-libs/libpulse )
+	samba? ( >=net-fs/samba-4.0.0:0[client,-debug(-)] )
+	sftp? ( net-libs/libssh2 )
+	shout? ( media-libs/libshout )
+	sid? ( media-libs/libsidplay:2 )
+	soxr? ( >=media-libs/soxr-0.1.2 )
+	speex? (
+		>=media-libs/speex-1.2.0
+		media-libs/speexdsp
+	)
+	srt? ( >=net-libs/srt-1.4.2:= )
+	ssl? ( net-libs/gnutls:= )
+	svg? (
+		gnome-base/librsvg:2
+		x11-libs/cairo
+	)
+	taglib? ( media-libs/taglib:= )
+	theora? ( media-libs/libtheora:= )
+	tremor? ( media-libs/tremor )
+	truetype? (
+		media-libs/freetype:2
+		virtual/ttf-fonts
+		!fontconfig? ( media-fonts/dejavu )
+	)
+	twolame? ( media-sound/twolame )
+	udev? ( virtual/udev )
+	upnp? ( net-libs/libupnp:=[ipv6(+)] )
+	v4l? ( media-libs/libv4l:= )
+	vaapi? ( media-libs/libva:=[drm(+),wayland?,X?] )
+	vdpau? ( x11-libs/libvdpau )
+	vnc? ( net-libs/libvncserver )
+	vpx? ( media-libs/libvpx:= )
+	wayland? (
+		>=dev-libs/wayland-1.15
+		dev-libs/wayland-protocols
+	)
+	X? (
+		x11-libs/libX11
+		x11-libs/libxcb
+		x11-libs/xcb-util
+		x11-libs/xcb-util-keysyms
+	)
+	x264? ( >=media-libs/x264-0.0.20190214:= )
+	x265? ( media-libs/x265:= )
+	xml? ( dev-libs/libxml2:2= )
+	zeroconf? ( net-dns/avahi[dbus] )
+	zvbi? ( media-libs/zvbi )
+"
+DEPEND="${RDEPEND}
+	X? ( x11-base/xorg-proto )
+"
+
+DOCS=( AUTHORS THANKS NEWS README doc/fortunes.txt )
+
+PATCHES=(
+	"${FILESDIR}"/${PN}-3.0.22-gettext-version.patch # bug 766549
+	"${FILESDIR}"/${PN}-3.0.22-no-vlc-cache-gen.patch # bugs 564842, 608256
+	"${FILESDIR}"/${PN}-2.1.0-fix-libtremor-libs.patch # build system
+	"${FILESDIR}"/${PN}-3.0.6-fdk-aac-2.0.0.patch # bug 672290
+	"${FILESDIR}"/${PN}-3.0.11.1-configure_lua_version.patch
+	"${FILESDIR}"/${PN}-3.0.18-drop-minizip-dep.patch
+)
+
+pkg_setup() {
+	use lua && lua-single_pkg_setup
+}
+
+src_prepare() {
+	default
+
+	xdg_environment_reset
+	rm m4/lt* m4/libtool.m4 || die
+	touch src/revision.txt || die
+	eautoreconf
+}
+
+src_configure() {
+	unset LEX YACC
+	local -x BUILDCC="$(tc-getBUILD_CC)"
+	local libdir=$(get_libdir)
+
+	local myeconfargs=(
+		--libdir="${EPREFIX}/usr/${libdir}/vlc3"
+		--includedir="${EPREFIX}/usr/include/vlc3"
+		--datarootdir="${EPREFIX}/usr/share/vlc3"
+		--disable-aa
+		--disable-amf-frc
+		--disable-freerdp
+		--disable-optimizations
+		--disable-postproc
+		--disable-rpath
+		--disable-update-check
+		--enable-fast-install
+		--enable-screen
+		--enable-vcd
+		--enable-vlc
+		--enable-vorbis
+		$(use_enable alsa)
+		$(use_enable aom)
+		$(use_enable archive)
+		$(use_enable aribsub)
+		$(use_enable bidi fribidi)
+		$(use_enable bidi harfbuzz)
+		$(use_enable bluray)
+		$(use_enable chromaprint)
+		$(use_enable chromecast)
+		$(use_enable chromecast microdns)
+		$(use_enable cpu_flags_arm_neon neon)
+		$(use_enable cpu_flags_ppc_altivec altivec)
+		$(use_enable cpu_flags_x86_mmx mmx)
+		$(use_enable cpu_flags_x86_sse sse)
+		$(use_enable dav1d)
+		$(use_enable dbus)
+		$(use_enable dbus kwallet)
+		$(use_enable dc1394)
+		$(use_enable debug)
+		$(use_enable directx)
+		$(use_enable directx d3d11va)
+		$(use_enable directx dxva2)
+		$(use_enable dvbpsi)
+		$(use_enable dvd dvdnav)
+		$(use_enable dvd dvdread)
+		$(use_enable encode sout)
+		$(use_enable encode vlm)
+		$(use_enable faad)
+		$(use_enable fdk fdkaac)
+		$(use_enable ffmpeg avcodec)
+		$(use_enable ffmpeg avformat)
+		$(use_enable ffmpeg swscale)
+		$(use_enable flac)
+		$(use_enable fluidsynth)
+		$(use_enable fontconfig)
+		$(use_enable gcrypt libgcrypt)
+		$(use_enable gme)
+		$(use_enable keyring secret)
+		$(use_enable gstreamer gst-decode)
+		$(use_enable ieee1394 dv1394)
+		$(use_enable jack)
+		$(use_enable jpeg)
+		$(use_enable kate)
+		$(use_enable libass)
+		$(use_enable libcaca caca)
+		$(use_enable libnotify notify)
+		$(use_enable libsamplerate samplerate)
+		$(use_enable libtiger tiger)
+		$(use_enable linsys)
+		$(use_enable lirc)
+		$(use_enable live live555)
+		$(use_enable lua)
+		$(use_enable macosx-notifications osx-notifications)
+		$(use_enable mad)
+		$(use_enable matroska)
+		$(use_enable modplug mod)
+		$(use_enable mp3 mpg123)
+		$(use_enable mtp)
+		$(use_enable musepack mpc)
+		$(use_enable ncurses)
+		$(use_enable nfs)
+		$(use_enable ogg)
+		$(use_enable omxil)
+		$(use_enable omxil omxil-vout)
+		$(use_enable optimisememory optimize-memory)
+		$(use_enable opus)
+		$(use_enable png)
+		$(use_enable projectm)
+		$(use_enable pulseaudio pulse)
+		$(use_enable run-as-root)
+		$(use_enable samba smbclient)
+		$(use_enable sftp)
+		$(use_enable shout)
+		$(use_enable sid)
+		$(use_enable soxr)
+		$(use_enable speex)
+		$(use_enable srt)
+		$(use_enable ssl gnutls)
+		$(use_enable svg)
+		$(use_enable svg svgdec)
+		$(use_enable taglib)
+		$(use_enable theora)
+		$(use_enable tremor)
+		$(use_enable twolame)
+		$(use_enable udev)
+		$(use_enable upnp)
+		$(use_enable v4l v4l2)
+		$(use_enable vaapi libva)
+		$(use_enable vdpau)
+		$(use_enable vnc)
+		$(use_enable vpx)
+		$(use_enable wayland)
+		$(use_with X x)
+		$(use_enable X xcb)
+		$(use_enable X xvideo)
+		$(use_enable x264)
+		$(use_enable x264 x26410b)
+		$(use_enable x265)
+		$(use_enable xml libxml2)
+		$(use_enable zeroconf avahi)
+		$(use_enable zvbi)
+		$(use_enable !zvbi telx)
+		--with-kde-solid="${EPREFIX}"/usr/share/solid/actions
+		--disable-a52
+		--disable-asdcp
+		--disable-coverage
+		--disable-cprof
+		--disable-crystalhd
+		--disable-decklink
+		--disable-dca
+		--disable-gles2
+		--disable-goom
+		--disable-kai
+		--disable-kva
+		--disable-libcddb
+		--disable-libmpeg2
+		--disable-libplacebo
+		--disable-maintainer-mode
+		--disable-merge-ffmpeg
+		--disable-mfx
+		--disable-mmal
+		--disable-opencv
+		--disable-opensles
+		--disable-oss
+		--disable-qt
+		--disable-rpi-omxil
+		--disable-schroedinger
+		--disable-sdl-image
+		--disable-shine
+		--disable-skins2
+		--disable-sndio
+		--disable-spatialaudio
+		--disable-vsxu
+		--disable-wasapi
+		--disable-wma-fixed
+	)
+
+	append-flags -fno-strict-aliasing
+	filter-lto
+	use samba && append-cppflags "-I${ESYSROOT}/usr/include/samba-4.0"
+	use x86 && append-cflags $(test-flags-CC -fno-stack-check)
+	append-ldflags "-L${ESYSROOT}/usr/$(get_libdir)/sidplay/builders/"
+	use riscv && append-libs -latomic
+
+	if use truetype || use bidi; then
+		myeconfargs+=( --enable-freetype )
+	else
+		myeconfargs+=( --disable-freetype )
+	fi
+
+	if use truetype || use projectm; then
+		local dejavu="${EPREFIX}/usr/share/fonts/dejavu/"
+		myeconfargs+=(
+			--with-default-font=${dejavu}/DejaVuSans.ttf
+			--with-default-font-family=Sans
+			--with-default-monospace-font=${dejavu}/DejaVuSansMono.ttf
+			--with-default-monospace-font-family=Monospace
+		)
+	fi
+
+	econf "${myeconfargs[@]}"
+	sed -i '1i#undef _FORTIFY_SOURCE' config.h || die
+}
+
+src_test() {
+	virtx emake check-TESTS
+}
+
+src_install() {
+	default
+	local libdir=$(get_libdir)
+
+	rm -rf "${ED}"/usr/bin || die
+	rm -rf "${ED}"/usr/share || die
+
+	if [[ -d "${ED}"/usr/include/vlc ]]; then
+		mkdir -p "${ED}"/usr/include/vlc3 || die
+		mv "${ED}"/usr/include/vlc "${ED}"/usr/include/vlc3/ || die
+	fi
+
+	local pc_src="${ED}/usr/${libdir}/vlc3/pkgconfig"
+	local pc_dest="${ED}/usr/${libdir}/pkgconfig"
+
+	if [[ -d "${pc_src}" ]]; then
+		find "${pc_src}" -name '*.pc' -exec \
+			sed -i -e "s|includedir=.*|includedir=\${prefix}/include/vlc3|" \
+				   -e "s|libdir=.*|libdir=\${prefix}/${libdir}/vlc3|" {} + || die
+
+		mkdir -p "${pc_dest}" || die
+		[[ -f "${pc_src}/libvlc.pc" ]] && mv "${pc_src}/libvlc.pc" "${pc_dest}/libvlc3.pc"
+		[[ -f "${pc_src}/vlc-plugin.pc" ]] && mv "${pc_src}/vlc-plugin.pc" "${pc_dest}/vlc-plugin3.pc"
+		
+		rm -rf "${pc_src}" || die
+	fi
+
+	echo "LDPATH=\"${EPREFIX}/usr/${libdir}/vlc3\"" > "${T}/99libvlc3" || die
+	doenvd "${T}/99libvlc3"
+
+	find "${ED}" -name '*.la' -delete || die
+}
+
+pkg_postinst() {
+	local libdir=$(get_libdir)
+	if [[ -x "${EROOT}/usr/${libdir}/vlc3/vlc-cache-gen" ]] ; then
+		"${EROOT}/usr/${libdir}/vlc3/vlc-cache-gen" "${EROOT}/usr/${libdir}/vlc3/plugins/"
+	fi
+}

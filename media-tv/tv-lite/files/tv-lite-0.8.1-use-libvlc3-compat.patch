@@ -1,0 +1,14 @@
+diff '--color=auto' -Nur a/CMakeLists.txt b/CMakeLists.txt
+--- a/CMakeLists.txt	2026-01-27 09:44:49.000000000 +0000
++++ b/CMakeLists.txt	2026-05-17 19:36:04.254394026 +0100
+@@ -66,8 +66,8 @@
+ pkg_check_modules(GTK REQUIRED ${GTKVER})
+ add_definitions(${GTK_CFLAGS})
+ 
+-pkg_check_modules(LIBVLC REQUIRED libvlc)
+-include_directories("${LIBVLC_INCLUDEDIR}")
++pkg_check_modules(LIBVLC REQUIRED libvlc3)
++include_directories("${LIBVLC_INCLUDE_DIRS}")
+ 
+ if(NOT DEFINED WX_CONFIG)
+   set (WX_CONFIG "wx-config")

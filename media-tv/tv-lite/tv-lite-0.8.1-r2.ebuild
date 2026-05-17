@@ -20,7 +20,7 @@ DEPEND="
 	"
 RDEPEND="${DEPEND}
 	dev-db/sqlite
-	<media-video/vlc-4
+	media-libs/libvlc:3=
 	net-misc/curl
 	net-misc/yt-dlp
 	sys-apps/util-linux
@@ -30,6 +30,8 @@ RDEPEND="${DEPEND}
 BDEPEND="${DEPEND}"
 
 S="${WORKDIR}/${P}/src"
+
+PATCHES=( "${FILESDIR}"/"${P}-use-libvlc3-compat.patch" )
 
 src_configure() {
 	local mycmakeargs=(
