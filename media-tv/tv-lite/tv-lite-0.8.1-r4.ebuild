@@ -36,12 +36,14 @@ PATCHES=( "${FILESDIR}"/"${P}-use-libvlc3-compat.patch" )
 src_configure() {
 	append-cppflags "-I${ESYSROOT}/usr/include/vlc3"
 	append-ldflags "-L${ESYSROOT}/usr/$(get_libdir)/vlc3"
+	append-ldflags "-Wl,-rpath,/usr/$(get_libdir)/vlc3"
 	append-ldflags "-Wl,--no-as-needed"
 
 	local mycmakeargs=(
 		-DWX_CONFIG=wx-config
 		-DCMAKE_LIBRARY_PATH="${ESYSROOT}/usr/$(get_libdir)/vlc3"
-		-DCMAKE_SKIP_RPATH=OFF
+		-DCMAKE_INSTALL_RPATH="/usr/$(get_libdir)/vlc3"
+		-DCMAKE_BUILD_WITH_INSTALL_RPATH=TRUE
 	)
 	cmake_src_configure
 }
