@@ -428,7 +428,8 @@ src_install() {
 	if [[ -d "${pc_src}" ]]; then
 		find "${pc_src}" -name '*.pc' -exec \
 			sed -i -e "s|includedir=.*|includedir=\${prefix}/include/vlc3|" \
-				   -e "s|libdir=.*|libdir=\${prefix}/${libdir}/vlc3|" {} + || die
+				-e "s|libdir=.*|libdir=\${prefix}/${libdir}/vlc3|" \
+				-e "s|Libs:.*|Libs: -L\${libdir} -lvlc -lvlccore|" {} + || die
 
 		mkdir -p "${pc_dest}" || die
 		[[ -f "${pc_src}/libvlc.pc" ]] && mv "${pc_src}/libvlc.pc" "${pc_dest}/libvlc3.pc"

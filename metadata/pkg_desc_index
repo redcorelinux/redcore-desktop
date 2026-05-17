@@ -34,7 +34,7 @@ kde-plasma/kinfocenter 6.6.5-r10: Utility providing information about the comput
 lxde-base/lxappearance 0.6.3-r5: LXDE GTK+ theme switcher
 lxqt-base/lxqt-meta 2.4.0-r10: Meta ebuild for LXQt, the Lightweight Desktop Environment
 lxqt-base/lxqt-session 2.4.0-r10: LXQt Session Manager
-media-libs/libvlc 3.0.23: Compatibility library for VLC 3 (libvlc and plugins only)
+media-libs/libvlc 3.0.23-r1: Compatibility library for VLC 3 (libvlc and plugins only)
 media-libs/portsmf 239-r1: The Tenacity fork of PortSMF, a Standard MIDI File library
 media-tv/sopcast 3.2.6-r5: SopCast free P2P Internet TV binary
 media-tv/tv-lite 0.8.1-r2: IPTV viewer with Sopcast and Acestream handling capabilities.
