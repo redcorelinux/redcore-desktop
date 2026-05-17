@@ -38,7 +38,6 @@ src_configure() {
 	append-ldflags "-Wl,--no-as-needed"
 	local mycmakeargs=(
 		-DWX_CONFIG=wx-config
-		-DPKG_CONFIG_EXECUTABLE="$(tc-getPKG_CONFIG)"
 	)
 	cmake_src_configure
 }
