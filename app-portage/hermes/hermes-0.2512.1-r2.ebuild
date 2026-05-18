@@ -12,7 +12,7 @@ HOMEPAGE="http://redcorelinux.org"
 
 EGIT_REPO_URI="https://gitlab.com/redcore/hermes.git"
 EGIT_BRANCH="redcore"
-EGIT_COMMIT="5f019e43071abf305fabc7c2550d9fff702fa50f"
+EGIT_COMMIT="63978c800bf0f4da30b754c354171047b3d6cbae"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -21,7 +21,7 @@ IUSE=""
 
 DEPEND=""
 RDEPEND="${DEPEND}
-	>=app-portage/sisyphus-6.2512.0
+	>=app-portage/sisyphus-7.2605.0
 	dev-libs/dbus-glib
 	dev-libs/glib[introspection]
 	dev-libs/gobject-introspection
