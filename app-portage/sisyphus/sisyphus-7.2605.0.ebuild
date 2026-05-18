@@ -12,7 +12,7 @@ HOMEPAGE="http://redcorelinux.org"
 
 EGIT_REPO_URI="https://gitlab.com/redcore/sisyphus.git"
 EGIT_BRANCH="master"
-EGIT_COMMIT="c78e89b47fa5099955c85f1c6c1e672094bda684"
+EIT_COMMIT="da447851b87c8d1723c9598e3cd5e2272db85c4f"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -29,12 +29,16 @@ RDEPEND="${DEPEND}
 		dev-python/click[${PYTHON_USEDEP}]
 		dev-python/colorama[${PYTHON_USEDEP}]
 		dev-python/gitpython[${PYTHON_USEDEP}]
+		dev-python/python-gnupg[${PYTHON_USEDEP}]
+		dev-python/requests[${PYTHON_USEDEP}]
+		dev-python/rich[${PYTHON_USEDEP}]
 		dev-python/typer[${PYTHON_USEDEP}]
 		dev-python/typing-extensions[${PYTHON_USEDEP}]
 		dev-python/urllib3[${PYTHON_USEDEP}]
 		sys-apps/portage[${PYTHON_USEDEP}]
 	')
-	sys-apps/gentoo-functions"
+	sys-apps/gentoo-functions
+	sec-keys/openpgp-keys-redcore-release"
 
 src_install() {
 	emake DESTDIR="${D}"/ install-cli
@@ -51,8 +55,13 @@ src_install() {
 	insinto etc/"${PN}"
 	doins "${FILESDIR}"/"${PN}".net_chk_addr.conf
 
-	doins "${FILESDIR}"/"${PN}"-mirrors-amd64.conf
-	doins "${FILESDIR}"/"${PN}"-mirrors-arm64.conf
+	if [[ $(uname -m) == "x86_64" ]] ; then
+		doins "${FILESDIR}"/"${PN}"-binhost-amd64.conf
+		doins "${FILESDIR}"/"${PN}"-binrepos-amd64.conf
+	elif [[ $(uname -m) == "aarch64" ]] ; then
+		doins "${FILESDIR}"/"${PN}"-binhost-arm64.conf
+		doins "${FILESDIR}"/"${PN}"-binrepos-arm64.conf
+	fi
 
 	doins "${FILESDIR}"/"${PN}".build-env.conf
 	doins "${FILESDIR}"/"${PN}".make-conf.conf
@@ -81,8 +90,8 @@ pkg_postinst() {
 	rm -rf "{EROOT}"/etc/"${PN}"/mirrors.conf
 
 	if [[ $(uname -m) == "x86_64" ]] ; then
-		ln -sf "${EROOT}"/etc/"${PN}"/"${PN}"-mirrors-amd64.conf "${EROOT}"/etc/"${PN}"/mirrors.conf
+		ln -sf "${EROOT}"/etc/"${PN}"/"${PN}"-binhost-amd64.conf "${EROOT}"/etc/"${PN}"/mirrors.conf
 	elif [[ $(uname -m) == "aarch64" ]] ; then
-		ln -sf "${EROOT}"/etc/"${PN}"/"${PN}"-mirrors-arm64.conf "${EROOT}"/etc/"${PN}"/mirrors.conf
+		ln -sf "${EROOT}"/etc/"${PN}"/"${PN}"-binhost-arm64.conf "${EROOT}"/etc/"${PN}"/mirrors.conf
 	fi
 }
