@@ -1,14 +1,28 @@
-diff '--color=auto' -Nur a/CMakeLists.txt b/CMakeLists.txt
---- a/CMakeLists.txt	2026-01-27 09:44:49.000000000 +0000
-+++ b/CMakeLists.txt	2026-05-17 19:36:04.254394026 +0100
-@@ -66,8 +66,8 @@
+--- a/CMakeLists.txt        2026-01-27 09:44:49.000000000 +0000
++++ b/CMakeLists.txt        2026-05-18 06:46:20.137186728 +0100
+@@ -66,8 +66,13 @@
  pkg_check_modules(GTK REQUIRED ${GTKVER})
  add_definitions(${GTK_CFLAGS})
  
 -pkg_check_modules(LIBVLC REQUIRED libvlc)
 -include_directories("${LIBVLC_INCLUDEDIR}")
 +pkg_check_modules(LIBVLC REQUIRED libvlc3)
-+include_directories("${LIBVLC_INCLUDE_DIRS}")
++include_directories(SYSTEM "${LIBVLC_INCLUDE_DIRS}")
++
++set(CMAKE_INSTALL_RPATH "${LIBVLC_LIBRARY_DIRS}")
++set(CMAKE_BUILD_WITH_INSTALL_RPATH TRUE)
++set(CMAKE_SKIP_BUILD_RPATH FALSE)
++
  
  if(NOT DEFINED WX_CONFIG)
    set (WX_CONFIG "wx-config")
+@@ -214,7 +219,7 @@
+ execute_process(COMMAND ${CMAKE_COMMAND} -E create_symlink ${CMAKE_CURRENT_BINARY_DIR}/compile_commands.json
+                 ${CMAKE_SOURCE_DIR}/compile_commands.json)
+ 
+-set(LINK_OPTIONS "${LINK_OPTIONS} ${GTK_LDFLAGS} ${LIBVLC_LDFLAGS} -lX11")
++set(LINK_OPTIONS "${LINK_OPTIONS} ${GTK_LDFLAGS} -Wl,-rpath-link,${LIBVLC_LIBRARY_DIRS} -Wl,--push-state,--no-as-needed ${LIBVLC_LIBRARY_DIRS}/libvlc.so ${LIBVLC_LIBRARY_DIRS}/libvlccore.so -Wl,--pop-state -lX11")
+ #}}}}
+ 
+ add_executable(TVLite ${RC_SRCS} ${CXX_SRCS} ${C_SRCS} ${ASM_SRCS})
+
