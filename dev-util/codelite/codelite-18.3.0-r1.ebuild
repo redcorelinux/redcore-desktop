@@ -36,6 +36,8 @@ BDEPEND="
 	virtual/pkgconfig
 "
 
+PATCHES=( "${FILESDIR}"/codelite-tree-context-menu-crash.patch )
+
 src_prepare() {
 	sed -i -e "s|set(CL_INSTALL_LIBDIR \"lib\")|set(CL_INSTALL_LIBDIR \"$(get_libdir)\")|g" CMakeLists.txt || die
 

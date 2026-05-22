@@ -1,0 +1,27 @@
+--- a/Plugin/clTreeCtrlPanel.cpp
++++ b/Plugin/clTreeCtrlPanel.cpp
+@@ -121,13 +121,19 @@
+         // Handle conditional menu items based on IsTopLevelFolder()
+         if (IsTopLevelFolder(item)) {
+             // Disable items for top-level folders
+-            menu->Enable(XRCID("tree_ctrl_delete_folder"), false);
+-            menu->Enable(XRCID("separator_delete"), false);
+-            menu->Enable(XRCID("tree_ctrl_rename_folder"), false);
+-            menu->Enable(XRCID("separator_rename"), false);
++            if (menu->FindItem(XRCID("tree_ctrl_delete_folder")))
++                menu->Enable(XRCID("tree_ctrl_delete_folder"), false);
++            if (menu->FindItem(XRCID("separator_delete")))
++                menu->Enable(XRCID("separator_delete"), false);
++            if (menu->FindItem(XRCID("tree_ctrl_rename_folder")))
++                menu->Enable(XRCID("tree_ctrl_rename_folder"), false);
++            if (menu->FindItem(XRCID("separator_rename")))
++                menu->Enable(XRCID("separator_rename"), false);
+         } else {
+             // Disable items for non top-level folders
+-            menu->Enable(XRCID("tree_ctrl_close_folder"), false);
+-            menu->Enable(XRCID("separator_close"), false);
++            if (menu->FindItem(XRCID("tree_ctrl_close_folder")))
++                menu->Enable(XRCID("tree_ctrl_close_folder"), false);
++            if (menu->FindItem(XRCID("separator_close")))
++                menu->Enable(XRCID("separator_close"), false);
+         }
