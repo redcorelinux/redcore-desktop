@@ -28,6 +28,7 @@ dev-python/grpcio-tools 1.80.0: Protobuf code generator for gRPC
 dev-python/qt-material 2.17: Material inspired stylesheet for PySide6 and PyQt6.
 dev-python/sh 1.12.14-r7: Python process launching
 dev-python/wget 2.2-r5: Python library for downloading from http URLs
+dev-util/codelite 18.3.0: Cross-platform IDE for C/C++, Rust, Python, PHP and Node.js
 gui-libs/display-manager-init 1.1.2-r10: RC init files for starting display and login managers
 kde-apps/kdegames-meta 26.04.1-r10: kdegames - merge this to pull in all kdegames-derived packages
 kde-plasma/kinfocenter 6.6.5-r10: Utility providing information about the computer hardware

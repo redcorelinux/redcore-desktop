@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=CodeLite
+GenericName=IDE
+Comment=Cross-platform IDE for C/C++, Rust, Python, PHP and Node.js
+Exec=codelite %F
+Icon=codelite
+Terminal=false
+Categories=Development;IDE;
+StartupNotify=true
