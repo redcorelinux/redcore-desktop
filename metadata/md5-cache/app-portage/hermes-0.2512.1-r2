@@ -4,11 +4,11 @@ DESCRIPTION=System Upgrade Watchdog Service
 EAPI=7
 HOMEPAGE=http://redcorelinux.org
 INHERIT=desktop git-r3 python-single-r1 systemd
-IUSE=python_single_target_python3_11 python_single_target_python3_12 python_single_target_python3_13
+IUSE=python_single_target_python3_12 python_single_target_python3_13
 KEYWORDS=~amd64
 LICENSE=GPL-2
 PROPERTIES=live
-RDEPEND=>=app-portage/sisyphus-7.2605.0 dev-libs/dbus-glib dev-libs/glib[introspection] dev-libs/gobject-introspection python_single_target_python3_11? ( dev-python/dbus-python[python_targets_python3_11(-)] dev-python/pygobject[python_targets_python3_11(-)] dev-python/pyqt6[dbus,gui,widgets,python_targets_python3_11(-)] ) python_single_target_python3_12? ( dev-python/dbus-python[python_targets_python3_12(-)] dev-python/pygobject[python_targets_python3_12(-)] dev-python/pyqt6[dbus,gui,widgets,python_targets_python3_12(-)] ) python_single_target_python3_13? ( dev-python/dbus-python[python_targets_python3_13(-)] dev-python/pygobject[python_targets_python3_13(-)] dev-python/pyqt6[dbus,gui,widgets,python_targets_python3_13(-)] ) sys-apps/dbus
+RDEPEND=>=app-portage/sisyphus-7.2605.0 dev-libs/dbus-glib dev-libs/glib[introspection] dev-libs/gobject-introspection python_single_target_python3_12? ( dev-python/dbus-python[python_targets_python3_12(-)] dev-python/pygobject[python_targets_python3_12(-)] dev-python/pyqt6[dbus,gui,widgets,python_targets_python3_12(-)] ) python_single_target_python3_13? ( dev-python/dbus-python[python_targets_python3_13(-)] dev-python/pygobject[python_targets_python3_13(-)] dev-python/pyqt6[dbus,gui,widgets,python_targets_python3_13(-)] ) sys-apps/dbus
 SLOT=0
-_eclasses_=desktop	26d57169ca094c04be416993844ec8bc	eapi8-dosym	5ac4857ad078256d939c44f7c64197a9	eapi9-pipestatus	d2c134036ac31c3085aebc9147f572bd	git-r3	2f8cdb10b033f92c3136aa6488a31c98	multiprocessing	45d0620f25c2f063ad6276ecd9ed9399	python-single-r1	47d8ac9be330c9366112b78fd4f8ce57	python-utils-r1	ae7ca7f9425ab1a1d2c909e225002f98	systemd	a964c0cbe818b5729da1dbfcee5be861	toolchain-funcs	58a918e3a42d0156f010dcfd43725be5
+_eclasses_=desktop	26d57169ca094c04be416993844ec8bc	eapi8-dosym	5ac4857ad078256d939c44f7c64197a9	eapi9-pipestatus	d2c134036ac31c3085aebc9147f572bd	git-r3	2f8cdb10b033f92c3136aa6488a31c98	multiprocessing	45d0620f25c2f063ad6276ecd9ed9399	python-single-r1	47d8ac9be330c9366112b78fd4f8ce57	python-utils-r1	18a01bee4e486884d7457cfacde74099	systemd	a964c0cbe818b5729da1dbfcee5be861	toolchain-funcs	58a918e3a42d0156f010dcfd43725be5
 _md5_=52d6eeb5b510148e5247a9aa2cb6c4ff
