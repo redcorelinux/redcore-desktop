@@ -8,5 +8,5 @@ LICENSE=GPL-2
 RDEPEND=sys-kernel/dkms
 RESTRICT=mirror
 SLOT=0
-SRC_URI=https://distfiles.gentoo.org/pub/dev/ceamac@gentoo.org/app-emulation/virtualbox-guest-modules/vbox-guest-kernel-module-src-7.2.10.tar.xz
+SRC_URI=https://distfiles.gentoo.org/pub/dev/ceamac@gentoo.org/app-emulation/virtualbox-guest-modules/vbox-guest-kernel-module-src-7.2.12.tar.xz
 _md5_=a391aae101cd9f189ed39697e7e2fa60

@@ -8,5 +8,5 @@ LICENSE=GPL-2
 RDEPEND=sys-apps/ethtool sys-kernel/dkms
 RESTRICT=mirror
 SLOT=0
-SRC_URI=https://distfiles.gentoo.org/pub/dev/ceamac@gentoo.org/app-emulation/virtualbox-modules/vbox-host-kernel-module-src-7.2.10.tar.xz
+SRC_URI=https://distfiles.gentoo.org/pub/dev/ceamac@gentoo.org/app-emulation/virtualbox-modules/vbox-host-kernel-module-src-7.2.12.tar.xz
 _md5_=0b9be70b8aa1551cff8f68bc0414f47d
