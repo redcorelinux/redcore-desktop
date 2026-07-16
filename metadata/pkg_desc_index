@@ -55,7 +55,7 @@ sys-boot/grub 2.14-r10: GNU GRUB boot loader
 sys-boot/os-prober 1.77-r10: Utility to detect other OSs on a set of drives
 sys-boot/plymouth 0.9.4-r11: Graphical boot animation (splash) and logger
 sys-boot/rpi-imager 1.8.5: Raspberry Pi Imaging Utility
-sys-boot/unetbootin-static 625-r5: Universal Netboot Installer creates Live USB systems for various OS distributions
+sys-boot/unetbootin-static 625-r6: Universal Netboot Installer creates Live USB systems for various OS distributions
 sys-fs/cryptsetup 2.8.1-r10: Tool to setup encrypted devices with dm-crypt
 sys-fs/vhba 20260313-r1: Virtual (SCSI) Host Bus Adapter kernel module for the CDEmu suite
 sys-fs/zfs 2.4.2: ZFS meta-package (Gentoo compatibility ebuild)

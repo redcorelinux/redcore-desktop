@@ -15,7 +15,7 @@ IUSE=""
 
 DEPEND=""
 RDEPEND="${DEPEND}
-	app-arch/p7zip
+	app-arch/7zip[symlink(+)]
 	media-libs/libpng-compat:1.2"
 
 src_install() {
