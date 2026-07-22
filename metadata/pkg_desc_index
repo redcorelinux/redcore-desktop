@@ -70,8 +70,8 @@ sys-kernel/linux-sources-redcore-lts 5.15.211-r1 6.1.177-r1 6.6.144-r1 6.12.96-r
 sys-kernel/nvidia-drivers-dkms 390.157-r8 470.256.02-r1 580.173.02 595.84: NVIDIA driver sources for linux
 sys-kernel/tp_smapi-dkms 0.45-r3: IBM ThinkPad SMAPI BIOS driver sources
 sys-kernel/vhba-dkms 20260313: Virtual (SCSI) Host Bus Adapter kernel module for the CDEmu suite sources
-sys-kernel/virtualbox-guest-modules-dkms 7.2.12: Kernel Modules (guest) source for Virtualbox
-sys-kernel/virtualbox-modules-dkms 7.2.12: Kernel Modules source for Virtualbox
+sys-kernel/virtualbox-guest-modules-dkms 7.2.12-r1: Kernel Modules (guest) source for Virtualbox
+sys-kernel/virtualbox-modules-dkms 7.2.12-r1: Kernel Modules source for Virtualbox
 sys-kernel/zfs-dkms 2.4.3: ZFS sources for linux
 sys-process/procps 4.0.6-r1: Standard informational utilities and process-handling tools
 virtual/libudev 314.1337-r1: Virtual for libudev providers
