@@ -6,12 +6,10 @@ app-admin/opensnitch-ebpf-module 1.8.0: eBPF process monitor module for opensnit
 app-admin/vasile 2.1812.2-r1: Versatile Advanced Script for ISO and Latest Enchantments
 app-arch/unp 2.0_pre9-r1: Script for unpacking various file formats
 app-backup/timeshift 25.12.4: A system restore utility for Linux
-app-editors/zed 0.187.9-r10: The fast, collaborative code editor
 app-emulation/steam 1.0.0.79: Installer, launcher and supplementary files for Valve's Steam client
 app-emulation/virtualbox-guest-additions 7.2.14: VirtualBox user-space tools for Gentoo guests
 app-emulation/virtualbox-guest-modules 7.2.14: Kernel Modules (guest) for Virtualbox
 app-emulation/virtualbox-modules 7.2.14: Kernel Modules for Virtualbox
-app-i18n/man-pages-l10n 4.30.0-r1: A somewhat comprehensive collection of man page translations
 app-laptop/tp_smapi 0.45: IBM ThinkPad SMAPI BIOS driver
 app-misc/calamares-config-redcore 1.314.1337-r19: Redcore Linux Calamares modules config
 app-misc/redcore-live 1.314.1337-r4: Redcore Linux live scripts
@@ -21,7 +19,6 @@ app-portage/hermes 0.2512.1-r2: System Upgrade Watchdog Service
 app-portage/sisyphus 7.2605.0-r2 9999: A simple portage python wrapper which works like other package managers(apt-get/yum/dnf)
 app-portage/sisyphus-qt 7.2605.0 9999: A simple portage python wrapper which works like other package managers(apt-get/yum/dnf)
 app-text/simplenote 2.6.0-r1: The simplest way to keep notes
-dev-go/protobuf-go 1.30.0-r1: Go support for Google's protocol buffers
 dev-go/protoc-gen-go-grpc 1.2.0: This tool generates Go language bindings of services in protobuf definition files for gRPC
 dev-python/animation 0.0.5-r8: Tools for terminal-based wait animations
 dev-python/grpcio-tools 1.83.0: Protobuf code generator for gRPC
@@ -34,8 +31,6 @@ kde-plasma/kinfocenter 6.7.3-r2: Utility providing information about the compute
 lxde-base/lxappearance 0.6.3-r5: LXDE GTK+ theme switcher
 lxqt-base/lxqt-meta 2.4.0-r10: Meta ebuild for LXQt, the Lightweight Desktop Environment
 lxqt-base/lxqt-session 2.4.0-r10: LXQt Session Manager
-mail-client/thunderbird 152.0: Thunderbird Mail Client
-mail-client/thunderbird-l10n 152.0: Thunderbird mail client's translation files
 media-libs/libvlc 3.0.23-r2: Compatibility library for VLC 3 (libvlc and plugins only)
 media-libs/portsmf 239-r1: The Tenacity fork of PortSMF, a Standard MIDI File library
 media-tv/sopcast 3.2.6-r5: SopCast free P2P Internet TV binary
@@ -64,9 +59,9 @@ sys-kernel/bcmwl-dkms 6.30.223.271-r22: Broadcom's IEEE 802.11a/b/g/n hybrid Lin
 sys-kernel/dkms 2.3-r4: Dynamic Kernel Module Support
 sys-kernel/dracut 059-r15: Generic initramfs generation tool
 sys-kernel/linux-image-redcore 7.1.5-r1: Redcore Linux Kernel Image
-sys-kernel/linux-image-redcore-lts 5.15.212-r1 6.1.178-r1 6.6.145-r1 6.12.97-r1 6.18.40-r1: Redcore Linux LTS Kernel Image
+sys-kernel/linux-image-redcore-lts 5.15.213-r1 6.1.180-r1 6.6.147-r1 6.12.100-r1 6.18.41-r1: Redcore Linux LTS Kernel Image
 sys-kernel/linux-sources-redcore 7.1.5-r1: Redcore Linux Kernel Sources
-sys-kernel/linux-sources-redcore-lts 5.15.212-r1 6.1.178-r1 6.6.145-r1 6.12.97-r1 6.18.40-r1: Redcore Linux LTS Kernel Sources
+sys-kernel/linux-sources-redcore-lts 5.15.213-r1 6.1.180-r1 6.6.147-r1 6.12.100-r1 6.18.41-r1: Redcore Linux LTS Kernel Sources
 sys-kernel/nvidia-drivers-dkms 390.157-r8 470.256.02-r1 580.173.02 595.84: NVIDIA driver sources for linux
 sys-kernel/tp_smapi-dkms 0.45-r4: IBM ThinkPad SMAPI BIOS driver sources
 sys-kernel/vhba-dkms 20260313-r1: Virtual (SCSI) Host Bus Adapter kernel module for the CDEmu suite sources
