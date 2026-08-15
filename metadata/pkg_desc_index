@@ -39,6 +39,7 @@ net-dialup/rp-pppoe 4.0-r5: A user-mode PPPoE client and server suite for Linux
 net-misc/warpinator 2.0.3: Share files across the LAN
 net-print/lexmark-upd-ppd 1.0.0.20210304-r1: Lexmark universal printer driver PPDs
 net-wireless/broadcom-sta 6.30.223.271-r6: Broadcom's IEEE 802.11a/b/g/n hybrid Linux device driver
+sci-ml/ggml 0.19.0: Tensor library for machine learning
 sec-keys/openpgp-keys-redcore-release 1.314.1337: OpenPGP keys used for Redcore Linux Project releases (iso, packages)
 sys-apps/baselayout 2.13-r8: Filesystem baselayout and init scripts
 sys-apps/lsb-release 3.3-r5: LSB version query program
