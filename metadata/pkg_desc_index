@@ -8,7 +8,7 @@ app-arch/unp 2.0_pre9-r1: Script for unpacking various file formats
 app-backup/timeshift 25.12.4: A system restore utility for Linux
 app-emulation/steam 1.0.0.79: Installer, launcher and supplementary files for Valve's Steam client
 app-emulation/virtualbox-guest-additions 7.2.16: VirtualBox user-space tools for Gentoo guests
-app-emulation/virtualbox-guest-modules 7.2.14: Kernel Modules (guest) for Virtualbox
+app-emulation/virtualbox-guest-modules 7.2.16: Kernel Modules (guest) for Virtualbox
 app-emulation/virtualbox-modules 7.2.14: Kernel Modules for Virtualbox
 app-laptop/tp_smapi 0.45: IBM ThinkPad SMAPI BIOS driver
 app-misc/calamares-config-redcore 1.314.1337-r19: Redcore Linux Calamares modules config
