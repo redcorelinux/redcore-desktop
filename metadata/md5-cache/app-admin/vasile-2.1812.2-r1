@@ -10,5 +10,5 @@ LICENSE=GPL-2
 PROPERTIES=live
 RDEPEND=sys-apps/gentoo-functions dev-libs/libisoburn dev-vcs/git sys-boot/grub:2 sys-kernel/dkms sys-fs/mtools sys-fs/squashfs-tools
 SLOT=0
-_eclasses_=git-r3	2f8cdb10b033f92c3136aa6488a31c98
+_eclasses_=git-r3	e6c2f983e006e805160436c75a0c1562
 _md5_=4482f1668ffb6c37b089e3d29b686654

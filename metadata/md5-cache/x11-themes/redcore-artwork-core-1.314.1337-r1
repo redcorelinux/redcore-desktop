@@ -10,5 +10,5 @@ LICENSE=CCPL-Attribution-ShareAlike-3.0
 PROPERTIES=live
 RDEPEND=sys-apps/findutils sys-boot/plymouth >=x11-themes/hicolor-icon-theme-0.10 splash? ( sys-kernel/dracut[splash] )
 SLOT=0
-_eclasses_=git-r3	2f8cdb10b033f92c3136aa6488a31c98
+_eclasses_=git-r3	e6c2f983e006e805160436c75a0c1562
 _md5_=6c9201cd221522a02d2761400e341736

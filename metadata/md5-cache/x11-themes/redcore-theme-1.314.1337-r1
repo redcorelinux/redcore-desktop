@@ -9,5 +9,5 @@ LICENSE=GPLv3
 PROPERTIES=live
 RDEPEND=x11-themes/gtk-engines-murrine x11-themes/gtk-engines-unico
 SLOT=0
-_eclasses_=git-r3	2f8cdb10b033f92c3136aa6488a31c98
+_eclasses_=git-r3	e6c2f983e006e805160436c75a0c1562
 _md5_=13d81316b826a99b8c888ce598a53105
