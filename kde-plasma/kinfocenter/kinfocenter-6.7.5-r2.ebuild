@@ -1,11 +1,11 @@
-# Copyright 1999-2025 Gentoo Authors
+# Copyright 1999-2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
 ECM_HANDBOOK="optional"
 KFMIN=6.26.0
-QTMIN=6.10.1
+QTMIN=6.11.2
 inherit ecm plasma.kde.org optfeature xdg
 
 DESCRIPTION="Utility providing information about the computer hardware"
@@ -13,7 +13,7 @@ HOMEPAGE="https://userbase.kde.org/KInfoCenter"
 
 LICENSE="GPL-2" # TODO: CHECK
 SLOT="6"
-KEYWORDS="~amd64"
+KEYWORDS="~amd64 ~arm64 ~ppc64 ~riscv ~x86"
 IUSE="gles2-only usb"
 
 DEPEND="
@@ -41,6 +41,11 @@ BDEPEND="
 	>=kde-frameworks/kcmutils-${KFMIN}:6
 	virtual/pkgconfig
 "
+
+PATCHES=(
+	"${FILESDIR}/${P}-libcxx23-missing-header.patch" # in 6.8
+	"${FILESDIR}/${P}-kcmutils-6.31-qml-link.patch" # in 6.8 (6.7 pending)
+)
 
 CMAKE_SKIP_TESTS=(
 	# bug 816591
