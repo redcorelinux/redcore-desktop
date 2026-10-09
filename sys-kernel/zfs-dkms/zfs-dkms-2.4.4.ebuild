@@ -20,13 +20,6 @@ RDEPEND="${DEPEND}"
 
 S="${WORKDIR}/${MY_P}"
 
-# https://github.com/openzfs/zfs/issues/18760#issuecomment-4919127088
-# https://github.com/openzfs/zfs/pull/18682
-
-PATCHES=(
-	"${FILESDIR}/linux_max_7.1.patch"
-)
-
 src_configure() {
 	:
 }
