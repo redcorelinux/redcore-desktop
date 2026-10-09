@@ -41,6 +41,7 @@ PATCHES=(
 	"${FILESDIR}/020-broadcom-wl-fix-linux-6.15.patch"
 	"${FILESDIR}/021-broadcom-wl-fix-linux-6.17.patch"
 	"${FILESDIR}/022-linux701.patch"
+	"${FILESDIR}/023-linux702.patch"
 	"${FILESDIR}/makefile-dkms.patch"
 )
 
