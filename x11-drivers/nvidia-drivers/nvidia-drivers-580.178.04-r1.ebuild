@@ -55,7 +55,6 @@ RDEPEND="
 	wayland? (
 		>=gui-libs/egl-gbm-1.1.1-r2[abi_x86_32(-)?]
 		>=gui-libs/egl-wayland-1.1.13.1[abi_x86_32(-)?]
-		gui-libs/egl-wayland2[abi_x86_32(-)?]
 		X? ( gui-libs/egl-x11[abi_x86_32(-)?] )
 	)
 "
@@ -108,12 +107,15 @@ pkg_setup() {
 	selection of a DRM device even if unused, e.g. CONFIG_DRM_QXL=m or
 	DRM_AMDGPU=m (among others, consult the kernel config's help), can
 	also use DRM_NOUVEAU=m as long as built as module *not* built-in."
-	local ERROR_DRM_KMS_HELPER="CONFIG_DRM_KMS_HELPER: is not set but is needed for wayland support,
-	tty takeover (e.g. for simpledrm), and config-less Xorg auto-detection.
+	local ERROR_DRM_KMS_HELPER="CONFIG_DRM_KMS_HELPER: is not set but needed for Xorg auto-detection
+	of drivers (no custom config), and for wayland / nvidia-drm.modeset=1.
 	${drm_helper_msg}"
 	local ERROR_DRM_TTM_HELPER="CONFIG_DRM_TTM_HELPER: is not set but is needed to compile when using
 	kernel version 6.11.x or newer while DRM_FBDEV_EMULATION is set.
 	${drm_helper_msg}"
+	local ERROR_MMU_NOTIFIER="CONFIG_MMU_NOTIFIER: is not set but needed to build with USE=kernel-open.
+	Cannot be directly selected in the kernel's menuconfig, and may need
+	selection of another option that requires it such as CONFIG_KVM."
 	local ERROR_PREEMPT_RT="CONFIG_PREEMPT_RT: is set but is unsupported by NVIDIA upstream and
 	will fail to build unless the env var IGNORE_PREEMPT_RT_PRESENCE=1 is
 	set. Please do not report issues if run into e.g. kernel panics while
@@ -128,6 +130,10 @@ src_prepare() {
 
 	default
 
+	# prevent detection of incomplete kernel DRM support (bug #603818)
+	sed 's/defined(CONFIG_DRM/defined(CONFIG_DRM_KMS_HELPER/g' \
+		-i kernel/conftest.sh || die
+
 	# adjust service files
 	sed 's/__USER__/nvpd/' \
 		nvidia-persistenced/init/systemd/nvidia-persistenced.service.template \
@@ -138,7 +144,7 @@ src_prepare() {
 	use X || sed -i 's/"libGLX/"libEGL/' nvidia_{layers,icd}.json || die
 
 	# enable nvidia-drm.modeset=1 by default with USE=wayland
-	cp "${FILESDIR}"/nvidia-595.conf "${T}"/nvidia.conf || die
+	cp "${FILESDIR}"/nvidia-580.conf "${T}"/nvidia.conf || die
 	use !wayland || sed -i '/^#.*modeset=1$/s/^#//' "${T}"/nvidia.conf || die
 }
 
@@ -195,7 +201,6 @@ src_install() {
 		libnvidia-{gtk,wayland-client} nvidia-{settings,xconfig} # from source
 		libnvidia-egl-gbm 15_nvidia_gbm # gui-libs/egl-gbm
 		libnvidia-egl-wayland 10_nvidia_wayland # gui-libs/egl-wayland
-		libnvidia-egl-wayland2 09_nvidia_wayland2 # gui-libs/egl-wayland2
 		libnvidia-egl-xcb 20_nvidia_xcb.json # gui-libs/egl-x11
 		libnvidia-egl-xlib 20_nvidia_xlib.json # gui-libs/egl-x11
 		libnvidia-pkcs11.so # using the openssl3 version instead
@@ -227,6 +232,12 @@ See '${EPREFIX}/etc/modprobe.d/nvidia.conf' for modules options.\
 
 Note that without USE=abi_x86_32 on ${PN}, 32bit applications
 (typically using wine / steam) will not be able to use GPU acceleration.\
+
+Be warned that USE=kernel-open may need to be either enabled or
+disabled for certain cards to function:
+- GTX 50xx (blackwell) and higher require it to be enabled
+- GTX 1650 and higher (pre-blackwell) should work either way
+- Older cards require it to be disabled
 
 For additional information or for troubleshooting issues, please see
 https://wiki.gentoo.org/wiki/NVIDIA/nvidia-drivers and NVIDIA's own
@@ -301,26 +312,16 @@ documentation that is installed alongside this README."
 	insopts -m0644 # reset
 
 	# MODULE:installer non-skipped extras
-	# (sleep services skipped, obsoleted by NVreg_UseKernelSuspendNotifiers=1)
+	: "$(systemd_get_sleepdir)"
+	exeinto "${_#"${EPREFIX}"}"
+	doexe systemd/system-sleep/nvidia
+	dobin systemd/nvidia-sleep.sh
+	systemd_dounit systemd/system/nvidia-{hibernate,resume,suspend,suspend-then-hibernate}.service
+
 	dobin nvidia-bug-report.sh
 
 	insinto /usr/share/nvidia/files.d
 	doins sandboxutils-filelist.json
-
-	# needed with >=systemd-256 or may fail to resume with some setups
-	# https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1072722
-	: "$(systemd_get_systemunitdir)"
-	local unitdir=${_#"${EPREFIX}"}
-	insinto "${unitdir}"/systemd-homed.service.d
-	newins - 10-nvidia.conf <<-EOF
-		[Service]
-		Environment=SYSTEMD_HOME_LOCK_FREEZE_SESSION=false
-	EOF
-	insinto "${unitdir}"/systemd-suspend.service.d
-	newins systemd/system/systemd-suspend.service.d/nvidia-suspend-nofreeze.conf 10-nvidia.conf
-	dosym -r "${unitdir}"/systemd-{suspend,hibernate}.service.d/10-nvidia.conf
-	dosym -r "${unitdir}"/systemd-{suspend,hybrid-sleep}.service.d/10-nvidia.conf
-	dosym -r "${unitdir}"/systemd-{suspend,suspend-then-hibernate}.service.d/10-nvidia.conf
 
 	# MODULE:powerd extras
 	if use powerd; then
@@ -330,6 +331,40 @@ documentation that is installed alongside this README."
 		insinto /usr/share/dbus-1/system.d
 		doins nvidia-dbus.conf
 	fi
+
+	# enabling is needed for sleep to work properly and little reason not to do
+	# it unconditionally for a better user experience
+	: "$(systemd_get_systemunitdir)"
+	local unitdir=${_#"${EPREFIX}"}
+	# not using relative symlinks to match systemd's own links
+	dosym {"${unitdir}",/etc/systemd/system/systemd-hibernate.service.wants}/nvidia-hibernate.service
+	dosym {"${unitdir}",/etc/systemd/system/systemd-hibernate.service.wants}/nvidia-resume.service
+	dosym {"${unitdir}",/etc/systemd/system/systemd-suspend-then-hibernate.service.wants}/nvidia-suspend-then-hibernate.service
+	dosym {"${unitdir}",/etc/systemd/system/systemd-suspend-then-hibernate.service.wants}/nvidia-resume.service
+	dosym {"${unitdir}",/etc/systemd/system/systemd-suspend.service.wants}/nvidia-suspend.service
+	dosym {"${unitdir}",/etc/systemd/system/systemd-suspend.service.wants}/nvidia-resume.service
+	# also add a custom elogind hook to do the equivalent of the above
+	exeinto /usr/lib/elogind/system-sleep
+	newexe "${FILESDIR}"/system-sleep.elogind nvidia
+	# <elogind-255.5 used a different path (bug #939216), keep a compat symlink
+	# TODO: cleanup after 255.5 been stable for a few months
+	dosym {/usr/lib,/"${libdir}"}/elogind/system-sleep/nvidia
+
+	# needed with >=systemd-256 or may fail to resume with some setups
+	# https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1072722
+	insinto "${unitdir}"/systemd-homed.service.d
+	newins - 10-nvidia.conf <<-EOF
+		[Service]
+		Environment=SYSTEMD_HOME_LOCK_FREEZE_SESSION=false
+	EOF
+	insinto "${unitdir}"/systemd-suspend.service.d
+	newins - 10-nvidia.conf <<-EOF
+		[Service]
+		Environment=SYSTEMD_SLEEP_FREEZE_USER_SESSIONS=false
+	EOF
+	dosym -r "${unitdir}"/systemd-{suspend,hibernate}.service.d/10-nvidia.conf
+	dosym -r "${unitdir}"/systemd-{suspend,hybrid-sleep}.service.d/10-nvidia.conf
+	dosym -r "${unitdir}"/systemd-{suspend,suspend-then-hibernate}.service.d/10-nvidia.conf
 
 	# symlink non-versioned so nvidia-settings can use it even if misdetected
 	dosym nvidia-application-profiles-${PV}-key-documentation \
@@ -382,20 +417,13 @@ pkg_postinst() {
 		ewarn "${PN}. Bug: https://bugs.gentoo.org/796329"
 	fi
 
-	if ver_replacing -lt 595; then
-		elog "\n>=${PN}-595 has changes that may or may not need attention:"
-		elog "1. kernel-open modules are now always enabled by default. If for some"
-		elog "   reason you really need the closed variant (e.g. Runtime D3 on Turing"
-		elog "   GPUs), please use LTS 580.xx instead as Gentoo has no intention to"
-		elog "   support both variants anymore going forward"
-		elog "2. systemd/elogind sleep services (nvidia-sleep.sh) were tentatively"
-		elog "   removed and replaced by setting NVreg_UseKernelSuspendNotifiers=1 in"
-		elog "   ${EROOT}/etc/modprobe.d/nvidia.conf. If using a non-default custom"
-		elog "   nvidia.conf, please ensure the option is set. Also, systemd users"
-		elog "   may want to ensure that they do not have old sleep/suspend/resume"
-		elog "   *nvidia* files in ${EROOT}/etc/systemd to avoid potential issues."
-		elog "3. nvidia-drm.modeset=1 was removed from nvidia.conf because it is now"
-		elog "   default enabled regardless (new NVIDIA default)"
+	if ver_replacing -lt 580.126.09-r1; then
+		elog "\n>=nvidia-drivers-580.126.09-r1 changes some defaults that may or may"
+		elog "not need attention:"
+		elog "1. nvidia-drm.modeset=1 is now default regardless of USE=wayland"
+		elog "2. nvidia-drm.fbdev=1 is now also tentatively default to match upstream"
+		elog "See ${EROOT}/etc/modprobe.d/nvidia.conf to modify settings if needed,"
+		elog "fbdev=1 *could* cause issues for the console display with some setups."
 	fi
 }
 
