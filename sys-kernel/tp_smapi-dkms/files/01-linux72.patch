@@ -1,0 +1,12 @@
+diff '--color=auto' -Nur a/tp_smapi.c b/tp_smapi.c
+--- a/tp_smapi.c	2025-06-24 20:17:59.000000000 +0100
++++ b/tp_smapi.c	2026-10-09 20:56:45.638961696 +0100
+@@ -669,7 +669,7 @@
+ 	ret = read_tp_ec_row(arg0, bat, 0, row);
+ 	if (ret)
+ 		return ret;
+-	strncpy(buf, (char *)row+offset, maxlen);
++	strscpy(buf, (char *)row+offset, maxlen);
+ 	buf[maxlen] = 0;
+ 	strcat(buf, "\n");
+ 	return strlen(buf);

@@ -9,4 +9,4 @@ LICENSE=GPL-2
 RDEPEND=sys-kernel/dkms
 SLOT=0
 SRC_URI=https://github.com/linux-thinkpad/tp_smapi/releases/download/tp-smapi/0.45/tp_smapi-0.45.tgz
-_md5_=346b33daab4e829121d2f8c7adbc5c18
+_md5_=6813ae8f259ea981c86119934cac9c9f

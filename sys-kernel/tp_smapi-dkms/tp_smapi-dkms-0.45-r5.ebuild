@@ -20,6 +20,10 @@ RDEPEND="${DEPEND}"
 
 S=${WORKDIR}/${MY_P}
 
+PATCHES=(
+	"${FILESDIR}/01-linux72.patch"
+)
+
 pkg_setup() {
 	if use hdaps; then
 		local CONFIG_CHECK="~INPUT_UINPUT"
