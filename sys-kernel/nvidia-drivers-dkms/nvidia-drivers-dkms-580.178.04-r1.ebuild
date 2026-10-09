@@ -24,7 +24,6 @@ RDEPEND="${DEPEND}
 
 PATCHES=(
 	"${FILESDIR}"/dkms580.patch
-	"${FILESDIR}"/nvidia-drivers-580.159.03-null-deref.patch
 )
 
 S="${WORKDIR}/${AMD64_NV_PACKAGE}"
