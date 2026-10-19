@@ -114,11 +114,20 @@ _dracut_initrd_create() {
 	fi
 }
 
-_dracut_initrd_delete() {
+_dracut_initrd_cleanup() {
 	rm -rf "${ROOT}"/boot/initrd-"${KV_FULL}"
 }
 
-_dkms_modules_manage() {
+_dkms_modules_install() {
+	if [[ -x $(which dkms) ]] ; then
+		export local DKMSMOD
+		for DKMSMOD in $(dkms status | cut -d " " -f1,2 | sed -e 's/,//g' | sed -e 's/ /\//g' | sed -e 's/://g' | uniq) ; do
+			dkms install "${DKMSMOD}" -k "${KV_FULL}"
+		done
+	fi
+}
+
+_dkms_modules_cleanup() {
 	if [[ -x $(which dkms) ]] ; then
 		export local DKMSMOD
 		for DKMSMOD in $(dkms status | cut -d " " -f1,2 | sed -e 's/,//g' | sed -e 's/ /\//g' | sed -e 's/://g' | uniq) ; do
@@ -128,12 +137,15 @@ _dkms_modules_manage() {
 	fi
 }
 
-_kernel_modules_delete() {
+_kernel_modules_cleanup() {
 	rm -rf "${ROOT}"/lib/modules/"${KV_FULL}"
 }
 
 pkg_postinst() {
 	if [ $(stat -c %d:%i /) == $(stat -c %d:%i /proc/1/root/.) ]; then
+		if use dkms; then
+			_dkms_modules_install
+		fi
 		if use dracut; then
 			_dracut_initrd_create
 		fi
@@ -143,13 +155,13 @@ pkg_postinst() {
 
 pkg_postrm() {
 	if [ $(stat -c %d:%i /) == $(stat -c %d:%i /proc/1/root/.) ]; then
+		if use dkms; then
+			_dkms_modules_cleanup
+		fi
 		if use dracut; then
-			_dracut_initrd_delete
+			_dracut_initrd_cleanup
 		fi
 		_grub2_update_grubcfg
 	fi
-	if use dkms; then
-		_dkms_modules_manage
-	fi
-	_kernel_modules_delete
+	_kernel_modules_cleanup
 }

@@ -10,4 +10,4 @@ RDEPEND=app-arch/lz4 app-arch/xz-utils dev-build/autoconf dev-build/make sys-dev
 RESTRICT=binchecks strip mirror
 SLOT=7.2
 SRC_URI=https://cdn.kernel.org/pub/linux/kernel/v7.x/linux-7.2.11.tar.xz
-_md5_=bf13fa33c440a1a00941885876f19bf7
+_md5_=84eb9d7cf2d200791ea630e2c32c0ecc

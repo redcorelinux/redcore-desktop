@@ -10,4 +10,4 @@ RDEPEND=app-arch/lz4 app-arch/xz-utils dev-build/autoconf dev-build/make sys-dev
 RESTRICT=binchecks strip mirror
 SLOT=6.1
 SRC_URI=https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.1.190.tar.xz
-_md5_=c0990c65f9f897629a99cf1f58b57fc7
+_md5_=1b46aacb22cec1bd1935488cd5c2eb06
