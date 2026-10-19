@@ -233,6 +233,9 @@ https://wiki.gentoo.org/wiki/NVIDIA/nvidia-drivers and NVIDIA's own
 documentation that is installed alongside this README."
 	readme.gentoo_create_doc
 
+	insinto /etc/dracut.conf.d
+	newins "${FILESDIR}"/dracut-nvidia-legacy.conf dracut-nvidia-${PV}.conf
+
 	insinto /etc/modprobe.d
 	doins "${T}"/nvidia.conf
 
