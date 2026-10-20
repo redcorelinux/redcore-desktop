@@ -4,7 +4,7 @@
 EAPI=8
 
 ECM_HANDBOOK="optional"
-KFMIN=6.26.0
+KFMIN=6.30.0
 QTMIN=6.11.2
 inherit ecm plasma.kde.org optfeature xdg
 
@@ -13,12 +13,13 @@ HOMEPAGE="https://userbase.kde.org/KInfoCenter"
 
 LICENSE="GPL-2" # TODO: CHECK
 SLOT="6"
-KEYWORDS="~amd64 ~arm64 ~ppc64 ~riscv ~x86"
+KEYWORDS="~amd64 ~arm64"
 IUSE="gles2-only usb"
 
 DEPEND="
 	>=dev-qt/qtbase-${QTMIN}:6[dbus,gles2-only=,gui,vulkan,widgets]
 	>=dev-qt/qtdeclarative-${QTMIN}:6
+	>=dev-qt/qtgraphs-${QTMIN}:6
 	>=kde-frameworks/kauth-${KFMIN}:6
 	>=kde-frameworks/kcmutils-${KFMIN}:6
 	>=kde-frameworks/kconfig-${KFMIN}:6
@@ -27,6 +28,7 @@ DEPEND="
 	>=kde-frameworks/kio-${KFMIN}:6
 	>=kde-frameworks/kservice-${KFMIN}:6
 	>=kde-frameworks/solid-${KFMIN}:6
+	media-libs/libglvnd
 	virtual/libudev:=
 	x11-libs/libdrm
 	gles2-only? ( >=media-libs/mesa-24.1.0_rc1[opengl] )
@@ -41,11 +43,6 @@ BDEPEND="
 	>=kde-frameworks/kcmutils-${KFMIN}:6
 	virtual/pkgconfig
 "
-
-PATCHES=(
-	"${FILESDIR}/${P}-libcxx23-missing-header.patch" # in 6.8
-	"${FILESDIR}/${P}-kcmutils-6.31-qml-link.patch" # in 6.8 (6.7 pending)
-)
 
 CMAKE_SKIP_TESTS=(
 	# bug 816591
@@ -84,7 +81,7 @@ pkg_postinst() {
 
 	optfeature_header "Query GPU/graphics support info:"
 	optfeature "OpenCL information module" dev-util/clinfo
-	optfeature "OpenGL information module" x11-apps/mesa-progs
+	optfeature "EGL information module" x11-apps/mesa-progs
 	optfeature "Vulkan graphics API information module" dev-util/vulkan-tools
 	optfeature "Wayland information module" app-misc/wayland-utils
 	optfeature "X Server information module" x11-apps/xdpyinfo
