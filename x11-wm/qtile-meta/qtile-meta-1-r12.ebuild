@@ -21,7 +21,7 @@ RDEPEND="
 	desktop-portal? ( gui-libs/xdg-desktop-portal-wlr )
 	discover? ( kde-plasma/discover )
 	display-manager? (
-		sddm? ( x11-misc/sddm )
+		sddm? ( gui-apps/sddm )
 		!sddm? ( x11-misc/lightdm )
 	)
 	editor? ( app-editors/featherpad )
