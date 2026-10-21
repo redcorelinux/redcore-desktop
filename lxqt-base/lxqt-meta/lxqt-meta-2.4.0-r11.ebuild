@@ -45,7 +45,7 @@ RDEPEND="
 	desktop-portal? ( >=gui-libs/xdg-desktop-portal-lxqt-1.1 )
 	discover? ( kde-plasma/discover )
 	display-manager? (
-		sddm? ( x11-misc/sddm )
+		sddm? ( gui-apps/sddm )
 		!sddm? ( x11-misc/lightdm )
 	)
 	filemanager? ( =x11-misc/pcmanfm-qt-${MY_PV}* )
