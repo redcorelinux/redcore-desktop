@@ -43,7 +43,7 @@ RDEPEND="
 	qt5? ( x11-misc/qt5ct )
 	qt6? ( gui-apps/qt6ct )
 	screenshot? ( media-gfx/flameshot )
-	sddm? ( x11-misc/sddm )
+	sddm? ( gui-apps/sddm )
 	terminal? ( x11-terms/alacritty )
 	wallpaper? (
 		X? ( media-gfx/feh )

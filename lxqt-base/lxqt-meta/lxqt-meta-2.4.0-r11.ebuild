@@ -63,7 +63,7 @@ RDEPEND="
 	qt5? ( x11-misc/qt5ct )
 	qt6? ( gui-apps/qt6ct )
 	screenshot? ( >=x11-misc/screengrab-2.9 )
-	sddm? ( x11-misc/sddm )
+	sddm? ( gui-apps/sddm )
 	ssh-askpass? ( =lxqt-base/lxqt-openssh-askpass-${MY_PV}* )
 	sudo? ( =lxqt-base/lxqt-sudo-${MY_PV}* )
 	terminal? ( =x11-terms/qterminal-${MY_PV}* )
