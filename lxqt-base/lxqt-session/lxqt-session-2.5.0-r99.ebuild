@@ -1,21 +1,24 @@
-# Copyright 1999-2025 Gentoo Authors
+# Copyright 1999-2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
 inherit cmake
 
-DESCRIPTION="LXQt Session Manager"
-HOMEPAGE="https://lxqt-project.org/"
-
 MY_PV="$(ver_cut 1-2)"
+
+DESCRIPTION="LXQt Session Manager"
+HOMEPAGE="
+	https://lxqt-project.org/
+	https://github.com/lxqt/lxqt-session/
+"
 
 if [[ ${PV} == 9999 ]]; then
 	inherit git-r3
 	EGIT_REPO_URI="https://github.com/lxqt/${PN}.git"
 else
 	SRC_URI="https://github.com/lxqt/${PN}/releases/download/${PV}/${P}.tar.xz"
-	KEYWORDS="~amd64 ~arm64 ~riscv ~x86"
+	KEYWORDS="~amd64 ~arm64 ~ppc64 ~riscv ~x86"
 fi
 
 LICENSE="LGPL-2.1 LGPL-2.1+"
@@ -24,11 +27,11 @@ IUSE="+udev"
 
 BDEPEND="
 	>=dev-qt/qttools-6.6:6[linguist]
-	>=dev-util/lxqt-build-tools-2.2.0
+	>=dev-util/lxqt-build-tools-2.5.0
 "
 DEPEND="
-	>=app-misc/qtxdg-tools-4.2.0
-	>=dev-libs/libqtxdg-4.2.0
+	>=app-misc/qtxdg-tools-4.5.0
+	>=dev-libs/libqtxdg-4.5.0
 	>=dev-qt/qtbase-6.6:6[dbus,gui,widgets]
 	kde-frameworks/kwindowsystem:6[X]
 	kde-plasma/layer-shell-qt:6

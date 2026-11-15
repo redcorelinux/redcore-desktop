@@ -29,7 +29,7 @@ gui-libs/display-manager-init 1.1.2-r10: RC init files for starting display and 
 kde-plasma/kinfocenter 6.8.1-r2: Utility providing information about the computer hardware
 lxde-base/lxappearance 0.6.3-r5: LXDE GTK+ theme switcher
 lxqt-base/lxqt-meta 2.4.0-r11: Meta ebuild for LXQt, the Lightweight Desktop Environment
-lxqt-base/lxqt-session 2.4.0-r10: LXQt Session Manager
+lxqt-base/lxqt-session 2.5.0-r99: LXQt Session Manager
 media-libs/libvlc 3.0.23-r2: Compatibility library for VLC 3 (libvlc and plugins only)
 media-libs/portsmf 239-r1: The Tenacity fork of PortSMF, a Standard MIDI File library
 media-tv/sopcast 3.2.6-r5: SopCast free P2P Internet TV binary
