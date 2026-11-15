@@ -16,18 +16,14 @@ LICENSE="metapackage"
 SLOT="0"
 
 IUSE="
-	+about admin +archiver +desktop-portal discover +display-manager +filemanager gtk
+	+about admin +archiver clip +desktop-portal discover +display-manager +filemanager gtk
 	+icons +lximage networkmanager nls +openbox +policykit powermanagement +processviewer
 	qt5 qt6 +screenshot +sddm ssh-askpass +sudo +terminal +trash wayland +window-manager
 "
 
 REQUIRED_USE="trash? ( filemanager )"
 
-# Pull in 'kde-frameworks/breeze-icons' as an upstream default.
-# https://bugs.gentoo.org/543380
-# https://github.com/lxqt/lxqt-session/commit/5d32ff434d4
 RDEPEND="
-	kde-frameworks/breeze-icons:6
 	=lxqt-base/lxqt-config-${MY_PV}*
 	=lxqt-base/lxqt-globalkeys-${MY_PV}*
 	=lxqt-base/lxqt-menu-data-${MY_PV}*
@@ -41,8 +37,9 @@ RDEPEND="
 	x11-themes/redcore-theme-lxqt
 	about? ( =lxqt-base/lxqt-about-${MY_PV}* )
 	admin? ( =lxqt-base/lxqt-admin-${MY_PV}* )
-	archiver? ( >=app-arch/lxqt-archiver-1.0 )
-	desktop-portal? ( >=gui-libs/xdg-desktop-portal-lxqt-1.1 )
+	archiver? ( >=app-arch/lxqt-archiver-1.5 )
+	clip? ( =gui-apps/lxqt-clip-${MY_PV}* )
+	desktop-portal? ( >=gui-libs/xdg-desktop-portal-lxqt-1.5 )
 	discover? ( kde-plasma/discover )
 	display-manager? (
 		sddm? ( gui-apps/sddm )
@@ -59,27 +56,23 @@ RDEPEND="
 	nls? ( dev-qt/qttranslations:6 )
 	policykit? ( =lxqt-base/lxqt-policykit-${MY_PV}* )
 	powermanagement? ( =lxqt-base/lxqt-powermanagement-${MY_PV}* )
-	processviewer? ( >=x11-misc/qps-2.10 )
+	processviewer? ( >=x11-misc/qps-2.14 )
 	qt5? ( x11-misc/qt5ct )
 	qt6? ( gui-apps/qt6ct )
-	screenshot? ( >=x11-misc/screengrab-2.9 )
+	screenshot? ( >=x11-misc/screengrab-3.3 )
 	sddm? ( gui-apps/sddm )
 	ssh-askpass? ( =lxqt-base/lxqt-openssh-askpass-${MY_PV}* )
 	sudo? ( =lxqt-base/lxqt-sudo-${MY_PV}* )
 	terminal? ( =x11-terms/qterminal-${MY_PV}* )
 	trash? ( gnome-base/gvfs )
-	wayland? (
-		lxqt-base/lxqt-wayland-session
-		gui-wm/labwc
-		)
+	wayland? ( lxqt-base/lxqt-wayland-session )
 	window-manager? (
-		openbox? (
-			x11-wm/openbox
-			x11-misc/obconf
-		)
-		!openbox? (
-			kde-plasma/kwin:6
-			kde-plasma/systemsettings:6
+		wayland? ( gui-wm/labwc )
+		!wayland? (
+			openbox? (
+				x11-wm/openbox
+				x11-misc/obconf
+			)
 		)
 	)
 "
