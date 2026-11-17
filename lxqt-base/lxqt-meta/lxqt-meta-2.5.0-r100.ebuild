@@ -24,7 +24,7 @@ IUSE="
 REQUIRED_USE="trash? ( filemanager )"
 
 RDEPEND="
-	>=lxqt-base/lxqt-config-${MY_PV}*
+	>=lxqt-base/lxqt-config-2.5.1
 	=lxqt-base/lxqt-globalkeys-${MY_PV}*
 	=lxqt-base/lxqt-menu-data-${MY_PV}*
 	=lxqt-base/lxqt-notificationd-${MY_PV}*
