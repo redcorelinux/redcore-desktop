@@ -1,4 +1,5 @@
 # Copyright 1999-2017 Gentoo Foundation
+# Copyright 2017-2026 Redcore Linux Project
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
