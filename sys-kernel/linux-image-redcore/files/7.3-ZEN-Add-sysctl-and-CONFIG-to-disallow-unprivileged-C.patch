@@ -1,7 +1,7 @@
 diff '--color=auto' -Nur a/include/linux/user_namespace.h b/include/linux/user_namespace.h
---- a/include/linux/user_namespace.h	2026-02-19 15:33:27.000000000 +0000
-+++ b/include/linux/user_namespace.h	2026-02-24 19:31:49.415823064 +0000
-@@ -173,6 +173,8 @@
+--- a/include/linux/user_namespace.h	2026-11-23 07:44:24.000000000 +0000
++++ b/include/linux/user_namespace.h	2026-11-23 13:24:10.583905752 +0000
+@@ -176,6 +176,8 @@
  
  #ifdef CONFIG_USER_NS
  
@@ -10,7 +10,7 @@ diff '--color=auto' -Nur a/include/linux/user_namespace.h b/include/linux/user_n
  static inline struct user_namespace *get_user_ns(struct user_namespace *ns)
  {
  	if (ns)
-@@ -206,6 +208,8 @@
+@@ -209,6 +211,8 @@
  struct ns_common *ns_get_owner(struct ns_common *ns);
  #else
  
@@ -20,9 +20,9 @@ diff '--color=auto' -Nur a/include/linux/user_namespace.h b/include/linux/user_n
  {
  	return &init_user_ns;
 diff '--color=auto' -Nur a/init/Kconfig b/init/Kconfig
---- a/init/Kconfig	2026-02-19 15:33:27.000000000 +0000
-+++ b/init/Kconfig	2026-02-24 19:31:49.416494864 +0000
-@@ -1398,6 +1398,22 @@
+--- a/init/Kconfig	2026-11-23 07:44:24.000000000 +0000
++++ b/init/Kconfig	2026-11-23 13:24:10.584905752 +0000
+@@ -1462,6 +1462,22 @@
  
  	  If unsure, say N.
  
@@ -46,9 +46,9 @@ diff '--color=auto' -Nur a/init/Kconfig b/init/Kconfig
  	bool "PID Namespaces"
  	default y
 diff '--color=auto' -Nur a/kernel/fork.c b/kernel/fork.c
---- a/kernel/fork.c	2026-02-19 15:33:27.000000000 +0000
-+++ b/kernel/fork.c	2026-02-24 19:33:37.408306763 +0000
-@@ -106,6 +106,11 @@
+--- a/kernel/fork.c	2026-11-23 07:44:24.000000000 +0000
++++ b/kernel/fork.c	2026-11-23 13:24:10.584905752 +0000
+@@ -110,6 +110,11 @@
  #include <linux/pidfs.h>
  #include <linux/tick.h>
  #include <linux/unwind_deferred.h>
@@ -60,7 +60,7 @@ diff '--color=auto' -Nur a/kernel/fork.c b/kernel/fork.c
  #include <linux/pgalloc.h>
  #include <linux/uaccess.h>
  
-@@ -1986,6 +1991,10 @@
+@@ -2051,6 +2056,10 @@
  	if ((clone_flags & (CLONE_NEWUSER|CLONE_FS)) == (CLONE_NEWUSER|CLONE_FS))
  		return ERR_PTR(-EINVAL);
  
@@ -71,9 +71,9 @@ diff '--color=auto' -Nur a/kernel/fork.c b/kernel/fork.c
  	/*
  	 * Thread groups must share signals as well, and detached threads
  	 * can only be started up within the thread group.
-@@ -3149,6 +3158,12 @@
- 	if (unshare_flags & CLONE_NEWNS)
- 		unshare_flags |= CLONE_FS;
+@@ -3307,6 +3316,12 @@
+ 	VFS_WARN_ON_ONCE(unshare_flags & (CLONE_NEWNS | CLONE_FS) &&
+ 			 current->fs != current->real_fs);
  
 +	if ((unshare_flags & CLONE_NEWUSER) && !unprivileged_userns_clone) {
 +		err = -EPERM;
@@ -85,8 +85,8 @@ diff '--color=auto' -Nur a/kernel/fork.c b/kernel/fork.c
  	if (err)
  		goto bad_unshare_out;
 diff '--color=auto' -Nur a/kernel/sysctl.c b/kernel/sysctl.c
---- a/kernel/sysctl.c	2026-02-19 15:33:27.000000000 +0000
-+++ b/kernel/sysctl.c	2026-02-24 19:31:49.417040367 +0000
+--- a/kernel/sysctl.c	2026-11-23 07:44:24.000000000 +0000
++++ b/kernel/sysctl.c	2026-11-23 13:38:02.319825510 +0000
 @@ -22,6 +22,10 @@
  #include <linux/uaccess.h>
  #include <asm/processor.h>
@@ -98,25 +98,25 @@ diff '--color=auto' -Nur a/kernel/sysctl.c b/kernel/sysctl.c
  /* shared constants to be used in various sysctls */
  const int sysctl_vals[] = { 0, 1, 2, 3, 4, 100, 200, 1000, 3000, INT_MAX, 65535, -1 };
  EXPORT_SYMBOL(sysctl_vals);
-@@ -1122,6 +1126,15 @@
- }
- 
- static const struct ctl_table sysctl_subsys_table[] = {
+@@ -1441,6 +1445,15 @@
+ 		.proc_handler	= proc_dointvec,
+ 	},
+ #endif
 +#ifdef CONFIG_USER_NS
-+	{
-+		.procname       = "unprivileged_userns_clone",
-+		.data           = &unprivileged_userns_clone,
-+		.maxlen         = sizeof(int),
-+		.mode           = 0644,
-+		.proc_handler   = proc_dointvec,
-+	},
++       {
++               .procname       = "unprivileged_userns_clone",
++               .data           = &unprivileged_userns_clone,
++               .maxlen         = sizeof(int),
++               .mode           = 0644,
++               .proc_handler   = proc_dointvec,
++       },
 +#endif
- #ifdef CONFIG_PROC_SYSCTL
- 	{
- 		.procname	= "sysctl_writes_strict",
+ };
+ 
+ int __init sysctl_init_bases(void)
 diff '--color=auto' -Nur a/kernel/user_namespace.c b/kernel/user_namespace.c
---- a/kernel/user_namespace.c	2026-02-19 15:33:27.000000000 +0000
-+++ b/kernel/user_namespace.c	2026-02-24 19:31:49.417338766 +0000
+--- a/kernel/user_namespace.c	2026-11-23 07:44:24.000000000 +0000
++++ b/kernel/user_namespace.c	2026-11-23 13:24:10.585905752 +0000
 @@ -23,6 +23,13 @@
  #include <linux/sort.h>
  #include <linux/nstree.h>
