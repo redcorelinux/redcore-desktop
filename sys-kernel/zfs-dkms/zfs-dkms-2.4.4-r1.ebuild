@@ -20,6 +20,14 @@ RDEPEND="${DEPEND}"
 
 S="${WORKDIR}/${MY_P}"
 
+PATCHES=(
+	"${FILESDIR}"/linux-7.3-iops-create-no-flag.patch
+	"${FILESDIR}"/linux-7.3-bvec-iter-bi-offset.patch
+	"${FILESDIR}"/linux-cpu-feature-enabled.patch
+	"${FILESDIR}"/linux-7.3-kthread-init-fs.patch
+	"${FILESDIR}"/bump-Linux-Maximum-7.3.patch
+)
+
 src_configure() {
 	:
 }
