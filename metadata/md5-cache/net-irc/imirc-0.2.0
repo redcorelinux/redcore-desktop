@@ -1,0 +1,16 @@
+BDEPEND=app-alternatives/ninja >=dev-build/cmake-3.28.5 dev-build/vcpkg-tool
+DEFINED_PHASES=compile configure install prepare test unpack
+DEPEND=media-libs/libglvnd x11-libs/libX11 x11-libs/libXcursor x11-libs/libXi x11-libs/libXinerama x11-libs/libXrandr
+DESCRIPTION=Lightweight desktop IRC client built with Dear ImGui, GLFW, and Boost.Asio
+EAPI=8
+HOMEPAGE=https://github.com/victorb64/ImIRC
+INHERIT=vcpkg
+KEYWORDS=~amd64
+LICENSE=Unlicense
+PROPERTIES=live
+RDEPEND=media-libs/libglvnd x11-libs/libX11 x11-libs/libXcursor x11-libs/libXi x11-libs/libXinerama x11-libs/libXrandr
+RESTRICT=network-sandbox
+SLOT=0
+SRC_URI=https://github.com/microsoft/vcpkg/archive/refs/tags/2026.10.16.tar.gz -> vcpkg-2026.10.16.tar.gz https://github.com/victorb64/ImIRC/archive/refs/tags/v0.2.0.tar.gz -> imirc-0.2.0.tar.gz
+_eclasses_=cmake	3530055400d05e64deaba3042af30af6	flag-o-matic	fd3558f73f6503093adee69adf41020d	multiprocessing	45d0620f25c2f063ad6276ecd9ed9399	ninja-utils	d063ea1900a793f93eb095010d6d9156	toolchain-funcs	58a918e3a42d0156f010dcfd43725be5	vcpkg	19e8b04eeb85648fb03d49925bf7b12d	xdg-utils	42869b3c8d86a70ef3cf75165a395e09
+_md5_=adfa6d71fc4a9ea502bae8a6fc47d7da

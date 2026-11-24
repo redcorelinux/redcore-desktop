@@ -18,6 +18,8 @@ app-portage/hermes 0.2512.1-r2: System Upgrade Watchdog Service
 app-portage/sisyphus 7.2605.0-r2 9999: A simple portage python wrapper which works like other package managers(apt-get/yum/dnf)
 app-portage/sisyphus-qt 7.2605.0 9999: A simple portage python wrapper which works like other package managers(apt-get/yum/dnf)
 app-text/simplenote 2.6.0-r1: The simplest way to keep notes
+dev-build/cmakerc 2.0.1_p20230725: A Resource Compiler in a Single CMake Script
+dev-build/vcpkg-tool 2026.10.29: Library manager for C/C++ (tool only)
 dev-go/protoc-gen-go-grpc 1.2.0: This tool generates Go language bindings of services in protobuf definition files for gRPC
 dev-python/animation 0.0.5-r8: Tools for terminal-based wait animations
 dev-python/grpcio-tools 1.85.1: Protobuf code generator for gRPC
@@ -36,6 +38,7 @@ media-libs/portsmf 239-r1: The Tenacity fork of PortSMF, a Standard MIDI File li
 media-tv/sopcast 3.2.6-r5: SopCast free P2P Internet TV binary
 media-tv/tv-lite 0.8.1-r5: IPTV viewer with Sopcast and Acestream handling capabilities.
 net-dialup/rp-pppoe 4.0-r5: A user-mode PPPoE client and server suite for Linux
+net-irc/imirc 0.2.0: Lightweight desktop IRC client built with Dear ImGui, GLFW, and Boost.Asio
 net-misc/warpinator 2.0.3: Share files across the LAN
 net-print/lexmark-upd-ppd 1.0.0.20210304-r1: Lexmark universal printer driver PPDs
 net-wireless/broadcom-sta 6.30.223.271-r6: Broadcom's IEEE 802.11a/b/g/n hybrid Linux device driver
