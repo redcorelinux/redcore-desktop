@@ -4,6 +4,8 @@
 
 EAPI=8
 
+inherit autotools
+
 MY_PN="zfs"
 MY_P="${MY_PN}-${PV}"
 
@@ -27,6 +29,11 @@ PATCHES=(
 	"${FILESDIR}"/linux-7.3-kthread-init-fs.patch
 	"${FILESDIR}"/bump-Linux-Maximum-7.3.patch
 )
+
+src_prepare() {
+	default
+	eautoreconf
+}
 
 src_configure() {
 	:
