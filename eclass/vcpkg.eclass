@@ -7,12 +7,13 @@
 # @AUTHOR:
 # Redcore Linux Project <contact@redcorelinux.org>
 # @SUPPORTED_EAPIS: 8
-# @BLURB: Fetches a pinned vcpkg release tarball and wires vcpkg.cmake into CMake
+# @BLURB: Common functions and variables for vcpkg manifest-mode CMake builds
 # @DESCRIPTION:
-# Provides Portage integration for CMake projects using vcpkg manifests.
-# Fetches a tagged microsoft/vcpkg release archive (or commit SHA) via SRC_URI,
-# binds it to the system dev-build/vcpkg-tool binary, and injects vcpkg.cmake
-# via CMAKE_PROJECT_INCLUDE_BEFORE alongside Gentoo's generated toolchain.
+# Provides Portage integration for CMake projects using vcpkg manifests,
+# modeled on cargo.eclass conventions. Fetches a pinned microsoft/vcpkg
+# snapshot via SRC_URI, isolates vcpkg configuration and cache directories
+# inside ${EVCPKG_HOME} (or a configurable shared cache), and wires
+# vcpkg.cmake into CMake.
 
 case ${EAPI} in
 	8) ;;
@@ -26,15 +27,28 @@ inherit cmake multiprocessing
 
 # @ECLASS_VARIABLE: VCPKG_VERSION
 # @REQUIRED
+# @PRE_INHERIT
 # @DESCRIPTION:
 # Release tag (e.g. "2026.10.16") or 40-char commit SHA of
 # https://github.com/microsoft/vcpkg to fetch as the vcpkg registry tree.
 # Automatically appended to SRC_URI.
 [[ -n ${VCPKG_VERSION} ]] || die "${ECLASS}: VCPKG_VERSION must be set before inheriting ${ECLASS}"
 
+# @ECLASS_VARIABLE: EVCPKG_HOME
+# @INTERNAL
+# @DESCRIPTION:
+# Location of the isolated vcpkg working home directory inside ${WORKDIR}.
+EVCPKG_HOME="${WORKDIR}/vcpkg_home"
+
+# @ECLASS_VARIABLE: EVCPKG_ROOT
+# @INTERNAL
+# @DESCRIPTION:
+# Location of the unpacked vcpkg registry and buildsystem tree.
+EVCPKG_ROOT="${WORKDIR}/vcpkg-${VCPKG_VERSION}"
+
 # @ECLASS_VARIABLE: VCPKG_TRIPLET
 # @DESCRIPTION:
-# Target vcpkg triplet. Auto-detected from CHOST if unset.
+# Target vcpkg triplet. Auto-detected from CHOST if unset (e.g. "x64-linux").
 if [[ -z ${VCPKG_TRIPLET} ]]; then
 	case ${CHOST} in
 		x86_64-*-linux-gnu)  VCPKG_TRIPLET="x64-linux" ;;
@@ -61,9 +75,16 @@ fi
 
 # @ECLASS_VARIABLE: VCPKG_SHARED_CACHE
 # @DESCRIPTION:
-# When set to "yes", persists downloaded port archives and binary caches under
-# /var/cache/vcpkg across emerges instead of isolating them inside ${T}.
+# When set to "yes" (e.g. in make.conf), persists downloaded port archives and
+# binary caches under VCPKG_CACHE_DIR across emerges instead of isolating
+# them inside ${EVCPKG_HOME}.
 : "${VCPKG_SHARED_CACHE:=no}"
+
+# @ECLASS_VARIABLE: VCPKG_CACHE_DIR
+# @DESCRIPTION:
+# Base directory for persistent vcpkg downloads and binary archives when
+# VCPKG_SHARED_CACHE="yes". Defaults to "${EROOT}/var/cache/vcpkg".
+: "${VCPKG_CACHE_DIR:=${EROOT}/var/cache/vcpkg}"
 
 if [[ ${VCPKG_VERSION} =~ ^[0-9a-f]{40}$ ]]; then
 	SRC_URI+=" https://github.com/microsoft/vcpkg/archive/${VCPKG_VERSION}.tar.gz -> vcpkg-${VCPKG_VERSION}.tar.gz"
@@ -71,63 +92,73 @@ else
 	SRC_URI+=" https://github.com/microsoft/vcpkg/archive/refs/tags/${VCPKG_VERSION}.tar.gz -> vcpkg-${VCPKG_VERSION}.tar.gz"
 fi
 
-# vcpkg manifest mode fetches upstream port source archives during configure
 PROPERTIES+=" live"
 RESTRICT+=" network-sandbox"
-
 BDEPEND="dev-build/vcpkg-tool"
 
-# @FUNCTION: _vcpkg_get_root
-# @INTERNAL
+# @FUNCTION: vcpkg_gen_config
 # @DESCRIPTION:
-# Echoes the path to the unpacked vcpkg registry directory in ${WORKDIR}.
-_vcpkg_get_root() {
-	echo "${WORKDIR}/vcpkg-${VCPKG_VERSION}"
+# Initializes the isolated ${EVCPKG_HOME} directory layout, mirroring
+# cargo_gen_config in cargo.eclass.
+vcpkg_gen_config() {
+	mkdir -p "${EVCPKG_HOME}" || die
 }
 
 # @FUNCTION: vcpkg_src_unpack
 # @DESCRIPTION:
-# Unpacks SRC_URI archives and binds the system vcpkg-tool binary into the
-# unpacked registry tree without invoking bootstrap-vcpkg.sh.
+# Unpacks SRC_URI archives, binds the system vcpkg-tool binary into
+# ${EVCPKG_ROOT}, and initializes ${EVCPKG_HOME} via vcpkg_gen_config.
 vcpkg_src_unpack() {
 	default
 
-	local vcpkg_root="$(_vcpkg_get_root)"
-	[[ -d "${vcpkg_root}" ]] || die "${ECLASS}: expected unpacked registry at ${vcpkg_root}"
+	[[ -d "${EVCPKG_ROOT}" ]] || die "${ECLASS}: expected unpacked registry at ${EVCPKG_ROOT}"
 
-	touch "${vcpkg_root}/.vcpkg-root" || die
-	ln -snf "${VCPKG_SYSTEM_BINARY:-${BROOT}/usr/bin/vcpkg}" "${vcpkg_root}/vcpkg" || die
+	touch "${EVCPKG_ROOT}/.vcpkg-root" || die
+	ln -snf "${VCPKG_SYSTEM_BINARY:-${BROOT}/usr/bin/vcpkg}" "${EVCPKG_ROOT}/vcpkg" || die
+
+	vcpkg_gen_config
 }
 
-# @FUNCTION: vcpkg_src_configure
+# @FUNCTION: vcpkg_env
+# @USAGE: <command> [<args>...]
 # @DESCRIPTION:
-# Configures CMake with CMAKE_PROJECT_INCLUDE_BEFORE pointing to vcpkg.cmake,
-# sets sandbox-safe cache paths, and passes manifest mode options.
-vcpkg_src_configure() {
-	local jobs="$(get_makeopts_jobs)"
-	export VCPKG_MAX_CONCURRENCY="${jobs}"
-	export CMAKE_BUILD_PARALLEL_LEVEL="${jobs}"
-
-	local vcpkg_root="$(_vcpkg_get_root)"
-	local downloads_dir="${T}/vcpkg-downloads"
-	local bincache_dir="${T}/vcpkg-bincache"
+# Runs a command with Portage's vcpkg environment variables exported,
+# analogous to cargo_env in cargo.eclass.
+vcpkg_env() {
+	local downloads_dir="${EVCPKG_HOME}/downloads"
+	local bincache_dir="${EVCPKG_HOME}/bincache"
 
 	if [[ ${VCPKG_SHARED_CACHE} == yes ]]; then
-		downloads_dir="${EROOT}/var/cache/vcpkg/downloads"
-		bincache_dir="${EROOT}/var/cache/vcpkg/bincache"
-		addwrite "${EROOT}/var/cache/vcpkg"
+		downloads_dir="${VCPKG_CACHE_DIR}/downloads"
+		bincache_dir="${VCPKG_CACHE_DIR}/bincache"
+		addwrite "${VCPKG_CACHE_DIR}"
 	fi
 
 	mkdir -p "${downloads_dir}" "${bincache_dir}" || die
 
-	export VCPKG_ROOT="${vcpkg_root}"
-	export VCPKG_FORCE_SYSTEM_BINARIES=1
-	export VCPKG_DISABLE_METRICS=1
-	export VCPKG_DOWNLOADS="${downloads_dir}"
-	export VCPKG_DEFAULT_BINARY_CACHE="${bincache_dir}"
+	local jobs="$(get_makeopts_jobs)"
+
+	local -x VCPKG_ROOT="${EVCPKG_ROOT}"
+	local -x VCPKG_FORCE_SYSTEM_BINARIES=1
+	local -x VCPKG_DISABLE_METRICS=1
+	local -x VCPKG_DOWNLOADS="${downloads_dir}"
+	local -x VCPKG_DEFAULT_BINARY_CACHE="${bincache_dir}"
+	local -x VCPKG_MAX_CONCURRENCY="${jobs}"
+	local -x CMAKE_BUILD_PARALLEL_LEVEL="${jobs}"
+
+	"${@}"
+}
+
+# @FUNCTION: vcpkg_src_configure
+# @DESCRIPTION:
+# Configures CMake via vcpkg_env, injecting vcpkg.cmake through
+# CMAKE_PROJECT_INCLUDE_BEFORE and pointing installed artifacts into
+# ${BUILD_DIR}/vcpkg_installed.
+vcpkg_src_configure() {
+	[[ -d "${EVCPKG_HOME}" ]] || vcpkg_gen_config
 
 	local mycmakeargs=(
-		-DCMAKE_PROJECT_INCLUDE_BEFORE="${vcpkg_root}/scripts/buildsystems/vcpkg.cmake"
+		-DCMAKE_PROJECT_INCLUDE_BEFORE="${EVCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake"
 		-DVCPKG_TARGET_TRIPLET="${VCPKG_TRIPLET}"
 		-DVCPKG_HOST_TRIPLET="${VCPKG_TRIPLET}"
 		-DVCPKG_INSTALLED_DIR="${BUILD_DIR}/vcpkg_installed"
@@ -137,7 +168,7 @@ vcpkg_src_configure() {
 		"${mycmakeargs[@]}"
 	)
 
-	cmake_src_configure "$@"
+	vcpkg_env cmake_src_configure "$@"
 }
 
 fi
