@@ -67,7 +67,10 @@ RDEPEND="
 	trash? ( gnome-base/gvfs )
 	wayland? ( lxqt-base/lxqt-wayland-session )
 	window-manager? (
-		wayland? ( gui-wm/labwc )
+		wayland? (
+			gui-apps/labwc-tweaks
+			gui-wm/labwc
+			)
 		!wayland? (
 			openbox? (
 				x11-wm/openbox
